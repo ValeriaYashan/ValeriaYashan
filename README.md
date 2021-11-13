@@ -1,8 +1,8 @@
-<h1 align="center">Hola, soy Valeria Yashan</h1><img src="https://github.com/TheDudeThatCode/TheDudeThatCode/blob/master/Assets/Hi.gif" width="29px"> 
+<img src="https://github.com/TheDudeThatCode/TheDudeThatCode/blob/master/Assets/Hi.gif" width="29px"> <h1 align="center">Hola, soy Valeria Yashan</h1>
 
 <h3 align="center">Ingeniera industrial y PMP de Argentina</h3>
-
-- 🌱 Actualmente estoy aprendiendo **Programación web Full Stack en Digital House** 
+<br/>
+- 🌱 Actualmente estoy aprendiendo **Programación web Full Stack en Digital House**Debajo dejo el link al proyecto integrador grupal** 
 
 - 🚀 ** Utilizamos HTML5, CSS3, JavaScript, Node.js, Express, Bootstrap, MySQL.**
 
