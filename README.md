@@ -42,13 +42,10 @@
   <a href="https://git-scm.com/" target="_blank" data-bs-toggle="tooltip" title="GIT"> <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="git" width="40" height="40"/> </a>
   <!–– BASH ––>
   <a href="https://www.gnu.org/software/bash/" target="_blank" data-bs-toggle="tooltip" title="Bash"> <img src="https://www.vectorlogo.zone/logos/gnu_bash/gnu_bash-icon.svg" alt="bash" width="40" height="40"/> </a>
-  <!–– POSTMAN––>
-  <a href="https://postman.com" target="_blank" data-bs-toggle="tooltip" title="Postman"> <img src="https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg" alt="postman" width="40" height="40"/> </a>
-  </p>
 <br/>
 
 <h3 align="left">Lenguajes más usados:</h3>
-<p align="center"> <img align="center" src="https://github-readme-stats.vercel.app/api/top-langs?username=lorenacohenebaez&show_icons=true&locale=en&layout=compact&theme=tokyonight" alt="lorenacohenebaez" /></p>
+<p align="center"> <img align="center" src="https://github-readme-stats.vercel.app/api/top-langs?username=Valeria Yashan&show_icons=true&locale=en&layout=compact&theme=tokyonight" alt="Valeria Yashan" /></p>
 <br/>
 <h3 align="left">Proyecto destacado:</h3>
 <p align="center"> 
