@@ -14,16 +14,6 @@
 <h3 align="left">Encuéntrame en :</h3>
 <p align="left">
   <p align="center">
-  <a target="_blank"href="https://www.linkedin.com/in/valeriayashan//"><img src="https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white alt="Valeria Yashan" /></a>&nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="mailto:valeriayashan@gmail.com"><img src="https://img.shields.io/badge/gmail-%23D14836.svg?&style=for-the-badge&logo=gmail&logoColor=white" alt="lorena cohene baez" /></a>&nbsp;&nbsp;&nbsp;&nbsp;
-    <a href="https://github.com/ValeriaYashan"><img src="https://img.shields.io/badge/GitHub-%23181717?style=for-the-badge&logo=GitHub&logoColor=white alt="Valeria Yashan" /></a>&nbsp;&nbsp;&nbsp;&nbsp;
-</p>
-</p>
-    
-
-<h3 align="left">Encuéntrame en :</h3>
-<p align="left">
-  <p align="center">
   <a target="_blank"href="https://www.linkedin.com/in/valeriayashan/"><img src="https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white alt="Valeria Yashan" /></a>&nbsp;&nbsp;&nbsp;&nbsp;
   <a href="mailto:valeriayashan@gmail.com"><img src="https://img.shields.io/badge/gmail-%23D14836.svg?&style=for-the-badge&logo=gmail&logoColor=white" alt="Valeria Yashan" /></a>&nbsp;&nbsp;&nbsp;&nbsp;
     <a href="https://github.com/ValeriaYashan"><img src="https://img.shields.io/badge/GitHub-%23181717?style=for-the-badge&logo=GitHub&logoColor=white alt="Valeria Yashan" /></a>&nbsp;&nbsp;&nbsp;&nbsp;
