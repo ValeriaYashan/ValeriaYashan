@@ -47,8 +47,8 @@
 <p align="center"> <img align="center" src="https://github-readme-stats.vercel.app/api/top-langs?username=ValeriaYashan&show_icons=true&locale=en&layout=compact&theme=tokyonight" alt="ValeriaYashan" /></p>
 <br/>
 <br/>
-<h3 align="left">Proyecto destacado: hace click en el botón</h3>
+<h3 align="left">Proyecto destacado:</h3>
 <p align="center"> 
-  <a href="https://github.com/Grupo06VIJJ/grupo_6_sexto.sol" target="_blank"><img align="center" <img src="delete.gif" alt="x" />Eliminar</button>"></a>
+  <a href="https://github.com/Grupo06VIJJ/grupo_6_sexto.sol" target="_blank"><img align="center" <img src="delete.gif" alt="x" />Sexto Sol</button>"></a>
 </p>
 </p>
