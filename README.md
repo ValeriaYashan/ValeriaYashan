@@ -1,5 +1,8 @@
  <h1 align="center">Hola, soy Valeria Yashan</h1>
-
+<style type="text/css">
+ p { color: red; }
+</style>
+<p> Texto en rojo </p>
 <h3 align="center">Ingeniera industrial y PMP de Argentina</h3>
 <br/>
  🌱 Actualmente estoy aprendiendo **Programación web Full Stack en Digital House.
