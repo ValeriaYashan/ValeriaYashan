@@ -1,5 +1,7 @@
 <h1 align="center">Hola, soy Valeria Yashan</h1><img src="https://github.com/TheDudeThatCode/TheDudeThatCode/blob/master/Assets/Hi.gif" width="29px"> 
-
+<h1 align="center">
+  <img src="https://raw.githubusercontent.com/martonlederer/martonlederer/master/name.svg" alt="Valeria Yashan" />
+</h1>
 
 <h3 align="center">Ingeniera industrial y PMP de Argentina</h3>
 
