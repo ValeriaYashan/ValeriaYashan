@@ -50,6 +50,6 @@
 <br/>
 <h3 align="left">Proyecto destacado:</h3>
 <p align="center"> 
-  <a href="https://github.com/Grupo06VIJJ/grupo_6_sexto.sol" target="_blank"><img align="center" src="https://github-readme-stats.vercel.app/api/top-langs?username=ValeriaYashan&theme=tokyonight"></a>
+  <a href="https://github.com/Grupo06VIJJ/grupo_6_sexto.sol" target="_blank"><img align="center" src="https://"></a>
 </p>
 </p>
