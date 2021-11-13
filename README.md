@@ -44,8 +44,9 @@
   <a href="https://www.gnu.org/software/bash/" target="_blank" data-bs-toggle="tooltip" title="Bash"> <img src="https://www.vectorlogo.zone/logos/gnu_bash/gnu_bash-icon.svg" alt="bash" width="40" height="40"/> </a>
 <br/>
 
-<h3 align="left">Lenguajes más usados:</h3>
-<p align="center"> <img align="center" src="https://github-readme-stats.vercel.app/api/top-langs?username=Valeria Yashan&show_icons=true&locale=en&layout=compact&theme=tokyonight" alt="Valeria Yashan" /></p>
+<<h3 align="left">Lenguajes más usados:</h3>
+<p align="center"> <img align="center" src="https://github-readme-stats.vercel.app/api/top-langs?username=lorenacohenebaez&show_icons=true&locale=en&layout=compact&theme=tokyonight" alt="lorenacohenebaez" /></p>
+<br/>
 <br/>
 <h3 align="left">Proyecto destacado:</h3>
 <p align="center"> 
