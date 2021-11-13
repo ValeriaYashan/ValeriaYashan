@@ -48,6 +48,6 @@
 <br/>
 <h3 align="left">Proyecto destacado:</h3>
 <p align="center"> 
-  <a href="https://github.com/Grupo06VIJJ/grupo_6_sexto.sol" target="_blank"><img align="center"> https://www.vectorlogo.zone/util/preview.html?image=/logos/broccolijs/broccolijs-icon.svg" alt="Sexto Sol" width="40" height="40"/></a>
+  <a href="https://github.com/Grupo06VIJJ/grupo_6_sexto.sol" target="_blank"><img align="center"> <img src="https://www.vectorlogo.zone/util/preview.html?image=/logos/broccolijs/broccolijs-icon.svg" alt="Sexto Sol" width="40" height="40"/></a>
 </p>
 </p>
