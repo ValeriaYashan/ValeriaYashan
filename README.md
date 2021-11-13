@@ -46,8 +46,8 @@
 <p align="center"> <img align="center" src="https://github-readme-stats.vercel.app/api/top-langs?username=ValeriaYashan&show_icons=true&locale=en&layout=compact&theme=tokyonight" alt="ValeriaYashan" /></p>
 <br/>
 <br/>
-<h3 align="left">Proyecto destacado:link</h3>
+<h3 align="left">Proyecto destacado</h3>
 <p align="center"> 
-  <a href="https://github.com/Grupo06VIJJ/grupo_6_sexto.sol" target="_blank"><img align="center"> <img src="https://www.vectorlogo.zone/logos/broccolijs/broccolijs-icon.svg" alt="Sexto Sol" width="40" height="40"/></a>
+  <a href="https://github.com/Grupo06VIJJ/grupo_6_sexto.sol" target="_blank"><img align="center"> <img src="https://www.vectorlogo.zone/logos/broccolijs/broccolijs-icon.svg" alt="bash" width="40" height="40"/> </a>
 </p>
 </p>
