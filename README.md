@@ -47,6 +47,6 @@
 <br/>
 <br/>
 <h3 align="left">Proyecto destacado</h3>
-<p align="center"> <a href="https://github.com/Grupo06VIJJ/grupo_6_sexto.sol" target="_blank"><p>Repo</p><img align="center"> <img src="https://www.vectorlogo.zone/logos/broccolijs/broccolijs-icon.svg" alt="bash" width="40" height="40"/> </a>
+<p align="center"> <a href="https://github.com/Grupo06VIJJ/grupo_6_sexto.sol" target="_blank"><p>E-commerce "Vivero Sexto Sol"</p><img align="center"> <img src="https://www.vectorlogo.zone/logos/broccolijs/broccolijs-icon.svg" alt="bash" width="40" height="40"/> </a>
 </p>
 </p>
