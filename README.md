@@ -45,7 +45,7 @@
 <br/>
 
 <<h3 align="left">Lenguajes más usados:</h3>
-<p align="center"> <img align="center" src="https://github-readme-stats.vercel.app/api/top-langs?username=lorenacohenebaez&show_icons=true&locale=en&layout=compact&theme=tokyonight" alt="lorenacohenebaez" /></p>
+<p align="center"> <img align="center" src="https://github-readme-stats.vercel.app/api/top-langs?username=ValeriaYashan&show_icons=true&locale=en&layout=compact&theme=tokyonight" alt="ValeriaYashan" /></p>
 <br/>
 <br/>
 <h3 align="left">Proyecto destacado:</h3>
