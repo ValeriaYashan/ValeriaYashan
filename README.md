@@ -2,13 +2,13 @@
 
 <h3 align="center">Ingeniera industrial y PMP de Argentina</h3>
 <br/>
-- 🌱 Actualmente estoy aprendiendo **Programación web Full Stack en Digital House.
+ 🌱 Actualmente estoy aprendiendo **Programación web Full Stack en Digital House.
 
-- 🚀 **Debajo dejo el link al proyecto integrador grupal "Vivero Sexto Sol"** Utilizamos HTML5, CSS3, JavaScript, Node.js, Express, Bootstrap, MySQL.**
+ 🚀 **Debajo dejo el link al proyecto integrador grupal "Vivero Sexto Sol"** Utilizamos HTML5, CSS3, JavaScript, Node.js, Express, Bootstrap, MySQL.**
 
-- 📌 También hice una certificación en Metodologías ágiles de Productos y Proyectos en ** ITBA.**
+ 📌 También hice una certificación en Metodologías ágiles de Productos y Proyectos en ** ITBA.**
 
-- ⚡ Un poco más sobre mí: **Me encanta leer, aprender, pintar y hacer actividades al aire libre.**
+ ⚡ Un poco más sobre mí: **Me encanta leer, aprender, pintar y hacer actividades al aire libre.**
 
 <h3 align="left">Podés encontrarme en :</h3>
 <p align="left">
