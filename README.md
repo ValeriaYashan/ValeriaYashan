@@ -1,6 +1,6 @@
  <h1 align="center">Hola, soy Valeria Yashan</h1>
  
-<h3 align="center">Ingeniera industrial y PMP de Argentina</h3>
+<h3 align="center">Ingeniera industrial y PMP (Argentina)</h3>
 <br/>
  🌱 Actualmente estoy aprendiendo **Programación web Full Stack en Digital House.
 
