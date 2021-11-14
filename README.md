@@ -1,8 +1,8 @@
  <h1 align="center">Hola, soy Valeria Yashan</h1>
  
 <h3 align="center">Ingeniera industrial y PMP (Argentina)</h3>
-<br/>
- 🌱 Actualmente estoy aprendiendo **Programación web Full Stack en Digital House.<br> 
+
+ 🌱 Actualmente estoy aprendiendo **Programación web Full Stack en Digital House.
 
  🚀 **Debajo dejo el link al proyecto integrador grupal "Vivero Sexto Sol"**.<br> 
      Utilizamos HTML5, CSS3, JavaScript, Node.js, Express, Bootstrap, MySQL.
