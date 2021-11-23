@@ -9,7 +9,7 @@
 
  📌 También hice una certificación en Metodologías ágiles de Productos y Proyectos en ITBA.
 
- ⚡ : Something more about me**I really enjoy reading, learning, painting and doing outside activities.**
+ ⚡ : Something more about me** I really enjoy reading, learning, painting and doing outside activities.**
 
 <h3 align="left">You can find me in :</h3>
 <p align="left">
