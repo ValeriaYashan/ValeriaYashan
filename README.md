@@ -38,10 +38,6 @@
 <a href="https://getbootstrap.com" target="_blank" data-bs-toggle="tooltip" title="Bootstrap"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/bootstrap/bootstrap-plain-wordmark.svg" alt="bootstrap" width="40" height="40"/> 
     <!–– MYSQL ––>
   <a href="https://www.mysql.com/" target="_blank" data-bs-toggle="tooltip" title="MySQL"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original-wordmark.svg" alt="mysql" width="40" height="40"/> </a> 
-  <!–– GIT ––>
-  <a href="https://git-scm.com/" target="_blank" data-bs-toggle="tooltip" title="GIT"> <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="git" width="40" height="40"/> </a>
-  <!–– BASH ––>
-  <a href="https://www.gnu.org/software/bash/" target="_blank" data-bs-toggle="tooltip" title="Bash"> <img src="https://www.vectorlogo.zone/logos/gnu_bash/gnu_bash-icon.svg" alt="bash" width="40" height="40"/> </a>
 <br/>
 <<h3 align="left">Lenguajes más usados:</h3>
 <p align="center"> <img align="center" src="https://github-readme-stats.vercel.app/api/top-langs?username=ValeriaYashan&show_icons=true&locale=en&layout=compact&theme=tokyonight" alt="ValeriaYashan" /></p>
@@ -50,4 +46,4 @@
 <h3 align="left">Proyecto destacado</h3>
 <p align="center"> <a href="https://sexto-sol.herokuapp.com/" target="_blank"><p>E-commerce "Vivero Sexto Sol"</p><img align="center"> <img src="https://www.vectorlogo.zone/logos/broccolijs/broccolijs-icon.svg" alt="bash" width="40" height="40"/> </a>
 </p>
-</p>
+</p>If you want to contact me, the best way is to send me an email to valeriayashan@gmail.com. ✉
