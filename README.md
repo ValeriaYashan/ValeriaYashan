@@ -1,15 +1,15 @@
- <h1 align="center">Hola, soy Valeria Yashan</h1>
+ <h1 align="center">Hello, I am Valeria Yashan</h1>
  
-<h3 align="center">Ingeniera industrial y PMP (Argentina)</h3>
+<h3 align="center">industrial engineer and PMP (Argentina)</h3>
 
- 🌱 Actualmente estoy aprendiendo **Programación web Full Stack en Digital House.
+ 🌱 Now I am learning **Programación web Full Stack in Digital House.
 
  🚀 **Debajo dejo el link al proyecto integrador grupal "Vivero Sexto Sol"**.<br> 
      Utilizamos HTML5, CSS3, JavaScript, Node.js, Express, Bootstrap, MySQL.
 
  📌 También hice una certificación en Metodologías ágiles de Productos y Proyectos en ITBA.
 
- ⚡ Un poco más sobre mí: **Me encanta leer, aprender, pintar y hacer actividades al aire libre.**
+ ⚡ : Something more about me**I really enjoy reading, learning, painting and doing outside activities.**
 
 <h3 align="left">Podés encontrarme en :</h3>
 <p align="left">
