@@ -11,7 +11,7 @@
 
  ⚡ : Something more about me**I really enjoy reading, learning, painting and doing outside activities.**
 
-<h3 align="left">Podés encontrarme en :</h3>
+<h3 align="left">You can find me in :</h3>
 <p align="left">
   <p align="center">
   <a target="_blank"href="https://www.linkedin.com/in/valeriayashan/"><img src="https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white alt="Valeria Yashan" /></a>&nbsp;&nbsp;&nbsp;&nbsp;
