@@ -1,6 +1,6 @@
  <h1 align="center">Hello, I am Valeria Yashan</h1>
  
-<h3 align="center">industrial engineer and PMP (Argentina)</h3>
+<h3 align="center">Industrial Engineer and PMP (Argentina)</h3>
 
  🌱 Now I am learning **Programación web Full Stack in Digital House.
 
