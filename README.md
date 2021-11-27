@@ -5,7 +5,7 @@
  🌱 Now I am learning **Programación web Full Stack in Digital House.
 
  🚀 **Debajo dejo el link al proyecto integrador grupal "Vivero Sexto Sol"**.<br> 
-     Utilizamos HTML5, CSS3, JavaScript, Node.js, Express, Bootstrap, MySQL.
+     We use HTML5, CSS3, JavaScript, Node.js, Express, Bootstrap, MySQL.
 
  📌 También hice una certificación en Metodologías ágiles de Productos y Proyectos en ITBA.
   
