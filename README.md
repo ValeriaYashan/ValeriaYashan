@@ -41,8 +41,7 @@
 <br/>
  
  <h3>🚀 Frameworks </h3>
-<hr />
-    
+<hr /> 
    <!–– BOOTSTRAP ––>
 <a href="https://getbootstrap.com" target="_blank" data-bs-toggle="tooltip" title="Bootstrap"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/bootstrap/bootstrap-plain-wordmark.svg" alt="bootstrap" width="40" height="40"/> 
     
