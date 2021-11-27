@@ -49,7 +49,7 @@
 <p align="center"> <img align="center" src="https://github-readme-stats.vercel.app/api/top-langs?username=ValeriaYashan&show_icons=true&locale=en&layout=compact&theme=tokyonight" alt="ValeriaYashan" /></p>
 <br/>
 <br/>
-<h3 align="left">Projet Digital House</h3>
+<h3 align="left"> Digital House Project</h3>
 <p align="center"> <a href="https://sexto-sol.herokuapp.com/" target="_blank"><p>E-commerce "Vivero Sexto Sol"</p><img align="center"> <img src="https://www.vectorlogo.zone/logos/broccolijs/broccolijs-icon.svg" alt="bash" width="40" height="40"/> </a>
 </p>
 
