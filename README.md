@@ -4,10 +4,10 @@
 
  🌱 Now I am learning **Programación web Full Stack in Digital House.
 
- 🚀 **Debajo dejo el link al proyecto integrador grupal "Vivero Sexto Sol"**.<br> 
+ 🚀 * Below I leave the link to the group integrating project "Vivero Sexto Sol".**.<br> 
      We use HTML5, CSS3, JavaScript, Node.js, Express, Bootstrap, MySQL.
 
- 📌 También hice una certificación en Metodologías ágiles de Productos y Proyectos en ITBA.
+ 📌 I also did a certification in "Agile Methodologies for Products and Projects" at ITBA.
   
  ⚡ : Something more about me** I really enjoy reading, learning, painting and doing outside activities.**
 
@@ -49,7 +49,7 @@
 <p align="center"> <img align="center" src="https://github-readme-stats.vercel.app/api/top-langs?username=ValeriaYashan&show_icons=true&locale=en&layout=compact&theme=tokyonight" alt="ValeriaYashan" /></p>
 <br/>
 <br/>
-<h3 align="left">Proyecto destacado</h3>
+<h3 align="left">Projet Digital House</h3>
 <p align="center"> <a href="https://sexto-sol.herokuapp.com/" target="_blank"><p>E-commerce "Vivero Sexto Sol"</p><img align="center"> <img src="https://www.vectorlogo.zone/logos/broccolijs/broccolijs-icon.svg" alt="bash" width="40" height="40"/> </a>
 </p>
 
