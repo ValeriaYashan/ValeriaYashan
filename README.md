@@ -2,14 +2,14 @@
  
 <h3 align="center">Industrial Engineer and PMP (Argentina)</h3>
 
- 🌱 Now I am learning **Programación web Full Stack in Digital House.
+ 🌱* Now I am learning **Programación web Full Stack in Digital House.
 
- 🚀 * Below I leave the link to the group integrating project "Vivero Sexto Sol".**.<br> 
+ 🚀 * Below I leave the link to the group integrating project "Vivero Sexto Sol".<br> 
      We use HTML5, CSS3, JavaScript, Node.js, Express, Bootstrap, MySQL.
 
- 📌 I also did a certification in "Agile Methodologies for Products and Projects" at ITBA.
+ 📌* I also did a certification in "Agile Methodologies for Products and Projects" at ITBA.
   
- ⚡ : Something more about me** I really enjoy reading, learning, painting and doing outside activities.**
+ ⚡ * Something more about me: I really enjoy reading, learning, painting and doing outside activities.
 
 <h3 align="left">Connect with me:</h3>
 <p align="left">
