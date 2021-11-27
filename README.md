@@ -11,7 +11,7 @@
 
  ⚡ : Something more about me** I really enjoy reading, learning, painting and doing outside activities.**
 
-<h3 align="left">You can find me in :</h3>
+<h3 align="left">Connect with me</h3>
 <p align="left">
   <p align="center">
   <a target="_blank"href="https://www.linkedin.com/in/valeriayashan/"><img src="https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white alt="Valeria Yashan" /></a>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -20,9 +20,9 @@
 </p>
 </p>
     
+<h3 align="left">>👩‍💻 Languages and Tools</h3>
+<hr />
 
-<h3 align="left">Tecnologías y herramientas que utilizo:</h3>
-<br/>
 <p align="center"> 
   <!–– JS ––>
   <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" data-bs-toggle="tooltip" title="JavaScript"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40"/> </a>
@@ -34,11 +34,18 @@
    <a href="https://www.w3.org/html/" target="_blank" data-bs-toggle="tooltip" title="HTML5"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" alt="html5" width="40" height="40"/> </a>
   <!–– CSS ––>
     <a href="https://www.w3schools.com/css/" target="_blank" data-bs-toggle="tooltip" title="CSS3"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg" alt="css3" width="40" height="40"/> </a>
-   <!–– BOOTSTRAP ––>
-<a href="https://getbootstrap.com" target="_blank" data-bs-toggle="tooltip" title="Bootstrap"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/bootstrap/bootstrap-plain-wordmark.svg" alt="bootstrap" width="40" height="40"/> 
-    <!–– MYSQL ––>
+ <h3> ⚡ Database 🔝 </h3>
+<hr />
+ <!–– MYSQL ––>
   <a href="https://www.mysql.com/" target="_blank" data-bs-toggle="tooltip" title="MySQL"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original-wordmark.svg" alt="mysql" width="40" height="40"/> </a> 
 <br/>
+ 
+ <h3>🚀 Frameworks </h3>
+<hr />
+    
+   <!–– BOOTSTRAP ––>
+<a href="https://getbootstrap.com" target="_blank" data-bs-toggle="tooltip" title="Bootstrap"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/bootstrap/bootstrap-plain-wordmark.svg" alt="bootstrap" width="40" height="40"/> 
+    
 <<h3 align="left">Lenguajes más usados:</h3>
 <p align="center"> <img align="center" src="https://github-readme-stats.vercel.app/api/top-langs?username=ValeriaYashan&show_icons=true&locale=en&layout=compact&theme=tokyonight" alt="ValeriaYashan" /></p>
 <br/>
@@ -46,4 +53,6 @@
 <h3 align="left">Proyecto destacado</h3>
 <p align="center"> <a href="https://sexto-sol.herokuapp.com/" target="_blank"><p>E-commerce "Vivero Sexto Sol"</p><img align="center"> <img src="https://www.vectorlogo.zone/logos/broccolijs/broccolijs-icon.svg" alt="bash" width="40" height="40"/> </a>
 </p>
+
+    
 </p>If you want to contact me, the best way is to send me an email to valeriayashan@gmail.com. ✉
