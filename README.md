@@ -8,7 +8,7 @@
      Utilizamos HTML5, CSS3, JavaScript, Node.js, Express, Bootstrap, MySQL.
 
  📌 También hice una certificación en Metodologías ágiles de Productos y Proyectos en ITBA.
-
+  <a href="https://certtun.vottun.com/badgedetail?id=bd6ae7c1-1a33-4526-952a-2b82b3750782"target="_blank" data-bs-toggle="tooltip" title="Metodologías ágiles"> <img 
  ⚡ : Something more about me** I really enjoy reading, learning, painting and doing outside activities.**
 
 <h3 align="left">Connect with me</h3>
