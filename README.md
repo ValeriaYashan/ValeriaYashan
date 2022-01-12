@@ -2,6 +2,8 @@
  
 <h3 align="center">Industrial Engineer and PMP (Argentina)</h3>
 
+ ⚡ *I am currently working on Hasar Sistemas as Project Leader
+
  🌱* Now I am learning **Programación web Full Stack in Digital House.
 
  🚀 * Below I leave the link to the group integrating project "Vivero Sexto Sol".<br> 
