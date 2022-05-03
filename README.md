@@ -6,7 +6,7 @@
 
  🔭 *I am currently working on Hasar Sistemas as Project Leader
 
-🌱 I’m currently learning Fullstack Node on Digital House
+🌱*I attended Full Stack Web Programming course at Digital House in 2021
 
  🚀 * Below I leave the link to the group integrating project "Vivero Sexto Sol".<br> 
      We use HTML5, CSS3, JavaScript, Node.js, Express, Bootstrap, MySQL, React.
