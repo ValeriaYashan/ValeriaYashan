@@ -12,6 +12,9 @@
      We use HTML5, CSS3, JavaScript, Node.js, Express, Bootstrap, MySQL, React.
 
  📌* I also did a certification in "Agile Methodologies for Products and Projects" at ITBA.
+ 
+ - 💼 &nbsp; I´m interested in **Data Analysis**;
+
   
  ⚡ * Something more about me: I really enjoy reading, learning, painting and doing outside activities.
 
@@ -44,6 +47,9 @@
   <a href="https://www.mysql.com/" target="_blank" data-bs-toggle="tooltip" title="MySQL"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original-wordmark.svg" alt="mysql" width="40" height="40"/> </a> 
 <br/>
  
+ ![Power BI](https://img.shields.io/badge/-Power%20BI-black?style=plastic&logo=Power-BI)
+ ![Tableau](https://img.shields.io/badge/-Tableau-black?style=plastic&logo=Tableau)
+ ![MySQL](https://img.shields.io/badge/-MySQL-333333?style=flat&logo=mysql)
  <h3>🚀 Frameworks </h3>
 <hr /> 
    <!–– BOOTSTRAP ––>
