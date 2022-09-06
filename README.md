@@ -1,4 +1,4 @@
- <h1 align="center">Hello,  I'm Valeria Yashan</h1>
+ <h1 align="center"> Hello! My name is Valeria Yashan 👋</h1>
  
 <h3 align="center">Industrial Engineer and PMP (Argentina)</h3>
 
@@ -10,22 +10,11 @@
 
  🚀 * Below I leave the link to the group integrating project "Vivero Sexto Sol".<br> 
      We use HTML5, CSS3, JavaScript, Node.js, Express, Bootstrap, MySQL, React.
+     
+      - 💼 &nbsp; I´m interested in **Data Analysis**;
 
  📌* I also did a certification in "Agile Methodologies for Products and Projects" at ITBA.
  
- - 💼 &nbsp; I´m interested in **Data Analysis**;
-
-  
- ⚡ * Something more about me: I really enjoy reading, learning, painting and doing outside activities.
-
-<h3 align="left">Connect with me:</h3>
-<p align="left">
-  <p align="center">
-  <a target="_blank"href="https://www.linkedin.com/in/valeriayashan/"><img src="https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white alt="Valeria Yashan" /></a>&nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="mailto:valeriayashan@gmail.com"><img src="https://img.shields.io/badge/gmail-%23D14836.svg?&style=for-the-badge&logo=gmail&logoColor=white" alt="Valeria Yashan" /></a>&nbsp;&nbsp;&nbsp;&nbsp;
-    <a href="https://github.com/ValeriaYashan"><img src="https://img.shields.io/badge/GitHub-%23181717?style=for-the-badge&logo=GitHub&logoColor=white alt="Valeria Yashan" /></a>&nbsp;&nbsp;&nbsp;&nbsp;
-</p>
-</p>
     
 <h3 align="left">👩‍💻 Languages and Tools</h3>
 <hr />
@@ -61,6 +50,17 @@
 <br/>
 <h3 align="left"> Digital House Project</h3>
 <p align="center"> <a href="https://sextosolprobando.herokuapp.com/" target="_blank"><p>E-commerce "Vivero Sexto Sol"</p><img align="center"> <img src="https://www.vectorlogo.zone/logos/broccolijs/broccolijs-icon.svg" alt="bash" width="40" height="40"/> </a>
+</p>
+ 
+ ⚡ * Something more about me: I really enjoy reading, learning, painting and doing outside activities.
+
+<h3 align="left">Connect with me:</h3>
+<p align="left">
+  <p align="center">
+  <a target="_blank"href="https://www.linkedin.com/in/valeriayashan/"><img src="https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white alt="Valeria Yashan" /></a>&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="mailto:valeriayashan@gmail.com"><img src="https://img.shields.io/badge/gmail-%23D14836.svg?&style=for-the-badge&logo=gmail&logoColor=white" alt="Valeria Yashan" /></a>&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="https://github.com/ValeriaYashan"><img src="https://img.shields.io/badge/GitHub-%23181717?style=for-the-badge&logo=GitHub&logoColor=white alt="Valeria Yashan" /></a>&nbsp;&nbsp;&nbsp;&nbsp;
+</p>
 </p>
 
     
