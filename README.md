@@ -4,7 +4,7 @@
 
 
 
- 🔭 *I am currently working on Garantizar SGR as Project Leader
+ 🔭 *I am currently working on Garantizar SGR as Project Manager
 
 🌱*I attended Full Stack Web Programming course at Digital House in 2021
 
