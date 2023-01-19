@@ -12,6 +12,7 @@
      We use HTML5, CSS3, JavaScript, Node.js, Express, Bootstrap, MySQL, React.
      
       - 💼  I´m interested in **Data Analysis**;
+      🌱*I am attend to Data Analytics course at Digital House 
 
  📌* I also did a certification in "Agile Methodologies for Products and Projects" at ITBA.
  
