@@ -20,24 +20,42 @@
 <hr />
 
 <p align="center"> 
-  <!–– JS ––>
-  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" data-bs-toggle="tooltip" title="JavaScript"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40"/> </a>
- <!-- PYTHON -->
-<a href="https://www.python.org" target="_blank" data-bs-toggle="tooltip" title="Python">
-  <img src="<img src="https://devicon-website.vercel.app/api/python/original.svg" alt="python" width="40" height="40"/></a>
-  <!–– EXPRESS JS ––>
-    <a href="https://expressjs.com" target="_blank" data-bs-toggle="tooltip" title="ExpressJS"> 
-     <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original-wordmark.svg" alt="express" width="40" height="40"/> </a>
-  <!–– NODE JS ––>
-    <a href="https://nodejs.org" target="_blank" data-bs-toggle="tooltip" title="NodeJS"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="nodejs" width="40" height="40"/> </a> 
-  <!–– HTML ––>
-   <a href="https://www.w3.org/html/" target="_blank" data-bs-toggle="tooltip" title="HTML5"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" alt="html5" width="40" height="40"/> </a>
-  <!–– CSS ––>
-    <a href="https://www.w3schools.com/css/" target="_blank" data-bs-toggle="tooltip" title="CSS3"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg" alt="css3" width="40" height="40"/> </a>
- <h3> ⚡ Database 🔝 </h3>
+  <!-- JS -->
+  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" data-bs-toggle="tooltip" title="JavaScript"> 
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40"/> 
+  </a>
+  
+  <!-- PYTHON -->
+  <a href="https://www.python.org" target="_blank" data-bs-toggle="tooltip" title="Python"> 
+    <img src="https://devicon-website.vercel.app/api/python/original.svg" alt="python" width="40" height="40"/> 
+  </a>
+  
+  <!-- EXPRESS JS -->
+  <a href="https://expressjs.com" target="_blank" data-bs-toggle="tooltip" title="ExpressJS"> 
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original-wordmark.svg" alt="express" width="40" height="40"/> 
+  </a>
+  
+  <!-- NODE JS -->
+  <a href="https://nodejs.org" target="_blank" data-bs-toggle="tooltip" title="NodeJS"> 
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="nodejs" width="40" height="40"/> 
+  </a> 
+  
+  <!-- HTML -->
+  <a href="https://www.w3.org/html/" target="_blank" data-bs-toggle="tooltip" title="HTML5"> 
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" alt="html5" width="40" height="40"/> 
+  </a>
+  
+  <!-- CSS -->
+  <a href="https://www.w3schools.com/css/" target="_blank" data-bs-toggle="tooltip" title="CSS3"> 
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg" alt="css3" width="40" height="40"/> 
+  </a>
+</p>
+<h3> ⚡ Database 🔝 </h3>
 <hr />
- <!–– MYSQL ––>
-  <a href="https://www.mysql.com/" target="_blank" data-bs-toggle="tooltip" title="MySQL"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original-wordmark.svg" alt="mysql" width="40" height="40"/> </a> 
+<!-- MYSQL -->
+<a href="https://www.mysql.com/" target="_blank" data-bs-toggle="tooltip" title="MySQL"> 
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original-wordmark.svg" alt="mysql" width="40" height="40"/> 
+</a>
 <br/>
  
  ![Power BI](https://img.shields.io/badge/-Power%20BI-black?style=plastic&logo=Power-BI)
