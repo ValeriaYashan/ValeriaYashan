@@ -24,10 +24,10 @@
   <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" data-bs-toggle="tooltip" title="JavaScript"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40"/> </a>
  <!-- PYTHON -->
 <a href="https://www.python.org" target="_blank" data-bs-toggle="tooltip" title="Python">
-  <img src="<img src="https://devicon-website.vercel.app/api/python/original.svg"></img>" alt="python" width="40" height="40"/>
-</a>
+  <img src="<img src="https://devicon-website.vercel.app/api/python/original.svg" alt="python" width="40" height="40"/></a>
   <!–– EXPRESS JS ––>
-    <a href="https://expressjs.com" target="_blank" data-bs-toggle="tooltip" title="ExpressJS"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original-wordmark.svg" alt="express" width="40" height="40"/> </a>
+    <a href="https://expressjs.com" target="_blank" data-bs-toggle="tooltip" title="ExpressJS"> 
+     <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original-wordmark.svg" alt="express" width="40" height="40"/> </a>
   <!–– NODE JS ––>
     <a href="https://nodejs.org" target="_blank" data-bs-toggle="tooltip" title="NodeJS"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="nodejs" width="40" height="40"/> </a> 
   <!–– HTML ––>
