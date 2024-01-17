@@ -6,13 +6,12 @@
 
  🔭 *I am currently working on Garantizar SGR as Project Manager
 
-🌱*I attended Full Stack Web Programming course at Digital House in 2021
+🌱*My hobby is programming and data analysis, and I thoroughly enjoy it
+  
+      🌱*I have completed Full Stack Programming and Data Analytics courses at Digital House
 
- 🚀 * Below I leave the link to the group integrating project "Vivero Sexto Sol".<br> 
+      🚀 * Below I leave the link to the group integrating project "Vivero Sexto Sol".<br> 
      We use HTML5, CSS3, JavaScript, Node.js, Express, Bootstrap, MySQL, React.
-     
-      - 💼  I´m interested in **Data Analysis**;
-      🌱*I am attend to Data Analytics course at Digital House 
 
  📌* I also did a certification in "Agile Methodologies for Products and Projects" at ITBA.
  
