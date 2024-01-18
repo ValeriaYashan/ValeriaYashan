@@ -4,7 +4,7 @@
 
 
 
- 🔭 *I am currently working on Garantizar SGR as Project Manager
+ 🔭 *I am currently working at Garantizar SGR as a Project Manager
 
 🌱*My hobby is programming and data analysis, and I thoroughly enjoy it
   
@@ -67,7 +67,9 @@
 <a href="https://getbootstrap.com" target="_blank" data-bs-toggle="tooltip" title="Bootstrap"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/bootstrap/bootstrap-plain-wordmark.svg" alt="bootstrap" width="40" height="40"/> 
    <br/> 
 <h3 align="left">Lenguajes más usados:</h3>
-<p align="center"> <img align="center" src="https://github-readme-stats.vercel.app/api/top-langs?username=ValeriaYashan&show_icons=true&locale=en&layout=compact&theme=tokyonight" alt="ValeriaYashan" /></p>
+<p align="center">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/top-langs/?username=ValeriaYashan&layout=compact&theme=tokyonight" alt="ValeriaYashan" />
+</p>
 <br/>
 <br/>
 <h3 align="left"> Digital House Project</h3>
@@ -86,4 +88,4 @@
 </p>
 
     
-</p>If you want to contact me, the best way is to send me an email to valeriayashan@gmail.com. ✉
+</p>If you wish to get in touch with me, the most effective method is to send an email to valeriayashan@gmail.com ✉
