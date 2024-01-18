@@ -51,9 +51,11 @@
   </a>
 </p>
 <h3 align="left">👩‍💻 Data Analysis Tools</h3>
- ![Power BI](https://img.shields.io/badge/-Power%20BI-black?style=plastic&logo=Power-BI)
- ![Tableau](https://img.shields.io/badge/-Tableau-black?style=plastic&logo=Tableau)
- ![MySQL](https://img.shields.io/badge/-MySQL-333333?style=flat&logo=mysql)
+
+[![Power BI](https://img.shields.io/badge/-Power%20BI-black?style=plastic&logo=Power-BI)](https://powerbi.microsoft.com/)
+[![Tableau](https://img.shields.io/badge/-Tableau-black?style=plastic&logo=Tableau)](https://www.tableau.com/)
+[![MySQL](https://img.shields.io/badge/-MySQL-333333?style=flat&logo=mysql)](https://www.mysql.com/)
+
 <h3> ⚡ Database 🔝 </h3>
 <hr />
 <!-- MYSQL -->
