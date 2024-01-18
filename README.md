@@ -50,6 +50,10 @@
     <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg" alt="css3" width="40" height="40"/> 
   </a>
 </p>
+<h3 align="left">👩‍💻 Data Analysis Tools</h3>
+ ![Power BI](https://img.shields.io/badge/-Power%20BI-black?style=plastic&logo=Power-BI)
+ ![Tableau](https://img.shields.io/badge/-Tableau-black?style=plastic&logo=Tableau)
+ ![MySQL](https://img.shields.io/badge/-MySQL-333333?style=flat&logo=mysql)
 <h3> ⚡ Database 🔝 </h3>
 <hr />
 <!-- MYSQL -->
@@ -58,9 +62,7 @@
 </a>
 <br/>
  
- ![Power BI](https://img.shields.io/badge/-Power%20BI-black?style=plastic&logo=Power-BI)
- ![Tableau](https://img.shields.io/badge/-Tableau-black?style=plastic&logo=Tableau)
- ![MySQL](https://img.shields.io/badge/-MySQL-333333?style=flat&logo=mysql)
+
  <h3>🚀 Frameworks </h3>
 <hr /> 
    <!–– BOOTSTRAP ––>
