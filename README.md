@@ -8,12 +8,11 @@
 
 🌱*My hobby is programming and data analysis, and I thoroughly enjoy it
   
-      🌱*I have completed Full Stack Programming and Data Analytics courses at Digital House
+🌱*I have completed Full Stack Programming and Data Analytics courses at Digital House
 
-      🚀 * Below I leave the link to the group integrating project "Vivero Sexto Sol".<br> 
-     We use HTML5, CSS3, JavaScript, Node.js, Express, Bootstrap, MySQL, React.
+ 📌* I also did a certification in "Agile Methodologies for Products and Projects" at ITBA
 
- 📌* I also did a certification in "Agile Methodologies for Products and Projects" at ITBA.
+ 📌*  currently pursuing an MBA at UCEMA
  
     
 <h3 align="left">👩‍💻 Languages and Tools</h3>
@@ -84,7 +83,5 @@
   <a href="mailto:valeriayashan@gmail.com"><img src="https://img.shields.io/badge/gmail-%23D14836.svg?&style=for-the-badge&logo=gmail&logoColor=white" alt="Valeria Yashan" /></a>&nbsp;&nbsp;&nbsp;&nbsp;
     <a href="https://github.com/ValeriaYashan"><img src="https://img.shields.io/badge/GitHub-%23181717?style=for-the-badge&logo=GitHub&logoColor=white alt="Valeria Yashan" /></a>&nbsp;&nbsp;&nbsp;&nbsp;
 </p>
-</p>
-
-    
+</p>    
 </p>If you wish to get in touch with me, the most effective method is to send an email to valeriayashan@gmail.com ✉
