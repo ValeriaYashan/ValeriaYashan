@@ -12,7 +12,7 @@
 
  📌* I also did a certification in "Agile Methodologies for Products and Projects" at ITBA
 
- 📌*  currently pursuing an MBA at UCEMA
+ 📌*  I'm currently pursuing an MBA at UCEMAcurrently pursuing an MBA at UCEMA
  
     
 <h3 align="left">👩‍💻 Languages and Tools</h3>
@@ -63,7 +63,6 @@
 </a>
 <br/>
  
-
  <h3>🚀 Frameworks </h3>
 <hr /> 
    <!–– BOOTSTRAP ––>
