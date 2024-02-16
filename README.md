@@ -6,13 +6,17 @@
 
  🔭 *I am currently working at Garantizar SGR as a Project Manager
 
-🌱*My hobby is programming and data analysis, and I thoroughly enjoy it
-  
-🌱*I have completed Full Stack Programming and Data Analytics courses at Digital House
+🌱 Programming and data analysis are my hobbies, and I derive immense pleasure from them.
 
- 📌* I also did a certification in "Agile Methodologies for Products and Projects" at ITBA
+🌱 I have completed Full Stack Programming and Data Analytics courses at Digital House.
 
- 📌*  I'm currently pursuing an MBA at UCEMAcurrently pursuing an MBA at UCEMA
+📌 Additionally, I have acquired certification in "Agile Methodologies for Products and Projects" from ITBA.
+
+📌 I am currently pursuing an MBA at UCEMA.
+
+📍 Furthermore, it's worth mentioning that I am a fervent enthusiast of artificial intelligence.
+
+
  
     
 <h3 align="left">👩‍💻 Languages and Tools</h3>
