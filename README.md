@@ -65,7 +65,12 @@
   <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original-wordmark.svg" alt="mysql" width="40" height="40"/> 
 </a>
 <br/>
- 
+ ## Recuento de Lenguajes en mis Repositorios
+
+![Lenguajes más usados](https://img.shields.io/static/v1?label=Python&message=60%25&color=blue)
+![Lenguajes más usados](https://img.shields.io/static/v1?label=JavaScript&message=25%25&color=yellow)
+![Lenguajes más usados](https://img.shields.io/static/v1?label=HTML%2FCSS&message=10%25&color=orange)
+![Lenguajes más usados](https://img.shields.io/static/v1?label=Otros&message=5%25&color=red)
 
 <h3 align="left">Connect with me:</h3>
 <p align="left">
