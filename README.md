@@ -19,7 +19,7 @@
 
  
     
-<h3 align="left">👩‍💻 Languages and Tools</h3>
+<h3 align="left">👩‍💻 The most commonly used languages</h3>
 <hr />
 
 <p align="center"> 
