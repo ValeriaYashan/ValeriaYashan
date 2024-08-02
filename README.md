@@ -4,7 +4,7 @@
 
 
 
- 🔭 *I am currently working at Garantizar SGR as a Project Manager
+ 🔭 *I am currently working at Danone as Squad Master.
 
 🌱 Programming and data analysis are my hobbies, and I derive immense pleasure from them.
 
