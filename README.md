@@ -19,7 +19,7 @@
 <h3 >👩‍💻 The most commonly used languages</h3>
 <hr />
 
-<p align="center"> 
+<p align="left"> 
   <!-- JS -->
   <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" data-bs-toggle="tooltip" title="JavaScript"> 
     <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40"/> 
