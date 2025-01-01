@@ -1,4 +1,4 @@
- <h1 align="center"> Thank you for visiting my profile! 😊 Hello! My name is Valeria Yashan 👋</h1>
+ <h1 align="center"> Thank you for visiting my profile! 😊  My name is Valeria Yashan 👋</h1>
  
 <h3 align="center">Industrial Engineer and PMP (Argentina)</h3>
 
