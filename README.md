@@ -16,7 +16,7 @@
 
  ⚡  A little more about me: I enjoy reading, learning, painting, and spending time outdoors.
     
-<h3 align="left">👩‍💻 The most commonly used languages</h3>
+<h3 >👩‍💻 The most commonly used languages</h3>
 <hr />
 
 <p align="center"> 
