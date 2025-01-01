@@ -4,7 +4,7 @@
 
 📌 I am an Industrial Engineer and completed an MBA at UCEMA last year.
 
- 🔭 I am a certified PMP and have been working as a Project Manager for over five years.
+ 🔭 I am a certified PMP since 2013 and have been working as a Project Manager for over five years.
 
 🌱 Programming and data analysis are two of my main hobbies.
 
