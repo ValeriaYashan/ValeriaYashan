@@ -2,21 +2,19 @@
  
 <h3 align="center">Industrial Engineer and PMP (Argentina)</h3>
 
+📌 I am an Industrial Engineer and completed an MBA at UCEMA last year.
 
+ 🔭 I am a certified PMP and have been working as a Project Manager for over five years.
 
- 🔭 *I am currently working at GeoVictoria as Project Manager.
+🌱 Programming and data analysis are two of my main hobbies.
 
-🌱 Programming and data analysis are my hobbies, and I derive immense pleasure from them.
+🌱  I have successfully completed Full Stack Programming and Data Analytics courses at Digital House.
 
-🌱 I have completed Full Stack Programming and Data Analytics courses at Digital House.
+📌  Additionally, I hold a certification in "Agile Methodologies for Products and Projects" from ITBA.
 
-📌 Additionally, I have acquired certification in "Agile Methodologies for Products and Projects" from ITBA.
+📍  I am also a passionate enthusiast of artificial intelligence and its potential to transform industries.
 
-📌 I am currently pursuing an MBA at UCEMA.
-
-📍 Furthermore, it's worth mentioning that I am a fervent enthusiast of artificial intelligence.
-
- ⚡ * Something more about me: I really enjoy reading, learning, painting and doing outside activities.
+ ⚡  A little more about me: I enjoy reading, learning, painting, and spending time outdoors.
     
 <h3 align="left">👩‍💻 The most commonly used languages</h3>
 <hr />
