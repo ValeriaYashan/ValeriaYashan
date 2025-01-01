@@ -57,8 +57,7 @@
 [![MySQL](https://img.shields.io/badge/-MySQL-333333?style=flat&logo=mysql)](https://www.mysql.com/)
 
 <h3> ⚡ Database 🔝 </h3>
-
-<!-- MYSQL -->
+  <!-- MySQL -->
 <a href="https://www.mysql.com/" target="_blank" data-bs-toggle="tooltip" title="MySQL"> 
   <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original-wordmark.svg" alt="mysql" width="40" height="40"/> 
 </a>
