@@ -9,7 +9,7 @@
 📜 Additionally, I hold a certification in "Agile Methodologies for Products and Projects" from ITBA.  
 🤖 I am also a passionate enthusiast of artificial intelligence and its potential to transform industries.  
 🌟 A little more about me: I enjoy reading, learning, painting, and spending time outdoors.  
-🐶 Me encantan los perros. 
+🐶 I love dogs. 
     
 <h3 >👩‍💻 The most commonly used languages</h3>
 <hr />
