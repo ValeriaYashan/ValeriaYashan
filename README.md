@@ -1,4 +1,4 @@
- <h1 align="center"> Thank you for visiting my profile! 😊  My name is Valeria Yashan 👋</h1>
+ <h1 align="center"> Thank you for visiting my profile! My name is Valeria Yashan 👋</h1>
  
 <h3 align="center">Industrial Engineer and PMP (Argentina)</h3>
 
@@ -15,6 +15,7 @@
 📍  I am also a passionate enthusiast of artificial intelligence and its potential to transform industries.
 
  ⚡  A little more about me: I enjoy reading, learning, painting, and spending time outdoors.
+ 🐶 Me encantan los perros.
     
 <h3 >👩‍💻 The most commonly used languages</h3>
 <hr />
