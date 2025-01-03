@@ -3,19 +3,13 @@
 <h3 align="center">Industrial Engineer and PMP (Argentina)</h3>
 
 📌 I am an Industrial Engineer and completed an MBA at UCEMA last year.
-
- 🔭 I am a certified PMP since 2013 and have been working as a Project Manager for over ten years.
-
-🌱 Programming and data analysis are two of my main hobbies.
-
-🌱  I have successfully completed Full Stack Programming and Data Analytics courses at Digital House.
-
-📌  Additionally, I hold a certification in "Agile Methodologies for Products and Projects" from ITBA.
-
-📍  I am also a passionate enthusiast of artificial intelligence and its potential to transform industries.
-
- ⚡  A little more about me: I enjoy reading, learning, painting, and spending time outdoors.
- 🐶 Me encantan los perros.
+💼 I am a certified PMP since 2013 and have been working as a Project Manager for over ten years.
+💻 Programming and data analysis are two of my main hobbies.
+🎓 I have successfully completed Full Stack Programming and Data Analytics courses at Digital House.
+📜 Additionally, I hold a certification in "Agile Methodologies for Products and Projects" from ITBA.
+🤖 I am also a passionate enthusiast of artificial intelligence and its potential to transform industries.
+🌟 A little more about me: I enjoy reading, learning, painting, and spending time outdoors.
+🐶 Me encantan los perros.
     
 <h3 >👩‍💻 The most commonly used languages</h3>
 <hr />
