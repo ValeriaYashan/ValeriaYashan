@@ -53,7 +53,7 @@
      <li>
     <b>AI — Machine Learning</b><br/>
     Machine Learning.<br/>
-    <a href="https://github.com/ValeriaYashan/analisis_datos](https://github.com/ValeriaYashan/Machine-learning" target="_blank" rel="noopener noreferrer">Repository</a>
+    <a href="https://github.com/ValeriaYashan/Machine-learning" target="_blank" rel="noopener noreferrer">Repository</a>
   </li>
      <br/> 
   <li>
