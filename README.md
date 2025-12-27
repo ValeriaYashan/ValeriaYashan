@@ -6,11 +6,11 @@
 <h1 align="center">Hi, I'm Valeria Yashan 👋</h1>
 
 <p align="center">
-  <b>Industrial Engineer (MBA)</b> · <b>PMP</b> · <b>Automation (n8n)</b> · <b>Power BI Dashboards</b> · <b>AI & Data Analytics</b>
+  <b>Industrial Engineer (MBA)</b> · <b>PMP</b> · <b>Automation (n8n)</b> · <b>AI (Google Colab)</b> · <b>Power BI Dashboards</b> · <b>Data Analytics</b>
 </p>
 
 <p align="center">
-  I build <b>process automations</b> and <b>data workflows</b> with <b>n8n</b>, Google Workspace, APIs, and <b>Power BI dashboards</b> for KPI tracking and decision support.
+  I build <b>process automations</b>, <b>AI prototypes</b> and <b>data workflows</b> using <b>n8n</b>, <b>Google Colab</b>, Google Workspace, APIs, and <b>Power BI dashboards</b> for KPI tracking and decision support.
 </p>
 
 <p align="center">
@@ -24,32 +24,41 @@
 
 <hr/>
 
-<h3>🚀 Featured Projects</h3>
-
-<!-- Replace REPO_LINK_* with your real links -->
+<h3>🚀 Featured Work (Repos)</h3>
 <ul>
   <li>
-    <b>n8n — Task Reminder & Email Digest</b><br/>
-    Filters pending tasks from Google Sheets and sends a digest via Gmail only when needed (validation + logging + branching).<br/>
-    <a href="REPO_LINK_1">Repository</a>
+    <b>Automation — n8n: Task Reminder & Email Digest</b><br/>
+    Google Sheets → validation/branching → Gmail digest (sends only when tasks exist).<br/>
+    <a href="REPO_LINK_AUTOMATION_1">Repository</a>
   </li>
   <br/>
   <li>
-    <b>n8n — Inventory Alert</b><br/>
-    Monitors stock levels in Google Sheets and triggers notifications when stock drops below a threshold (retries + error handling).<br/>
-    <a href="REPO_LINK_2">Repository</a>
+    <b>AI — Google Colab Notebooks</b><br/>
+    Practical AI experiments (data prep, modeling, evaluation) with reproducible notebooks.<br/>
+    <a href="REPO_LINK_AI_1">Repository</a>
   </li>
   <br/>
   <li>
-    <b>Power BI — KPI Dashboard</b><br/>
-    Executive KPI tracking dashboard with drill-downs for operations and performance management.<br/>
-    <a href="REPO_LINK_3">Repository / Screenshots</a>
+    <b>Power BI — KPI Dashboards</b><br/>
+    KPI tracking with drill-downs and decision-support views.<br/>
+    <a href="REPO_LINK_BI_1">Repository / Screenshots</a>
   </li>
 </ul>
 
 <hr/>
 
-<h3>⚙️ What I build with Automation (n8n)</h3>
+<h3>🤖 AI (Google Colab) — What I build</h3>
+<ul>
+  <li><b>Reproducible notebooks</b>: clear inputs/outputs, step-by-step experiments</li>
+  <li><b>Data pipelines</b>: cleaning, feature engineering, train/validation splits</li>
+  <li><b>Modeling</b>: baseline → improved models, metrics-driven iteration</li>
+  <li><b>Evaluation</b>: error analysis, confusion matrix/threshold tuning (when applicable)</li>
+  <li><b>Operational mindset</b>: versioned datasets, documented assumptions, repeatable runs</li>
+</ul>
+
+<hr/>
+
+<h3>⚙️ Automation (n8n) — What I build</h3>
 <ul>
   <li><b>Google Workspace automations</b>: Forms → Sheets → Gmail/Drive/Calendar</li>
   <li><b>Operational alerts</b>: deadlines, SLA breaches, exceptions, inventory thresholds</li>
@@ -80,8 +89,8 @@
   <a href="https://www.tableau.com/" target="_blank">
     <img alt="Tableau" src="https://img.shields.io/badge/Tableau-111?style=flat&logo=tableau&logoColor=white" />
   </a>
-  <a href="https://www.mysql.com/" target="_blank">
-    <img alt="MySQL" src="https://img.shields.io/badge/MySQL-111?style=flat&logo=mysql&logoColor=white" />
+  <a href="https://colab.research.google.com/" target="_blank">
+    <img alt="Google Colab" src="https://img.shields.io/badge/Google%20Colab-111?style=flat&logo=googlecolab&logoColor=white" />
   </a>
 </p>
 
@@ -98,7 +107,5 @@
 <hr/>
 
 <h3>📬 Contact</h3>
-<p>
-Best way to reach me: <b>valeriayashan@gmail.com</b>
-</p>
+<p>Best way to reach me: <b>valeriayashan@gmail.com</b></p>
 
