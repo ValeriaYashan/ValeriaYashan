@@ -24,7 +24,7 @@
 
 <hr/>
 
-<h3>🚀 Featured Work (Repos)</h3>
+<h3> Featured Work (Repos)</h3>
 <ul>
   <li>
     <b>Automation — n8n: Task Reminder & Email Digest</b><br/>
@@ -47,7 +47,7 @@
 
 <hr/>
 
-<h3>🤖 AI (Google Colab) — What I build</h3>
+<h3> AI (Google Colab) — What I build</h3>
 <ul>
   <li><b>Reproducible notebooks</b>: clear inputs/outputs, step-by-step experiments</li>
   <li><b>Data pipelines</b>: cleaning, feature engineering, train/validation splits</li>
@@ -58,7 +58,7 @@
 
 <hr/>
 
-<h3>⚙️ Automation (n8n) — What I build</h3>
+<h3> Automation (n8n) — What I build</h3>
 <ul>
   <li><b>Google Workspace automations</b>: Forms → Sheets → Gmail/Drive/Calendar</li>
   <li><b>Operational alerts</b>: deadlines, SLA breaches, exceptions, inventory thresholds</li>
@@ -68,7 +68,7 @@
 
 <hr/>
 
-<h3>🧰 Tech Stack</h3>
+<h3> Tech Stack</h3>
 <p align="left">
   <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="Python" width="40" height="40"/>
   <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="JavaScript" width="40" height="40"/>
@@ -81,7 +81,7 @@
 
 <hr/>
 
-<h3>📊 Data & BI</h3>
+<h3> Data & BI</h3>
 <p align="left">
   <a href="https://powerbi.microsoft.com/" target="_blank">
     <img alt="Power BI" src="https://img.shields.io/badge/Power%20BI-111?style=flat&logo=powerbi&logoColor=white" />
@@ -96,7 +96,7 @@
 
 <hr/>
 
-<h3>✅ Engineering principles I apply</h3>
+<h3> Engineering principles I apply</h3>
 <ul>
   <li><b>Traceability</b>: log inputs, decisions, and outputs for every run</li>
   <li><b>Reliability</b>: retries/backoff, safe failures, and clear error paths</li>
@@ -106,6 +106,6 @@
 
 <hr/>
 
-<h3>📬 Contact</h3>
+<h3> Contact</h3>
 <p>Best way to reach me: <b>valeriayashan@gmail.com</b></p>
 
