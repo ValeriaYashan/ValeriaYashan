@@ -33,16 +33,15 @@
 <h3> Featured Work (Repos)</h3>
 <ul>
   <li>
-    <b>Automation — n8n: Task Reminder & Email Digest</b><br/>
-    Google Sheets → validation/branching → Gmail digest (sends only when tasks exist).<br/>
-    <a href="REPO_LINK_AUTOMATION_1">Repository</a>
+    <b>Automation — n8n: Workflows & Alerts (Google, Asana, WhatsApp)</b><br/>
+    Automatizaciones con Google Sheets, Gmail, Calendar, Asana, WhatsApp y APIs externas (AI, Kling, ElevenLabs).<br/>
+    <a href="https://github.com/ValeriaYashan/n8n-workflows" target="_blank">Repository</a>
   </li>
   <br/>
   <li>
     <b>AI — Google Colab Notebooks</b><br/>
     Practical AI experiments (data prep, modeling, evaluation) with reproducible notebooks.<br/>
-   <a href="https://github.com/ValeriaYashan/Herramientas-IA" target="_blank" rel="noopener noreferrer">Repository</a>
-
+    <a href="https://github.com/ValeriaYashan/Herramientas-IA" target="_blank" rel="noopener noreferrer">Repository</a>
   </li>
   <br/>
   <li>
