@@ -35,7 +35,7 @@
   <li>
     <b>AI — Google Colab Notebooks</b><br/>
     Practical AI experiments (data prep, modeling, evaluation) with reproducible notebooks.<br/>
-    <a href="REPO_LINK_AI_1">Repository</a>
+    <a href="[Machine-learning](https://github.com/ValeriaYashan/Machine-learning)">Repository</a>
   </li>
   <br/>
   <li>
