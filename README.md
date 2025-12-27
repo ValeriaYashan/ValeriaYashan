@@ -46,9 +46,15 @@
   <br/>
   <li>
     <b>AI — Análisis de Datos</b><br/>
-    Machine Learning.<br/>
+    Modelos.<br/>
     <a href="https://github.com/ValeriaYashan/analisis_datos" target="_blank" rel="noopener noreferrer">Repository</a>
   </li>
+      <br/>
+      <li>
+<b>AI — Machine learning</b><br/>
+               Machine Learning.<br/>
+    <a href=" https://github.com/ValeriaYashan/Machine-learning" target="_blank" rel="noopener noreferrer">Repository</a>
+<li>
      <br/> 
   <li>
     <b>Power BI — KPI Dashboards</b><br/>
