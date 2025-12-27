@@ -1,62 +1,104 @@
-<h1 align="center">Hi! I'm Valeria Yashan 👋</h1>
-<h3 align="center">Industrial Engineer (MBA) | PMP Project Manager | Automation (n8n) | AI & Data Analytics</h3>
+<!-- =========================
+     VALERIA YASHAN · PROFILE README (TOP SECTION)
+     Paste this at the very top of your README.md
+========================= -->
+
+<h1 align="center">Hi, I'm Valeria Yashan 👋</h1>
 
 <p align="center">
-I design and deliver end-to-end <b>process automation</b> and <b>data-driven workflows</b> using <b>n8n</b>, Google Workspace, and APIs — with a strong focus on traceability, reliability, and measurable business outcomes.
+  <b>Industrial Engineer (MBA)</b> · <b>PMP</b> · <b>Automation (n8n)</b> · <b>Power BI Dashboards</b> · <b>AI & Data Analytics</b>
 </p>
 
 <p align="center">
-  <a target="_blank" href="https://www.linkedin.com/in/valeriayashan/">
-    <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" />
+  I build <b>process automations</b> and <b>data workflows</b> with <b>n8n</b>, Google Workspace, APIs, and <b>Power BI dashboards</b> for KPI tracking and decision support.
+</p>
+
+<p align="center">
+  <a href="https://www.linkedin.com/in/valeriayashan/" target="_blank">
+    <img alt="LinkedIn" src="https://img.shields.io/badge/LinkedIn-0A66C2?style=flat&logo=linkedin&logoColor=white" />
   </a>
   <a href="mailto:valeriayashan@gmail.com">
-    <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" />
+    <img alt="Email" src="https://img.shields.io/badge/Email-D14836?style=flat&logo=gmail&logoColor=white" />
   </a>
 </p>
 
----
+<hr/>
 
-<h3>⚙️ Automation (n8n) — What I build</h3>
+<h3>🚀 Featured Projects</h3>
+
+<!-- Replace REPO_LINK_* with your real links -->
 <ul>
-  <li><b>Operational alerts</b>: stock, SLA breaches, deadlines, exceptions</li>
-  <li><b>Google Workspace automations</b>: Forms → Sheets → Gmail, Drive, Calendar</li>
-  <li><b>Workflow patterns</b>: validation, branching, retries, logging, idempotency, error handling</li>
+  <li>
+    <b>n8n — Task Reminder & Email Digest</b><br/>
+    Filters pending tasks from Google Sheets and sends a digest via Gmail only when needed (validation + logging + branching).<br/>
+    <a href="REPO_LINK_1">Repository</a>
+  </li>
+  <br/>
+  <li>
+    <b>n8n — Inventory Alert</b><br/>
+    Monitors stock levels in Google Sheets and triggers notifications when stock drops below a threshold (retries + error handling).<br/>
+    <a href="REPO_LINK_2">Repository</a>
+  </li>
+  <br/>
+  <li>
+    <b>Power BI — KPI Dashboard</b><br/>
+    Executive KPI tracking dashboard with drill-downs for operations and performance management.<br/>
+    <a href="REPO_LINK_3">Repository / Screenshots</a>
+  </li>
+</ul>
+
+<hr/>
+
+<h3>⚙️ What I build with Automation (n8n)</h3>
+<ul>
+  <li><b>Google Workspace automations</b>: Forms → Sheets → Gmail/Drive/Calendar</li>
+  <li><b>Operational alerts</b>: deadlines, SLA breaches, exceptions, inventory thresholds</li>
+  <li><b>Workflow patterns</b>: validation, branching, retries, logging, idempotency</li>
   <li><b>AI-assisted routing</b>: classify requests and route to the right process/ticket queue</li>
 </ul>
 
-<h3>🚀 Featured Work</h3>
-<ul>
-  <li><b>n8n — Task Reminder & Email Digest</b> (Sheets + Gmail): filters pending tasks and sends only when needed. <a href="REPO_LINK">Repo</a></li>
-  <li><b>n8n — Inventory Alert</b> (Sheets): triggers notification when stock &lt; threshold. <a href="REPO_LINK">Repo</a></li>
-  <li><b>n8n — Lead Intake</b> (Forms/Webhook → validation → routing → logging). <a href="REPO_LINK">Repo</a></li>
-</ul>
+<hr/>
 
-<h3>🧰 Tooling</h3>
+<h3>🧰 Tech Stack</h3>
 <p align="left">
-  <!-- n8n badge -->
-  <img src="https://img.shields.io/badge/n8n-111?style=for-the-badge&logo=n8n&logoColor=white" />
-  <img src="https://img.shields.io/badge/Google%20Workspace-111?style=for-the-badge&logo=google&logoColor=white" />
-  <img src="https://img.shields.io/badge/APIs-111?style=for-the-badge&logo=swagger&logoColor=white" />
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="Python" width="40" height="40"/>
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="JavaScript" width="40" height="40"/>
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="Node.js" width="40" height="40"/>
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original-wordmark.svg" alt="Express" width="40" height="40"/>
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original-wordmark.svg" alt="MySQL" width="40" height="40"/>
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" alt="HTML5" width="40" height="40"/>
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg" alt="CSS3" width="40" height="40"/>
 </p>
 
-<h3>🛠️ Tech Stack</h3>
+<hr/>
+
+<h3>📊 Data & BI</h3>
 <p align="left">
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" width="40" height="40"/>
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" width="40" height="40"/>
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" width="40" height="40"/>
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original-wordmark.svg" width="40" height="40"/>
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original-wordmark.svg" width="40" height="40"/>
+  <a href="https://powerbi.microsoft.com/" target="_blank">
+    <img alt="Power BI" src="https://img.shields.io/badge/Power%20BI-111?style=flat&logo=powerbi&logoColor=white" />
+  </a>
+  <a href="https://www.tableau.com/" target="_blank">
+    <img alt="Tableau" src="https://img.shields.io/badge/Tableau-111?style=flat&logo=tableau&logoColor=white" />
+  </a>
+  <a href="https://www.mysql.com/" target="_blank">
+    <img alt="MySQL" src="https://img.shields.io/badge/MySQL-111?style=flat&logo=mysql&logoColor=white" />
+  </a>
 </p>
+
+<hr/>
 
 <h3>✅ Engineering principles I apply</h3>
 <ul>
-  <li><b>Traceability</b>: every run logged (inputs, decisions, outputs)</li>
-  <li><b>Reliability</b>: retries/backoff, dead-letter handling, safe failures</li>
-  <li><b>Idempotency</b>: avoid duplicates when workflows re-run</li>
-  <li><b>Governance</b>: clear KPIs, audit trail, and change control</li>
+  <li><b>Traceability</b>: log inputs, decisions, and outputs for every run</li>
+  <li><b>Reliability</b>: retries/backoff, safe failures, and clear error paths</li>
+  <li><b>Idempotency</b>: prevent duplicates when workflows re-run</li>
+  <li><b>Measurable outcomes</b>: KPIs and operational metrics tied to business goals</li>
 </ul>
 
+<hr/>
+
+<h3>📬 Contact</h3>
 <p>
-📬 Best way to reach me: <b>valeriayashan@gmail.com</b>
+Best way to reach me: <b>valeriayashan@gmail.com</b>
 </p>
 
