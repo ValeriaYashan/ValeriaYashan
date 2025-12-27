@@ -6,11 +6,15 @@
 <h1 align="center">Hi, I'm Valeria Yashan 👋</h1>
 
 <p align="center">
-  <b>Industrial Engineer (MBA)</b> · <b>PMP</b> · <b>Automation (n8n)</b> · <b>AI (Google Colab)</b> · <b>Power BI Dashboards</b> · <b>Data Analytics</b>
+  <b>Industrial Engineer (MBA)</b> · <b>PMP</b> · <b>Automation & AI</b> · <b>Power BI</b> · <b>Data & Process Optimization</b>
 </p>
 
 <p align="center">
-  I build <b>process automations</b>, <b>AI prototypes</b> and <b>data workflows</b> using <b>n8n</b>, <b>Google Colab</b>, Google Workspace, APIs, and <b>Power BI dashboards</b> for KPI tracking and decision support.
+  I design and implement <b>AI-powered automations</b>, <b>data workflows</b>, and <b>KPI dashboards</b> using tools like <b>n8n</b>, <b>Google Colab</b>, <b>Power BI</b>, Google Workspace, and APIs — enabling smarter decisions and scalable impact.
+</p>
+
+<p align="center">
+  Passionate about digital transformation, low-code tools, and using data to drive efficiency, innovation, and business growth.
 </p>
 
 <p align="center">
@@ -20,10 +24,12 @@
   <a href="mailto:valeriayashan@gmail.com">
     <img alt="Email" src="https://img.shields.io/badge/Email-D14836?style=flat&logo=gmail&logoColor=white" />
   </a>
+  <a href="https://github.com/ValeriaYashan" target="_blank">
+    <img alt="GitHub" src="https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white" />
+  </a>
 </p>
 
 <hr/>
-
 <h3> Featured Work (Repos)</h3>
 <ul>
   <li>
