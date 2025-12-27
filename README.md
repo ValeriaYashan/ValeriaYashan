@@ -50,11 +50,11 @@
     <a href="https://github.com/ValeriaYashan/analisis_datos" target="_blank" rel="noopener noreferrer">Repository</a>
   </li>
       <br/>
-      <li>
-<b>AI — Machine learning</b><br/>
-               Machine Learning.<br/>
-    <a href=" https://github.com/ValeriaYashan/Machine-learning" target="_blank" rel="noopener noreferrer">Repository</a>
-<li>
+     <li>
+    <b>AI — Machine Learning</b><br/>
+    Machine Learning.<br/>
+    <a href="https://github.com/ValeriaYashan/analisis_datos](https://github.com/ValeriaYashan/Machine-learning" target="_blank" rel="noopener noreferrer">Repository</a>
+  </li>
      <br/> 
   <li>
     <b>Power BI — KPI Dashboards</b><br/>
