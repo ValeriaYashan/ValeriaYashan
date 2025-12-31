@@ -44,10 +44,12 @@
       <li>
         <a href="https://github.com/ValeriaYashan/Inventario---Alerta-stock-_-10-Sheets_Gmail-" target="_blank" rel="noopener noreferrer">Inventario — Alerta de stock (Sheets → Gmail)</a>
         — Monitoreo de stock en Sheets con umbral; dispara alerta por Gmail y marca filas como “Alerta Enviada” para evitar duplicados.
-      </li>
-    </ul>
-  </li>
-
+      </li>  
+<li>
+  <a href="https://github.com/ValeriaYashan/n8n-clinica-rag-agent" target="_blank" rel="noopener noreferrer">n8n-clinica-rag-agent</a>
+  — Agente IA con memoria en Postgres y RAG en Supabase Vector Store; pipeline de ingesta desde Drive (PDF) + embeddings OpenAI.
+</li>
+</ul>
   <br/>
 
   <li>
