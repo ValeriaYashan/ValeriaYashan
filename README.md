@@ -32,13 +32,13 @@
 <hr/>
 <h3> Featured Work (Repos)</h3>
 <ul>
-  <li>
-    <b>Automation — n8n: Workflows & Alerts (Google, Asana, WhatsApp)</b><br/>
-    Automatizaciones con Google Sheets, Gmail, Calendar, Asana, WhatsApp y APIs externas (AI, Kling, ElevenLabs).<br/>
-    <a href="https://github.com/ValeriaYashan/Pokemon-Scrapper/blob/main/Pokemon%20Scrapper.json"</a>
-<a href="https://github.com/ValeriaYashan/n8n-weather-alerts/tree/main"</a>
-  </li>
-  <br/>
+ <li>
+  <b>Automation — n8n: Workflows & Alerts (Google, Asana, WhatsApp)</b><br/>
+  Automatizaciones con Google Sheets, Gmail, Calendar, Asana, WhatsApp y APIs externas (AI, Kling, ElevenLabs).<br/>
+  <a href="https://github.com/ValeriaYashan/Pokemon-Scrapper/blob/main/Pokemon%20Scrapper.json">Pokemon Scrapper (workflow .json)</a><br/>
+  <a href="https://github.com/ValeriaYashan/n8n-weather-alerts/tree/main">n8n-weather-alerts (repo)</a>
+</li>
+<br/>
   <li>
     <b>AI — Google Colab Notebooks</b><br/>
     Practical AI experiments (data prep, modeling, evaluation) with reproducible notebooks.<br/>
