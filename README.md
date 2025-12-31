@@ -33,12 +33,21 @@
 <h3> Featured Work (Repos)</h3>
 <ul>
  <li>
-  <b>Automation — n8n: Workflows & Alerts (Google, Asana, WhatsApp)</b><br/>
-Automatizaciones con Google Sheets, Gmail, Calendar, Asana, WhatsApp y APIs externas (AI, Kling, ElevenLabs).<br/>
-<a href="https://github.com/ValeriaYashan/Pokemon-Scrapper">Pokemon Scrapper</a><br/>
-<a href="https://github.com/ValeriaYashan/n8n-weather-alerts/tree/main">n8n-weather-alerts</a><br/>
-<a href="https://github.com/ValeriaYashan/Inventario---Alerta-stock-_-10-Sheets_Gmail-/tree/main">Inventario — Alerta stock (Sheets → Gmail)</a><br/>
-</li>
+ <b>Automation — n8n: Workflows & Alerts (Google, Asana, WhatsApp)</b><br/>
+Automatizaciones con Google Sheets, Gmail, Calendar, Asana, WhatsApp y APIs públicas. Enfoque: monitoreo, enriquecimiento de datos, alertas y reportes.<br/><br/>
+
+<ul>
+  <li>
+    <a href="https://github.com/ValeriaYashan/Pokemon-Scrapper">Pokemon Scrapper</a> — Completa Google Sheets con datos de PokéAPI (nombre/tipos/sprites) y envía resumen por Gmail.
+  </li>
+  <li>
+    <a href="https://github.com/ValeriaYashan/n8n-weather-alerts">n8n-weather-alerts</a> — Alertas de clima por ciudad (Nominatim + Open-Meteo) con dedupe anti-spam; notifica por Telegram/Gmail y log opcional.
+  </li>
+  <li>
+    <a href="https://github.com/ValeriaYashan/Inventario---Alerta-stock-_-10-Sheets_Gmail-/tree/main">Inventario — Alerta stock (Sheets → Gmail)</a> — Monitorea stock en Sheets y dispara alerta por Gmail cuando baja del umbral; marca “Alerta Enviada”.
+  </li>
+</ul>
+
 <br/>
   <li>
     <b>AI — Google Colab Notebooks</b><br/>
