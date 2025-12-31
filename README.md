@@ -1,140 +1,124 @@
 <!-- =========================
-     VALERIA YASHAN · PROFILE README (TOP SECTION)
-     Paste this at the very top of your README.md
+     VALERIA YASHAN · PROFILE README (TOP SECTION) — ES
 ========================= -->
 
-<h1 align="center">Hi, I'm Valeria Yashan 👋</h1>
+<h1 align="center">Hola, soy Valeria Yashan 👋</h1>
 
 <p align="center">
-  <b>Industrial Engineer (MBA)</b> · <b>PMP</b> · <b>Automation & AI</b> · <b>Power BI</b> · <b>Data & Process Optimization</b>
+  <b>Ingeniera Industrial (MBA)</b> · <b>PMP</b> · <b>Automatización & IA</b> · <b>Power BI</b>
 </p>
 
 <p align="center">
-  I design and implement <b>AI-powered automations</b>, <b>data workflows</b>, and <b>KPI dashboards</b> using tools like <b>n8n</b>, <b>Google Colab</b>, <b>Power BI</b>, Google Workspace, and APIs — enabling smarter decisions and scalable impact.
+  Diseño e implemento <b>automatizaciones operativas</b> (n8n + APIs + Google Workspace) y <b>analítica/KPIs</b> (Power BI) para reducir tareas manuales, mejorar la confiabilidad del proceso y convertir operaciones en métricas accionables.
 </p>
 
 <p align="center">
-  Passionate about digital transformation, low-code tools, and using data to drive efficiency, innovation, and business growth.
-</p>
-
-<p align="center">
-  <a href="https://www.linkedin.com/in/valeriayashan/" target="_blank">
+  <a href="https://www.linkedin.com/in/valeriayashan/" target="_blank" rel="noopener noreferrer">
     <img alt="LinkedIn" src="https://img.shields.io/badge/LinkedIn-0A66C2?style=flat&logo=linkedin&logoColor=white" />
   </a>
   <a href="mailto:valeriayashan@gmail.com">
     <img alt="Email" src="https://img.shields.io/badge/Email-D14836?style=flat&logo=gmail&logoColor=white" />
   </a>
-  <a href="https://github.com/ValeriaYashan" target="_blank">
+  <a href="https://github.com/ValeriaYashan" target="_blank" rel="noopener noreferrer">
     <img alt="GitHub" src="https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white" />
   </a>
 </p>
 
 <hr/>
-<h3> Featured Work (Repos)</h3>
-<ul>
- <li>
- <b>Automation — n8n: Workflows & Alerts (Google, Asana, WhatsApp)</b><br/>
-Automatizaciones con Google Sheets, Gmail, Calendar, Asana, WhatsApp y APIs públicas. Enfoque: monitoreo, enriquecimiento de datos, alertas y reportes.<br/><br/>
+
+<h3>Trabajo destacado</h3>
 
 <ul>
   <li>
-    <a href="https://github.com/ValeriaYashan/Pokemon-Scrapper">Pokemon Scrapper</a> — Completa Google Sheets con datos de PokéAPI (nombre/tipos/sprites) y envía resumen por Gmail.
+    <b>Automatización — n8n: Workflows & Alertas (Google, Asana, WhatsApp)</b><br/>
+    Flujos con enfoque “producción”: validación, ramificación, reintentos, logging estructurado y deduplicación (anti-duplicados). Salidas a Gmail/Telegram/Sheets e integraciones mediante APIs públicas/REST.
+    <ul>
+      <li>
+        <a href="https://github.com/ValeriaYashan/Pokemon-Scrapper" target="_blank" rel="noopener noreferrer">Pokemon Scrapper</a>
+        — Enriquecimiento de Google Sheets desde PokéAPI (nombre/tipos/sprites) + resumen por Gmail (procesamiento por lotes).
+      </li>
+      <li>
+        <a href="https://github.com/ValeriaYashan/n8n-weather-alerts" target="_blank" rel="noopener noreferrer">n8n-weather-alerts</a>
+        — Alertas meteorológicas por ciudad (Nominatim + Open-Meteo) con dedupe anti-spam; notificaciones por Telegram/Gmail + logging opcional.
+      </li>
+      <li>
+        <a href="https://github.com/ValeriaYashan/Inventario---Alerta-stock-_-10-Sheets_Gmail-" target="_blank" rel="noopener noreferrer">Inventario — Alerta de stock (Sheets → Gmail)</a>
+        — Monitoreo de stock en Sheets con umbral; dispara alerta por Gmail y marca filas como “Alerta Enviada” para evitar duplicados.
+      </li>
+    </ul>
   </li>
-  <li>
-    <a href="https://github.com/ValeriaYashan/n8n-weather-alerts">n8n-weather-alerts</a> — Alertas de clima por ciudad (Nominatim + Open-Meteo) con dedupe anti-spam; notifica por Telegram/Gmail y log opcional.
-  </li>
-  <li>
-    <a href="https://github.com/ValeriaYashan/Inventario---Alerta-stock-_-10-Sheets_Gmail-/tree/main">Inventario — Alerta stock (Sheets → Gmail)</a> — Monitorea stock en Sheets y dispara alerta por Gmail cuando baja del umbral; marca “Alerta Enviada”.
-  </li>
-</ul>
 
-<br/>
-  <li>
-    <b>AI — Google Colab Notebooks</b><br/>
-    Practical AI experiments (data prep, modeling, evaluation) with reproducible notebooks.<br/>
-    <a href="https://github.com/ValeriaYashan/Herramientas-IA" target="_blank" rel="noopener noreferrer">Repository</a>
-  </li>
   <br/>
+
   <li>
-    <b>AI — Análisis de Datos</b><br/>
-    Modelos.<br/>
-    <a href="https://github.com/ValeriaYashan/analisis_datos" target="_blank" rel="noopener noreferrer">Repository</a>
+    <b>IA — Notebooks en Google Colab</b><br/>
+    Experimentos reproducibles: preparación de datos → modelado → evaluación, con supuestos documentados.
+    <br/>
+    <a href="https://github.com/ValeriaYashan/Herramientas-IA" target="_blank" rel="noopener noreferrer">Repositorio</a>
   </li>
-      <br/>
-     <li>
-    <b>AI — Machine Learning</b><br/>
-    Machine Learning.<br/>
-    <a href="https://github.com/ValeriaYashan/Machine-learning" target="_blank" rel="noopener noreferrer">Repository</a>
-  </li>
-     <br/> 
+
+  <br/>
+
   <li>
-    <b>Power BI — KPI Dashboards</b><br/>
-    KPI tracking with drill-downs and decision-support views.<br/>
-    <a href="REPO_LINK_BI_1">Repository / Screenshots</a>
+    <b>IA — Análisis de datos</b><br/>
+    Proyectos de análisis exploratorio y modelos.
+    <br/>
+    <a href="https://github.com/ValeriaYashan/analisis_datos" target="_blank" rel="noopener noreferrer">Repositorio</a>
+  </li>
+
+  <br/>
+
+  <li>
+    <b>IA — Machine Learning</b><br/>
+    Ejercicios y modelos end-to-end.
+    <br/>
+    <a href="https://github.com/ValeriaYashan/Machine-learning" target="_blank" rel="noopener noreferrer">Repositorio</a>
+  </li>
+
+  <br/>
+
+  <li>
+    <b>Power BI — Dashboards de KPIs</b><br/>
+    Seguimiento de KPIs con drill-down y vistas de soporte a decisiones.
+    <br/>
+    <a href="REEMPLAZAR_CON_LINK_A_REPO_O_PORTFOLIO_POWER_BI" target="_blank" rel="noopener noreferrer">Repositorio / Capturas</a>
   </li>
 </ul>
 
 <hr/>
 
-<h3> AI (Google Colab) — What I build</h3>
+<h3>Qué construyo</h3>
 <ul>
-  <li><b>Reproducible notebooks</b>: clear inputs/outputs, step-by-step experiments</li>
-  <li><b>Data pipelines</b>: cleaning, feature engineering, train/validation splits</li>
-  <li><b>Modeling</b>: baseline → improved models, metrics-driven iteration</li>
-  <li><b>Evaluation</b>: error analysis, confusion matrix/threshold tuning (when applicable)</li>
-  <li><b>Operational mindset</b>: versioned datasets, documented assumptions, repeatable runs</li>
+  <li><b>Automatizaciones (n8n)</b>: Google Workspace, alertas operativas, enrutamiento, integraciones API, dedupe, reintentos y logging</li>
+  <li><b>Workflows con IA</b>: salidas estructuradas, clasificación, uso de herramientas, drafts supervisados</li>
+  <li><b>Datos & BI</b>: pipelines de limpieza, definición de KPIs, dashboards en Power BI para soporte a decisiones</li>
 </ul>
 
 <hr/>
 
-<h3> Automation (n8n) — What I build</h3>
+<h3>Stack técnico</h3>
 <ul>
-  <li><b>Google Workspace automations</b>: Forms → Sheets → Gmail/Drive/Calendar</li>
-  <li><b>Operational alerts</b>: deadlines, SLA breaches, exceptions, inventory thresholds</li>
-  <li><b>Workflow patterns</b>: validation, branching, retries, logging, idempotency</li>
-  <li><b>AI-assisted routing</b>: classify requests and route to the right process/ticket queue</li>
+  <li><b>Automatización</b>: n8n, Webhooks, REST APIs</li>
+  <li><b>Google</b>: Sheets, Gmail, Calendar, Drive</li>
+  <li><b>IA</b>: OpenAI (salida estructurada), diseño de prompts</li>
+  <li><b>Datos</b>: SQL básico, modelado, controles de calidad (QA)</li>
+  <li><b>BI</b>: Power BI (medidas, drill-down, reporting)</li>
 </ul>
 
 <hr/>
 
-<h3> Tech Stack</h3>
-<p align="left">
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="Python" width="40" height="40"/>
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="JavaScript" width="40" height="40"/>
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="Node.js" width="40" height="40"/>
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original-wordmark.svg" alt="Express" width="40" height="40"/>
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original-wordmark.svg" alt="MySQL" width="40" height="40"/>
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" alt="HTML5" width="40" height="40"/>
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg" alt="CSS3" width="40" height="40"/>
-</p>
-
-<hr/>
-
-<h3> Data & BI</h3>
-<p align="left">
-  <a href="https://powerbi.microsoft.com/" target="_blank">
-    <img alt="Power BI" src="https://img.shields.io/badge/Power%20BI-111?style=flat&logo=powerbi&logoColor=white" />
-  </a>
-  <a href="https://www.tableau.com/" target="_blank">
-    <img alt="Tableau" src="https://img.shields.io/badge/Tableau-111?style=flat&logo=tableau&logoColor=white" />
-  </a>
-  <a href="https://colab.research.google.com/" target="_blank">
-    <img alt="Google Colab" src="https://img.shields.io/badge/Google%20Colab-111?style=flat&logo=googlecolab&logoColor=white" />
-  </a>
-</p>
-
-<hr/>
-
-<h3> Engineering principles I apply</h3>
+<h3>Principios de ingeniería</h3>
 <ul>
-  <li><b>Traceability</b>: log inputs, decisions, and outputs for every run</li>
-  <li><b>Reliability</b>: retries/backoff, safe failures, and clear error paths</li>
-  <li><b>Idempotency</b>: prevent duplicates when workflows re-run</li>
-  <li><b>Measurable outcomes</b>: KPIs and operational metrics tied to business goals</li>
+  <li><b>Trazabilidad</b>: logs estructurados de inputs, decisiones y outputs</li>
+  <li><b>Confiabilidad</b>: reintentos/backoff, fallas seguras y notificaciones claras</li>
+  <li><b>Idempotencia</b>: dedupe keys para evitar duplicados en re-ejecuciones</li>
+  <li><b>Observabilidad</b>: KPIs operativos medibles desde logs (éxito, alertas, errores)</li>
+  <li><b>Seguridad por defecto</b>: sin secretos en repos; credenciales gestionadas en la herramienta</li>
 </ul>
 
 <hr/>
 
-<h3> Contact</h3>
-<p>Best way to reach me: <b>valeriayashan@gmail.com</b></p>
+<h3>Contacto</h3>
+<p>Email: <b>valeriayashan@gmail.com</b></p>
+
 
