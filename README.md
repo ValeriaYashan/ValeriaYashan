@@ -35,7 +35,7 @@
   <li>
     <b>Automation — n8n: Workflows & Alerts (Google, Asana, WhatsApp)</b><br/>
     Automatizaciones con Google Sheets, Gmail, Calendar, Asana, WhatsApp y APIs externas (AI, Kling, ElevenLabs).<br/>
-    <a href="https://github.com/ValeriaYashan/n8n-workflows" target="_blank">Repository</a>
+    <a href="https://github.com/ValeriaYashan/Pokemon-Scrapper/blob/main/Pokemon%20Scrapper.json</a>
   </li>
   <br/>
   <li>
