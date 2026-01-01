@@ -81,10 +81,12 @@
 
 <h3>Qué construyo</h3>
 <ul>
-  <li><b>Automatizaciones (n8n)</b>: Google Workspace, alertas operativas, enrutamiento, integraciones API, dedupe/idempotencia, reintentos y logging</li>
-  <li><b>Agentes IA</b>: salidas estructuradas, clasificación/ruteo, herramientas (RAG), drafts supervisados, control de calidad</li>
-  <li><b>Datos & BI</b>: pipelines de limpieza, definición de KPIs, tableros en Power BI para soporte a decisiones</li>
+  <li><b>Automatizaciones (n8n)</b>: Google Workspace, alertas operativas, enrutamiento, integraciones API, dedupe/idempotencia, reintentos y logging estructurado.</li>
+  <li><b>Agentes IA</b>: salidas estructuradas, clasificación/ruteo, herramientas (RAG), drafts supervisados, validaciones y control de calidad.</li>
+  <li><b>Datos & BI</b>: pipelines de limpieza, definición de KPIs, tableros en Power BI para soporte a decisiones y monitoreo operacional.</li>
+  <li><b>Gestión de proyectos (PM)</b>: discovery → diseño → implementación → UAT → go-live; planificación y seguimiento (alcance, cronograma, riesgos, cambios), coordinación cross-funcional y medición de impacto (SLA, tiempos, tasa de error, adopción).</li>
 </ul>
+
 
 <hr/>
 
