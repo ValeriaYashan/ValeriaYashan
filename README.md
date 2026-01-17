@@ -19,8 +19,8 @@
   <a href="mailto:valeriayashan@gmail.com">
     <img alt="Email" src="https://img.shields.io/badge/Email-D14836?style=flat&logo=gmail&logoColor=white" />
   </a>
-  <a href="https://github.com/ValeriaYashan" target="_blank" rel="noopener noreferrer">
-    <img alt="GitHub" src="https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white" />
+  <a href="https://valeria-delivery-hub.lovable.app/" target="_blank" rel="noopener noreferrer">
+    <img alt="Web Portfolio" src="https://img.shields.io/badge/Ver%20Web%20Portfolio-000000?style=for-the-badge&logo=vercel&logoColor=white" />
   </a>
 </p>
 
