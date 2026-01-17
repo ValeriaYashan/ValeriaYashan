@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  Diseño e implemento <b>automatizaciones operativas</b> (n8n + APIs + Google Workspace) y <b>soluciones de datos</b> (SQL/BI) para reducir tareas manuales, mejorar la confiabilidad del proceso y convertir operaciones en <b>KPIs accionables</b>.
+  Diseño e implemento <b>automatizaciones operativas y productos internos</b> (n8n, Lovable, APIs, Google Workspace) con foco en <b>entrega end-to-end</b>, confiabilidad del proceso y conversión de operaciones en <b>KPIs accionables</b>.
 </p>
 
 <p align="center">
@@ -29,6 +29,19 @@
 <h3>Repos destacados</h3>
 
 <ul>
+  <li>
+    <b>Portfolio — Automation & Delivery (Lovable)</b> ⭐<br/>
+    Portfolio de <b>mini-apps operativas</b> diseñadas con enfoque PM/Delivery: alcance definido, validaciones, flujo end-to-end y KPIs sugeridos.
+    <ul>
+      <li>
+        <a href="https://github.com/ValeriaYashan/lovable-apps-portfolio" target="_blank" rel="noopener noreferrer">
+          <b>Lovable Apps Portfolio</b>
+        </a>
+        — Calculadora de horas y costos, generador de presupuestos (PDF), project tracker con progreso y generador de cuestionarios MCQ.
+      </li>
+    </ul>
+  </li>
+
   <li>
     <b>Automatización — n8n: Workflows & Alertas (Google, WhatsApp, APIs)</b><br/>
     Flujos con enfoque “producción”: <b>validación</b>, <b>ramificación</b>, <b>reintentos/backoff</b>, <b>logging estructurado</b> e <b>idempotencia/dedupe</b>. Integraciones con Gmail/Telegram/Sheets y APIs públicas/REST.
@@ -82,17 +95,17 @@
 <h3>Qué construyo</h3>
 <ul>
   <li><b>Automatizaciones (n8n)</b>: Google Workspace, alertas operativas, enrutamiento, integraciones API, dedupe/idempotencia, reintentos y logging estructurado.</li>
+  <li><b>Productos internos low-code</b>: mini-apps operativas (Lovable) con foco en UX simple, validaciones, cálculo confiable y entrega rápida.</li>
   <li><b>Agentes IA</b>: salidas estructuradas, clasificación/ruteo, herramientas (RAG), drafts supervisados, validaciones y control de calidad.</li>
   <li><b>Datos & BI</b>: pipelines de limpieza, definición de KPIs, tableros en Power BI para soporte a decisiones y monitoreo operacional.</li>
   <li><b>Gestión de proyectos (PM)</b>: discovery → diseño → implementación → UAT → go-live; planificación y seguimiento (alcance, cronograma, riesgos, cambios), coordinación cross-funcional y medición de impacto (SLA, tiempos, tasa de error, adopción).</li>
 </ul>
 
-
 <hr/>
 
 <h3>Stack técnico</h3>
 <ul>
-  <li><b>Automatización</b>: n8n, Webhooks, REST APIs, JSON</li>
+  <li><b>Automatización</b>: n8n, Lovable, Webhooks, REST APIs, JSON</li>
   <li><b>Google</b>: Sheets, Gmail, Calendar, Drive</li>
   <li><b>IA</b>: OpenAI (salida estructurada), prompting, RAG</li>
   <li><b>Bases de datos / Persistencia</b>: SQL, <b>PostgreSQL</b>, <b>Supabase</b> (Postgres + Vector Store), Google Sheets (operativo/logs)</li>
@@ -116,6 +129,3 @@
 
 <h3>Contacto</h3>
 <p>Email: <b>valeriayashan@gmail.com</b></p>
-
-
-
