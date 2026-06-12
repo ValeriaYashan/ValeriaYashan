@@ -1,11 +1,172 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<BaseLayout
+  title="Inicio"
+  description="Valeria Yashan — Consultora en Project Management e Inteligencia Artificial aplicada. Autora, docente y estratega."
+>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-inner mark-accent">
+        <p class="hero-eyebrow">Project Management · IA · Estrategia</p>
+        <h1 class="hero-headline">Gestión de proyectos<br />en la era de la IA.</h1>
+        <p class="hero-sub">
+          Ayudo a profesionales y organizaciones a integrar metodologías de gestión de proyectos
+          con herramientas de inteligencia artificial. Autora, consultora y docente.
+        </p>
+        <div class="hero-actions">
+          <a href="/libro" class="btn btn-primary">Ver el libro</a>
+          <a href="/blog" class="btn btn-outline">Leer artículos</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACERCA -->
+  <section class="about">
+    <div class="container">
+      <h2 class="section-title">Sobre mí</h2>
+      <p>
+        Soy Project Manager certificada (PMP®) con más de diez años de experiencia en gestión de proyectos,
+        estrategia organizacional e implementación de herramientas digitales. Trabajo con equipos que quieren
+        mejorar su forma de planificar, ejecutar y medir resultados.
+      </p>
+      <p>
+        En los últimos años integré la inteligencia artificial como parte de mi práctica profesional.
+        Escribo, enseño y consulto sobre cómo aplicar IA de forma concreta y sostenible en el trabajo de proyectos.
+      </p>
+      <a href="/contacto" class="btn btn-outline" style="margin-top: 1rem;">Contacto profesional</a>
+    </div>
+  </section>
+
+  <!-- LIBRO -->
+  <section class="book-preview">
+    <div class="container">
+      <div class="book-card mark-accent">
+        <p class="book-label">Libro</p>
+        <h2 class="book-title">Gestión de proyectos con IA</h2>
+        <p class="book-desc">
+          Una guía práctica para integrar inteligencia artificial en el ciclo de vida de los proyectos.
+          Disponible en Amazon.
+        </p>
+        <a href="/libro" class="btn btn-primary">Ver recursos del libro</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOG PREVIEW -->
+  <section class="blog-preview">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Últimos artículos</h2>
+        <a href="/blog" class="view-all">Ver todos →</a>
+      </div>
+      <p class="blog-preview-text">
+        Escribo sobre Project Management, inteligencia artificial aplicada, productividad y herramientas digitales.
+        Sin relleno, con ejemplos concretos.
+      </p>
+      <a href="/blog" class="btn btn-outline" style="margin-top: 1rem;">Ir al blog</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    padding: var(--space-xl) 0 var(--space-lg);
+  }
+
+  .hero-inner {
+    max-width: 620px;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+    margin-bottom: var(--space-sm);
+  }
+
+  .hero-headline {
+    margin-bottom: var(--space-sm);
+  }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--color-muted);
+    margin-bottom: var(--space-md);
+    max-width: 520px;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .about {
+    padding: var(--space-lg) 0;
+    background-color: var(--color-surface);
+  }
+
+  .about .container {
+    max-width: var(--max-width);
+  }
+
+  .section-title {
+    margin-bottom: var(--space-sm);
+  }
+
+  .book-preview {
+    padding: var(--space-lg) 0;
+  }
+
+  .book-card {
+    background: var(--color-surface);
+    padding: var(--space-md);
+    border-radius: var(--radius);
+  }
+
+  .book-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .book-title {
+    margin-bottom: 0.75rem;
+  }
+
+  .book-desc {
+    color: var(--color-muted);
+    margin-bottom: var(--space-sm);
+  }
+
+  .blog-preview {
+    padding: var(--space-lg) 0 var(--space-xl);
+    background-color: var(--color-surface);
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: var(--space-sm);
+  }
+
+  .view-all {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-accent);
+  }
+
+  .blog-preview-text {
+    color: var(--color-muted);
+  }
+</style>

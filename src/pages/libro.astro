@@ -1,0 +1,125 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Libro"
+  description="Recursos complementarios del libro de Valeria Yashan sobre gestión de proyectos e inteligencia artificial."
+>
+  <div class="container page-container">
+    <header class="page-header mark-accent">
+      <p class="page-eyebrow">Libro</p>
+      <h1>Gestión de proyectos con IA</h1>
+      <p class="page-lead">
+        Bienvenido/a a la página oficial del libro. Aquí encontrarás los recursos
+        complementarios, materiales de práctica y actualizaciones.
+      </p>
+    </header>
+
+    <section class="libro-recursos">
+      <h2>Material complementario</h2>
+      <p>El material complementario del libro está disponible en Notion. Incluye plantillas, ejemplos y recursos adicionales que se actualizan periódicamente.</p>
+      <a href="https://notion.so" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Acceder al material en Notion</a>
+      <p class="update-notice">⚠ Los recursos pueden actualizarse. Siempre accedé a través de esta página para asegurarte de tener la versión más reciente.</p>
+    </section>
+
+    <section class="libro-faq">
+      <h2>Preguntas frecuentes</h2>
+
+      <div class="faq-item">
+        <h3>¿Dónde puedo comprar el libro?</h3>
+        <p>El libro está disponible en Amazon en versión impresa y digital (Kindle).</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>¿Los recursos son gratuitos?</h3>
+        <p>Sí. El material complementario es gratuito para todos los lectores del libro.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>¿Se actualiza el contenido?</h3>
+        <p>El material en Notion puede actualizarse con nuevos recursos, correcciones o ejemplos adicionales. El libro impreso mantiene su contenido original.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>¿Cómo puedo contactar a la autora?</h3>
+        <p>Podés escribirme a través de la <a href="/contacto">página de contacto</a> o por LinkedIn.</p>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .page-container {
+    padding-top: var(--space-lg);
+    padding-bottom: var(--space-xl);
+  }
+
+  .page-header {
+    margin-bottom: var(--space-lg);
+  }
+
+  .page-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .page-lead {
+    font-size: 1.1rem;
+    color: var(--color-muted);
+    margin-top: var(--space-sm);
+    margin-bottom: 0;
+    max-width: 520px;
+  }
+
+  .libro-recursos,
+  .libro-faq {
+    margin-bottom: var(--space-lg);
+  }
+
+  .libro-recursos h2,
+  .libro-faq h2 {
+    margin-bottom: var(--space-sm);
+  }
+
+  .libro-recursos p {
+    color: var(--color-muted);
+    margin-bottom: var(--space-sm);
+  }
+
+  .update-notice {
+    margin-top: var(--space-sm);
+    font-size: 0.85rem;
+    color: var(--color-muted);
+    background: var(--color-surface);
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius);
+    border-left: 3px solid var(--color-border);
+  }
+
+  .faq-item {
+    padding: var(--space-sm) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .faq-item:first-of-type {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .faq-item h3 {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.35rem;
+  }
+
+  .faq-item p {
+    color: var(--color-muted);
+    font-size: 0.95rem;
+    margin-bottom: 0;
+  }
+</style>
