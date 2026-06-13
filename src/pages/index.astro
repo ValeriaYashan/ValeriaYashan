@@ -12,12 +12,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <div class="hero-inner mark-accent">
         <p class="hero-eyebrow">Project Management · IA · Estrategia</p>
         <h1 class="hero-headline">Gestión de proyectos<br />en la era de la IA.</h1>
-        <p class="hero-sub">
-          Ayudo a profesionales y organizaciones a integrar metodologías de gestión de proyectos
-          con herramientas de inteligencia artificial. Autora, consultora y docente.
-        </p>
+        <p class="hero-credenciales">PMP® · +10 años en gestión de proyectos · Autora · Docente</p>
+        <p class="hero-sub">Ayudo a profesionales y organizaciones a integrar metodologías de gestión de proyectos con herramientas de inteligencia artificial. Autora, consultora y docente.</p>
         <div class="hero-actions">
-          <a href="/libro" class="btn btn-primary">Ver el libro</a>
+          <a href="/libro" class="btn btn-primary">Ver libros</a>
           <a href="/blog" class="btn btn-outline">Leer artículos</a>
         </div>
       </div>
@@ -28,30 +26,38 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <section class="about">
     <div class="container">
       <h2 class="section-title">Sobre mí</h2>
-      <p>
-        Soy Project Manager certificada (PMP®) con más de diez años de experiencia en gestión de proyectos,
-        estrategia organizacional e implementación de herramientas digitales. Trabajo con equipos que quieren
-        mejorar su forma de planificar, ejecutar y medir resultados.
-      </p>
-      <p>
-        En los últimos años integré la inteligencia artificial como parte de mi práctica profesional.
-        Escribo, enseño y consulto sobre cómo aplicar IA de forma concreta y sostenible en el trabajo de proyectos.
-      </p>
+      <p>Soy Project Manager certificada (PMP®) con más de diez años de experiencia en gestión de proyectos, estrategia organizacional e implementación de herramientas digitales. Trabajo con equipos que quieren mejorar su forma de planificar, ejecutar y medir resultados.</p>
+      <p>En los últimos años integré la inteligencia artificial como parte de mi práctica profesional. Escribo, enseño y consulto sobre cómo aplicar IA de forma concreta y sostenible en el trabajo de proyectos.</p>
       <a href="/contacto" class="btn btn-outline" style="margin-top: 1rem;">Contacto profesional</a>
     </div>
   </section>
 
-  <!-- LIBRO -->
-  <section class="book-preview">
+  <!-- LIBROS -->
+  <section class="libros">
     <div class="container">
-      <div class="book-card mark-accent">
-        <p class="book-label">Libro</p>
-        <h2 class="book-title">Dirección de Proyectos: Guía de Preparación para la Certificación</h2>
-        <p class="book-desc">
-          Tomo I — Fundamentos, Gestión de Personas y Planificación de Procesos.
-          Disponible en Amazon.
-        </p>
-        <a href="/libro" class="btn btn-primary">Ver recursos del libro</a>
+      <p class="section-eyebrow">Libros</p>
+      <h2 class="section-title">Publicaciones</h2>
+      <div class="libros-grid">
+
+        <div class="libro-card mark-accent">
+          <p class="libro-label">Gestión de proyectos · Maternidad</p>
+          <h3 class="libro-titulo">PM MOM</h3>
+          <p class="libro-desc">El primer libro que aplica las herramientas reales de la gestión de proyectos a los primeros cinco años de la maternidad. Con templates listos para usar y un glosario de 22 términos de PM aplicados a la maternidad real.</p>
+          <div class="libro-actions">
+            <a href="https://www.amazon.com/gp/product/B0H34V2L3S" target="_blank" rel="noopener noreferrer" class="btn btn-amazon">Comprar en Amazon →</a>
+          </div>
+        </div>
+
+        <div class="libro-card mark-accent">
+          <p class="libro-label">Project Management · Certificación PMP®</p>
+          <h3 class="libro-titulo">Dirección de Proyectos: Guía de Preparación para la Certificación</h3>
+          <p class="libro-desc">Tomo I — Fundamentos, Gestión de Personas y Planificación de Procesos. Guía práctica para preparar el examen PMP® con base en el PMBOK® Guide Eighth Edition.</p>
+          <div class="libro-actions">
+            <a href="https://www.amazon.com/dp/B0H34Y8KJ7?binding=paperback&ref=dbs_dp_rwt_sb_pc_tpbk" target="_blank" rel="noopener noreferrer" class="btn btn-amazon">Comprar en Amazon →</a>
+            <a href="/libro" class="btn btn-outline">Ver recursos</a>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -63,10 +69,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <h2 class="section-title">Últimos artículos</h2>
         <a href="/blog" class="view-all">Ver todos →</a>
       </div>
-      <p class="blog-preview-text">
-        Escribo sobre Project Management, inteligencia artificial aplicada, productividad y herramientas digitales.
-        Sin relleno, con ejemplos concretos.
-      </p>
+      <p class="blog-preview-text">Escribo sobre Project Management, inteligencia artificial aplicada, productividad y herramientas digitales. Sin relleno, con ejemplos concretos.</p>
       <a href="/blog" class="btn btn-outline" style="margin-top: 1rem;">Ir al blog</a>
     </div>
   </section>
@@ -91,6 +94,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
 
   .hero-headline {
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-credenciales {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
     margin-bottom: var(--space-sm);
   }
 
@@ -120,32 +132,78 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     margin-bottom: var(--space-sm);
   }
 
-  .book-preview {
-    padding: var(--space-lg) 0;
-  }
-
-  .book-card {
-    background: var(--color-surface);
-    padding: var(--space-md);
-    border-radius: var(--radius);
-  }
-
-  .book-label {
+  .section-eyebrow {
     font-size: 0.75rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--color-accent);
+    margin-bottom: 0.25rem;
+  }
+
+  .libros {
+    padding: var(--space-lg) 0;
+  }
+
+  .libros-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-md);
+    margin-top: var(--space-md);
+  }
+
+  .libro-card {
+    background: var(--color-surface);
+    padding: var(--space-md);
+    border-radius: var(--radius);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .libro-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+    margin-bottom: 0.25rem;
+  }
+
+  .libro-titulo {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--color-text);
     margin-bottom: 0.5rem;
   }
 
-  .book-title {
-    margin-bottom: 0.75rem;
+  .libro-desc {
+    font-size: 0.9rem;
+    color: var(--color-muted);
+    line-height: 1.6;
+    flex: 1;
   }
 
-  .book-desc {
-    color: var(--color-muted);
-    margin-bottom: var(--space-sm);
+  .libro-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 0.75rem;
+  }
+
+  .btn-amazon {
+    background-color: #FF9900;
+    color: #111 !important;
+    border: 2px solid #FF9900;
+    text-decoration: none;
+  }
+
+  .btn-amazon:hover {
+    background-color: #e88a00;
+    border-color: #e88a00;
+    opacity: 1;
   }
 
   .blog-preview {
