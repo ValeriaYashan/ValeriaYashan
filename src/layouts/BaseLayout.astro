@@ -6,10 +6,18 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description?: string;
+  image?: string;
 }
 
-const { title, description = 'Valeria Yashan — Project Management, IA y gestión estratégica.' } = Astro.props;
+const {
+  title,
+  description = 'Valeria Yashan — Project Management, IA y gestión estratégica.',
+  image = '/images/og-default.jpg',
+} = Astro.props;
+
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const fullTitle = `${title} — Valeria Yashan`;
+const imageURL = new URL(image, Astro.site);
 ---
 
 <!DOCTYPE html>
@@ -20,7 +28,22 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>{title} — Valeria Yashan</title>
+    <title>{fullTitle}</title>
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={imageURL} />
+    <meta property="og:locale" content="es_AR" />
+    <meta property="og:site_name" content="Valeria Yashan" />
+
+    <!-- Twitter/X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageURL} />
   </head>
   <body>
     <Header />
