@@ -1,0 +1,271 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Recursos gratuitos"
+  description="Plantillas, checklists y guías gratuitas sobre gestión de proyectos e inteligencia artificial. Descargalos sin costo."
+>
+  <div class="container page-container">
+
+    <header class="page-header mark-accent">
+      <p class="page-eyebrow">Recursos</p>
+      <h1>Recursos gratuitos</h1>
+      <p class="page-lead">
+        Plantillas, checklists y guías que uso en mi práctica profesional.
+        Descargalos sin costo. Se actualizan periódicamente.
+      </p>
+    </header>
+
+    <!-- CATEGORÍA 1: Libro -->
+    <section class="categoria">
+      <h2 class="categoria-titulo">Para lectores del libro</h2>
+      <div class="recursos-grid">
+
+        <div class="recurso-card">
+          <span class="recurso-tipo">PDF</span>
+          <h3>Glosario de términos clave del PMBOK</h3>
+          <p>Los conceptos esenciales definidos de forma clara y práctica. Ideal para tener a mano mientras estudiás o trabajás.</p>
+          <a href="/recursos/glosario-pmbok.pdf" download class="btn-recurso">Descargar →</a>
+        </div>
+
+        <div class="recurso-card">
+          <span class="recurso-tipo">PDF</span>
+          <h3>Checklist de cierre de proyecto</h3>
+          <p>Una página, imprimible. Todo lo que hay que verificar antes de cerrar formalmente un proyecto.</p>
+          <a href="/recursos/checklist-cierre-proyecto.pdf" download class="btn-recurso">Descargar →</a>
+        </div>
+
+        <div class="recurso-card">
+          <span class="recurso-tipo">Plantilla</span>
+          <h3>Acta de constitución del proyecto</h3>
+          <p>Plantilla lista para usar. Define el alcance, los objetivos y los responsables desde el inicio.</p>
+          <a href="/recursos/acta-constitucion.pdf" download class="btn-recurso">Descargar →</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CATEGORÍA 2: IA aplicada -->
+    <section class="categoria">
+      <h2 class="categoria-titulo">IA aplicada a proyectos</h2>
+      <div class="recursos-grid">
+
+        <div class="recurso-card destacado">
+          <span class="recurso-tipo">Guía</span>
+          <h3>Prompts de IA para project managers</h3>
+          <p>Prompts probados para usar ChatGPT en planificación, gestión de riesgos, comunicación y cierre de proyectos.</p>
+          <a href="/recursos/prompts-ia-pm.pdf" download class="btn-recurso">Descargar →</a>
+        </div>
+
+        <div class="recurso-card">
+          <span class="recurso-tipo">Checklist</span>
+          <h3>Cómo usar IA en cada fase del proyecto</h3>
+          <p>Qué herramientas y qué tipo de tareas podés delegar a IA en cada etapa del ciclo de vida del proyecto.</p>
+          <a href="/recursos/ia-fases-proyecto.pdf" download class="btn-recurso">Descargar →</a>
+        </div>
+
+        <div class="recurso-card">
+          <span class="recurso-tipo">Plantilla</span>
+          <h3>Registro de riesgos</h3>
+          <p>Plantilla para identificar, clasificar y dar seguimiento a los riesgos de tu proyecto.</p>
+          <a href="/recursos/registro-riesgos.xlsx" download class="btn-recurso">Descargar →</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CATEGORÍA 3: Certificación -->
+    <section class="categoria">
+      <h2 class="categoria-titulo">Para quienes buscan certificarse</h2>
+      <div class="recursos-grid">
+
+        <div class="recurso-card">
+          <span class="recurso-tipo">PDF</span>
+          <h3>Mapa mental del PMBOK</h3>
+          <p>Las áreas de conocimiento y grupos de procesos en un esquema visual. Para estudiar o repasar rápido.</p>
+          <a href="/recursos/mapa-mental-pmbok.pdf" download class="btn-recurso">Descargar →</a>
+        </div>
+
+        <div class="recurso-card">
+          <span class="recurso-tipo">Checklist</span>
+          <h3>Checklist de preparación PMP®</h3>
+          <p>Todo lo que necesitás organizar antes de rendir el examen: requisitos, estudio, logística y mentalidad.</p>
+          <a href="/recursos/checklist-pmp.pdf" download class="btn-recurso">Descargar →</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- NEWSLETTER -->
+    <section class="newsletter-section">
+      <div class="newsletter-inner">
+        <h2>Recibí los próximos recursos</h2>
+        <p>
+          Subo recursos nuevos y escribo artículos sobre PM e IA.<br>
+          Suscribite para recibirlos sin tener que volver a buscarlos.
+        </p>
+        <div class="brevo-embed">
+          <iframe
+            width="540"
+            height="305"
+            src="https://a55096c1.sibforms.com/v2/serve/MUIFANq7Ejc7HcoQmak19v6LMCBF30dP4TIiNoM1t8h5eSbTtWQ4IfCj01uDg_8U55RsoMLNJS274dzOcW6sbYvfoBK6khQpZNNSUbra8acptq7niSl1gKxXuiLk8lOdtUH57JL4P-QCQjP2XiLqgZY5ki-bFDfXT9W4nYXUiJZgi30UOuLj8-5mdyiWfQA9v6o0zlm6hHMrx78WMg=="
+            frameborder="0"
+            scrolling="auto"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</BaseLayout>
+
+<style>
+  .page-container {
+    padding-top: var(--space-lg);
+    padding-bottom: var(--space-xl);
+  }
+
+  .page-header {
+    margin-bottom: var(--space-lg);
+  }
+
+  .page-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .page-lead {
+    font-size: 1.1rem;
+    color: var(--color-muted);
+    margin-top: var(--space-sm);
+    margin-bottom: 0;
+    max-width: 520px;
+  }
+
+  /* Categorías */
+  .categoria {
+    margin-bottom: var(--space-lg);
+  }
+
+  .categoria-titulo {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 0.75rem;
+    margin-bottom: var(--space-md);
+  }
+
+  .recursos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.25rem;
+  }
+
+  /* Cards */
+  .recurso-card {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: var(--space-md);
+    background: var(--color-bg);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    transition: border-color 0.2s;
+  }
+
+  .recurso-card:hover {
+    border-color: var(--color-accent);
+  }
+
+  .recurso-card.destacado {
+    border-color: var(--color-accent);
+    background: var(--color-surface);
+  }
+
+  .recurso-tipo {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+
+  .recurso-card h3 {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-text);
+    line-height: 1.35;
+    margin: 0;
+  }
+
+  .recurso-card p {
+    font-size: 0.875rem;
+    color: var(--color-muted);
+    line-height: 1.5;
+    margin: 0;
+    flex: 1;
+  }
+
+  .btn-recurso {
+    display: inline-block;
+    margin-top: 0.75rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .btn-recurso:hover {
+    opacity: 0.7;
+  }
+
+  /* Newsletter */
+  .newsletter-section {
+    margin-top: var(--space-lg);
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .newsletter-inner {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .newsletter-inner h2 {
+    margin-bottom: var(--space-xs);
+  }
+
+  .newsletter-inner p {
+    color: var(--color-muted);
+    margin-bottom: var(--space-md);
+  }
+
+  .brevo-embed {
+    display: flex;
+    justify-content: center;
+  }
+
+  .brevo-embed iframe {
+    max-width: 100%;
+    border: none;
+  }
+
+  @media (max-width: 600px) {
+    .recursos-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
