@@ -3,50 +3,64 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout
-  title="Libro — Dirección de Proyectos: Guía de Preparación para la Certificación"
-  description="Material complementario del libro Dirección de Proyectos: Guía de Preparación para la Certificación de Valeria Yashan. Recursos para la certificación PMP."
+  title="Libros — Valeria Yashan"
+  description="Libros de Valeria Yashan sobre gestión de proyectos, certificación PMP® y maternidad. Recursos complementarios y material de práctica."
 >
   <div class="container page-container">
+
     <header class="page-header mark-accent">
-      <p class="page-eyebrow">Libro</p>
-      <h1>Dirección de Proyectos: Guía de Preparación para la Certificación</h1>
-      <p class="page-lead">
-        Tomo I — Fundamentos, Gestión de Personas y Planificación de Procesos.
-        Bienvenido/a a la página oficial del libro. Aquí encontrarás los recursos
-        complementarios, materiales de práctica y actualizaciones.
-      </p>
+      <p class="page-eyebrow">Libros</p>
+      <h1>Publicaciones</h1>
+      <p class="page-lead">Escribo sobre gestión de proyectos, certificación PMP® y la intersección entre metodología y vida real.</p>
     </header>
 
-    <section class="libro-recursos">
-      <h2>Material complementario</h2>
-      <p>El material complementario del libro está disponible en Notion. Incluye plantillas, ejemplos y recursos adicionales que se actualizan periódicamente.</p>
-      <a href="https://app.notion.com/p/Material-complementario-del-Libro-378c3df5efcd81b89f51e5b21d3e890a" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Acceder al material en Notion</a>
+    <!-- LIBRO 1: PM MOM -->
+    <section class="libro-seccion">
+      <div class="libro-header mark-accent">
+        <p class="libro-tag">Gestión de proyectos · Maternidad</p>
+        <h2>PM MOM</h2>
+        <p class="libro-subtitulo">El primer libro que aplica las herramientas reales de la gestión de proyectos a los primeros cinco años de la maternidad.</p>
+      </div>
+      <p class="libro-desc">La maternidad es el proyecto más importante de tu vida. PM Mom aplica el PMBOK® Guide Eighth Edition a los primeros cinco años de la maternidad — no porque la maternidad sea un proyecto corporativo, sino porque las mismas habilidades que te hacen eficaz en el trabajo también te hacen más serena y más presente como mamá. Con templates listos para usar y un glosario de 22 términos de PM aplicados a la maternidad real.</p>
+      <div class="libro-actions">
+        <a href="https://www.amazon.com/gp/product/B0H34V2L3S" target="_blank" rel="noopener noreferrer" class="btn btn-amazon">Comprar en Amazon →</a>
+      </div>
+    </section>
+
+    <!-- LIBRO 2: Dirección de Proyectos -->
+    <section class="libro-seccion">
+      <div class="libro-header mark-accent">
+        <p class="libro-tag">Project Management · Certificación PMP®</p>
+        <h2>Dirección de Proyectos: Guía de Preparación para la Certificación</h2>
+        <p class="libro-subtitulo">Tomo I — Fundamentos, Gestión de Personas y Planificación de Procesos.</p>
+      </div>
+      <p class="libro-desc">Bienvenido/a a la página oficial del libro. Aquí encontrarás los recursos complementarios, materiales de práctica y actualizaciones. El material complementario está disponible en Notion e incluye plantillas, ejemplos y recursos adicionales que se actualizan periódicamente.</p>
+      <div class="libro-actions">
+        <a href="https://www.amazon.com/dp/B0H34Y8KJ7?binding=paperback&ref=dbs_dp_rwt_sb_pc_tpbk" target="_blank" rel="noopener noreferrer" class="btn btn-amazon">Comprar en Amazon →</a>
+        <a href="https://app.notion.com/p/Material-complementario-del-Libro-378c3df5efcd81b89f51e5b21d3e890a" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Material complementario en Notion</a>
+      </div>
       <p class="update-notice">⚠ Los recursos pueden actualizarse. Siempre accedé a través de esta página para asegurarte de tener la versión más reciente.</p>
-    </section>
 
-    <section class="libro-faq">
-      <h2>Preguntas frecuentes</h2>
+      <div class="libro-faq">
+        <h3 class="faq-titulo">Preguntas frecuentes</h3>
 
-      <div class="faq-item">
-        <h3>¿Dónde puedo comprar el libro?</h3>
-        <p>El libro está disponible en Amazon en versión impresa y digital (Kindle).</p>
-      </div>
+        <div class="faq-item">
+          <h4>¿Los recursos son gratuitos?</h4>
+          <p>Sí. El material complementario es gratuito para todos los lectores del libro.</p>
+        </div>
 
-      <div class="faq-item">
-        <h3>¿Los recursos son gratuitos?</h3>
-        <p>Sí. El material complementario es gratuito para todos los lectores del libro.</p>
-      </div>
+        <div class="faq-item">
+          <h4>¿Se actualiza el contenido?</h4>
+          <p>El material en Notion puede actualizarse con nuevos recursos, correcciones o ejemplos adicionales. El libro impreso mantiene su contenido original.</p>
+        </div>
 
-      <div class="faq-item">
-        <h3>¿Se actualiza el contenido?</h3>
-        <p>El material en Notion puede actualizarse con nuevos recursos, correcciones o ejemplos adicionales. El libro impreso mantiene su contenido original.</p>
-      </div>
-
-      <div class="faq-item">
-        <h3>¿Cómo puedo contactar a la autora?</h3>
-        <p>Podés escribirme a través de la <a href="/contacto">página de contacto</a> o por LinkedIn.</p>
+        <div class="faq-item">
+          <h4>¿Cómo puedo contactar a la autora?</h4>
+          <p>Podés escribirme a través de la <a href="/contacto">página de contacto</a> o por LinkedIn.</p>
+        </div>
       </div>
     </section>
+
   </div>
 </BaseLayout>
 
@@ -77,19 +91,63 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     max-width: 520px;
   }
 
-  .libro-recursos,
-  .libro-faq {
-    margin-bottom: var(--space-lg);
+  .libro-seccion {
+    margin-bottom: var(--space-xl);
+    padding-bottom: var(--space-xl);
+    border-bottom: 1px solid var(--color-border);
   }
 
-  .libro-recursos h2,
-  .libro-faq h2 {
-    margin-bottom: var(--space-sm);
+  .libro-seccion:last-child {
+    border-bottom: none;
   }
 
-  .libro-recursos p {
+  .libro-header {
+    margin-bottom: var(--space-md);
+  }
+
+  .libro-tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .libro-header h2 {
+    margin-bottom: 0.5rem;
+  }
+
+  .libro-subtitulo {
+    font-size: 1rem;
     color: var(--color-muted);
+    margin: 0;
+  }
+
+  .libro-desc {
+    color: var(--color-muted);
+    margin-bottom: var(--space-md);
+    max-width: 600px;
+  }
+
+  .libro-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
     margin-bottom: var(--space-sm);
+  }
+
+  .btn-amazon {
+    background-color: #FF9900;
+    color: #111 !important;
+    border: 2px solid #FF9900;
+    text-decoration: none;
+  }
+
+  .btn-amazon:hover {
+    background-color: #e88a00;
+    border-color: #e88a00;
+    opacity: 1;
   }
 
   .update-notice {
@@ -102,16 +160,28 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     border-left: 3px solid var(--color-border);
   }
 
+  .libro-faq {
+    margin-top: var(--space-lg);
+  }
+
+  .faq-titulo {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-muted);
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 0.75rem;
+    margin-bottom: var(--space-sm);
+  }
+
   .faq-item {
     padding: var(--space-sm) 0;
     border-bottom: 1px solid var(--color-border);
   }
 
-  .faq-item:first-of-type {
-    border-top: 1px solid var(--color-border);
-  }
-
-  .faq-item h3 {
+  .faq-item h4 {
     font-family: var(--font-body);
     font-size: 1rem;
     font-weight: 600;
