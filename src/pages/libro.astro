@@ -40,6 +40,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <a href="https://app.notion.com/p/Material-complementario-del-Libro-378c3df5efcd81b89f51e5b21d3e890a" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Material complementario en Notion</a>
       </div>
       <p class="update-notice">⚠ Los recursos pueden actualizarse. Siempre accedé a través de esta página para asegurarte de tener la versión más reciente.</p>
+      <p class="recursos-link">¿Buscás plantillas y checklists gratuitos? <a href="/recursos">Visitá la página de recursos →</a></p>
 
       <div class="libro-faq">
         <h3 class="faq-titulo">Preguntas frecuentes</h3>
@@ -158,6 +159,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     padding: 0.75rem 1rem;
     border-radius: var(--radius);
     border-left: 3px solid var(--color-border);
+  }
+
+  .recursos-link {
+    font-size: 0.9rem;
+    color: var(--color-muted);
+    margin-top: var(--space-sm);
+  }
+
+  .recursos-link a {
+    color: var(--color-accent);
+    font-weight: 600;
   }
 
   .libro-faq {
