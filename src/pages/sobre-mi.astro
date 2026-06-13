@@ -1,0 +1,214 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Sobre mí — Valeria Yashan | Project Manager PMP® y consultora en IA"
+  description="Valeria Yashan, Project Manager certificada PMP® con más de 10 años de experiencia. Consultora en gestión de proyectos e IA aplicada para empresas en Latinoamérica y España."
+>
+  <div class="container page-container">
+
+    <header class="page-header mark-accent">
+      <p class="page-eyebrow">Sobre mí</p>
+      <h1>Valeria Yashan</h1>
+      <p class="page-lead">Project Manager certificada (PMP®), consultora en IA aplicada, autora y capacitadora. Trabajo con equipos y organizaciones en Latinoamérica y España.</p>
+    </header>
+
+    <section class="bio-section">
+      <div class="bio-inner">
+        <div class="bio-texto">
+          <h2>Quién soy</h2>
+          <p>Soy Project Manager certificada (PMP®) con más de diez años de experiencia liderando proyectos complejos, equipos multidisciplinarios y procesos de transformación organizacional. A lo largo de mi carrera trabajé con empresas medianas y grandes, startups, PyMEs y organizaciones educativas que necesitaban mejorar su forma de planificar, ejecutar y medir resultados.</p>
+          <p>En los últimos años integré la inteligencia artificial como parte central de mi práctica profesional. Hoy ayudo a equipos y organizaciones a incorporar herramientas de IA de forma concreta, sostenible y alineada con sus procesos de gestión de proyectos.</p>
+          <p>Soy autora de dos libros sobre gestión de proyectos publicados en Amazon, docente universitaria y capacitadora en empresas. También escribo en este blog sobre PM, IA y productividad profesional.</p>
+        </div>
+        <div class="bio-foto">
+          <img src="/images/valeria.jpg" alt="Valeria Yashan — Project Manager PMP®" />
+        </div>
+      </div>
+    </section>
+
+    <section class="servicios-section">
+      <h2>En qué puedo ayudarte</h2>
+      <div class="servicios-grid">
+
+        <div class="servicio-card">
+          <h3>Consultoría y asesoría estratégica</h3>
+          <p>Diagnóstico y mejora de procesos de gestión de proyectos. Acompañamiento a equipos que quieren trabajar mejor, con metodologías probadas y sin burocracia innecesaria.</p>
+        </div>
+
+        <div class="servicio-card">
+          <h3>Dirección de proyectos</h3>
+          <p>Liderazgo de proyectos complejos desde la definición hasta el cierre. Gestión de alcance, cronograma, riesgos, stakeholders y equipos.</p>
+        </div>
+
+        <div class="servicio-card">
+          <h3>Capacitaciones y talleres</h3>
+          <p>Formación práctica en gestión de proyectos e inteligencia artificial aplicada. Talleres diseñados a medida para equipos y organizaciones en formato presencial o remoto.</p>
+        </div>
+
+        <div class="servicio-card">
+          <h3>Implementación de IA en equipos</h3>
+          <p>Incorporación de herramientas de inteligencia artificial en los flujos de trabajo de proyectos. Desde la selección de herramientas hasta la adopción real por parte del equipo.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="credenciales-section">
+      <h2>Formación y certificaciones</h2>
+      <ul class="credenciales-lista">
+        <li>PMP® — Project Management Professional (PMI)</li>
+        <li>Más de 10 años de experiencia en gestión de proyectos</li>
+        <li>Autora de <a href="/libro">dos libros sobre Project Management</a> publicados en Amazon</li>
+        <li>Docente universitaria en gestión de proyectos y administración estratégica</li>
+        <li>Especialización en IA aplicada a proyectos</li>
+      </ul>
+    </section>
+
+    <section class="contacto-section">
+      <h2>¿Trabajamos juntos?</h2>
+      <p>Si necesitás apoyo en gestión de proyectos, capacitación para tu equipo o consultoría estratégica, escribime. Trabajo con organizaciones y equipos en Latinoamérica y España, en formato remoto o presencial.</p>
+      <a href="/contacto" class="btn btn-primary">Contacto profesional</a>
+    </section>
+
+  </div>
+</BaseLayout>
+
+<style>
+  .page-container {
+    padding-top: var(--space-lg);
+    padding-bottom: var(--space-xl);
+  }
+
+  .page-header {
+    margin-bottom: var(--space-lg);
+  }
+
+  .page-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .page-lead {
+    font-size: 1.1rem;
+    color: var(--color-muted);
+    margin-top: var(--space-sm);
+    margin-bottom: 0;
+    max-width: 560px;
+  }
+
+  .bio-inner {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: var(--space-lg);
+    align-items: start;
+  }
+
+  .bio-foto img {
+    width: 100%;
+    border-radius: 8px;
+    display: block;
+  }
+
+  .bio-section,
+  .servicios-section,
+  .credenciales-section,
+  .contacto-section {
+    margin-bottom: var(--space-lg);
+    padding-bottom: var(--space-lg);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .contacto-section {
+    border-bottom: none;
+  }
+
+  h2 {
+    margin-bottom: var(--space-sm);
+  }
+
+  .servicios-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.25rem;
+    margin-top: var(--space-sm);
+  }
+
+  .servicio-card {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: var(--space-md);
+    background: var(--color-surface);
+  }
+
+  .servicio-card h3 {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 0.5rem;
+  }
+
+  .servicio-card p {
+    font-size: 0.9rem;
+    color: var(--color-muted);
+    margin: 0;
+  }
+
+  .credenciales-lista {
+    list-style: none;
+    padding: 0;
+    margin-top: var(--space-sm);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .credenciales-lista li {
+    font-size: 0.95rem;
+    color: var(--color-text);
+    padding-left: 1.25rem;
+    position: relative;
+  }
+
+  .credenciales-lista li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+    font-weight: 600;
+  }
+
+  .credenciales-lista a {
+    color: var(--color-accent);
+    font-weight: 600;
+  }
+
+  .contacto-section p {
+    max-width: 540px;
+    margin-bottom: var(--space-md);
+  }
+
+  @media (max-width: 600px) {
+    .bio-inner {
+      grid-template-columns: 1fr;
+    }
+
+    .bio-foto {
+      order: -1;
+    }
+
+    .bio-foto img {
+      max-width: 240px;
+    }
+
+    .servicios-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
