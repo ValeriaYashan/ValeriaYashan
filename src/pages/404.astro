@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Página no encontrada"
+  description="La página que buscás no existe. Volvé al inicio de valeriayashan.com.ar"
+>
+  <div class="container page-404">
+    <div class="mark-accent">
+      <p class="eyebrow">404</p>
+      <h1>Página no encontrada</h1>
+      <p class="lead">La página que buscás no existe o fue movida. Podés volver al inicio o explorar el contenido disponible.</p>
+    </div>
+    <div class="links-404">
+      <a href="/" class="btn btn-primary">Ir al inicio</a>
+      <a href="/blog" class="btn btn-outline">Ver artículos</a>
+      <a href="/recursos" class="btn btn-outline">Ver recursos</a>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .page-404 {
+    padding: var(--space-xl) 0;
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .eyebrow {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .lead {
+    font-size: 1.1rem;
+    color: var(--color-muted);
+    max-width: 480px;
+    margin-top: var(--space-sm);
+  }
+
+  .links-404 {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: var(--space-lg);
+  }
+</style>

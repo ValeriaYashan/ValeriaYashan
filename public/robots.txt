@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://valeriayashan.com.ar/sitemap-index.xml
