@@ -22,13 +22,33 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </div>
   </section>
 
+  <!-- RESULTADOS -->
+  <section class="resultados">
+    <div class="container">
+      <div class="resultados-grid">
+        <div class="resultado-item">
+          <span class="resultado-icono">→</span>
+          <p class="resultado-texto">Proyectos planificados y ejecutados con metodologías probadas</p>
+        </div>
+        <div class="resultado-item">
+          <span class="resultado-icono">→</span>
+          <p class="resultado-texto">Equipos capacitados para incorporar IA en su trabajo diario</p>
+        </div>
+        <div class="resultado-item">
+          <span class="resultado-icono">→</span>
+          <p class="resultado-texto">Profesionales acompañados en su preparación para la certificación PMP®</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ACERCA -->
   <section class="about">
     <div class="container">
       <h2 class="section-title">Sobre mí</h2>
       <p>Soy Project Manager certificada (PMP®) con más de diez años de experiencia en gestión de proyectos, estrategia organizacional e implementación de herramientas digitales. Trabajo con equipos que quieren mejorar su forma de planificar, ejecutar y medir resultados.</p>
       <p>En los últimos años integré la inteligencia artificial como parte de mi práctica profesional. Escribo, enseño y consulto sobre cómo aplicar IA de forma concreta y sostenible en el trabajo de proyectos.</p>
-      <a href="/contacto" class="btn btn-outline" style="margin-top: 1rem;">Contacto profesional</a>
+      <a href="/sobre-mi" class="btn btn-outline" style="margin-top: 1rem;">Conocer más →</a>
     </div>
   </section>
 
@@ -117,6 +137,40 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
+  }
+
+  /* Resultados */
+  .resultados {
+    padding: var(--space-md) 0;
+    background-color: var(--color-accent);
+  }
+
+  .resultados-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--space-md);
+  }
+
+  .resultado-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .resultado-icono {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+  }
+
+  .resultado-texto {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #FFFFFF;
+    line-height: 1.4;
+    margin: 0;
   }
 
   .about {
@@ -227,5 +281,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   .blog-preview-text {
     color: var(--color-muted);
+  }
+
+  @media (max-width: 600px) {
+    .resultados-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-sm);
+    }
   }
 </style>
