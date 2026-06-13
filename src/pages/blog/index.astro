@@ -29,7 +29,7 @@ const posts = (await getCollection('blog')).sort(
           description={post.data.description}
           pubDate={post.data.pubDate}
           category={post.data.category}
-          slug={post.slug}
+          slug={post.id.replace(/\.md$/, '')}
         />
       ))}
     </section>
