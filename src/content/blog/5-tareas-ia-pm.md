@@ -10,7 +10,7 @@ La conversación sobre IA y gestión de proyectos suele caer en uno de dos extre
 
 La realidad es más interesante y más concreta: hay tareas específicas que podés delegar a IA hoy mismo y ganar horas reales de trabajo. Y hay otras donde delegarlas sería un error que puede costarle caro al proyecto.
 
-Esta es mi lista después de años integrando IA en mi práctica profesional.
+Esta es mi lista después de años integrando IA en mi práctica profesional. Si querés el contexto más amplio de por qué un PM necesita entender IA, leé primero [Por qué los project managers necesitan entender IA (aunque no sean técnicos)](/blog/por-que-los-project-managers-necesitan-entender-ia).
 
 ---
 
@@ -105,3 +105,7 @@ Si la consecuencia la asume el proyecto — una mala comunicación con el sponso
 Si la consecuencia es perder tiempo o producir un borrador que vas a revisar de todas formas, la IA puede ayudarte.
 
 La IA es un multiplicador de tu capacidad. No un reemplazo de tu criterio.
+
+---
+
+Si estás preparando la certificación PMP y querés entender cómo la IA aparece en el nuevo examen, leé [PMBOK® 8 y el nuevo examen PMP 2026](/blog/pmbok-8-nuevo-examen-pmp-2026). Y si estás pensando en certificarte, empezá por [los requisitos para rendir el PMP en 2026](/blog/requisitos-examen-pmp-2026).

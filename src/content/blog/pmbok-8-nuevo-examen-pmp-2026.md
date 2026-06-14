@@ -18,7 +18,7 @@ En este artículo explico qué cambia, qué se mantiene y cómo orientar la prep
 
 El Exam Content Outline (ECO) es el documento que define qué se evalúa en el examen PMP: los dominios, las tareas y el peso de cada uno en el puntaje final. No es el PMBOK. Es la guía de contenido del examen.
 
-Cada vez que PMI actualiza el ECO, cambia lo que se pregunta y en qué proporción. Por eso es el primer documento que cualquier candidato debería leer antes de empezar a estudiar.
+Cada vez que PMI actualiza el ECO, cambia lo que se pregunta y en qué proporción. Por eso es el primer documento que cualquier candidato debería leer antes de empezar a estudiar. Si todavía no verificaste si cumplís los requisitos para rendir, leé primero [Requisitos para rendir el PMP en 2026](/blog/requisitos-examen-pmp-2026).
 
 ---
 
@@ -49,14 +49,12 @@ El PMBOK® Guide no es el examen. Pero sí es la referencia conceptual sobre la 
 
 La Octava Edición, publicada en enero de 2026, representa un cambio de dirección respecto a la Séptima. Mientras la Séptima priorizó principios y dominios de desempeño a expensas de la estructura de procesos, la Octava recupera el equilibrio: mantiene los principios pero vuelve a incorporar **40 procesos claros y documentados**, organizados por dominio.
 
-Para quienes prepararon el PMP con la Sexta Edición y sintieron que la Séptima era demasiado abstracta, el PMBOK® 8 va a resultar más familiar en su lógica. Para quienes vienen del mundo ágil, también: la guía integra enfoques predictivos, ágiles e híbridos sin tratarlos como compartimentos separados.
-
 Las novedades más relevantes del PMBOK® 8:
 
 - **Estructura híbrida**: combina la precisión técnica de la Sexta con la flexibilidad de la Séptima
 - **40 procesos no prescriptivos**: cada proceso incluye entradas, herramientas, técnicas y salidas, pero con criterio contextual
-- **IA integrada en el contenido central**: por primera vez, la inteligencia artificial aparece como parte de las herramientas del PM, no como apéndice
-- **Pensamiento sistémico**: los proyectos se piensan en relación con su entorno organizacional, no como unidades aisladas
+- **IA integrada en el contenido central**: por primera vez, la inteligencia artificial aparece como parte de las herramientas del PM
+- **Pensamiento sistémico**: los proyectos se piensan en relación con su entorno organizacional
 
 ---
 
@@ -74,7 +72,7 @@ Antes de cambiar tu plan de estudio, conviene saber qué no cambia:
 
 ## Cómo prepararte si rendís antes del 9 de julio
 
-Si tu examen está programado antes del 9 de julio, estudiá con el ECO actual. Los recursos disponibles, los simulacros y los materiales de preparación están alineados con ese ECO. No tiene sentido cambiar de material a semanas del examen.
+Si tu examen está programado antes del 9 de julio, estudiá con el ECO actual. No tiene sentido cambiar de material a semanas del examen.
 
 Lo que sí conviene hacer: practicar con la mayor cantidad de preguntas posible bajo condiciones reales. La distribución de dominios del ECO actual — 42% Personas, 50% Proceso, 8% Entorno — sigue siendo la que te van a evaluar hasta esa fecha.
 
@@ -82,23 +80,21 @@ Lo que sí conviene hacer: practicar con la mayor cantidad de preguntas posible 
 
 ## Cómo prepararte si rendís después del 9 de julio
 
-Si tu examen es posterior al 9 de julio, el nuevo ECO ya está vigente cuando estudies. Los puntos clave para orientar tu preparación:
+Si tu examen es posterior al 9 de julio, estos son los puntos clave:
 
-**Reforzá Entorno de negocio.** Pasó de ser el dominio menor al segundo en peso. Alineación estratégica, gestión de beneficios, gobernanza y valor del negocio van a tener presencia real en el examen.
+**Reforzá Entorno de negocio.** Pasó del 8% al 26%. Alineación estratégica, gestión de beneficios, gobernanza y valor del negocio van a tener presencia real en el examen.
 
-**Practicá con escenarios complejos.** El nuevo formato pone más énfasis en cómo pensás y decidís, no solo en qué sabés. Los simulacros con casos integrados y preguntas encadenadas son la mejor preparación.
+**Practicá con escenarios complejos.** El nuevo formato pone más énfasis en cómo pensás y decidís. Los simulacros con casos integrados y preguntas encadenadas son la mejor preparación. Si querés saber cómo enfrentar esas preguntas sin caer en las trampas del examen, leé [Cómo leer una pregunta de simulacro PMP sin caer en las trampas](/blog/como-leer-preguntas-simulacro-pmp).
 
-**Incorporá el enfoque híbrido.** El examen ya no separa predictivo de ágil. En la práctica real tampoco se separan, y el nuevo ECO lo refleja.
+**Incorporá el enfoque híbrido.** El examen ya no separa predictivo de ágil. Para entender cuándo usar cada enfoque, leé [Predictivo, ágil o híbrido: cómo elegir el enfoque correcto](/blog/predictivo-agil-hibrido-como-elegir).
 
-**Usá simulacros con distribución ECO actualizada.** No todos los recursos disponibles todavía están alineados con el nuevo ECO. Verificá que los simulacros que usás respeten la nueva distribución: 33% Personas, 41% Proceso, 26% Entorno de negocio.
+**Evitá los errores más comunes.** Muchos candidatos estudian mucho y no aprueban por razones evitables. Leé [Los 5 errores más comunes al estudiar para el PMP](/blog/errores-comunes-estudiar-pmp) antes de definir tu plan.
 
 ---
 
 ## Una fecha, una decisión
 
-El 9 de julio no es una fecha arbitraria. Es el resultado de un proceso de investigación que PMI realizó con más de 48.000 datos aportados por profesionales de proyectos en todo el mundo. El nuevo ECO y el PMBOK® 8 reflejan cómo trabajan realmente los project managers hoy.
-
-Eso no significa que todo lo que estudiaste hasta ahora quede obsoleto. Los fundamentos de la gestión de proyectos no cambian con cada edición. Lo que cambia es el énfasis, la estructura y el peso relativo de cada área.
+El 9 de julio no es una fecha arbitraria. El nuevo ECO y el PMBOK® 8 reflejan cómo trabajan realmente los project managers hoy.
 
 Si estás en proceso de preparación, la clave es saber exactamente qué versión del ECO aplica a tu examen y orientar los simulacros en consecuencia.
 
@@ -112,4 +108,4 @@ Incluye 180 preguntas de simulacro con distribución ECO real (33% Personas / 41
 
 Está alineado con el PMBOK® Guide Eighth Edition y el ECO vigente desde julio 2026.
 
-[Ver el libro en Amazon →](https://www.amazon.com/dp/B0H58TX7Z4?spcref=PRINT_LISTING)
+[Ver el libro en Amazon →](https://www.amazon.com/dp/B0H58TX7Z4?spcref=PRINT_LISTING) · [Ver todos los libros →](/libro)

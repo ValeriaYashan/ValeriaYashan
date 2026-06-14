@@ -122,9 +122,7 @@ Si agotás los tres intentos sin aprobar, debés volver a aplicar y pagar nuevam
 
 ## El momento importa: julio 2026 cambia el examen
 
-Si estás leyendo esto en junio de 2026, tenés pocos días para rendir bajo el formato actual (180 preguntas, 230 minutos, ECO 2021). A partir del 9 de julio entra en vigor el nuevo examen con el ECO actualizado y el PMBOK® Guide Eighth Edition como referencia.
-
-Ninguno es más fácil que el otro — son diferentes. Lo importante es saber cuál aplica a tu fecha de examen y prepararte en consecuencia.
+Si estás leyendo esto en junio de 2026, tenés pocos días para rendir bajo el formato actual. A partir del 9 de julio entra en vigor el nuevo examen con el ECO actualizado y el PMBOK® Guide Eighth Edition como referencia. Si querés entender exactamente qué cambia, leé [PMBOK® 8 y el nuevo examen PMP 2026: qué cambia, qué se mantiene y cómo prepararte](/blog/pmbok-8-nuevo-examen-pmp-2026).
 
 ---
 
@@ -136,10 +134,10 @@ Antes de completar la aplicación, hacete estas preguntas:
 - ¿Puedo documentar esa experiencia con nombres de proyectos, organizaciones y fechas reales?
 - ¿Tengo constancia de al menos 35 horas de formación en gestión de proyectos?
 
-Si las tres respuestas son sí, estás listo para aplicar.
+Si las tres respuestas son sí, estás listo para aplicar. El siguiente paso es planificar el estudio. Una guía útil para arrancar: [los 5 errores más comunes al estudiar para el PMP](/blog/errores-comunes-estudiar-pmp).
 
 ---
 
-Si ya cumplís los requisitos y estás en la etapa de preparación, el siguiente paso es practicar con simulacros reales. El **Tomo III de la serie *Dirección de Proyectos: Guía de Preparación para la Certificación*** incluye 180 preguntas con distribución ECO real, justificación detallada de cada respuesta y diagnóstico de brechas para el repaso final.
+Si ya cumplís los requisitos y estás en la etapa de práctica intensiva, el **Tomo III de la serie *Dirección de Proyectos: Guía de Preparación para la Certificación*** incluye 180 preguntas con distribución ECO real, justificación detallada de cada respuesta y diagnóstico de brechas para el repaso final.
 
-[Ver el libro en Amazon →](https://www.amazon.com/dp/B0H58TX7Z4?spcref=PRINT_LISTING)
+[Ver el libro en Amazon →](https://www.amazon.com/dp/B0H58TX7Z4?spcref=PRINT_LISTING) · [Ver todos los libros →](/libro)

@@ -3,73 +3,122 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout
-  title="Sobre mí — Valeria Yashan | Project Manager PMP® y consultora en IA"
-  description="Valeria Yashan, Project Manager certificada PMP® con más de 10 años de experiencia. Consultora en gestión de proyectos e IA aplicada para empresas en Latinoamérica y España."
+  title="Sobre mí — Valeria Yashan"
+  description="Valeria Yashan — Project Manager certificada (PMP®), MBA, Ingeniera Industrial. Más de 10 años liderando proyectos de transformación digital en energía, finanzas y tecnología."
 >
   <div class="container page-container">
 
-    <header class="page-header mark-accent">
-      <p class="page-eyebrow">Sobre mí</p>
-      <h1>Valeria Yashan</h1>
-      <p class="page-lead">Project Manager certificada (PMP®), consultora en IA aplicada, autora y capacitadora. Trabajo con equipos y organizaciones en Latinoamérica y España.</p>
-    </header>
-
-    <section class="bio-section">
-      <div class="bio-inner">
-        <div class="bio-texto">
-          <h2>Quién soy</h2>
-          <p>Soy Project Manager certificada (PMP®) con más de diez años de experiencia liderando proyectos complejos, equipos multidisciplinarios y procesos de transformación organizacional. A lo largo de mi carrera trabajé con empresas medianas y grandes, startups, PyMEs y organizaciones educativas que necesitaban mejorar su forma de planificar, ejecutar y medir resultados.</p>
-          <p>En los últimos años integré la inteligencia artificial como parte central de mi práctica profesional. Hoy ayudo a equipos y organizaciones a incorporar herramientas de IA de forma concreta, sostenible y alineada con sus procesos de gestión de proyectos.</p>
-          <p>Soy autora de dos libros sobre gestión de proyectos publicados en Amazon, docente universitaria y capacitadora en empresas. También escribo en este blog sobre PM, IA y productividad profesional.</p>
-        </div>
-        <div class="bio-foto">
-          <img src="/images/valeria.jpg" alt="Valeria Yashan — Project Manager PMP®" />
+    <!-- HERO CON FOTO -->
+    <section class="sobre-hero">
+      <div class="sobre-foto-wrap">
+        <img src="/images/valeria-yashan.jpg" alt="Valeria Yashan" class="sobre-foto" width="180" height="240" />
+      </div>
+      <div class="sobre-intro mark-accent">
+        <p class="page-eyebrow">Sobre mí</p>
+        <h1>Valeria Yashan</h1>
+        <p class="hero-tags">PMP® · MBA · Ingeniera Industrial · Autora · Docente</p>
+        <p class="sobre-bio">Project Manager con más de 10 años liderando proyectos de transformación digital en energía, finanzas y tecnología. Combino metodologías probadas de gestión de proyectos con herramientas de inteligencia artificial aplicada.</p>
+        <p class="sobre-bio">También escribo y enseño: publiqué libros sobre gestión de proyectos y certificación PMP®, doy clases universitarias y capacito equipos profesionales.</p>
+        <div class="hero-actions">
+          <a href="/contacto" class="btn btn-primary">Contacto →</a>
+          <a href="https://www.linkedin.com/in/valeriayashan/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">LinkedIn →</a>
         </div>
       </div>
     </section>
 
-    <section class="servicios-section">
-      <h2>En qué puedo ayudarte</h2>
-      <div class="servicios-grid">
+    <!-- DOS COLUMNAS: FORMACIÓN + PUBLICACIONES -->
+    <section class="sobre-seccion">
+      <div class="dos-columnas">
 
-        <div class="servicio-card">
-          <h3>Consultoría y asesoría estratégica</h3>
-          <p>Diagnóstico y mejora de procesos de gestión de proyectos. Acompañamiento a equipos que quieren trabajar mejor, con metodologías probadas y sin burocracia innecesaria.</p>
+        <div class="columna">
+          <h2>Formación y certificaciones</h2>
+          <div class="creds-grid">
+            <div class="cred-item">
+              <span class="cred-icon">→</span>
+              <div>
+                <p class="cred-titulo">PMP® — Project Management Professional</p>
+                <p class="cred-detalle">PMI #1613335 · Vigente desde 2013</p>
+              </div>
+            </div>
+            <div class="cred-item">
+              <span class="cred-icon">→</span>
+              <div>
+                <p class="cred-titulo">MBA</p>
+                <p class="cred-detalle">Universidad del CEMA · 2025</p>
+              </div>
+            </div>
+            <div class="cred-item">
+              <span class="cred-icon">→</span>
+              <div>
+                <p class="cred-titulo">Ingeniería Industrial</p>
+                <p class="cred-detalle">Universidad Nacional de La Plata · 2008</p>
+              </div>
+            </div>
+            <div class="cred-item">
+              <span class="cred-icon">→</span>
+              <div>
+                <p class="cred-titulo">Especialización en Gestión de Proyectos</p>
+                <p class="cred-detalle">UTN · 2009</p>
+              </div>
+            </div>
+            <div class="cred-item">
+              <span class="cred-icon">→</span>
+              <div>
+                <p class="cred-titulo">Certificación Avanzada en Metodologías Ágiles</p>
+                <p class="cred-detalle">2021</p>
+              </div>
+            </div>
+            <div class="cred-item">
+              <span class="cred-icon">→</span>
+              <div>
+                <p class="cred-titulo">Profesorado Universitario</p>
+                <p class="cred-detalle">Universidad de San Andrés UDESA · 2018</p>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="servicio-card">
-          <h3>Dirección de proyectos</h3>
-          <p>Liderazgo de proyectos complejos desde la definición hasta el cierre. Gestión de alcance, cronograma, riesgos, stakeholders y equipos.</p>
-        </div>
+        <div class="columna">
+          <h2>Publicaciones</h2>
+          <div class="creds-grid">
+            <div class="cred-item">
+              <span class="cred-icon">→</span>
+              <div>
+                <p class="cred-titulo">PM MOM</p>
+                <p class="cred-detalle">Gestión de proyectos aplicada a la maternidad</p>
+              </div>
+            </div>
+            <div class="cred-item">
+              <span class="cred-icon">→</span>
+              <div>
+                <p class="cred-titulo">Dirección de Proyectos — Tomo I</p>
+                <p class="cred-detalle">Fundamentos, Gestión de Personas y Planificación</p>
+              </div>
+            </div>
+            <div class="cred-item">
+              <span class="cred-icon">→</span>
+              <div>
+                <p class="cred-titulo">Dirección de Proyectos — Tomo III</p>
+                <p class="cred-detalle">Simulacros PMP® · PMBOK® 8 · ECO julio 2026</p>
+              </div>
+            </div>
+          </div>
+          <a href="/libro" class="link-libros">Ver todos los libros →</a>
 
-        <div class="servicio-card">
-          <h3>Capacitaciones y talleres</h3>
-          <p>Formación práctica en gestión de proyectos e inteligencia artificial aplicada. Talleres diseñados a medida para equipos y organizaciones en formato presencial o remoto.</p>
-        </div>
-
-        <div class="servicio-card">
-          <h3>Implementación de IA en equipos</h3>
-          <p>Incorporación de herramientas de inteligencia artificial en los flujos de trabajo de proyectos. Desde la selección de herramientas hasta la adopción real por parte del equipo.</p>
+          <h2 style="margin-top: 1.25rem;">Blog</h2>
+          <div class="creds-grid">
+            <div class="cred-item">
+              <span class="cred-icon">→</span>
+              <div>
+                <p class="cred-titulo">Project Management e IA aplicada</p>
+                <p class="cred-detalle">Artículos sobre PM, certificación PMP® e inteligencia artificial</p>
+              </div>
+            </div>
+          </div>
+          <a href="/blog" class="link-libros">Leer artículos →</a>
         </div>
 
       </div>
-    </section>
-
-    <section class="credenciales-section">
-      <h2>Formación y certificaciones</h2>
-      <ul class="credenciales-lista">
-        <li>PMP® — Project Management Professional (PMI)</li>
-        <li>Más de 10 años de experiencia en gestión de proyectos</li>
-        <li>Autora de <a href="/libro">dos libros sobre Project Management</a> publicados en Amazon</li>
-        <li>Docente universitaria en gestión de proyectos y administración estratégica</li>
-        <li>Especialización en IA aplicada a proyectos</li>
-      </ul>
-    </section>
-
-    <section class="contacto-section">
-      <h2>¿Trabajamos juntos?</h2>
-      <p>Si necesitás apoyo en gestión de proyectos, capacitación para tu equipo o consultoría estratégica, escribime. Trabajo con organizaciones y equipos en Latinoamérica y España, en formato remoto o presencial.</p>
-      <a href="/contacto" class="btn btn-primary">Contacto profesional</a>
     </section>
 
   </div>
@@ -77,138 +126,160 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <style>
   .page-container {
-    padding-top: var(--space-lg);
-    padding-bottom: var(--space-xl);
+    padding-top: 1.75rem;
+    padding-bottom: 2rem;
   }
 
-  .page-header {
-    margin-bottom: var(--space-lg);
+  .sobre-hero {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 2rem;
+    align-items: start;
+    margin-bottom: 1.25rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .sobre-foto-wrap {
+    width: 180px;
+  }
+
+  .sobre-foto {
+    width: 180px;
+    height: 240px;
+    border-radius: var(--radius);
+    display: block;
+    object-fit: cover;
+    object-position: top center;
+  }
+
+  .sobre-intro {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
   }
 
   .page-eyebrow {
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--color-accent);
-    margin-bottom: 0.5rem;
-  }
-
-  .page-lead {
-    font-size: 1.1rem;
-    color: var(--color-muted);
-    margin-top: var(--space-sm);
-    margin-bottom: 0;
-    max-width: 560px;
-  }
-
-  .bio-inner {
-    display: grid;
-    grid-template-columns: 1fr 280px;
-    gap: var(--space-lg);
-    align-items: start;
-  }
-
-  .bio-foto img {
-    width: 100%;
-    border-radius: 8px;
-    display: block;
-  }
-
-  .bio-section,
-  .servicios-section,
-  .credenciales-section,
-  .contacto-section {
-    margin-bottom: var(--space-lg);
-    padding-bottom: var(--space-lg);
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  .contacto-section {
-    border-bottom: none;
-  }
-
-  h2 {
-    margin-bottom: var(--space-sm);
-  }
-
-  .servicios-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 1.25rem;
-    margin-top: var(--space-sm);
-  }
-
-  .servicio-card {
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius);
-    padding: var(--space-md);
-    background: var(--color-surface);
-  }
-
-  .servicio-card h3 {
-    font-family: var(--font-body);
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--color-text);
-    margin-bottom: 0.5rem;
-  }
-
-  .servicio-card p {
-    font-size: 0.9rem;
-    color: var(--color-muted);
     margin: 0;
   }
 
-  .credenciales-lista {
-    list-style: none;
-    padding: 0;
-    margin-top: var(--space-sm);
+  .sobre-intro h1 {
+    margin: 0;
+    font-size: 2rem;
+    line-height: 1.1;
+  }
+
+  .hero-tags {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-accent);
+    margin: 0;
+  }
+
+  .sobre-bio {
+    color: var(--color-muted);
+    margin: 0;
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 0.2rem;
+  }
+
+  .sobre-seccion {
+    margin-bottom: 0;
+  }
+
+  .dos-columnas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  .columna h2 {
+    font-size: 0.72rem;
+    font-family: var(--font-body);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-muted);
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 0.35rem;
+    margin-bottom: 0.4rem;
+    margin-top: 0;
+  }
+
+  .creds-grid {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
   }
 
-  .credenciales-lista li {
-    font-size: 0.95rem;
+  .cred-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 0.38rem 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .cred-item:last-child {
+    border-bottom: none;
+  }
+
+  .cred-icon {
+    color: var(--color-accent);
+    font-weight: 700;
+    flex-shrink: 0;
+    font-size: 0.8rem;
+    margin-top: 0.15rem;
+  }
+
+  .cred-titulo {
+    font-weight: 600;
     color: var(--color-text);
-    padding-left: 1.25rem;
-    position: relative;
+    margin: 0 0 0.05rem 0;
+    font-size: 0.85rem;
   }
 
-  .credenciales-lista li::before {
-    content: "→";
-    position: absolute;
-    left: 0;
-    color: var(--color-accent);
+  .cred-detalle {
+    color: var(--color-muted);
+    font-size: 0.76rem;
+    margin: 0;
+  }
+
+  .link-libros {
+    display: inline-block;
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
     font-weight: 600;
-  }
-
-  .credenciales-lista a {
     color: var(--color-accent);
-    font-weight: 600;
   }
 
-  .contacto-section p {
-    max-width: 540px;
-    margin-bottom: var(--space-md);
-  }
-
-  @media (max-width: 600px) {
-    .bio-inner {
+  @media (max-width: 680px) {
+    .sobre-hero {
       grid-template-columns: 1fr;
     }
 
-    .bio-foto {
-      order: -1;
+    .sobre-foto {
+      width: 130px;
+      height: 173px;
     }
 
-    .bio-foto img {
-      max-width: 240px;
-    }
-
-    .servicios-grid {
+    .dos-columnas {
       grid-template-columns: 1fr;
+      gap: 1.5rem;
     }
   }
 </style>
