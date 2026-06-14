@@ -1,5 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog'))
+  .sort((a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf())
+  .slice(0, 3);
 ---
 
 <BaseLayout
@@ -45,10 +50,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <!-- ACERCA -->
   <section class="about">
     <div class="container">
-      <h2 class="section-title">Sobre mí</h2>
-      <p>Soy Project Manager certificada (PMP®) con más de diez años de experiencia en gestión de proyectos, estrategia organizacional e implementación de herramientas digitales. Trabajo con equipos que quieren mejorar su forma de planificar, ejecutar y medir resultados.</p>
-      <p>En los últimos años integré la inteligencia artificial como parte de mi práctica profesional. Escribo, enseño y consulto sobre cómo aplicar IA de forma concreta y sostenible en el trabajo de proyectos.</p>
-      <a href="/sobre-mi" class="btn btn-outline" style="margin-top: 1rem;">Conocer más →</a>
+      <div class="about-inner">
+        <img src="/images/valeria-yashan.jpg" alt="Valeria Yashan — Project Manager y autora" class="about-foto" />
+        <div class="about-texto">
+          <h2 class="section-title">Sobre mí</h2>
+          <p>Soy Project Manager certificada (PMP®) con más de diez años de experiencia en gestión de proyectos, estrategia organizacional e implementación de herramientas digitales. Trabajo con equipos que quieren mejorar su forma de planificar, ejecutar y medir resultados.</p>
+          <p>En los últimos años integré la inteligencia artificial como parte de mi práctica profesional. Escribo, enseño y consulto sobre cómo aplicar IA de forma concreta y sostenible en el trabajo de proyectos.</p>
+          <a href="/sobre-mi" class="btn btn-outline" style="margin-top: 1rem;">Conocer más →</a>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -88,8 +98,19 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <h2 class="section-title">Últimos artículos</h2>
         <a href="/blog" class="view-all">Ver todos →</a>
       </div>
-      <p class="blog-preview-text">Escribo sobre Project Management, inteligencia artificial aplicada, productividad y herramientas digitales. Sin relleno, con ejemplos concretos.</p>
-      <a href="/blog" class="btn btn-outline" style="margin-top: 1rem;">Ir al blog</a>
+      <div class="posts-grid">
+        {posts.map((post) => (
+          <a href={`/blog/${post.id.replace(/\.md$/, '')}`} class="post-card">
+            <div class="post-meta">
+              <span class="post-category">{post.data.category}</span>
+              <span class="post-date">{new Date(post.data.pubDate).toLocaleDateString('es-AR', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+            </div>
+            <h3 class="post-title">{post.data.title}</h3>
+            <p class="post-desc">{post.data.description}</p>
+            <span class="post-link">Leer artículo →</span>
+          </a>
+        ))}
+      </div>
     </div>
   </section>
 </BaseLayout>
@@ -172,13 +193,38 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     margin: 0;
   }
 
+  /* About */
   .about {
     padding: var(--space-lg) 0;
     background-color: var(--color-surface);
   }
 
-  .about .container {
-    max-width: var(--max-width);
+  .about-inner {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: var(--space-lg);
+    align-items: center;
+  }
+
+  .about-foto {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    object-position: top;
+    border-radius: var(--radius);
+    display: block;
+  }
+
+  .about-texto {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .about-texto p {
+    color: var(--color-muted);
+    line-height: 1.7;
+    margin: 0;
   }
 
   .section-title {
@@ -194,6 +240,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     margin-bottom: 0.25rem;
   }
 
+  /* Libros */
   .libros {
     padding: var(--space-lg) 0;
     background-color: var(--color-bg);
@@ -260,6 +307,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     opacity: 1;
   }
 
+  /* Blog preview */
   .blog-preview {
     padding: var(--space-lg) 0 var(--space-xl);
     background-color: var(--color-surface);
@@ -269,7 +317,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     display: flex;
     align-items: baseline;
     justify-content: space-between;
-    margin-bottom: var(--space-sm);
+    margin-bottom: var(--space-md);
   }
 
   .view-all {
@@ -278,14 +326,93 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     color: var(--color-accent);
   }
 
-  .blog-preview-text {
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-md);
+  }
+
+  .post-card {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-decoration: none;
+    transition: border-color 0.2s;
+  }
+
+  .post-card:hover {
+    border-color: var(--color-accent);
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .post-category {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-accent);
+    background: var(--color-surface);
+    padding: 2px 8px;
+    border-radius: 20px;
+  }
+
+  .post-date {
+    font-size: 0.75rem;
     color: var(--color-muted);
   }
 
-  @media (max-width: 600px) {
+  .post-title {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-text);
+    line-height: 1.3;
+    margin: 0.25rem 0;
+  }
+
+  .post-desc {
+    font-size: 0.875rem;
+    color: var(--color-muted);
+    line-height: 1.6;
+    flex: 1;
+    margin: 0;
+  }
+
+  .post-link {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    margin-top: 0.5rem;
+  }
+
+  /* Responsive */
+  @media (max-width: 700px) {
+    .about-inner {
+      grid-template-columns: 1fr;
+    }
+
+    .about-foto {
+      aspect-ratio: 4 / 3;
+      max-height: 320px;
+    }
+
     .resultados-grid {
       grid-template-columns: 1fr;
       gap: var(--space-sm);
+    }
+
+    .posts-grid {
+      grid-template-columns: 1fr;
     }
   }
 </style>
