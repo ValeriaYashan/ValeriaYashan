@@ -27,32 +27,42 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
     </section>
 
-    <!-- LIBRO 2: Dirección de Proyectos -->
+    <!-- LIBRO 2: Dirección de Proyectos Tomo III -->
     <section class="libro-seccion">
       <div class="libro-header mark-accent">
         <p class="libro-tag">Project Management · Certificación PMP®</p>
-        <h2>Dirección de Proyectos: Guía de Preparación para la Certificación</h2>
-        <p class="libro-subtitulo">Tomo I — Fundamentos, Gestión de Personas y Planificación de Procesos.</p>
+        <h2>Dirección de Proyectos: Guía de Preparación para la Certificación — Tomo III</h2>
+        <p class="libro-subtitulo">Simulacros de Práctica Intensiva · Alineado con PMBOK® Guide — Eighth Edition · ECO vigente desde julio 2026</p>
       </div>
-      <p class="libro-desc">Bienvenido/a a la página oficial del libro. Aquí encontrarás los recursos complementarios, materiales de práctica y actualizaciones. El material complementario está disponible en Notion e incluye plantillas, ejemplos y recursos adicionales que se actualizan periódicamente.</p>
+      <p class="libro-desc">La etapa final de preparación para el examen PMP®. 180 preguntas de simulacro con distribución ECO real, respuestas con justificación detallada y diagnóstico de brechas para orientar el repaso de último momento. Diseñado para quienes ya completaron el estudio y necesitan entrenar bajo condiciones reales de examen.</p>
+
+      <ul class="libro-features">
+        <li><strong>Cap. 22 — Simulacros por dominio:</strong> 60 preguntas con distribución ECO: 20 de Personas (33%), 25 de Proceso (41%) y 15 de Entorno de negocio (26%). Con tabla de brechas.</li>
+        <li><strong>Cap. 23 — Simulacro final integrado:</strong> 120 preguntas en condiciones de examen real con diagnóstico final.</li>
+        <li>3 casos integrados de alta complejidad con subpreguntas encadenadas.</li>
+        <li>Respuestas con justificación detallada y análisis de distractores impreso al pie — sin códigos QR.</li>
+        <li>Hoja de puntaje y tabla de diagnóstico para el repaso de último momento.</li>
+      </ul>
+
+      <p class="libro-nota-tecnica">Enfoques predictivo, ágil e híbrido · 134 páginas · Tapa blanda</p>
+
       <div class="libro-actions">
-        <a href="https://www.amazon.com/dp/B0H34Y8KJ7?binding=paperback&ref=dbs_dp_rwt_sb_pc_tpbk" target="_blank" rel="noopener noreferrer" class="btn btn-amazon">Comprar en Amazon →</a>
-        <a href="https://app.notion.com/p/Material-complementario-del-Libro-378c3df5efcd81b89f51e5b21d3e890a" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Material complementario en Notion</a>
+        <a href="https://www.amazon.com/dp/B0H58TX7Z4?spcref=PRINT_LISTING" target="_blank" rel="noopener noreferrer" class="btn btn-amazon">Comprar en Amazon →</a>
       </div>
-      <p class="update-notice">⚠ Los recursos pueden actualizarse. Siempre accedé a través de esta página para asegurarte de tener la versión más reciente.</p>
-      <p class="recursos-link">¿Buscás plantillas y checklists gratuitos? <a href="/recursos">Visitá la página de recursos →</a></p>
+
+      <p class="update-notice">⚠ Este libro es el Tomo III de la serie. Los Tomos I y II cubren los fundamentos, gestión de personas, procesos y entorno de negocio.</p>
 
       <div class="libro-faq">
         <h3 class="faq-titulo">Preguntas frecuentes</h3>
 
         <div class="faq-item">
-          <h4>¿Los recursos son gratuitos?</h4>
-          <p>Sí. El material complementario es gratuito para todos los lectores del libro.</p>
+          <h4>¿Para quién es el Tomo III?</h4>
+          <p>Para candidatos al PMP® que ya completaron su estudio y quieren entrenar con simulacros en condiciones reales de examen.</p>
         </div>
 
         <div class="faq-item">
-          <h4>¿Se actualiza el contenido?</h4>
-          <p>El material en Notion puede actualizarse con nuevos recursos, correcciones o ejemplos adicionales. El libro impreso mantiene su contenido original.</p>
+          <h4>¿Necesito leer los Tomos I y II antes?</h4>
+          <p>Es recomendable. El Tomo III es la etapa final de la serie y asume que ya tenés los conceptos de los tomos anteriores.</p>
         </div>
 
         <div class="faq-item">
@@ -131,6 +141,41 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     max-width: 600px;
   }
 
+  .libro-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--space-md) 0;
+    max-width: 620px;
+  }
+
+  .libro-features li {
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--color-border);
+    font-size: 0.95rem;
+    color: var(--color-muted);
+    padding-left: 1.25rem;
+    position: relative;
+  }
+
+  .libro-features li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+    font-weight: 600;
+  }
+
+  .libro-features li:last-child {
+    border-bottom: none;
+  }
+
+  .libro-nota-tecnica {
+    font-size: 0.82rem;
+    color: var(--color-muted);
+    margin-bottom: var(--space-md);
+    letter-spacing: 0.02em;
+  }
+
   .libro-actions {
     display: flex;
     gap: 1rem;
@@ -171,17 +216,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     padding: 0.75rem 1rem;
     border-radius: var(--radius);
     border-left: 3px solid var(--color-border);
-  }
-
-  .recursos-link {
-    font-size: 0.9rem;
-    color: var(--color-muted);
-    margin-top: var(--space-sm);
-  }
-
-  .recursos-link a {
-    color: var(--color-accent);
-    font-weight: 600;
   }
 
   .libro-faq {
