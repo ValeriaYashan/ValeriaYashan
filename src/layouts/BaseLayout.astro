@@ -16,7 +16,7 @@ const {
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const fullTitle = `${title} — Valeria Yashan`;
+const fullTitle = title.includes('Valeria Yashan') ? title : `${title} — Valeria Yashan`;
 const imageURL = new URL(image, Astro.site);
 ---
 
