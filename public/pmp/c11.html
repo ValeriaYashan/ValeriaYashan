@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Capítulo 11. Alcance, requisitos, trabajo pendiente priorizado y entregables — Respuestas | Valeria Yashan</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f6f8; color: #1a1a2e; }
+  
+  .header {
+    background: #1e3a5f;
+    color: white;
+    padding: 1.5rem 2rem 2rem;
+  }
+  .header .marca { font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.75; margin-bottom: 0.5rem; }
+  .header h1 { font-size: clamp(1.4rem, 4vw, 2rem); font-weight: 700; line-height: 1.25; margin-bottom: 0.75rem; }
+  .header .meta { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-top: 0.75rem; font-size: 0.875rem; opacity: 0.9; }
+  .header .meta span { display: flex; align-items: center; gap: 0.4rem; }
+  
+  .container { max-width: 820px; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
+  
+  .aviso {
+    background: #e8f4fd;
+    border-left: 4px solid #2196f3;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.875rem;
+    border-radius: 0 6px 6px 0;
+    color: #1565c0;
+  }
+  
+  .respuesta {
+    background: white;
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.25rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    border: 1px solid #e8eaed;
+  }
+  
+  .pregunta-id {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #1e3a5f;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.6rem;
+    font-family: 'Courier New', monospace;
+  }
+  
+  .respuesta-correcta-badge {
+    display: inline-block;
+    background: #e8f5e9;
+    border: 1px solid #a5d6a7;
+    color: #1b5e20;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.3rem 0.75rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+  }
+  
+  .cuerpo p {
+    font-size: 0.925rem;
+    line-height: 1.65;
+    margin-bottom: 0.6rem;
+    color: #2c2c2c;
+  }
+  
+  .cuerpo p.opcion {
+    color: #444;
+    padding-left: 0.5rem;
+    border-left: 2px solid #e0e0e0;
+  }
+  
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.875rem;
+  }
+  
+  .tag {
+    background: #f0f4ff;
+    color: #3949ab;
+    border: 1px solid #c5cae9;
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+  
+  .tag-enfoque {
+    background: #f3e5f5;
+    color: #6a1b9a;
+    border-color: #ce93d8;
+  }
+  
+  .tabla-meta {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8rem;
+    margin: 0.75rem 0;
+  }
+  .tabla-meta th, .tabla-meta td {
+    border: 1px solid #e0e0e0;
+    padding: 0.35rem 0.6rem;
+    text-align: left;
+  }
+  .tabla-meta th { background: #f5f5f5; font-weight: 600; color: #333; }
+  .tabla-meta tr:nth-child(even) td { background: #fafafa; }
+  
+  .footer-nav {
+    text-align: center;
+    padding: 1.5rem 1rem;
+    font-size: 0.85rem;
+    color: #666;
+  }
+  .footer-nav a {
+    color: #1e3a5f;
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 1px solid #1e3a5f;
+    padding-bottom: 1px;
+  }
+  
+  @media (max-width: 600px) {
+    .header { padding: 1.25rem 1rem 1.5rem; }
+    .respuesta { padding: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="marca">Dirección de Proyectos · Tomo I · PARTE IV — PROCESO · 41% DEL EXAMEN</div>
+  <h1>Capítulo 11. Alcance, requisitos, trabajo pendiente priorizado y entregables</h1>
+  <div class="meta">
+    <span>📋 25 ítems</span>
+    <span>🎯 Dominio ECO: Proceso · 41%</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="aviso">
+    Estas respuestas corresponden a las preguntas de práctica del Capítulo 11 del libro impreso. 
+    Para cada ítem encontrarás la respuesta correcta y el análisis de cada distractor.
+  </div>
+
+  
+<div class="respuesta">
+  <div class="pregunta-id">PMP-11-001</div>
+  <div class="respuesta-correcta-badge">RESPUESTA CORRECTA &nbsp; <strong>C</strong></div>
+  <div class="cuerpo">
+    <p><strong>Justificación: </strong>La repriorización del backlog es el mecanismo natural de gestión del alcance en proyectos ágiles. No es scope creep porque el Product Owner tiene autoridad para repriorizar el trabajo pendiente. El proceso formal de control integrado de cambios aplica en contextos predictivos o para componentes con línea base aprobada, no para la gestión dinámica del backlog. La directora de proyectos debe reconocer cuándo el proceso de adaptación es legítimo.</p><table class="tabla-meta"><thead><tr><th><strong>Opción</strong></th><th><strong>Evaluación</strong></th></tr></thead><tbody><tr><td>A</td><td>Incorrecta. Registrar como scope creep confunde la repriorización del backlog —proceso legítimo— con la incorporación no autorizada de alcance. El scope creep implica trabajo no planificado que se ejecuta sin proceso; la repriorización es el proceso.</td></tr><tr><td>B</td><td>Incorrecta. Bloquear el sprint por una repriorización del backlog introduce burocracia innecesaria en un proceso adaptativo y frena la entrega de valor. El CCB no tiene rol en la gestión del backlog.</td></tr><tr><td>C</td><td>Correcta. La repriorización del backlog por el Product Owner es el mecanismo de adaptación definido en el proceso ágil. No requiere aprobación externa si está dentro del alcance del proyecto.</td></tr><tr><td>D</td><td>Incorrecta. Documentar como desviación y notificar al sponsor es una respuesta desproporcionada para un mecanismo normal del proceso ágil. Generaría alarma innecesaria y desconfianza en el equipo.</td></tr><tr><td><strong>Dominio ECO</strong></td><td>Process / Proceso</td></tr><tr><td><strong>Tarea ECO</strong></td><td>Gestionar el alcance del trabajo del proyecto en un contexto adaptativo</td></tr><tr><td><strong>Dominio PMBOK 8</strong></td><td>Scope Performance Domain</td></tr><tr><td><strong>Principio PMBOK 8</strong></td><td>Focus on Value</td></tr><tr><td><strong>Enfoque</strong></td><td>Ágil / Adaptativo</td></tr><tr><td><strong>Dificultad</strong></td><td>Básica</td></tr><tr><td><strong>Tipo de ítem</strong></td><td>SIT — Situacional</td></tr><tr><td><strong>Competencia evaluada</strong></td><td>Distinguir mecanismos legítimos de adaptación del backlog de situaciones de scope creep</td></tr><tr><td><strong>Error conceptual detectado</strong></td><td>Confundir repriorización del backlog con scope creep o change request</td></tr></tbody></table>
+  </div>
+  
+</div>
+
+<div class="respuesta">
+  <div class="pregunta-id">PMP-11-002</div>
+  <div class="respuesta-correcta-badge">RESPUESTA CORRECTA &nbsp; <strong>C</strong></div>
+  <div class="cuerpo">
+    <p><strong>Justificación: </strong>Un backlog con ítems mal definidos y sin priorizar es un riesgo de gestión: el equipo pierde tiempo en cada sprint buscando claridad en lugar de entregar valor. La solución estructural es establecer sesiones regulares de refinamiento del backlog (backlog refinement) para garantizar que siempre haya una cantidad suficiente de ítems bien definidos, estimados y priorizados para los próximos sprints. Esta es la práctica ágil estándar para ese problema.</p><table class="tabla-meta"><thead><tr><th><strong>Opción</strong></th><th><strong>Evaluación</strong></th></tr></thead><tbody><tr><td>A</td><td>Incorrecta. Congelar el backlog e intentar documentar los 80 ítems como requisitos formales introduce una lógica predictiva en un entorno ágil. El resultado sería un documento rígido que no refleja la naturaleza iterativa del proyecto.</td></tr><tr><td>B</td><td>Incorrecta. El sponsor no tiene la información ni el contexto técnico para priorizar ítems del backlog. Escalar sin haber resuelto el problema primero es escalamiento prematuro.</td></tr><tr><td>C</td><td>Correcta. El refinamiento regular del backlog es la respuesta estructural al problema. Garantiza que el equipo trabaje siempre con ítems claros, priorizados y estimados.</td></tr><tr><td>D</td><td>Incorrecta. Reducir el alcance a 12 ítems sin análisis ni decisión del Product Owner sería una decisión unilateral del director de proyectos sobre el alcance del producto. No es su rol.</td></tr><tr><td><strong>Dominio ECO</strong></td><td>Process / Proceso</td></tr><tr><td><strong>Tarea ECO</strong></td><td>Gestionar y priorizar el backlog en un entorno adaptativo</td></tr><tr><td><strong>Dominio PMBOK 8</strong></td><td>Scope Performance Domain</td></tr><tr><td><strong>Principio PMBOK 8</strong></td><td>Focus on Value</td></tr><tr><td><strong>Enfoque</strong></td><td>Ágil / Adaptativo</td></tr><tr><td><strong>Dificultad</strong></td><td>Intermedia</td></tr><tr><td><strong>Tipo de ítem</strong></td><td>SIT — Situacional</td></tr><tr><td><strong>Competencia evaluada</strong></td><td>Identificar y resolver problemas de gestión del backlog que afectan la entrega de valor</td></tr><tr><td><strong>Error conceptual detectado</strong></td><td>Aplicar lógica predictiva (congelar, documentar exhaustivamente) a un problema de gestión adaptativa</td></tr></tbody></table>
+  </div>
+  
+</div>
+
+<div class="respuesta">
+  <div class="pregunta-id">PMP-11-003</div>
+  <div class="respuesta-correcta-badge">RESPUESTA CORRECTA &nbsp; <strong>B</strong></div>
+  <div class="cuerpo">
+    <p><strong>Justificación: </strong>Ante scope creep detectado —trabajo no autorizado ejecutado en un componente con línea base aprobada— la primera acción del director de proyectos es cuantificar el impacto y formalizar la situación a través del proceso de control de cambios. Esto permite decidir con información: ¿se incorpora la mejora a la línea base con ajuste de cronograma o costo? ¿O se descarta? Ambas decisiones requieren datos del esfuerzo invertido.</p><table class="tabla-meta"><thead><tr><th><strong>Opción</strong></th><th><strong>Evaluación</strong></th></tr></thead><tbody><tr><td>A</td><td>Incorrecta. Validar que la mejora funcione y luego incorporarla retroactivamente es el procedimiento, pero omite el paso previo de cuantificación del impacto y la presentación formal al CCB. La secuencia es: cuantificar → solicitud de cambio → decisión.</td></tr><tr><td>B</td><td>Correcta. Cuantificar el esfuerzo, evaluar el impacto y presentar la solicitud de cambio es el proceso correcto ante scope creep en un componente predictivo. La decisión final corresponde al CCB, no al director de proyectos de forma unilateral.</td></tr><tr><td>C</td><td>Incorrecta. Ignorar el incidente deja el scope creep sin gestionar y no corrige el comportamiento del equipo. Además, el impacto en cronograma y costo queda sin documentar.</td></tr><tr><td>D</td><td>Incorrecta. Revertir el trabajo sin análisis puede ser más costoso que formalizarlo. Además, si la mejora tiene valor técnico real, descartarla sin evaluarla es una decisión de alcance que requiere información.</td></tr><tr><td><strong>Dominio ECO</strong></td><td>Process / Proceso</td></tr><tr><td><strong>Tarea ECO</strong></td><td>Controlar el alcance y gestionar desviaciones en un entorno híbrido</td></tr><tr><td><strong>Dominio PMBOK 8</strong></td><td>Scope Performance Domain · Governance Performance Domain</td></tr><tr><td><strong>Principio PMBOK 8</strong></td><td>Be an Accountable Leader · Adopt a Holistic View</td></tr><tr><td><strong>Enfoque</strong></td><td>Híbrido</td></tr><tr><td><strong>Dificultad</strong></td><td>Intermedia</td></tr><tr><td><strong>Tipo de ítem</strong></td><td>SIT — Situacional</td></tr><tr><td><strong>Competencia evaluada</strong></td><td>Detectar scope creep en componentes predictivos y seguir el proceso de control de cambios</td></tr><tr><td><strong>Error conceptual detectado</strong></td><td>Normalizar el scope creep (validar y continuar) o eliminar el trabajo sin análisis</td></tr></tbody></table>
+  </div>
+  
+</div>
+
+<div class="respuesta">
+  <div class="pregunta-id">PMP-11-004</div>
+  <div class="respuesta-correcta-badge">RESPUESTA CORRECTA &nbsp; <strong>B, C</strong></div>
+  <div class="cuerpo">
+    <p><strong>Justificación: </strong>Cuando un entregable cumple los criterios de aceptación pero el cliente lo rechaza, el problema es de expectativas, no de calidad. El director de proyectos debe: (1) revisar con el cliente cuáles criterios específicos considera que no se cumplen —esto puede revelar una brecha en la definición original— y (2) gestionar la brecha entre criterios acordados y expectativas actuales mediante una conversación que alinee ambas partes. No debe aceptar el rechazo sin análisis ni escalar sin haber intentado la resolución.</p><table class="tabla-meta"><thead><tr><th><strong>Opción</strong></th><th><strong>Evaluación</strong></th></tr></thead><tbody><tr><td>A</td><td>Incorrecta. Aceptar el rechazo y rehacer el trabajo sin revisar los criterios de aceptación es rendirse sin análisis. Si los criterios se cumplen, el problema es de comunicación de expectativas.</td></tr><tr><td>B</td><td>Correcta. Revisar con el cliente cuáles criterios específicos no se cumplen según su criterio es el primer paso para distinguir entre un problema de calidad y un problema de expectativas.</td></tr><tr><td>C</td><td>Correcta. Gestionar la brecha entre criterios acordados y expectativas actuales es la competencia clave. Puede llevar a actualizar los criterios de aceptación para sprints futuros si la expectativa es legítima.</td></tr><tr><td>D</td><td>Incorrecta. Escalar al sponsor para que imponga la aceptación daña la relación con el cliente y no resuelve el problema de fondo. Escalar es el último recurso, no el primero.</td></tr><tr><td>E</td><td>Incorrecta. Cancelar el sprint y comenzar de nuevo sin entender el problema es la opción más costosa y menos eficiente. No aporta información sobre qué está fallando.</td></tr><tr><td><strong>Dominio ECO</strong></td><td>Process / Proceso · People / Personas</td></tr><tr><td><strong>Tarea ECO</strong></td><td>Validar entregables y gestionar expectativas de interesados en contexto ágil</td></tr><tr><td><strong>Dominio PMBOK 8</strong></td><td>Scope Performance Domain · Stakeholder Performance Domain</td></tr><tr><td><strong>Principio PMBOK 8</strong></td><td>Focus on Value · Embed Quality</td></tr><tr><td><strong>Enfoque</strong></td><td>Ágil / Adaptativo</td></tr><tr><td><strong>Dificultad</strong></td><td>Intermedia</td></tr><tr><td><strong>Tipo de ítem</strong></td><td>MR — Respuesta múltiple</td></tr><tr><td><strong>Competencia evaluada</strong></td><td>Distinguir problema de calidad de problema de expectativas y gestionar la validación del alcance</td></tr><tr><td><strong>Error conceptual detectado</strong></td><td>Aceptar rechazos sin análisis o escalar antes de intentar resolver directamente con el cliente</td></tr></tbody></table>
+  </div>
+  
+</div>
+
+<div class="respuesta">
+  <div class="pregunta-id">PMP-11-005</div>
+  <div class="respuesta-correcta-badge">RESPUESTA CORRECTA &nbsp; <strong>B</strong></div>
+  <div class="cuerpo">
+    <p><strong>Justificación: </strong>Aplicando las fórmulas corregidas de la segunda impresión del PMBOK 8: Arrastre de alcance (%) = (Entregables no planificados / Total de entregables) × 100 = 6/(40+6) × 100 = 6/46 × 100 ≈ 13%. Sin embargo, si el denominador es el total de la línea base original (40): 6/40 × 100 = 15%. La formulación correcta usa el total de entregables actuales o el total de la línea base según el contexto. La opción B usa el denominador de la línea base (40) para arrastre = 15%, y estabilidad = 90/120 = 75%. Nota: el examen puede presentar la fórmula con ambos denominadores posibles; lo crítico es no invertir numerador y denominador.</p><table class="tabla-meta"><thead><tr><th><strong>Opción</strong></th><th><strong>Evaluación</strong></th></tr></thead><tbody><tr><td>A</td><td>Incorrecta. 6% sería el resultado de invertir el cálculo o usar un denominador incorrecto. La estabilidad de 75% es correcta si se calcula como 90/120.</td></tr><tr><td>B</td><td>Correcta usando línea base como denominador para arrastre: 6/40=15%. Estabilidad: 90/120=75%. La clave es aplicar la fórmula corregida sin invertir las variables.</td></tr><tr><td>C</td><td>Incorrecta. El 25% de estabilidad confunde el numerador con los requisitos que sí cambiaron (30/120) en lugar de los que no cambiaron (90/120).</td></tr><tr><td>D</td><td>Incorrecta. El 25% de estabilidad es el error de invertir la fórmula: usar requisitos cambiados como numerador en lugar de requisitos sin cambios.</td></tr><tr><td><strong>Dominio ECO</strong></td><td>Process / Proceso</td></tr><tr><td><strong>Tarea ECO</strong></td><td>Aplicar métricas de control del alcance con fórmulas corregidas del PMBOK 8</td></tr><tr><td><strong>Dominio PMBOK 8</strong></td><td>Scope Performance Domain</td></tr><tr><td><strong>Principio PMBOK 8</strong></td><td>Embed Quality Into Processes and Deliverables</td></tr><tr><td><strong>Enfoque</strong></td><td>Predictivo</td></tr><tr><td><strong>Dificultad</strong></td><td>Intermedia</td></tr><tr><td><strong>Tipo de ítem</strong></td><td>TAB — Tabla/gráfico con datos</td></tr><tr><td><strong>Competencia evaluada</strong></td><td>Calcular e interpretar métricas de alcance usando las fórmulas corregidas de la segunda impresión del PMBOK 8</td></tr><tr><td><strong>Error conceptual detectado</strong></td><td>Invertir numerador y denominador en las fórmulas de arrastre de alcance y estabilidad de requisitos</td></tr></tbody></table>
+  </div>
+  
+</div>
+
+<div class="respuesta">
+  <div class="pregunta-id">PMP-11-006</div>
+  <div class="respuesta-correcta-badge">RESPUESTA CORRECTA &nbsp; <strong>C</strong></div>
+  <div class="cuerpo">
+    <p><strong>Justificación: </strong>El director de proyectos tiene un rol facilitador en la interfaz entre el equipo técnico y el Product Manager. La deuda técnica tiene un costo de retraso que no siempre está visible en el WSJF calculado originalmente. Hacer ese costo visible —con datos— permite que el Product Manager tome una decisión informada. Si el WSJF se recalcula incluyendo el impacto de la deuda técnica, la priorización resultante puede ser diferente. El director de proyectos no debe tomar la decisión por ninguna de las partes.</p><table class="tabla-meta"><thead><tr><th><strong>Opción</strong></th><th><strong>Evaluación</strong></th></tr></thead><tbody><tr><td>A</td><td>Incorrecta. Seguir la priorización sin intervenir ignora un riesgo técnico con impacto sistémico en todos los ítems siguientes. El director de proyectos tiene la responsabilidad de hacer visible ese riesgo.</td></tr><tr><td>B</td><td>Incorrecta. Escalar al sponsor sin haber intentado resolver la situación entre el equipo y el Product Manager es un escalamiento prematuro. Este tipo de decisión técnico-funcional puede resolverse con los actores directos.</td></tr><tr><td>C</td><td>Correcta. Facilitar la conversación para hacer visible el costo de la deuda técnica como parte del coste del retraso es la acción más adecuada. Permite que la decisión se tome con información completa.</td></tr><tr><td>D</td><td>Incorrecta. Agregar un ítem al backlog sin consultar al Product Manager viola su autoridad sobre la priorización. El director de proyectos no puede modificar el backlog unilateralmente.</td></tr><tr><td><strong>Dominio ECO</strong></td><td>Process / Proceso · Business Environment / Entorno de negocio</td></tr><tr><td><strong>Tarea ECO</strong></td><td>Gestionar la priorización del backlog considerando restricciones técnicas y valor de negocio</td></tr><tr><td><strong>Dominio PMBOK 8</strong></td><td>Scope Performance Domain · Governance Performance Domain</td></tr><tr><td><strong>Principio PMBOK 8</strong></td><td>Focus on Value · Adopt a Holistic View</td></tr><tr><td><strong>Enfoque</strong></td><td>Ágil / Adaptativo</td></tr><tr><td><strong>Dificultad</strong></td><td>Avanzada</td></tr><tr><td><strong>Tipo de ítem</strong></td><td>SIT — Situacional</td></tr><tr><td><strong>Competencia evaluada</strong></td><td>Gestionar la interfaz entre priorización por valor y restricciones técnicas en entornos ágiles a escala</td></tr><tr><td><strong>Error conceptual detectado</strong></td><td>Subordinarse al Product Manager sin hacer visible información crítica, o tomar decisiones de priorización de forma unilateral</td></tr></tbody></table>
+  </div>
+  
+</div>
+
+<div class="respuesta">
+  <div class="pregunta-id">PMP-11-007</div>
+  <div class="respuesta-correcta-badge">RESPUESTA CORRECTA &nbsp; <strong>B</strong></div>
+  <div class="cuerpo">
+    <p><strong>Justificación: </strong>La Definition of Done es un contrato interno del equipo que define cuándo un ítem está completo. Si los ítems cumplen la DoD pero el cliente los rechaza repetidamente, la señal más probable es que la DoD está desactualizada respecto de las expectativas del cliente. La retroactiva es el espacio natural para revisar y actualizar acuerdos de proceso. Involucrar al cliente en esa conversación asegura que la DoD actualizada refleje sus expectativas reales.</p><table class="tabla-meta"><thead><tr><th><strong>Opción</strong></th><th><strong>Evaluación</strong></th></tr></thead><tbody><tr><td>A</td><td>Incorrecta. Capacitar al cliente en metodología ágil puede ser útil, pero no resuelve el problema de fondo: la DoD no está alineada con sus expectativas. Es una respuesta que culpa al cliente en lugar de resolver la causa raíz.</td></tr><tr><td>B</td><td>Correcta. La DoD debe actualizarse cuando las expectativas del cliente evolucionan. La retrospectiva es el espacio correcto para esa conversación, e involucrar al cliente asegura alineación.</td></tr><tr><td>C</td><td>Incorrecta. Si el equipo cumple la DoD y los ítems se marcan correctamente, auditar cada ítem no resuelve el problema. La causa es la DoD, no el comportamiento del equipo.</td></tr><tr><td>D</td><td>Incorrecta. Los criterios del cliente no son necesariamente subjetivos: pueden ser legítimos pero no están reflejados en la DoD. Documentar rechazos y escalar no resuelve la causa raíz.</td></tr><tr><td><strong>Dominio ECO</strong></td><td>Process / Proceso · People / Personas</td></tr><tr><td><strong>Tarea ECO</strong></td><td>Gestionar la Definition of Done y la validación de entregables en proyectos ágiles</td></tr><tr><td><strong>Dominio PMBOK 8</strong></td><td>Scope Performance Domain</td></tr><tr><td><strong>Principio PMBOK 8</strong></td><td>Embed Quality Into Processes and Deliverables · Focus on Value</td></tr><tr><td><strong>Enfoque</strong></td><td>Ágil / Adaptativo</td></tr><tr><td><strong>Dificultad</strong></td><td>Intermedia</td></tr><tr><td><strong>Tipo de ítem</strong></td><td>SIT — Situacional</td></tr><tr><td><strong>Competencia evaluada</strong></td><td>Identificar cuando la DoD necesita actualizarse y gestionar el proceso de alineación con el cliente</td></tr><tr><td><strong>Error conceptual detectado</strong></td><td>Confundir un problema de DoD desactualizada con un problema de auditoría o de capacitación del cliente</td></tr></tbody></table>
+  </div>
+  
+</div>
+
+<div class="respuesta">
+  <div class="pregunta-id">PMP-11-008</div>
+  <div class="respuesta-correcta-badge">RESPUESTA CORRECTA &nbsp; <strong>A</strong></div>
+  <div class="cuerpo">
+    <p><strong>Justificación: </strong>La secuencia correcta de la gestión del alcance en proyectos predictivos sigue el orden lógico del grupo de procesos de planificación: primero se recopilan los requisitos (se entiende qué necesita el cliente), luego se define el alcance (se elabora el enunciado del alcance), luego se crea la EDT (se descompone el alcance en entregables manejables), luego se valida el alcance con el cliente (se obtiene aceptación formal de los entregables), y finalmente se controla el alcance durante toda la ejecución.</p><table class="tabla-meta"><thead><tr><th><strong>Opción</strong></th><th><strong>Evaluación</strong></th></tr></thead><tbody><tr><td>A</td><td>Correcta. 2→1→3→4→5 refleja la secuencia lógica: recopilar requisitos → definir alcance → crear EDT → validar → controlar.</td></tr><tr><td>B</td><td>Incorrecta. Definir el alcance antes de recopilar requisitos invierte la lógica: no se puede definir qué incluye el proyecto sin entender qué necesita el cliente.</td></tr><tr><td>C</td><td>Incorrecta. Crear la EDT antes de definir el alcance no tiene sentido: la EDT descompone el alcance ya definido, no lo precede.</td></tr><tr><td>D</td><td>Incorrecta. Similar al error de B: define el alcance antes de recopilar requisitos, lo cual genera un enunciado del alcance sin base en las necesidades del cliente.</td></tr><tr><td><strong>Dominio ECO</strong></td><td>Process / Proceso</td></tr><tr><td><strong>Tarea ECO</strong></td><td>Planificar y secuenciar los procesos de gestión del alcance en proyectos predictivos</td></tr><tr><td><strong>Dominio PMBOK 8</strong></td><td>Scope Performance Domain</td></tr><tr><td><strong>Principio PMBOK 8</strong></td><td>Focus on Value · Embed Quality</td></tr><tr><td><strong>Enfoque</strong></td><td>Predictivo</td></tr><tr><td><strong>Dificultad</strong></td><td>Intermedia</td></tr><tr><td><strong>Tipo de ítem</strong></td><td>DND — Secuenciación/arrastre y soltar adaptado</td></tr><tr><td><strong>Competencia evaluada</strong></td><td>Ordenar correctamente los procesos de gestión del alcance predictivo</td></tr><tr><td><strong>Error conceptual detectado</strong></td><td>Invertir la recopilación de requisitos con la definición del alcance, o crear la EDT antes de definir el alcance</td></tr></tbody></table>
+  </div>
+  
+</div>
+
+<div class="respuesta">
+  <div class="pregunta-id">PMP-11-009</div>
+  <div class="respuesta-correcta-badge">RESPUESTA CORRECTA &nbsp; <strong>B</strong></div>
+  <div class="cuerpo">
+    <p><strong>Justificación: </strong>En un enfoque híbrido, los componentes predictivos tienen línea base aprobada y están protegidos por el proceso de control integrado de cambios. Un requisito emergente del componente ágil que afecta al componente predictivo debe gestionarse formalmente: documentar el requisito, evaluar el impacto en los paquetes de trabajo de la línea base y seguir el proceso de control de cambios. Tratar la interfaz entre componentes con rigor es la competencia central de la gestión híbrida.</p><table class="tabla-meta"><thead><tr><th><strong>Opción</strong></th><th><strong>Evaluación</strong></th></tr></thead><tbody><tr><td>A</td><td>Incorrecta. Rechazar el requisito emergente del componente ágil porque «afecta al predictivo» es una respuesta rígida que ignora la realidad de los proyectos híbridos: los componentes interactúan y generan dependencias.</td></tr><tr><td>B</td><td>Correcta. Documentar el requisito emergente, evaluar el impacto en la línea base predictivo y seguir el proceso formal de control de cambios es la gestión correcta de la interfaz híbrida.</td></tr><tr><td>C</td><td>Incorrecta. Adaptar el componente predictivo al requisito emergente sin proceso formal porque «el entorno es híbrido» confunde flexibilidad ágil con ausencia de governance en el componente predictivo.</td></tr><tr><td>D</td><td>Incorrecta. Escalar al sponsor para congelar el componente ágil es desproporcionado. El director de proyectos puede gestionar la interfaz con el proceso correcto sin necesidad de congelar nada.</td></tr><tr><td><strong>Dominio ECO</strong></td><td>Process / Proceso</td></tr><tr><td><strong>Tarea ECO</strong></td><td>Gestionar requisitos emergentes que atraviesan la interfaz entre componentes predictivos y ágiles en un entorno híbrido</td></tr><tr><td><strong>Dominio PMBOK 8</strong></td><td>Scope Performance Domain · Governance Performance Domain</td></tr><tr><td><strong>Principio PMBOK 8</strong></td><td>Adopt a Holistic View · Be an Accountable Leader</td></tr><tr><td><strong>Enfoque</strong></td><td>Híbrido</td></tr><tr><td><strong>Dificultad</strong></td><td>Avanzada</td></tr><tr><td><strong>Tipo de ítem</strong></td><td>SIT — Situacional</td></tr><tr><td><strong>Competencia evaluada</strong></td><td>Gestionar la interfaz entre componentes con diferentes enfoques en proyectos híbridos</td></tr><tr><td><strong>Error conceptual detectado</strong></td><td>Aplicar flexibilidad ágil al componente predictivo, o rechazar sin análisis requisitos emergentes del componente adaptativo</td></tr></tbody></table>
+  </div>
+  
+</div>
+
+<div class="respuesta">
+  <div class="pregunta-id">PMP-11-010</div>
+  <div class="respuesta-correcta-badge">RESPUESTA CORRECTA &nbsp; <strong>B, C</strong></div>
+  <div class="cuerpo">
+    <p><strong>Justificación: </strong>Cuando el backlog acumula Must Have sin capacidad para ejecutarlos, el director de proyectos debe hacer dos cosas: facilitar la revisión de si los nuevos ítems realmente califican como Must Have (MoSCoW requiere criterio riguroso: «sin esto el proyecto fracasa») y mostrar los datos reales de capacidad para que la decisión sea informada. No es su rol rechazar ni aceptar unilateralmente, sino facilitar la toma de decisión con información.</p><table class="tabla-meta"><thead><tr><th><strong>Opción</strong></th><th><strong>Evaluación</strong></th></tr></thead><tbody><tr><td>A</td><td>Incorrecta. Aceptar todos los nuevos Must Have sin análisis lleva a un backlog imposible de ejecutar con la velocidad actual del equipo, lo que genera expectativas no cumplidas.</td></tr><tr><td>B</td><td>Correcta. Revisar si los 10 nuevos ítems son genuinamente Must Have es el primer paso: muchos ítems se clasifican como Must Have por presión del negocio, no por criterio real.</td></tr><tr><td>C</td><td>Correcta. Mostrar los datos de velocidad y el estado del backlog permite que la decisión se tome con información real, no por intuición o presión.</td></tr><tr><td>D</td><td>Incorrecta. Rechazar los nuevos ítems sin análisis es una decisión unilateral del director de proyectos sobre el alcance del producto. No es su rol.</td></tr><tr><td>E</td><td>Incorrecta. Escalar al sponsor sin haber analizado la situación con el Product Owner es un escalamiento prematuro. La priorización del backlog es responsabilidad del Product Owner con información del equipo.</td></tr><tr><td><strong>Dominio ECO</strong></td><td>Process / Proceso · Business Environment / Entorno de negocio</td></tr><tr><td><strong>Tarea ECO</strong></td><td>Gestionar la priorización del backlog con restricciones de capacidad y técnica MoSCoW</td></tr><tr><td><strong>Dominio PMBOK 8</strong></td><td>Scope Performance Domain</td></tr><tr><td><strong>Principio PMBOK 8</strong></td><td>Focus on Value · Adopt a Holistic View</td></tr><tr><td><strong>Enfoque</strong></td><td>Ágil / Adaptativo</td></tr><tr><td><strong>Dificultad</strong></td><td>Avanzada</td></tr><tr><td><strong>Tipo de ítem</strong></td><td>MR — Respuesta múltiple</td></tr><tr><td><strong>Competencia evaluada</strong></td><td>Facilitar decisiones de priorización del backlog basadas en capacidad real y criterio de valor</td></tr><tr><td><strong>Error conceptual detectado</strong></td><td>Aceptar sin análisis toda solicitud de Must Have o rechazarla sin datos que sustenten la decisión</td></tr></tbody></table>
+  </div>
+  
+</div>
+
+<div class="respuesta">
+  <div class="pregunta-id">PMP-11-011</div>
+  <div class="respuesta-correcta-badge">RESPUESTA CORRECTA &nbsp; <strong>B</strong></div>
+  <div class="cuerpo">
+    <p><strong>Justificación: </strong>La EDT es una jerarquía de entregables y sub entregables, no una lista de actividades. «Coordinar con proveedores» y «revisar planos» son actividades del cronograma, no entregables del proyecto. Los entregables se expresan como resultados: «informe de factibilidad», «planos aprobados», «contrato firmado con proveedor». Este error conceptual es muy frecuente y el examen lo evalúa directamente.</p><table class="tabla-meta"><thead><tr><th><strong>Opción</strong></th><th><strong>Evaluación</strong></th></tr></thead><tbody><tr><td>A</td><td>Incorrecta. El formato de la EDT —gráfico o lista jerárquica— es una convención de presentación, no un error conceptual. Ambos formatos son válidos.</td></tr><tr><td>B</td><td>Correcta. La EDT debe contener entregables, no actividades. Las actividades pertenecen al plan de gestión del cronograma.</td></tr><tr><td>C</td><td>Incorrecta. El nivel de detalle es una decisión de diseño; el problema no es la granularidad sino la naturaleza de los elementos incluidos.</td></tr><tr><td>D</td><td>Incorrecta. La EDT incluye todos los entregables del proyecto, tanto externos (para el cliente) como internos (gestión del proyecto). No se limita a entregables del cliente.</td></tr><tr><td><strong>Dominio ECO</strong></td><td>Process / Proceso</td></tr><tr><td><strong>Tarea ECO</strong></td><td>Crear la EDT con el contenido correcto (entregables, no actividades)</td></tr><tr><td><strong>Dominio PMBOK 8</strong></td><td>Scope Performance Domain</td></tr><tr><td><strong>Principio PMBOK 8</strong></td><td>Embed Quality Into Processes and Deliverables</td></tr><tr><td><strong>Enfoque</strong></td><td>Predictivo</td></tr><tr><td><strong>Dificultad</strong></td><td>Básica</td></tr><tr><td><strong>Tipo de ítem</strong></td><td>SIT — Situacional</td></tr><tr><td><strong>Competencia evaluada</strong></td><td>Distinguir entregables de actividades al construir la EDT</td></tr><tr><td><strong>Error conceptual detectado</strong></td><td>Incluir actividades del cronograma como elementos de la EDT en lugar de entregables</td></tr></tbody></table>
+  </div>
+  
+</div>
+
+<div class="respuesta">
+  <div class="pregunta-id">PMP-11-012</div>
+  <div class="respuesta-correcta-badge">RESPUESTA CORRECTA &nbsp; <strong>A</strong></div>
+  <div class="cuerpo">
+    <p><strong>Justificación: </strong>MoSCoW sirve para priorizar ítems del backlog según valor y urgencia —ideal para acordar prioridades entre múltiples interesados (a→3). La EDT descompone entregables estables en paquetes de trabajo para planificar el cronograma (b→1). La matriz de trazabilidad de requisitos vincula requisitos con entregables y objetivos para verificar cobertura (c→4). Los criterios de aceptación definen las condiciones específicas que un entregable debe cumplir para ser aceptado —cuando el cliente rechaza, se revisa cuál criterio no se cumple (d→2).</p><table class="tabla-meta"><thead><tr><th><strong>Opción</strong></th><th><strong>Evaluación</strong></th></tr></thead><tbody><tr><td>A</td><td>Correcta. La asociación (a)→3 · (b)→1 · (c)→4 · (d)→2 es la única combinación que asigna cada herramienta a su uso más apropiado.</td></tr><tr><td>B</td><td>Incorrecta. Asigna EDT a priorización de features, lo cual invierte la lógica: la EDT descompone entregables, no prioriza por valor.</td></tr><tr><td>C</td><td>Incorrecta. Asigna la matriz de trazabilidad a priorizar features y MoSCoW a verificar cobertura. Ambas asignaciones son incorrectas.</td></tr><tr><td>D</td><td>Incorrecta. Asigna la matriz de trazabilidad como herramienta de descomposición, lo cual es incorrecto: la matriz vincula y verifica, no descompone.</td></tr><tr><td><strong>Dominio ECO</strong></td><td>Process / Proceso</td></tr><tr><td><strong>Tarea ECO</strong></td><td>Seleccionar la herramienta de gestión del alcance adecuada para cada situación</td></tr><tr><td><strong>Dominio PMBOK 8</strong></td><td>Scope Performance Domain</td></tr><tr><td><strong>Principio PMBOK 8</strong></td><td>Focus on Value · Embed Quality</td></tr><tr><td><strong>Enfoque</strong></td><td>Híbrido</td></tr><tr><td><strong>Dificultad</strong></td><td>Intermedia</td></tr><tr><td><strong>Tipo de ítem</strong></td><td>MAT — Matching</td></tr><tr><td><strong>Competencia evaluada</strong></td><td>Asociar herramientas de gestión del alcance con sus casos de uso apropiados</td></tr><tr><td><strong>Error conceptual detectado</strong></td><td>Confundir los propósitos de la EDT, la matriz de trazabilidad, MoSCoW y los criterios de aceptación</td></tr></tbody></table>
+  </div>
+  
+</div>
+
+<div class="respuesta">
+  <div class="pregunta-id">PMP-11-013</div>
+  <div class="respuesta-correcta-badge">RESPUESTA CORRECTA &nbsp; <strong>C</strong></div>
+  <div class="cuerpo">
+    <p><strong>Justificación: </strong>Una solicitud de cambio fuera de la línea base de un contrato de precio fijo requiere el proceso formal de control de cambios, con evaluación de impacto en todas las dimensiones (alcance, cronograma, costo, riesgo) y presentación de opciones al cliente. No se puede incorporar el módulo sin ajuste contractual, ni rechazarlo sin análisis. El director de proyectos documenta, evalúa y presenta opciones.</p><table class="tabla-meta"><thead><tr><th><strong>Opción</strong></th><th><strong>Evaluación</strong></th></tr></thead><tbody><tr><td>A</td><td>Incorrecta. El argumento de «extensión natural» no es suficiente para incorporar alcance fuera de la línea base. Si el director lo acepta sin proceso formal, pierde control sobre el proyecto y asume riesgos contractuales.</td></tr><tr><td>B</td><td>Incorrecta. Rechazar sin análisis tampoco es correcto. El director de proyectos debe evaluar la solicitud y presentar opciones, no cerrar la conversación.</td></tr><tr><td>C</td><td>Correcta. Documentar, evaluar el impacto y presentar opciones al CCB y al cliente —incluyendo el ajuste contractual correspondiente— es el proceso correcto en un contrato de precio fijo.</td></tr><tr><td>D</td><td>Incorrecta. Incorporar el módulo sin modificar el contrato es la opción más riesgosa: genera scope creep contractual con impacto en costo y cronograma sin compensación para el proveedor.</td></tr><tr><td><strong>Dominio ECO</strong></td><td>Process / Proceso · Business Environment / Entorno de negocio</td></tr><tr><td><strong>Tarea ECO</strong></td><td>Gestionar solicitudes de cambio de alcance en contratos de precio fijo</td></tr><tr><td><strong>Dominio PMBOK 8</strong></td><td>Scope Performance Domain · Governance Performance Domain</td></tr><tr><td><strong>Principio PMBOK 8</strong></td><td>Be an Accountable Leader · Focus on Value</td></tr><tr><td><strong>Enfoque</strong></td><td>Predictivo</td></tr><tr><td><strong>Dificultad</strong></td><td>Intermedia</td></tr><tr><td><strong>Tipo de ítem</strong></td><td>SIT — Situacional</td></tr><tr><td><strong>Competencia evaluada</strong></td><td>Gestionar solicitudes de cambio de alcance en contextos contractuales con línea base aprobada</td></tr><tr><td><strong>Error conceptual detectado</strong></td><td>Incorporar alcance sin proceso formal o rechazar sin análisis por rigidez contractual</td></tr></tbody></table>
+  </div>
+  
+</div>
+
+<div class="respuesta">
+  <div class="pregunta-id">PMP-11-014</div>
+  <div class="respuesta-correcta-badge">RESPUESTA CORRECTA &nbsp; <strong>B</strong></div>
+  <div class="cuerpo">
+    <p><strong>Justificación: </strong>Un backlog con ítems viejos, sin estimación ni criterio de valor claro, acumula «deuda de producto»: ruido que dificulta la priorización real y genera frustración en el Product Owner porque el equipo entrega velocidad pero no el valor correcto. La solución es una sesión de limpieza del backlog (backlog grooming/pruning) donde se descarten los ítems que no tienen valor demostrable o se reprioricen los que sí lo tienen.</p><table class="tabla-meta"><thead><tr><th><strong>Opción</strong></th><th><strong>Evaluación</strong></th></tr></thead><tbody><tr><td>A</td><td>Incorrecta. El problema no es la velocidad sino la dirección del producto. Aumentar la velocidad sin mejorar la priorización acelera la entrega de cosas de poco valor.</td></tr><tr><td>B</td><td>Correcta. La deuda de producto es el problema real. La limpieza del backlog es la solución estructural que elimina el ruido y enfoca al equipo en el valor correcto.</td></tr><tr><td>C</td><td>Incorrecta. El Product Owner puede estar involucrado pero incapaz de gestionar un backlog de 80 ítems sin estructura. El problema es el backlog, no la persona.</td></tr><tr><td>D</td><td>Incorrecta. Congelar el backlog e intentar documentar los 80 ítems como requisitos formales convierte el problema en algo más grande, no lo resuelve.</td></tr><tr><td><strong>Dominio ECO</strong></td><td>Process / Proceso</td></tr><tr><td><strong>Tarea ECO</strong></td><td>Gestionar la salud del backlog y eliminar ítems sin valor en proyectos ágiles</td></tr><tr><td><strong>Dominio PMBOK 8</strong></td><td>Scope Performance Domain</td></tr><tr><td><strong>Principio PMBOK 8</strong></td><td>Focus on Value · Build an Empowered Culture</td></tr><tr><td><strong>Enfoque</strong></td><td>Ágil / Adaptativo</td></tr><tr><td><strong>Dificultad</strong></td><td>Avanzada</td></tr><tr><td><strong>Tipo de ítem</strong></td><td>SIT — Situacional</td></tr><tr><td><strong>Competencia evaluada</strong></td><td>Identificar y resolver deuda de producto en el backlog para mejorar la entrega de valor</td></tr><tr><td><strong>Error conceptual detectado</strong></td><td>Confundir el problema de un backlog mal gestionado con un problema de velocidad del equipo o de disponibilidad del Product Owner</td></tr></tbody></table>
+  </div>
+  
+</div>
+
+<div class="respuesta">
+  <div class="pregunta-id">PMP-11-015</div>
+  <div class="respuesta-correcta-badge">RESPUESTA CORRECTA &nbsp; <strong>A</strong></div>
+  <div class="cuerpo">
+    <p><strong>Justificación: </strong>Ante scope creep detectado, la primera acción es documentar y cuantificar para poder tomar una decisión informada. ¿Se incorpora la mejora a la línea base con ajuste de cronograma o se descarta? Ambas opciones requieren una solicitud de cambio formal. La conversación informal del sponsor no autoriza el inicio de trabajo fuera de la línea base.</p><table class="tabla-meta"><thead><tr><th><strong>Opción</strong></th><th><strong>Evaluación</strong></th></tr></thead><tbody><tr><td>A</td><td>Correcta. Documentar, cuantificar e iniciar la solicitud de cambio formal es el proceso correcto ante scope creep ya ejecutado. Permite tomar una decisión informada sobre qué hacer con el trabajo realizado.</td></tr><tr><td>B</td><td>Incorrecta. Validar con el sponsor verbalmente y continuar reproduciendo el problema: una mención informal del sponsor no es una solicitud de cambio formal aprobada.</td></tr><tr><td>C</td><td>Incorrecta. Detener y revertir sin análisis puede ser más costoso que formalizar el trabajo ya realizado, especialmente si tiene valor. Requiere análisis previo.</td></tr><tr><td>D</td><td>Incorrecta. El sponsor tiene autoridad estratégica pero su mención informal no equivale a una aprobación formal de cambio de alcance. La autoridad no reemplaza al proceso.</td></tr><tr><td><strong>Dominio ECO</strong></td><td>Process / Proceso</td></tr><tr><td><strong>Tarea ECO</strong></td><td>Gestionar scope creep detectado durante la ejecución de proyectos predictivos</td></tr><tr><td><strong>Dominio PMBOK 8</strong></td><td>Scope Performance Domain · Governance Performance Domain</td></tr><tr><td><strong>Principio PMBOK 8</strong></td><td>Be an Accountable Leader</td></tr><tr><td><strong>Enfoque</strong></td><td>Predictivo</td></tr><tr><td><strong>Dificultad</strong></td><td>Intermedia</td></tr><tr><td><strong>Tipo de ítem</strong></td><td>SIT — Situacional</td></tr><tr><td><strong>Competencia evaluada</strong></td><td>Responder correctamente ante scope creep detectado: documentar, cuantificar y formalizar</td></tr><tr><td><strong>Error conceptual detectado</strong></td><td>Asumir que la mención informal de un interesado con autoridad equivale a aprobación de cambio de alcance</td></tr></tbody></table>
+  </div>
+  
+</div>
+
+<div class="respuesta">
+  <div class="pregunta-id">PMP-11-016</div>
+  <div class="respuesta-correcta-badge">RESPUESTA CORRECTA &nbsp; <strong>B</strong></div>
+  <div class="cuerpo">
+    <p><strong>Justificación: </strong>Aplicando las fórmulas corregidas: Arrastre = 4/(35+4) = 4/39 ≈ 10,3% (denominador = total actual de entregables). Estabilidad = 105/150 = 70% (denominador = total inicial de requisitos). Los 18 requisitos incorporados por cambios aprobados modificaron el estado de los requisitos originales —por eso no cuentan como 'sin cambios'— pero fueron gestionados formalmente y no son scope creep. Nota: el denominador del arrastre puede ser el total de la línea base o el total actualizado según cómo lo plantee el enunciado; lo crítico es no invertir numerador y denominador.</p><table class="tabla-meta"><thead><tr><th><strong>Opción</strong></th><th><strong>Evaluación</strong></th></tr></thead><tbody><tr><td>A</td><td>Incorrecta. El 11,4% proviene de 4/35 (usando solo la línea base como denominador). La fórmula correcta usa el total de entregables incluyendo los no planificados incorporados: 4/39≈10,3%.</td></tr><tr><td>B</td><td>Correcta. Arrastre=10,3% (4/39) y estabilidad=70% (105/150). Los 18 cambios aprobados sí afectaron la estabilidad: no se cuentan como «sin cambios» pero tampoco son scope creep.</td></tr><tr><td>C</td><td>Incorrecta. El 85% de estabilidad excluye incorrectamente los 18 cambios aprobados del cálculo. Los cambios aprobados también modifican requisitos, por lo que la base de «sin cambios» sigue siendo 105.</td></tr><tr><td>D</td><td>Incorrecta. El 62,5% incluye los 18 nuevos requisitos en el denominador (168), pero la fórmula usa el total inicial (150) como referencia de la estabilidad del alcance original.</td></tr><tr><td><strong>Dominio ECO</strong></td><td>Process / Proceso</td></tr><tr><td><strong>Tarea ECO</strong></td><td>Calcular e interpretar métricas de control del alcance en proyectos con cambios aprobados y scope creep simultáneos</td></tr><tr><td><strong>Dominio PMBOK 8</strong></td><td>Scope Performance Domain</td></tr><tr><td><strong>Principio PMBOK 8</strong></td><td>Embed Quality · Be an Accountable Leader</td></tr><tr><td><strong>Enfoque</strong></td><td>Predictivo</td></tr><tr><td><strong>Dificultad</strong></td><td>Avanzada</td></tr><tr><td><strong>Tipo de ítem</strong></td><td>TAB — Tabla/gráfico con datos</td></tr><tr><td><strong>Competencia evaluada</strong></td><td>Distinguir scope creep de cambios aprobados al calcular métricas de alcance</td></tr><tr><td><strong>Error conceptual detectado</strong></td><td>Incluir los 18 cambios aprobados como parte de los requisitos sin cambios, o excluirlos del denominador de estabilidad</td></tr></tbody></table>
+  </div>
+  
+</div>
+
+<div class="respuesta">
+  <div class="pregunta-id">PMP-11-017</div>
+  <div class="respuesta-correcta-badge">RESPUESTA CORRECTA &nbsp; <strong>B</strong></div>
+  <div class="cuerpo">
+    <p><strong>Justificación: </strong>Requisitos contradictorios en el backlog deben resolverse antes de ejecutarlos, no durante. El mecanismo correcto es una sesión con los interesados afectados —área clínica, área legal y Product Owner— para identificar cuál es el requisito válido, actualizar los criterios de aceptación de ambas historias y garantizar coherencia antes de iniciar el desarrollo. No se debe tomar la decisión de forma unilateral.</p><table class="tabla-meta"><thead><tr><th><strong>Opción</strong></th><th><strong>Evaluación</strong></th></tr></thead><tbody><tr><td>A</td><td>Incorrecta. Descartar la historia A sin involucrar a los interesados clínicos puede eliminar un requisito legítimo. El requisito legal prevalece en la regulación, pero el operativo puede tener una solución que los concilie.</td></tr><tr><td>B</td><td>Correcta. La sesión con los interesados clave es el mecanismo correcto para resolver la contradicción con información completa y actualizar los criterios antes de ejecutar.</td></tr><tr><td>C</td><td>Incorrecta. El sponsor no tiene la información técnica ni regulatoria para resolver esta contradicción. La decisión requiere a los expertos del dominio.</td></tr><tr><td>D</td><td>Incorrecta. Avanzar el sprint sin resolver las historias bloqueadas no resuelve el problema y puede crear dependencias que bloqueen el sprint siguiente.</td></tr><tr><td><strong>Dominio ECO</strong></td><td>Process / Proceso · People / Personas</td></tr><tr><td><strong>Tarea ECO</strong></td><td>Resolver contradicciones entre requisitos antes de ejecutar historias de usuario en proyectos ágiles</td></tr><tr><td><strong>Dominio PMBOK 8</strong></td><td>Scope Performance Domain · Stakeholder Performance Domain</td></tr><tr><td><strong>Principio PMBOK 8</strong></td><td>Adopt a Holistic View · Be an Accountable Leader</td></tr><tr><td><strong>Enfoque</strong></td><td>Ágil / Adaptativo</td></tr><tr><td><strong>Dificultad</strong></td><td>Intermedia</td></tr><tr><td><strong>Tipo de ítem</strong></td><td>SIT — Situacional</td></tr><tr><td><strong>Competencia evaluada</strong></td><td>Gestionar requisitos contradictorios involucrando a los interesados correctos antes de ejecutar</td></tr><tr><td><strong>Error conceptual detectado</strong></td><td>Tomar la decisión de forma unilateral o escalar antes de intentar resolverlo con los interesados del dominio</td></tr></tbody></table>
+  </div>
+  
+</div>
+
+<div class="respuesta">
+  <div class="pregunta-id">PMP-11-018</div>
+  <div class="respuesta-correcta-badge">RESPUESTA CORRECTA &nbsp; <strong>C</strong></div>
+  <div class="cuerpo">
+    <p><strong>Justificación: </strong>En proyectos híbridos, las interfaces entre componentes son puntos de riesgo. Cuando un requisito del componente ágil afecta a la línea base del componente predictivo, el proceso correcto es analizar el impacto conjuntamente y, si se decide proceder, seguir el control formal de cambios para el componente predictivo. Ninguna de las dos partes puede imponer su lógica a la otra.</p><table class="tabla-meta"><thead><tr><th><strong>Opción</strong></th><th><strong>Evaluación</strong></th></tr></thead><tbody><tr><td>A</td><td>Incorrecta. Eliminar la funcionalidad del backlog sin análisis puede descartar valor de negocio real. El componente UX no puede ignorar el valor de una funcionalidad por una rigidez del componente predictivo.</td></tr><tr><td>B</td><td>Incorrecta. Pedir al equipo de pagos que adapte la API sin proceso formal viola la integridad de la línea base predictiva, que existe por razones de compliance y control de riesgos.</td></tr><tr><td>C</td><td>Correcta. El análisis conjunto del impacto y la aplicación del control formal de cambios si se decide proceder es la gestión correcta de la interfaz híbrida.</td></tr><tr><td>D</td><td>Incorrecta. El sponsor no tiene el contexto técnico para decidir qué módulo tiene prioridad. Esta es una decisión que debe tomarse con análisis de impacto de los dos equipos, con la directora de proyectos facilitando.</td></tr><tr><td><strong>Dominio ECO</strong></td><td>Process / Proceso · Business Environment / Entorno de negocio</td></tr><tr><td><strong>Tarea ECO</strong></td><td>Gestionar interfaces entre componentes predictivos y ágiles en proyectos híbridos complejos</td></tr><tr><td><strong>Dominio PMBOK 8</strong></td><td>Scope Performance Domain · Governance Performance Domain</td></tr><tr><td><strong>Principio PMBOK 8</strong></td><td>Adopt a Holistic View · Be an Accountable Leader</td></tr><tr><td><strong>Enfoque</strong></td><td>Híbrido</td></tr><tr><td><strong>Dificultad</strong></td><td>Avanzada</td></tr><tr><td><strong>Tipo de ítem</strong></td><td>SIT — Situacional</td></tr><tr><td><strong>Competencia evaluada</strong></td><td>Facilitar la gestión de interfaces entre componentes de diferente enfoque en proyectos híbridos</td></tr><tr><td><strong>Error conceptual detectado</strong></td><td>Subordinar el proceso de control de cambios del componente predictivo a la urgencia del componente ágil, o viceversa</td></tr></tbody></table>
+  </div>
+  
+</div>
+
+<div class="respuesta">
+  <div class="pregunta-id">PMP-11-019</div>
+  <div class="respuesta-correcta-badge">RESPUESTA CORRECTA &nbsp; <strong>B</strong></div>
+  <div class="cuerpo">
+    <p><strong>Justificación: </strong>El alcance del proyecto describe el trabajo necesario para producir el resultado. Las actividades de diseño, desarrollo, pruebas, capacitación y puesta en producción son el trabajo del proyecto. El alcance del producto, en cambio, son las características de la aplicación: funcionalidad de seguimiento, integración con pasarela de pagos, etc.</p><table class="tabla-meta"><thead><tr><th><strong>Opción</strong></th><th><strong>Evaluación</strong></th></tr></thead><tbody><tr><td>A</td><td>Incorrecta. La funcionalidad de seguimiento y la integración con la pasarela de pagos son características del producto (alcance del producto), no el trabajo del proyecto.</td></tr><tr><td>B</td><td>Correcta. Las actividades de diseño, desarrollo, pruebas, capacitación y puesta en producción describen el trabajo que el proyecto debe realizar para producir la aplicación. Eso es el alcance del proyecto.</td></tr><tr><td>C</td><td>Incorrecta. La interfaz visual y la experiencia del usuario son características del producto, no el alcance del proyecto.</td></tr><tr><td>D</td><td>Incorrecta. El número de restaurantes que usarán la plataforma al lanzamiento es un supuesto o un indicador de alcance comercial, no una descripción del alcance del proyecto.</td></tr><tr><td><strong>Dominio ECO</strong></td><td>Process / Proceso</td></tr><tr><td><strong>Tarea ECO</strong></td><td>Distinguir alcance del proyecto de alcance del producto en proyectos de desarrollo de software</td></tr><tr><td><strong>Dominio PMBOK 8</strong></td><td>Scope Performance Domain</td></tr><tr><td><strong>Principio PMBOK 8</strong></td><td>Focus on Value</td></tr><tr><td><strong>Enfoque</strong></td><td>Híbrido</td></tr><tr><td><strong>Dificultad</strong></td><td>Básica</td></tr><tr><td><strong>Tipo de ítem</strong></td><td>SIT — Situacional</td></tr><tr><td><strong>Competencia evaluada</strong></td><td>Aplicar correctamente la distinción entre alcance del proyecto y alcance del producto</td></tr><tr><td><strong>Error conceptual detectado</strong></td><td>Confundir características del producto (alcance del producto) con actividades del proyecto (alcance del proyecto)</td></tr></tbody></table>
+  </div>
+  
+</div>
+
+<div class="respuesta">
+  <div class="pregunta-id">PMP-11-020</div>
+  <div class="respuesta-correcta-badge">RESPUESTA CORRECTA &nbsp; <strong>C</strong></div>
+  <div class="cuerpo">
+    <p><strong>Justificación: </strong>Ante una solicitud masiva de nuevas funcionalidades de un sponsor, el proceso correcto no es aceptar ni rechazar, sino involucrar al Product Owner, analizar las funcionalidades con criterio de valor/esfuerzo y agregar al backlog solo las que superen el umbral de valor definido. El backlog no es una lista de deseos: requiere una priorización rigurosa.</p><table class="tabla-meta"><thead><tr><th><strong>Opción</strong></th><th><strong>Evaluación</strong></th></tr></thead><tbody><tr><td>A</td><td>Incorrecta. Agregar todas con prioridad máxima sin análisis destruye la priorización existente y genera expectativas que el equipo no podrá cumplir.</td></tr><tr><td>B</td><td>Incorrecta. El backlog no se «aprueba» al inicio y luego se congela en proyectos ágiles. Es dinámico por diseño. Rechazar sin análisis tampoco es correcto.</td></tr><tr><td>C</td><td>Correcta. El proceso correcto involucra al Product Owner, analiza las funcionalidades con criterio de valor y prioriza rigurosamente. El sponsor aporta perspectiva estratégica, pero la priorización del backlog corresponde al Product Owner.</td></tr><tr><td>D</td><td>Incorrecta. Clasificar como Should Have sin análisis es una decisión sin fundamento. Además, no resuelve el problema de fondo: el sponsor puede presionar en el siguiente sprint para elevarlos a Must Have.</td></tr><tr><td><strong>Dominio ECO</strong></td><td>Process / Proceso · People / Personas</td></tr><tr><td><strong>Tarea ECO</strong></td><td>Gestionar solicitudes de alcance de interesados de alto nivel en proyectos ágiles</td></tr><tr><td><strong>Dominio PMBOK 8</strong></td><td>Scope Performance Domain · Stakeholder Performance Domain</td></tr><tr><td><strong>Principio PMBOK 8</strong></td><td>Focus on Value · Be an Accountable Leader</td></tr><tr><td><strong>Enfoque</strong></td><td>Ágil / Adaptativo</td></tr><tr><td><strong>Dificultad</strong></td><td>Intermedia</td></tr><tr><td><strong>Tipo de ítem</strong></td><td>SIT — Situacional</td></tr><tr><td><strong>Competencia evaluada</strong></td><td>Gestionar presión de interesados de alto nivel sobre el backlog sin perder la priorización por valor</td></tr><tr><td><strong>Error conceptual detectado</strong></td><td>Subordinar la priorización del backlog a la jerarquía organizacional del solicitante en lugar del criterio de valor</td></tr></tbody></table>
+  </div>
+  
+</div>
+
+<div class="respuesta">
+  <div class="pregunta-id">PMP-11-021</div>
+  <div class="respuesta-correcta-badge">RESPUESTA CORRECTA &nbsp; <strong>C</strong></div>
+  <div class="cuerpo">
+    <p><strong>Justificación: </strong>Requisitos contradictorios en el alcance aprobado de un proyecto predictivo son un problema que debe resolverse formalmente: involucrar a los interesados clave para identificar la contradicción, acordar la solución y actualizar el enunciado del alcance mediante el proceso de control de cambios. Implementar los más simples o escalar sin análisis no resuelve el problema.</p><table class="tabla-meta"><thead><tr><th><strong>Opción</strong></th><th><strong>Evaluación</strong></th></tr></thead><tbody><tr><td>A</td><td>Incorrecta. Implementar los requisitos más simples sin involucrar al cliente es una decisión unilateral que puede incumplir las necesidades reales del negocio.</td></tr><tr><td>B</td><td>Incorrecta. Exigirle al cliente que defina cuál es «el correcto» sin análisis previo ni propuestas de solución no es un enfoque colaborativo. El director de proyectos debe llegar a la reunión con opciones.</td></tr><tr><td>C</td><td>Correcta. Involucrar a los interesados, resolver la contradicción con información completa y actualizar el alcance formalmente es el proceso correcto en un entorno predictivo.</td></tr><tr><td>D</td><td>Incorrecta. Registrar como riesgo y continuar es el error de posponer un problema estructural que bloqueará la ejecución. Una contradicción en requisitos no puede dejarse como riesgo latente.</td></tr><tr><td><strong>Dominio ECO</strong></td><td>Process / Proceso · People / Personas</td></tr><tr><td><strong>Tarea ECO</strong></td><td>Resolver contradicciones en el alcance aprobado de proyectos predictivos mediante control de cambios</td></tr><tr><td><strong>Dominio PMBOK 8</strong></td><td>Scope Performance Domain · Governance Performance Domain</td></tr><tr><td><strong>Principio PMBOK 8</strong></td><td>Adopt a Holistic View · Be an Accountable Leader</td></tr><tr><td><strong>Enfoque</strong></td><td>Predictivo</td></tr><tr><td><strong>Dificultad</strong></td><td>Avanzada</td></tr><tr><td><strong>Tipo de ítem</strong></td><td>SIT — Situacional</td></tr><tr><td><strong>Competencia evaluada</strong></td><td>Gestionar requisitos contradictorios en el alcance aprobado de un proyecto predictivo</td></tr><tr><td><strong>Error conceptual detectado</strong></td><td>Posponer la resolución de contradicciones en el alcance como si fueran riesgos, o resolverlas de forma unilateral</td></tr></tbody></table>
+  </div>
+  
+</div>
+
+<div class="respuesta">
+  <div class="pregunta-id">PMP-11-022</div>
+  <div class="respuesta-correcta-badge">RESPUESTA CORRECTA &nbsp; <strong>C</strong></div>
+  <div class="cuerpo">
+    <p><strong>Justificación: </strong>La ausencia del Product Owner es un impedimento que el director de proyectos debe gestionar, no reemplazar ni escalar directamente. La primera acción es entender las razones de la ausencia, hacer visible el impacto en el producto y acordar una modalidad sostenible de participación. Asumir el rol de Product Owner mezcla responsabilidades y reduce la accountability.</p><table class="tabla-meta"><thead><tr><th><strong>Opción</strong></th><th><strong>Evaluación</strong></th></tr></thead><tbody><tr><td>A</td><td>Incorrecta. Asumir el rol de Product Owner crea un conflicto de roles: el director de proyectos facilita el proceso, no define la prioridad del producto. Esta mezcla de roles es una mala práctica en entornos ágiles.</td></tr><tr><td>B</td><td>Incorrecta. Escalar sin haber intentado resolver directamente con el Product Owner es escalamiento prematuro. Primero hay que entender la situación.</td></tr><tr><td>C</td><td>Correcta. Conversar con el Product Owner, hacer visible el impacto y acordar una modalidad sostenible resuelve el problema sin escalar ni asumir roles que no corresponden.</td></tr><tr><td>D</td><td>Incorrecta. El equipo puede conocer bien el producto desde el punto de vista técnico, pero no tiene la autoridad ni el contexto de negocio para tomar decisiones de priorización que corresponden al Product Owner.</td></tr><tr><td><strong>Dominio ECO</strong></td><td>People / Personas · Process / Proceso</td></tr><tr><td><strong>Tarea ECO</strong></td><td>Gestionar la falta de participación del Product Owner como impedimento del proyecto ágil</td></tr><tr><td><strong>Dominio PMBOK 8</strong></td><td>Scope Performance Domain · Stakeholder Performance Domain</td></tr><tr><td><strong>Principio PMBOK 8</strong></td><td>Build an Empowered Culture · Be an Accountable Leader</td></tr><tr><td><strong>Enfoque</strong></td><td>Ágil / Adaptativo</td></tr><tr><td><strong>Dificultad</strong></td><td>Intermedia</td></tr><tr><td><strong>Tipo de ítem</strong></td><td>SIT — Situacional</td></tr><tr><td><strong>Competencia evaluada</strong></td><td>Gestionar la ausencia de un rol clave en proyectos ágiles sin mezclar responsabilidades</td></tr><tr><td><strong>Error conceptual detectado</strong></td><td>Asumir el rol del Product Owner o escalar sin haber intentado resolver directamente con el interesado</td></tr></tbody></table>
+  </div>
+  
+</div>
+
+<div class="respuesta">
+  <div class="pregunta-id">PMP-11-023</div>
+  <div class="respuesta-correcta-badge">RESPUESTA CORRECTA &nbsp; <strong>B, D</strong></div>
+  <div class="cuerpo">
+    <p><strong>Justificación: </strong>El proceso formal de control de cambios aplica a todos los cambios, independientemente del tamaño. No existe un umbral informal que justifique procesar cambios menores sin documentación. Además, el director de proyectos tiene la responsabilidad de explicar a los interesados cómo funciona el proceso y orientarlos en cómo presentar sus solicitudes correctamente.</p><table class="tabla-meta"><thead><tr><th><strong>Opción</strong></th><th><strong>Evaluación</strong></th></tr></thead><tbody><tr><td>A</td><td>Incorrecta. No existe excepción por «tamaño pequeño» en el control de cambios. Todo cambio que afecte la línea base requiere registro y evaluación.</td></tr><tr><td>B</td><td>Correcta. Toda solicitud de cambio debe registrarse y evaluarse. El tamaño no determina si el proceso aplica o no.</td></tr><tr><td>C</td><td>Incorrecta. El rango jerárquico del interesado no autoriza cambios de alcance. La autorización corresponde al CCB o al proceso definido en el plan de gestión del proyecto.</td></tr><tr><td>D</td><td>Correcta. Comunicar el proceso y orientar a los interesados es parte de la gestión del alcance. Los interesados necesitan saber cómo presentar solicitudes formalmente.</td></tr><tr><td>E</td><td>Incorrecta. Acumular solicitudes para presentarlas mensualmente crea retrasos en la evaluación de impacto y puede generar esperas innecesarias que afectan el cronograma.</td></tr><tr><td><strong>Dominio ECO</strong></td><td>Process / Proceso</td></tr><tr><td><strong>Tarea ECO</strong></td><td>Aplicar el proceso de control de cambios ante múltiples solicitudes informales de interesados</td></tr><tr><td><strong>Dominio PMBOK 8</strong></td><td>Scope Performance Domain · Governance Performance Domain</td></tr><tr><td><strong>Principio PMBOK 8</strong></td><td>Be an Accountable Leader · Embed Quality</td></tr><tr><td><strong>Enfoque</strong></td><td>Predictivo</td></tr><tr><td><strong>Dificultad</strong></td><td>Intermedia</td></tr><tr><td><strong>Tipo de ítem</strong></td><td>MR — Respuesta múltiple</td></tr><tr><td><strong>Competencia evaluada</strong></td><td>Aplicar el proceso de control de cambios de forma consistente y orientar a los interesados</td></tr><tr><td><strong>Error conceptual detectado</strong></td><td>Asumir que cambios menores o de interesados de alto rango pueden procesarse informalmente</td></tr></tbody></table>
+  </div>
+  
+</div>
+
+<div class="respuesta">
+  <div class="pregunta-id">PMP-11-024</div>
+  <div class="respuesta-correcta-badge">RESPUESTA CORRECTA &nbsp; <strong>C</strong></div>
+  <div class="cuerpo">
+    <p><strong>Justificación: </strong>En proyectos híbridos, el director de proyectos debe gestionar las interfaces con criterio. Antes de bloquear el sprint ágil o iniciar formalmente el proceso de cambio de la línea base predictiva, debe analizar si existe una solución alternativa temporal que permita avanzar al componente ágil sin modificar la línea base. Esto es pensamiento sistémico: buscar opciones antes de escalar o bloquear.</p><table class="tabla-meta"><thead><tr><th><strong>Opción</strong></th><th><strong>Evaluación</strong></th></tr></thead><tbody><tr><td>A</td><td>Incorrecta. Priorizar el componente ágil y pedir al equipo de seguridad que adapte la línea base sin proceso formal viola la integridad del componente predictivo, que tiene razones de compliance para mantener su línea base.</td></tr><tr><td>B</td><td>Incorrecta. Posponer el sprint del componente ágil sin análisis es la opción más conservadora pero no necesariamente la más adecuada. Puede haber alternativas que permitan avanzar.</td></tr><tr><td>C</td><td>Correcta. Analizar si existe una solución alternativa temporal permite avanzar al componente ágil mientras se evalúa formalmente el cambio en el predictivo. Es la respuesta más creativa y menos disruptiva.</td></tr><tr><td>D</td><td>Incorrecta. Escalar al sponsor sin haber analizado las opciones disponibles es escalamiento prematuro. El director de proyectos debe llegar con opciones, no con el problema sin analizar.</td></tr><tr><td><strong>Dominio ECO</strong></td><td>Process / Proceso · Business Environment / Entorno de negocio</td></tr><tr><td><strong>Tarea ECO</strong></td><td>Gestionar dependencias críticas entre componentes de diferente enfoque en proyectos híbridos</td></tr><tr><td><strong>Dominio PMBOK 8</strong></td><td>Scope Performance Domain · Governance Performance Domain · Risk Performance Domain</td></tr><tr><td><strong>Principio PMBOK 8</strong></td><td>Adopt a Holistic View · Focus on Value</td></tr><tr><td><strong>Enfoque</strong></td><td>Híbrido</td></tr><tr><td><strong>Dificultad</strong></td><td>Avanzada</td></tr><tr><td><strong>Tipo de ítem</strong></td><td>SIT — Situacional</td></tr><tr><td><strong>Competencia evaluada</strong></td><td>Buscar soluciones alternativas antes de bloquear o escalar en interfaces complejas de proyectos híbridos</td></tr><tr><td><strong>Error conceptual detectado</strong></td><td>Escalar sin análisis o bloquear el componente ágil como única opción ante una dependencia de un componente predictivo</td></tr></tbody></table>
+  </div>
+  
+</div>
+
+<div class="respuesta">
+  <div class="pregunta-id">PMP-11-025</div>
+  <div class="respuesta-correcta-badge">RESPUESTA CORRECTA &nbsp; <strong>B</strong></div>
+  <div class="cuerpo">
+    <p><strong>Pregunta 25a — Respuesta correcta: B</strong></p><p><strong>Justificación: </strong>El trabajo del equipo de riesgo crediticio es scope creep. Independientemente del valor técnico del algoritmo, fue ejecutado fuera del proceso de priorización acordado con el Product Owner. El criterio PMP es claro: si el trabajo no fue autorizado por el mecanismo correcto (en este caso, la priorización del backlog por el Product Owner), es trabajo no autorizado. El valor del resultado no cambia la naturaleza del proceso.</p><table class="tabla-meta"><thead><tr><th><strong>Opción</strong></th><th><strong>Evaluación</strong></th></tr></thead><tbody><tr><td>A</td><td>Incorrecta. Valorar la iniciativa sin señalar el problema de proceso normaliza el scope creep y crea un precedente para repetirlo.</td></tr><tr><td>B</td><td>Correcta. Scope creep: trabajo no autorizado que no siguió el proceso de priorización del Product Owner.</td></tr><tr><td>C</td><td>Incorrecta. El equipo no tiene autoridad para aprobar cambios de alcance de forma colectiva. La autorización corresponde al Product Owner.</td></tr><tr><td>D</td><td>Incorrecta. La deuda técnica es trabajo técnico acumulado que se resuelve cuando el equipo lo decide; el scope creep es trabajo no planificado ejecutado sin autorización. Son conceptos distintos.</td></tr></tbody></table><p><strong>Pregunta 25b — Respuesta correcta: C</strong></p><p><strong>Justificación: </strong>Un hallazgo de compliance legal que afecta la operabilidad del producto tiene prioridad máxima. Pablo debe comunicarlo de inmediato a todos los interesados relevantes, cuantificar el impacto en el sprint actual y las iteraciones siguientes, y repriorizar antes de comenzar el sprint 6. No puede continuar con la planificación original si sabe que dos ítems Must Have generan riesgo legal.</p><table class="tabla-meta"><thead><tr><th><strong>Opción</strong></th><th><strong>Evaluación</strong></th></tr></thead><tbody><tr><td>A</td><td>Incorrecta. Agregar un ítem de corrección sin comunicar el hallazgo legal a todos los interesados es una respuesta parcial que puede generar sorpresas más adelante.</td></tr><tr><td>B</td><td>Incorrecta. Escalar al sponsor para que autorice el sprint sin los ítems problemáticos es escalamiento prematuro. Pablo puede gestionar la repriorización directamente con el Product Owner.</td></tr><tr><td>C</td><td>Correcta. Comunicar el hallazgo, cuantificar el impacto y repriorizar antes de comenzar el sprint 6 es la respuesta completa y correcta.</td></tr><tr><td>D</td><td>Incorrecta. Continuar el sprint 6 con el riesgo legal conocido es negligencia. Un director de proyectos competente no pospone riesgos de compliance que están activos.</td></tr></tbody></table><p><strong>Pregunta 25c — Respuesta correcta: A</strong></p><p><strong>Justificación: </strong>La causa raíz del problema del sprint 5 es la desconexión entre el equipo técnico y el Product Owner sobre qué trabajo tiene valor y prioridad. La medida estructural es garantizar esa conexión en sesiones de refinamiento del backlog antes de cada sprint. Esto no elimina la autonomía técnica del equipo, sino que la canaliza hacia el valor correcto.</p><table class="tabla-meta"><thead><tr><th><strong>Opción</strong></th><th><strong>Evaluación</strong></th></tr></thead><tbody><tr><td>A</td><td>Correcta. Las sesiones de refinamiento del backlog con el Product Owner son el mecanismo que alinea al equipo con las prioridades de valor antes de cada sprint, previniendo trabajo fuera del proceso.</td></tr><tr><td>B</td><td>Incorrecta. Eliminar la autonomía técnica y requerir aprobación para todo trabajo es una solución autoritaria que destruye la cultura de empoderamiento del equipo ágil.</td></tr><tr><td>C</td><td>Incorrecta. Un backlog técnico separado sin conexión con el backlog del producto perpetúa la desconexión entre trabajo técnico y valor de negocio.</td></tr><tr><td>D</td><td>Incorrecta. La capacitación puede ser útil pero no resuelve el problema de fondo: falta el mecanismo de conexión entre el equipo y el Product Owner antes de cada sprint.</td></tr><tr><td><strong>Dominio ECO</strong></td><td>Process / Proceso · People / Personas</td></tr><tr><td><strong>Tarea ECO</strong></td><td>Gestionar el alcance del trabajo y el proceso de autorización en entornos ágiles</td></tr><tr><td><strong>Dominio PMBOK 8</strong></td><td>Scope Performance Domain · Stakeholder Performance Domain · Governance Performance Domain</td></tr><tr><td><strong>Principio PMBOK 8</strong></td><td>Focus on Value · Be an Accountable Leader · Build an Empowered Culture</td></tr><tr><td><strong>Enfoque</strong></td><td>Ágil / Adaptativo</td></tr><tr><td><strong>Dificultad</strong></td><td>Avanzada</td></tr><tr><td><strong>Tipo de ítem</strong></td><td>CAS — Caso con preguntas asociadas</td></tr><tr><td><strong>Competencia evaluada</strong></td><td>Gestionar scope creep, compliance y mecanismos de alineación del equipo en entornos ágiles</td></tr><tr><td><strong>Error conceptual detectado</strong></td><td>Confundir valor del resultado con autorización del proceso; posponer riesgos de compliance conocidos</td></tr></tbody></table>
+  </div>
+  
+</div>
+
+
+</div>
+
+<div class="footer-nav">
+  <a href="https://valeriayashan.com.ar/libro">← Volver a Publicaciones</a>
+  &nbsp;·&nbsp;
+  <a href="https://valeriayashan.com.ar">valeriayashan.com.ar</a>
+</div>
+
+</body>
+</html>

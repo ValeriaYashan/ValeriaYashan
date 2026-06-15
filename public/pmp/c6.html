@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Capítulo 6. Enfoques de entrega: predictivo, ágil e híbrido — Respuestas | Valeria Yashan</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f6f8; color: #1a1a2e; }
+  
+  .header {
+    background: #1e3a5f;
+    color: white;
+    padding: 1.5rem 2rem 2rem;
+  }
+  .header .marca { font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.75; margin-bottom: 0.5rem; }
+  .header h1 { font-size: clamp(1.4rem, 4vw, 2rem); font-weight: 700; line-height: 1.25; margin-bottom: 0.75rem; }
+  .header .meta { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-top: 0.75rem; font-size: 0.875rem; opacity: 0.9; }
+  .header .meta span { display: flex; align-items: center; gap: 0.4rem; }
+  
+  .container { max-width: 820px; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
+  
+  .aviso {
+    background: #e8f4fd;
+    border-left: 4px solid #2196f3;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.875rem;
+    border-radius: 0 6px 6px 0;
+    color: #1565c0;
+  }
+  
+  .respuesta {
+    background: white;
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.25rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    border: 1px solid #e8eaed;
+  }
+  
+  .pregunta-id {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #1e3a5f;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.6rem;
+    font-family: 'Courier New', monospace;
+  }
+  
+  .respuesta-correcta-badge {
+    display: inline-block;
+    background: #e8f5e9;
+    border: 1px solid #a5d6a7;
+    color: #1b5e20;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.3rem 0.75rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+  }
+  
+  .cuerpo p {
+    font-size: 0.925rem;
+    line-height: 1.65;
+    margin-bottom: 0.6rem;
+    color: #2c2c2c;
+  }
+  
+  .cuerpo p.opcion {
+    color: #444;
+    padding-left: 0.5rem;
+    border-left: 2px solid #e0e0e0;
+  }
+  
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.875rem;
+  }
+  
+  .tag {
+    background: #f0f4ff;
+    color: #3949ab;
+    border: 1px solid #c5cae9;
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+  
+  .tag-enfoque {
+    background: #f3e5f5;
+    color: #6a1b9a;
+    border-color: #ce93d8;
+  }
+  
+  .tabla-meta {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8rem;
+    margin: 0.75rem 0;
+  }
+  .tabla-meta th, .tabla-meta td {
+    border: 1px solid #e0e0e0;
+    padding: 0.35rem 0.6rem;
+    text-align: left;
+  }
+  .tabla-meta th { background: #f5f5f5; font-weight: 600; color: #333; }
+  .tabla-meta tr:nth-child(even) td { background: #fafafa; }
+  
+  .footer-nav {
+    text-align: center;
+    padding: 1.5rem 1rem;
+    font-size: 0.85rem;
+    color: #666;
+  }
+  .footer-nav a {
+    color: #1e3a5f;
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 1px solid #1e3a5f;
+    padding-bottom: 1px;
+  }
+  
+  @media (max-width: 600px) {
+    .header { padding: 1.25rem 1rem 1.5rem; }
+    .respuesta { padding: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="marca">Dirección de Proyectos · Tomo I · PARTE II — FUNDAMENTOS DE LA GUÍA PMBOK 8</div>
+  <h1>Capítulo 6. Enfoques de entrega: predictivo, ágil e híbrido</h1>
+  <div class="meta">
+    <span>📋 10 ítems</span>
+    <span>🎯 Dominio ECO: Proceso / Entorno de negocio · —</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="aviso">
+    Estas respuestas corresponden a las preguntas de práctica del Capítulo 6 del libro impreso. 
+    Para cada ítem encontrarás la respuesta correcta y el análisis de cada distractor.
+  </div>
+
+  
+<div class="respuesta">
+  <div class="pregunta-id">PMP-06-001-SIT-BAS</div>
+  <div class="respuesta-correcta-badge">RESPUESTA CORRECTA &nbsp; <strong>B</strong></div>
+  <div class="cuerpo">
+    <p>Un director de proyectos inicia la gestión de un proyecto de construcción de planta industrial para una empresa manufacturera. Los requisitos técnicos están completamente definidos, el diseño está aprobado por regulación y los cambios durante la ejecución tienen costos muy altos. ¿Cuál es el enfoque de entrega más adecuado y por qué?</p><p class="opcion">A.  Ágil/adaptativo, porque permite incorporar cambios del cliente durante la ejecución.</p><p class="opcion">B.  Predictivo, porque los requisitos son estables, el riesgo de cambio es bajo y el costo de cambios tardíos es prohibitivo.</p><p class="opcion">C.  Híbrido, porque siempre es recomendable combinar ambos enfoques para maximizar la flexibilidad.</p><p class="opcion">D.  Ágil/adaptativo, porque el PMBOK 8 recomienda ese enfoque para todos los proyectos modernos.</p><p><strong>Respuesta correcta: </strong>B.</p><p><strong>Justificación:</strong></p><p>El enfoque predictivo es el más adecuado cuando los requisitos son estables, el alcance está bien definido desde el inicio y el costo de los cambios tardíos es alto. Una planta industrial con diseño regulado cumple exactamente esas condiciones: cambiar el diseño en fase de ejecución puede implicar rediseño estructural, nuevas aprobaciones regulatorias y sobrecostos significativos. El enfoque predictivo permite planificar con detalle, establecer una línea base sólida y controlar el avance de forma disciplinada.</p><p><strong>Análisis de distractores:</strong></p><table class="tabla-meta"><thead><tr><th>Opción</th><th>Evaluación</th></tr></thead><tbody><tr><td>A</td><td>Incorrecta. El enfoque ágil es adecuado cuando los requisitos evolucionan y el cliente necesita retroalimentación frecuente. No es el caso de una planta industrial con diseño regulado.</td></tr><tr><td>B</td><td>Correcta. Requisitos estables + costo alto de cambios tardíos = enfoque predictivo. Es la condición clásica.</td></tr><tr><td>C</td><td>Incorrecta. El híbrido no es siempre la mejor opción. Se usa cuando partes del proyecto tienen condiciones distintas; aquí todo el proyecto tiene las mismas condiciones.</td></tr><tr><td>D</td><td>Incorrecta. El PMBOK 8 no recomienda el enfoque ágil para todos los proyectos. Recomienda seleccionar el enfoque según el contexto del proyecto.</td></tr></tbody></table><p><strong>Etiquetas</strong></p><p class="opcion">- Dominio ECO: Process / Proceso</p><p class="opcion">- Tarea ECO: Seleccionar el enfoque de entrega apropiado según el contexto</p><p class="opcion">- Dominio PMBOK 8: Governance Performance Domain</p><p class="opcion">- Principio PMBOK 8: Adopt a Holistic View</p><p class="opcion">- Enfoque: Predictivo</p><p class="opcion">- Dificultad: Básica</p><p class="opcion">- Tipo de ítem: SIT — Situacional</p><p class="opcion">- Competencia evaluada: Identificar criterios para seleccionar enfoque predictivo</p><p class="opcion">- Error conceptual detectado: Asumir que ágil o híbrido siempre es mejor que predictivo</p>
+  </div>
+  <div class="tags"><span class="tag">Process / Proceso</span><span class="tag tag-enfoque">Predictivo</span></div>
+</div>
+
+<div class="respuesta">
+  <div class="pregunta-id">PMP-06-002-SIT-INT</div>
+  <div class="respuesta-correcta-badge">RESPUESTA CORRECTA &nbsp; <strong>B</strong></div>
+  <div class="cuerpo">
+    <p>Una directora de proyectos gestiona el desarrollo de una aplicación de salud mental para una mutualista nacional. El sponsor quiere que la app esté disponible para los usuarios lo antes posible, aunque no esté completa. El equipo de desarrollo puede entregar funcionalidades en ciclos de dos semanas. Las necesidades de los usuarios no están del todo definidas y se espera que evolucionen con el uso real de la aplicación. ¿Qué enfoque de entrega debería recomendar la directora de proyectos?</p><p class="opcion">A.  Predictivo, para asegurar que toda la funcionalidad esté aprobada antes de lanzar la aplicación.</p><p class="opcion">B.  Ágil/adaptativo, porque permite entregas frecuentes, incorpora feedback de usuarios y adapta las funcionalidades a medida que las necesidades evolucionan.</p><p class="opcion">C.  Predictivo, porque los proyectos de salud siempre requieren planificación completa antes de la ejecución.</p><p class="opcion">D.  Ninguno de los anteriores; este tipo de proyecto requiere un enfoque totalmente personalizado sin marco de referencia.</p><p><strong>Respuesta correcta: </strong>B.</p><p><strong>Justificación:</strong></p><p>El enfoque ágil/adaptativo es el más adecuado cuando los requisitos son evolutivos, se necesita feedback frecuente de los usuarios y el sponsor valora la entrega incremental de valor. Una app de salud mental con necesidades de usuario no definidas del todo, ciclos de desarrollo de dos semanas disponibles y un sponsor que quiere lanzar rápido cumple exactamente esas condiciones. Las entregas iterativas permiten validar funcionalidades con usuarios reales y ajustar el backlog en función del aprendizaje.</p><p><strong>Análisis de distractores:</strong></p><table class="tabla-meta"><thead><tr><th>Opción</th><th>Evaluación</th></tr></thead><tbody><tr><td>A</td><td>Incorrecta. Esperar que toda la funcionalidad esté lista antes de lanzar contradice el objetivo del sponsor y desperdicia la oportunidad de aprender de usuarios reales.</td></tr><tr><td>B</td><td>Correcta. Requisitos evolutivos + entregas frecuentes posibles + feedback de usuarios = enfoque ágil/adaptativo.</td></tr><tr><td>C</td><td>Incorrecta. El sector salud no determina automáticamente el enfoque predictivo. Lo determinan las características del entregable, el proyecto y la organización.</td></tr><tr><td>D</td><td>Incorrecta. Los marcos de referencia existen para adaptarse a distintos contextos. No existe una situación que justifique prescindir de todo marco.</td></tr></tbody></table><p><strong>Etiquetas</strong></p><p class="opcion">- Dominio ECO: Process / Proceso</p><p class="opcion">- Tarea ECO: Seleccionar el enfoque de entrega apropiado según el contexto</p><p class="opcion">- Dominio PMBOK 8: Scope Performance Domain</p><p class="opcion">- Principio PMBOK 8: Focus on Value</p><p class="opcion">- Enfoque: Ágil / Adaptativo</p><p class="opcion">- Dificultad: Intermedia</p><p class="opcion">- Tipo de ítem: SIT — Situacional</p><p class="opcion">- Competencia evaluada: Identificar criterios para seleccionar enfoque ágil/adaptativo</p><p class="opcion">- Error conceptual detectado: Asumir que el sector (salud) determina el enfoque de entrega</p>
+  </div>
+  <div class="tags"><span class="tag">Process / Proceso</span><span class="tag tag-enfoque">Ágil / Adaptativo</span></div>
+</div>
+
+<div class="respuesta">
+  <div class="pregunta-id">PMP-06-003-SIT-INT</div>
+  <div class="respuesta-correcta-badge">RESPUESTA CORRECTA &nbsp; <strong>C</strong></div>
+  <div class="cuerpo">
+    <p>Un director de proyectos gestiona la implantación de un sistema ERP en una empresa de logística de mediana escala. La infraestructura tecnológica base (servidores, red, licencias) tiene requisitos técnicos fijos y debe instalarse primero. El módulo de gestión de pedidos, en cambio, necesita iteraciones con los operadores logísticos para ajustar los flujos de trabajo. El plazo total es de 14 meses. ¿Qué enfoque de entrega debería usar el director de proyectos?</p><p class="opcion">A.  Predictivo para todo el proyecto, porque un ERP requiere planificación integral antes de la ejecución.</p><p class="opcion">B.  Ágil para todo el proyecto, porque los módulos funcionales deben desarrollarse con feedback continuo del usuario.</p><p class="opcion">C.  Híbrido: enfoque predictivo para la infraestructura técnica y enfoque ágil/adaptativo para el módulo de gestión de pedidos.</p><p class="opcion">D.  Híbrido: enfoque ágil para la infraestructura técnica y predictivo para el módulo de gestión de pedidos.</p><p><strong>Respuesta correcta: </strong>C.</p><p><strong>Justificación:</strong></p><p>El enfoque híbrido es la respuesta correcta cuando distintos componentes del proyecto tienen características diferentes. La infraestructura técnica —servidores, red, licencias— tiene requisitos estables, dependencias técnicas fijas y bajo margen de cambio: enfoque predictivo. El módulo de gestión de pedidos requiere iteraciones con operadores logísticos para ajustar flujos de trabajo reales: enfoque ágil. Separar los componentes según su naturaleza y aplicar el enfoque apropiado a cada uno es precisamente el criterio de tailoring que el examen evalúa en el dominio híbrido.</p><p><strong>Análisis de distractores:</strong></p><table class="tabla-meta"><thead><tr><th>Opción</th><th>Evaluación</th></tr></thead><tbody><tr><td>A</td><td>Incompleta. Predictivo para todo el proyecto ignoraría la necesidad de iteración en el módulo funcional, generando un producto que no se adapta a los flujos reales de los operadores.</td></tr><tr><td>B</td><td>Incorrecta. Ágil para toda la infraestructura técnica no es adecuado cuando los requisitos son fijos y las dependencias técnicas no toleran iteración sin costos altos.</td></tr><tr><td>C</td><td>Correcta. Híbrido bien definido: componente estable → predictivo; componente evolutivo → ágil. Eso es tailoring basado en la naturaleza del entregable.</td></tr><tr><td>D</td><td>Incorrecta. Invertida: la infraestructura técnica tiene requisitos fijos (predictivo), no el módulo funcional evolutivo.</td></tr></tbody></table><p><strong>Etiquetas</strong></p><p class="opcion">- Dominio ECO: Process / Proceso</p><p class="opcion">- Tarea ECO: Aplicar tailoring del enfoque de entrega según la naturaleza del componente</p><p class="opcion">- Dominio PMBOK 8: Governance Performance Domain · Scope Performance Domain</p><p class="opcion">- Principio PMBOK 8: Adopt a Holistic View</p><p class="opcion">- Enfoque: Híbrido</p><p class="opcion">- Dificultad: Intermedia</p><p class="opcion">- Tipo de ítem: SIT — Situacional</p><p class="opcion">- Competencia evaluada: Diseñar enfoque híbrido con componentes diferenciados</p><p class="opcion">- Error conceptual detectado: Aplicar el mismo enfoque a todos los componentes del proyecto</p>
+  </div>
+  <div class="tags"><span class="tag">Process / Proceso</span><span class="tag tag-enfoque">Híbrido</span></div>
+</div>
+
+<div class="respuesta">
+  <div class="pregunta-id">PMP-06-004-MR-INT</div>
+  <div class="respuesta-correcta-badge">RESPUESTA CORRECTA &nbsp; <strong>A Y C</strong></div>
+  <div class="cuerpo">
+    <p>Un director de proyectos está evaluando el enfoque de entrega para un proyecto de desarrollo de política pública de vivienda en un gobierno provincial. El equipo técnico tiene experiencia en proyectos predictivos. Los requisitos de la política deben validarse con múltiples ministerios, y el alcance puede ajustarse según las prioridades del gobierno de turno. Además, los resultados deben entregarse en etapas para que el ministerio pueda implementar cada fase antes de que comience la siguiente.</p><p>¿Cuáles DOS factores del escenario sugieren específicamente que un enfoque puramente predictivo podría ser insuficiente?</p><p>Seleccione dos respuestas.</p><p class="opcion">A.  El alcance puede ajustarse según las prioridades del gobierno, lo que implica requisitos evolutivos.</p><p class="opcion">B.  El equipo tiene experiencia en proyectos predictivos, lo que facilita la planificación anticipada.</p><p class="opcion">C.  Los resultados deben entregarse en etapas para implementación incremental, lo que sugiere necesidad de cadencia de entrega múltiple o periódica.</p><p class="opcion">D.  La validación requiere múltiples ministerios, lo que aumenta los tiempos de aprobación pero no cambia el enfoque.</p><p>E.  El gobierno provincial siempre usa metodología predictiva, por lo que ese factor no es relevante.</p><p><strong>Respuesta correcta: </strong>A y C.</p><p><strong>Justificación:</strong></p><p>Los dos factores que sugieren que un enfoque puramente predictivo podría ser insuficiente son: (A) el alcance puede ajustarse según prioridades del gobierno, lo que implica requisitos evolutivos que no pueden planificarse completamente al inicio; y (C) los resultados deben entregarse en etapas para implementación incremental, lo que sugiere una cadencia de entrega múltiple o periódica incompatible con un único entregable al final del proyecto. Estos factores no impiden usar predictivo en partes del proyecto, pero sí justifican explorar un enfoque híbrido.</p><p><strong>Análisis de distractores:</strong></p><table class="tabla-meta"><thead><tr><th>Opción</th><th>Evaluación</th></tr></thead><tbody><tr><td>A</td><td>Correcta. Alcance ajustable según prioridades políticas = requisitos evolutivos. Un plan completamente cerrado al inicio no puede gestionar esa variabilidad.</td></tr><tr><td>B</td><td>Incorrecta. La experiencia del equipo en predictivo es un factor organizacional relevante para la selección de enfoque, pero en este caso habla a favor del predictivo, no en contra.</td></tr><tr><td>C</td><td>Correcta. Entregas en etapas para implementación incremental = cadencia de entrega múltiple o periódica. Eso es incompatible con un único entregable al final.</td></tr><tr><td>D</td><td>Incorrecta. La validación con múltiples ministerios aumenta la complejidad del proceso de aprobación, pero no es el factor principal que cuestiona el enfoque predictivo.</td></tr><tr><td>E</td><td>Incorrecta. La cultura organizacional es un factor de selección de enfoque, pero no impide considerar un enfoque diferente cuando las condiciones del proyecto lo requieren.</td></tr></tbody></table><p><strong>Etiquetas</strong></p><p class="opcion">- Dominio ECO: Process / Proceso · Business Environment / Entorno de negocio</p><p class="opcion">- Tarea ECO: Analizar los factores de contexto para seleccionar el enfoque de entrega</p><p class="opcion">- Dominio PMBOK 8: Governance Performance Domain · Scope Performance Domain</p><p class="opcion">- Principio PMBOK 8: Adopt a Holistic View</p><p class="opcion">- Enfoque: Híbrido</p><p class="opcion">- Dificultad: Intermedia</p><p class="opcion">- Tipo de ítem: MR — Respuesta múltiple</p><p class="opcion">- Competencia evaluada: Identificar factores que cuestionan un enfoque puramente predictivo</p><p class="opcion">- Error conceptual detectado: Confundir la experiencia del equipo con la adecuación del enfoque al contexto</p>
+  </div>
+  <div class="tags"><span class="tag">Process / Proceso · Business Environment / Entorno de negocio</span><span class="tag tag-enfoque">Híbrido</span></div>
+</div>
+
+<div class="respuesta">
+  <div class="pregunta-id">PMP-06-005-TAB-INT</div>
+  <div class="respuesta-correcta-badge">RESPUESTA CORRECTA &nbsp; <strong>A</strong></div>
+  <div class="cuerpo">
+    <p>Un comité de dirección de proyectos analiza cuatro proyectos de la cartera y debe asignar el enfoque de entrega más adecuado a cada uno. La siguiente tabla resume las características principales:</p><table class="tabla-meta"><thead><tr><th>Proyecto</th><th>Entregable</th><th>Requisitos</th><th>Restricción principal</th><th>Equipo</th></tr></thead><tbody><tr><td>A — Reglamentación interna</td><td>Documento normativo</td><td>Completamente definidos, aprobados por legal</td><td>Publicación regulatoria en fecha fija</td><td>Expertos legales, sin experiencia ágil</td></tr><tr><td>B — App de bienestar laboral</td><td>Aplicación móvil</td><td>Evolutivos; se definen con feedback de usuarios</td><td>Lanzamiento de versión beta en 3 meses</td><td>Equipo de desarrollo con experiencia ágil</td></tr><tr><td>C — Ampliación de planta</td><td>Obra civil</td><td>Totalmente definidos por ingeniería</td><td>Impacto alto de cambios tardíos</td><td>Contratistas especializados</td></tr><tr><td>D — Sistema de gestión de turnos</td><td>Software interno</td><td>Parcialmente definidos; los flujos se ajustan con RRHH</td><td>Integración con sistema de nómina (fija)</td><td>Equipo mixto: TI + RRHH</td></tr></tbody></table><p>¿Cuál asignación de enfoques es la más adecuada?</p><p class="opcion">A.  A-Predictivo, B-Ágil, C-Predictivo, D-Híbrido.</p><p class="opcion">B.  A-Ágil, B-Ágil, C-Predictivo, D-Híbrido.</p><p class="opcion">C.  A-Predictivo, B-Híbrido, C-Ágil, D-Predictivo.</p><p class="opcion">D.  A-Ágil, B-Predictivo, C-Híbrido, D-Ágil.</p><p><strong>Respuesta correcta: </strong>A.</p><p><strong>Justificación:</strong></p><p>La asignación correcta es: Proyecto A (documento normativo, requisitos cerrados, fecha fija, equipo sin experiencia ágil) → Predictivo. Proyecto B (app con requisitos evolutivos, feedback de usuarios, beta en 3 meses, equipo ágil) → Ágil. Proyecto C (obra civil, requisitos definidos por ingeniería, cambios costosos) → Predictivo. Proyecto D (sistema parcialmente definido que requiere ajuste con RRHH, pero con integración técnica fija) → Híbrido. El análisis aplica los tres factores de selección de enfoque: naturaleza del entregable, restricciones del proyecto y características de la organización/equipo.</p><p><strong>Análisis de distractores:</strong></p><table class="tabla-meta"><thead><tr><th>Opción</th><th>Evaluación</th></tr></thead><tbody><tr><td>A</td><td>Correcta. Aplica los tres factores de selección de enfoque en cada proyecto con precisión.</td></tr><tr><td>B</td><td>Incorrecta. Asigna ágil al Proyecto A, que tiene requisitos cerrados, fecha regulatoria fija y equipo sin experiencia ágil — tres factores que apuntan a predictivo.</td></tr><tr><td>C</td><td>Incorrecta. Asigna ágil al Proyecto C (obra civil con requisitos de ingeniería fijos) e híbrido al Proyecto B, que tiene todas las condiciones para ágil puro.</td></tr><tr><td>D</td><td>Incorrecta. Invierte los enfoques del A y B, y no reconoce la naturaleza híbrida del Proyecto D.</td></tr></tbody></table><p><strong>Etiquetas</strong></p><p class="opcion">- Dominio ECO: Process / Proceso</p><p class="opcion">- Tarea ECO: Asignar el enfoque de entrega según los factores del proyecto</p><p class="opcion">- Dominio PMBOK 8: Governance Performance Domain</p><p class="opcion">- Principio PMBOK 8: Adopt a Holistic View</p><p class="opcion">- Enfoque: Universal</p><p class="opcion">- Dificultad: Intermedia</p><p class="opcion">- Tipo de ítem: TAB — Tabla/gráfico</p><p class="opcion">- Competencia evaluada: Asignar enfoque de entrega a múltiples proyectos según factores de contexto</p><p class="opcion">- Error conceptual detectado: Seleccionar enfoque por sector o preferencia del equipo en lugar de por factores de contexto</p>
+  </div>
+  <div class="tags"><span class="tag">Process / Proceso</span><span class="tag tag-enfoque">Universal</span></div>
+</div>
+
+<div class="respuesta">
+  <div class="pregunta-id">PMP-06-006-SIT-INT</div>
+  <div class="respuesta-correcta-badge">RESPUESTA CORRECTA &nbsp; <strong>C</strong></div>
+  <div class="cuerpo">
+    <p>Una directora de proyectos trabaja en el desarrollo de un sistema de monitoreo ambiental para una autoridad regulatoria nacional. El entregable final es una plataforma tecnológica integrada que debe operar de forma continua. El cliente requiere que la plataforma se active módulo por módulo a medida que cada componente esté listo y probado. Los módulos son interdependientes, pero cada uno puede ponerse en producción de forma autónoma. ¿Qué cadencia de entrega es la más apropiada para este proyecto?</p><p class="opcion">A.  Cadencia única — toda la plataforma se entrega en un solo momento al final del proyecto.</p><p class="opcion">B.  Cadencia periódica — los módulos se entregan en intervalos de tiempo fijos (por ejemplo, cada 30 días), independientemente de su estado de completitud.</p><p class="opcion">C.  Cadencia múltiple — los módulos se entregan de forma secuencial a medida que cada uno está listo y probado, sin un intervalo de tiempo fijo.</p><p class="opcion">D.  Cadencia continua — la plataforma entra en producción de forma incremental en tiempo real, sin releases definidos.</p><p><strong>Respuesta correcta: </strong>C.</p><p><strong>Justificación:</strong></p><p>La cadencia múltiple es la que mejor describe la entrega de módulos de forma secuencial a medida que cada uno está listo y probado, sin un intervalo de tiempo fijo. A diferencia de la cadencia periódica (que responde a intervalos de tiempo fijos), la cadencia múltiple responde a la completitud del entregable. A diferencia de la continua (que es un flujo ininterrumpido sin releases definidos), la cadencia múltiple tiene puntos de entrega discretos. Cada módulo autónomo de la plataforma es un entregable en sí mismo.</p><p><strong>Análisis de distractores:</strong></p><table class="tabla-meta"><thead><tr><th>Opción</th><th>Evaluación</th></tr></thead><tbody><tr><td>A</td><td>Incorrecta. La cadencia única contradice el requisito del cliente de activar módulo por módulo. Implica riesgo alto: si algo falla al final, no hay nada en producción.</td></tr><tr><td>B</td><td>Incorrecta. La cadencia periódica entrega en intervalos de tiempo fijos. El escenario no describe intervalos fijos sino entrega según completitud de cada módulo.</td></tr><tr><td>C</td><td>Correcta. Cadencia múltiple: entregas secuenciales discretas según completitud del entregable, no según intervalo de tiempo.</td></tr><tr><td>D</td><td>Incorrecta. La cadencia continua es característica de sistemas con flujo ininterrumpido (por ejemplo, software con deployment continuo). No aplica a módulos discretos con pruebas de aceptación.</td></tr></tbody></table><p><strong>Etiquetas</strong></p><p class="opcion">- Dominio ECO: Process / Proceso</p><p class="opcion">- Tarea ECO: Definir la cadencia de entrega apropiada para el proyecto</p><p class="opcion">- Dominio PMBOK 8: Scope Performance Domain · Schedule Performance Domain</p><p class="opcion">- Principio PMBOK 8: Focus on Value</p><p class="opcion">- Enfoque: Híbrido</p><p class="opcion">- Dificultad: Intermedia</p><p class="opcion">- Tipo de ítem: SIT — Situacional</p><p class="opcion">- Competencia evaluada: Distinguir cadencias de entrega (única, múltiple, periódica, continua)</p><p class="opcion">- Error conceptual detectado: Confundir cadencia múltiple con periódica o con continua</p>
+  </div>
+  <div class="tags"><span class="tag">Process / Proceso</span><span class="tag tag-enfoque">Híbrido</span></div>
+</div>
+
+<div class="respuesta">
+  <div class="pregunta-id">PMP-06-007-SIT-AVZ</div>
+  <div class="respuesta-correcta-badge">RESPUESTA CORRECTA &nbsp; <strong>C</strong></div>
+  <div class="cuerpo">
+    <p>Un director de proyectos gestiona la transformación digital de una cadena de retail con presencia en cinco países de América Latina. El proyecto tiene cuatro componentes: (1) migración de datos al nuevo ERP — requisitos técnicos cerrados; (2) rediseño de la experiencia de cliente en tienda — iterativo, requiere testeo con usuarios reales; (3) capacitación de 1.200 vendedores — cronograma fijo por apertura de temporada; (4) integración con sistemas de proveedores — dependencias técnicas externas con fechas contractuales. En la reunión de apertura, el sponsor pregunta si el director puede gestionar los cuatro componentes con el mismo enfoque de entrega para simplificar el reporting. ¿Cuál es la respuesta más adecuada del director?</p><p class="opcion">A.  Sí, se puede gestionar todo con enfoque predictivo para tener mayor control y consistencia de reporting.</p><p class="opcion">B.  Sí, se puede usar ágil para todo porque el entorno de transformación digital requiere flexibilidad máxima.</p><p class="opcion">C.  No es posible gestionar los cuatro con el mismo enfoque sin comprometer la calidad del resultado. Cada componente tiene condiciones distintas que requieren un enfoque diferenciado, aunque el reporting integrado puede diseñarse de forma unificada.</p><p class="opcion">D.  No es posible gestionar el proyecto si hay más de dos enfoques distintos; lo correcto es dividirlo en cuatro proyectos independientes.</p><p><strong>Respuesta correcta: </strong>C.</p><p><strong>Justificación:</strong></p><p>El criterio correcto es que los cuatro componentes tienen condiciones distintas: (1) migración de datos → predictivo (requisitos cerrados); (2) rediseño de experiencia → ágil (iterativo con usuarios); (3) capacitación → predictivo con fecha fija (cronograma de temporada); (4) integración con proveedores → predictivo con dependencias contractuales externas. Forzar un solo enfoque para todos comprometería la calidad del resultado en al menos dos de los componentes. Lo que sí puede unificarse es el reporting ejecutivo: los indicadores de estado de cada componente pueden consolidarse en un dashboard común sin que eso implique gestionar todos con el mismo método.</p><p><strong>Análisis de distractores:</strong></p><table class="tabla-meta"><thead><tr><th>Opción</th><th>Evaluación</th></tr></thead><tbody><tr><td>A</td><td>Incorrecta. Predictivo para el componente de rediseño de experiencia de cliente ignoraría la necesidad de iteración y feedback con usuarios reales, generando un producto inadecuado.</td></tr><tr><td>B</td><td>Incorrecta. Ágil para la migración de datos y la integración con proveedores (con fechas contractuales externas) no es adecuado cuando los requisitos son cerrados y hay compromisos externos fijos.</td></tr><tr><td>C</td><td>Correcta. Cada componente requiere el enfoque apropiado a su naturaleza. El reporting puede unificarse sin imponer un método único.</td></tr><tr><td>D</td><td>Incorrecta. Gestionar múltiples enfoques dentro de un mismo programa o proyecto es una práctica estándar en híbrido. No requiere dividirlo en proyectos independientes.</td></tr></tbody></table><p><strong>Etiquetas</strong></p><p class="opcion">- Dominio ECO: Process / Proceso · Business Environment / Entorno de negocio</p><p class="opcion">- Tarea ECO: Aplicar tailoring de enfoque de entrega en proyectos con múltiples componentes</p><p class="opcion">- Dominio PMBOK 8: Governance Performance Domain</p><p class="opcion">- Principio PMBOK 8: Adopt a Holistic View · Be an Accountable Leader</p><p class="opcion">- Enfoque: Híbrido</p><p class="opcion">- Dificultad: Avanzada</p><p class="opcion">- Tipo de ítem: SIT — Situacional</p><p class="opcion">- Competencia evaluada: Diseñar estrategia de entrega diferenciada por componente y unificar reporting</p><p class="opcion">- Error conceptual detectado: Imponer un enfoque único para simplificar reporting a costa de la calidad del resultado</p>
+  </div>
+  <div class="tags"><span class="tag">Process / Proceso · Business Environment / Entorno de negocio</span><span class="tag tag-enfoque">Híbrido</span></div>
+</div>
+
+<div class="respuesta">
+  <div class="pregunta-id">PMP-06-008-SIT-BAS</div>
+  <div class="respuesta-correcta-badge">RESPUESTA CORRECTA &nbsp; <strong>A</strong></div>
+  <div class="cuerpo">
+    <p>Una directora de proyectos explica a un nuevo miembro del equipo la diferencia entre ciclo de vida del proyecto y enfoque de entrega. El nuevo integrante pregunta: '¿Cuál es la diferencia entre una fase secuencial y una fase superpuesta en el ciclo de vida?'. ¿Cuál es la mejor respuesta?</p><p class="opcion">A.  En un ciclo de vida con fases secuenciales, cada fase comienza cuando termina la anterior. En uno con fases superpuestas, una fase puede comenzar antes de que la anterior haya concluido, lo que permite reducir el tiempo total del proyecto.</p><p class="opcion">B.  Las fases secuenciales son exclusivas del enfoque predictivo y las fases superpuestas son exclusivas del enfoque ágil.</p><p class="opcion">C.  Las fases superpuestas implican que dos fases comparten el mismo equipo de trabajo al mismo tiempo, lo que genera conflictos de recursos.</p><p class="opcion">D.  En un ciclo de vida con fases superpuestas, el proyecto puede tener cualquier cantidad de fases; en uno secuencial, solo puede tener dos fases.</p><p><strong>Respuesta correcta: </strong>A.</p><p><strong>Justificación:</strong></p><p>Las fases secuenciales implican que cada fase comienza cuando la anterior ha concluido: se trabaja en una fase a la vez. Las fases superpuestas (también llamadas fast-tracking) permiten que una fase comience antes de que la anterior haya terminado: hay un solapamiento deliberado que reduce el plazo total a cambio de mayor riesgo de retrabajo. Ninguno de los dos tipos es exclusivo de un enfoque de entrega: pueden ocurrir en proyectos predictivos, ágiles o híbridos según el contexto.</p><p><strong>Análisis de distractores:</strong></p><table class="tabla-meta"><thead><tr><th>Opción</th><th>Evaluación</th></tr></thead><tbody><tr><td>A</td><td>Correcta. Define con precisión ambos tipos de fase y su implicancia en el plazo del proyecto.</td></tr><tr><td>B</td><td>Incorrecta. Ni las fases secuenciales son exclusivas del predictivo ni las superpuestas del ágil. Ambos tipos pueden ocurrir en cualquier enfoque.</td></tr><tr><td>C</td><td>Incorrecta. Las fases superpuestas no implican necesariamente compartir el mismo equipo ni generan conflictos por definición. El riesgo es de retrabajo si una fase previa entrega resultados que afectan a la que ya comenzó.</td></tr><tr><td>D</td><td>Incorrecta. La cantidad de fases no está determinada por si son secuenciales o superpuestas.</td></tr></tbody></table><p><strong>Etiquetas</strong></p><p class="opcion">- Dominio ECO: Process / Proceso</p><p class="opcion">- Tarea ECO: Comprender la estructura del ciclo de vida del proyecto</p><p class="opcion">- Dominio PMBOK 8: Schedule Performance Domain · Governance Performance Domain</p><p class="opcion">- Principio PMBOK 8: Adopt a Holistic View</p><p class="opcion">- Enfoque: Universal</p><p class="opcion">- Dificultad: Básica</p><p class="opcion">- Tipo de ítem: SIT — Situacional</p><p class="opcion">- Competencia evaluada: Distinguir fases secuenciales de fases superpuestas en el ciclo de vida</p><p class="opcion">- Error conceptual detectado: Asociar tipos de fase a enfoques de entrega específicos</p>
+  </div>
+  <div class="tags"><span class="tag">Process / Proceso</span><span class="tag tag-enfoque">Universal</span></div>
+</div>
+
+<div class="respuesta">
+  <div class="pregunta-id">PMP-06-009-SIT-AVZ</div>
+  <div class="respuesta-correcta-badge">RESPUESTA CORRECTA &nbsp; <strong>C</strong></div>
+  <div class="cuerpo">
+    <p>Un director de proyectos recibe la asignación de un proyecto de redesarrollo de un sistema de gestión de reclamos para una compañía de seguros. El jefe de proyecto anterior utilizó enfoque ágil porque la organización tiene un equipo de desarrollo con experiencia en Scrum. Sin embargo, el nuevo director nota que el área de compliance exige trazabilidad completa de cada cambio de requisito, que el sistema debe pasar por auditorías regulatorias antes de cada release y que los clientes externos esperan un sistema completamente funcional —no incrementos parciales. El sponsor le pide su recomendación de enfoque. ¿Cuál es la respuesta más adecuada?</p><p class="opcion">A.  Continuar con ágil porque el equipo ya tiene experiencia en Scrum y cambiar el enfoque generaría resistencia.</p><p class="opcion">B.  Cambiar a predictivo porque el compliance exige trazabilidad, las auditorías regulan los releases y los clientes esperan un sistema completo.</p><p class="opcion">C.  Adoptar un enfoque híbrido: mantener ciclos iterativos de desarrollo internos para aprovechar la experiencia del equipo, pero incorporar controles de compliance y auditorías regulatorias en los hitos de release.</p><p class="opcion">D.  Cambiar a predictivo solo para la fase de compliance y volver a ágil para las demás fases del proyecto.</p><p><strong>Respuesta correcta: </strong>C.</p><p><strong>Justificación:</strong></p><p>El enfoque híbrido es la respuesta más adecuada porque permite combinar lo mejor de ambos mundos: ciclos iterativos internos que aprovechan la experiencia del equipo en Scrum para desarrollar con rapidez y calidad, pero con controles de compliance, trazabilidad de cambios y auditorías regulatorias formales antes de cada release. Esto satisface los tres factores restrictivos (compliance, auditoría y expectativa de sistema completo) sin desperdiciar la capacidad instalada del equipo. La opción B (puramente predictivo) es válida pero no es la más adecuada dado que el equipo ya tiene capacidad ágil bien desarrollada.</p><p><strong>Análisis de distractores:</strong></p><table class="tabla-meta"><thead><tr><th>Opción</th><th>Evaluación</th></tr></thead><tbody><tr><td>A</td><td>Incorrecta. La experiencia del equipo en Scrum es un factor a considerar, pero no es suficiente para justificar un enfoque que no cumple con los requisitos de compliance y expectativa del cliente.</td></tr><tr><td>B</td><td>Parcialmente correcta. Predictivo resolvería el compliance, pero descartaría la capacidad instalada del equipo. El híbrido es más adecuado en este contexto.</td></tr><tr><td>C</td><td>Correcta. Híbrido bien justificado: desarrollo iterativo interno + controles formales de compliance y auditoría en releases. Aprovecha la fortaleza del equipo sin sacrificar los requisitos regulatorios.</td></tr><tr><td>D</td><td>Incorrecta. Cambiar de enfoque entre fases sin una razón de negocio clara genera confusión y no resuelve el problema estructural del compliance en todos los releases.</td></tr></tbody></table><p><strong>Etiquetas</strong></p><p class="opcion">- Dominio ECO: Process / Proceso · Business Environment / Entorno de negocio</p><p class="opcion">- Tarea ECO: Seleccionar el enfoque de entrega considerando restricciones regulatorias y capacidad del equipo</p><p class="opcion">- Dominio PMBOK 8: Governance Performance Domain · Scope Performance Domain</p><p class="opcion">- Principio PMBOK 8: Be an Accountable Leader · Adopt a Holistic View</p><p class="opcion">- Enfoque: Híbrido</p><p class="opcion">- Dificultad: Avanzada</p><p class="opcion">- Tipo de ítem: SIT — Situacional</p><p class="opcion">- Competencia evaluada: Diseñar enfoque híbrido ante restricciones regulatorias en un equipo con capacidad ágil</p><p class="opcion">- Error conceptual detectado: Mantener el enfoque anterior por inercia o comodidad del equipo</p>
+  </div>
+  <div class="tags"><span class="tag">Process / Proceso · Business Environment / Entorno de negocio</span><span class="tag tag-enfoque">Híbrido</span></div>
+</div>
+
+<div class="respuesta">
+  <div class="pregunta-id">PMP-06-010-CON-BAS</div>
+  <div class="respuesta-correcta-badge">RESPUESTA CORRECTA &nbsp; <strong>B</strong></div>
+  <div class="cuerpo">
+    <p>¿Cuáles son los tres factores principales que el PMBOK 8 y las guías de referencia del PMI recomiendan analizar para seleccionar el enfoque de entrega de un proyecto?</p><p class="opcion">A.  El presupuesto disponible, el plazo del proyecto y el tamaño del equipo.</p><p class="opcion">B.  La naturaleza del entregable, las características del proyecto y las capacidades de la organización.</p><p class="opcion">C.  La experiencia del director de proyectos, la tecnología disponible y las preferencias del sponsor.</p><p class="opcion">D.  El nivel de riesgo, el grado de innovación del entregable y la cultura del equipo.</p><p><strong>Respuesta correcta: </strong>B.</p><p><strong>Justificación:</strong></p><p>El PMBOK 8 y las guías del PMI identifican tres factores principales para seleccionar el enfoque de entrega: (1) La naturaleza del entregable — qué tipo de producto se desarrolla, qué tan definidos están los requisitos, qué regulaciones aplican; (2) Las características del proyecto — restricciones de tiempo, costo, riesgo, complejidad y número de interesados; (3) Las capacidades de la organización — experiencia del equipo, cultura organizacional, soporte de la PMO, herramientas disponibles. Estos tres factores permiten una selección informada del enfoque: predictivo, ágil o híbrido.</p><p><strong>Análisis de distractores:</strong></p><table class="tabla-meta"><thead><tr><th>Opción</th><th>Evaluación</th></tr></thead><tbody><tr><td>A</td><td>Incorrecta. Presupuesto, plazo y tamaño del equipo son restricciones del proyecto, no los tres factores estructurales de selección de enfoque.</td></tr><tr><td>B</td><td>Correcta. Los tres factores son: naturaleza del entregable, características del proyecto y capacidades de la organización.</td></tr><tr><td>C</td><td>Incorrecta. La experiencia del director, la tecnología y las preferencias del sponsor son consideraciones secundarias, no los factores principales de selección.</td></tr><tr><td>D</td><td>Incorrecta. El riesgo y la innovación son características importantes pero no los tres factores estructurales. La cultura del equipo es parte de las capacidades organizacionales, no un factor independiente.</td></tr></tbody></table><p><strong>Etiquetas</strong></p><p class="opcion">- Dominio ECO: Process / Proceso</p><p class="opcion">- Tarea ECO: Seleccionar el enfoque de entrega apropiado</p><p class="opcion">- Dominio PMBOK 8: Governance Performance Domain</p><p class="opcion">- Principio PMBOK 8: Adopt a Holistic View</p><p class="opcion">- Enfoque: Universal</p><p class="opcion">- Dificultad: Básica</p><p class="opcion">- Tipo de ítem: CON — Conceptual de alta confusión</p><p class="opcion">- Competencia evaluada: Identificar los tres factores de selección del enfoque de entrega</p><p class="opcion">- Error conceptual detectado: Confundir restricciones del proyecto con factores de selección de enfoque</p>
+  </div>
+  <div class="tags"><span class="tag">Process / Proceso</span><span class="tag tag-enfoque">Universal</span></div>
+</div>
+
+
+</div>
+
+<div class="footer-nav">
+  <a href="https://valeriayashan.com.ar/libro">← Volver a Publicaciones</a>
+  &nbsp;·&nbsp;
+  <a href="https://valeriayashan.com.ar">valeriayashan.com.ar</a>
+</div>
+
+</body>
+</html>
