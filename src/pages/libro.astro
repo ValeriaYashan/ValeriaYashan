@@ -14,19 +14,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <p class="page-lead">Escribo sobre gestión de proyectos, certificación PMP® y la intersección entre metodología y vida real.</p>
     </header>
 
-    <!-- PM MOM -->
-    <section class="libro-seccion">
-      <div class="libro-header">
-        <p class="libro-tag">Gestión de proyectos · Maternidad</p>
-        <h2>PM MOM</h2>
-        <p class="libro-subtitulo">El primer libro que aplica las herramientas reales de la gestión de proyectos a los primeros cinco años de la maternidad.</p>
-      </div>
-      <p class="libro-desc">La maternidad es el proyecto más importante de tu vida. PM Mom aplica el PMBOK® Guide Eighth Edition a los primeros cinco años de la maternidad — no porque la maternidad sea un proyecto corporativo, sino porque las mismas habilidades que te hacen eficaz en el trabajo también te hacen más serena y más presente como mamá. Con templates listos para usar y un glosario de 22 términos de PM aplicados a la maternidad real.</p>
-      <div class="libro-actions">
-        <a href="https://www.amazon.com/gp/product/B0H34V2L3S" target="_blank" rel="noopener noreferrer" class="btn btn-amazon">Comprar en Amazon →</a>
-      </div>
-    </section>
-
     <!-- SERIE -->
     <div class="serie-header">
       <div class="serie-badge">Serie completa · 3 volúmenes</div>
@@ -110,6 +97,19 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
     </section>
 
+    <!-- PM MOM -->
+    <section class="libro-seccion">
+      <div class="libro-header">
+        <p class="libro-tag">Gestión de proyectos · Maternidad</p>
+        <h2>PM MOM</h2>
+        <p class="libro-subtitulo">El primer libro que aplica las herramientas reales de la gestión de proyectos a los primeros cinco años de la maternidad.</p>
+      </div>
+      <p class="libro-desc">La maternidad es el proyecto más importante de tu vida. PM Mom aplica el PMBOK® Guide Eighth Edition a los primeros cinco años de la maternidad — no porque la maternidad sea un proyecto corporativo, sino porque las mismas habilidades que te hacen eficaz en el trabajo también te hacen más serena y más presente como mamá. Con templates listos para usar y un glosario de 22 términos de PM aplicados a la maternidad real.</p>
+      <div class="libro-actions">
+        <a href="https://www.amazon.com/gp/product/B0H34V2L3S" target="_blank" rel="noopener noreferrer" class="btn btn-amazon">Comprar en Amazon →</a>
+      </div>
+    </section>
+
     <!-- RECURSOS -->
     <section class="libros-recursos">
       <h2>Material complementario</h2>
@@ -147,7 +147,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     max-width: 520px;
   }
 
-  /* SERIE */
   .serie-header {
     background: var(--color-accent);
     border-radius: 12px;
@@ -186,7 +185,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     margin-bottom: 1.25rem;
   }
 
-  /* SECCIONES */
   .libro-seccion {
     margin-bottom: var(--space-xl);
     padding-bottom: var(--space-xl);
@@ -261,7 +259,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     margin-bottom: var(--space-sm);
   }
 
-  /* BOTONES */
   .btn {
     display: inline-block;
     font-family: 'Inter', sans-serif;
@@ -305,7 +302,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     border-left: 3px solid var(--color-border);
   }
 
-  /* FAQ */
   .libro-faq {
     margin-top: var(--space-lg);
   }
@@ -339,7 +335,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     margin-bottom: 0;
   }
 
-  /* RECURSOS */
   .libros-recursos {
     text-align: center;
     padding: 2.5rem;
