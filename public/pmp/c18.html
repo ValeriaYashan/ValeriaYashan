@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Cap. 18 — Respuestas · Dirección de Proyectos · Valeria Yashan</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #1a1a2e;
+  background: #ffffff;
+}
+
+/* ── Site header ── */
+.site-header {
+  border-bottom: 1px solid #e8eaf0;
+  padding: 0 24px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 10;
+}
+.site-header a.logo {
+  font-weight: 700;
+  font-size: 15px;
+  color: #1a1a2e;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+.site-header .back {
+  font-size: 13px;
+  color: #1F4E79;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.site-header .back:hover { text-decoration: underline; }
+
+/* ── Chapter hero ── */
+.chapter-hero {
+  background: linear-gradient(135deg, #1F4E79 0%, #2E6099 100%);
+  color: #fff;
+  padding: 40px 24px 36px;
+}
+.chapter-hero .eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin-bottom: 8px;
+}
+.chapter-hero h1 {
+  font-size: clamp(20px, 4vw, 28px);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+}
+.chapter-hero .meta {
+  font-size: 13px;
+  opacity: 0.75;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.chapter-hero .meta span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* ── Content wrapper ── */
+.content {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 20px 64px;
+}
+
+/* ── Question card ── */
+.q-block {
+  border-top: 1px solid #e8eaf0;
+  padding: 28px 0 4px;
+}
+.q-block:first-child { border-top: none; padding-top: 36px; }
+
+.q-id {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #2E6099;
+  margin-bottom: 6px;
+}
+
+.q-answer {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #EBF3FB;
+  border-left: 3px solid #1F4E79;
+  border-radius: 0 6px 6px 0;
+  padding: 8px 14px;
+  margin-bottom: 12px;
+}
+.q-answer .label { font-size: 11px; color: #2E6099; font-weight: 600; text-transform: uppercase; }
+.q-answer .value { font-size: 15px; font-weight: 700; color: #1F4E79; }
+
+.q-justification {
+  font-size: 14.5px;
+  color: #2c2c3e;
+  line-height: 1.65;
+  margin-bottom: 10px;
+}
+
+.q-distractors {
+  font-size: 13.5px;
+  color: #4a4a6a;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+.q-distractors strong { color: #1a1a2e; }
+
+.q-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+  margin-bottom: 8px;
+}
+.tag {
+  font-size: 11px;
+  background: #f4f6fb;
+  color: #4a4a6a;
+  border-radius: 4px;
+  padding: 3px 8px;
+  border: 1px solid #e2e6f0;
+}
+.tag.domain { background: #EBF3FB; color: #1F4E79; border-color: #BDD7EE; }
+.tag.approach { background: #f0f7f0; color: #2d6a2d; border-color: #b8ddb8; }
+
+/* ── CAS subquestion ── */
+.cas-block {
+  background: #fafbfd;
+  border: 1px solid #e2e6f0;
+  border-radius: 8px;
+  padding: 16px 18px;
+  margin-top: 12px;
+}
+.cas-block .cas-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #2E6099;
+  margin-bottom: 8px;
+}
+
+/* ── Site footer ── */
+.site-footer {
+  border-top: 1px solid #e8eaf0;
+  padding: 24px 20px;
+  text-align: center;
+  font-size: 12px;
+  color: #9090a8;
+  line-height: 1.8;
+}
+.site-footer a { color: #2E6099; text-decoration: none; }
+.site-footer a:hover { text-decoration: underline; }
+
+@media (max-width: 480px) {
+  .chapter-hero { padding: 28px 16px 24px; }
+  .content { padding: 0 16px 48px; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="logo" href="https://www.valeriayashan.com.ar">Valeria Yashan</a>
+  <div style="display:flex;gap:16px;align-items:center">
+    <a href="/pmp/c17" class="back">← Cap. 17</a> &nbsp; <a href="/pmp/c19" class="back">Cap. 19 →</a>
+  </div>
+</header>
+
+<div class="chapter-hero">
+  <div class="eyebrow">Dirección de Proyectos · Tomo II · Parte V — Entorno de negocio</div>
+  <h1>Capítulo 18. Gobernanza, PMO y toma de decisiones</h1>
+  <div class="meta">
+    <span>📋 25 ítems preguntas</span>
+    <span>🎯 Dominio ECO: Entorno de negocio · 26%</span>
+  </div>
+</div>
+
+<div class="content">
+<div class="q-block">
+<div class="q-id">PMP-18-001</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Cambio que supera el umbral del director: documentar la solicitud de cambio con análisis de impacto y elevarla al patrocinador.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Umbrales de autoridad y control de cambios</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-18-002</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">PMO de apoyo: provee plantillas y metodologías, baja autoridad. PMO de control: exige cumplimiento de estándares, autoridad regulatoria. PMO directiva: gestiona directamente los proyectos.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Tipos de PMO</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-18-003</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">C</span></div>
+<p class="q-justification">Reunirse con el patrocinador para clarificar roles y el proceso de comunicación con el equipo, y acordar cómo coordinar sus intervenciones.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Gestión de la relación director-patrocinador</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-18-004</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">C</span></div>
+<p class="q-justification">Documentar el análisis técnico que justifica la inviabilidad, proponer opciones (reducción de alcance / extensión de plazo / recursos adicionales) y presentarlo al director de la PMO para que lo escale al directorio.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Integridad ante restricciones no viables</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-18-005</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B, C y E</span></div>
+<p class="q-justification">Escalar cuando: B — sobrecosto supera umbral autorizado; C — cambio de alcance supera autoridad del director; E — riesgo con impacto potencial que supera la reserva de contingencia disponible.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Cuándo escalar — umbrales</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-18-006</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">C</span></div>
+<p class="q-justification">Go con condiciones: continuar la Fase 3 incorporando el módulo regulatorio con ajuste formal de presupuesto/cronograma, y hitos de control adicionales.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Decisión Go/Hold/Kill en compuerta</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-18-007</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Dos situaciones requieren escalamiento: el cambio de alcance (+3 meses) y el riesgo de cumplimiento legal.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Análisis de situaciones vs. umbrales de escalamiento</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-18-008</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Ante una auditoría, el director debe informar sobre los tres cambios no documentados con total transparencia, presentar la documentación disponible y proponer un plan de corrección.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Integridad en auditorías</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-18-009</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">2 → 4 → 5 → 1 → 3</span></div>
+<p class="q-justification">1. Confirmar que supera el umbral de autoridad → 2. Analizar el impacto → 3. Identificar opciones → 4. Presentar al patrocinador con análisis y recomendación → 5. Documentar la decisión y actualizar el plan.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Secuencia de escalamiento al patrocinador</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-18-010</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">C</span></div>
+<p class="q-justification">Reunirse con la PMO para entender sus necesidades de información y proponer un formato de reporte adaptado que satisfaga la gobernanza usando métricas ágiles equivalentes.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Ágil</span><span class="tag ">Adaptación de reportes ágiles a gobernanza PMO</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-18-011</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Presentar los datos reales al comité. Explicar previamente al patrocinador que presentar datos incorrectos compromete la gobernanza y la integridad profesional de ambos.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Integridad ante presión del patrocinador</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-18-012</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">1-B · 2-C · 3-D · 4-A</span></div>
+<p class="q-justification">Conflicto técnico de arquitectura (1) = director (B) · Cambio que supera umbral (2) = patrocinador (C) · Conflicto de recursos entre proyectos del portafolio (3) = PMO (D) · Go/No Go en compuerta (4) = comité directivo (A).</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Quién decide qué en la estructura de gobernanza</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-18-013</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">El director ya intentó resolver directamente sin resultado. Siguiente paso: escalar al patrocinador para que intervenga con autoridad ejecutiva.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Escalamiento de impedimento sistémico</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-18-014</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">C</span></div>
+<p class="q-justification">Go con condiciones: plan de mitigación del riesgo de suministro, revisión presupuestaria ajustada al tipo de cambio, y nueva revisión del caso de negocio al 60% del proyecto.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Go/Hold/Kill con múltiples señales</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-18-015</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">C</span></div>
+<p class="q-justification">En proyectos híbridos, trabajar con la PMO para definir umbrales que diferencien qué cambios requieren CCB de los cambios de refinamiento del backlog ágil.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Híbrido</span><span class="tag ">Gobernanza adaptada en proyectos híbridos</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-18-016</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Una observación de auditoría requiere respuesta: reconocer el hallazgo, identificar la causa raíz, documentar retroactivamente las lecciones disponibles e incorporar el proceso en las fases restantes.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Respuesta a hallazgos de auditoría</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-18-017</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Documentar el conflicto, intentar resolverlo directamente con el gerente de finanzas y, si no hay resultado, escalar al patrocinador para que coordine con el vicepresidente de finanzas.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Gestión de conflictos con interesados de alto nivel</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-18-018</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B y D</span></div>
+<p class="q-justification">Compuerta efectiva basada en datos: B — incluye estado del proyecto, vigencia del caso de negocio y contexto estratégico; D — datos objetivos sin omisiones políticas.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Características de compuertas efectivas</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-18-019</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Convocar a los tres interesados a un taller facilitado de alineación, identificar los intereses subyacentes y construir una solución integrada que el patrocinador pueda ratificar.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Facilitación de conflictos entre múltiples interesados</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-18-020</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Documentar el impacto estimado de la reasignación (6 semanas / $95.000) y presentar al director de la PMO para una decisión informada.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Gestión de reasignaciones y su impacto</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-18-021</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Ante auditoría de certificación UE: presentar toda la documentación disponible incluyendo los dos ajustes del log ágil, explicar el error de clasificación y proponer la documentación retroactiva correcta.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Transparencia en auditorías de cumplimiento</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-18-022</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">Situaciones 2 y 4</span></div>
+<p class="q-justification">Variación de costo +8%: dentro del umbral (±10%) → NO escalar. Solicitud que extiende 5 semanas: supera umbral (±2 semanas) → SÍ escalar. Retraso 1 semana en tarea no crítica: dentro del umbral → NO escalar. Posible incumplimiento normativa de datos: supera autoridad del director → SÍ escalar.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Análisis de umbrales de escalamiento</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-18-023</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">El rol del director de proyectos en una compuerta no es votar ni imponer una posición: es presentar la información del proyecto de forma objetiva, clarificar el impacto de cada opción con datos, facilitar la discusión y dejar que el comité —que tiene la autoridad— tome la decisión.</p>
+<p class="q-distractors"><strong>A.</strong> El director de proyectos no tiene autoridad de decisión en una compuerta de etapa. <strong>C.</strong> La lealtad al patrocinador no reemplaza la objetividad en la presentación de datos al comité. <strong>D.</strong> Posponer indefinidamente no es una opción válida; el comité tiene la autoridad para decidir aunque no haya consenso unánime.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Híbrido</span><span class="tag ">Rol del director de proyectos en compuertas de etapa</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-18-024</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Ante una investigación del ente contralor, el director de proyectos debe escalar de inmediato al patrocinador y al área legal del ministerio, cooperar plenamente con la investigación proporcionando toda la documentación disponible, y documentar las medidas correctivas para asegurar cumplimiento en las fases restantes. La transparencia y la cooperación son obligaciones profesionales y legales.</p>
+<p class="q-distractors"><strong>A.</strong> Minimizar la descripción del proceso en el informe es una violación de integridad que puede constituir obstrucción de una investigación oficial. <strong>C.</strong> La investigación no es una cuestión de quién dirigía el proyecto en la Fase 1; el director actual tiene responsabilidad de cooperar y asegurar el cumplimiento futuro. <strong>D.</strong> Suspender el proyecto sin base técnica ni legal durante una investigación agrava la situación sin resolver el incumplimiento.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Integridad ante investigación de ente contralor</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-18-025</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">Ver subpreguntas</span></div>
+<p class="q-justification">Caso integrado: Transformación de gobernanza de datos en grupo bancario, Perú. Directora: Camila Torres. CPI 0,89 · SPI 0,93. Bloqueo sistemático del CEO de Bolivia (miembro del comité directivo).</p>
+<div class="cas-block"><div class="cas-label">Pregunta 1</div>
+<div class="q-answer"><span class="label">Respuesta</span><span class="value">B</span></div>
+<p class="q-justification">Camila ya intentó tres veces resolver la situación directamente sin resultado — ese umbral de escalamiento ya fue superado. La acción correcta es escalar formalmente al patrocinador (CFO del grupo), documentando los tres intentos de resolución, el impacto del bloqueo en cronograma y costo, y solicitando su intervención. El CFO tiene autoridad ejecutiva sobre el CEO de Bolivia que el director de proyectos no tiene. <strong>A.</strong> Insistir en reuniones directas sin autoridad ejecutiva detrás no cambiará el resultado. <strong>C.</strong> Rediseñar el proyecto excluyendo a Bolivia requeriría aprobación formal del comité y cambiaría el alcance original. <strong>D.</strong> Saltarse al patrocinador para ir directamente al directorio viola la cadena de escalamiento.</p></div>
+<div class="cas-block"><div class="cas-label">Pregunta 2</div>
+<div class="q-answer"><span class="label">Respuesta</span><span class="value">B</span></div>
+<p class="q-justification">La solución correcta es proponer a la PMO un formato de reporte adaptado que incluya las métricas estándar para los componentes predictivos (CPI, SPI, variaciones) y métricas ágiles equivalentes para los componentes iterativos (velocity, burn-down, capacidad del sprint). Esto cumple el espíritu del requerimiento de gobernanza sin forzar al proyecto a renunciar a sus prácticas ágiles. <strong>A.</strong> Ignorar la observación de la PMO viola los acuerdos de gobernanza del proyecto. <strong>C.</strong> Convertir el componente ágil a predictivo solo para satisfacer el formato de reporte es desproporcionado y perjudica la metodología del proyecto. <strong>D.</strong> Solicitar una exención al patrocinador es innecesario si existe una solución de compromiso viable.</p></div>
+<div class="cas-block"><div class="cas-label">Pregunta 3</div>
+<div class="q-answer"><span class="label">Respuesta</span><span class="value">C</span></div>
+<p class="q-justification">La posición más profesional de Camila es presentar al comité una recomendación estructurada: Go con redefinición de alcance (excluir Bolivia temporalmente y establecer un plan de incorporación posterior), con ajuste formal de presupuesto y cronograma, y solicitar al comité que autorice al CFO a gestionar el bloqueo de Bolivia a nivel ejecutivo del grupo. Esta recomendación es objetiva, basada en datos, propone una solución accionable y respeta la autoridad del comité. <strong>A.</strong> Recomendar Kill descarta el valor real que el proyecto genera para tres subsidiarias. <strong>B.</strong> Un Go incondicional ignora el riesgo real del bloqueo y la variación en los índices de desempeño. <strong>D.</strong> Abstenerse de dar una recomendación es una omisión profesional: el director de proyectos tiene el deber de proveer su análisis y recomendación al comité.</p></div>
+</div>
+</div>
+
+<footer class="site-footer">
+  © 2026 Valeria Yashan. Todos los derechos reservados.<br>
+  «PMI», «PMP» y «PMBOK» son marcas registradas de Project Management Institute, Inc.<br>
+  Esta publicación es independiente y no está autorizada ni afiliada a PMI.<br>
+  <a href="https://www.valeriayashan.com.ar/libro">Volver al libro</a> &nbsp;·&nbsp;
+  <a href="https://www.valeriayashan.com.ar">valeriayashan.com.ar</a>
+</footer>
+
+</body>
+</html>

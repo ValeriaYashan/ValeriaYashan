@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Cap. 13 — Respuestas · Dirección de Proyectos · Valeria Yashan</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #1a1a2e;
+  background: #ffffff;
+}
+
+/* ── Site header ── */
+.site-header {
+  border-bottom: 1px solid #e8eaf0;
+  padding: 0 24px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 10;
+}
+.site-header a.logo {
+  font-weight: 700;
+  font-size: 15px;
+  color: #1a1a2e;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+.site-header .back {
+  font-size: 13px;
+  color: #1F4E79;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.site-header .back:hover { text-decoration: underline; }
+
+/* ── Chapter hero ── */
+.chapter-hero {
+  background: linear-gradient(135deg, #1F4E79 0%, #2E6099 100%);
+  color: #fff;
+  padding: 40px 24px 36px;
+}
+.chapter-hero .eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin-bottom: 8px;
+}
+.chapter-hero h1 {
+  font-size: clamp(20px, 4vw, 28px);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+}
+.chapter-hero .meta {
+  font-size: 13px;
+  opacity: 0.75;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.chapter-hero .meta span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* ── Content wrapper ── */
+.content {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 20px 64px;
+}
+
+/* ── Question card ── */
+.q-block {
+  border-top: 1px solid #e8eaf0;
+  padding: 28px 0 4px;
+}
+.q-block:first-child { border-top: none; padding-top: 36px; }
+
+.q-id {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #2E6099;
+  margin-bottom: 6px;
+}
+
+.q-answer {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #EBF3FB;
+  border-left: 3px solid #1F4E79;
+  border-radius: 0 6px 6px 0;
+  padding: 8px 14px;
+  margin-bottom: 12px;
+}
+.q-answer .label { font-size: 11px; color: #2E6099; font-weight: 600; text-transform: uppercase; }
+.q-answer .value { font-size: 15px; font-weight: 700; color: #1F4E79; }
+
+.q-justification {
+  font-size: 14.5px;
+  color: #2c2c3e;
+  line-height: 1.65;
+  margin-bottom: 10px;
+}
+
+.q-distractors {
+  font-size: 13.5px;
+  color: #4a4a6a;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+.q-distractors strong { color: #1a1a2e; }
+
+.q-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+  margin-bottom: 8px;
+}
+.tag {
+  font-size: 11px;
+  background: #f4f6fb;
+  color: #4a4a6a;
+  border-radius: 4px;
+  padding: 3px 8px;
+  border: 1px solid #e2e6f0;
+}
+.tag.domain { background: #EBF3FB; color: #1F4E79; border-color: #BDD7EE; }
+.tag.approach { background: #f0f7f0; color: #2d6a2d; border-color: #b8ddb8; }
+
+/* ── CAS subquestion ── */
+.cas-block {
+  background: #fafbfd;
+  border: 1px solid #e2e6f0;
+  border-radius: 8px;
+  padding: 16px 18px;
+  margin-top: 12px;
+}
+.cas-block .cas-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #2E6099;
+  margin-bottom: 8px;
+}
+
+/* ── Site footer ── */
+.site-footer {
+  border-top: 1px solid #e8eaf0;
+  padding: 24px 20px;
+  text-align: center;
+  font-size: 12px;
+  color: #9090a8;
+  line-height: 1.8;
+}
+.site-footer a { color: #2E6099; text-decoration: none; }
+.site-footer a:hover { text-decoration: underline; }
+
+@media (max-width: 480px) {
+  .chapter-hero { padding: 28px 16px 24px; }
+  .content { padding: 0 16px 48px; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="logo" href="https://www.valeriayashan.com.ar">Valeria Yashan</a>
+  <div style="display:flex;gap:16px;align-items:center">
+    <a href="/pmp/c14" class="back">Cap. 14 →</a>
+  </div>
+</header>
+
+<div class="chapter-hero">
+  <div class="eyebrow">Dirección de Proyectos · Tomo II · Parte IV — Proceso</div>
+  <h1>Capítulo 13. Costos, finanzas y valor</h1>
+  <div class="meta">
+    <span>📋 25 ítems preguntas</span>
+    <span>🎯 Dominio ECO: Proceso · 41%</span>
+  </div>
+</div>
+
+<div class="content">
+<div class="q-block">
+<div class="q-id">PMP-13-001</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">La variación del costo (CV = EV − AC = 78.000 − 95.000 = −17.000) responde directamente si el proyecto está sobre o bajo presupuesto. Un CV negativo indica sobrecosto. Es la primera métrica a calcular porque cuantifica la diferencia entre lo que debería haber costado el trabajo completado y lo que costó realmente.</p>
+<p class="q-distractors"><strong>A.</strong> El SPI mide desempeño de cronograma, no de costo. <strong>C.</strong> El EAC proyecta el costo final, pero primero hay que determinar el estado actual; eso lo da el CV. <strong>D.</strong> La SV mide atraso en cronograma, no desviación de presupuesto.</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Predictivo</span><span class="tag ">EVM · CV</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-13-002</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">C</span></div>
+<p class="q-justification">EAC con eficiencia actual = BAC / CPI. CPI = EV/AC = 200.000/240.000 = 0,833. EAC = 500.000 / 0,833 ≈ USD 600.000. Esta variante asume que la eficiencia observada se mantendrá.</p>
+<p class="q-distractors"><strong>A.</strong> El BAC no es una proyección; es el presupuesto original aprobado. <strong>B.</strong> El resultado numérico coincide pero el razonamiento de «sumar el sobrecosto actual» es incorrecto. <strong>D.</strong> EAC = AC + (BAC−EV) asume rendimiento planificado en el trabajo restante, no eficiencia actual.</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Predictivo</span><span class="tag ">EAM = BAC / CPI</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-13-003</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B y C</span></div>
+<p class="q-justification">En proyectos ágiles el EVM clásico no siempre aplica. Las métricas más relevantes son: valor entregado por sprint vs. costo por sprint (B), que muestra retorno sobre inversión sprint a sprint; y burn rate vs. presupuesto restante (C), que indica si el proyecto puede completarse dentro del presupuesto disponible.</p>
+<p class="q-distractors"><strong>A.</strong> El CPI clásico requiere una línea base de costos distribuida en el tiempo que en ágil puede no existir. <strong>D.</strong> La SV clásica requiere EV y PV de una línea base original. <strong>E.</strong> Los story points sin considerar costo no miden viabilidad financiera.</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Ágil</span><span class="tag ">Métricas financieras ágiles</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-13-004</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">TCPI = (BAC−EV)/(BAC−AC) = (2.800.000−1.540.000)/(2.800.000−1.820.000) = 1.260.000/980.000 ≈ 1,29. CPI actual = 0,846. Un TCPI mayor que el CPI actual indica que el equipo debe mejorar su eficiencia para cerrar en presupuesto.</p>
+<p class="q-distractors"><strong>A.</strong> TCPI = 0,83 implicaría margen, incompatible con CPI actual de 0,846. <strong>C.</strong> TCPI = 1,00 significaría que la eficiencia actual es suficiente — aritméticamente incorrecto. <strong>D.</strong> TCPI = 1,41 sobreestima el índice requerido.</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Predictivo</span><span class="tag ">TCPI</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-13-005</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Las reservas de gestión están fuera de la línea base de costos. Cubren riesgos desconocidos (unknown unknowns) y su uso requiere aprobación formal del nivel de gobernanza correspondiente.</p>
+<p class="q-distractors"><strong>A.</strong> Las reservas de gestión NO forman parte de la línea base. <strong>C.</strong> Las de contingencia cubren riesgos identificados; las de gestión cubren desconocidos. <strong>D.</strong> No existe fórmula estándar de PMBOK 8 para calcular reservas de gestión.</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Predictivo</span><span class="tag ">Reservas de gestión</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-13-006</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Módulo ágil: 210 SP / 42 SP/sprint = 5 sprints adicionales × USD 18.000 = USD 90.000. Componente predictivo: EAC = 350.000/0,91 ≈ USD 384.600. El director combina ambas proyecciones para un panorama financiero integrado.</p>
+<p class="q-distractors"><strong>A.</strong> Reportar solo el EAC predictivo omite la mitad del proyecto. <strong>C.</strong> Aplicar EVM clásico al componente ágil fuerza una metodología inadecuada. <strong>D.</strong> La proyección por velocidad es válida en ágil sin cambiar metodología.</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Híbrido</span><span class="tag ">Proyección financiera híbrida</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-13-007</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">CPI Mes 1 = 0,923 → Mes 2 = 0,836 → Mes 3 = 0,814. El CPI se deteriora progresivamente y EV < PV en todos los períodos. El proyecto está constantemente sobre presupuesto y atrasado.</p>
+<p class="q-distractors"><strong>A.</strong> El CPI disminuye de 0,923 a 0,814, no aumenta. <strong>C.</strong> AC > EV en todos los períodos (sobre presupuesto, no bajo). <strong>D.</strong> Existe tendencia clara y negativa.</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Predictivo</span><span class="tag ">Tendencias EVM</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-13-008</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">C</span></div>
+<p class="q-justification">Presupuesto restante = USD 84.000. Sprints adicionales = 18/6 = 3 sprints × USD 12.000 = USD 36.000. Como USD 36.000 < USD 84.000, el presupuesto cubre el backlog restante.</p>
+<p class="q-distractors"><strong>A.</strong> El presupuesto restante (USD 84.000) es más que suficiente para los USD 36.000 necesarios. <strong>B.</strong> Confunde presupuesto restante con costo de sprints. <strong>D.</strong> Con velocidad estable, la proyección es válida.</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Ágil</span><span class="tag ">Proyección presupuestaria ágil</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-13-009</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Las reservas de contingencia están incluidas dentro del BAC. Usarlas no lo modifica porque ya estaban contabilizadas para cubrir riesgos identificados.</p>
+<p class="q-distractors"><strong>A.</strong> Las reservas de contingencia ya están dentro del BAC. <strong>C.</strong> Su uso no requiere solicitud de cambio que modifique el BAC. <strong>D.</strong> El CPI no se ajusta automáticamente.</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Predictivo</span><span class="tag ">Reservas de contingencia</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-13-010</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">VAN positivo (proyecto A: USD 120.000) indica que los flujos futuros descontados superan la inversión. VAN negativo (proyecto B: −USD 45.000) destruye valor. La decisión correcta es ejecutar el proyecto A.</p>
+<p class="q-distractors"><strong>A.</strong> VAN negativo no indica menor riesgo; indica destrucción de valor. <strong>C.</strong> El costo de inversión no es el criterio cuando el VAN está disponible. <strong>D.</strong> VAN negativo no implica menor inversión.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">VAN / NPV</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-13-011</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">A</span></div>
+<p class="q-justification">Sprints adicionales = 180 SP / 36 SP/sprint = 5 sprints × USD 14.400 = USD 72.000.</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Ágil</span><span class="tag ">Estimación por velocidad</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-13-012</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">1-c · 2-d · 3-a · 4-b · 5-e</span></div>
+<p class="q-justification">CV = EV−AC (c) · CPI = EV/AC (d) · SV = EV−PV (a) · EAC = BAC/CPI (b) · TCPI = (BAC−EV)/(BAC−AC) (e).</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Predictivo</span><span class="tag ">Fórmulas EVM</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-13-013</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Ante CPI de 0,88, el primer paso es identificar la causa raíz antes de tomar acciones. Sin diagnóstico, las correcciones no atacan el problema real.</p>
+<p class="q-distractors"><strong>A.</strong> Las reservas de gestión cubren riesgos desconocidos, no ineficiencias. <strong>C.</strong> Reducir calidad sin informar al sponsor es violación ética. <strong>D.</strong> Aumentar ritmo sin cambios formales puede generar más costos.</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Predictivo</span><span class="tag ">Causa raíz ante variaciones</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-13-014</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B y C</span></div>
+<p class="q-justification">Según PMBOK 8 segunda impresión (errata): la estimación por tamaño relativo fue eliminada de la lista oficial. Las técnicas válidas son: análoga (B — rápida, menos precisa) y ascendente (C — mayor precisión, mayor esfuerzo).</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Predictivo</span><span class="tag ">Técnicas de estimación PMBOK 8</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-13-015</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">C</span></div>
+<p class="q-justification">El director tiene obligación ética de reportar el estado real. Ocultar la variación viola el Código de Ética de PMI. EAC ≈ USD 1.428.600.</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Predictivo</span><span class="tag ">Integridad en el reporte</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-13-016</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">ROI del sprint = (38.000 − 22.000) / 22.000 = 72,7%. El sprint generó retorno superior a su costo, justificando la continuidad.</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Ágil</span><span class="tag ">ROI por sprint</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-13-017</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">C</span></div>
+<p class="q-justification">TCPI ≈ 1,12. CPI actual = 0,833. El equipo debería mejorar su eficiencia ~35%, lo cual es muy difícil. Se recomienda revisar el BAC o reducir alcance.</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Predictivo</span><span class="tag ">TCPI y decisiones de gestión</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-13-018</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">C</span></div>
+<p class="q-justification">El equipo aplica una relación estadística (costo/SP) para proyectar el nuevo proyecto — esto es estimación paramétrica. La limitación: la relación puede no mantenerse si el contexto difiere.</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Ágil</span><span class="tag ">Estimación paramétrica en ágil</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-13-019</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">D</span></div>
+<p class="q-justification">CPI y SPI son métricas independientes. CPI = 0,79 indica ineficiencia de costo independiente del cronograma. Recuperar el cronograma no mejora el CPI automáticamente.</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Predictivo</span><span class="tag ">Independencia de CPI y SPI</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-13-020</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">C</span></div>
+<p class="q-justification">La decisión de continuar o cerrar se basa en si el valor futuro justifica el costo de completarlo, no en la inversión ya realizada (sunk cost fallacy).</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Ágil</span><span class="tag ">Cierre anticipado · Sunk cost</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-13-021</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Con datos históricos de proyectos similares y necesidad de estimación rápida, la técnica correcta es la estimación análoga.</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Predictivo</span><span class="tag ">Estimación análoga</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-13-022</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">A</span></div>
+<p class="q-justification">Antes de recomendar una opción al comité, el director debe evaluar si el EAC es confiable analizando la tendencia reciente del CPI (mejora o deterioro).</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Predictivo</span><span class="tag ">Fiabilidad del EAC</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-13-023</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">A → B → C → E → D</span></div>
+<p class="q-justification">1. Estimar costos (A) → 2. Definir reservas de contingencia (B) → 3. Consolidar línea base/curva S (C) → 4. Agregar reservas de gestión para obtener BAC (E) → 5. Aprobación formal (D).</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Predictivo</span><span class="tag ">Construcción de línea base de costos</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-13-024</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">EAC optimista = BAC (USD 1.800.000). EAC base = BAC/CPI ≈ USD 2.025.000. EAC pesimista = BAC/(CPI × SPI).</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Predictivo</span><span class="tag ">EAC por escenarios</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-13-025</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">Ver subpreguntas</span></div>
+<p class="q-justification">Caso integrado: Digitalización Registro Civil, Paraguay (proyecto híbrido).</p>
+<div class="cas-block"><div class="cas-label">25a</div>
+<div class="q-answer"><span class="label">Respuesta</span><span class="value">B</span></div>
+<p class="q-justification">CPI = 420.000/504.000 = 0,833. EAC = 1.200.000/0,833 ≈ USD 1.440.000.</p></div>
+<div class="cas-block"><div class="cas-label">25b</div>
+<div class="q-answer"><span class="label">Respuesta</span><span class="value">B</span></div>
+<p class="q-justification">190 SP / 38 SP/sprint = 5 sprints × USD 28.000 = USD 140.000 adicionales.</p></div>
+<div class="cas-block"><div class="cas-label">25c</div>
+<div class="q-answer"><span class="label">Respuesta</span><span class="value">B</span></div>
+<p class="q-justification">Costo total proyectado: 1.440.000 + 280.000 = USD 1.720.000 vs. presupuesto de USD 1.950.000. El proyecto puede estar dentro del presupuesto si el sobrecosto de infraestructura no se profundiza.</p></div>
+</div>
+</div>
+
+<footer class="site-footer">
+  © 2026 Valeria Yashan. Todos los derechos reservados.<br>
+  «PMI», «PMP» y «PMBOK» son marcas registradas de Project Management Institute, Inc.<br>
+  Esta publicación es independiente y no está autorizada ni afiliada a PMI.<br>
+  <a href="https://www.valeriayashan.com.ar/libro">Volver al libro</a> &nbsp;·&nbsp;
+  <a href="https://www.valeriayashan.com.ar">valeriayashan.com.ar</a>
+</footer>
+
+</body>
+</html>

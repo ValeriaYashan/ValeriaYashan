@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Cap. 14 — Respuestas · Dirección de Proyectos · Valeria Yashan</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #1a1a2e;
+  background: #ffffff;
+}
+
+/* ── Site header ── */
+.site-header {
+  border-bottom: 1px solid #e8eaf0;
+  padding: 0 24px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 10;
+}
+.site-header a.logo {
+  font-weight: 700;
+  font-size: 15px;
+  color: #1a1a2e;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+.site-header .back {
+  font-size: 13px;
+  color: #1F4E79;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.site-header .back:hover { text-decoration: underline; }
+
+/* ── Chapter hero ── */
+.chapter-hero {
+  background: linear-gradient(135deg, #1F4E79 0%, #2E6099 100%);
+  color: #fff;
+  padding: 40px 24px 36px;
+}
+.chapter-hero .eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin-bottom: 8px;
+}
+.chapter-hero h1 {
+  font-size: clamp(20px, 4vw, 28px);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+}
+.chapter-hero .meta {
+  font-size: 13px;
+  opacity: 0.75;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.chapter-hero .meta span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* ── Content wrapper ── */
+.content {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 20px 64px;
+}
+
+/* ── Question card ── */
+.q-block {
+  border-top: 1px solid #e8eaf0;
+  padding: 28px 0 4px;
+}
+.q-block:first-child { border-top: none; padding-top: 36px; }
+
+.q-id {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #2E6099;
+  margin-bottom: 6px;
+}
+
+.q-answer {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #EBF3FB;
+  border-left: 3px solid #1F4E79;
+  border-radius: 0 6px 6px 0;
+  padding: 8px 14px;
+  margin-bottom: 12px;
+}
+.q-answer .label { font-size: 11px; color: #2E6099; font-weight: 600; text-transform: uppercase; }
+.q-answer .value { font-size: 15px; font-weight: 700; color: #1F4E79; }
+
+.q-justification {
+  font-size: 14.5px;
+  color: #2c2c3e;
+  line-height: 1.65;
+  margin-bottom: 10px;
+}
+
+.q-distractors {
+  font-size: 13.5px;
+  color: #4a4a6a;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+.q-distractors strong { color: #1a1a2e; }
+
+.q-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+  margin-bottom: 8px;
+}
+.tag {
+  font-size: 11px;
+  background: #f4f6fb;
+  color: #4a4a6a;
+  border-radius: 4px;
+  padding: 3px 8px;
+  border: 1px solid #e2e6f0;
+}
+.tag.domain { background: #EBF3FB; color: #1F4E79; border-color: #BDD7EE; }
+.tag.approach { background: #f0f7f0; color: #2d6a2d; border-color: #b8ddb8; }
+
+/* ── CAS subquestion ── */
+.cas-block {
+  background: #fafbfd;
+  border: 1px solid #e2e6f0;
+  border-radius: 8px;
+  padding: 16px 18px;
+  margin-top: 12px;
+}
+.cas-block .cas-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #2E6099;
+  margin-bottom: 8px;
+}
+
+/* ── Site footer ── */
+.site-footer {
+  border-top: 1px solid #e8eaf0;
+  padding: 24px 20px;
+  text-align: center;
+  font-size: 12px;
+  color: #9090a8;
+  line-height: 1.8;
+}
+.site-footer a { color: #2E6099; text-decoration: none; }
+.site-footer a:hover { text-decoration: underline; }
+
+@media (max-width: 480px) {
+  .chapter-hero { padding: 28px 16px 24px; }
+  .content { padding: 0 16px 48px; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="logo" href="https://www.valeriayashan.com.ar">Valeria Yashan</a>
+  <div style="display:flex;gap:16px;align-items:center">
+    <a href="/pmp/c13" class="back">← Cap. 13</a> &nbsp; <a href="/pmp/c15" class="back">Cap. 15 →</a>
+  </div>
+</header>
+
+<div class="chapter-hero">
+  <div class="eyebrow">Dirección de Proyectos · Tomo II · Parte IV — Proceso</div>
+  <h1>Capítulo 14. Calidad, aceptación y mejora continua</h1>
+  <div class="meta">
+    <span>📋 25 ítems preguntas</span>
+    <span>🎯 Dominio ECO: Proceso · 41%</span>
+  </div>
+</div>
+
+<div class="content">
+<div class="q-block">
+<div class="q-id">PMP-14-001</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">La DoD interna del equipo no incluyó los criterios de aceptación funcionales del cliente, generando una brecha entre lo que el equipo considera «terminado» y lo que el cliente necesita. La solución es alinear ambos documentos.</p>
+<p class="q-distractors"><strong>A.</strong> La DoD no garantiza satisfacción del cliente si no incluye sus criterios. <strong>C.</strong> La DoD es un estándar del equipo, no se revisa caso por caso. <strong>D.</strong> El sponsor no debe resolver un problema de alineación DoD-criterios.</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Ágil</span><span class="tag ">DoD vs. criterios de aceptación</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-14-002</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">C</span></div>
+<p class="q-justification">Ante un defecto con causa desconocida, se debe usar el diagrama de Ishikawa para identificar las causas raíz (6M: máquina, método, material, mano de obra, medio, medición).</p>
+<p class="q-distractors"><strong>A.</strong> El gráfico de control monitorea variación, no identifica causa. <strong>B.</strong> Pareto prioriza categorías, pero el defecto ya es conocido. <strong>D.</strong> La lista de verificación registra cumplimiento de pasos, no identifica por qué falla.</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Predictivo</span><span class="tag ">Diagrama de Ishikawa</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-14-003</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B y C</span></div>
+<p class="q-justification">B: el quality management plan es componente del plan para la dirección del proyecto. C: según la segunda impresión del PMBOK 8 (errata), el quality management plan fue agregado como output de Plan Scope Management.</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Predictivo</span><span class="tag ">Errata PMBOK 8 — 2.ª impresión</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-14-004</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">El sistema cumplió las specs técnicas (verificación correcta) pero no satisface la necesidad completa del cliente — falla de validación.</p>
+<p class="q-distractors"><strong>A.</strong> No hubo falla de verificación. <strong>C.</strong> No es falla de QA (procesos). <strong>D.</strong> El QC detectó el cumplimiento técnico correctamente; la falla es de alcance/validación.</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Predictivo</span><span class="tag ">Verificación vs. validación</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-14-005</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">C</span></div>
+<p class="q-justification">Capacitación en calidad antes de la ejecución = inversión para prevenir defectos = costo de conformidad — prevención.</p>
+<p class="q-distractors"><strong>A/B.</strong> Los costos de no conformidad incluyen fallos internos/externos. <strong>D.</strong> La inspección es otro tipo de costo de conformidad; la capacitación preventiva es prevención.</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Predictivo</span><span class="tag ">Costos de calidad — prevención</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-14-006</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">En ágil, la DoD es un estándar vivo que evoluciona mediante retrospectivas. Actualizarla para incluir pruebas de integración es la acción correcta.</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Ágil</span><span class="tag ">Evolución de la DoD</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-14-007</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Principio de Pareto: «fugas en junta» (42%) + «deformación de cuerpo» (28%) = 70% de los defectos. Enfocar aquí maximiza el impacto.</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Predictivo</span><span class="tag ">Pareto — 80/20</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-14-008</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">El proceso no incluye un paso necesario → hallazgo de QA. Acción: corregir el proceso y gestionar documentos existentes mediante solicitud de cambio.</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Predictivo</span><span class="tag ">QA vs. QC</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-14-009</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Los límites de control (UCL/LCL) representan comportamiento estadístico normal (±3 sigma). Superarlos indica variación especial aunque el proceso esté dentro de specs regulatorias.</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Predictivo</span><span class="tag ">Límites de control vs. especificaciones</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-14-010</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">La ceremonia donde el equipo reflexiona sobre su proceso de trabajo es la Sprint Retrospective.</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Ágil</span><span class="tag ">Sprint Retrospective</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-14-011</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Tres acciones correctivas sin resultado duradero = el equipo ataca síntomas sin causa raíz. Se requiere análisis de causa raíz formal antes de nuevas acciones.</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Predictivo</span><span class="tag ">Causa raíz antes de acciones correctivas</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-14-012</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">1-C · 2-D · 3-A · 4-B</span></div>
+<p class="q-justification">QA(1) = mejora procesos(C) · QC(2) = inspecciona entregables(D) · Verificación(3) = cumple specs(A) · Validación(4) = satisface necesidad del cliente(B).</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Predictivo</span><span class="tag ">QA / QC / Verificación / Validación</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-14-013</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">La DoD del equipo ágil no incluye pruebas en el entorno de infraestructura real. Actualizarla para incluir pruebas de compatibilidad es la solución correcta.</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Híbrido</span><span class="tag ">DoD en proyectos híbridos</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-14-014</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B y D</span></div>
+<p class="q-justification">QA actúa sobre procesos: B — auditar proceso de revisión de código; D — evaluar si el proceso de pruebas de seguridad es adecuado.</p>
+<p class="q-distractors"><strong>A, C, E.</strong> Son actividades de QC (inspección de entregables individuales).</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Predictivo</span><span class="tag ">QA vs. QC — proceso vs. entregable</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-14-015</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">El puente aprobó inspección estructural (verificación) pero el ancho es 1,8m en lugar de los 2,2m especificados → falla de validación contra specs acordadas.</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Predictivo</span><span class="tag ">Verificación vs. validación</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-14-016</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Inversión en prevención → menos defectos desde el inicio → reduce el costo de no conformidad. Cada dólar en prevención ahorra múltiples dólares en corrección.</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Predictivo</span><span class="tag ">Costo de prevención</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-14-017</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">El módulo no refleja la lógica operativa real de triaje — validación con usuarios finales insuficiente. El proceso de validación debe revisarse antes de implementar en los hospitales restantes.</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Predictivo</span><span class="tag ">Validación con usuarios finales</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-14-018</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">La acumulación de bugs indica gestión ineficiente del backlog. El director debe trabajar con el Product Owner para repriorizar e incluir bugs de mayor impacto en el sprint actual.</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Ágil</span><span class="tag ">Deuda técnica en backlog ágil</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-14-019</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Las lecciones aprendidas tienen valor organizacional. Aunque el proyecto cerró, deben documentarse y contribuirse al repositorio organizacional para mejorar proyectos futuros.</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Predictivo</span><span class="tag ">Lecciones aprendidas — activo organizacional</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-14-020</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">C</span></div>
+<p class="q-justification">En proyectos híbridos, el director debe facilitar la creación de una definición compartida de «terminado» para los puntos de integración.</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Híbrido</span><span class="tag ">DoD en proyectos híbridos</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-14-021</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Kaizen propone mejoras pequeñas e incrementales de forma continua: menor resistencia al cambio y menor disrupción operativa.</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag "></span><span class="tag ">Kaizen</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-14-022</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Puntos consistentemente cercanos al UCL pero sin superarlo = patrón no aleatorio que requiere investigación (reglas Western Electric).</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Predictivo</span><span class="tag ">Gráfico de control — variación no aleatoria</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-14-023</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B → D → E → A → C</span></div>
+<p class="q-justification">1. Definir estándares y criterios (B) → 2. Desarrollar quality management plan (D) → 3. Auditorías de QA durante ejecución (E) → 4. Pruebas de QC sobre entregables (A) → 5. Lecciones aprendidas al cierre (C).</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Predictivo</span><span class="tag ">Secuencia de gestión de calidad</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-14-024</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Incompatibilidades detectadas durante pruebas antes de la entrega al cliente = costo de no conformidad — fallo interno.</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Predictivo</span><span class="tag ">Costo de no conformidad — fallo interno</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-14-025</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">Ver subpreguntas</span></div>
+<p class="q-justification">Caso integrado: Digitalización expedientes clínicos, Chile.</p>
+<div class="cas-block"><div class="cas-label">25a</div>
+<div class="q-answer"><span class="label">Respuesta</span><span class="value">B</span></div>
+<p class="q-justification">El lote 6 superó el límite de calidad (0,8% vs. 0,5% máximo). Primera acción: detener el avance al lote 7 hasta identificar la causa raíz.</p></div>
+<div class="cas-block"><div class="cas-label">25b</div>
+<div class="q-answer"><span class="label">Respuesta</span><span class="value">B</span></div>
+<p class="q-justification">Datos fuente incompletos en esa región: documentar como lección aprendida, notificar al Ministerio y gestionar solicitud de cambio para adaptar el proceso de esa región.</p></div>
+<div class="cas-block"><div class="cas-label">25c</div>
+<div class="q-answer"><span class="label">Respuesta</span><span class="value">B</span></div>
+<p class="q-justification">Documentar el cambio aprobado en el plan de gestión de calidad y el registro de cambios, aplicando el criterio diferenciado (1,2%) solo a los lotes de esa región.</p></div>
+</div>
+</div>
+
+<footer class="site-footer">
+  © 2026 Valeria Yashan. Todos los derechos reservados.<br>
+  «PMI», «PMP» y «PMBOK» son marcas registradas de Project Management Institute, Inc.<br>
+  Esta publicación es independiente y no está autorizada ni afiliada a PMI.<br>
+  <a href="https://www.valeriayashan.com.ar/libro">Volver al libro</a> &nbsp;·&nbsp;
+  <a href="https://www.valeriayashan.com.ar">valeriayashan.com.ar</a>
+</footer>
+
+</body>
+</html>

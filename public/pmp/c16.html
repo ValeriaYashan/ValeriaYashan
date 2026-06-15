@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Cap. 16 — Respuestas · Dirección de Proyectos · Valeria Yashan</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #1a1a2e;
+  background: #ffffff;
+}
+
+/* ── Site header ── */
+.site-header {
+  border-bottom: 1px solid #e8eaf0;
+  padding: 0 24px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 10;
+}
+.site-header a.logo {
+  font-weight: 700;
+  font-size: 15px;
+  color: #1a1a2e;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+.site-header .back {
+  font-size: 13px;
+  color: #1F4E79;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.site-header .back:hover { text-decoration: underline; }
+
+/* ── Chapter hero ── */
+.chapter-hero {
+  background: linear-gradient(135deg, #1F4E79 0%, #2E6099 100%);
+  color: #fff;
+  padding: 40px 24px 36px;
+}
+.chapter-hero .eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin-bottom: 8px;
+}
+.chapter-hero h1 {
+  font-size: clamp(20px, 4vw, 28px);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+}
+.chapter-hero .meta {
+  font-size: 13px;
+  opacity: 0.75;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.chapter-hero .meta span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* ── Content wrapper ── */
+.content {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 20px 64px;
+}
+
+/* ── Question card ── */
+.q-block {
+  border-top: 1px solid #e8eaf0;
+  padding: 28px 0 4px;
+}
+.q-block:first-child { border-top: none; padding-top: 36px; }
+
+.q-id {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #2E6099;
+  margin-bottom: 6px;
+}
+
+.q-answer {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #EBF3FB;
+  border-left: 3px solid #1F4E79;
+  border-radius: 0 6px 6px 0;
+  padding: 8px 14px;
+  margin-bottom: 12px;
+}
+.q-answer .label { font-size: 11px; color: #2E6099; font-weight: 600; text-transform: uppercase; }
+.q-answer .value { font-size: 15px; font-weight: 700; color: #1F4E79; }
+
+.q-justification {
+  font-size: 14.5px;
+  color: #2c2c3e;
+  line-height: 1.65;
+  margin-bottom: 10px;
+}
+
+.q-distractors {
+  font-size: 13.5px;
+  color: #4a4a6a;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+.q-distractors strong { color: #1a1a2e; }
+
+.q-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+  margin-bottom: 8px;
+}
+.tag {
+  font-size: 11px;
+  background: #f4f6fb;
+  color: #4a4a6a;
+  border-radius: 4px;
+  padding: 3px 8px;
+  border: 1px solid #e2e6f0;
+}
+.tag.domain { background: #EBF3FB; color: #1F4E79; border-color: #BDD7EE; }
+.tag.approach { background: #f0f7f0; color: #2d6a2d; border-color: #b8ddb8; }
+
+/* ── CAS subquestion ── */
+.cas-block {
+  background: #fafbfd;
+  border: 1px solid #e2e6f0;
+  border-radius: 8px;
+  padding: 16px 18px;
+  margin-top: 12px;
+}
+.cas-block .cas-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #2E6099;
+  margin-bottom: 8px;
+}
+
+/* ── Site footer ── */
+.site-footer {
+  border-top: 1px solid #e8eaf0;
+  padding: 24px 20px;
+  text-align: center;
+  font-size: 12px;
+  color: #9090a8;
+  line-height: 1.8;
+}
+.site-footer a { color: #2E6099; text-decoration: none; }
+.site-footer a:hover { text-decoration: underline; }
+
+@media (max-width: 480px) {
+  .chapter-hero { padding: 28px 16px 24px; }
+  .content { padding: 0 16px 48px; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="logo" href="https://www.valeriayashan.com.ar">Valeria Yashan</a>
+  <div style="display:flex;gap:16px;align-items:center">
+    <a href="/pmp/c15" class="back">← Cap. 15</a> &nbsp; <a href="/pmp/c17" class="back">Cap. 17 →</a>
+  </div>
+</header>
+
+<div class="chapter-hero">
+  <div class="eyebrow">Dirección de Proyectos · Tomo II · Parte IV — Proceso</div>
+  <h1>Capítulo 16. Recursos, adquisiciones y proveedores</h1>
+  <div class="meta">
+    <span>📋 13 ítems activos preguntas</span>
+    <span>🎯 Dominio ECO: Proceso · 41%</span>
+  </div>
+</div>
+
+<div class="content">
+<div class="q-block">
+<div class="q-id">PMP-16-001</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Con alcance no definido con precisión, el contrato correcto es Tiempo y Materiales. Un precio fijo cerrado requiere alcance bien definido.</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Predictivo</span><span class="tag ">Selección de tipo de contrato</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-16-002</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Primero clarificar los hechos: revisar qué se discutió en la reunión informal y, si los cambios fueron reales, formalizarlos con una enmienda contractual retroactiva.</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Predictivo</span><span class="tag ">Cambios contractuales no documentados</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-16-003</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">A y C</span></div>
+<p class="q-justification">Contrato de precio fijo es apropiado cuando: A — el alcance está definido en catálogo técnico cerrado; C — las cantidades están fijadas en el diseño aprobado.</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Predictivo</span><span class="tag ">Condiciones para precio fijo</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-16-004</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">A</span></div>
+<p class="q-justification">Ante facturas que crecieron 40% sin justificación técnica, el primer paso es solicitar una auditoría de las horas trabajadas con respaldo de registros de actividad y entregables.</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Predictivo</span><span class="tag ">Auditoría de contratos T&M</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-16-005</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">C</span></div>
+<p class="q-justification">Proveedor C tiene el puntaje ponderado total más alto (83,0 vs. 82,5 y 79,25). El criterio correcto en selección con tabla ponderada es el puntaje total.</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Predictivo</span><span class="tag ">Selección de proveedor por puntaje ponderado</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-16-006</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Evaluar técnicamente si la necesidad de seguridad adicional es real, verificar el impacto regulatorio, y si corresponde, gestionar la solicitud de cambio interna antes de formalizar la enmienda contractual.</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Predictivo</span><span class="tag ">Cambios contractuales con impacto regulatorio</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-16-007</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">2 → 5 → 3 → 1 → 4</span></div>
+<p class="q-justification">1. Definir criterios de selección y tipo de contrato → 2. Elaborar el SOW → 3. Emitir la RFP → 4. Recibir y evaluar propuestas → 5. Firmar el contrato y comunicar la adjudicación.</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Predictivo</span><span class="tag ">Secuencia del proceso de adquisición</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-16-008</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Primero revisar el contrato para determinar si la participación en demos estaba especificada. Si no lo estaba, acordar cómo documentar esa expectativa en el acuerdo de servicio.</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Ágil</span><span class="tag ">Expectativas contractuales en proyectos ágiles</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-16-009</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Rechazar la reunión informal, documentar ambas situaciones (solicitud de reunión + relación comercial de la gerencia) y reportarlas al área de gobernanza o compliance.</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Predictivo</span><span class="tag ">Ética en adquisiciones · conflicto de interés</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-16-010</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Sobreasignación que afecta dos proyectos con hitos contractuales: reunirse con el director del otro proyecto, evaluar prioridad estratégica y coordinar una solución que minimice el impacto global.</p>
+<div class="q-tags"><span class="tag domain">Proceso</span><span class="tag approach">Predictivo</span><span class="tag ">Recursos compartidos en múltiples proyectos</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-16-025</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">Ver subpreguntas</span></div>
+<p class="q-justification">Caso integrado: Proyecto con contratos múltiples.</p>
+<div class="cas-block"><div class="cas-label">25a</div>
+<div class="q-answer"><span class="label">Respuesta</span><span class="value">B</span></div>
+<p class="q-justification">Antes de aprobar el cambio de arquitectura (precio fijo), revisar el SOW para determinar si el requisito de alta disponibilidad estaba explícito o implícito. Si no lo estaba, iniciar proceso de control de cambios antes de formalizar la enmienda.</p></div>
+<div class="cas-block"><div class="cas-label">25b</div>
+<div class="q-answer"><span class="label">Respuesta</span><span class="value">B</span></div>
+<p class="q-justification">82% del techo con 60% completado: analizar la causa del consumo acelerado con el proveedor, revisar si el alcance se amplió informalmente, y gestionar cambio de presupuesto o renegociación.</p></div>
+<div class="cas-block"><div class="cas-label">25c</div>
+<div class="q-answer"><span class="label">Respuesta</span><span class="value">C</span></div>
+<p class="q-justification">Trabajo adicional no previsto en plan: evaluar impacto en cronograma y presupuesto, verificar si las vulnerabilidades justifican el trabajo y gestionar la solicitud de cambio si corresponde.</p></div>
+</div>
+</div>
+
+<footer class="site-footer">
+  © 2026 Valeria Yashan. Todos los derechos reservados.<br>
+  «PMI», «PMP» y «PMBOK» son marcas registradas de Project Management Institute, Inc.<br>
+  Esta publicación es independiente y no está autorizada ni afiliada a PMI.<br>
+  <a href="https://www.valeriayashan.com.ar/libro">Volver al libro</a> &nbsp;·&nbsp;
+  <a href="https://www.valeriayashan.com.ar">valeriayashan.com.ar</a>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Cap. 17 — Respuestas · Dirección de Proyectos · Valeria Yashan</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #1a1a2e;
+  background: #ffffff;
+}
+
+/* ── Site header ── */
+.site-header {
+  border-bottom: 1px solid #e8eaf0;
+  padding: 0 24px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 10;
+}
+.site-header a.logo {
+  font-weight: 700;
+  font-size: 15px;
+  color: #1a1a2e;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+.site-header .back {
+  font-size: 13px;
+  color: #1F4E79;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.site-header .back:hover { text-decoration: underline; }
+
+/* ── Chapter hero ── */
+.chapter-hero {
+  background: linear-gradient(135deg, #1F4E79 0%, #2E6099 100%);
+  color: #fff;
+  padding: 40px 24px 36px;
+}
+.chapter-hero .eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin-bottom: 8px;
+}
+.chapter-hero h1 {
+  font-size: clamp(20px, 4vw, 28px);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+}
+.chapter-hero .meta {
+  font-size: 13px;
+  opacity: 0.75;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.chapter-hero .meta span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* ── Content wrapper ── */
+.content {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 20px 64px;
+}
+
+/* ── Question card ── */
+.q-block {
+  border-top: 1px solid #e8eaf0;
+  padding: 28px 0 4px;
+}
+.q-block:first-child { border-top: none; padding-top: 36px; }
+
+.q-id {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #2E6099;
+  margin-bottom: 6px;
+}
+
+.q-answer {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #EBF3FB;
+  border-left: 3px solid #1F4E79;
+  border-radius: 0 6px 6px 0;
+  padding: 8px 14px;
+  margin-bottom: 12px;
+}
+.q-answer .label { font-size: 11px; color: #2E6099; font-weight: 600; text-transform: uppercase; }
+.q-answer .value { font-size: 15px; font-weight: 700; color: #1F4E79; }
+
+.q-justification {
+  font-size: 14.5px;
+  color: #2c2c3e;
+  line-height: 1.65;
+  margin-bottom: 10px;
+}
+
+.q-distractors {
+  font-size: 13.5px;
+  color: #4a4a6a;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+.q-distractors strong { color: #1a1a2e; }
+
+.q-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+  margin-bottom: 8px;
+}
+.tag {
+  font-size: 11px;
+  background: #f4f6fb;
+  color: #4a4a6a;
+  border-radius: 4px;
+  padding: 3px 8px;
+  border: 1px solid #e2e6f0;
+}
+.tag.domain { background: #EBF3FB; color: #1F4E79; border-color: #BDD7EE; }
+.tag.approach { background: #f0f7f0; color: #2d6a2d; border-color: #b8ddb8; }
+
+/* ── CAS subquestion ── */
+.cas-block {
+  background: #fafbfd;
+  border: 1px solid #e2e6f0;
+  border-radius: 8px;
+  padding: 16px 18px;
+  margin-top: 12px;
+}
+.cas-block .cas-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #2E6099;
+  margin-bottom: 8px;
+}
+
+/* ── Site footer ── */
+.site-footer {
+  border-top: 1px solid #e8eaf0;
+  padding: 24px 20px;
+  text-align: center;
+  font-size: 12px;
+  color: #9090a8;
+  line-height: 1.8;
+}
+.site-footer a { color: #2E6099; text-decoration: none; }
+.site-footer a:hover { text-decoration: underline; }
+
+@media (max-width: 480px) {
+  .chapter-hero { padding: 28px 16px 24px; }
+  .content { padding: 0 16px 48px; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="logo" href="https://www.valeriayashan.com.ar">Valeria Yashan</a>
+  <div style="display:flex;gap:16px;align-items:center">
+    <a href="/pmp/c16" class="back">← Cap. 16</a> &nbsp; <a href="/pmp/c18" class="back">Cap. 18 →</a>
+  </div>
+</header>
+
+<div class="chapter-hero">
+  <div class="eyebrow">Dirección de Proyectos · Tomo II · Parte V — Entorno de negocio</div>
+  <h1>Capítulo 17. Entorno de negocio y alineación estratégica</h1>
+  <div class="meta">
+    <span>📋 25 ítems preguntas</span>
+    <span>🎯 Dominio ECO: Entorno de negocio · 26%</span>
+  </div>
+</div>
+
+<div class="content">
+<div class="q-block">
+<div class="q-id">PMP-17-001</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Cambio regulatorio → evaluar impacto en alcance, cronograma y presupuesto antes de actuar. Luego presentar opciones al patrocinador.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Cambio regulatorio — evaluación de impacto</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-17-002</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">El proyecto cumple líneas base, pero el caso de negocio se deterioró (beneficio cae a la mitad). El director debe documentar la variación y escalar al patrocinador para que evalúe la continuidad.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Monitoreo del caso de negocio</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-17-003</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Programa: agrupa proyectos con dependencias o beneficios compartidos. Portafolio: agrupa programas y proyectos con criterio estratégico, sin requerir relación técnica entre ellos.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Proyecto vs. programa vs. portafolio</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-17-004</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">C</span></div>
+<p class="q-justification">Criterio de mayor peso en priorización de portafolio: alineación estratégica con los objetivos organizacionales y el valor diferencial que cada proyecto genera.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Priorización de portafolio</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-17-005</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B, C y E</span></div>
+<p class="q-justification">Señales de pérdida de justificación de negocio: B — mercado objetivo se redujo drásticamente; C — nuevo patrocinador no reconoce prioridad; E — existe solución alternativa con 60% menos de inversión.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Pérdida de justificación de negocio</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-17-006</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Requisito regulatorio con plazo de 90 días: agregar al backlog, evaluar en refinamiento, planificar en el sprint más cercano posible, documentar riesgo de incumplimiento si el plazo es ajustado.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Ágil</span><span class="tag ">Requisitos regulatorios en proyectos ágiles</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-17-007</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">C</span></div>
+<p class="q-justification">Delta tiene alineación estratégica baja y riesgo muy alto. A pesar del ROI del 41%, es el candidato para deprioritizar en el portafolio.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Criterios de priorización de portafolio</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-17-008</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Reducir pruebas puede comprometer la confiabilidad del sistema y el beneficio primario. El director debe evaluar ese riesgo y presentarlo al patrocinador.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Protección de realización de beneficios</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-17-009</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">2 → 4 → 1 → 5 → 3</span></div>
+<p class="q-justification">1. Identificar el cambio regulatorio y su fecha de vigencia → 2. Evaluar impacto → 3. Presentar opciones al patrocinador → 4. Obtener aprobación formal → 5. Actualizar el plan.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Secuencia ante cambio regulatorio</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-17-010</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">C</span></div>
+<p class="q-justification">Beneficio reducido de $4,2M a $1,8M anuales; costo a completar $2,1M. Documentar el análisis de viabilidad actualizado y presentarlo al patrocinador y comité directivo. El sunk cost no es argumento para continuar.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Cierre anticipado · Sunk cost</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-17-011</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Caso de negocio de 14 meses con tres cambios regulatorios no incorporados. El director debe evaluar el impacto antes de iniciar la planificación detallada.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Vigencia del caso de negocio</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-17-012</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">1-B · 2-D · 3-C · 4-A</span></div>
+<p class="q-justification">Caso de negocio (1) = justifica inversión (B) · Plan de beneficios (2) = cómo se medirá el valor post-cierre (D) · Score estratégico (3) = modelo para priorizar (C) · Compuerta (4) = punto de decisión Go/Kill (A).</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Documentos de gestión de valor</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-17-013</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Presentar al comité directivo un análisis objetivo que incluya la pérdida de alineación estratégica y dejar que el comité tome la decisión de continuidad.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Rol del director ante pérdida de alineación</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-17-014</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">En un programa, el director analiza la cadena de dependencias y coordina una respuesta integrada que evalúe opciones de compresión, replanificación o ajuste de alcance.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Gestión de dependencias en programas</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-17-015</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Convocar de inmediato a los stakeholders relevantes para evaluar opciones: financiamiento alternativo, reducción de alcance, priorización de entregables o cierre ordenado.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Crisis de financiamiento — opciones</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-17-016</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">El director debe asegurarse de que el proyecto genere las condiciones técnicas y operativas necesarias para que el beneficio pueda materializarse, y documentar variaciones que lo amenacen.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Plan de gestión de beneficios en ejecución</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-17-017</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">El componente de integración planificado ya no será necesario. El director debe evaluar el impacto, revisar el caso de negocio y presentar opciones al patrocinador.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Respuesta a cambios del entorno</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-17-018</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B y D</span></div>
+<p class="q-justification">B: documentar objetivamente la pérdida de alineación y escalar al patrocinador. D: proponer una revisión formal del caso de negocio actualizado.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Comportamiento ante pérdida de alineación</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-17-019</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Priorización correcta: 1.º Residencial Norte (penalidades por retraso) → 2.º Galpão Industrial (cliente estratégico clave) → luego 2 y 4 según compromisos contractuales.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Priorización de portafolio ante restricción de caja</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-17-020</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Nueva ley de subsidios que modifica la estructura tarifaria puede alterar el modelo financiero del caso de negocio (ROI a 7 años). Evaluar impacto y presentar al patrocinador antes de la planificación detallada.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Impacto regulatorio en el caso de negocio</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-17-021</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">El comité pidió opciones. Presentar tres opciones con análisis de impacto: (1) continuar y acelerar con inversión adicional, (2) MVP en menor tiempo, (3) cancelación y reasignación de recursos.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Presentación de opciones ante cambio de mercado</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-17-022</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">Nivel 3</span></div>
+<p class="q-justification">La decisión de cancelar un proyecto por pérdida de alineación estratégica corresponde al patrocinador / comité directivo.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Autoridad de cancelación de proyectos</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-17-023</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">C</span></div>
+<p class="q-justification">Antes de analizar factibilidad técnica, el director debe analizar si la estrategia de aceleración del sponsor es la respuesta más adecuada al cambio del entorno, o si existen otras opciones.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Análisis estratégico antes de respuesta táctica</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-17-024</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">VPN pasa a negativo. El director debe presentar al comité directivo el análisis actualizado con las opciones: continuar con nueva justificación, reducir alcance o cancelar.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Transparencia ante deterioro del caso de negocio</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-17-025</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">Ver subpreguntas</span></div>
+<p class="q-justification">Caso integrado: Transformación digital portuaria, Uruguay.</p>
+<div class="cas-block"><div class="cas-label">Pregunta 1</div>
+<div class="q-answer"><span class="label">Respuesta</span><span class="value">B</span></div>
+<p class="q-justification">Proveedor de sensores quebró: evaluar proveedores alternativos, analizar impacto en cronograma y presupuesto, presentar opciones al patrocinador considerando la restricción de 8 meses para la norma ministerial.</p></div>
+<div class="cas-block"><div class="cas-label">Pregunta 2</div>
+<div class="q-answer"><span class="label">Respuesta</span><span class="value">B</span></div>
+<p class="q-justification">Rodrigo debe evaluar si el proyecto, con los ajustes necesarios, sigue siendo la mejor forma de cumplir la nueva meta estratégica, o si existen opciones más rápidas o económicas. No confirmar ni desestimar sin evaluación.</p></div>
+</div>
+</div>
+
+<footer class="site-footer">
+  © 2026 Valeria Yashan. Todos los derechos reservados.<br>
+  «PMI», «PMP» y «PMBOK» son marcas registradas de Project Management Institute, Inc.<br>
+  Esta publicación es independiente y no está autorizada ni afiliada a PMI.<br>
+  <a href="https://www.valeriayashan.com.ar/libro">Volver al libro</a> &nbsp;·&nbsp;
+  <a href="https://www.valeriayashan.com.ar">valeriayashan.com.ar</a>
+</footer>
+
+</body>
+</html>

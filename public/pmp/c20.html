@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Cap. 20 — Respuestas · Dirección de Proyectos · Valeria Yashan</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #1a1a2e;
+  background: #ffffff;
+}
+
+/* ── Site header ── */
+.site-header {
+  border-bottom: 1px solid #e8eaf0;
+  padding: 0 24px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 10;
+}
+.site-header a.logo {
+  font-weight: 700;
+  font-size: 15px;
+  color: #1a1a2e;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+.site-header .back {
+  font-size: 13px;
+  color: #1F4E79;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.site-header .back:hover { text-decoration: underline; }
+
+/* ── Chapter hero ── */
+.chapter-hero {
+  background: linear-gradient(135deg, #1F4E79 0%, #2E6099 100%);
+  color: #fff;
+  padding: 40px 24px 36px;
+}
+.chapter-hero .eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin-bottom: 8px;
+}
+.chapter-hero h1 {
+  font-size: clamp(20px, 4vw, 28px);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+}
+.chapter-hero .meta {
+  font-size: 13px;
+  opacity: 0.75;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.chapter-hero .meta span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* ── Content wrapper ── */
+.content {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 20px 64px;
+}
+
+/* ── Question card ── */
+.q-block {
+  border-top: 1px solid #e8eaf0;
+  padding: 28px 0 4px;
+}
+.q-block:first-child { border-top: none; padding-top: 36px; }
+
+.q-id {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #2E6099;
+  margin-bottom: 6px;
+}
+
+.q-answer {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #EBF3FB;
+  border-left: 3px solid #1F4E79;
+  border-radius: 0 6px 6px 0;
+  padding: 8px 14px;
+  margin-bottom: 12px;
+}
+.q-answer .label { font-size: 11px; color: #2E6099; font-weight: 600; text-transform: uppercase; }
+.q-answer .value { font-size: 15px; font-weight: 700; color: #1F4E79; }
+
+.q-justification {
+  font-size: 14.5px;
+  color: #2c2c3e;
+  line-height: 1.65;
+  margin-bottom: 10px;
+}
+
+.q-distractors {
+  font-size: 13.5px;
+  color: #4a4a6a;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+.q-distractors strong { color: #1a1a2e; }
+
+.q-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+  margin-bottom: 8px;
+}
+.tag {
+  font-size: 11px;
+  background: #f4f6fb;
+  color: #4a4a6a;
+  border-radius: 4px;
+  padding: 3px 8px;
+  border: 1px solid #e2e6f0;
+}
+.tag.domain { background: #EBF3FB; color: #1F4E79; border-color: #BDD7EE; }
+.tag.approach { background: #f0f7f0; color: #2d6a2d; border-color: #b8ddb8; }
+
+/* ── CAS subquestion ── */
+.cas-block {
+  background: #fafbfd;
+  border: 1px solid #e2e6f0;
+  border-radius: 8px;
+  padding: 16px 18px;
+  margin-top: 12px;
+}
+.cas-block .cas-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #2E6099;
+  margin-bottom: 8px;
+}
+
+/* ── Site footer ── */
+.site-footer {
+  border-top: 1px solid #e8eaf0;
+  padding: 24px 20px;
+  text-align: center;
+  font-size: 12px;
+  color: #9090a8;
+  line-height: 1.8;
+}
+.site-footer a { color: #2E6099; text-decoration: none; }
+.site-footer a:hover { text-decoration: underline; }
+
+@media (max-width: 480px) {
+  .chapter-hero { padding: 28px 16px 24px; }
+  .content { padding: 0 16px 48px; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="logo" href="https://www.valeriayashan.com.ar">Valeria Yashan</a>
+  <div style="display:flex;gap:16px;align-items:center">
+    <a href="/pmp/c19" class="back">← Cap. 19</a>
+  </div>
+</header>
+
+<div class="chapter-hero">
+  <div class="eyebrow">Dirección de Proyectos · Tomo II · Parte V — Entorno de negocio</div>
+  <h1>Capítulo 20. Sostenibilidad y responsabilidad profesional</h1>
+  <div class="meta">
+    <span>📋 25 ítems preguntas</span>
+    <span>🎯 Dominio ECO: Entorno de negocio · 26%</span>
+  </div>
+</div>
+
+<div class="content">
+<div class="q-block">
+<div class="q-id">PMP-20-001</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Las comunidades afectadas son interesados legítimos aunque no sean clientes. Identificarlos formalmente, evaluar el impacto real, implementar medidas de mitigación y comunicar proactivamente.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Interesados afectados · sostenibilidad social</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-20-002</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">El PMBOK 8 eleva la sostenibilidad a principio central explícito: uno de los seis principios refinados exige integrarla en todas las áreas del proyecto.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag "></span><span class="tag ">Sostenibilidad en PMBOK 8 — principio transversal</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-20-003</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">C</span></div>
+<p class="q-justification">Documentar el análisis completo incluyendo el riesgo reputacional, regulatorio y social de las sanciones laborales del Proveedor A, y presentar al patrocinador ambas opciones con sus trade-offs.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Trade-off costo vs. responsabilidad social</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-20-004</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Iniciar obras sin completar la consulta previa viola la legislación federal y puede resultar en suspensión judicial del proyecto, agravando el retraso actual.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Consulta previa a comunidades indígenas</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-20-005</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">A, C y D</span></div>
+<p class="q-justification">A — criterios ambientales y sociales en evaluación de proveedores desde la planificación. C — comunidades aguas abajo como interesados del proyecto. D — indicadores de impacto ambiental en el sistema de monitoreo junto con costo y cronograma.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Integración práctica de sostenibilidad</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-20-006</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Aplicar los mismos estándares de mitigación en todos los barrios, independientemente del nivel socioeconómico. Aplicar estándares diferenciados por zona constituye una práctica discriminatoria.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Equidad · aplicación uniforme de estándares</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-20-007</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B (dos acciones inconsistentes)</span></div>
+<p class="q-justification">Incorrectas: seleccionar al proveedor familiar sin declarar el vínculo (✗ — conflicto de interés) · omitir incidentes de seguridad laboral en el informe de cierre (✗ — violación de integridad).</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Integridad y sostenibilidad en PMBOK 8</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-20-008</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Trabajo infantil = violación grave de derechos humanos. Documentar formalmente, notificar al subcontratista que debe cesar de inmediato y escalar al área legal y de cumplimiento.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Trabajo infantil — violación no negociable</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-20-009</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">3 → 1 → 2 → 5 → 4</span></div>
+<p class="q-justification">1. Identificar la relación con el proveedor → 2. Declarar el conflicto al patrocinador o compliance de forma proactiva → 3. Abstenerse de participar en la decisión de selección → 4. Asegurar que otro responsable calificado conduzca la evaluación → 5. Documentar la declaración y la abstención.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Gestión de conflicto de interés — secuencia</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-20-010</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Hallazgo en auditoría de cierre: documentar en el informe de cierre, notificar al organismo ambiental, gestionar la remediación con el patrocinador y registrar en lecciones aprendidas.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Notificación de incumplimiento ambiental al cierre</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-20-011</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Modelo que penaliza sistemáticamente a clientes rurales: documentar como riesgo social y regulatorio, informar al cliente del impacto potencial y proponer una revisión del alcance para corregir el sesgo.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Sesgo algorítmico como riesgo social</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-20-012</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">1-B · 2-C · 3-A · 4-D</span></div>
+<p class="q-justification">Social (1) = impacto sobre personas y comunidades (B) · Ambiental (2) = impacto sobre el medio ambiente (C) · Gobernanza (3) = estructuras de rendición de cuentas y ética (A) · Trade-off de sostenibilidad (4) = tensión entre valor económico e impacto ESG (D).</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag "></span><span class="tag ">Marco ESG aplicado a proyectos</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-20-013</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Recibir regalo de proveedor en proceso de licitación activo: rechazarlo (o declararlo si ya fue recibido), declarar al área de compliance y abstenerse de participar en la decisión de adjudicación.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Conflicto de interés — regalos de proveedores</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-20-014</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Negarse a omitir la información del estudio ante el regulador. Presentar información incompleta a un organismo regulador es una violación legal y ética grave. Proponer en su lugar una revisión del diseño que proteja el corredor faunístico.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Integridad ante reguladores · fauna protegida</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-20-015</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Aceptación formal ya firmada, pero el director detecta errores materiales que causarán daño operativo: informar al cliente y ofrecer la corrección como acción de cierre responsable.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Responsabilidad profesional ante defectos conocidos</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-20-016</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Falsificación de datos de calidad: hablar con el miembro del equipo, documentar la situación, informar al patrocinador y al cliente sobre la discrepancia en los datos y gestionar la corrección.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Integridad · falsificación de datos de calidad</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-20-017</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Negociaciones laborales con un proveedor activo = conflicto de interés potencial. Declarar proactivamente al patrocinador la existencia de esas negociaciones y evaluar con compliance si requiere alguna medida.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Conflicto de interés con proveedor activo</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-20-018</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B y D</span></div>
+<p class="q-justification">B: el director tiene responsabilidad de actuar con integridad aunque la presión venga del patrocinador. D: los trade-offs ESG deben documentarse y presentarse al comité con transparencia.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Integridad bajo presión · trade-offs ESG</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-20-019</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Vulnerabilidad de seguridad identificada en el cierre: informar al cliente, gestionar la corrección como acción de cierre responsable y documentar en lecciones aprendidas.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Responsabilidad ante vulnerabilidades en el cierre</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-20-020</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">C</span></div>
+<p class="q-justification">Presentar al patrocinador un análisis completo con ahorro económico del trazado alternativo, impacto social sobre los productores, costos de compensación, riesgos legales y reputacionales.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Análisis de trade-offs costo-impacto social</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-20-021</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Daño a fuente de agua que abastece comunidades = incumplimiento ambiental. Negarse a documentar de forma inexacta, notificar al organismo ambiental, gestionar la remediación y escalar al área legal.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Notificación obligatoria de incumplimiento ambiental</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-20-022</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">Ver correspondencia</span></div>
+<p class="q-justification">Aplicar mismos criterios a todos los proveedores → Equidad · Presentar datos reales aunque sean negativos → Integridad · Gestionar preocupaciones de la comunidad como interesado legítimo → Respeto · Documentar un error propio en lecciones aprendidas → Responsabilidad.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag "></span><span class="tag ">Cuatro valores del Código de Ética de PMI</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-20-023</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Incidentes de seguridad de datos no reportados: incluirlos en el informe de cierre y evaluar con el área legal si la regulación financiera exige notificación al regulador o al cliente.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Incidentes de datos — obligaciones de reporte al cierre</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-20-024</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">B</span></div>
+<p class="q-justification">Las salvaguardas del BID son parte del contrato de financiamiento. Detener la operación en el área afectada, evaluar el impacto, notificar al BID y consultar con la comunidad antes de retomar.</p>
+<div class="q-tags"><span class="tag domain">Entorno de negocio</span><span class="tag approach">Predictivo</span><span class="tag ">Salvaguardas sociales en contratos de financiamiento internacional</span></div>
+</div>
+<div class="q-block">
+<div class="q-id">PMP-20-025</div>
+<div class="q-answer"><span class="label">Respuesta correcta</span><span class="value">Ver subpreguntas</span></div>
+<p class="q-justification">Caso integrado: Expansión portuaria Puerto Austral, Chile.</p>
+<div class="cas-block"><div class="cas-label">Pregunta 1</div>
+<div class="q-answer"><span class="label">Respuesta</span><span class="value">B</span></div>
+<p class="q-justification">Identificar a las comunidades pesqueras como interesados, solicitar evaluación técnica propia del impacto y presentar al patrocinador y al banco financiador las opciones de respuesta antes de decidir sobre la continuidad.</p></div>
+<div class="cas-block"><div class="cas-label">Pregunta 2</div>
+<div class="q-answer"><span class="label">Respuesta</span><span class="value">B</span></div>
+<p class="q-justification">Verificar el texto exacto de las cláusulas de salvaguarda, evaluar con área legal si son vinculantes e informar al patrocinador con un análisis documentado del riesgo de incumplimiento antes de decidir continuar o pausar.</p></div>
+<div class="cas-block"><div class="cas-label">Pregunta 3</div>
+<div class="q-answer"><span class="label">Respuesta</span><span class="value">C</span></div>
+<p class="q-justification">Presentar las tres opciones al patrocinador y al banco con análisis completo en costo, plazo, riesgo reputacional, cumplimiento ESG y sostenibilidad a largo plazo para las comunidades, dejando la decisión final al comité.</p></div>
+</div>
+</div>
+
+<footer class="site-footer">
+  © 2026 Valeria Yashan. Todos los derechos reservados.<br>
+  «PMI», «PMP» y «PMBOK» son marcas registradas de Project Management Institute, Inc.<br>
+  Esta publicación es independiente y no está autorizada ni afiliada a PMI.<br>
+  <a href="https://www.valeriayashan.com.ar/libro">Volver al libro</a> &nbsp;·&nbsp;
+  <a href="https://www.valeriayashan.com.ar">valeriayashan.com.ar</a>
+</footer>
+
+</body>
+</html>
