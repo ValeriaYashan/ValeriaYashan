@@ -1,0 +1,302 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Servicios — Valeria Yashan"
+  description="Capacitación en Project Management, consultoría en IA aplicada y preparación para la certificación PMP®. Valeria Yashan, PMP®."
+>
+
+  <section class="servicios-hero">
+    <div class="container">
+      <p class="page-eyebrow">Servicios</p>
+      <h1>¿En qué puedo ayudarte?</h1>
+      <p class="page-lead">Trabajo con equipos y organizaciones que quieren mejorar su forma de gestionar proyectos e incorporar inteligencia artificial en su trabajo cotidiano.</p>
+    </div>
+  </section>
+
+  <!-- SERVICIO 1 -->
+  <section class="servicio-seccion">
+    <div class="container servicio-inner">
+      <div class="servicio-header">
+        <span class="servicio-numero">01</span>
+        <div>
+          <h2>Capacitación en Project Management</h2>
+          <p class="servicio-para">Para equipos y organizaciones</p>
+        </div>
+      </div>
+      <div class="servicio-body">
+        <p class="servicio-desc">Talleres y programas de formación para equipos que necesitan ordenar cómo planifican, ejecutan y miden resultados en sus proyectos. Adaptado al contexto, nivel y sector de cada organización.</p>
+        <ul class="servicio-incluye">
+          <li>Diagnóstico de madurez en gestión de proyectos</li>
+          <li>Talleres presenciales o virtuales (formato a definir)</li>
+          <li>Programas de formación desde fundamentos hasta nivel avanzado</li>
+          <li>Preparación para la certificación PMP® (individual o grupal)</li>
+          <li>Material de apoyo incluido</li>
+        </ul>
+        <a href="/contacto" class="btn-servicio">Consultame sobre este servicio →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICIO 2 -->
+  <section class="servicio-seccion alt">
+    <div class="container servicio-inner">
+      <div class="servicio-header">
+        <span class="servicio-numero">02</span>
+        <div>
+          <h2>Consultoría en incorporación de IA</h2>
+          <p class="servicio-para">Para equipos y organizaciones</p>
+        </div>
+      </div>
+      <div class="servicio-body">
+        <p class="servicio-desc">Acompañamiento a organizaciones que quieren incorporar IA generativa en sus procesos de trabajo de forma práctica, sostenible y sin reemplazar equipos. El foco está en resultados concretos, no en tecnología por tecnología.</p>
+        <ul class="servicio-incluye">
+          <li>Diagnóstico de oportunidades de incorporación de IA</li>
+          <li>Selección de herramientas según el contexto del equipo</li>
+          <li>Capacitación práctica en uso de IA generativa</li>
+          <li>Acompañamiento en la implementación</li>
+          <li>Seguimiento y ajuste de procesos</li>
+        </ul>
+        <a href="/contacto" class="btn-servicio">Consultame sobre este servicio →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICIO 3 -->
+  <section class="servicio-seccion">
+    <div class="container servicio-inner">
+      <div class="servicio-header">
+        <span class="servicio-numero">03</span>
+        <div>
+          <h2>Charlas y conferencias</h2>
+          <p class="servicio-para">Para eventos, congresos y jornadas</p>
+        </div>
+      </div>
+      <div class="servicio-body">
+        <p class="servicio-desc">Presentaciones para eventos institucionales, congresos académicos y jornadas profesionales sobre Project Management, liderazgo de equipos e inteligencia artificial aplicada al trabajo.</p>
+        <ul class="servicio-incluye">
+          <li>Project Management en la era de la IA</li>
+          <li>Cómo prepararse para la certificación PMP®</li>
+          <li>IA aplicada a la gestión de proyectos</li>
+          <li>Liderazgo de equipos en entornos complejos</li>
+          <li>Temas a medida según el evento</li>
+        </ul>
+        <a href="/contacto" class="btn-servicio">Consultame sobre este servicio →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="servicios-cta">
+    <div class="container">
+      <div class="cta-inner">
+        <h2>¿Tenés una necesidad concreta?</h2>
+        <p>Contame qué necesita tu equipo u organización y vemos cómo puedo ayudarte.</p>
+        <a href="/contacto" class="btn-primary-white">Escribime →</a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  /* HERO */
+  .servicios-hero {
+    padding: var(--space-xl) 0 var(--space-lg);
+  }
+
+  .page-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .servicios-hero h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 900;
+    color: var(--color-text);
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+
+  .page-lead {
+    font-size: 1.1rem;
+    color: var(--color-muted);
+    max-width: 540px;
+    line-height: 1.7;
+  }
+
+  /* SECCIONES */
+  .servicio-seccion {
+    padding: var(--space-lg) 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .servicio-seccion.alt {
+    background: var(--color-surface);
+  }
+
+  .servicio-inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    max-width: 720px;
+  }
+
+  .servicio-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+
+  .servicio-numero {
+    font-family: 'Fraunces', serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--color-border);
+    line-height: 1;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  .servicio-header h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 0.25rem;
+    line-height: 1.2;
+  }
+
+  .servicio-para {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-accent);
+    margin: 0;
+  }
+
+  .servicio-body {
+    padding-left: 4rem;
+  }
+
+  .servicio-desc {
+    color: var(--color-muted);
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: var(--space-md);
+    max-width: 580px;
+  }
+
+  .servicio-incluye {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--space-md) 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .servicio-incluye li {
+    font-size: 0.92rem;
+    color: var(--color-muted);
+    padding-left: 1.25rem;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .servicio-incluye li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+    font-weight: 700;
+  }
+
+  .btn-servicio {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--color-accent);
+    text-decoration: none;
+    border-bottom: 2px solid var(--color-accent);
+    padding-bottom: 2px;
+    transition: opacity 0.2s;
+  }
+
+  .btn-servicio:hover {
+    opacity: 0.7;
+  }
+
+  /* CTA FINAL */
+  .servicios-cta {
+    background: var(--color-accent);
+    padding: var(--space-lg) 0 var(--space-xl);
+  }
+
+  .cta-inner {
+    max-width: 560px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .cta-inner h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.2;
+  }
+
+  .cta-inner p {
+    color: rgba(255,255,255,0.85);
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .btn-primary-white {
+    display: inline-block;
+    background: #fff;
+    color: var(--color-accent);
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 0.75rem 1.75rem;
+    border-radius: 6px;
+    text-decoration: none;
+    align-self: flex-start;
+    transition: background 0.2s ease;
+  }
+
+  .btn-primary-white:hover {
+    background: var(--color-surface);
+  }
+
+  /* MOBILE */
+  @media (max-width: 640px) {
+    .servicio-header {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .servicio-numero {
+      font-size: 1.8rem;
+    }
+
+    .servicio-body {
+      padding-left: 0;
+    }
+
+    .servicios-hero h1 {
+      font-size: 1.8rem;
+    }
+  }
+</style>
