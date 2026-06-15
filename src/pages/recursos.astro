@@ -8,12 +8,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 >
   <div class="container page-container">
 
-    <header class="page-header mark-accent">
+    <header class="page-header">
       <p class="page-eyebrow">Recursos</p>
       <h1>Recursos gratuitos</h1>
       <p class="page-lead">
         Plantillas, checklists y guías que uso en mi práctica profesional.
-        Descargalos sin costo. Se actualizan periódicamente.
+        Descargalos sin costo. Si querés aplicar esto en tu organización,
+        <a href="/contacto" class="lead-link">escribime</a>.
       </p>
     </header>
 
@@ -44,6 +45,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
 
       </div>
+      <p class="categoria-cta">¿Querés implementar estas herramientas en tu equipo? <a href="/contacto">Hablemos →</a></p>
     </section>
 
     <!-- CATEGORÍA 2: IA aplicada -->
@@ -73,6 +75,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
 
       </div>
+      <p class="categoria-cta">¿Querés incorporar IA en tu organización de forma concreta? <a href="/contacto">Contactame →</a></p>
     </section>
 
     <!-- CATEGORÍA 3: Certificación -->
@@ -95,10 +98,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
 
       </div>
+      <p class="categoria-cta">¿Preparándote para el PMP®? <a href="/contacto">Puedo acompañarte →</a></p>
     </section>
 
     <!-- NEWSLETTER -->
-    <section class="newsletter-section">
+    <section id="newsletter" class="newsletter-section">
       <div class="newsletter-inner">
         <h2>Recibí los próximos recursos</h2>
         <p>
@@ -146,11 +150,18 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     margin-top: var(--space-sm);
     margin-bottom: 0;
     max-width: 520px;
+    line-height: 1.7;
+  }
+
+  .lead-link {
+    color: var(--color-accent);
+    font-weight: 600;
+    text-decoration: underline;
   }
 
   /* Categorías */
   .categoria {
-    margin-bottom: var(--space-lg);
+    margin-bottom: var(--space-xl);
   }
 
   .categoria-titulo {
@@ -169,6 +180,23 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .categoria-cta {
+    font-size: 0.88rem;
+    color: var(--color-muted);
+    margin-top: 1rem;
+  }
+
+  .categoria-cta a {
+    color: var(--color-accent);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .categoria-cta a:hover {
+    text-decoration: underline;
   }
 
   /* Cards */
@@ -251,6 +279,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .newsletter-inner p {
     color: var(--color-muted);
     margin-bottom: var(--space-md);
+    line-height: 1.6;
   }
 
   .brevo-embed {
