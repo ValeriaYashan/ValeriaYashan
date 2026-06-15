@@ -53,7 +53,7 @@ body {
 }
 
 /* ========================================
-   TIPOGRAFÍA BASE
+   TIPOGRAFIA BASE
 ======================================== */
 h1, h2, h3, h4 {
   font-family: var(--font-display);
@@ -93,7 +93,7 @@ a:hover { opacity: 0.75; }
 }
 
 /* ========================================
-   MARK ACCENT (línea izquierda verde)
+   MARK ACCENT
 ======================================== */
 .mark-accent {
   border-left: 3px solid var(--color-accent);
@@ -129,11 +129,96 @@ a:hover { opacity: 0.75; }
 }
 
 /* ========================================
+   HERRAMIENTAS
+======================================== */
+.herramientas {
+  background: var(--color-surface);
+  padding: var(--space-lg) var(--space-sm);
+}
+
+.herramientas-inner {
+  max-width: var(--max-width-wide);
+  margin: 0 auto;
+}
+
+.herramientas h2 {
+  margin-bottom: 0.5rem;
+}
+
+.herramientas-intro {
+  color: var(--color-muted);
+  margin-bottom: var(--space-md);
+  max-width: 520px;
+}
+
+.herramientas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.herramientas-categoria {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+}
+
+.herramientas-categoria h3 {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--color-accent);
+  margin-bottom: 1rem;
+}
+
+.herramientas-lista {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.herramientas-lista li {
+  font-size: 0.9rem;
+  color: var(--color-text);
+  padding: 0.45rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.herramientas-lista li:last-child {
+  border-bottom: none;
+}
+
+.herramientas-cert {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-top: 0.5rem !important;
+}
+
+.cert-nombre {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.cert-meta {
+  font-size: 0.75rem;
+  color: var(--color-muted);
+}
+
+/* ========================================
    RESPONSIVE
 ======================================== */
 @media (max-width: 600px) {
   :root {
     --space-lg: 2.5rem;
     --space-xl: 3.5rem;
+  }
+
+  .herramientas-grid {
+    grid-template-columns: 1fr;
   }
 }
