@@ -4,35 +4,66 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <BaseLayout
   title="Contacto"
-  description="Contacto profesional de Valeria Yashan — Project Manager, consultora en IA y autora."
+  description="Contacto profesional de Valeria Yashan — consultoría y capacitación en Project Management e IA para equipos y organizaciones."
 >
   <div class="container page-container">
-    <header class="page-header mark-accent">
+
+    <header class="page-header">
       <p class="page-eyebrow">Contacto</p>
-      <h1>Hablemos</h1>
+      <h1>¿Tenés un proyecto o necesidad concreta?</h1>
       <p class="page-lead">
-        Para consultas profesionales, colaboraciones, charlas o cualquier pregunta
-        sobre el libro, podés escribirme por LinkedIn o por mail.
+        Trabajo con equipos y organizaciones en capacitación en Project Management
+        e incorporación de IA en procesos reales. Si estás buscando a alguien para
+        eso, escribime.
       </p>
     </header>
 
+    <section class="servicios">
+      <div class="servicio-item">
+        <span class="servicio-icono">◆</span>
+        <div>
+          <p class="servicio-titulo">Capacitación en Project Management</p>
+          <p class="servicio-desc">Talleres y programas para equipos que necesitan ordenar cómo gestionan proyectos. Desde fundamentos hasta preparación PMP®.</p>
+        </div>
+      </div>
+      <div class="servicio-item">
+        <span class="servicio-icono">◆</span>
+        <div>
+          <p class="servicio-titulo">Consultoría en incorporación de IA</p>
+          <p class="servicio-desc">Acompañamiento a organizaciones que quieren incorporar IA generativa en sus procesos de trabajo de forma práctica y sostenible.</p>
+        </div>
+      </div>
+      <div class="servicio-item">
+        <span class="servicio-icono">◆</span>
+        <div>
+          <p class="servicio-titulo">Charlas y conferencias</p>
+          <p class="servicio-desc">Presentaciones para eventos, congresos y jornadas sobre Project Management, liderazgo de equipos e inteligencia artificial aplicada.</p>
+        </div>
+      </div>
+    </section>
+
     <section class="contact-options">
-      <div class="contact-card">
-        <p class="contact-label">LinkedIn</p>
-        <p class="contact-desc">La forma más rápida de contactarme para consultas profesionales.</p>
-        <a href="https://www.linkedin.com/in/valeriayashan" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Ir a LinkedIn →</a>
+      <div class="contact-card contact-card--primary">
+        <p class="contact-label">Email</p>
+        <p class="contact-desc">Para propuestas concretas, presupuestos o consultas formales.</p>
+        <a href="mailto:hola@valeriayashan.com.ar" class="btn btn-primary">hola@valeriayashan.com.ar</a>
       </div>
 
       <div class="contact-card">
-        <p class="contact-label">Email</p>
-        <p class="contact-desc">Para consultas formales o propuestas de colaboración.</p>
-        <a href="mailto:hola@valeriayashan.com.ar" class="btn btn-outline">hola@valeriayashan.com.ar</a>
+        <p class="contact-label">LinkedIn</p>
+        <p class="contact-desc">Para conectar, seguir mi actividad profesional o enviar un mensaje directo.</p>
+        <a href="https://www.linkedin.com/in/valeriayashan" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Ir a LinkedIn →</a>
       </div>
     </section>
 
     <section class="contact-note">
-      <p>También podés encontrarme en <a href="/blog">el blog</a> o acceder al <a href="/libro">material del libro</a>.</p>
+      <p>
+        Si todavía no me conocés, podés leer
+        <a href="/blog">artículos del blog</a> o revisar
+        <a href="/libro">mis libros</a> para tener contexto de mi enfoque.
+      </p>
     </section>
+
   </div>
 </BaseLayout>
 
@@ -40,6 +71,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .page-container {
     padding-top: var(--space-lg);
     padding-bottom: var(--space-xl);
+    max-width: 680px;
+    margin: 0 auto;
   }
 
   .page-header {
@@ -55,14 +88,63 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     margin-bottom: 0.5rem;
   }
 
-  .page-lead {
-    font-size: 1.1rem;
-    color: var(--color-muted);
-    margin-top: var(--space-sm);
-    margin-bottom: 0;
-    max-width: 520px;
+  .page-header h1 {
+    font-family: 'Fraunces', serif;
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: var(--color-text);
+    line-height: 1.2;
+    margin-bottom: 1rem;
   }
 
+  .page-lead {
+    font-size: 1.05rem;
+    color: var(--color-muted);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  /* SERVICIOS */
+  .servicios {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-bottom: var(--space-lg);
+    padding: 1.75rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+  }
+
+  .servicio-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .servicio-icono {
+    color: var(--color-accent);
+    font-size: 0.6rem;
+    margin-top: 0.4rem;
+    flex-shrink: 0;
+  }
+
+  .servicio-titulo {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--color-text);
+    margin-bottom: 0.25rem;
+  }
+
+  .servicio-desc {
+    font-size: 0.88rem;
+    color: var(--color-muted);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* CONTACTO */
   .contact-options {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -73,8 +155,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .contact-card {
     background: var(--color-surface);
     padding: var(--space-md);
-    border-radius: var(--radius);
+    border-radius: 12px;
     border: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .contact-card--primary {
+    border-color: var(--color-accent);
   }
 
   .contact-label {
@@ -83,23 +172,68 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--color-accent);
-    margin-bottom: 0.5rem;
+    margin: 0;
   }
 
   .contact-desc {
     color: var(--color-muted);
-    font-size: 0.9rem;
-    margin-bottom: var(--space-sm);
+    font-size: 0.88rem;
+    line-height: 1.5;
+    margin: 0;
+    flex-grow: 1;
+  }
+
+  .btn {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 0.88rem;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.2s ease;
+    margin-top: 0.25rem;
+  }
+
+  .btn-primary {
+    background: var(--color-accent);
+    color: #fff;
+  }
+
+  .btn-primary:hover {
+    background: #1B4332;
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--color-accent);
+    border: 1.5px solid var(--color-accent);
+  }
+
+  .btn-outline:hover {
+    background: var(--color-accent);
+    color: #fff;
   }
 
   .contact-note {
     color: var(--color-muted);
-    font-size: 0.9rem;
+    font-size: 0.88rem;
+    line-height: 1.6;
+  }
+
+  .contact-note a {
+    color: var(--color-accent);
+    text-decoration: underline;
   }
 
   @media (max-width: 600px) {
     .contact-options {
       grid-template-columns: 1fr;
+    }
+
+    .page-header h1 {
+      font-size: 1.8rem;
     }
   }
 </style>
