@@ -19,7 +19,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <h1 class="sobre-nombre">Valeria Yashan</h1>
           <p class="sobre-rol">Project Manager · Autora · Docente</p>
           <div class="sobre-credenciales">
-            <span>PMP® Certificada</span>
+            <span>PMP® #1613335 · desde 2013</span>
             <span>+10 años de experiencia</span>
             <span>Docente universitaria</span>
             <span>4 libros publicados</span>
@@ -27,7 +27,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <p class="sobre-bajada">Combino más de diez años de experiencia en gestión de proyectos con una mirada práctica sobre cómo la inteligencia artificial puede transformar la forma en que los equipos planifican, ejecutan y miden resultados.</p>
           <div class="sobre-actions">
             <a href="/contacto" class="btn btn-primary">Contactarme</a>
-            <a href="/libro" class="btn btn-outline">Ver libros</a>
+            <a href="/servicios" class="btn btn-outline">Ver servicios</a>
           </div>
         </div>
       </div>
@@ -77,36 +77,212 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </div>
   </section>
 
-  <!-- SERVICIOS -->
-  <section class="servicios">
+  <!-- CTA FINAL -->
+  <section class="sobre-cta">
     <div class="container">
-      <p class="section-eyebrow">Lo que hago</p>
-      <h2 class="section-title">Áreas de trabajo</h2>
-      <div class="servicios-grid">
-
-        <div class="servicio-card">
-          <h3 class="servicio-titulo">Capacitación en Project Management</h3>
-          <p class="servicio-desc">Talleres y programas para equipos que necesitan ordenar cómo gestionan proyectos. Desde fundamentos hasta preparación PMP®. Adaptado al contexto y nivel del equipo.</p>
-        </div>
-
-        <div class="servicio-card">
-          <h3 class="servicio-titulo">Consultoría en incorporación de IA</h3>
-          <p class="servicio-desc">Acompañamiento a organizaciones que quieren incorporar IA generativa en sus procesos de trabajo de forma práctica y sostenible. Sin reemplazar equipos, sino potenciándolos.</p>
-        </div>
-
-        <div class="servicio-card">
-          <h3 class="servicio-titulo">Preparación para la certificación PMP®</h3>
-          <p class="servicio-desc">Acompañamiento personalizado para profesionales que se preparan para rendir el examen PMP®. Diagnóstico de brechas, plan de estudio y práctica con simulacros.</p>
-        </div>
-
-        <div class="servicio-card">
-          <h3 class="servicio-titulo">Charlas y conferencias</h3>
-          <p class="servicio-desc">Presentaciones para eventos, congresos y jornadas sobre Project Management, liderazgo de equipos e inteligencia artificial aplicada al trabajo profesional.</p>
-        </div>
-
+      <div class="cta-inner">
+        <h2 class="cta-titulo">¿Trabajamos juntos?</h2>
+        <p class="cta-desc">Si tenés un proyecto, un equipo o una organización que quiere mejorar su forma de gestionar, escribime. Contame qué necesitás y vemos cómo puedo ayudarte.</p>
+        <a href="/contacto" class="btn btn-primary">Contactarme</a>
       </div>
     </div>
   </section>
+
+</BaseLayout>
+
+<style>
+  .sobre-hero {
+    padding: var(--space-xl) 0 var(--space-lg);
+    background-color: var(--color-bg);
+  }
+
+  .sobre-hero-inner {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: var(--space-lg);
+    align-items: center;
+  }
+
+  .sobre-foto {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    object-position: top;
+    border-radius: var(--radius);
+    display: block;
+  }
+
+  .sobre-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .sobre-nombre {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-text);
+    line-height: 1.1;
+    margin-bottom: 0.25rem;
+  }
+
+  .sobre-rol {
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+    margin-bottom: var(--space-sm);
+  }
+
+  .sobre-credenciales {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: var(--space-sm);
+  }
+
+  .sobre-credenciales span {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+  }
+
+  .sobre-bajada {
+    font-size: 1.05rem;
+    color: var(--color-muted);
+    line-height: 1.7;
+    margin-bottom: var(--space-md);
+    max-width: 520px;
+  }
+
+  .sobre-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  /* TRAYECTORIA */
+  .trayectoria {
+    padding: var(--space-lg) 0;
+    background-color: var(--color-surface);
+  }
+
+  .hitos-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+    margin-top: var(--space-md);
+  }
+
+  .hito {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .hito-icon {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    flex-shrink: 0;
+    margin-top: 0.2rem;
+  }
+
+  .hito-titulo {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 0.4rem;
+  }
+
+  .hito-desc {
+    font-size: 0.9rem;
+    color: var(--color-muted);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* CTA */
+  .sobre-cta {
+    padding: var(--space-lg) 0 var(--space-xl);
+    background-color: var(--color-accent);
+  }
+
+  .cta-inner {
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .cta-titulo {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+    margin: 0;
+  }
+
+  .cta-desc {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .sobre-cta .btn-primary {
+    background: white;
+    color: var(--color-accent) !important;
+    border-color: white;
+    align-self: flex-start;
+  }
+
+  .sobre-cta .btn-primary:hover {
+    background: var(--color-surface);
+    border-color: var(--color-surface);
+  }
+
+  .section-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+    margin-bottom: 0.25rem;
+  }
+
+  .section-title {
+    margin-bottom: var(--space-sm);
+  }
+
+  @media (max-width: 700px) {
+    .sobre-hero-inner {
+      grid-template-columns: 1fr;
+    }
+
+    .sobre-foto {
+      aspect-ratio: 4 / 3;
+      max-height: 320px;
+    }
+
+    .sobre-nombre {
+      font-size: 1.8rem;
+    }
+
+    .hitos-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
 
   <!-- CTA FINAL -->
   <section class="sobre-cta">
