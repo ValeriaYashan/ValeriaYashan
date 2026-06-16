@@ -14,13 +14,13 @@ const posts = (await getCollection('blog'))
   <!-- HERO -->
   <section class="hero">
     <div class="container">
-      <div class="hero-inner mark-accent">
+      <div class="hero-inner">
         <p class="hero-eyebrow">Project Management &middot; IA &middot; Estrategia</p>
         <h1 class="hero-headline">Gesti&oacute;n de proyectos<br />en la era de la IA.</h1>
         <p class="hero-credenciales">PMP&reg; &middot; +10 a&ntilde;os en gesti&oacute;n de proyectos &middot; Autora &middot; Docente</p>
         <p class="hero-sub">Ayudo a profesionales y organizaciones a integrar metodolog&iacute;as de gesti&oacute;n de proyectos con herramientas de inteligencia artificial. Autora, consultora y docente.</p>
         <div class="hero-actions">
-          <a href="/libro" class="btn btn-primary">Ver libros</a>
+          <a href="/servicios" class="btn btn-primary">Ver servicios</a>
           <a href="/blog" class="btn btn-outline">Leer art&iacute;culos</a>
         </div>
       </div>
@@ -47,7 +47,7 @@ const posts = (await getCollection('blog'))
     </div>
   </section>
 
-  <!-- ACERCA -->
+  <!-- SOBRE MÍ -->
   <section class="about">
     <div class="container">
       <div class="about-inner">
@@ -58,90 +58,6 @@ const posts = (await getCollection('blog'))
           <p>En los &uacute;ltimos a&ntilde;os integr&eacute; la inteligencia artificial como parte de mi pr&aacute;ctica profesional. Escribo, ense&ntilde;o y consulto sobre c&oacute;mo aplicar IA de forma concreta y sostenible en el trabajo de proyectos.</p>
           <a href="/sobre-mi" class="btn btn-outline" style="margin-top: 1rem;">Conocer m&aacute;s &rarr;</a>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- LIBROS -->
-  <section class="libros">
-    <div class="container">
-      <p class="section-eyebrow">Libros</p>
-      <h2 class="section-title">Publicaciones</h2>
-      <div class="libros-grid">
-
-        <div class="libro-card mark-accent">
-          <p class="libro-label">Gesti&oacute;n de proyectos &middot; Maternidad</p>
-          <h3 class="libro-titulo">PM MOM</h3>
-          <p class="libro-desc">El primer libro que aplica las herramientas reales de la gesti&oacute;n de proyectos a los primeros cinco a&ntilde;os de la maternidad. Con templates listos para usar y un glosario de 22 t&eacute;rminos de PM aplicados a la maternidad real.</p>
-          <div class="libro-actions">
-            <a href="https://www.amazon.com/gp/product/B0H34V2L3S" target="_blank" rel="noopener noreferrer" class="btn btn-amazon">Comprar en Amazon &rarr;</a>
-          </div>
-        </div>
-
-        <div class="libro-card mark-accent">
-          <p class="libro-label">Project Management &middot; Certificaci&oacute;n PMP&reg;</p>
-          <h3 class="libro-titulo">Direcci&oacute;n de Proyectos &mdash; Tomo III: Simulacros de Pr&aacute;ctica Intensiva</h3>
-          <p class="libro-desc">La etapa final de preparaci&oacute;n para el examen PMP&reg;. 180 preguntas de simulacro con distribuci&oacute;n ECO real, respuestas con justificaci&oacute;n detallada y diagn&oacute;stico de brechas. Alineado con PMBOK&reg; Guide &mdash; Eighth Edition &middot; ECO vigente desde julio 2026.</p>
-          <div class="libro-actions">
-            <a href="https://www.amazon.com/dp/B0H58TX7Z4?spcref=PRINT_LISTING" target="_blank" rel="noopener noreferrer" class="btn btn-amazon">Comprar en Amazon &rarr;</a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- HERRAMIENTAS -->
-  <section class="herramientas" id="herramientas">
-    <div class="herramientas-inner">
-      <h2>Herramientas con las que trabajo</h2>
-      <p class="herramientas-intro">Gestiono proyectos con las plataformas que tu equipo ya usa o quiere adoptar.</p>
-
-      <div class="herramientas-grid">
-
-        <div class="herramientas-categoria">
-          <h3>Gesti&oacute;n de proyectos</h3>
-          <ul class="herramientas-lista">
-            <li>ClickUp</li>
-            <li>Notion</li>
-            <li>Trello</li>
-            <li>Asana</li>
-            <li>MS Project</li>
-          </ul>
-        </div>
-
-        <div class="herramientas-categoria">
-          <h3>Colaboraci&oacute;n</h3>
-          <ul class="herramientas-lista">
-            <li>Slack</li>
-            <li>Teams</li>
-            <li>Google Meet</li>
-            <li>Google Workspace</li>
-          </ul>
-        </div>
-
-        <div class="herramientas-categoria">
-          <h3>IA aplicada al trabajo</h3>
-          <ul class="herramientas-lista">
-            <li>Claude</li>
-            <li>ChatGPT</li>
-            <li>Copilot</li>
-            <li>Perplexity</li>
-          </ul>
-        </div>
-
-        <div class="herramientas-categoria">
-          <h3>Marcos de referencia</h3>
-          <ul class="herramientas-lista">
-            <li>PMBOK 8.&ordf; ed.</li>
-            <li>Scrum / Agile</li>
-            <li class="herramientas-cert">
-              <span class="cert-nombre">PMP&reg; certificada</span>
-              <span class="cert-meta">#1613335 &middot; desde 2013</span>
-            </li>
-          </ul>
-        </div>
-
       </div>
     </div>
   </section>
@@ -168,9 +84,22 @@ const posts = (await getCollection('blog'))
       </div>
     </div>
   </section>
+
+  <!-- CTA CONTACTO -->
+  <section class="cta">
+    <div class="container">
+      <div class="cta-inner">
+        <h2 class="cta-titulo">&iquest;Trabajamos juntos?</h2>
+        <p class="cta-texto">Si quer&eacute;s capacitar a tu equipo, incorporar IA en tu organizaci&oacute;n o necesit&aacute;s acompa&ntilde;amiento en gesti&oacute;n de proyectos, escribime.</p>
+        <a href="/contacto" class="btn btn-primary">Contactar</a>
+      </div>
+    </div>
+  </section>
+
 </BaseLayout>
 
 <style>
+  /* HERO */
   .hero {
     padding: var(--space-xl) 0 var(--space-lg);
   }
@@ -214,7 +143,7 @@ const posts = (await getCollection('blog'))
     flex-wrap: wrap;
   }
 
-  /* Resultados */
+  /* RESULTADOS */
   .resultados {
     padding: var(--space-md) 0;
     background-color: var(--color-accent);
@@ -222,7 +151,7 @@ const posts = (await getCollection('blog'))
 
   .resultados-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: var(--space-md);
   }
 
@@ -248,7 +177,7 @@ const posts = (await getCollection('blog'))
     margin: 0;
   }
 
-  /* About */
+  /* SOBRE MÍ */
   .about {
     padding: var(--space-lg) 0;
     background-color: var(--color-surface);
@@ -286,86 +215,10 @@ const posts = (await getCollection('blog'))
     margin-bottom: var(--space-sm);
   }
 
-  .section-eyebrow {
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--color-accent);
-    margin-bottom: 0.25rem;
-  }
-
-  /* Libros */
-  .libros {
+  /* BLOG PREVIEW */
+  .blog-preview {
     padding: var(--space-lg) 0;
     background-color: var(--color-bg);
-  }
-
-  .libros-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: var(--space-md);
-    margin-top: var(--space-md);
-  }
-
-  .libro-card {
-    background: var(--color-surface);
-    padding: var(--space-md);
-    border-radius: var(--radius);
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .libro-label {
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--color-accent);
-    margin-bottom: 0.25rem;
-  }
-
-  .libro-titulo {
-    font-family: var(--font-display);
-    font-size: 1.35rem;
-    font-weight: 400;
-    line-height: 1.2;
-    color: var(--color-text);
-    margin-bottom: 0.5rem;
-  }
-
-  .libro-desc {
-    font-size: 0.9rem;
-    color: var(--color-muted);
-    line-height: 1.6;
-    flex: 1;
-  }
-
-  .libro-actions {
-    display: flex;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-    margin-top: 0.75rem;
-  }
-
-  .btn-amazon {
-    background-color: #FF9900;
-    color: #111 !important;
-    border: 2px solid #FF9900;
-    text-decoration: none;
-  }
-
-  .btn-amazon:hover {
-    background-color: #e88a00;
-    border-color: #e88a00;
-    opacity: 1;
-  }
-
-  /* Blog preview */
-  .blog-preview {
-    padding: var(--space-lg) 0 var(--space-xl);
-    background-color: var(--color-surface);
   }
 
   .section-header {
@@ -379,16 +232,17 @@ const posts = (await getCollection('blog'))
     font-size: 0.85rem;
     font-weight: 600;
     color: var(--color-accent);
+    text-decoration: none;
   }
 
   .posts-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: var(--space-md);
   }
 
   .post-card {
-    background: var(--color-bg);
+    background: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--radius);
     padding: var(--space-md);
@@ -416,7 +270,7 @@ const posts = (await getCollection('blog'))
     text-transform: uppercase;
     letter-spacing: 0.06em;
     color: var(--color-accent);
-    background: var(--color-surface);
+    background: var(--color-bg);
     padding: 2px 8px;
     border-radius: 20px;
   }
@@ -450,7 +304,37 @@ const posts = (await getCollection('blog'))
     margin-top: 0.5rem;
   }
 
-  /* Responsive */
+  /* CTA */
+  .cta {
+    padding: var(--space-xl) 0;
+    background-color: var(--color-surface);
+  }
+
+  .cta-inner {
+    max-width: 560px;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .cta-titulo {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin: 0;
+  }
+
+  .cta-texto {
+    color: var(--color-muted);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  /* RESPONSIVE */
   @media (max-width: 700px) {
     .about-inner {
       grid-template-columns: 1fr;
