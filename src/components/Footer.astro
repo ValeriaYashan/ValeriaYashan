@@ -4,12 +4,27 @@ const year = new Date().getFullYear();
 
 <footer class="site-footer">
   <div class="container--wide footer-inner">
-    <div class="footer-links">
-      <a href="https://www.linkedin.com/in/valeriayashan" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-      <span class="footer-sep">·</span>
-      <a href="mailto:hola@valeriayashan.com.ar">hola@valeriayashan.com.ar</a>
+
+    <div class="footer-brand">
+      <p class="footer-name">Valeria Yashan</p>
+      <p class="footer-tagline">Project Management &middot; IA &middot; Estrategia</p>
     </div>
-    <p class="footer-copy">© {year} Valeria Yashan. Todos los derechos reservados.</p>
+
+    <div class="footer-contacto">
+      <p class="footer-contacto-titulo">Contacto</p>
+      <div class="footer-links">
+        <a href="mailto:hola@valeriayashan.com.ar">hola@valeriayashan.com.ar</a>
+        <a href="https://wa.me/541140791007" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        <a href="https://www.linkedin.com/in/valeriayashan" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-copy-bar">
+    <div class="container--wide">
+      <p class="footer-copy">© {year} Valeria Yashan. Todos los derechos reservados.</p>
+    </div>
   </div>
 </footer>
 
@@ -17,41 +32,95 @@ const year = new Date().getFullYear();
   .site-footer {
     margin-top: var(--space-xl);
     border-top: 1px solid var(--color-border);
-    padding: var(--space-md) 0;
-    background-color: var(--color-bg);
+    background-color: var(--color-surface);
   }
 
   .footer-inner {
     display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+    padding: var(--space-lg) 0 var(--space-md);
+  }
+
+  .footer-brand {
+    display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    text-align: center;
+    gap: 0.35rem;
+  }
+
+  .footer-name {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin: 0;
+  }
+
+  .footer-tagline {
+    font-size: 0.8rem;
+    color: var(--color-muted);
+    margin: 0;
+    letter-spacing: 0.03em;
+  }
+
+  .footer-contacto {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: flex-end;
+  }
+
+  .footer-contacto-titulo {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+    margin: 0;
   }
 
   .footer-links {
     display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.85rem;
+    gap: 1.5rem;
   }
 
   .footer-links a {
+    font-size: 0.875rem;
     color: var(--color-muted);
     text-decoration: none;
+    transition: color 0.2s;
   }
 
   .footer-links a:hover {
     color: var(--color-accent);
   }
 
-  .footer-sep {
-    color: var(--color-border);
+  .footer-copy-bar {
+    border-top: 1px solid var(--color-border);
+    padding: var(--space-sm) 0;
   }
 
   .footer-copy {
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     color: var(--color-muted);
-    margin-bottom: 0;
+    margin: 0;
+  }
+
+  @media (max-width: 600px) {
+    .footer-inner {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.5rem;
+    }
+
+    .footer-contacto {
+      align-items: flex-start;
+    }
+
+    .footer-links {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
   }
 </style>
