@@ -23,7 +23,7 @@ const year = new Date().getFullYear();
 
   <div class="footer-copy-bar">
     <div class="container--wide">
-      <p class="footer-copy">© {year} Valeria Yashan. Todos los derechos reservados.</p>
+      <p class="footer-copy">&copy; {year} Valeria Yashan. Todos los derechos reservados.</p>
     </div>
   </div>
 </footer>
@@ -31,8 +31,7 @@ const year = new Date().getFullYear();
 <style>
   .site-footer {
     margin-top: var(--space-xl);
-    border-top: 1px solid var(--color-border);
-    background-color: var(--color-surface);
+    background-color: #2D6A4F;
   }
 
   .footer-inner {
@@ -53,13 +52,13 @@ const year = new Date().getFullYear();
     font-family: var(--font-display);
     font-size: 1.1rem;
     font-weight: 700;
-    color: var(--color-text);
+    color: #FFFFFF;
     margin: 0;
   }
 
   .footer-tagline {
     font-size: 0.8rem;
-    color: var(--color-muted);
+    color: rgba(255,255,255,0.6);
     margin: 0;
     letter-spacing: 0.03em;
   }
@@ -76,7 +75,7 @@ const year = new Date().getFullYear();
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: var(--color-accent);
+    color: rgba(255,255,255,0.5);
     margin: 0;
   }
 
@@ -87,23 +86,23 @@ const year = new Date().getFullYear();
 
   .footer-links a {
     font-size: 0.875rem;
-    color: var(--color-muted);
+    color: rgba(255,255,255,0.8);
     text-decoration: none;
     transition: color 0.2s;
   }
 
   .footer-links a:hover {
-    color: var(--color-accent);
+    color: #FFFFFF;
   }
 
   .footer-copy-bar {
-    border-top: 1px solid var(--color-border);
+    border-top: 1px solid rgba(255,255,255,0.2);
     padding: var(--space-sm) 0;
   }
 
   .footer-copy {
     font-size: 0.78rem;
-    color: var(--color-muted);
+    color: rgba(255,255,255,0.4);
     margin: 0;
   }
 
