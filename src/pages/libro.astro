@@ -3,421 +3,326 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout
-  title="Libros — Valeria Yashan"
-  description="Trilogía PMP® y PM MOM: todos los libros de Valeria Yashan sobre gestión de proyectos y certificación PMP®."
+  title="Mis libros — Valeria Yashan"
+  description="Libros de Valeria Yashan sobre gestión de proyectos y certificación PMP. Disponibles en Amazon y en formato digital."
 >
-  <div class="container page-container">
 
-    <header class="page-header">
-      <p class="page-eyebrow">Libros</p>
-      <h1>Mis libros</h1>
-      <p class="page-lead">Escribo sobre gestión de proyectos, certificación PMP® y la intersección entre metodología y vida real.</p>
-    </header>
+  <section class="hero">
+    <h1>Mis libros</h1>
+    <p class="bajada">Recursos para project managers que quieren certificarse, liderar mejor e incorporar IA a su trabajo.</p>
+  </section>
 
-    <!-- SERIE -->
-    <div class="serie-header">
-      <div class="serie-badge">Serie completa · 3 volúmenes</div>
-      <h2 class="serie-titulo">Dirección de Proyectos: Guía de Preparación para la Certificación</h2>
-      <p class="serie-subtitulo">Valeria Yashan, PMP® · Directora de Proyectos · Docente universitaria</p>
-      <a href="https://www.amazon.com/-/es/dp/B0H5DWJ5VM?ref_=saga_dp_bnx_dsk_dp" target="_blank" rel="noopener noreferrer" class="btn btn-amazon">Comprar los 3 tomos en Amazon →</a>
+  <!-- SECCIÓN: LIBROS EN AMAZON -->
+  <section class="seccion">
+    <h2>Guías de preparación para la certificación PMP®</h2>
+    <p class="seccion-descripcion">Tres tomos diseñados para que llegues al examen con dominio real del contenido, no solo con memorización. Disponibles en Amazon en formato impreso y Kindle.</p>
+
+    <div class="grid-libros">
+
+      <div class="card-libro">
+        <img src="/images/cover-tomo-1.jpg" alt="Portada Tomo I — Dirección de Proyectos" class="cover" />
+        <div class="card-info">
+          <h3>Tomo I</h3>
+          <p>Fundamentos, marcos de trabajo y dominios de desempeño. La base para entender el nuevo enfoque del examen PMP®.</p>
+          <a href="https://www.amazon.com/-/es/Valeria-Yashan-ebook/dp/B0H4J29PP5/" target="_blank" rel="noopener" class="btn-amazon">Ver en Amazon</a>
+        </div>
+      </div>
+
+      <div class="card-libro">
+        <img src="/images/cover-tomo-2.jpg" alt="Portada Tomo II — Dirección de Proyectos" class="cover" />
+        <div class="card-info">
+          <h3>Tomo II</h3>
+          <p>Predictivo, ágil e híbrido. Cómo adaptar el enfoque al contexto del proyecto y al tipo de pregunta del examen.</p>
+          <a href="https://www.amazon.com/-/es/dp/B0H5DWJ5VM" target="_blank" rel="noopener" class="btn-amazon">Ver en Amazon</a>
+        </div>
+      </div>
+
+      <div class="card-libro">
+        <img src="/images/cover-tomo-3.jpg" alt="Portada Tomo III — Dirección de Proyectos" class="cover" />
+        <div class="card-info">
+          <h3>Tomo III</h3>
+          <p>Simulacros, estrategias de examen y repaso final. Para llegar el día del examen con confianza y claridad.</p>
+          <a href="https://www.amazon.com/-/es/Valeria-Yashan-ebook/dp/B0H58SSYFG" target="_blank" rel="noopener" class="btn-amazon">Ver en Amazon</a>
+        </div>
+      </div>
+
     </div>
 
-    <!-- TOMO I -->
-    <section class="libro-seccion">
-      <div class="libro-inner">
-        <div class="libro-cover">
-          <img src="/images/cover-tomo-1.jpg" alt="Portada Tomo I — Dirección de Proyectos" width="160" height="240" loading="lazy" />
-        </div>
-        <div class="libro-content">
-          <div class="libro-header">
-            <p class="libro-tag">PMP® · Fundamentos · Personas · Proceso</p>
-            <h2>Tomo I — Fundamentos, Gestión de Personas y Planificación de Procesos</h2>
-            <p class="libro-subtitulo">Alineado con PMBOK® Guide — Eighth Edition · ECO vigente desde julio 2026</p>
-          </div>
-          <p class="libro-desc">Cubre los fundamentos del PMBOK® Guide Eighth Edition, el dominio Personas completo y los primeros capítulos del dominio Proceso. Incluye criterio situacional, errores frecuentes, caso aplicado y preguntas de práctica con explicación razonada. Cuatro planes de estudio de 4, 6, 8 y 12 semanas.</p>
-          <ul class="libro-features">
-            <li>582 páginas · Caps. 1–12</li>
-            <li>Dominio Personas completo</li>
-            <li>4 planes de estudio adaptados a distintos perfiles</li>
-            <li>Preguntas con justificación detallada de cada distractor</li>
-          </ul>
-          <div class="libro-actions">
-            <a href="https://www.amazon.com/-/es/Valeria-Yashan-ebook/dp/B0H4J29PP5/" target="_blank" rel="noopener noreferrer" class="btn btn-amazon">Comprar en Amazon →</a>
-          </div>
-        </div>
+    <div class="serie-completa">
+      <p>¿Querés los tres tomos juntos?</p>
+      <a href="https://www.amazon.com/-/es/dp/B0H5DWJ5VM?ref_=saga_dp_bnx_dsk_dp" target="_blank" rel="noopener" class="btn-amazon">Ver serie completa en Amazon</a>
+    </div>
+  </section>
+
+  <hr class="separador" />
+
+  <!-- SECCIÓN: PM MOM -->
+  <section class="seccion">
+    <h2>PM MOM</h2>
+    <p class="seccion-descripcion">Un libro diferente. Para las project managers que también son madres, y para quienes quieren entender cómo se lidera un proyecto cuando la vida personal también exige gestión.</p>
+
+    <div class="card-libro card-libro--horizontal">
+      <img src="/images/cover-pm-mom.jpg" alt="Portada PM MOM" class="cover" />
+      <div class="card-info">
+        <p>Una mirada honesta sobre maternidad, liderazgo y gestión de proyectos. Porque los proyectos más importantes no siempre están en el trabajo.</p>
+        <a href="https://www.amazon.com/gp/product/B0H34V2L3S" target="_blank" rel="noopener" class="btn-amazon">Ver en Amazon</a>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- TOMO II -->
-    <section class="libro-seccion">
-      <div class="libro-inner">
-        <div class="libro-cover">
-          <img src="/images/cover-tomo-2.jpg" alt="Portada Tomo II — Proceso, Entorno de Negocio y Herramientas" width="160" height="240" loading="lazy" />
-        </div>
-        <div class="libro-content">
-          <div class="libro-header">
-            <p class="libro-tag">PMP® · Proceso · Entorno de Negocio · Herramientas</p>
-            <h2>Tomo II — Proceso, Entorno de Negocio y Herramientas de Entrenamiento</h2>
-            <p class="libro-subtitulo">Alineado con PMBOK® Guide — Eighth Edition · ECO vigente desde julio 2026</p>
-          </div>
-          <p class="libro-desc">Cierra el dominio Proceso con los capítulos más técnicos del examen: valor ganado, riesgos y adquisiciones. Cubre el dominio Entorno de negocio completo, incluyendo IA en la dirección de proyectos y sostenibilidad. 175 preguntas de práctica con acceso a respuestas por QR.</p>
-          <ul class="libro-features">
-            <li>305 páginas · Caps. 13–21</li>
-            <li>Dominio Entorno de negocio completo</li>
-            <li>Glosario bilingüe español-inglés con 55 términos clave</li>
-            <li>175 preguntas de práctica con respuestas por QR</li>
-          </ul>
-          <div class="libro-actions">
-            <a href="https://www.amazon.com/-/es/dp/B0H5DWJ5VM" target="_blank" rel="noopener noreferrer" class="btn btn-amazon">Comprar en Amazon →</a>
-          </div>
-        </div>
-      </div>
-    </section>
+  <hr class="separador" />
 
-    <!-- TOMO III -->
-    <section class="libro-seccion">
-      <div class="libro-inner">
-        <div class="libro-cover">
-          <img src="/images/cover-tomo-3.jpg" alt="Portada Tomo III — Simulacros de Práctica Intensiva" width="160" height="240" loading="lazy" />
-        </div>
-        <div class="libro-content">
-          <div class="libro-header">
-            <p class="libro-tag">PMP® · Simulacros · Práctica Intensiva</p>
-            <h2>Tomo III — Simulacros de Práctica Intensiva</h2>
-            <p class="libro-subtitulo">Alineado con PMBOK® Guide — Eighth Edition · ECO vigente desde julio 2026</p>
-          </div>
-          <p class="libro-desc">180 preguntas de simulacro para el examen de certificación. Diseñado para quienes ya completaron los Tomos I y II y necesitan entrenar bajo condiciones reales. Simulacros por dominio ECO, simulacro final integrado y casos de alta complejidad con subpreguntas encadenadas.</p>
-          <ul class="libro-features">
-            <li>170 páginas · Caps. 22–23</li>
-            <li>60 preguntas por dominio ECO con tabla de brechas</li>
-            <li>120 preguntas de simulacro final integrado</li>
-            <li>Respuestas con justificación detallada — sin códigos QR</li>
-            <li>Hoja de puntaje y diagnóstico de último momento</li>
-          </ul>
-          <div class="libro-actions">
-            <a href="https://www.amazon.com/-/es/Valeria-Yashan-ebook/dp/B0H58SSYFG" target="_blank" rel="noopener noreferrer" class="btn btn-amazon">Comprar en Amazon →</a>
-          </div>
-          <p class="update-notice">⚠ Este libro es el Tomo III de la serie. Los Tomos I y II cubren los fundamentos, gestión de personas, procesos y entorno de negocio.</p>
-          <div class="libro-faq">
-            <h3 class="faq-titulo">Preguntas frecuentes</h3>
-            <div class="faq-item">
-              <h4>¿Para quién es el Tomo III?</h4>
-              <p>Para candidatos al PMP® que ya completaron su estudio y quieren entrenar con simulacros en condiciones reales de examen.</p>
-            </div>
-            <div class="faq-item">
-              <h4>¿Necesito leer los Tomos I y II antes?</h4>
-              <p>Es recomendable. El Tomo III es la etapa final de la serie y asume que ya tenés los conceptos de los tomos anteriores.</p>
-            </div>
-            <div class="faq-item">
-              <h4>¿Cómo puedo contactar a la autora?</h4>
-              <p>Podés escribirme a través de la <a href="/contacto">página de contacto</a> o por LinkedIn.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+  <!-- SECCIÓN: PRODUCTO DIGITAL — PACK DE PROMPTS -->
+  <section class="seccion seccion-destacada">
+    <div class="badge">Producto digital</div>
+    <h2>Pack de Prompts de IA para Project Managers</h2>
+    <p class="seccion-descripcion">10 prompts listos para usar con ChatGPT, Claude o Gemini. Diseñados específicamente para project managers: gestión de riesgos, comunicación con stakeholders, reportes, retrospectivas y más.</p>
 
-    <!-- PM MOM -->
-    <section class="libro-seccion">
-      <div class="libro-inner">
-        <div class="libro-cover">
-          <img src="/images/cover-pm-mom.jpg" alt="Portada PM MOM" width="160" height="240" loading="lazy" />
-        </div>
-        <div class="libro-content">
-          <div class="libro-header">
-            <p class="libro-tag">Gestión de proyectos · Maternidad</p>
-            <h2>PM MOM</h2>
-            <p class="libro-subtitulo">El primer libro que aplica las herramientas reales de la gestión de proyectos a los primeros cinco años de la maternidad.</p>
-          </div>
-          <p class="libro-desc">La maternidad es el proyecto más importante de tu vida. PM Mom aplica el PMBOK® Guide Eighth Edition a los primeros cinco años de la maternidad — no porque la maternidad sea un proyecto corporativo, sino porque las mismas habilidades que te hacen eficaz en el trabajo también te hacen más serena y más presente como mamá. Con templates listos para usar y un glosario de 22 términos de PM aplicados a la maternidad real.</p>
-          <div class="libro-actions">
-            <a href="https://www.amazon.com/gp/product/B0H34V2L3S" target="_blank" rel="noopener noreferrer" class="btn btn-amazon">Comprar en Amazon →</a>
-          </div>
-        </div>
-      </div>
-    </section>
+    <ul class="lista-features">
+      <li>✓ 10 prompts listos para copiar y pegar</li>
+      <li>✓ Adaptados al contexto real de PM</li>
+      <li>✓ Compatibles con ChatGPT, Claude y Gemini</li>
+      <li>✓ PDF descargable, acceso inmediato</li>
+      <li>✓ Guía de uso incluida</li>
+    </ul>
 
-    <!-- RECURSOS -->
-    <section class="libros-recursos">
-      <h2>Material complementario</h2>
-      <p>Recursos adicionales para acompañar tu estudio: glosarios, plantillas y guías descargables.</p>
-      <a href="/recursos" class="btn btn-primary">Ver recursos descargables</a>
-    </section>
+    <div class="precio-bloque">
+      <span class="precio">USD 12</span>
+      <a href="https://PLACEHOLDER-GUMROAD.gumroad.com/l/PLACEHOLDER" target="_blank" rel="noopener" class="btn-primario">Comprar ahora — USD 12</a>
+    </div>
 
-  </div>
+    <p class="nota-pago">Pago seguro vía Gumroad. Recibís el PDF por email de forma inmediata.</p>
+  </section>
+
 </BaseLayout>
 
 <style>
-  .page-container {
-    padding-top: var(--space-lg);
-    padding-bottom: var(--space-xl);
+  .hero {
+    text-align: center;
+    padding: 3rem 1rem 2rem;
+    max-width: 700px;
+    margin: 0 auto;
   }
 
-  .page-header {
-    margin-bottom: var(--space-lg);
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--color-text);
+    margin-bottom: 1rem;
   }
 
-  .page-eyebrow {
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--color-accent);
-    margin-bottom: 0.5rem;
-  }
-
-  .page-lead {
+  .bajada {
     font-size: 1.1rem;
     color: var(--color-muted);
-    margin-top: var(--space-sm);
-    margin-bottom: 0;
-    max-width: 520px;
+    line-height: 1.6;
   }
 
-  .serie-header {
-    background: var(--color-accent);
-    border-radius: 12px;
-    padding: 2rem;
-    text-align: center;
-    margin-bottom: var(--space-lg);
-    color: #fff;
+  .seccion {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 3rem 1rem;
   }
 
-  .serie-badge {
-    display: inline-block;
-    background: rgba(255,255,255,0.2);
-    color: #fff;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    padding: 0.3rem 0.8rem;
-    border-radius: 20px;
+  .seccion h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--color-text);
     margin-bottom: 0.75rem;
   }
 
-  .serie-titulo {
-    font-family: 'Fraunces', serif;
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: #fff;
-    margin-bottom: 0.4rem;
-    line-height: 1.3;
+  .seccion-descripcion {
+    color: var(--color-muted);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    max-width: 650px;
   }
 
-  .serie-subtitulo {
-    font-size: 0.9rem;
-    color: rgba(255,255,255,0.8);
-    margin-bottom: 1.25rem;
-  }
-
-  .libro-seccion {
-    padding: 2.5rem 0;
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  .libro-seccion:last-of-type {
-    border-bottom: none;
-  }
-
-  .libro-inner {
+  .grid-libros {
     display: grid;
-    grid-template-columns: 180px 1fr;
-    gap: 2.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .card-libro {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-libro--horizontal {
+    flex-direction: row;
+    max-width: 600px;
+    gap: 1.5rem;
     align-items: flex-start;
   }
 
-  .libro-cover img {
+  .cover {
     width: 100%;
-    height: auto;
-    border-radius: 6px;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    height: 200px;
+    object-fit: cover;
     display: block;
   }
 
-  .libro-content {
+  .card-libro--horizontal .cover {
+    width: 140px;
+    height: auto;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  .card-info {
+    padding: 1.25rem;
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
+    flex: 1;
   }
 
-  .libro-header {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-  }
-
-  .libro-tag {
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--color-accent);
+  .card-info h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-text);
     margin: 0;
   }
 
-  .libro-header h2 {
-    margin: 0;
-    line-height: 1.3;
-  }
-
-  .libro-subtitulo {
-    font-size: 0.9rem;
+  .card-info p {
     color: var(--color-muted);
-    margin: 0;
-  }
-
-  .libro-desc {
-    color: var(--color-muted);
-    max-width: 580px;
-    line-height: 1.7;
-    margin: 0;
-    font-size: 0.95rem;
-  }
-
-  .libro-features {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    max-width: 560px;
-  }
-
-  .libro-features li {
-    padding: 0.5rem 0 0.5rem 1.25rem;
-    border-bottom: 1px solid var(--color-border);
     font-size: 0.9rem;
-    color: var(--color-muted);
-    position: relative;
-  }
-
-  .libro-features li::before {
-    content: "→";
-    position: absolute;
-    left: 0;
-    color: var(--color-accent);
-    font-weight: 600;
-  }
-
-  .libro-features li:last-child {
-    border-bottom: none;
-  }
-
-  .libro-actions {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-
-  .btn {
-    display: inline-block;
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
-    font-size: 0.9rem;
-    padding: 0.65rem 1.4rem;
-    border-radius: 6px;
-    text-decoration: none;
-    transition: all 0.2s ease;
+    line-height: 1.6;
+    margin: 0;
   }
 
   .btn-amazon {
+    display: inline-block;
     background: #FF9900;
-    color: #111 !important;
-    border: 2px solid #FF9900;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    text-decoration: none;
+    text-align: center;
+    transition: opacity 0.2s;
+    align-self: flex-start;
   }
 
   .btn-amazon:hover {
-    background: #e88a00;
-    border-color: #e88a00;
+    opacity: 0.88;
   }
 
-  .btn-primary {
-    background: var(--color-accent);
-    color: #fff;
-    border: 2px solid var(--color-accent);
-  }
-
-  .btn-primary:hover {
-    background: #1B4332;
-    border-color: #1B4332;
-  }
-
-  .update-notice {
-    font-size: 0.85rem;
-    color: var(--color-muted);
+  .serie-completa {
     background: var(--color-surface);
-    padding: 0.75rem 1rem;
-    border-radius: var(--radius);
-    border-left: 3px solid var(--color-border);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
   }
 
-  .libro-faq {
-    margin-top: 0.5rem;
-  }
-
-  .faq-titulo {
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
+  .serie-completa p {
     color: var(--color-muted);
-    border-bottom: 1px solid var(--color-border);
-    padding-bottom: 0.75rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .faq-item {
-    padding: 0.75rem 0;
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  .faq-item:last-child {
-    border-bottom: none;
-  }
-
-  .faq-item h4 {
-    font-size: 0.95rem;
-    font-weight: 600;
-    margin-bottom: 0.3rem;
-  }
-
-  .faq-item p {
-    color: var(--color-muted);
-    font-size: 0.9rem;
     margin: 0;
+    font-size: 0.95rem;
   }
 
-  .libros-recursos {
-    text-align: center;
-    padding: 2.5rem;
+  .separador {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  /* Sección destacada — Pack de Prompts */
+  .seccion-destacada {
     background: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: 12px;
-    margin-top: 2.5rem;
+    padding: 2.5rem;
+    max-width: 900px;
+    margin: 3rem auto;
   }
 
-  .libros-recursos h2 {
-    font-family: 'Fraunces', serif;
-    font-size: 1.4rem;
-    font-weight: 700;
+  .badge {
+    display: inline-block;
+    background: var(--color-accent);
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.75rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+  }
+
+  .lista-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .lista-features li {
+    font-size: 0.95rem;
+    color: var(--color-text);
+  }
+
+  .precio-bloque {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
     margin-bottom: 0.75rem;
   }
 
-  .libros-recursos p {
+  .precio {
+    font-family: 'Fraunces', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  .btn-primario {
+    display: inline-block;
+    background: var(--color-accent);
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0.75rem 1.75rem;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .btn-primario:hover {
+    opacity: 0.88;
+  }
+
+  .nota-pago {
+    font-size: 0.85rem;
     color: var(--color-muted);
-    margin-bottom: 1.5rem;
-    font-size: 0.95rem;
+    margin: 0;
   }
 
   @media (max-width: 600px) {
-    .libro-inner {
-      grid-template-columns: 1fr;
-    }
-
-    .libro-cover img {
-      width: 140px;
-    }
-
-    .serie-titulo { font-size: 1.2rem; }
+    .hero h1 { font-size: 1.8rem; }
+    .card-libro--horizontal { flex-direction: column; }
+    .card-libro--horizontal .cover { width: 100%; height: 200px; object-fit: cover; }
+    .seccion-destacada { padding: 1.5rem; }
+    .precio-bloque { flex-direction: column; align-items: flex-start; gap: 1rem; }
   }
 </style>
