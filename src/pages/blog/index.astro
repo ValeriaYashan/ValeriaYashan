@@ -1,130 +1,460 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import ArticleCard from '../../components/ArticleCard.astro';
 import { getCollection } from 'astro:content';
 
-const posts = (await getCollection('blog')).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-);
+const posts = (await getCollection('blog'))
+  .sort((a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf())
+  .slice(0, 3);
 ---
 
 <BaseLayout
-  title="Blog"
-  description="Artículos de Valeria Yashan sobre Project Management, IA aplicada, productividad y herramientas digitales."
+  title="Valeria Yashan — Project Management e IA"
+  description="Valeria Yashan — Consultora en Project Management e Inteligencia Artificial aplicada. Autora, docente y estratega."
 >
-  <div class="container page-container">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-inner mark-accent">
+        <p class="hero-eyebrow">Project Management &middot; IA &middot; Estrategia</p>
+        <h1 class="hero-headline">Gesti&oacute;n de proyectos<br />en la era de la IA.</h1>
+        <p class="hero-credenciales">PMP&reg; &middot; +10 a&ntilde;os en gesti&oacute;n de proyectos &middot; Autora &middot; Docente</p>
+        <p class="hero-sub">Ayudo a profesionales y organizaciones a integrar metodolog&iacute;as de gesti&oacute;n de proyectos con herramientas de inteligencia artificial. Autora, consultora y docente.</p>
+        <div class="hero-actions">
+          <a href="/contacto" class="btn btn-primary">Hablemos de tu proyecto &rarr;</a>
+          <a href="/blog" class="btn btn-outline">Leer art&iacute;culos</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <header class="page-header">
-      <p class="page-eyebrow">Blog</p>
-      <h1>Artículos</h1>
-      <p class="page-lead">
-        Escribo sobre gestión de proyectos, inteligencia artificial aplicada,
-        productividad y herramientas digitales. Sin relleno, con ejemplos concretos.
-      </p>
-    </header>
+  <!-- RESULTADOS -->
+  <section class="resultados">
+    <div class="container">
+      <div class="resultados-grid">
+        <div class="resultado-item">
+          <span class="resultado-icono">&rarr;</span>
+          <p class="resultado-texto">Proyectos planificados y ejecutados con metodolog&iacute;as probadas</p>
+        </div>
+        <div class="resultado-item">
+          <span class="resultado-icono">&rarr;</span>
+          <p class="resultado-texto">Equipos capacitados para incorporar IA en su trabajo diario</p>
+        </div>
+        <div class="resultado-item">
+          <span class="resultado-icono">&rarr;</span>
+          <p class="resultado-texto">Profesionales acompa&ntilde;ados en su preparaci&oacute;n para la certificaci&oacute;n PMP&reg;</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <section class="posts-list">
-      {posts.map(post => (
-        <ArticleCard
-          title={post.data.title}
-          description={post.data.description}
-          pubDate={post.data.pubDate}
-          category={post.data.category}
-          slug={post.id.replace(/\.md$/, '')}
-        />
-      ))}
-    </section>
+  <!-- ACERCA -->
+  <section class="about">
+    <div class="container">
+      <div class="about-inner">
+        <img src="/images/valeria-yashan.jpg" alt="Valeria Yashan — Project Manager y autora" class="about-foto" />
+        <div class="about-texto">
+          <h2 class="section-title">Sobre m&iacute;</h2>
+          <p>Soy Project Manager certificada (PMP&reg;) con m&aacute;s de diez a&ntilde;os de experiencia en gesti&oacute;n de proyectos, estrategia organizacional e implementaci&oacute;n de herramientas digitales. Trabajo con equipos que quieren mejorar su forma de planificar, ejecutar y medir resultados.</p>
+          <p>En los &uacute;ltimos a&ntilde;os integr&eacute; la inteligencia artificial como parte de mi pr&aacute;ctica profesional. Escribo, ense&ntilde;o y consulto sobre c&oacute;mo aplicar IA de forma concreta y sostenible en el trabajo de proyectos.</p>
+          <a href="/sobre-mi" class="btn btn-outline" style="margin-top: 1rem;">Conocer m&aacute;s &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <section class="blog-newsletter">
-      <p class="newsletter-label">Newsletter</p>
-      <h2 class="newsletter-titulo">Recibí los próximos artículos</h2>
-      <p class="newsletter-desc">Sin spam. Solo cuando publico algo que vale la pena leer.</p>
-      <a href="/recursos#newsletter" class="btn-newsletter">Suscribirme →</a>
-    </section>
+  <!-- SERVICIOS -->
+  <section class="servicios">
+    <div class="container">
+      <p class="section-eyebrow">&iquest;En qu&eacute; puedo ayudarte?</p>
+      <h2 class="section-title">Servicios</h2>
+      <div class="servicios-grid">
 
-  </div>
+        <div class="servicio-card">
+          <h3 class="servicio-titulo">Consultor&iacute;a en gesti&oacute;n de proyectos</h3>
+          <p class="servicio-desc">Trabajo con equipos y organizaciones para estructurar, planificar y ejecutar proyectos con metodolog&iacute;as probadas. Predictivo, &aacute;gil o h&iacute;brido seg&uacute;n el contexto.</p>
+        </div>
+
+        <div class="servicio-card">
+          <h3 class="servicio-titulo">Capacitaci&oacute;n en IA para equipos</h3>
+          <p class="servicio-desc">Talleres y programas de formaci&oacute;n para integrar herramientas de inteligencia artificial en el trabajo diario de equipos de proyecto. Aplicaci&oacute;n concreta, sin tecnicismos.</p>
+        </div>
+
+        <div class="servicio-card">
+          <h3 class="servicio-titulo">Preparaci&oacute;n para la certificaci&oacute;n PMP&reg;</h3>
+          <p class="servicio-desc">Acompa&ntilde;amiento personalizado para profesionales que quieren obtener la certificaci&oacute;n PMP&reg;. Enfoque en comprensi&oacute;n real, no en memorizaci&oacute;n.</p>
+        </div>
+
+      </div>
+      <div class="servicios-cta">
+        <a href="/contacto" class="btn btn-primary">Hablemos de tu proyecto &rarr;</a>
+        <a href="/servicios" class="btn btn-outline">Ver todos los servicios</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- HERRAMIENTAS -->
+  <section class="herramientas" id="herramientas">
+    <div class="herramientas-inner">
+      <h2>Herramientas con las que trabajo</h2>
+      <p class="herramientas-intro">Gestiono proyectos con las plataformas que tu equipo ya usa o quiere adoptar.</p>
+
+      <div class="herramientas-grid">
+
+        <div class="herramientas-categoria">
+          <h3>Gesti&oacute;n de proyectos</h3>
+          <ul class="herramientas-lista">
+            <li>ClickUp</li>
+            <li>Notion</li>
+            <li>Trello</li>
+            <li>Asana</li>
+            <li>MS Project</li>
+          </ul>
+        </div>
+
+        <div class="herramientas-categoria">
+          <h3>Colaboraci&oacute;n</h3>
+          <ul class="herramientas-lista">
+            <li>Slack</li>
+            <li>Teams</li>
+            <li>Google Meet</li>
+            <li>Google Workspace</li>
+          </ul>
+        </div>
+
+        <div class="herramientas-categoria">
+          <h3>IA aplicada al trabajo</h3>
+          <ul class="herramientas-lista">
+            <li>Claude</li>
+            <li>ChatGPT</li>
+            <li>Copilot</li>
+            <li>Perplexity</li>
+          </ul>
+        </div>
+
+        <div class="herramientas-categoria">
+          <h3>Marcos de referencia</h3>
+          <ul class="herramientas-lista">
+            <li>PMBOK 8.&ordf; ed.</li>
+            <li>Scrum / Agile</li>
+            <li class="herramientas-cert">
+              <span class="cert-nombre">PMP&reg; certificada</span>
+              <span class="cert-meta">#1613335 &middot; desde 2013</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOG PREVIEW -->
+  <section class="blog-preview">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">&Uacute;ltimos art&iacute;culos</h2>
+        <a href="/blog" class="view-all">Ver todos &rarr;</a>
+      </div>
+      <div class="posts-grid">
+        {posts.map((post) => (
+          <a href={`/blog/${post.id.replace(/\.md$/, '')}`} class="post-card">
+            <div class="post-meta">
+              <span class="post-category">{post.data.category}</span>
+              <span class="post-date">{new Date(post.data.pubDate).toLocaleDateString('es-AR', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+            </div>
+            <h3 class="post-title">{post.data.title}</h3>
+            <p class="post-desc">{post.data.description}</p>
+            <span class="post-link">Leer art&iacute;culo &rarr;</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
 </BaseLayout>
 
 <style>
-  .page-container {
-    padding-top: var(--space-lg);
-    padding-bottom: var(--space-xl);
+  .hero {
+    padding: var(--space-xl) 0 var(--space-lg);
   }
 
-  .page-header {
-    margin-bottom: var(--space-lg);
-    max-width: 600px;
+  .hero-inner {
+    max-width: 620px;
   }
 
-  .page-eyebrow {
-    font-size: 0.75rem;
+  .hero-eyebrow {
+    font-size: 0.8rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--color-accent);
+    margin-bottom: var(--space-sm);
+  }
+
+  .hero-headline {
     margin-bottom: 0.5rem;
   }
 
-  .page-lead {
+  .hero-credenciales {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+    margin-bottom: var(--space-sm);
+  }
+
+  .hero-sub {
     font-size: 1.1rem;
     color: var(--color-muted);
-    margin-top: var(--space-sm);
-    margin-bottom: 0;
+    margin-bottom: var(--space-md);
+    max-width: 520px;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  /* Resultados */
+  .resultados {
+    padding: var(--space-md) 0;
+    background-color: var(--color-accent);
+  }
+
+  .resultados-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--space-md);
+  }
+
+  .resultado-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .resultado-icono {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+  }
+
+  .resultado-texto {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #FFFFFF;
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  /* About */
+  .about {
+    padding: var(--space-lg) 0;
+    background-color: var(--color-surface);
+  }
+
+  .about-inner {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: var(--space-lg);
+    align-items: center;
+  }
+
+  .about-foto {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    object-position: top;
+    border-radius: var(--radius);
+    display: block;
+  }
+
+  .about-texto {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .about-texto p {
+    color: var(--color-muted);
     line-height: 1.7;
+    margin: 0;
   }
 
-  .posts-list {
-    max-width: 720px;
+  .section-title {
+    margin-bottom: var(--space-sm);
   }
 
-  /* NEWSLETTER */
-  .blog-newsletter {
-    max-width: 720px;
-    margin-top: var(--space-lg);
-    padding: 2rem;
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: 12px;
-    border-left: 3px solid var(--color-accent);
-  }
-
-  .newsletter-label {
+  .section-eyebrow {
     font-size: 0.75rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--color-accent);
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.25rem;
   }
 
-  .newsletter-titulo {
-    font-family: 'Fraunces', serif;
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: var(--color-text);
-    margin-bottom: 0.4rem;
+  /* Servicios */
+  .servicios {
+    padding: var(--space-lg) 0;
+    background-color: var(--color-bg);
   }
 
-  .newsletter-desc {
-    color: var(--color-muted);
-    font-size: 0.92rem;
-    margin-bottom: 1rem;
+  .servicios-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: var(--space-md);
+    margin-top: var(--space-md);
   }
 
-  .btn-newsletter {
-    display: inline-block;
-    background: var(--color-accent);
-    color: #fff;
-    font-family: 'Inter', sans-serif;
+  .servicio-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .servicio-titulo {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
     font-weight: 600;
-    font-size: 0.9rem;
-    padding: 0.65rem 1.4rem;
-    border-radius: 6px;
-    text-decoration: none;
-    transition: background 0.2s ease;
+    color: var(--color-text);
+    line-height: 1.3;
   }
 
-  .btn-newsletter:hover {
-    background: #1B4332;
+  .servicio-desc {
+    font-size: 0.9rem;
+    color: var(--color-muted);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .servicios-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: var(--space-lg);
+  }
+
+  /* Blog preview */
+  .blog-preview {
+    padding: var(--space-lg) 0 var(--space-xl);
+    background-color: var(--color-surface);
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: var(--space-md);
+  }
+
+  .view-all {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-accent);
+  }
+
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-md);
+  }
+
+  .post-card {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-decoration: none;
+    transition: border-color 0.2s;
+  }
+
+  .post-card:hover {
+    border-color: var(--color-accent);
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .post-category {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-accent);
+    background: var(--color-surface);
+    padding: 2px 8px;
+    border-radius: 20px;
+  }
+
+  .post-date {
+    font-size: 0.75rem;
+    color: var(--color-muted);
+  }
+
+  .post-title {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-text);
+    line-height: 1.3;
+    margin: 0.25rem 0;
+  }
+
+  .post-desc {
+    font-size: 0.875rem;
+    color: var(--color-muted);
+    line-height: 1.6;
+    flex: 1;
+    margin: 0;
+  }
+
+  .post-link {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    margin-top: 0.5rem;
+  }
+
+  /* Responsive */
+  @media (max-width: 700px) {
+    .about-inner {
+      grid-template-columns: 1fr;
+    }
+
+    .about-foto {
+      aspect-ratio: 4 / 3;
+      max-height: 320px;
+    }
+
+    .resultados-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-sm);
+    }
+
+    .posts-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .servicios-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .servicios-cta {
+      flex-direction: column;
+    }
   }
 </style>
