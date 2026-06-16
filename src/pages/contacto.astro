@@ -3,36 +3,45 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout
-  title="Contacto"
+  title="Contacto — Valeria Yashan"
   description="Contacto profesional de Valeria Yashan — Project Manager, consultora en IA y autora."
 >
   <div class="container page-container">
+
     <header class="page-header mark-accent">
       <p class="page-eyebrow">Contacto</p>
       <h1>Conversemos</h1>
-      <p class="page-lead">
-        Para consultas profesionales, colaboraciones, charlas o cualquier pregunta
-        sobre el libro, podés escribirme por LinkedIn o por mail.
-      </p>
+      <p class="page-lead">Si tenés una consulta profesional, una propuesta de colaboración o querés que acompañe a tu equipo, escribime. Respondo en menos de 48 horas.</p>
     </header>
 
     <section class="contact-options">
+
       <div class="contact-card">
-        <p class="contact-label">LinkedIn</p>
-        <p class="contact-desc">La forma más rápida de contactarme para consultas profesionales.</p>
-        <a href="https://www.linkedin.com/in/valeriayashan" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Ir a LinkedIn →</a>
+        <p class="contact-label">WhatsApp</p>
+        <p class="contact-desc">La forma más rápida de contactarme. Para consultas concretas y propuestas de trabajo.</p>
+        <a href="https://wa.me/541140791007" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Escribir por WhatsApp →</a>
       </div>
 
       <div class="contact-card">
         <p class="contact-label">Email</p>
-        <p class="contact-desc">Para consultas formales o propuestas de colaboración.</p>
+        <p class="contact-desc">Para propuestas formales, presupuestos o consultas que requieran más detalle.</p>
         <a href="mailto:hola@valeriayashan.com.ar" class="btn btn-outline">hola@valeriayashan.com.ar</a>
       </div>
+
+      <div class="contact-card">
+        <p class="contact-label">LinkedIn</p>
+        <p class="contact-desc">Para conectar profesionalmente, seguir mi actividad o enviar un mensaje por la plataforma.</p>
+        <a href="https://www.linkedin.com/in/valeriayashan" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Ver perfil en LinkedIn →</a>
+      </div>
+
     </section>
 
-    <section class="contact-note">
-      <p>También podés encontrarme en <a href="/blog">el blog</a> o acceder al <a href="/libro">material del libro</a>.</p>
+    <section class="contact-cta">
+      <h2 class="contact-cta-titulo">¿No sabés por dónde empezar?</h2>
+      <p class="contact-cta-texto">Contame brevemente qué necesita tu equipo u organización y te cuento cómo puedo ayudarte. Sin compromiso.</p>
+      <a href="https://wa.me/541140791007?text=Hola%20Valeria%2C%20me%20contacto%20desde%20tu%20web%20porque%20necesito..." target="_blank" rel="noopener noreferrer" class="btn btn-primary">Iniciar conversación →</a>
     </section>
+
   </div>
 </BaseLayout>
 
@@ -44,6 +53,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   .page-header {
     margin-bottom: var(--space-lg);
+    max-width: 600px;
   }
 
   .page-eyebrow {
@@ -56,18 +66,18 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
 
   .page-lead {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     color: var(--color-muted);
     margin-top: var(--space-sm);
     margin-bottom: 0;
-    max-width: 520px;
+    line-height: 1.7;
   }
 
   .contact-options {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     gap: var(--space-md);
-    margin-bottom: var(--space-lg);
+    margin-bottom: var(--space-xl);
   }
 
   .contact-card {
@@ -75,6 +85,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     padding: var(--space-md);
     border-radius: var(--radius);
     border: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
   }
 
   .contact-label {
@@ -83,23 +96,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--color-accent);
-    margin-bottom: 0.5rem;
+    margin: 0;
   }
 
   .contact-desc {
     color: var(--color-muted);
     font-size: 0.9rem;
-    margin-bottom: var(--space-sm);
-  }
-
-  .contact-note {
-    color: var(--color-muted);
-    font-size: 0.9rem;
-  }
-
-  @media (max-width: 600px) {
-    .contact-options {
-      grid-template-columns: 1fr;
-    }
-  }
-</style>
+    line-height: 1.6;
+    flex:
