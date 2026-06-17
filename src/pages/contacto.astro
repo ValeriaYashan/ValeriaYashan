@@ -8,38 +8,53 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 >
   <div class="container page-container">
 
-    <header class="page-header mark-accent">
+    <header class="page-header">
       <p class="page-eyebrow">Contacto</p>
       <h1>Conversemos</h1>
       <p class="page-lead">Si tenés una consulta profesional, una propuesta de colaboración o querés que acompañe a tu equipo, escribime. Respondo en menos de 48 horas.</p>
     </header>
 
-    <section class="contact-options">
+    <section class="contact-lista">
 
-      <div class="contact-card">
-        <p class="contact-label">WhatsApp</p>
-        <p class="contact-desc">La forma más rápida de contactarme. Para consultas concretas y propuestas de trabajo.</p>
-        <a href="https://wa.me/541140791007" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Escribir por WhatsApp →</a>
-      </div>
+      <a href="https://wa.me/541140791007" target="_blank" rel="noopener noreferrer" class="contact-item">
+        <div class="contact-icono">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21"/><path d="M9 10c0 .552.493 1 1 1.5s1 1.5 1 2.5c0 .552-.448 1-1 1h-1c-.552 0-1-.448-1-1v-2"/><path d="M15 10h-1c-.552 0-1 .448-1 1v1c0 .552.448 1 1 1h1c.552 0 1 .448 1 1v1c0 .552-.448 1-1 1h-1"/></svg>
+        </div>
+        <div class="contact-info">
+          <p class="contact-titulo">WhatsApp</p>
+          <p class="contact-desc">La forma más rápida de contactarme. Para consultas concretas y propuestas de trabajo.</p>
+        </div>
+        <span class="contact-accion">Escribir →</span>
+      </a>
 
-      <div class="contact-card">
-        <p class="contact-label">Email</p>
-        <p class="contact-desc">Para propuestas formales, presupuestos o consultas que requieran más detalle.</p>
-        <a href="mailto:hola@valeriayashan.com.ar" class="btn btn-outline">hola@valeriayashan.com.ar</a>
-      </div>
+      <a href="mailto:hola@valeriayashan.com.ar" class="contact-item">
+        <div class="contact-icono">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
+        </div>
+        <div class="contact-info">
+          <p class="contact-titulo">Email</p>
+          <p class="contact-desc">hola@valeriayashan.com.ar — Para propuestas formales o presupuestos detallados.</p>
+        </div>
+        <span class="contact-accion">Enviar →</span>
+      </a>
 
-      <div class="contact-card">
-        <p class="contact-label">LinkedIn</p>
-        <p class="contact-desc">Para conectar profesionalmente, seguir mi actividad o enviar un mensaje por la plataforma.</p>
-        <a href="https://www.linkedin.com/in/valeriayashan" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Ver perfil en LinkedIn →</a>
-      </div>
+      <a href="https://www.linkedin.com/in/valeriayashan" target="_blank" rel="noopener noreferrer" class="contact-item">
+        <div class="contact-icono">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </div>
+        <div class="contact-info">
+          <p class="contact-titulo">LinkedIn</p>
+          <p class="contact-desc">Para conectar profesionalmente, seguir mi actividad o enviar un mensaje por la plataforma.</p>
+        </div>
+        <span class="contact-accion">Ver perfil →</span>
+      </a>
 
     </section>
 
     <section class="contact-cta">
       <h2 class="contact-cta-titulo">¿No sabés por dónde empezar?</h2>
       <p class="contact-cta-texto">Contame brevemente qué necesita tu equipo u organización y te cuento cómo puedo ayudarte. Sin compromiso.</p>
-      <a href="https://wa.me/541140791007?text=Hola%20Valeria%2C%20me%20contacto%20desde%20tu%20web%20porque%20necesito..." target="_blank" rel="noopener noreferrer" class="btn btn-primary">Iniciar conversación →</a>
+      <a href="https://wa.me/541140791007?text=Hola%20Valeria%2C%20me%20contacto%20desde%20tu%20web%20porque%20necesito..." target="_blank" rel="noopener noreferrer" class="btn-verde">Iniciar conversación →</a>
     </section>
 
   </div>
@@ -47,12 +62,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <style>
   .page-container {
-    padding-top: var(--space-lg);
-    padding-bottom: var(--space-xl);
+    padding-top: 2.5rem;
+    padding-bottom: 4rem;
   }
 
   .page-header {
-    margin-bottom: var(--space-lg);
+    margin-bottom: 2.5rem;
     max-width: 600px;
   }
 
@@ -65,42 +80,146 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     margin-bottom: 0.5rem;
   }
 
+  .page-header h1 {
+    font-family: 'Fraunces', serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--color-text);
+    margin-bottom: 0.75rem;
+  }
+
   .page-lead {
     font-size: 1.05rem;
     color: var(--color-muted);
-    margin-top: var(--space-sm);
-    margin-bottom: 0;
     line-height: 1.7;
-  }
-
-  .contact-options {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-md);
-    margin-bottom: var(--space-xl);
-  }
-
-  .contact-card {
-    background: var(--color-surface);
-    padding: var(--space-md);
-    border-radius: var(--radius);
-    border: 1px solid var(--color-border);
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .contact-label {
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--color-accent);
     margin: 0;
   }
 
+  /* ── LISTA DE CANALES ── */
+  .contact-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 3rem;
+    max-width: 680px;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    text-decoration: none;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .contact-item:hover {
+    border-color: var(--color-accent);
+    background: #ffffff;
+  }
+
+  .contact-icono {
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    background: #E8F5EE;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--color-accent);
+  }
+
+  .contact-info {
+    flex: 1;
+  }
+
+  .contact-titulo {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin: 0 0 0.25rem;
+  }
+
   .contact-desc {
+    font-size: 0.85rem;
     color: var(--color-muted);
-    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .contact-accion {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  /* ── CTA FINAL ── */
+  .contact-cta {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    max-width: 600px;
+  }
+
+  .contact-cta-titulo {
+    font-family: 'Fraunces', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin: 0;
+  }
+
+  .contact-cta-texto {
+    color: var(--color-muted);
+    font-size: 0.95rem;
     line-height: 1.6;
-    flex:
+    margin: 0;
+  }
+
+  .btn-verde {
+    display: inline-flex;
+    align-items: center;
+    background: var(--color-accent);
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 0.7rem 1.5rem;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: opacity 0.2s;
+    align-self: flex-start;
+    min-height: 44px;
+  }
+
+  .btn-verde:hover { opacity: 0.88; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 700px) {
+    .page-header h1 { font-size: 1.8rem; }
+
+    .contact-item {
+      padding: 1rem;
+      gap: 0.75rem;
+    }
+
+    .contact-accion {
+      display: none;
+    }
+
+    .contact-cta {
+      padding: 1.5rem;
+    }
+  }
+</style>
