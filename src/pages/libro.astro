@@ -12,7 +12,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <p class="bajada">Recursos para project managers que quieren certificarse, liderar mejor e incorporar IA a su trabajo.</p>
   </section>
 
-  <!-- SECCIÓN: LIBROS EN AMAZON -->
+  <!-- SECCIÓN: GUÍAS PMP -->
   <section class="seccion">
     <h2>Guías de preparación para la certificación PMP®</h2>
     <p class="seccion-descripcion">Tres tomos diseñados para que llegues al examen con dominio real del contenido, no solo con memorización. Disponibles en Amazon en formato impreso y Kindle.</p>
@@ -20,7 +20,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="grid-libros">
 
       <div class="card-libro">
-        <img src="/images/cover-tomo-1.jpg" alt="Portada Tomo I — Dirección de Proyectos" class="cover" />
+        <div class="cover-wrapper">
+          <img src="/images/cover-tomo-1.jpg" alt="Tomo I — Dirección de Proyectos: Guía de Preparación para la Certificación PMP" class="cover" loading="lazy" />
+        </div>
         <div class="card-info">
           <h3>Tomo I</h3>
           <p>Fundamentos, marcos de trabajo y dominios de desempeño. La base para entender el nuevo enfoque del examen PMP®.</p>
@@ -29,7 +31,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
 
       <div class="card-libro">
-        <img src="/images/cover-tomo-2.jpg" alt="Portada Tomo II — Dirección de Proyectos" class="cover" />
+        <div class="cover-wrapper">
+          <img src="/images/cover-tomo-2.jpg" alt="Tomo II — Dirección de Proyectos: Proceso, Entorno de Negocio y Herramientas" class="cover" loading="lazy" />
+        </div>
         <div class="card-info">
           <h3>Tomo II</h3>
           <p>Predictivo, ágil e híbrido. Cómo adaptar el enfoque al contexto del proyecto y al tipo de pregunta del examen.</p>
@@ -38,7 +42,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
 
       <div class="card-libro">
-        <img src="/images/cover-tomo-3.jpg" alt="Portada Tomo III — Dirección de Proyectos" class="cover" />
+        <div class="cover-wrapper">
+          <img src="/images/cover-tomo-3.jpg" alt="Tomo III — Dirección de Proyectos: Simulacros y Repaso Final PMP" class="cover" loading="lazy" />
+        </div>
         <div class="card-info">
           <h3>Tomo III</h3>
           <p>Simulacros, estrategias de examen y repaso final. Para llegar el día del examen con confianza y claridad.</p>
@@ -62,7 +68,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <p class="seccion-descripcion">Un libro diferente. Para las project managers que también son madres, y para quienes quieren entender cómo se lidera un proyecto cuando la vida personal también exige gestión.</p>
 
     <div class="card-libro card-libro--horizontal">
-      <img src="/images/cover-pm-mom.jpg" alt="Portada PM MOM" class="cover" />
+      <div class="cover-wrapper-horizontal">
+        <img src="/images/cover-pm-mom.jpg" alt="PM MOM — Valeria Yashan: maternidad, liderazgo y gestión de proyectos" class="cover-horizontal" loading="lazy" />
+      </div>
       <div class="card-info">
         <p>Una mirada honesta sobre maternidad, liderazgo y gestión de proyectos. Porque los proyectos más importantes no siempre están en el trabajo.</p>
         <a href="https://www.amazon.com/gp/product/B0H34V2L3S" target="_blank" rel="noopener" class="btn-amazon">Ver en Amazon</a>
@@ -76,27 +84,52 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <section class="seccion seccion-destacada">
     <div class="badge">Producto digital</div>
     <h2>Pack de Prompts de IA para Project Managers</h2>
-    <p class="seccion-descripcion">10 prompts listos para usar con ChatGPT, Claude o Gemini. Diseñados específicamente para project managers: gestión de riesgos, comunicación con stakeholders, reportes, retrospectivas y más.</p>
 
-    <ul class="lista-features">
-      <li>✓ 10 prompts listos para copiar y pegar</li>
-      <li>✓ Adaptados al contexto real de PM</li>
-      <li>✓ Compatibles con ChatGPT, Claude y Gemini</li>
-      <li>✓ PDF descargable, acceso inmediato</li>
-      <li>✓ Guía de uso incluida</li>
-    </ul>
+    <div class="pack-layout">
 
-    <div class="precio-bloque">
-      <span class="precio">USD 12</span>
-      <a href="https://PLACEHOLDER-GUMROAD.gumroad.com/l/PLACEHOLDER" target="_blank" rel="noopener" class="btn-primario">Comprar ahora — USD 12</a>
+      <div class="mockup-contenedor">
+        <div class="mockup-pagina">
+          <div class="mockup-barra-verde"></div>
+          <div class="mockup-barra-gris"></div>
+          <div class="mockup-numero">10</div>
+          <div class="mockup-subtitulo">Prompts de IA<br/>para Project Managers</div>
+          <div class="mockup-lineas">
+            <div class="mockup-linea"></div>
+            <div class="mockup-linea" style="width: 60%"></div>
+            <div class="mockup-linea"></div>
+            <div class="mockup-linea" style="width: 75%"></div>
+            <div class="mockup-linea"></div>
+          </div>
+          <div class="mockup-autor">Valeria Yashan · PMP®</div>
+        </div>
+      </div>
+
+      <div class="pack-info">
+        <p class="seccion-descripcion">10 prompts listos para usar con ChatGPT, Claude o Gemini. Diseñados específicamente para project managers: gestión de riesgos, comunicación con stakeholders, reportes, retrospectivas y más.</p>
+
+        <ul class="lista-features">
+          <li>✓ 10 prompts listos para copiar y pegar</li>
+          <li>✓ Adaptados al contexto real de PM</li>
+          <li>✓ Compatibles con ChatGPT, Claude y Gemini</li>
+          <li>✓ PDF descargable, acceso inmediato</li>
+          <li>✓ Guía de uso incluida</li>
+        </ul>
+
+        <div class="precio-bloque">
+          <span class="precio">USD 12</span>
+          <a href="https://PLACEHOLDER-GUMROAD.gumroad.com/l/PLACEHOLDER" target="_blank" rel="noopener" class="btn-primario">Comprar ahora — USD 12</a>
+        </div>
+
+        <p class="nota-pago">Pago seguro vía Gumroad. Recibís el PDF por email de forma inmediata.</p>
+      </div>
+
     </div>
-
-    <p class="nota-pago">Pago seguro vía Gumroad. Recibís el PDF por email de forma inmediata.</p>
   </section>
 
 </BaseLayout>
 
 <style>
+  /* ── HERO ── */
   .hero {
     text-align: center;
     padding: 3rem 1rem 2rem;
@@ -118,6 +151,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     line-height: 1.6;
   }
 
+  /* ── SECCIONES ── */
   .seccion {
     max-width: 900px;
     margin: 0 auto;
@@ -139,13 +173,22 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     max-width: 650px;
   }
 
+  .separador {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  /* ── GRID 3 COLUMNAS FIJAS ── */
   .grid-libros {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
     margin-bottom: 2rem;
   }
 
+  /* ── CARD VERTICAL ── */
   .card-libro {
     background: var(--color-surface);
     border: 1px solid var(--color-border);
@@ -155,25 +198,23 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     flex-direction: column;
   }
 
-  .card-libro--horizontal {
-    flex-direction: row;
-    max-width: 600px;
-    gap: 1.5rem;
-    align-items: flex-start;
+  .cover-wrapper {
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    height: 260px;
+    border-bottom: 1px solid var(--color-border);
   }
 
   .cover {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    display: block;
-  }
-
-  .card-libro--horizontal .cover {
-    width: 140px;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
     height: auto;
-    border-radius: 4px;
-    flex-shrink: 0;
+    object-fit: contain;
+    display: block;
   }
 
   .card-info {
@@ -197,10 +238,37 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     font-size: 0.9rem;
     line-height: 1.6;
     margin: 0;
+    flex: 1;
   }
 
+  /* ── CARD HORIZONTAL (PM MOM) ── */
+  .card-libro--horizontal {
+    flex-direction: row;
+    max-width: 620px;
+    overflow: hidden;
+  }
+
+  .cover-wrapper-horizontal {
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem 1.25rem;
+    border-right: 1px solid var(--color-border);
+    flex-shrink: 0;
+  }
+
+  .cover-horizontal {
+    width: 160px;
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
+
+  /* ── BOTONES ── */
   .btn-amazon {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     background: #FF9900;
     color: #fff;
     font-family: 'Inter', sans-serif;
@@ -209,15 +277,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     padding: 0.6rem 1.2rem;
     border-radius: 6px;
     text-decoration: none;
-    text-align: center;
     transition: opacity 0.2s;
     align-self: flex-start;
+    min-height: 44px;
   }
 
-  .btn-amazon:hover {
-    opacity: 0.88;
-  }
+  .btn-amazon:hover { opacity: 0.88; }
 
+  /* ── SERIE COMPLETA ── */
   .serie-completa {
     background: var(--color-surface);
     border: 1px solid var(--color-border);
@@ -235,14 +302,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     font-size: 0.95rem;
   }
 
-  .separador {
-    border: none;
-    border-top: 1px solid var(--color-border);
-    max-width: 900px;
-    margin: 0 auto;
-  }
-
-  /* Sección destacada — Pack de Prompts */
+  /* ── SECCIÓN DESTACADA ── */
   .seccion-destacada {
     background: var(--color-surface);
     border: 1px solid var(--color-border);
@@ -264,6 +324,92 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     padding: 0.3rem 0.75rem;
     border-radius: 4px;
     margin-bottom: 1rem;
+  }
+
+  /* ── LAYOUT PACK: mockup + info ── */
+  .pack-layout {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 2.5rem;
+    align-items: start;
+    margin-top: 1.5rem;
+  }
+
+  /* ── MOCKUP PDF ── */
+  .mockup-contenedor {
+    width: 160px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+  }
+
+  .mockup-pagina {
+    background: #ffffff;
+    border: 1px solid #e0dfdb;
+    border-radius: 6px;
+    padding: 1.25rem 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    box-shadow: 6px 6px 0 #d8d8d8;
+  }
+
+  .mockup-barra-verde {
+    height: 5px;
+    width: 55%;
+    background: #2D6A4F;
+    border-radius: 2px;
+  }
+
+  .mockup-barra-gris {
+    height: 3px;
+    width: 85%;
+    background: #e0dfdb;
+    border-radius: 2px;
+    margin-bottom: 0.25rem;
+  }
+
+  .mockup-numero {
+    font-family: 'Fraunces', serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #2D6A4F;
+    line-height: 1;
+  }
+
+  .mockup-subtitulo {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #1A1A1A;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    line-height: 1.4;
+  }
+
+  .mockup-lineas {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    margin: 0.5rem 0;
+  }
+
+  .mockup-linea {
+    height: 2.5px;
+    width: 100%;
+    background: #e0dfdb;
+    border-radius: 1px;
+  }
+
+  .mockup-autor {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.6rem;
+    color: #6B6B6B;
+    margin-top: 0.25rem;
+  }
+
+  /* ── INFO PACK ── */
+  .pack-info .seccion-descripcion {
+    margin-bottom: 1.5rem;
   }
 
   .lista-features {
@@ -296,7 +442,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
 
   .btn-primario {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     background: var(--color-accent);
     color: #fff;
     font-family: 'Inter', sans-serif;
@@ -306,11 +453,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     border-radius: 6px;
     text-decoration: none;
     transition: opacity 0.2s;
+    min-height: 44px;
   }
 
-  .btn-primario:hover {
-    opacity: 0.88;
-  }
+  .btn-primario:hover { opacity: 0.88; }
 
   .nota-pago {
     font-size: 0.85rem;
@@ -318,11 +464,47 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     margin: 0;
   }
 
-  @media (max-width: 600px) {
+  /* ── RESPONSIVE ── */
+  @media (max-width: 700px) {
     .hero h1 { font-size: 1.8rem; }
-    .card-libro--horizontal { flex-direction: column; }
-    .card-libro--horizontal .cover { width: 100%; height: 200px; object-fit: cover; }
-    .seccion-destacada { padding: 1.5rem; }
-    .precio-bloque { flex-direction: column; align-items: flex-start; gap: 1rem; }
+
+    .grid-libros {
+      grid-template-columns: 1fr;
+    }
+
+    .cover-wrapper {
+      height: 220px;
+    }
+
+    .card-libro--horizontal {
+      flex-direction: column;
+    }
+
+    .cover-wrapper-horizontal {
+      border-right: none;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .cover-horizontal {
+      width: 130px;
+    }
+
+    .seccion-destacada {
+      padding: 1.5rem;
+    }
+
+    .pack-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .mockup-contenedor {
+      display: none;
+    }
+
+    .precio-bloque {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
   }
 </style>
