@@ -1,0 +1,563 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Asana para Project Managers | Valeria Yashan" description="Guía práctica de Asana para PMs: configuración, gestión de tareas, seguimiento de equipo y errores frecuentes. Con ejemplos reales de gestión de proyectos.">
+
+  <div class="guia-container">
+
+    <nav class="breadcrumb">
+      <a href="/herramientas">Herramientas</a>
+      <span>→</span>
+      <span>Asana para Project Managers</span>
+    </nav>
+
+    <header class="guia-header">
+      <span class="guia-tag">Gestión de tareas</span>
+      <h1>Asana para Project Managers</h1>
+      <p class="guia-lead">Guía práctica para configurar y usar Asana en la gestión de proyectos reales. Desde cero, con ejemplos concretos y sin rodeos.</p>
+      <div class="guia-meta">
+        <span>Nivel: inicial</span>
+        <span>·</span>
+        <span>Herramienta: Asana (plan gratuito)</span>
+        <span>·</span>
+        <span>Autora: Valeria Yashan</span>
+      </div>
+    </header>
+
+    <div class="descarga-banner">
+      <div class="descarga-info">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        <div>
+          <p class="descarga-titulo">Descargá esta guía en PDF</p>
+          <p class="descarga-subtitulo">Guía de Asana para Project Managers · PDF · Gratis</p>
+        </div>
+      </div>
+      <a href="/recursos/guia-asana-pm.pdf" download class="btn-descarga">
+        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Descargar PDF
+      </a>
+    </div>
+
+    <nav class="tabla-contenidos">
+      <p class="toc-titulo">Contenido de esta guía</p>
+      <ol>
+        <li><a href="#que-es-asana">Qué es Asana y para qué sirve en PM</a></li>
+        <li><a href="#configuracion-inicial">Configuración inicial</a></li>
+        <li><a href="#primer-proyecto">Crear tu primer proyecto</a></li>
+        <li><a href="#dia-a-dia">Gestión del día a día</a></li>
+        <li><a href="#seguimiento">Seguimiento y reportes</a></li>
+        <li><a href="#funciones-avanzadas">Funciones avanzadas para PMs</a></li>
+        <li><a href="#errores-frecuentes">Errores frecuentes y cómo evitarlos</a></li>
+      </ol>
+    </nav>
+
+    <div class="guia-contenido">
+
+      <section id="que-es-asana">
+        <h2>1. Qué es Asana y para qué sirve en gestión de proyectos</h2>
+        <p>Asana es una herramienta de gestión de trabajo en equipo. Permite organizar tareas, asignar responsables, establecer fechas límite y hacer seguimiento del avance de un proyecto desde un solo lugar.</p>
+        <p>Para un Project Manager, el valor principal de Asana es eliminar la dispersión: nada queda en el email, nada queda en mensajes de WhatsApp, nada queda en hojas de cálculo separadas. Todo el trabajo del equipo vive en un mismo sistema.</p>
+
+        <h3>¿Qué problemas resuelve?</h3>
+        <ul>
+          <li>Falta de visibilidad sobre quién hace qué y para cuándo.</li>
+          <li>Reuniones de seguimiento que podrían ser un dashboard.</li>
+          <li>Tareas que caen entre las grietas porque nadie las tiene asignadas.</li>
+          <li>Dificultad para identificar bloqueos y dependencias entre actividades.</li>
+        </ul>
+
+        <h3>¿Qué no resuelve?</h3>
+        <ul>
+          <li>No reemplaza la planificación estratégica del proyecto.</li>
+          <li>No funciona si el equipo no la usa de forma consistente.</li>
+          <li>No es un sustituto de la comunicación entre personas.</li>
+        </ul>
+
+        <h3>Asana vs Excel: el salto que vale la pena dar</h3>
+        <p>Excel permite registrar tareas, pero no fue diseñado para gestionar trabajo en equipo en tiempo real. Asana sí. La diferencia más concreta: en Asana cada tarea tiene un responsable, una fecha, un estado y un historial de conversación. En Excel, esa información está dispersa o directamente no existe.</p>
+
+        <div class="nota-practica">
+          <p><strong>Nota práctica:</strong> El plan gratuito de Asana permite hasta 10 usuarios y cubre la mayoría de las funciones que necesita un PM para gestionar proyectos reales. Esta guía usa solo el plan gratuito.</p>
+        </div>
+      </section>
+
+      <section id="configuracion-inicial">
+        <h2>2. Configuración inicial: cuenta, workspace y equipo</h2>
+        <p>Antes de crear el primer proyecto, hay que entender la estructura de Asana y tomar algunas decisiones de configuración.</p>
+
+        <h3>Crear la cuenta</h3>
+        <ol>
+          <li>Ingresá a <strong>asana.com</strong> y hacé clic en "Empezar gratis".</li>
+          <li>Registrate con tu email profesional. Asana asocia automáticamente cuentas del mismo dominio, así que si tu equipo usa el mismo dominio de empresa, se van a poder encontrar fácilmente.</li>
+          <li>Completá tu nombre y el nombre de tu organización o equipo.</li>
+        </ol>
+
+        <h3>Entender el workspace</h3>
+        <p>Un workspace es el espacio de trabajo general de tu organización en Asana. Dentro de un workspace podés tener múltiples proyectos, equipos y miembros.</p>
+        <p>Si trabajás de forma independiente o con clientes distintos, podés tener un workspace personal y workspaces separados por cliente. Para la mayoría de los casos, un solo workspace es suficiente.</p>
+
+        <h3>Invitar al equipo</h3>
+        <ol>
+          <li>Desde el panel lateral izquierdo, buscá la opción "Invitar a miembros".</li>
+          <li>Ingresá los emails de las personas que van a trabajar en el proyecto.</li>
+          <li>Asigná el rol: miembro o invitado. Los invitados solo pueden ver los proyectos a los que fueron añadidos explícitamente.</li>
+        </ol>
+
+        <div class="nota-practica">
+          <p><strong>Decisión importante:</strong> Antes de invitar a todo el equipo, configurá al menos un proyecto de prueba. Así cuando lleguen ya tienen algo concreto donde trabajar, no una pantalla vacía.</p>
+        </div>
+      </section>
+
+      <section id="primer-proyecto">
+        <h2>3. Crear tu primer proyecto</h2>
+        <p>Un proyecto en Asana representa un conjunto de trabajo con un objetivo definido y una fecha de cierre. Puede ser el lanzamiento de un producto, la implementación de un sistema, una campaña o cualquier iniciativa con tareas y responsables.</p>
+
+        <h3>Cómo crear el proyecto</h3>
+        <ol>
+          <li>En el panel lateral, hacé clic en el ícono "+" junto a "Proyectos".</li>
+          <li>Elegí "Proyecto en blanco" para empezar desde cero.</li>
+          <li>Asigná un nombre claro y descriptivo. Ejemplo: "Implementación ERP — Q3 2026".</li>
+          <li>Elegí la vista inicial.</li>
+        </ol>
+
+        <h3>Elegir la vista correcta</h3>
+        <p>Asana ofrece tres vistas principales. Como PM, usarás las tres en distintos momentos:</p>
+        <ul>
+          <li><strong>Lista:</strong> ideal para el día a día. Mostrás todas las tareas con su responsable, fecha y estado. Es la vista más usada.</li>
+          <li><strong>Tablero:</strong> vista tipo Kanban. Útil para proyectos con etapas claras: Por hacer / En progreso / Completado.</li>
+          <li><strong>Cronograma:</strong> vista tipo Gantt. Muestra las tareas en el tiempo y sus dependencias. Muy útil para planificación y seguimiento de plazos.</li>
+        </ul>
+
+        <h3>Crear las primeras tareas</h3>
+        <ol>
+          <li>Hacé clic en "Agregar tarea" dentro del proyecto.</li>
+          <li>Asigná un nombre concreto y accionable. Mal ejemplo: "Reunión". Buen ejemplo: "Reunión de kick-off con el equipo técnico".</li>
+          <li>Asignale un responsable: la persona que tiene que completar la tarea.</li>
+          <li>Asignale una fecha límite.</li>
+          <li>Agregá una descripción si la tarea necesita contexto adicional.</li>
+        </ol>
+
+        <div class="nota-practica">
+          <p><strong>Regla de oro:</strong> Cada tarea debe tener exactamente un responsable. No "el equipo". No "Juan y María". Una persona. Esa persona es quien responde por esa tarea.</p>
+        </div>
+      </section>
+
+      <section id="dia-a-dia">
+        <h2>4. Gestión del día a día</h2>
+        <p>Asana solo funciona si el equipo la usa de forma consistente. Estas son las prácticas que hacen la diferencia entre una herramienta abandonada y un sistema que realmente funciona.</p>
+
+        <h3>Actualizar el estado de las tareas</h3>
+        <p>Cada miembro del equipo debe actualizar el estado de sus tareas al menos una vez por día. Los estados básicos son: pendiente, en progreso y completada. Cuando una tarea se completa, se marca con el tilde verde.</p>
+
+        <h3>Comentar dentro de las tareas</h3>
+        <p>Las conversaciones sobre una tarea deben ocurrir dentro de la tarea, no en WhatsApp ni por email. Esto mantiene el contexto junto al trabajo y permite que cualquier persona pueda entender el historial sin preguntar.</p>
+
+        <h3>Usar la bandeja de entrada</h3>
+        <p>Asana tiene una bandeja de entrada (ícono de campana) donde llegan todas las notificaciones: tareas asignadas, comentarios y cambios de estado. Como PM, revisala al inicio y al cierre de cada jornada.</p>
+
+        <h3>Configurar notificaciones</h3>
+        <p>Por defecto, Asana envía muchas notificaciones por email. Recomiendo ajustar esto desde Configuración → Notificaciones y activar solo las que realmente importan: tareas asignadas a vos y menciones directas.</p>
+      </section>
+
+      <section id="seguimiento">
+        <h2>5. Seguimiento y reportes</h2>
+        <p>Una de las mayores ventajas de Asana sobre Excel es la posibilidad de hacer seguimiento del proyecto sin necesidad de armar reportes manuales.</p>
+
+        <h3>Estado del proyecto</h3>
+        <p>Asana permite publicar actualizaciones de estado del proyecto directamente en la herramienta. Desde la pestaña "Resumen" del proyecto, podés publicar un estado semanal con semáforo (en camino, en riesgo, retrasado) y un comentario breve. Esto reemplaza el típico email de estado semanal.</p>
+
+        <h3>Progreso de tareas</h3>
+        <p>La vista de lista muestra de forma inmediata cuántas tareas están completadas, en progreso o vencidas. Como PM, prestá especial atención a las tareas vencidas: son la señal más clara de que algo necesita tu atención.</p>
+
+        <h3>Portfolios (plan premium)</h3>
+        <p>Si gestionás múltiples proyectos simultáneamente, los portfolios de Asana permiten ver el estado de todos los proyectos en una sola pantalla. Esta función requiere plan premium, pero vale la pena conocerla para cuando escales tu uso de la herramienta.</p>
+      </section>
+
+      <section id="funciones-avanzadas">
+        <h2>6. Funciones avanzadas útiles para PMs</h2>
+        <p>Estas funciones están disponibles en el plan gratuito y marcan una diferencia real en la gestión de proyectos complejos.</p>
+
+        <h3>Subtareas</h3>
+        <p>Una tarea puede contener subtareas. Útil cuando una actividad tiene pasos internos que también necesitan responsable y fecha. Ejemplo: la tarea "Desarrollar módulo de pagos" puede tener subtareas como "Diseñar la interfaz", "Desarrollar el backend" y "Hacer testing".</p>
+
+        <h3>Dependencias</h3>
+        <p>Podés marcar que una tarea depende de otra: la tarea B no puede empezar hasta que la tarea A esté completada. Esto es especialmente útil en la vista de cronograma para visualizar el camino crítico del proyecto.</p>
+
+        <h3>Plantillas</h3>
+        <p>Si gestionás proyectos similares de forma recurrente, podés guardar un proyecto como plantilla y reutilizarlo. Esto ahorra tiempo de configuración y garantiza consistencia entre proyectos.</p>
+
+        <h3>Reglas de automatización</h3>
+        <p>Asana permite crear reglas simples del tipo "cuando pase X, hacer Y". Ejemplo: cuando una tarea se marca como completada, mover automáticamente a la sección "Hecho" del tablero. Estas automatizaciones reducen el trabajo manual del equipo.</p>
+      </section>
+
+      <section id="errores-frecuentes">
+        <h2>7. Errores frecuentes y cómo evitarlos</h2>
+
+        <div class="error-item">
+          <h3>Sobrecomplicar la estructura desde el inicio</h3>
+          <p>El error más común es crear demasiadas secciones, etiquetas y campos personalizados antes de entender cómo el equipo realmente trabaja. Empezá simple: un proyecto, tareas con responsable y fecha. Complejizá solo cuando lo necesites.</p>
+        </div>
+
+        <div class="error-item">
+          <h3>No mantener las tareas actualizadas</h3>
+          <p>Asana pierde todo su valor si las tareas no se actualizan. Si el equipo no actualiza el estado, el PM no tiene visibilidad real y vuelve a necesitar reuniones de seguimiento para saber qué pasa. La disciplina de actualización es más importante que la configuración perfecta.</p>
+        </div>
+
+        <div class="error-item">
+          <h3>Usar Asana en paralelo con otros sistemas</h3>
+          <p>Si el equipo sigue usando WhatsApp para asignar tareas y Excel para el seguimiento, Asana queda como un sistema más que nadie usa. La implementación exitosa requiere una decisión clara: Asana es el sistema único de gestión de trabajo.</p>
+        </div>
+
+        <div class="error-item">
+          <h3>No asignar responsable a cada tarea</h3>
+          <p>Una tarea sin responsable no existe. Si no hay una persona específica que responde por esa tarea, es muy probable que no se haga. Antes de cerrar la sesión de planificación, cada tarea debe tener nombre y apellido.</p>
+        </div>
+
+        <div class="error-item">
+          <h3>Ignorar las tareas vencidas</h3>
+          <p>Las tareas vencidas son una señal de alerta que requiere acción inmediata: reasignar, replantear el plazo o escalar. Dejarlas acumular sin atender destruye la credibilidad del sistema y del PM.</p>
+        </div>
+      </section>
+
+    </div>
+
+    <div class="guia-footer">
+      <div class="autor-box">
+        <img src="/images/valeria-yashan.jpg" alt="Valeria Yashan, Project Manager PMP® y autora" class="autor-foto" />
+        <div class="autor-info">
+          <p class="autor-nombre">Valeria Yashan</p>
+          <p class="autor-desc">PMP® · Consultora en gestión de proyectos e IA · Autora de 4 libros sobre Project Management.</p>
+          <a href="/sobre-mi">Conocé más sobre Valeria →</a>
+        </div>
+      </div>
+
+      <div class="cta-box">
+        <h3>¿Querés implementar Asana en tu equipo?</h3>
+        <p>Puedo acompañarte en la configuración inicial y capacitar a tu equipo para que la adopción sea real y duradera.</p>
+        <a href="/contacto" class="btn-cta">Hablemos →</a>
+      </div>
+    </div>
+
+  </div>
+
+</BaseLayout>
+
+<style>
+  .guia-container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 5rem;
+  }
+
+  .breadcrumb {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    font-size: 0.85rem;
+    color: var(--color-muted);
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+  }
+
+  .breadcrumb a {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .breadcrumb a:hover {
+    text-decoration: underline;
+  }
+
+  .guia-tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+
+  .guia-header h1 {
+    font-family: 'Fraunces', serif;
+    font-size: 2.4rem;
+    font-weight: 900;
+    color: var(--color-text);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .guia-lead {
+    font-size: 1.1rem;
+    color: var(--color-muted);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+
+  .guia-meta {
+    display: flex;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--color-muted);
+    flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+  }
+
+  .descarga-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-left: 3px solid var(--color-accent);
+    border-radius: 0 8px 8px 0;
+    padding: 1rem 1.25rem;
+    margin-bottom: 2rem;
+  }
+
+  .descarga-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--color-accent);
+  }
+
+  .descarga-titulo {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin: 0;
+  }
+
+  .descarga-subtitulo {
+    font-size: 0.8rem;
+    color: var(--color-muted);
+    margin: 0;
+  }
+
+  .btn-descarga {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--color-accent);
+    color: #ffffff;
+    padding: 0.5rem 1.1rem;
+    border-radius: 6px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .btn-descarga:hover {
+    opacity: 0.85;
+  }
+
+  .tabla-contenidos {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-left: 3px solid var(--color-accent);
+    border-radius: 0 6px 6px 0;
+    padding: 1.5rem 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .toc-titulo {
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .tabla-contenidos ol {
+    margin: 0;
+    padding-left: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .tabla-contenidos a {
+    color: var(--color-text);
+    text-decoration: none;
+    font-size: 0.95rem;
+  }
+
+  .tabla-contenidos a:hover {
+    color: var(--color-accent);
+  }
+
+  .guia-contenido section {
+    margin-bottom: 3.5rem;
+    padding-bottom: 3.5rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .guia-contenido section:last-child {
+    border-bottom: none;
+  }
+
+  .guia-contenido h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 1.2rem;
+  }
+
+  .guia-contenido h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-top: 2rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .guia-contenido p {
+    color: var(--color-text);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+
+  .guia-contenido ul,
+  .guia-contenido ol {
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .guia-contenido li {
+    color: var(--color-text);
+    line-height: 1.7;
+    margin-bottom: 0.4rem;
+  }
+
+  .nota-practica {
+    background: var(--color-surface);
+    border-left: 3px solid var(--color-accent);
+    border-radius: 0 6px 6px 0;
+    padding: 1rem 1.25rem;
+    margin-top: 1.5rem;
+  }
+
+  .nota-practica p {
+    margin: 0;
+    font-size: 0.92rem;
+    color: var(--color-muted);
+  }
+
+  .error-item {
+    margin-bottom: 2rem;
+  }
+
+  .error-item h3 {
+    margin-top: 0;
+  }
+
+  .guia-footer {
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .autor-box {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+    padding: 1.5rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+  }
+
+  .autor-foto {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .autor-nombre {
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+    color: var(--color-text);
+  }
+
+  .autor-desc {
+    font-size: 0.88rem;
+    color: var(--color-muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .autor-info a {
+    font-size: 0.88rem;
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .autor-info a:hover {
+    text-decoration: underline;
+  }
+
+  .cta-box {
+    background: var(--color-accent);
+    color: #ffffff;
+    padding: 2rem;
+    border-radius: 10px;
+  }
+
+  .cta-box h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #ffffff;
+  }
+
+  .cta-box p {
+    font-size: 0.95rem;
+    opacity: 0.9;
+    margin-bottom: 1.25rem;
+    color: #ffffff;
+  }
+
+  .btn-cta {
+    display: inline-block;
+    background: #ffffff;
+    color: var(--color-accent);
+    padding: 0.65rem 1.4rem;
+    border-radius: 6px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+  }
+
+  .btn-cta:hover {
+    opacity: 0.9;
+  }
+
+  @media (max-width: 700px) {
+    .guia-header h1 {
+      font-size: 1.8rem;
+    }
+
+    .autor-box {
+      flex-direction: column;
+    }
+
+    .descarga-banner {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

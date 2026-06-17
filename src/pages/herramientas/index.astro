@@ -1,0 +1,173 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Herramientas de gestión de proyectos | Valeria Yashan" description="Guías prácticas de herramientas digitales para project managers. Asana, ClickUp y más, explicadas desde la gestión de proyectos real.">
+
+  <section class="herramientas-hero">
+    <h1>Herramientas para PMs</h1>
+    <p class="bajada">Guías prácticas para incorporar herramientas digitales a tu gestión de proyectos. Sin teoría vacía, con ejemplos reales.</p>
+  </section>
+
+  <section class="herramientas-grid">
+
+    <article class="herramienta-card">
+      <div class="herramienta-header">
+        <span class="herramienta-tag">Gestión de tareas</span>
+      </div>
+      <h2>Asana para Project Managers</h2>
+      <p>Cómo configurar y usar Asana para gestionar proyectos reales: desde la cuenta hasta el seguimiento semanal del equipo.</p>
+      <div class="herramienta-meta">
+        <span class="herramienta-nivel">Nivel: inicial</span>
+        <span class="herramienta-estado disponible">Disponible</span>
+      </div>
+      <a href="/herramientas/asana" class="btn-herramienta">Leer guía</a>
+    </article>
+
+    <article class="herramienta-card proxima">
+      <div class="herramienta-header">
+        <span class="herramienta-tag">Gestión de tareas</span>
+      </div>
+      <h2>ClickUp para Project Managers</h2>
+      <p>Guía práctica de ClickUp aplicada a la gestión de proyectos: estructura, automatizaciones y seguimiento de equipo.</p>
+      <div class="herramienta-meta">
+        <span class="herramienta-nivel">Nivel: inicial</span>
+        <span class="herramienta-estado proxima-label">Próximamente</span>
+      </div>
+      <span class="btn-herramienta deshabilitado">En preparación</span>
+    </article>
+
+  </section>
+
+</BaseLayout>
+
+<style>
+  .herramientas-hero {
+    padding: 4rem 0 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .herramientas-hero h1 {
+    font-family: 'Fraunces', serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--color-text);
+    margin-bottom: 1rem;
+  }
+
+  .bajada {
+    font-size: 1.1rem;
+    color: var(--color-muted);
+    max-width: 600px;
+    line-height: 1.6;
+  }
+
+  .herramientas-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    max-width: 900px;
+    margin: 3rem auto 5rem;
+  }
+
+  .herramienta-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .herramienta-card.proxima {
+    opacity: 0.6;
+  }
+
+  .herramienta-tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .herramienta-card h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin: 0;
+  }
+
+  .herramienta-card p {
+    color: var(--color-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+    flex-grow: 1;
+  }
+
+  .herramienta-meta {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .herramienta-nivel {
+    font-size: 0.8rem;
+    color: var(--color-muted);
+  }
+
+  .herramienta-estado {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+  }
+
+  .disponible {
+    background: #D1FAE5;
+    color: #065F46;
+  }
+
+  .proxima-label {
+    background: var(--color-border);
+    color: var(--color-muted);
+  }
+
+  .btn-herramienta {
+    display: inline-block;
+    background: var(--color-accent);
+    color: #ffffff;
+    padding: 0.65rem 1.25rem;
+    border-radius: 6px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    text-align: center;
+    transition: opacity 0.2s;
+  }
+
+  .btn-herramienta:hover {
+    opacity: 0.85;
+  }
+
+  .btn-herramienta.deshabilitado {
+    background: var(--color-border);
+    color: var(--color-muted);
+    cursor: not-allowed;
+  }
+
+  @media (max-width: 700px) {
+    .herramientas-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .herramientas-hero h1 {
+      font-size: 1.8rem;
+    }
+  }
+</style>
