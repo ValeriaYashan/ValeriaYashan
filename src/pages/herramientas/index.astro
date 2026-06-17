@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="Herramientas de gestión de proyectos | Valeria Yashan" description="Guías prácticas de herramientas digitales para project managers. Asana, ClickUp y más, explicadas desde la gestión de proyectos real.">
+<BaseLayout title="Herramientas de gestión de proyectos | Valeria Yashan" description="Guías prácticas de herramientas digitales para project managers. Asana, ClickUp, Trello y más, explicadas desde la gestión de proyectos real.">
 
   <section class="herramientas-hero">
     <h1>Herramientas para PMs</h1>
@@ -35,6 +35,32 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         <span class="herramienta-estado disponible">Disponible</span>
       </div>
       <a href="/herramientas/clickup" class="btn-herramienta">Leer guía</a>
+    </article>
+
+    <article class="herramienta-card">
+      <div class="herramienta-header">
+        <span class="herramienta-tag">Gestión de tareas</span>
+      </div>
+      <h2>Trello para Project Managers</h2>
+      <p>Guía práctica de Trello para equipos que dan sus primeros pasos en herramientas digitales: tableros, Cards y Power-Ups.</p>
+      <div class="herramienta-meta">
+        <span class="herramienta-nivel">Nivel: inicial</span>
+        <span class="herramienta-estado disponible">Disponible</span>
+      </div>
+      <a href="/herramientas/trello" class="btn-herramienta">Leer guía</a>
+    </article>
+
+    <article class="herramienta-card proxima">
+      <div class="herramienta-header">
+        <span class="herramienta-tag">Gestión de tareas</span>
+      </div>
+      <h2>Monday para Project Managers</h2>
+      <p>Guía práctica de Monday.com aplicada a la gestión de proyectos: automatizaciones, dashboards y seguimiento de equipo.</p>
+      <div class="herramienta-meta">
+        <span class="herramienta-nivel">Nivel: inicial</span>
+        <span class="herramienta-estado proxima-label">Próximamente</span>
+      </div>
+      <span class="btn-herramienta deshabilitado">En preparación</span>
     </article>
 
   </section>
@@ -79,6 +105,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     display: flex;
     flex-direction: column;
     gap: 1rem;
+  }
+
+  .herramienta-card.proxima {
+    opacity: 0.6;
   }
 
   .herramienta-tag {
@@ -128,6 +158,11 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     color: #065F46;
   }
 
+  .proxima-label {
+    background: var(--color-border);
+    color: var(--color-muted);
+  }
+
   .btn-herramienta {
     display: inline-block;
     background: var(--color-accent);
@@ -144,6 +179,12 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
   .btn-herramienta:hover {
     opacity: 0.85;
+  }
+
+  .btn-herramienta.deshabilitado {
+    background: var(--color-border);
+    color: var(--color-muted);
+    cursor: not-allowed;
   }
 
   @media (max-width: 700px) {

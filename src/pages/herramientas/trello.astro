@@ -1,0 +1,581 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Trello para Project Managers | Valeria Yashan" description="Guía práctica de Trello para PMs: tableros Kanban, gestión de tareas, Power-Ups y errores frecuentes. Con ejemplos reales de gestión de proyectos.">
+
+  <div class="guia-container">
+
+    <nav class="breadcrumb">
+      <a href="/herramientas">Herramientas</a>
+      <span>→</span>
+      <span>Trello para Project Managers</span>
+    </nav>
+
+    <header class="guia-header">
+      <span class="guia-tag">Gestión de tareas</span>
+      <h1>Trello para Project Managers</h1>
+      <p class="guia-lead">Guía práctica para usar Trello en la gestión de proyectos reales. Simple, visual y efectivo para equipos que dan sus primeros pasos en herramientas digitales.</p>
+      <div class="guia-meta">
+        <span>Nivel: inicial</span>
+        <span>·</span>
+        <span>Herramienta: Trello (plan gratuito)</span>
+        <span>·</span>
+        <span>Autora: Valeria Yashan</span>
+      </div>
+    </header>
+
+    <div class="descarga-banner">
+      <div class="descarga-info">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        <div>
+          <p class="descarga-titulo">Descargá esta guía en PDF</p>
+          <p class="descarga-subtitulo">Guía de Trello para Project Managers · PDF · Gratis</p>
+        </div>
+      </div>
+      <a href="/recursos/guia-trello-pm.pdf" download class="btn-descarga">
+        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Descargar PDF
+      </a>
+    </div>
+
+    <nav class="tabla-contenidos">
+      <p class="toc-titulo">Contenido de esta guía</p>
+      <ol>
+        <li><a href="#que-es-trello">Qué es Trello y para qué sirve en PM</a></li>
+        <li><a href="#conceptos-clave">Conceptos clave: Boards, Lists y Cards</a></li>
+        <li><a href="#configuracion-inicial">Configuración inicial y primer tablero</a></li>
+        <li><a href="#dia-a-dia">Gestión del día a día</a></li>
+        <li><a href="#power-ups">Power-Ups útiles para PMs</a></li>
+        <li><a href="#errores-frecuentes">Errores frecuentes y cuándo migrar</a></li>
+      </ol>
+    </nav>
+
+    <div class="guia-contenido">
+
+      <section id="que-es-trello">
+        <h2>1. Qué es Trello y para qué sirve en gestión de proyectos</h2>
+        <p>Trello es una herramienta de gestión de tareas basada en el modelo Kanban. Su interfaz es completamente visual: las tareas son tarjetas que se mueven entre columnas que representan estados del trabajo.</p>
+        <p>Para un Project Manager, Trello es la herramienta ideal para equipos que vienen de Excel o WhatsApp y necesitan dar un primer paso hacia la gestión digital sin una curva de aprendizaje pronunciada. En 15 minutos, cualquier persona puede entender cómo funciona y empezar a usarla.</p>
+
+        <h3>¿Para qué tipo de proyectos es ideal?</h3>
+        <ul>
+          <li>Proyectos con flujos de trabajo lineales y etapas claras.</li>
+          <li>Equipos pequeños de hasta 10 personas.</li>
+          <li>Proyectos con ciclos cortos donde la visualización del avance es prioritaria.</li>
+          <li>Gestión de contenido, campañas, lanzamientos o procesos repetitivos.</li>
+        </ul>
+
+        <h3>¿Cuándo Trello no es suficiente?</h3>
+        <ul>
+          <li>Cuando necesitás dependencias entre tareas.</li>
+          <li>Cuando el proyecto tiene más de 50 tareas activas simultáneas.</li>
+          <li>Cuando necesitás reportes de avance detallados o seguimiento de tiempo.</li>
+          <li>Cuando el equipo supera las 10 personas o maneja múltiples proyectos simultáneos.</li>
+        </ul>
+
+        <div class="nota-practica">
+          <p><strong>Nota práctica:</strong> El plan gratuito de Trello permite tableros ilimitados, hasta 10 Power-Ups por tablero y todas las funciones básicas que un PM necesita para proyectos de tamaño mediano.</p>
+        </div>
+      </section>
+
+      <section id="conceptos-clave">
+        <h2>2. Conceptos clave: Boards, Lists y Cards</h2>
+        <p>Trello tiene solo tres elementos fundamentales. Entenderlos bien es todo lo que necesitás para empezar.</p>
+
+        <h3>Board (Tablero)</h3>
+        <p>Un Board es el espacio de trabajo de un proyecto. Cada proyecto tiene su propio Board. Dentro del Board vivem todas las Lists y Cards del proyecto. Ejemplo: "Lanzamiento de producto Q3 2026" es un Board.</p>
+
+        <h3>List (Lista)</h3>
+        <p>Una List es una columna dentro del Board. Representa una etapa o estado del trabajo. Las Lists más comunes en PM son:</p>
+        <ul>
+          <li><strong>Por hacer:</strong> tareas pendientes que aún no se iniciaron.</li>
+          <li><strong>En progreso:</strong> tareas que alguien está haciendo ahora.</li>
+          <li><strong>En revisión:</strong> tareas completadas que esperan aprobación.</li>
+          <li><strong>Completado:</strong> tareas finalizadas y aprobadas.</li>
+        </ul>
+
+        <h3>Card (Tarjeta)</h3>
+        <p>Una Card es una tarea. Cada Card representa una unidad de trabajo y puede contener:</p>
+        <ul>
+          <li>Descripción detallada de la tarea.</li>
+          <li>Responsable asignado.</li>
+          <li>Fecha límite.</li>
+          <li>Checklist de subtareas.</li>
+          <li>Etiquetas de color para categorizar.</li>
+          <li>Comentarios del equipo.</li>
+          <li>Archivos adjuntos.</li>
+        </ul>
+
+        <div class="nota-practica">
+          <p><strong>La lógica del Kanban:</strong> Una Card empieza en la primera List (Por hacer) y se mueve hacia la derecha a medida que avanza. Cuando llega a la última List (Completado), la tarea está terminada. El tablero completo muestra el estado real del proyecto en un solo vistazo.</p>
+        </div>
+      </section>
+
+      <section id="configuracion-inicial">
+        <h2>3. Configuración inicial y primer tablero</h2>
+
+        <h3>Crear la cuenta</h3>
+        <ol>
+          <li>Ingresá a <strong>trello.com</strong> y hacé clic en "Registrarse, es gratis".</li>
+          <li>Registrate con tu email profesional o con Google.</li>
+          <li>Completá tu nombre y confirmá el email.</li>
+        </ol>
+
+        <h3>Crear el primer Board</h3>
+        <ol>
+          <li>Desde el panel principal, hacé clic en "Crear nuevo tablero".</li>
+          <li>Asigná un nombre descriptivo. Ejemplo: "Implementación CRM — Q3 2026".</li>
+          <li>Elegí un color o fondo para el tablero.</li>
+          <li>Definí si el tablero es privado, de equipo o público.</li>
+        </ol>
+
+        <h3>Configurar las Lists</h3>
+        <p>Trello crea tres Lists por defecto: "To Do", "Doing" y "Done". Podés renombrarlas o agregar nuevas según el flujo de tu proyecto. Para la mayoría de los proyectos de PM, esta estructura funciona bien:</p>
+        <ol>
+          <li>Backlog — tareas identificadas pero no priorizadas aún.</li>
+          <li>Por hacer — tareas priorizadas para el sprint o semana actual.</li>
+          <li>En progreso — tareas que alguien está ejecutando ahora.</li>
+          <li>En revisión — tareas que esperan aprobación del PM.</li>
+          <li>Completado — tareas finalizadas.</li>
+        </ol>
+
+        <h3>Invitar al equipo</h3>
+        <ol>
+          <li>Dentro del Board, hacé clic en "Invitar" en la barra superior.</li>
+          <li>Ingresá los emails de los miembros del equipo.</li>
+          <li>Los miembros invitados pueden ver y editar el tablero por defecto.</li>
+        </ol>
+
+        <div class="nota-practica">
+          <p><strong>Consejo:</strong> Antes de invitar al equipo, creá al menos 5 Cards de ejemplo con el formato correcto. Así cuando lleguen saben exactamente cómo completar una Card sin necesidad de explicación adicional.</p>
+        </div>
+      </section>
+
+      <section id="dia-a-dia">
+        <h2>4. Gestión del día a día</h2>
+
+        <h3>Crear y completar Cards</h3>
+        <p>Para crear una Card, hacé clic en "Agregar una tarjeta" al pie de cualquier List. Asigná un nombre concreto y accionable, luego abrí la Card para completar los detalles: responsable, fecha límite, descripción y checklist si la tarea tiene pasos internos.</p>
+
+        <h3>Mover Cards entre Lists</h3>
+        <p>El movimiento de Cards es la acción central en Trello. Cuando el responsable empieza a trabajar en una tarea, mueve la Card de "Por hacer" a "En progreso". Cuando termina, la mueve a "En revisión". Como PM, el tablero te da visibilidad inmediata sin necesidad de preguntar al equipo.</p>
+
+        <h3>Usar etiquetas</h3>
+        <p>Las etiquetas de color permiten categorizar Cards visualmente. Ejemplos de uso en PM:</p>
+        <ul>
+          <li>Rojo: tarea bloqueada o con riesgo.</li>
+          <li>Amarillo: tarea en espera de un tercero.</li>
+          <li>Verde: tarea en camino sin problemas.</li>
+          <li>Azul: tarea de alta prioridad.</li>
+        </ul>
+
+        <h3>Checklists dentro de las Cards</h3>
+        <p>Cuando una tarea tiene pasos internos, agregá un checklist dentro de la Card. Cada ítem del checklist puede tener su propio responsable y fecha. El porcentaje de completitud aparece visualmente en la Card dentro del tablero.</p>
+
+        <h3>Comentarios y menciones</h3>
+        <p>Las conversaciones sobre una tarea deben ocurrir en los comentarios de la Card, no en WhatsApp ni por email. Usá @ para mencionar a un miembro específico y que reciba una notificación directa.</p>
+
+        <h3>Fechas límite</h3>
+        <p>Cada Card puede tener una fecha límite. Cuando la fecha se acerca, la Card cambia de color automáticamente: amarillo cuando faltan 24 horas, rojo cuando está vencida. Esto da visibilidad inmediata sobre el estado de cumplimiento del proyecto.</p>
+      </section>
+
+      <section id="power-ups">
+        <h2>5. Power-Ups útiles para PMs</h2>
+        <p>Los Power-Ups son integraciones y funciones adicionales que se activan dentro de un tablero. El plan gratuito permite un Power-Up ilimitado por tablero. Estos son los más útiles para gestión de proyectos:</p>
+
+        <h3>Calendar</h3>
+        <p>Muestra todas las Cards con fecha límite en una vista de calendario mensual. Muy útil para identificar semanas sobrecargadas y distribuir mejor la carga de trabajo del equipo.</p>
+
+        <h3>Card Aging</h3>
+        <p>Las Cards que no se tocan durante varios días se vuelven progresivamente más transparentes. Es una señal visual inmediata de tareas abandonadas o estancadas que el PM necesita atender.</p>
+
+        <h3>Google Drive</h3>
+        <p>Permite adjuntar archivos directamente desde Google Drive dentro de las Cards. Útil para vincular documentos del proyecto sin necesidad de cargar archivos.</p>
+
+        <h3>Slack</h3>
+        <p>Envía notificaciones automáticas a un canal de Slack cuando se mueven Cards, se acercan fechas límite o se agregan comentarios. Mantiene al equipo informado sin necesidad de revisar el tablero constantemente.</p>
+
+        <div class="nota-practica">
+          <p><strong>Recomendación:</strong> Empezá sin Power-Ups durante las primeras dos semanas. Una vez que el equipo tiene el flujo básico incorporado, activá Calendar como primer Power-Up. Es el que más valor aporta con menos complejidad.</p>
+        </div>
+      </section>
+
+      <section id="errores-frecuentes">
+        <h2>6. Errores frecuentes y cuándo migrar a otra herramienta</h2>
+
+        <div class="error-item">
+          <h3>Crear demasiadas Lists</h3>
+          <p>El tablero pierde su claridad visual cuando tiene más de 6 o 7 Lists. Si necesitás más columnas para representar tu flujo de trabajo, es una señal de que el proyecto es más complejo de lo que Trello puede manejar cómodamente.</p>
+        </div>
+
+        <div class="error-item">
+          <h3>No asignar responsable a cada Card</h3>
+          <p>Una Card sin responsable es una tarea que nadie va a hacer. Antes de cerrar la sesión de planificación, cada Card debe tener una persona asignada y una fecha límite.</p>
+        </div>
+
+        <div class="error-item">
+          <h3>Usar Trello como repositorio de ideas</h3>
+          <p>El Backlog no puede convertirse en un cementerio de ideas sin priorizar. Si una Card lleva más de dos semanas en el Backlog sin moverse, hay que decidir: se hace, se descarta o se pospone con fecha concreta.</p>
+        </div>
+
+        <div class="error-item">
+          <h3>No revisar el tablero diariamente</h3>
+          <p>Trello funciona cuando el equipo lo usa todos los días. Si la revisión del tablero no forma parte de la rutina diaria del PM y del equipo, las Cards quedan desactualizadas y el tablero deja de reflejar la realidad del proyecto.</p>
+        </div>
+
+        <h3>Señales de que es momento de migrar a Asana o ClickUp</h3>
+        <ul>
+          <li>El equipo supera las 10 personas activas en el tablero.</li>
+          <li>Necesitás dependencias entre tareas (una tarea no puede empezar hasta que otra termine).</li>
+          <li>Necesitás reportes de avance para stakeholders externos.</li>
+          <li>Gestionás más de 3 proyectos simultáneos con el mismo equipo.</li>
+          <li>Necesitás rastrear el tiempo dedicado a cada tarea.</li>
+        </ul>
+
+        <div class="nota-practica">
+          <p><strong>Regla práctica:</strong> Trello es la herramienta correcta hasta que se siente limitada. Cuando el equipo empieza a pedir funciones que Trello no tiene, es el momento de migrar, no antes.</p>
+        </div>
+      </section>
+
+    </div>
+
+    <div class="guia-footer">
+      <div class="autor-box">
+        <img src="/images/valeria-yashan.jpg" alt="Valeria Yashan, Project Manager PMP® y autora" class="autor-foto" />
+        <div class="autor-info">
+          <p class="autor-nombre">Valeria Yashan</p>
+          <p class="autor-desc">PMP® · Consultora en gestión de proyectos e IA · Autora de 4 libros sobre Project Management.</p>
+          <a href="/sobre-mi">Conocé más sobre Valeria →</a>
+        </div>
+      </div>
+
+      <div class="cta-box">
+        <h3>¿Querés implementar Trello en tu equipo?</h3>
+        <p>Puedo acompañarte en la configuración inicial y capacitar a tu equipo para que la adopción sea real y duradera.</p>
+        <a href="/contacto" class="btn-cta">Hablemos →</a>
+      </div>
+    </div>
+
+  </div>
+
+</BaseLayout>
+
+<style>
+  .guia-container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 5rem;
+  }
+
+  .breadcrumb {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    font-size: 0.85rem;
+    color: var(--color-muted);
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+  }
+
+  .breadcrumb a {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .breadcrumb a:hover {
+    text-decoration: underline;
+  }
+
+  .guia-tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+
+  .guia-header h1 {
+    font-family: 'Fraunces', serif;
+    font-size: 2.4rem;
+    font-weight: 900;
+    color: var(--color-text);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .guia-lead {
+    font-size: 1.1rem;
+    color: var(--color-muted);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+
+  .guia-meta {
+    display: flex;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--color-muted);
+    flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+  }
+
+  .descarga-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-left: 3px solid var(--color-accent);
+    border-radius: 0 8px 8px 0;
+    padding: 1rem 1.25rem;
+    margin-bottom: 2rem;
+  }
+
+  .descarga-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--color-accent);
+  }
+
+  .descarga-titulo {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin: 0;
+  }
+
+  .descarga-subtitulo {
+    font-size: 0.8rem;
+    color: var(--color-muted);
+    margin: 0;
+  }
+
+  .btn-descarga {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--color-accent);
+    color: #ffffff;
+    padding: 0.5rem 1.1rem;
+    border-radius: 6px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .btn-descarga:hover {
+    opacity: 0.85;
+  }
+
+  .tabla-contenidos {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-left: 3px solid var(--color-accent);
+    border-radius: 0 6px 6px 0;
+    padding: 1.5rem 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .toc-titulo {
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .tabla-contenidos ol {
+    margin: 0;
+    padding-left: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .tabla-contenidos a {
+    color: var(--color-text);
+    text-decoration: none;
+    font-size: 0.95rem;
+  }
+
+  .tabla-contenidos a:hover {
+    color: var(--color-accent);
+  }
+
+  .guia-contenido section {
+    margin-bottom: 3.5rem;
+    padding-bottom: 3.5rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .guia-contenido section:last-child {
+    border-bottom: none;
+  }
+
+  .guia-contenido h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 1.2rem;
+  }
+
+  .guia-contenido h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-top: 2rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .guia-contenido p {
+    color: var(--color-text);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+
+  .guia-contenido ul,
+  .guia-contenido ol {
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .guia-contenido li {
+    color: var(--color-text);
+    line-height: 1.7;
+    margin-bottom: 0.4rem;
+  }
+
+  .nota-practica {
+    background: var(--color-surface);
+    border-left: 3px solid var(--color-accent);
+    border-radius: 0 6px 6px 0;
+    padding: 1rem 1.25rem;
+    margin-top: 1.5rem;
+  }
+
+  .nota-practica p {
+    margin: 0;
+    font-size: 0.92rem;
+    color: var(--color-muted);
+  }
+
+  .error-item {
+    margin-bottom: 2rem;
+  }
+
+  .error-item h3 {
+    margin-top: 0;
+  }
+
+  .guia-footer {
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .autor-box {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+    padding: 1.5rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+  }
+
+  .autor-foto {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .autor-nombre {
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+    color: var(--color-text);
+  }
+
+  .autor-desc {
+    font-size: 0.88rem;
+    color: var(--color-muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .autor-info a {
+    font-size: 0.88rem;
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .autor-info a:hover {
+    text-decoration: underline;
+  }
+
+  .cta-box {
+    background: var(--color-accent);
+    color: #ffffff;
+    padding: 2rem;
+    border-radius: 10px;
+  }
+
+  .cta-box h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #ffffff;
+  }
+
+  .cta-box p {
+    font-size: 0.95rem;
+    opacity: 0.9;
+    margin-bottom: 1.25rem;
+    color: #ffffff;
+  }
+
+  .btn-cta {
+    display: inline-block;
+    background: #ffffff;
+    color: var(--color-accent);
+    padding: 0.65rem 1.4rem;
+    border-radius: 6px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+  }
+
+  .btn-cta:hover {
+    opacity: 0.9;
+  }
+
+  @media (max-width: 700px) {
+    .guia-header h1 {
+      font-size: 1.8rem;
+    }
+
+    .autor-box {
+      flex-direction: column;
+    }
+
+    .descarga-banner {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>
