@@ -2,13 +2,15 @@
 ---
 <header class="site-header">
   <div class="container--wide header-inner">
-    <a href="/" class="site-logo">Valeria Yashan</a>
+    <a href="/" class="site-logo" aria-label="Valeria Yashan — Inicio">
+      <img src="/images/logo.svg" alt="Valeria Yashan PMP® · IA · PM" width="200" height="52" />
+    </a>
     <nav aria-label="Navegación principal">
       <ul class="nav-list">
         <li><a href="/" class="nav-link">Inicio</a></li>
         <li><a href="/sobre-mi" class="nav-link">Sobre mí</a></li>
         <li><a href="/servicios" class="nav-link">Servicios</a></li>
-       <li><a href="/libro" class="nav-link">Libros</a></li>
+        <li><a href="/libro" class="nav-link">Libros</a></li>
         <li><a href="/blog" class="nav-link">Blog</a></li>
         <li><a href="/recursos" class="nav-link">Recursos</a></li>
         <li><a href="/contacto" class="nav-link">Contacto</a></li>
@@ -24,27 +26,34 @@
     z-index: 100;
     background-color: var(--color-bg);
     border-bottom: 1px solid var(--color-border);
-    padding: 1rem 0;
+    padding: 0.75rem 0;
   }
+
   .header-inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
+
   .site-logo {
-    font-family: var(--font-display);
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--color-text);
+    display: flex;
+    align-items: center;
     text-decoration: none;
-    letter-spacing: -0.01em;
-    white-space: nowrap;
+    flex-shrink: 0;
   }
+
+  .site-logo img {
+    height: 44px;
+    width: auto;
+    display: block;
+  }
+
   .nav-list {
     display: flex;
     list-style: none;
     gap: 2rem;
   }
+
   .nav-link {
     font-size: 0.9rem;
     font-weight: 500;
@@ -52,19 +61,27 @@
     text-decoration: none;
     transition: color 0.15s ease;
   }
+
   .nav-link:hover {
     color: var(--color-accent);
   }
-  @media (max-width: 600px) {
+
+  @media (max-width: 700px) {
     .header-inner {
       flex-direction: column;
       align-items: flex-start;
       gap: 0.75rem;
     }
+
+    .site-logo img {
+      height: 36px;
+    }
+
     .nav-list {
       gap: 1rem;
       flex-wrap: wrap;
     }
+
     .nav-link {
       font-size: 0.85rem;
     }
