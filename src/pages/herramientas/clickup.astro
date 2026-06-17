@@ -1,0 +1,612 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="ClickUp para Project Managers | Valeria Yashan" description="Guía práctica de ClickUp para PMs: jerarquía, configuración, gestión de tareas, automatizaciones y errores frecuentes. Con ejemplos reales de gestión de proyectos.">
+
+  <div class="guia-container">
+
+    <nav class="breadcrumb">
+      <a href="/herramientas">Herramientas</a>
+      <span>→</span>
+      <span>ClickUp para Project Managers</span>
+    </nav>
+
+    <header class="guia-header">
+      <span class="guia-tag">Gestión de tareas</span>
+      <h1>ClickUp para Project Managers</h1>
+      <p class="guia-lead">Guía práctica para configurar y usar ClickUp en la gestión de proyectos reales. Con foco en la jerarquía, las automatizaciones y el seguimiento de equipo.</p>
+      <div class="guia-meta">
+        <span>Nivel: inicial</span>
+        <span>·</span>
+        <span>Herramienta: ClickUp (plan gratuito)</span>
+        <span>·</span>
+        <span>Autora: Valeria Yashan</span>
+      </div>
+    </header>
+
+    <div class="descarga-banner">
+      <div class="descarga-info">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        <div>
+          <p class="descarga-titulo">Descargá esta guía en PDF</p>
+          <p class="descarga-subtitulo">Guía de ClickUp para Project Managers · PDF · Gratis</p>
+        </div>
+      </div>
+      <a href="/recursos/guia-clickup-pm.pdf" download class="btn-descarga">
+        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Descargar PDF
+      </a>
+    </div>
+
+    <nav class="tabla-contenidos">
+      <p class="toc-titulo">Contenido de esta guía</p>
+      <ol>
+        <li><a href="#que-es-clickup">Qué es ClickUp y en qué se diferencia de Asana</a></li>
+        <li><a href="#jerarquia">La jerarquía de ClickUp: Spaces, Folders y Lists</a></li>
+        <li><a href="#configuracion-inicial">Configuración inicial: cuenta y workspace</a></li>
+        <li><a href="#primer-proyecto">Crear tu primer proyecto</a></li>
+        <li><a href="#dia-a-dia">Gestión del día a día</a></li>
+        <li><a href="#seguimiento">Seguimiento y reportes</a></li>
+        <li><a href="#automatizaciones">Automatizaciones para PMs</a></li>
+        <li><a href="#errores-frecuentes">Errores frecuentes y cómo evitarlos</a></li>
+      </ol>
+    </nav>
+
+    <div class="guia-contenido">
+
+      <section id="que-es-clickup">
+        <h2>1. Qué es ClickUp y en qué se diferencia de Asana</h2>
+        <p>ClickUp es una herramienta de gestión de trabajo que busca reemplazar múltiples aplicaciones en una sola: tareas, documentos, metas, dashboards y automatizaciones conviven en el mismo espacio.</p>
+        <p>Si Asana es una herramienta enfocada y simple, ClickUp es una plataforma más completa y flexible. Esa flexibilidad es su mayor ventaja y también su mayor riesgo: mal configurada, se convierte en un sistema caótico que nadie usa.</p>
+
+        <h3>¿Cuándo conviene ClickUp sobre Asana?</h3>
+        <ul>
+          <li>Cuando gestionás múltiples proyectos con equipos distintos y necesitás visibilidad centralizada.</li>
+          <li>Cuando necesitás estados de tarea personalizados por proyecto.</li>
+          <li>Cuando querés automatizaciones más potentes sin pagar un plan premium.</li>
+          <li>Cuando tu equipo también necesita documentación interna junto a las tareas.</li>
+        </ul>
+
+        <h3>¿Cuándo conviene Asana sobre ClickUp?</h3>
+        <ul>
+          <li>Cuando el equipo es pequeño y la simplicidad es más importante que las funciones.</li>
+          <li>Cuando la curva de aprendizaje del equipo es un factor crítico.</li>
+          <li>Cuando solo necesitás gestionar tareas sin documentación ni dashboards avanzados.</li>
+        </ul>
+
+        <div class="nota-practica">
+          <p><strong>Nota práctica:</strong> El plan gratuito de ClickUp es significativamente más generoso que el de Asana. Incluye miembros ilimitados, tareas ilimitadas y la mayoría de las funciones que un PM necesita para gestionar proyectos reales.</p>
+        </div>
+      </section>
+
+      <section id="jerarquia">
+        <h2>2. La jerarquía de ClickUp: Spaces, Folders y Lists</h2>
+        <p>Este es el concepto más importante de ClickUp y el que más confunde a los usuarios nuevos. Antes de crear una sola tarea, necesitás entender cómo se organiza la información.</p>
+
+        <h3>La estructura de arriba hacia abajo</h3>
+        <ul>
+          <li><strong>Workspace:</strong> el nivel más alto. Es tu organización o empresa. Todo lo demás vive dentro del workspace.</li>
+          <li><strong>Space:</strong> un área de trabajo grande. Puede representar un departamento, un cliente o una línea de negocio. Ejemplo: "Consultoría", "Capacitación", "Proyectos internos".</li>
+          <li><strong>Folder:</strong> una agrupación dentro de un Space. Puede representar un programa o un conjunto de proyectos relacionados. Es opcional: podés tener Lists directamente dentro de un Space.</li>
+          <li><strong>List:</strong> el contenedor de tareas. Cada List es lo que en Asana sería un proyecto. Acá es donde viven las tareas.</li>
+          <li><strong>Task:</strong> la unidad de trabajo. Cada tarea tiene responsable, fecha, estado, prioridad y comentarios.</li>
+        </ul>
+
+        <h3>Ejemplo aplicado a PM</h3>
+        <ul>
+          <li>Space: "Clientes 2026"</li>
+          <li>Folder: "Empresa ABC"</li>
+          <li>List: "Implementación ERP — Fase 1"</li>
+          <li>List: "Implementación ERP — Fase 2"</li>
+        </ul>
+
+        <div class="nota-practica">
+          <p><strong>Regla de diseño:</strong> No uses Folders si no los necesitás. Empezá con Spaces y Lists directamente. Agregá Folders cuando tengas múltiples proyectos relacionados que convenga agrupar.</p>
+        </div>
+      </section>
+
+      <section id="configuracion-inicial">
+        <h2>3. Configuración inicial: cuenta y workspace</h2>
+
+        <h3>Crear la cuenta</h3>
+        <ol>
+          <li>Ingresá a <strong>clickup.com</strong> y hacé clic en "Get Started Free".</li>
+          <li>Registrate con tu email profesional o con Google.</li>
+          <li>Completá el nombre de tu workspace. Usá el nombre de tu organización o tu nombre si trabajás de forma independiente.</li>
+          <li>ClickUp te va a preguntar para qué lo vas a usar. Elegí "Project Management".</li>
+        </ol>
+
+        <h3>Configurar el primer Space</h3>
+        <ol>
+          <li>Al crear tu cuenta, ClickUp crea automáticamente un Space de ejemplo. Podés usarlo o eliminarlo y crear uno propio.</li>
+          <li>Para crear un Space: clic en el "+" junto a "Spaces" en el panel lateral.</li>
+          <li>Asigná un nombre, elegí un color y configurá los permisos de acceso.</li>
+          <li>Elegí qué vistas querés disponibles en este Space: Lista, Tablero, Cronograma, Calendario.</li>
+        </ol>
+
+        <h3>Invitar al equipo</h3>
+        <ol>
+          <li>Desde el panel lateral, hacé clic en tu avatar o en "Invite People".</li>
+          <li>Ingresá los emails de los miembros del equipo.</li>
+          <li>Asigná el rol: Owner, Admin, Member o Guest. Los Guests solo pueden acceder a las Lists a las que fueron invitados explícitamente.</li>
+        </ol>
+
+        <div class="nota-practica">
+          <p><strong>Decisión importante:</strong> Definí la estructura de Spaces antes de invitar al equipo. Si cambiás la estructura después, vas a tener que reubicar tareas y reconfigurar permisos.</p>
+        </div>
+      </section>
+
+      <section id="primer-proyecto">
+        <h2>4. Crear tu primer proyecto</h2>
+        <p>En ClickUp, un proyecto es una List. Todo lo que en Asana es un proyecto, en ClickUp es una List dentro de un Space o Folder.</p>
+
+        <h3>Crear la List</h3>
+        <ol>
+          <li>Dentro de tu Space (o Folder), hacé clic en "Add List".</li>
+          <li>Asigná un nombre descriptivo. Ejemplo: "Lanzamiento producto Q3 2026".</li>
+          <li>Elegí un color para identificarla visualmente.</li>
+          <li>Configurá los estados de las tareas para esta List.</li>
+        </ol>
+
+        <h3>Configurar los estados de tarea</h3>
+        <p>Esta es una de las mayores ventajas de ClickUp sobre Asana: podés definir estados personalizados por proyecto. Los estados base son:</p>
+        <ul>
+          <li><strong>To Do:</strong> tarea pendiente, aún no iniciada.</li>
+          <li><strong>In Progress:</strong> tarea en curso.</li>
+          <li><strong>Done:</strong> tarea completada.</li>
+        </ul>
+        <p>Podés agregar estados intermedios según el flujo de tu proyecto. Ejemplo para desarrollo: To Do → In Progress → In Review → Done.</p>
+
+        <h3>Elegir la vista correcta</h3>
+        <ul>
+          <li><strong>List:</strong> vista estándar, ideal para el día a día y el seguimiento de tareas.</li>
+          <li><strong>Board:</strong> vista Kanban, útil para visualizar el flujo de trabajo por estados.</li>
+          <li><strong>Gantt:</strong> vista de cronograma con dependencias. Requiere plan pagado en algunos casos.</li>
+          <li><strong>Calendar:</strong> vista de calendario, útil para ver fechas límite de forma mensual.</li>
+          <li><strong>Dashboard:</strong> vista de métricas y resumen, ideal para reportes ejecutivos.</li>
+        </ul>
+
+        <h3>Crear las primeras tareas</h3>
+        <ol>
+          <li>Hacé clic en "Add Task" dentro de la List.</li>
+          <li>Asigná un nombre concreto y accionable.</li>
+          <li>Asigná un responsable, una fecha límite y una prioridad (Urgent, High, Normal, Low).</li>
+          <li>Agregá una descripción con el contexto necesario para completar la tarea.</li>
+        </ol>
+
+        <div class="nota-practica">
+          <p><strong>Regla de oro:</strong> Configurá los estados de tarea antes de crear las primeras tareas. Cambiarlos después requiere reclasificar manualmente todas las tareas existentes.</p>
+        </div>
+      </section>
+
+      <section id="dia-a-dia">
+        <h2>5. Gestión del día a día</h2>
+
+        <h3>La vista "My Work"</h3>
+        <p>ClickUp tiene una vista personal llamada "My Work" que muestra todas las tareas asignadas a vos en todos los proyectos. Es el punto de partida de cada jornada: sabés exactamente qué tenés que hacer hoy sin necesidad de abrir cada proyecto.</p>
+
+        <h3>Prioridades</h3>
+        <p>A diferencia de Asana, ClickUp tiene un sistema de prioridades nativo: Urgent, High, Normal y Low. Usalo como PM para comunicar claridad al equipo sobre qué va primero cuando hay múltiples tareas abiertas.</p>
+
+        <h3>Comentarios y menciones</h3>
+        <p>Las conversaciones sobre una tarea deben ocurrir dentro de la tarea, usando comentarios. Podés mencionar a un miembro del equipo con @ para que reciba una notificación específica. Los comentarios pueden marcarse como "resolved" cuando el punto fue atendido.</p>
+
+        <h3>Actualizar el estado de las tareas</h3>
+        <p>Cada miembro del equipo debe actualizar el estado de sus tareas al menos una vez por día. En ClickUp, el cambio de estado es visual y directo: hacé clic en el estado actual de la tarea y elegí el nuevo estado del menú.</p>
+
+        <h3>Configurar notificaciones</h3>
+        <p>ClickUp envía notificaciones por email, web y móvil. Desde Configuración → Notificaciones, ajustá para recibir solo lo que realmente importa: tareas asignadas a vos, menciones directas y cambios de estado en tareas críticas.</p>
+      </section>
+
+      <section id="seguimiento">
+        <h2>6. Seguimiento y reportes</h2>
+
+        <h3>Dashboards</h3>
+        <p>Los Dashboards de ClickUp son su funcionalidad más poderosa para PMs. Permiten crear vistas personalizadas con widgets: gráficos de avance, tareas vencidas, carga de trabajo por persona, tareas por estado. Un Dashboard bien configurado elimina la necesidad de reportes manuales.</p>
+
+        <h3>Metas (Goals)</h3>
+        <p>ClickUp permite crear Metas vinculadas a tareas o listas. Podés definir un objetivo medible — por ejemplo, "Completar el 100% de las tareas de la Fase 1" — y el sistema calcula el avance automáticamente a medida que se completan las tareas.</p>
+
+        <h3>Carga de trabajo (Workload)</h3>
+        <p>La vista Workload muestra cuántas tareas tiene asignada cada persona en un período de tiempo. Como PM, usala para detectar cuellos de botella antes de que se conviertan en problemas: si una persona tiene 15 tareas esta semana y otra tiene 2, hay un desbalance que necesitás corregir.</p>
+
+        <h3>Reportes de tiempo</h3>
+        <p>ClickUp tiene un rastreador de tiempo integrado. Los miembros del equipo pueden registrar el tiempo dedicado a cada tarea. Como PM, esto te permite comparar el tiempo estimado con el tiempo real y mejorar la planificación de proyectos futuros.</p>
+      </section>
+
+      <section id="automatizaciones">
+        <h2>7. Automatizaciones para PMs</h2>
+        <p>Las automatizaciones de ClickUp son más potentes que las de Asana en el plan gratuito. Permiten reducir el trabajo manual del equipo y garantizar que los procesos se cumplan de forma consistente.</p>
+
+        <h3>Cómo crear una automatización</h3>
+        <ol>
+          <li>Dentro de una List, hacé clic en "Automate" en la barra superior.</li>
+          <li>Elegí una plantilla de automatización o creá una desde cero.</li>
+          <li>Definí el disparador (trigger): qué evento activa la automatización.</li>
+          <li>Definí la acción: qué hace el sistema cuando se activa el trigger.</li>
+        </ol>
+
+        <h3>Automatizaciones más útiles para PMs</h3>
+        <ul>
+          <li><strong>Cuando una tarea se marca como completada → notificar al PM.</strong> Útil para tareas críticas que requieren revisión antes de continuar.</li>
+          <li><strong>Cuando una tarea vence sin completarse → cambiar prioridad a Urgent.</strong> Garantiza visibilidad inmediata sobre tareas atrasadas.</li>
+          <li><strong>Cuando se crea una tarea en una List → asignar automáticamente a un responsable.</strong> Útil para tareas recurrentes con responsable fijo.</li>
+          <li><strong>Cuando el estado cambia a "In Review" → asignar al PM como revisor.</strong> Automatiza el flujo de aprobación sin intervención manual.</li>
+        </ul>
+
+        <div class="nota-practica">
+          <p><strong>Consejo:</strong> Empezá con una o dos automatizaciones simples. Las automatizaciones mal configuradas generan notificaciones innecesarias y confunden al equipo. Agregá complejidad de forma gradual.</p>
+        </div>
+      </section>
+
+      <section id="errores-frecuentes">
+        <h2>8. Errores frecuentes y cómo evitarlos</h2>
+
+        <div class="error-item">
+          <h3>No definir la jerarquía antes de empezar</h3>
+          <p>El error más costoso en ClickUp. Si empezás a crear Spaces, Folders y Lists sin un plan claro, terminás con una estructura caótica que es muy difícil de reorganizar después. Dedicá 30 minutos a diseñar la jerarquía en papel antes de tocar la herramienta.</p>
+        </div>
+
+        <div class="error-item">
+          <h3>Activar todas las funciones desde el inicio</h3>
+          <p>ClickUp tiene decenas de funciones: campos personalizados, vistas, integraciones, automatizaciones. Activarlas todas desde el inicio abruma al equipo y genera resistencia. Empezá con tareas, estados y fechas. Agregá funciones a medida que el equipo las pida.</p>
+        </div>
+
+        <div class="error-item">
+          <h3>Crear demasiados estados personalizados</h3>
+          <p>La flexibilidad de estados es una ventaja, pero también una trampa. Si cada proyecto tiene 8 estados distintos, el equipo no sabe en cuál poner cada tarea. Tres a cinco estados son suficientes para la mayoría de los proyectos.</p>
+        </div>
+
+        <div class="error-item">
+          <h3>No capacitar al equipo antes de migrar</h3>
+          <p>ClickUp tiene una curva de aprendizaje mayor que Asana. Migrar a un equipo sin capacitación previa genera abandono de la herramienta en las primeras semanas. Antes de la migración, hacé al menos una sesión de 45 minutos con el equipo completo.</p>
+        </div>
+
+        <div class="error-item">
+          <h3>Ignorar la vista "My Work"</h3>
+          <p>Muchos usuarios nuevos abren cada proyecto por separado para ver sus tareas. La vista "My Work" centraliza todo en un solo lugar y es el punto de partida correcto para cada jornada. Si el equipo no la usa, está desperdiciando una de las mejores funciones de ClickUp.</p>
+        </div>
+      </section>
+
+    </div>
+
+    <div class="guia-footer">
+      <div class="autor-box">
+        <img src="/images/valeria-yashan.jpg" alt="Valeria Yashan, Project Manager PMP® y autora" class="autor-foto" />
+        <div class="autor-info">
+          <p class="autor-nombre">Valeria Yashan</p>
+          <p class="autor-desc">PMP® · Consultora en gestión de proyectos e IA · Autora de 4 libros sobre Project Management.</p>
+          <a href="/sobre-mi">Conocé más sobre Valeria →</a>
+        </div>
+      </div>
+
+      <div class="cta-box">
+        <h3>¿Querés implementar ClickUp en tu equipo?</h3>
+        <p>Puedo acompañarte en la configuración inicial y capacitar a tu equipo para que la adopción sea real y duradera.</p>
+        <a href="/contacto" class="btn-cta">Hablemos →</a>
+      </div>
+    </div>
+
+  </div>
+
+</BaseLayout>
+
+<style>
+  .guia-container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 5rem;
+  }
+
+  .breadcrumb {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    font-size: 0.85rem;
+    color: var(--color-muted);
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+  }
+
+  .breadcrumb a {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .breadcrumb a:hover {
+    text-decoration: underline;
+  }
+
+  .guia-tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+
+  .guia-header h1 {
+    font-family: 'Fraunces', serif;
+    font-size: 2.4rem;
+    font-weight: 900;
+    color: var(--color-text);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .guia-lead {
+    font-size: 1.1rem;
+    color: var(--color-muted);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+
+  .guia-meta {
+    display: flex;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--color-muted);
+    flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+  }
+
+  .descarga-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-left: 3px solid var(--color-accent);
+    border-radius: 0 8px 8px 0;
+    padding: 1rem 1.25rem;
+    margin-bottom: 2rem;
+  }
+
+  .descarga-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--color-accent);
+  }
+
+  .descarga-titulo {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin: 0;
+  }
+
+  .descarga-subtitulo {
+    font-size: 0.8rem;
+    color: var(--color-muted);
+    margin: 0;
+  }
+
+  .btn-descarga {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--color-accent);
+    color: #ffffff;
+    padding: 0.5rem 1.1rem;
+    border-radius: 6px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .btn-descarga:hover {
+    opacity: 0.85;
+  }
+
+  .tabla-contenidos {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-left: 3px solid var(--color-accent);
+    border-radius: 0 6px 6px 0;
+    padding: 1.5rem 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .toc-titulo {
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .tabla-contenidos ol {
+    margin: 0;
+    padding-left: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .tabla-contenidos a {
+    color: var(--color-text);
+    text-decoration: none;
+    font-size: 0.95rem;
+  }
+
+  .tabla-contenidos a:hover {
+    color: var(--color-accent);
+  }
+
+  .guia-contenido section {
+    margin-bottom: 3.5rem;
+    padding-bottom: 3.5rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .guia-contenido section:last-child {
+    border-bottom: none;
+  }
+
+  .guia-contenido h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 1.2rem;
+  }
+
+  .guia-contenido h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-top: 2rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .guia-contenido p {
+    color: var(--color-text);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+
+  .guia-contenido ul,
+  .guia-contenido ol {
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .guia-contenido li {
+    color: var(--color-text);
+    line-height: 1.7;
+    margin-bottom: 0.4rem;
+  }
+
+  .nota-practica {
+    background: var(--color-surface);
+    border-left: 3px solid var(--color-accent);
+    border-radius: 0 6px 6px 0;
+    padding: 1rem 1.25rem;
+    margin-top: 1.5rem;
+  }
+
+  .nota-practica p {
+    margin: 0;
+    font-size: 0.92rem;
+    color: var(--color-muted);
+  }
+
+  .error-item {
+    margin-bottom: 2rem;
+  }
+
+  .error-item h3 {
+    margin-top: 0;
+  }
+
+  .guia-footer {
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .autor-box {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+    padding: 1.5rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+  }
+
+  .autor-foto {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .autor-nombre {
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+    color: var(--color-text);
+  }
+
+  .autor-desc {
+    font-size: 0.88rem;
+    color: var(--color-muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .autor-info a {
+    font-size: 0.88rem;
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .autor-info a:hover {
+    text-decoration: underline;
+  }
+
+  .cta-box {
+    background: var(--color-accent);
+    color: #ffffff;
+    padding: 2rem;
+    border-radius: 10px;
+  }
+
+  .cta-box h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #ffffff;
+  }
+
+  .cta-box p {
+    font-size: 0.95rem;
+    opacity: 0.9;
+    margin-bottom: 1.25rem;
+    color: #ffffff;
+  }
+
+  .btn-cta {
+    display: inline-block;
+    background: #ffffff;
+    color: var(--color-accent);
+    padding: 0.65rem 1.4rem;
+    border-radius: 6px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+  }
+
+  .btn-cta:hover {
+    opacity: 0.9;
+  }
+
+  @media (max-width: 700px) {
+    .guia-header h1 {
+      font-size: 1.8rem;
+    }
+
+    .autor-box {
+      flex-direction: column;
+    }
+
+    .descarga-banner {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

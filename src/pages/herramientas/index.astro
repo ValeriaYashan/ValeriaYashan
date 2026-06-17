@@ -24,7 +24,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <a href="/herramientas/asana" class="btn-herramienta">Leer guía</a>
     </article>
 
-    <article class="herramienta-card proxima">
+    <article class="herramienta-card">
       <div class="herramienta-header">
         <span class="herramienta-tag">Gestión de tareas</span>
       </div>
@@ -32,9 +32,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <p>Guía práctica de ClickUp aplicada a la gestión de proyectos: estructura, automatizaciones y seguimiento de equipo.</p>
       <div class="herramienta-meta">
         <span class="herramienta-nivel">Nivel: inicial</span>
-        <span class="herramienta-estado proxima-label">Próximamente</span>
+        <span class="herramienta-estado disponible">Disponible</span>
       </div>
-      <span class="btn-herramienta deshabilitado">En preparación</span>
+      <a href="/herramientas/clickup" class="btn-herramienta">Leer guía</a>
     </article>
 
   </section>
@@ -79,10 +79,6 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     display: flex;
     flex-direction: column;
     gap: 1rem;
-  }
-
-  .herramienta-card.proxima {
-    opacity: 0.6;
   }
 
   .herramienta-tag {
@@ -132,11 +128,6 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     color: #065F46;
   }
 
-  .proxima-label {
-    background: var(--color-border);
-    color: var(--color-muted);
-  }
-
   .btn-herramienta {
     display: inline-block;
     background: var(--color-accent);
@@ -153,12 +144,6 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
   .btn-herramienta:hover {
     opacity: 0.85;
-  }
-
-  .btn-herramienta.deshabilitado {
-    background: var(--color-border);
-    color: var(--color-muted);
-    cursor: not-allowed;
   }
 
   @media (max-width: 700px) {
