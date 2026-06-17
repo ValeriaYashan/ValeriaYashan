@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="Herramientas de gestión de proyectos | Valeria Yashan" description="Guías prácticas de herramientas digitales para project managers. Asana, ClickUp, Trello y más, explicadas desde la gestión de proyectos real.">
+<BaseLayout title="Herramientas de gestión de proyectos | Valeria Yashan" description="Guías prácticas de herramientas digitales para project managers. Asana, ClickUp, Trello, Monday y más, explicadas desde la gestión de proyectos real.">
 
   <section class="herramientas-hero">
     <h1>Herramientas para PMs</h1>
@@ -50,17 +50,17 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <a href="/herramientas/trello" class="btn-herramienta">Leer guía</a>
     </article>
 
-    <article class="herramienta-card proxima">
+    <article class="herramienta-card">
       <div class="herramienta-header">
         <span class="herramienta-tag">Gestión de tareas</span>
       </div>
       <h2>Monday para Project Managers</h2>
-      <p>Guía práctica de Monday.com aplicada a la gestión de proyectos: automatizaciones, dashboards y seguimiento de equipo.</p>
+      <p>Guía práctica de Monday.com aplicada a la gestión de proyectos: columnas, dashboards y automatizaciones para equipos medianos.</p>
       <div class="herramienta-meta">
         <span class="herramienta-nivel">Nivel: inicial</span>
-        <span class="herramienta-estado proxima-label">Próximamente</span>
+        <span class="herramienta-estado disponible">Disponible</span>
       </div>
-      <span class="btn-herramienta deshabilitado">En preparación</span>
+      <a href="/herramientas/monday" class="btn-herramienta">Leer guía</a>
     </article>
 
   </section>
@@ -105,10 +105,6 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     display: flex;
     flex-direction: column;
     gap: 1rem;
-  }
-
-  .herramienta-card.proxima {
-    opacity: 0.6;
   }
 
   .herramienta-tag {
@@ -158,11 +154,6 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     color: #065F46;
   }
 
-  .proxima-label {
-    background: var(--color-border);
-    color: var(--color-muted);
-  }
-
   .btn-herramienta {
     display: inline-block;
     background: var(--color-accent);
@@ -179,12 +170,6 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
   .btn-herramienta:hover {
     opacity: 0.85;
-  }
-
-  .btn-herramienta.deshabilitado {
-    background: var(--color-border);
-    color: var(--color-muted);
-    cursor: not-allowed;
   }
 
   @media (max-width: 700px) {

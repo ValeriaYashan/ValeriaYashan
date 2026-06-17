@@ -1,0 +1,608 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Monday para Project Managers | Valeria Yashan" description="Guía práctica de Monday.com para PMs: boards, columnas personalizables, dashboards y automatizaciones. Con ejemplos reales de gestión de proyectos.">
+
+  <div class="guia-container">
+
+    <nav class="breadcrumb">
+      <a href="/herramientas">Herramientas</a>
+      <span>→</span>
+      <span>Monday para Project Managers</span>
+    </nav>
+
+    <header class="guia-header">
+      <span class="guia-tag">Gestión de tareas</span>
+      <h1>Monday para Project Managers</h1>
+      <p class="guia-lead">Guía práctica para configurar y usar Monday.com en la gestión de proyectos reales. Con foco en el sistema de columnas, los dashboards y las automatizaciones.</p>
+      <div class="guia-meta">
+        <span>Nivel: inicial</span>
+        <span>·</span>
+        <span>Herramienta: Monday.com (plan gratuito)</span>
+        <span>·</span>
+        <span>Autora: Valeria Yashan</span>
+      </div>
+    </header>
+
+    <div class="descarga-banner">
+      <div class="descarga-info">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        <div>
+          <p class="descarga-titulo">Descargá esta guía en PDF</p>
+          <p class="descarga-subtitulo">Guía de Monday para Project Managers · PDF · Gratis</p>
+        </div>
+      </div>
+      <a href="/recursos/guia-monday-pm.pdf" download class="btn-descarga">
+        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Descargar PDF
+      </a>
+    </div>
+
+    <nav class="tabla-contenidos">
+      <p class="toc-titulo">Contenido de esta guía</p>
+      <ol>
+        <li><a href="#que-es-monday">Qué es Monday y para qué sirve en PM</a></li>
+        <li><a href="#conceptos-clave">Conceptos clave: Boards, Groups e Items</a></li>
+        <li><a href="#configuracion-inicial">Configuración inicial y primer Board</a></li>
+        <li><a href="#columnas">El sistema de columnas</a></li>
+        <li><a href="#dia-a-dia">Gestión del día a día</a></li>
+        <li><a href="#dashboards">Dashboards y automatizaciones</a></li>
+        <li><a href="#errores-frecuentes">Errores frecuentes y cómo evitarlos</a></li>
+      </ol>
+    </nav>
+
+    <div class="guia-contenido">
+
+      <section id="que-es-monday">
+        <h2>1. Qué es Monday y para qué sirve en gestión de proyectos</h2>
+        <p>Monday.com es una plataforma de gestión del trabajo que combina la flexibilidad de una hoja de cálculo con la potencia de una herramienta de gestión de proyectos. Su interfaz visual y colorida está diseñada para que cualquier persona pueda entender el estado del trabajo de un vistazo.</p>
+        <p>Para un Project Manager, Monday es especialmente útil cuando necesitás una herramienta que el equipo adopte rápido sin capacitación técnica, y que al mismo tiempo ofrezca dashboards y automatizaciones para el seguimiento ejecutivo.</p>
+
+        <h3>¿Para qué tipo de organizaciones es ideal?</h3>
+        <ul>
+          <li>Equipos medianos de 10 a 50 personas que gestionan múltiples proyectos simultáneos.</li>
+          <li>Organizaciones que necesitan visibilidad transversal entre departamentos.</li>
+          <li>Proyectos con flujos de trabajo repetitivos que se benefician de automatizaciones.</li>
+          <li>Equipos que necesitan reportes ejecutivos sin armar presentaciones manuales.</li>
+        </ul>
+
+        <h3>¿Cómo se diferencia de las otras herramientas?</h3>
+        <ul>
+          <li><strong>vs Trello:</strong> Monday es más potente y flexible, pero más complejo. Trello es mejor para equipos pequeños y proyectos simples.</li>
+          <li><strong>vs Asana:</strong> Monday tiene una interfaz más visual y colorida. Asana es más limpia y enfocada en la gestión de tareas pura.</li>
+          <li><strong>vs ClickUp:</strong> Monday es más fácil de adoptar pero menos personalizable. ClickUp tiene más funciones en el plan gratuito.</li>
+        </ul>
+
+        <div class="nota-practica">
+          <p><strong>Nota sobre el plan gratuito:</strong> El plan gratuito de Monday.com permite hasta 2 usuarios y tableros ilimitados. Para equipos más grandes, el plan básico de pago es necesario. Esta guía cubre las funciones disponibles en los planes de pago básicos, que son los más usados en organizaciones reales.</p>
+        </div>
+      </section>
+
+      <section id="conceptos-clave">
+        <h2>2. Conceptos clave: Boards, Groups e Items</h2>
+        <p>Monday tiene su propia terminología. Entender estos tres conceptos es todo lo que necesitás para empezar a trabajar con la herramienta.</p>
+
+        <h3>Board (Tablero)</h3>
+        <p>Un Board es el espacio de trabajo principal. Equivale a un proyecto en Asana o una List en ClickUp. Cada Board tiene su propia estructura de columnas, grupos e items. Ejemplo: "Lanzamiento de producto Q3 2026" es un Board.</p>
+
+        <h3>Group (Grupo)</h3>
+        <p>Un Group es una agrupación de Items dentro de un Board. Puede representar una fase del proyecto, una semana de trabajo, un departamento o cualquier categoría que tenga sentido para tu proyecto. Ejemplo: "Fase 1 — Planificación", "Fase 2 — Ejecución", "Fase 3 — Cierre".</p>
+
+        <h3>Item (Elemento)</h3>
+        <p>Un Item es la unidad de trabajo. Equivale a una tarea en Asana o una Card en Trello. Cada Item tiene columnas con información específica: responsable, fecha, estado, prioridad y cualquier columna personalizada que hayas configurado.</p>
+
+        <div class="nota-practica">
+          <p><strong>La diferencia clave con otras herramientas:</strong> En Monday, la información de cada Item se organiza en columnas, como en una hoja de cálculo. Esto hace que la vista de un Board sea más densa en información que Trello o Asana, pero también más poderosa para el seguimiento.</p>
+        </div>
+      </section>
+
+      <section id="configuracion-inicial">
+        <h2>3. Configuración inicial y primer Board</h2>
+
+        <h3>Crear la cuenta</h3>
+        <ol>
+          <li>Ingresá a <strong>monday.com</strong> y hacé clic en "Empezar gratis".</li>
+          <li>Registrate con tu email profesional o con Google.</li>
+          <li>Completá el nombre de tu organización y la cantidad de personas en tu equipo.</li>
+          <li>Monday te va a preguntar para qué lo vas a usar. Elegí "Gestión de proyectos".</li>
+        </ol>
+
+        <h3>Crear el primer Board</h3>
+        <p>Monday ofrece dos opciones para crear un Board:</p>
+        <ul>
+          <li><strong>Desde una plantilla:</strong> Monday tiene cientos de plantillas organizadas por industria y tipo de proyecto. Para PM, las más útiles son "Project Tracker", "Sprint Planning" y "Campaign Management".</li>
+          <li><strong>Desde cero:</strong> Empezás con un Board vacío y configurás las columnas según las necesidades de tu proyecto.</li>
+        </ul>
+
+        <h3>Configurar los Groups</h3>
+        <ol>
+          <li>Por defecto, Monday crea un Group llamado "Group Title". Hacé clic en el nombre para renombrarlo.</li>
+          <li>Para agregar un nuevo Group, hacé clic en "+ Agregar grupo" al final del Board.</li>
+          <li>Elegí un color para cada Group para identificarlos visualmente.</li>
+        </ol>
+
+        <h3>Invitar al equipo</h3>
+        <ol>
+          <li>Desde el panel lateral, hacé clic en "Invitar miembros".</li>
+          <li>Ingresá los emails de los miembros del equipo.</li>
+          <li>Asigná el rol: Admin, Miembro o Espectador.</li>
+        </ol>
+
+        <div class="nota-practica">
+          <p><strong>Recomendación:</strong> Empezá desde una plantilla en lugar de desde cero. Las plantillas de Monday están bien diseñadas y te ahorran tiempo de configuración. Podés modificarlas libremente después.</p>
+        </div>
+      </section>
+
+      <section id="columnas">
+        <h2>4. El sistema de columnas</h2>
+        <p>El sistema de columnas es la funcionalidad más poderosa y diferenciadora de Monday. A diferencia de Asana o Trello, donde la información de cada tarea está dentro de un panel lateral, en Monday toda la información está visible directamente en el Board, organizada en columnas.</p>
+
+        <h3>Columnas predeterminadas</h3>
+        <p>Cuando creás un Board, Monday incluye columnas básicas por defecto:</p>
+        <ul>
+          <li><strong>Item:</strong> el nombre de la tarea. Es la única columna que no se puede eliminar.</li>
+          <li><strong>Persona:</strong> el responsable asignado.</li>
+          <li><strong>Estado:</strong> el estado actual de la tarea (configurable).</li>
+          <li><strong>Fecha:</strong> la fecha límite.</li>
+        </ul>
+
+        <h3>Tipos de columnas disponibles</h3>
+        <p>Monday permite agregar más de 30 tipos de columnas distintas. Las más útiles para PM son:</p>
+        <ul>
+          <li><strong>Estado:</strong> columna de semáforo personalizable. Podés definir los estados y colores que representan tu flujo de trabajo.</li>
+          <li><strong>Persona:</strong> asignación de responsable con foto de perfil visible.</li>
+          <li><strong>Fecha:</strong> fecha límite con recordatorio automático.</li>
+          <li><strong>Prioridad:</strong> nivel de prioridad (crítica, alta, media, baja).</li>
+          <li><strong>Números:</strong> para registrar horas, presupuesto o cualquier valor numérico.</li>
+          <li><strong>Fórmula:</strong> calcula valores automáticamente a partir de otras columnas.</li>
+          <li><strong>Dependencia:</strong> marca que un Item depende de otro para poder iniciarse.</li>
+          <li><strong>Progreso:</strong> barra de progreso calculada a partir de subtareas o valores manuales.</li>
+        </ul>
+
+        <h3>Cómo agregar una columna</h3>
+        <ol>
+          <li>Hacé clic en el "+" al final de la fila de columnas.</li>
+          <li>Elegí el tipo de columna que querés agregar.</li>
+          <li>Asigná un nombre descriptivo.</li>
+          <li>Configurá las opciones específicas del tipo de columna.</li>
+        </ol>
+
+        <div class="nota-practica">
+          <p><strong>Regla de diseño:</strong> Menos columnas es mejor. Empezá con Estado, Persona, Fecha y Prioridad. Agregá columnas nuevas solo cuando el equipo las pida. Un Board con 15 columnas es difícil de leer y de mantener actualizado.</p>
+        </div>
+      </section>
+
+      <section id="dia-a-dia">
+        <h2>5. Gestión del día a día</h2>
+
+        <h3>Actualizar Items</h3>
+        <p>Cada miembro del equipo debe actualizar el estado de sus Items al menos una vez por día. En Monday, el cambio de estado es visual e inmediato: hacé clic en la celda de estado y elegí el nuevo estado del menú desplegable. El color cambia automáticamente.</p>
+
+        <h3>Vistas disponibles</h3>
+        <p>Monday permite cambiar la forma en que se visualiza el mismo Board sin modificar los datos:</p>
+        <ul>
+          <li><strong>Tabla:</strong> la vista por defecto, similar a una hoja de cálculo.</li>
+          <li><strong>Kanban:</strong> vista de tablero por columnas de estado.</li>
+          <li><strong>Gantt:</strong> vista de cronograma con dependencias y fechas.</li>
+          <li><strong>Calendario:</strong> vista mensual de fechas límite.</li>
+          <li><strong>Mapa:</strong> para proyectos con componentes geográficos.</li>
+        </ul>
+
+        <h3>Filtros y agrupaciones</h3>
+        <p>Como PM, los filtros son una de las funciones más útiles del día a día. Podés filtrar el Board para ver solo las tareas asignadas a una persona, solo las tareas vencidas, o solo las tareas de una fase específica. Los filtros no modifican el Board, solo cambian lo que ves en pantalla.</p>
+
+        <h3>Actualizaciones y comentarios</h3>
+        <p>Cada Item tiene un panel de actualizaciones donde el equipo puede agregar comentarios, mencionar personas con @ y adjuntar archivos. Las conversaciones sobre un Item deben ocurrir en ese panel, no en WhatsApp ni por email.</p>
+
+        <h3>Mi trabajo (My Work)</h3>
+        <p>Monday tiene una vista personal "Mi trabajo" que muestra todos los Items asignados a vos en todos los Boards. Es el punto de partida recomendado para cada jornada.</p>
+      </section>
+
+      <section id="dashboards">
+        <h2>6. Dashboards y automatizaciones</h2>
+
+        <h3>Dashboards</h3>
+        <p>Los Dashboards de Monday son su funcionalidad más potente para PMs y stakeholders. Permiten crear vistas con widgets que consolidan información de múltiples Boards en una sola pantalla.</p>
+        <p>Los widgets más útiles para PM son:</p>
+        <ul>
+          <li><strong>Gráfico de batería:</strong> muestra el porcentaje de tareas completadas vs pendientes.</li>
+          <li><strong>Tabla de resumen:</strong> consolida Items de múltiples Boards en una sola tabla.</li>
+          <li><strong>Carga de trabajo:</strong> muestra cuántas tareas tiene asignada cada persona.</li>
+          <li><strong>Cronograma:</strong> vista Gantt de múltiples proyectos simultáneos.</li>
+          <li><strong>Números:</strong> muestra totales calculados (horas, presupuesto, cantidad de tareas).</li>
+        </ul>
+
+        <h3>Automatizaciones</h3>
+        <p>Monday tiene un sistema de automatizaciones con más de 200 recetas predefinidas. Las más útiles para PMs son:</p>
+        <ul>
+          <li><strong>Cuando el estado cambia a "Completado" → notificar al PM.</strong></li>
+          <li><strong>Cuando la fecha límite llega sin completar → cambiar estado a "Atrasado".</strong></li>
+          <li><strong>Cuando se crea un Item → asignar automáticamente a un responsable.</strong></li>
+          <li><strong>Cuando el estado cambia a "En revisión" → asignar al PM como responsable.</strong></li>
+          <li><strong>Cada lunes → enviar resumen de tareas pendientes al equipo.</strong></li>
+        </ul>
+
+        <h3>Cómo crear una automatización</h3>
+        <ol>
+          <li>Dentro de un Board, hacé clic en "Automatizar" en la barra superior.</li>
+          <li>Explorá las recetas predefinidas o hacé clic en "Crear automatización personalizada".</li>
+          <li>Definí el disparador (trigger) y la acción.</li>
+          <li>Activá la automatización.</li>
+        </ol>
+
+        <div class="nota-practica">
+          <p><strong>Consejo:</strong> Empezá con la automatización de fechas vencidas. Es la más simple y la que más valor aporta desde el primer día: cuando una tarea vence sin completarse, el estado cambia automáticamente a "Atrasado" y el PM recibe una notificación.</p>
+        </div>
+      </section>
+
+      <section id="errores-frecuentes">
+        <h2>7. Errores frecuentes y cómo evitarlos</h2>
+
+        <div class="error-item">
+          <h3>Agregar demasiadas columnas desde el inicio</h3>
+          <p>El error más común en Monday. La flexibilidad del sistema de columnas tienta a configurar todo desde el inicio: estado, prioridad, fecha, horas, presupuesto, departamento, etiquetas. El resultado es un Board imposible de leer y de mantener actualizado. Empezá con cuatro columnas y agregá más solo cuando el equipo las necesite.</p>
+        </div>
+
+        <div class="error-item">
+          <h3>No definir los estados personalizados</h3>
+          <p>Monday permite personalizar los estados con nombres y colores propios. Si no lo hacés, el equipo usa los estados genéricos y pierde claridad sobre qué significa cada uno. Dedicá 15 minutos a definir los estados que representan exactamente el flujo de trabajo de tu proyecto antes de empezar.</p>
+        </div>
+
+        <div class="error-item">
+          <h3>Crear un Board por cada tema en lugar de usar Groups</h3>
+          <p>Un error frecuente es crear un Board separado para cada fase o subproyecto. Esto fragmenta la visibilidad y complica los dashboards. Usá Groups dentro de un mismo Board para separar fases o categorías, y reservá Boards distintos para proyectos realmente independientes.</p>
+        </div>
+
+        <div class="error-item">
+          <h3>No capacitar al equipo en la lógica de columnas</h3>
+          <p>Monday es intuitivo para quien lo configura, pero puede ser confuso para quien llega sin explicación. Antes de invitar al equipo, prepará una guía de 5 minutos que explique qué significa cada columna y cómo actualizar el estado de un Item.</p>
+        </div>
+
+        <div class="error-item">
+          <h3>Usar Monday solo como lista de tareas</h3>
+          <p>Monday tiene mucho más valor cuando se usan los Dashboards y las automatizaciones. Si el equipo lo usa solo para registrar tareas sin aprovechar la visibilidad transversal y los reportes automáticos, están pagando por una herramienta que usan al 20% de su capacidad.</p>
+        </div>
+      </section>
+
+    </div>
+
+    <div class="guia-footer">
+      <div class="autor-box">
+        <img src="/images/valeria-yashan.jpg" alt="Valeria Yashan, Project Manager PMP® y autora" class="autor-foto" />
+        <div class="autor-info">
+          <p class="autor-nombre">Valeria Yashan</p>
+          <p class="autor-desc">PMP® · Consultora en gestión de proyectos e IA · Autora de 4 libros sobre Project Management.</p>
+          <a href="/sobre-mi">Conocé más sobre Valeria →</a>
+        </div>
+      </div>
+
+      <div class="cta-box">
+        <h3>¿Querés implementar Monday en tu equipo?</h3>
+        <p>Puedo acompañarte en la configuración inicial y capacitar a tu equipo para que la adopción sea real y duradera.</p>
+        <a href="/contacto" class="btn-cta">Hablemos →</a>
+      </div>
+    </div>
+
+  </div>
+
+</BaseLayout>
+
+<style>
+  .guia-container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 5rem;
+  }
+
+  .breadcrumb {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    font-size: 0.85rem;
+    color: var(--color-muted);
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+  }
+
+  .breadcrumb a {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .breadcrumb a:hover {
+    text-decoration: underline;
+  }
+
+  .guia-tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+
+  .guia-header h1 {
+    font-family: 'Fraunces', serif;
+    font-size: 2.4rem;
+    font-weight: 900;
+    color: var(--color-text);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .guia-lead {
+    font-size: 1.1rem;
+    color: var(--color-muted);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+
+  .guia-meta {
+    display: flex;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--color-muted);
+    flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+  }
+
+  .descarga-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-left: 3px solid var(--color-accent);
+    border-radius: 0 8px 8px 0;
+    padding: 1rem 1.25rem;
+    margin-bottom: 2rem;
+  }
+
+  .descarga-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--color-accent);
+  }
+
+  .descarga-titulo {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin: 0;
+  }
+
+  .descarga-subtitulo {
+    font-size: 0.8rem;
+    color: var(--color-muted);
+    margin: 0;
+  }
+
+  .btn-descarga {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--color-accent);
+    color: #ffffff;
+    padding: 0.5rem 1.1rem;
+    border-radius: 6px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .btn-descarga:hover {
+    opacity: 0.85;
+  }
+
+  .tabla-contenidos {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-left: 3px solid var(--color-accent);
+    border-radius: 0 6px 6px 0;
+    padding: 1.5rem 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .toc-titulo {
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .tabla-contenidos ol {
+    margin: 0;
+    padding-left: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .tabla-contenidos a {
+    color: var(--color-text);
+    text-decoration: none;
+    font-size: 0.95rem;
+  }
+
+  .tabla-contenidos a:hover {
+    color: var(--color-accent);
+  }
+
+  .guia-contenido section {
+    margin-bottom: 3.5rem;
+    padding-bottom: 3.5rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .guia-contenido section:last-child {
+    border-bottom: none;
+  }
+
+  .guia-contenido h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 1.2rem;
+  }
+
+  .guia-contenido h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-top: 2rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .guia-contenido p {
+    color: var(--color-text);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+
+  .guia-contenido ul,
+  .guia-contenido ol {
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .guia-contenido li {
+    color: var(--color-text);
+    line-height: 1.7;
+    margin-bottom: 0.4rem;
+  }
+
+  .nota-practica {
+    background: var(--color-surface);
+    border-left: 3px solid var(--color-accent);
+    border-radius: 0 6px 6px 0;
+    padding: 1rem 1.25rem;
+    margin-top: 1.5rem;
+  }
+
+  .nota-practica p {
+    margin: 0;
+    font-size: 0.92rem;
+    color: var(--color-muted);
+  }
+
+  .error-item {
+    margin-bottom: 2rem;
+  }
+
+  .error-item h3 {
+    margin-top: 0;
+  }
+
+  .guia-footer {
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .autor-box {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+    padding: 1.5rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+  }
+
+  .autor-foto {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .autor-nombre {
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+    color: var(--color-text);
+  }
+
+  .autor-desc {
+    font-size: 0.88rem;
+    color: var(--color-muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .autor-info a {
+    font-size: 0.88rem;
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .autor-info a:hover {
+    text-decoration: underline;
+  }
+
+  .cta-box {
+    background: var(--color-accent);
+    color: #ffffff;
+    padding: 2rem;
+    border-radius: 10px;
+  }
+
+  .cta-box h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #ffffff;
+  }
+
+  .cta-box p {
+    font-size: 0.95rem;
+    opacity: 0.9;
+    margin-bottom: 1.25rem;
+    color: #ffffff;
+  }
+
+  .btn-cta {
+    display: inline-block;
+    background: #ffffff;
+    color: var(--color-accent);
+    padding: 0.65rem 1.4rem;
+    border-radius: 6px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+  }
+
+  .btn-cta:hover {
+    opacity: 0.9;
+  }
+
+  @media (max-width: 700px) {
+    .guia-header h1 {
+      font-size: 1.8rem;
+    }
+
+    .autor-box {
+      flex-direction: column;
+    }
+
+    .descarga-banner {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>
