@@ -18,6 +18,9 @@ const formattedDate = pubDate.toLocaleDateString('es-AR', {
 });
 
 const esIA = category === 'IA';
+
+const ogImage = esIA ? '/images/og-ia.jpg' : '/images/og-pm.jpg';
+
 const ctaTitulo = esIA
   ? '¿Querés incorporar IA en tu equipo?'
   : '¿Querés prepararte para el PMP con acompañamiento real?';
@@ -26,7 +29,7 @@ const ctaTexto = esIA
   : 'Trabajo con profesionales que quieren certificarse con comprensión real, no con memorización. Si estás en esa etapa, escribime.';
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} image={ogImage}>
   <div class="container post-container">
     <header class="post-header mark-accent">
       <div class="post-meta">
