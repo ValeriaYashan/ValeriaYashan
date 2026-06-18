@@ -9,7 +9,6 @@ const posts = await Promise.all(
   allPosts
     .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
     .map(async (post) => {
-      const { Content } = await render(post);
       const plainText = post.body ?? '';
       const wordCount = plainText.trim().split(/\s+/).length;
       const readingTime = Math.max(1, Math.round(wordCount / 200));
@@ -19,7 +18,7 @@ const posts = await Promise.all(
 ---
 
 <BaseLayout
-  title="Blog"
+  title="Blog — Valeria Yashan"
   description="Artículos de Valeria Yashan sobre Project Management, IA aplicada, productividad y herramientas digitales."
 >
   <div class="container page-container">
