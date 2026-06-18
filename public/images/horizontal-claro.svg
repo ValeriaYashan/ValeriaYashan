@@ -1,0 +1,9 @@
+<svg width="360" height="80" viewBox="0 0 360 80" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Valeria Yashan — PMP, Project Management e IA aplicada">
+  <title>Valeria Yashan — logo horizontal (fondo claro)</title>
+  <defs></defs>  <g transform="translate(0,12) scale(0.5833)">
+    <rect width="96" height="96" rx="22" fill="#003087"></rect>
+    <path d="M27 44 L43 63" stroke="#FAFAF8" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"></path>
+    <path d="M43 63 L73 23" stroke="#00AEEF" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"></path>
+  </g>  <text class="nm" x="74" y="41" font-size="27" fill="#001c4d">Valeria Yashan</text>
+  <text class="tg" x="75" y="60" font-size="11" fill="#0066CC">PMP® · PROJECT MANAGEMENT · IA APLICADA</text>
+</svg>
