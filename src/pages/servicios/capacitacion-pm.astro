@@ -1,0 +1,84 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Capacitación en Project Management — Valeria Yashan"
+  description="Talleres y programas de formación en gestión de proyectos para equipos. Contenido práctico basado en PMBOK® y metodologías ágiles. Valeria Yashan, PMP®."
+>
+
+  <div class="servicio-page">
+    <div class="container">
+
+      <div class="breadcrumb">
+        <a href="/servicios">Servicios</a>
+        <span>&#8594;</span>
+        <span>Capacitaci&#243;n en Project Management</span>
+      </div>
+
+      <header class="servicio-header">
+        <p class="page-eyebrow">Servicio 03</p>
+        <h1>Capacitaci&#243;n en Project Management</h1>
+        <p class="page-lead">Talleres y programas de formaci&#243;n para equipos que necesitan gestionar mejor sus proyectos. Contenido pr&#225;ctico basado en el PMBOK&#174; Guide y metodolog&#237;as &#225;giles e h&#237;bridas, adaptado al contexto real de tu organizaci&#243;n.</p>
+      </header>
+
+      <div class="servicio-body">
+
+        <section class="servicio-section">
+          <h2>&#191;Para qui&#233;n es este servicio?</h2>
+          <p>Equipos de proyecto, l&#237;deres de &#225;rea y organizaciones que quieren profesionalizar su gesti&#243;n. Tanto para equipos que nunca tuvieron formaci&#243;n formal como para los que quieren actualizar sus pr&#225;cticas con el PMBOK&#174; Guide 8th Edition y el nuevo ECO vigente desde julio 2026.</p>
+        </section>
+
+        <section class="servicio-section">
+          <h2>&#191;Qu&#233; incluye?</h2>
+          <ul class="servicio-list">
+            <li>Talleres presenciales y virtuales a medida</li>
+            <li>Programas in-company o en modalidad abierta</li>
+            <li>Materiales did&#225;cticos propios basados en PMBOK&#174; Guide 8th Edition</li>
+            <li>Ejercicios pr&#225;cticos con casos reales del equipo</li>
+            <li>Seguimiento post-capacitaci&#243;n</li>
+          </ul>
+        </section>
+
+        <section class="servicio-section">
+          <h2>Mi enfoque</h2>
+          <p>No es teor&#237;a de libro. Es PM aplicado al trabajo concreto de tu equipo. Como docente universitaria y autora de una serie de libros de preparaci&#243;n PMP&#174;, llevo el contenido t&#233;cnico a ejemplos que el equipo reconoce como propios. El resultado es conocimiento que se aplica desde el primer d&#237;a despu&#233;s de la capacitaci&#243;n.</p>
+        </section>
+
+      </div>
+
+      <div class="servicio-cta">
+        <h2>&#191;Quer&#233;s capacitar a tu equipo en Project Management?</h2>
+        <p>Contame cu&#225;ntas personas son, qu&#233; experiencia tienen y qu&#233; problemas concretos quer&#233;s resolver.</p>
+        <div class="cta-buttons">
+          <a href="/contacto" class="btn-primary">Escribime &#8594;</a>
+          <a href="https://wa.me/541140791007" target="_blank" rel="noopener" class="btn-secondary">WhatsApp &#8594;</a>
+        </div>
+      </div>
+
+      <div class="servicio-nav">
+        <a href="/servicios/direccion-proyectos" class="nav-back">&#8592; Direcci&#243;n de Proyectos Externa</a>
+        <a href="/servicios/consultoria-ia" class="nav-next">Consultor&#237;a en IA Aplicada &#8594;</a>
+      </div>
+
+    </div>
+  </div>
+
+</BaseLayout>
+
+<style>
+  .servicio-page { padding: var(--space-xl) 0; }
+  .breadcrumb { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--color-muted); margin-bottom: 2rem; }
+  .breadcrumb a { color: var(--color-accent); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .servicio-header { margin-bottom: 3rem; }
+  .page-eyebrow { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-accent); margin-bottom: 0.5rem; }
+  .servicio-header h1 { font-family: 'Fraunces', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900; color: var(--color-text); line-height: 1.15; margin-bottom: 1rem; }
+  .page-lead { font-size: 1.1rem; color: var(--color-muted); max-width: 600px; line-height: 1.7; }
+  .servicio-body { display: flex; flex-direction: column; gap: 2.5rem; max-width: 680px; margin-bottom: 3rem; padding-bottom: 3rem; border-bottom: 1px solid var(--color-border); }
+  .servicio-section h2 { font-family: 'Fraunces', serif; font-size: 1.3rem; font-weight: 700; color: var(--color-text); margin-bottom: 0.75rem; }
+  .servicio-section p { font-size: 0.95rem; color: var(--color-muted); line-height: 1.75; }
+  .servicio-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+  .servicio-list li { font-size: 0.95rem; color: var(--color-muted); padding-left: 1.25rem; position: relative; line-height: 1.6; }
+  .servicio-list li::before { content: '&#10003;'; position: absolute; left: 0; color: var(--color-accent); font-weight: 700; }
+  .servicio-cta { background: var(--color-surface); border: 1px solid var(--color-border);

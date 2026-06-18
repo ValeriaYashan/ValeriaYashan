@@ -8,17 +8,30 @@
     <nav aria-label="Navegación principal">
       <ul class="nav-list">
         <li><a href="/" class="nav-link">Inicio</a></li>
-        <li><a href="/sobre-mi" class="nav-link">Sobre mí</a></li>
-        <li><a href="/servicios" class="nav-link">Servicios</a></li>
+        <li><a href="/sobre-mi" class="nav-link">Sobre m&#237;</a></li>
+        <li class="nav-item--dropdown">
+          <button class="nav-link nav-dropdown-trigger" aria-expanded="false" aria-haspopup="true">
+            Servicios <span class="nav-arrow" aria-hidden="true">&#8964;</span>
+          </button>
+          <ul class="nav-dropdown" role="menu">
+            <li role="none"><a href="/servicios" class="dropdown-link" role="menuitem">Ver todos los servicios</a></li>
+            <li role="none"><hr class="dropdown-divider" /></li>
+            <li role="none"><a href="/servicios/consultoria-pm" class="dropdown-link" role="menuitem">Consultor&#237;a en Gesti&#243;n de Proyectos</a></li>
+            <li role="none"><a href="/servicios/direccion-proyectos" class="dropdown-link" role="menuitem">Direcci&#243;n de Proyectos Externa</a></li>
+            <li role="none"><a href="/servicios/capacitacion-pm" class="dropdown-link" role="menuitem">Capacitaci&#243;n en Project Management</a></li>
+            <li role="none"><a href="/servicios/consultoria-ia" class="dropdown-link" role="menuitem">Consultor&#237;a en IA Aplicada</a></li>
+            <li role="none"><a href="/servicios/certificacion-pmp" class="dropdown-link" role="menuitem">Preparaci&#243;n para PMP&#174;</a></li>
+            <li role="none"><a href="/servicios/clases-ia" class="dropdown-link dropdown-link--highlight" role="menuitem">Clases Pr&#225;cticas de IA &#10024;</a></li>
+          </ul>
+        </li>
         <li><a href="/libro" class="nav-link">Libros</a></li>
         <li><a href="/blog" class="nav-link">Blog</a></li>
         <li><a href="/recursos" class="nav-link">Recursos</a></li>
         <li><a href="/herramientas" class="nav-link">Herramientas</a></li>
-        <li><a href="/capacitacion" class="nav-link">Capacitación</a></li>
         <li><a href="/contacto" class="nav-link">Contacto</a></li>
       </ul>
     </nav>
-    <a href="https://calendly.com/valeriayashan/30min" target="_blank" rel="noopener" class="btn-calendly">Agendá una consulta</a>
+    <a href="https://calendly.com/valeriayashan/30min" target="_blank" rel="noopener" class="btn-calendly">Agend&#225; una consulta</a>
   </div>
 </header>
 
@@ -59,6 +72,7 @@
     margin: 0;
     padding: 0;
     flex-wrap: nowrap;
+    align-items: center;
   }
 
   .nav-link {
@@ -72,6 +86,123 @@
 
   .nav-link:hover {
     color: var(--color-accent);
+  }
+
+  .nav-dropdown-trigger {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .nav-arrow {
+    font-size: 0.65rem;
+    transition: transform 0.2s ease;
+    display: inline-block;
+    line-height: 1;
+    margin-top: 1px;
+  }
+
+  .nav-dropdown-trigger[aria-expanded="true"] .nav-arrow {
+    transform: rotate(180deg);
+  }
+
+  .nav-item--dropdown {
+    position: relative;
+    list-style: none;
+  }
+
+  .nav-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    padding: 0.5rem 0;
+    min-width: 260px;
+    list-style: none;
+    margin: 0;
+    z-index: 200;
+  }
+
+  .nav-dropdown::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 10px;
+    background: var(--color-bg);
+    border-left: 1px solid var(--color-border);
+    border-top: 1px solid var(--color-border);
+    rotate: 45deg;
+  }
+
+  .nav-item--dropdown:hover .nav-dropdown {
+    display: block;
+  }
+
+  .nav-item--dropdown:hover .nav-dropdown-trigger {
+    color: var(--color-accent);
+  }
+
+  .nav-item--dropdown.is-open .nav-dropdown {
+    display: block;
+  }
+
+  .nav-item--dropdown.is-open .nav-dropdown-trigger {
+    color: var(--color-accent);
+  }
+
+  .dropdown-link {
+    display: block;
+    padding: 0.55rem 1.1rem;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--color-text);
+    text-decoration: none;
+    transition: background 0.15s, color 0.15s;
+    white-space: nowrap;
+  }
+
+  .dropdown-link:hover {
+    background: var(--color-surface);
+    color: var(--color-accent);
+  }
+
+  .dropdown-link--highlight {
+    color: var(--color-accent);
+    font-weight: 600;
+  }
+
+  .dropdown-link--highlight:hover {
+    background: var(--color-surface);
+  }
+
+  .dropdown-divider {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: 0.35rem 0;
+  }
+
+  .nav-dropdown li:first-child .dropdown-link {
+    font-size: 0.78rem;
+    color: var(--color-muted);
+    font-weight: 400;
+  }
+
+  .nav-dropdown li:first-child .dropdown-link:hover {
+    color: var(--color-accent);
+    background: var(--color-surface);
   }
 
   .btn-calendly {
@@ -110,6 +241,7 @@
       flex-wrap: wrap;
       order: 3;
       width: 100%;
+      align-items: flex-start;
     }
 
     .nav-link {
@@ -120,5 +252,54 @@
       font-size: 0.78rem;
       padding: 0.45rem 0.85rem;
     }
+
+    .nav-dropdown {
+      position: static;
+      transform: none;
+      box-shadow: none;
+      border-radius: 8px;
+      margin-top: 6px;
+      min-width: 100%;
+      left: auto;
+    }
+
+    .nav-dropdown::before {
+      display: none;
+    }
+
+    .nav-item--dropdown {
+      width: 100%;
+    }
   }
 </style>
+
+<script>
+  const trigger = document.querySelector('.nav-dropdown-trigger');
+  const item = document.querySelector('.nav-item--dropdown');
+
+  if (trigger && item) {
+    trigger.addEventListener('click', (e) => {
+      const isMobile = window.innerWidth <= 700;
+      if (isMobile) {
+        e.stopPropagation();
+        const isOpen = item.classList.toggle('is-open');
+        trigger.setAttribute('aria-expanded', isOpen.toString());
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!item.contains(e.target)) {
+        item.classList.remove('is-open');
+        trigger.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        item.classList.remove('is-open');
+        trigger.setAttribute('aria-expanded', 'false');
+        trigger.focus();
+      }
+    });
+  }
+</script>

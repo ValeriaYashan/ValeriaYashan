@@ -1,0 +1,242 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Consultoría en Gestión de Proyectos — Valeria Yashan"
+  description="Diagnóstico, implementación de metodologías y acompañamiento en proyectos complejos. Valeria Yashan, PMP® con más de 10 años de experiencia."
+>
+
+  <div class="servicio-page">
+    <div class="container">
+
+      <div class="breadcrumb">
+        <a href="/servicios">Servicios</a>
+        <span>&#8594;</span>
+        <span>Consultor&#237;a en Gesti&#243;n de Proyectos</span>
+      </div>
+
+      <header class="servicio-header">
+        <p class="page-eyebrow">Servicio 01</p>
+        <h1>Consultor&#237;a en Gesti&#243;n de Proyectos</h1>
+        <p class="page-lead">Para organizaciones que necesitan ordenar c&#243;mo gestionan sus proyectos. Analizamos el estado actual, identificamos las brechas y dise&#241;amos un modelo de gesti&#243;n adaptado a tu equipo y contexto.</p>
+      </header>
+
+      <div class="servicio-body">
+
+        <section class="servicio-section">
+          <h2>&#191;Para qui&#233;n es este servicio?</h2>
+          <p>Empresas de energ&#237;a, finanzas y tecnolog&#237;a con proyectos en curso que no est&#225;n dando los resultados esperados. Tambi&#233;n organizaciones que quieren profesionalizar su gesti&#243;n antes de escalar.</p>
+        </section>
+
+        <section class="servicio-section">
+          <h2>&#191;Qu&#233; incluye?</h2>
+          <ul class="servicio-list">
+            <li>Diagn&#243;stico de madurez en gesti&#243;n de proyectos</li>
+            <li>Dise&#241;o de procesos y plantillas adaptadas al equipo</li>
+            <li>Implementaci&#243;n de metodolog&#237;as predictivas, &#225;giles o h&#237;bridas</li>
+            <li>Acompa&#241;amiento durante la implementaci&#243;n</li>
+            <li>Capacitaci&#243;n al equipo en los nuevos procesos</li>
+          </ul>
+        </section>
+
+        <section class="servicio-section">
+          <h2>Mi enfoque</h2>
+          <p>No impongo metodolog&#237;as de manual. Construyo lo que realmente funciona en tu organizaci&#243;n, considerando el tama&#241;o del equipo, la cultura y los proyectos reales que ten&#233;s en curso. Con m&#225;s de 10 a&#241;os como PMP&#174; certificada y experiencia en transformaci&#243;n digital en energ&#237;a, finanzas y tecnolog&#237;a.</p>
+        </section>
+
+      </div>
+
+      <div class="servicio-cta">
+        <h2>&#191;Quer&#233;s mejorar la gesti&#243;n de proyectos de tu equipo?</h2>
+        <p>Contame d&#243;nde est&#225;n parados y vemos c&#243;mo puedo ayudarte.</p>
+        <div class="cta-buttons">
+          <a href="/contacto" class="btn-primary">Escribime &#8594;</a>
+          <a href="https://wa.me/541140791007" target="_blank" rel="noopener" class="btn-secondary">WhatsApp &#8594;</a>
+        </div>
+      </div>
+
+      <div class="servicio-nav">
+        <a href="/servicios" class="nav-back">&#8592; Ver todos los servicios</a>
+        <a href="/servicios/direccion-proyectos" class="nav-next">Direcci&#243;n de Proyectos Externa &#8594;</a>
+      </div>
+
+    </div>
+  </div>
+
+</BaseLayout>
+
+<style>
+  .servicio-page { padding: var(--space-xl) 0; }
+
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--color-muted);
+    margin-bottom: 2rem;
+  }
+
+  .breadcrumb a {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .breadcrumb a:hover { text-decoration: underline; }
+
+  .servicio-header { margin-bottom: 3rem; }
+
+  .page-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .servicio-header h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 900;
+    color: var(--color-text);
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+
+  .page-lead {
+    font-size: 1.1rem;
+    color: var(--color-muted);
+    max-width: 600px;
+    line-height: 1.7;
+  }
+
+  .servicio-body {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    max-width: 680px;
+    margin-bottom: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .servicio-section h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 0.75rem;
+  }
+
+  .servicio-section p {
+    font-size: 0.95rem;
+    color: var(--color-muted);
+    line-height: 1.75;
+  }
+
+  .servicio-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .servicio-list li {
+    font-size: 0.95rem;
+    color: var(--color-muted);
+    padding-left: 1.25rem;
+    position: relative;
+    line-height: 1.6;
+  }
+
+  .servicio-list li::before {
+    content: '&#10003;';
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+    font-weight: 700;
+  }
+
+  .servicio-cta {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .servicio-cta h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 0.5rem;
+  }
+
+  .servicio-cta p {
+    font-size: 0.95rem;
+    color: var(--color-muted);
+    margin-bottom: 1.25rem;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    background: var(--color-accent);
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 0.7rem 1.5rem;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .btn-primary:hover { opacity: 0.88; }
+
+  .btn-secondary {
+    display: inline-block;
+    background: transparent;
+    color: var(--color-accent);
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 0.7rem 1.5rem;
+    border-radius: 6px;
+    border: 2px solid var(--color-accent);
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .btn-secondary:hover {
+    background: var(--color-accent);
+    color: #fff;
+  }
+
+  .servicio-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .nav-back, .nav-next {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .nav-back:hover, .nav-next:hover { text-decoration: underline; }
+</style>

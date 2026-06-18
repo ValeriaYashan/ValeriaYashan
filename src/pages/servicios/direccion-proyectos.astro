@@ -1,0 +1,95 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Dirección de Proyectos Externa — Valeria Yashan"
+  description="PM externa para liderar proyectos complejos sin contratación permanente. Planificación, seguimiento y gestión de stakeholders. Valeria Yashan, PMP®."
+>
+
+  <div class="servicio-page">
+    <div class="container">
+
+      <div class="breadcrumb">
+        <a href="/servicios">Servicios</a>
+        <span>&#8594;</span>
+        <span>Direcci&#243;n de Proyectos Externa</span>
+      </div>
+
+      <header class="servicio-header">
+        <p class="page-eyebrow">Servicio 02</p>
+        <h1>Direcci&#243;n de Proyectos Externa</h1>
+        <p class="page-lead">Cuando necesit&#225;s una Project Manager experimentada sin incorporar un recurso de planta. Me integro a tu equipo y dirijo el proyecto desde adentro: planificaci&#243;n, seguimiento, gesti&#243;n de stakeholders y cierre.</p>
+      </header>
+
+      <div class="servicio-body">
+
+        <section class="servicio-section">
+          <h2>&#191;Para qui&#233;n es este servicio?</h2>
+          <p>Organizaciones con proyectos cr&#237;ticos que necesitan liderazgo de proyecto sin una estructura interna dedicada. Ideal para empresas que atraviesan transformaciones digitales, lanzamientos de producto o proyectos de alto impacto con plazos definidos.</p>
+        </section>
+
+        <section class="servicio-section">
+          <h2>&#191;Qu&#233; incluye?</h2>
+          <ul class="servicio-list">
+            <li>Planificaci&#243;n completa del proyecto y cronograma</li>
+            <li>Gesti&#243;n de riesgos e incidentes</li>
+            <li>Reportes peri&#243;dicos a stakeholders</li>
+            <li>Coordinaci&#243;n de equipos multidisciplinarios</li>
+            <li>Cierre formal del proyecto con documentaci&#243;n</li>
+          </ul>
+        </section>
+
+        <section class="servicio-section">
+          <h2>Mi enfoque</h2>
+          <p>Con m&#225;s de 10 a&#241;os de experiencia en proyectos de transformaci&#243;n digital en energ&#237;a, finanzas y tecnolog&#237;a. Me integro r&#225;pidamente a equipos existentes, trabajo con metodolog&#237;as predictivas, &#225;giles o h&#237;bridas seg&#250;n el contexto, y mantengo visibilidad permanente para todos los involucrados.</p>
+        </section>
+
+      </div>
+
+      <div class="servicio-cta">
+        <h2>&#191;Ten&#233;s un proyecto que necesita liderazgo?</h2>
+        <p>Contame de qu&#233; se trata y evaluamos c&#243;mo puedo incorporarme.</p>
+        <div class="cta-buttons">
+          <a href="/contacto" class="btn-primary">Escribime &#8594;</a>
+          <a href="https://wa.me/541140791007" target="_blank" rel="noopener" class="btn-secondary">WhatsApp &#8594;</a>
+        </div>
+      </div>
+
+      <div class="servicio-nav">
+        <a href="/servicios/consultoria-pm" class="nav-back">&#8592; Consultor&#237;a en Gesti&#243;n de Proyectos</a>
+        <a href="/servicios/capacitacion-pm" class="nav-next">Capacitaci&#243;n en PM &#8594;</a>
+      </div>
+
+    </div>
+  </div>
+
+</BaseLayout>
+
+<style>
+  .servicio-page { padding: var(--space-xl) 0; }
+  .breadcrumb { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--color-muted); margin-bottom: 2rem; }
+  .breadcrumb a { color: var(--color-accent); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .servicio-header { margin-bottom: 3rem; }
+  .page-eyebrow { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-accent); margin-bottom: 0.5rem; }
+  .servicio-header h1 { font-family: 'Fraunces', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900; color: var(--color-text); line-height: 1.15; margin-bottom: 1rem; }
+  .page-lead { font-size: 1.1rem; color: var(--color-muted); max-width: 600px; line-height: 1.7; }
+  .servicio-body { display: flex; flex-direction: column; gap: 2.5rem; max-width: 680px; margin-bottom: 3rem; padding-bottom: 3rem; border-bottom: 1px solid var(--color-border); }
+  .servicio-section h2 { font-family: 'Fraunces', serif; font-size: 1.3rem; font-weight: 700; color: var(--color-text); margin-bottom: 0.75rem; }
+  .servicio-section p { font-size: 0.95rem; color: var(--color-muted); line-height: 1.75; }
+  .servicio-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+  .servicio-list li { font-size: 0.95rem; color: var(--color-muted); padding-left: 1.25rem; position: relative; line-height: 1.6; }
+  .servicio-list li::before { content: '&#10003;'; position: absolute; left: 0; color: var(--color-accent); font-weight: 700; }
+  .servicio-cta { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 12px; padding: 2rem; margin-bottom: 3rem; }
+  .servicio-cta h2 { font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 700; color: var(--color-text); margin-bottom: 0.5rem; }
+  .servicio-cta p { font-size: 0.95rem; color: var(--color-muted); margin-bottom: 1.25rem; }
+  .cta-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary { display: inline-block; background: var(--color-accent); color: #fff; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.9rem; padding: 0.7rem 1.5rem; border-radius: 6px; text-decoration: none; transition: opacity 0.2s; }
+  .btn-primary:hover { opacity: 0.88; }
+  .btn-secondary { display: inline-block; background: transparent; color: var(--color-accent); font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.9rem; padding: 0.7rem 1.5rem; border-radius: 6px; border: 2px solid var(--color-accent); text-decoration: none; transition: background 0.2s, color 0.2s; }
+  .btn-secondary:hover { background: var(--color-accent); color: #fff; }
+  .servicio-nav { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  .nav-back, .nav-next { font-size: 0.85rem; font-weight: 600; color: var(--color-accent); text-decoration: none; }
+  .nav-back:hover, .nav-next:hover { text-decoration: underline; }
+</style>
