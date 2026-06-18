@@ -166,7 +166,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     border: 1px solid var(--color-border);
     border-radius: 12px;
     padding: 2rem;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
   }
 
   .servicio-cta h2 {
@@ -180,7 +180,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   .servicio-cta p {
     font-size: 0.95rem;
     color: var(--color-muted);
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
   }
 
   .cta-buttons {
@@ -190,13 +191,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   }
 
   .btn-primary {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     background: var(--color-accent);
     color: #fff;
     font-family: 'Inter', sans-serif;
     font-weight: 600;
     font-size: 0.9rem;
-    padding: 0.7rem 1.5rem;
+    padding: 0.75rem 1.5rem;
     border-radius: 6px;
     text-decoration: none;
     transition: opacity 0.2s;
@@ -205,13 +207,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   .btn-primary:hover { opacity: 0.88; }
 
   .btn-secondary {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     background: transparent;
     color: var(--color-accent);
     font-family: 'Inter', sans-serif;
     font-weight: 600;
     font-size: 0.9rem;
-    padding: 0.7rem 1.5rem;
+    padding: 0.75rem 1.5rem;
     border-radius: 6px;
     border: 2px solid var(--color-accent);
     text-decoration: none;
@@ -229,6 +232,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     align-items: center;
     flex-wrap: wrap;
     gap: 1rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border);
+    margin-top: 1rem;
   }
 
   .nav-back, .nav-next {
