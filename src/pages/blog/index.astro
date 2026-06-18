@@ -1,10 +1,20 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ArticleCard from '../../components/ArticleCard.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 
-const posts = (await getCollection('blog')).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+const allPosts = await getCollection('blog');
+
+const posts = await Promise.all(
+  allPosts
+    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+    .map(async (post) => {
+      const { Content } = await render(post);
+      const plainText = post.body ?? '';
+      const wordCount = plainText.trim().split(/\s+/).length;
+      const readingTime = Math.max(1, Math.round(wordCount / 200));
+      return { post, readingTime };
+    })
 );
 ---
 
@@ -23,14 +33,15 @@ const posts = (await getCollection('blog')).sort(
       </p>
     </header>
 
-    <section class="posts-list">
-      {posts.map(post => (
+    <section class="posts-grid">
+      {posts.map(({ post, readingTime }) => (
         <ArticleCard
           title={post.data.title}
           description={post.data.description}
           pubDate={post.data.pubDate}
           category={post.data.category}
           slug={post.id.replace(/\.md$/, '')}
+          readingTime={readingTime}
         />
       ))}
     </section>
@@ -73,13 +84,16 @@ const posts = (await getCollection('blog')).sort(
     line-height: 1.7;
   }
 
-  .posts-list {
-    max-width: 720px;
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+    max-width: 900px;
+    margin-bottom: var(--space-lg);
   }
 
-  /* NEWSLETTER */
   .blog-newsletter {
-    max-width: 720px;
+    max-width: 900px;
     margin-top: var(--space-lg);
     padding: 2rem;
     background: var(--color-surface);
@@ -126,5 +140,11 @@ const posts = (await getCollection('blog')).sort(
 
   .btn-newsletter:hover {
     background: #1B4332;
+  }
+
+  @media (max-width: 700px) {
+    .posts-grid {
+      grid-template-columns: 1fr;
+    }
   }
 </style>
