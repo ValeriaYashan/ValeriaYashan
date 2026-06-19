@@ -1,12 +1,12 @@
 ---
-title: "5 prompts de ChatGPT que uso todas las semanas como PM"
-description: "No todos los prompts son iguales. Estos son los cinco que realmente uso en mi trabajo como project manager: probados, ajustados y con resultado concreto."
+title: "5 prompts para project managers que uso todas las semanas"
+description: "Los mejores prompts para project managers no son genéricos: son específicos, probados y con resultado concreto. Estos son los 5 que uso en mi trabajo real como PM."
 pubDate: "2026-06-14"
 category: "IA"
 tags: ["IA", "Project Management", "Productividad", "ChatGPT", "Prompts"]
 ---
 
-Hay miles de listas de prompts para project managers en internet. La mayoría son genéricas, teóricas o directamente inútiles en la práctica.
+Hay miles de listas de prompts para project managers en internet. La mayoría son genéricas, teóricas o directamente inútiles en la práctica. Si buscás prompts para project managers que realmente funcionen en el trabajo diario, esta es la lista que necesitás.
 
 Esta no es esa lista.
 
@@ -98,13 +98,13 @@ Cuando aparece un entregable nuevo en medio del proyecto — un cambio de alcanc
 
 ---
 
-## Lo que estos prompts tienen en común
+## Lo que estos prompts para project managers tienen en común
 
 Los cinco siguen el mismo principio: **contexto específico + formato claro + tono definido**.
 
 Cuanto más le explicás a la herramienta sobre tu proyecto, tu equipo y tu audiencia, menos genérica es la respuesta. La IA no sabe nada de tu proyecto si no se lo decís. Pero cuando se lo decís bien, el resultado es sorprendentemente útil.
 
-Si querés explorar más prompts para project managers, descargá la guía completa desde la sección de [recursos gratuitos](/recursos). Tiene más de 15 prompts organizados por fase del proyecto, con ejemplos de uso y variantes para distintos contextos.
+Si querés explorar más prompts para project managers, descargá el pack completo desde la sección de [recursos gratuitos](/recursos). Tiene más de 15 prompts para project managers organizados por fase del proyecto, con ejemplos de uso y variantes para distintos contextos.
 
 ---
 
