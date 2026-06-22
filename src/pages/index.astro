@@ -10,6 +10,24 @@ const posts = (await getCollection('blog'))
 <BaseLayout
   title="Valeria Yashan — Project Management e IA"
   description="Valeria Yashan — Consultora en Project Management e Inteligencia Artificial aplicada. Autora, docente y estratega."
+  schema={{
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Valeria Yashan",
+    "url": "https://valeriayashan.com.ar",
+    "image": "https://valeriayashan.com.ar/images/valeria-yashan.jpg",
+    "jobTitle": "Project Manager · Consultora en IA · Autora",
+    "description": "Consultora en Project Management e Inteligencia Artificial aplicada. PMP® certificada desde 2013. Autora, docente y estratega.",
+    "sameAs": [
+      "https://www.linkedin.com/in/valeriayashan",
+      "https://www.amazon.com/-/es/Valeria-Yashan/e/B0CH6XWPVZ"
+    ],
+    "knowsAbout": ["Project Management", "Inteligencia Artificial", "PMBOK", "Gestión de proyectos ágiles"],
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "AR"
+    }
+  }}
 >
   <!-- HERO -->
   <section class="hero">
