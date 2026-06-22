@@ -5,6 +5,61 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <BaseLayout
   title="Mis libros — Valeria Yashan"
   description="Libros de Valeria Yashan sobre gestión de proyectos y certificación PMP. Disponibles en Amazon y en formato digital."
+  schema={{
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Libros de Valeria Yashan",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@type": "Book",
+          "name": "Dirección de Proyectos: Guía de Preparación para la Certificación PMP® — Tomo I",
+          "author": { "@type": "Person", "name": "Valeria Yashan" },
+          "url": "https://www.amazon.com/-/es/Valeria-Yashan-ebook/dp/B0H4J29PP5/",
+          "inLanguage": "es",
+          "genre": "Project Management"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+          "@type": "Book",
+          "name": "Dirección de Proyectos: Procesos, Predictivo, Ágil e Híbrido — Tomo II",
+          "author": { "@type": "Person", "name": "Valeria Yashan" },
+          "url": "https://www.amazon.com/-/es/dp/B0H5DWJ5VM",
+          "inLanguage": "es",
+          "genre": "Project Management"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@type": "Book",
+          "name": "Dirección de Proyectos: Guía de Preparación para la Certificación PMP® — Tomo III",
+          "author": { "@type": "Person", "name": "Valeria Yashan" },
+          "url": "https://www.amazon.com/-/es/Valeria-Yashan-ebook/dp/B0H58SSYFG",
+          "inLanguage": "es",
+          "genre": "Project Management"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "item": {
+          "@type": "Book",
+          "name": "PM MOM",
+          "author": { "@type": "Person", "name": "Valeria Yashan" },
+          "url": "https://www.amazon.com/gp/product/B0H34V2L3S",
+          "inLanguage": "es",
+          "genre": "Leadership"
+        }
+      }
+    ]
+  }}
 >
 
   <section class="hero">
