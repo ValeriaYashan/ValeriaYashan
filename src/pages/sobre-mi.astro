@@ -77,6 +77,63 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </div>
   </section>
 
+  <!-- FORMACIÓN -->
+  <section class="formacion">
+    <div class="container">
+      <p class="section-eyebrow">Formación</p>
+      <h2 class="section-title">Base académica y profesional</h2>
+      <div class="formacion-grid">
+
+        <div class="formacion-item">
+          <h3 class="formacion-titulo">MBA — Maestría en Administración de Empresas</h3>
+          <p class="formacion-desc">Formación en estrategia organizacional, gestión del cambio, liderazgo y toma de decisiones en entornos complejos. Base para integrar la visión de negocio con la ejecución de proyectos.</p>
+        </div>
+
+        <div class="formacion-item">
+          <h3 class="formacion-titulo">Ingeniería Industrial</h3>
+          <p class="formacion-desc">Formación técnica orientada a la optimización de procesos, análisis de sistemas y mejora continua. Fundamento para abordar proyectos con rigor metodológico y orientación a resultados medibles.</p>
+        </div>
+
+        <div class="formacion-item">
+          <h3 class="formacion-titulo">PMP® — Project Management Professional</h3>
+          <p class="formacion-desc">Certificación internacional otorgada por el Project Management Institute (PMI), credencial #1613335, activa desde 2013. Una de las certificaciones más reconocidas en gestión de proyectos a nivel global.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ENFOQUE -->
+  <section class="enfoque">
+    <div class="container">
+      <p class="section-eyebrow">Enfoque</p>
+      <h2 class="section-title">Cómo trabajo</h2>
+      <div class="enfoque-contenido">
+        <p>Mi enfoque combina metodología probada con adaptación al contexto real de cada organización. No existen soluciones genéricas: cada equipo tiene su historia, su cultura y sus desafíos específicos.</p>
+        <p>En consultoría de gestión de proyectos, parto siempre del diagnóstico. Antes de proponer cualquier cambio, entiendo cómo funciona el equipo, qué herramientas usa, qué fricción existe en los procesos actuales y cuáles son los objetivos concretos que la organización quiere alcanzar.</p>
+        <p>En la incorporación de inteligencia artificial, trabajo desde lo práctico. No propongo implementar IA porque está de moda, sino porque resuelve un problema concreto. Cada herramienta, cada flujo, cada prompt que trabajo con un equipo tiene un propósito claro y un resultado medible.</p>
+        <p>En capacitación y formación, diseño programas que combinan teoría con ejercicios aplicados al trabajo real de los participantes. El conocimiento que no se puede usar al día siguiente no tiene valor.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTORES -->
+  <section class="sectores">
+    <div class="container">
+      <p class="section-eyebrow">Experiencia</p>
+      <h2 class="section-title">Sectores e industrias</h2>
+      <p class="sectores-intro">He trabajado con equipos y organizaciones en Argentina y España, en sectores que incluyen energía, tecnología, finanzas y educación. La diversidad de contextos me permite traer perspectivas de distintas industrias a cada proyecto.</p>
+      <div class="sectores-grid">
+        <div class="sector-item">Energía</div>
+        <div class="sector-item">Tecnología</div>
+        <div class="sector-item">Finanzas</div>
+        <div class="sector-item">Educación</div>
+        <div class="sector-item">Consultoría</div>
+        <div class="sector-item">Servicios profesionales</div>
+      </div>
+    </div>
+  </section>
+
   <!-- CTA FINAL -->
   <section class="sobre-cta">
     <div class="container">
@@ -219,6 +276,91 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     margin: 0;
   }
 
+  /* FORMACIÓN */
+  .formacion {
+    padding: var(--space-lg) 0;
+    background-color: var(--color-bg);
+  }
+
+  .formacion-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-md);
+    margin-top: var(--space-md);
+  }
+
+  .formacion-item {
+    padding: var(--space-md);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+  }
+
+  .formacion-titulo {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 0.5rem;
+  }
+
+  .formacion-desc {
+    font-size: 0.9rem;
+    color: var(--color-muted);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* ENFOQUE */
+  .enfoque {
+    padding: var(--space-lg) 0;
+    background-color: var(--color-surface);
+  }
+
+  .enfoque-contenido {
+    max-width: 720px;
+    margin-top: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .enfoque-contenido p {
+    font-size: 1rem;
+    color: var(--color-muted);
+    line-height: 1.75;
+  }
+
+  /* SECTORES */
+  .sectores {
+    padding: var(--space-lg) 0;
+    background-color: var(--color-bg);
+  }
+
+  .sectores-intro {
+    font-size: 1rem;
+    color: var(--color-muted);
+    line-height: 1.7;
+    max-width: 680px;
+    margin-top: var(--space-sm);
+    margin-bottom: var(--space-md);
+  }
+
+  .sectores-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .sector-item {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    padding: 0.5rem 1.25rem;
+    border-radius: 20px;
+  }
+
   /* CTA */
   .sobre-cta {
     padding: var(--space-lg) 0 var(--space-xl);
@@ -299,6 +441,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     }
 
     .hitos-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .formacion-grid {
       grid-template-columns: 1fr;
     }
   }
