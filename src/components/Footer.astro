@@ -1,26 +1,31 @@
 ---
 const year = new Date().getFullYear();
 ---
-
 <footer class="site-footer">
   <div class="container--wide footer-inner">
-
     <div class="footer-brand">
       <p class="footer-name">Valeria Yashan</p>
       <p class="footer-tagline">Project Management &middot; IA &middot; Estrategia</p>
     </div>
-
+    <div class="footer-nav">
+      <p class="footer-col-titulo">Secciones</p>
+      <div class="footer-nav-links">
+        <a href="/sobre-mi">Sobre m&iacute;</a>
+        <a href="/servicios">Servicios</a>
+        <a href="/libro">Libros</a>
+        <a href="/blog">Blog</a>
+        <a href="/recursos">Recursos</a>
+      </div>
+    </div>
     <div class="footer-contacto">
-      <p class="footer-contacto-titulo">Contacto</p>
+      <p class="footer-col-titulo">Contacto</p>
       <div class="footer-links">
         <a href="mailto:hola@valeriayashan.com.ar">hola@valeriayashan.com.ar</a>
         <a href="https://wa.me/541140791007" target="_blank" rel="noopener noreferrer">WhatsApp</a>
         <a href="https://www.linkedin.com/in/valeriayashan" target="_blank" rel="noopener noreferrer">LinkedIn</a>
       </div>
     </div>
-
   </div>
-
   <div class="footer-copy-bar">
     <div class="container--wide">
       <p class="footer-copy">&copy; {year} Valeria Yashan. Todos los derechos reservados.</p>
@@ -36,11 +41,11 @@ const year = new Date().getFullYear();
   }
 
   .footer-inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
     gap: 2rem;
     padding: var(--space-lg) 0 var(--space-md);
+    align-items: flex-start;
   }
 
   .footer-brand {
@@ -64,25 +69,36 @@ const year = new Date().getFullYear();
     letter-spacing: 0.03em;
   }
 
-  .footer-contacto {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    align-items: flex-end;
-  }
-
-  .footer-contacto-titulo {
+  .footer-col-titulo {
     font-size: 0.75rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: rgba(255,255,255,0.5);
-    margin: 0;
+    margin: 0 0 0.75rem 0;
+  }
+
+  .footer-nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .footer-nav-links a {
+    font-size: 0.875rem;
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-nav-links a:hover {
+    color: #FFFFFF;
   }
 
   .footer-links {
     display: flex;
-    gap: 1.5rem;
+    flex-direction: column;
+    gap: 0.4rem;
   }
 
   .footer-links a {
@@ -107,20 +123,10 @@ const year = new Date().getFullYear();
     margin: 0;
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 700px) {
     .footer-inner {
-      flex-direction: column;
-      align-items: flex-start;
+      grid-template-columns: 1fr;
       gap: 1.5rem;
-    }
-
-    .footer-contacto {
-      align-items: flex-start;
-    }
-
-    .footer-links {
-      flex-direction: column;
-      gap: 0.5rem;
     }
   }
 </style>
