@@ -109,3 +109,5 @@ Si querés explorar más prompts para project managers, descargá el pack comple
 ---
 
 *¿Usás algún prompt que no está acá y que te cambió la forma de trabajar? Escribime por [LinkedIn](https://www.linkedin.com/in/valeriayashan) — me interesa conocerlo.*
+
+Si estos prompts te resultaron útiles, el siguiente paso es saber qué tareas de PM podés delegar a IA y cuáles no: [5 tareas de PM que podés delegar a IA hoy](/blog/5-tareas-ia-pm). Y si todavía te preguntás por qué vale la pena incorporar IA como PM, leé [por qué los project managers necesitan entender IA](/blog/por-que-los-project-managers-necesitan-entender-ia).
