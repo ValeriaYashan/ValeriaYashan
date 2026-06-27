@@ -1,6 +1,6 @@
 ---
-title: "Predictivo, ágil o híbrido: cómo elegir el enfoque correcto"
-description: "Uno de los temas más evaluados en el nuevo examen PMP es saber cuándo aplicar cada enfoque. Explicamos las diferencias reales y cómo decidir en la práctica."
+title: "Predictivo, ágil o híbrido: cómo elegir el enfoque para tu proyecto"
+description: "Cuándo usar enfoque predictivo, ágil o híbrido en gestión de proyectos: diferencias reales, criterios de decisión y cómo aplica en el examen PMP 2026. Guía práctica con ejemplos."
 pubDate: "2026-06-28"
 category: "Project Management"
 tags: ["PMP", "Ágil", "Híbrido", "PMBOK", "Project Management"]
