@@ -51,3 +51,5 @@ Si estás preparando el PMP y dudás si vale la pena hacer las preguntas de los 
 ---
 
 *Valeria Yashan es PMP®, docente universitaria y autora de la serie **Dirección de Proyectos: Guía de Preparación para la Certificación**, alineada con el PMBOK® Guide — Eighth Edition y el ECO vigente desde julio de 2026. La serie está disponible en [mis publicaciones](/libro).*
+
+Una vez que entendés cómo usar cada tipo de pregunta, el siguiente desafío es aprender a leerlas bien: [Cómo leer preguntas de simulacro PMP sin caer en las trampas](/blog/como-leer-preguntas-simulacro-pmp). Y si estás en etapa de estudio, revisá también [los errores más comunes al prepararse para el PMP](/blog/errores-comunes-estudiar-pmp).
