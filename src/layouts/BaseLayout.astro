@@ -7,12 +7,14 @@ interface Props {
   title: string;
   description?: string;
   image?: string;
+  schema?: object;
 }
 
 const {
   title,
   description = 'Valeria Yashan — Project Management, IA y gestión estratégica.',
   image = '/images/og-default.jpg',
+  schema,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -44,6 +46,9 @@ const imageURL = new URL(image, Astro.site);
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={imageURL} />
+
+    <!-- Schema JSON-LD -->
+    {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
 
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DK70Z7NVB9"></script>
