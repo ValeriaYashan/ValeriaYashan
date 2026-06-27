@@ -100,3 +100,5 @@ Ese análisis te dice si el problema es técnica de lectura o conocimiento — y
 Si querés practicar con preguntas diseñadas para el [nuevo formato del examen PMP](/blog/pmbok-8-nuevo-examen-pmp-2026), con respuestas que explican por qué cada distractor está mal además de por qué la correcta es correcta, el **Tomo III de la serie *Dirección de Proyectos: Guía de Preparación para la Certificación*** tiene exactamente ese nivel de detalle en las 180 preguntas de simulacro.
 
 [Ver el libro en Amazon →](https://www.amazon.com/dp/B0H58TX7Z4?spcref=PRINT_LISTING) · [Ver todos los libros →](/libro)
+
+Si querés profundizar en tu preparación, te recomiendo leer sobre [las diferencias entre preguntas de práctica y simulacros PMP](/blog/preguntas-practica-vs-simulacros-pmp) — no son lo mismo y usarlas bien cambia los resultados. Y si todavía cometés alguno de los errores clásicos al estudiar, revisá [los 5 errores más comunes al prepararse para el PMP](/blog/errores-comunes-estudiar-pmp).

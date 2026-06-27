@@ -103,3 +103,5 @@ Las respuestas te van a llevar casi siempre al enfoque correcto.
 Si estás en la etapa final de preparación para el PMP y necesitás practicar este tipo de razonamiento con preguntas reales de examen, el **Tomo III de la serie *Dirección de Proyectos: Guía de Preparación para la Certificación*** incluye simulacros con los tres enfoques integrados, alineados con el nuevo ECO vigente desde julio 2026.
 
 [Ver el libro en Amazon →](https://www.amazon.com/dp/B0H58TX7Z4?spcref=PRINT_LISTING) · [Ver todos los libros →](/libro)
+
+Este tema es uno de los más evaluados en el nuevo examen. Para entender el contexto completo, leé [qué cambia con el PMBOK® 8 y el nuevo examen PMP 2026](/blog/pmbok-8-nuevo-examen-pmp-2026). Y si estás por empezar el proceso de postulación, revisá los [requisitos para rendir el PMP en 2026](/blog/requisitos-examen-pmp-2026).

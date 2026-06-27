@@ -141,3 +141,5 @@ Si las tres respuestas son sí, estás listo para aplicar. El siguiente paso es 
 Si ya cumplís los requisitos y estás en la etapa de práctica intensiva, el **Tomo III de la serie *Dirección de Proyectos: Guía de Preparación para la Certificación*** incluye 180 preguntas con distribución ECO real, justificación detallada de cada respuesta y diagnóstico de brechas para el repaso final.
 
 [Ver el libro en Amazon →](https://www.amazon.com/dp/B0H58TX7Z4?spcref=PRINT_LISTING) · [Ver todos los libros →](/libro)
+
+Una vez que confirmás que cumplís los requisitos, el siguiente paso es entender qué cambió en el examen: [PMBOK® 8 y el nuevo examen PMP 2026](/blog/pmbok-8-nuevo-examen-pmp-2026). Y para no arrancar con el pie izquierdo, revisá también [los errores más comunes al estudiar para el PMP](/blog/errores-comunes-estudiar-pmp).

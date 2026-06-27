@@ -91,3 +91,5 @@ Preparación real es entender la lógica del examen, practicar bajo condiciones 
 Si estás en la etapa final de preparación y querés practicar con simulacros diseñados para el nuevo formato, el **Tomo III de la serie *Dirección de Proyectos: Guía de Preparación para la Certificación*** incluye 180 preguntas con distribución ECO real, análisis de distractores y tabla de diagnóstico de brechas para orientar el repaso de último momento.
 
 [Ver el libro en Amazon →](https://www.amazon.com/dp/B0H58TX7Z4?spcref=PRINT_LISTING) · [Ver todos los libros →](/libro)
+
+Si ya sabés qué errores evitar, el siguiente paso es aprender a leer las preguntas del examen sin caer en las trampas: [Cómo leer preguntas de simulacro PMP sin caer en las trampas](/blog/como-leer-preguntas-simulacro-pmp). Y si todavía estás evaluando si rendirlo, revisá primero los [requisitos para rendir el PMP en 2026](/blog/requisitos-examen-pmp-2026).

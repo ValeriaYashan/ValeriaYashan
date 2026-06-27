@@ -109,3 +109,5 @@ Incluye 180 preguntas de simulacro con distribución ECO real (33% Personas / 41
 Está alineado con el PMBOK® Guide Eighth Edition y el ECO vigente desde julio 2026.
 
 [Ver el libro en Amazon →](https://www.amazon.com/dp/B0H58TX7Z4?spcref=PRINT_LISTING) · [Ver todos los libros →](/libro)
+
+Ahora que entendés qué cambió en el examen, es importante saber cuándo aplicar cada enfoque: [Predictivo, ágil o híbrido: cómo elegir el enfoque correcto](/blog/predictivo-agil-hibrido-como-elegir). Y si estás por iniciar el proceso de postulación, revisá los [requisitos para rendir el PMP en 2026](/blog/requisitos-examen-pmp-2026).
