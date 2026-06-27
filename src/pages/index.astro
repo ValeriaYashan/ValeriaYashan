@@ -33,6 +33,107 @@ const posts = (await getCollection('blog'))
   <section class="hero">
     <div class="container">
       <div class="hero-inner">
+        <p class="hero-eyebrow">Consultoría &middot; Capacitación &middot; Certificación PMP®</p>
+        <h1 class="hero-headline">Gestioná proyectos complejos<br />con metodología e IA.</h1>
+        <p class="hero-sub">Valeria Yashan &mdash; PMP® certificada desde 2013, autora de 4 libros y consultora en gestión de proyectos e inteligencia artificial aplicada para equipos en Argentina y Latinoamérica.</p>
+        <div class="hero-actions">
+          <a href="/servicios" class="btn btn-primary">Ver servicios</a>
+          <a href="/blog" class="btn btn-outline">Leer artículos</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTADOS -->
+  <section class="resultados">
+    <div class="container">
+      <div class="resultados-grid">
+        <div class="resultado-item">
+          <span class="resultado-icono">&rarr;</span>
+          <p class="resultado-texto">Proyectos planificados y ejecutados con metodologías probadas</p>
+        </div>
+        <div class="resultado-item">
+          <span class="resultado-icono">&rarr;</span>
+          <p class="resultado-texto">Equipos capacitados para incorporar IA en su trabajo diario</p>
+        </div>
+        <div class="resultado-item">
+          <span class="resultado-icono">&rarr;</span>
+          <p class="resultado-texto">Profesionales acompañados en su preparación para la certificación PMP®</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MÉTRICAS -->
+  <section class="metricas">
+    <div class="container">
+      <div class="metricas-grid">
+        <div class="metrica-item">
+          <span class="metrica-numero">+10</span>
+          <span class="metrica-label">años de experiencia</span>
+        </div>
+        <div class="metrica-item">
+          <span class="metrica-numero">4</span>
+          <span class="metrica-label">libros publicados</span>
+        </div>
+        <div class="metrica-item">
+          <span class="metrica-numero">PMP®</span>
+          <span class="metrica-label">certificada desde 2013</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE MÍ -->
+  <section class="about">
+    <div class="container">
+      <div class="about-inner">
+        <img src="/images/valeria-yashan.jpg" alt="Valeria Yashan — Project Manager y autora" class="about-foto" />
+        <div class="about-texto">
+          <h2 class="section-title">Sobre mí</h2>
+          <p>Soy Project Manager certificada (PMP®) con más de diez años de experiencia en gestión de proyectos, estrategia organizacional e implementación de herramientas digitales. Trabajo con equipos que quieren mejorar su forma de planificar, ejecutar y medir resultados.</p>
+          <p>En los últimos años integré la inteligencia artificial como parte de mi práctica profesional. Escribo, enseño y consulto sobre cómo aplicar IA de forma concreta y sostenible en el trabajo de proyectos.</p>
+          <a href="/sobre-mi" class="btn btn-outline" style="margin-top: 1rem;">Conocer más &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOG PREVIEW -->
+  <section class="blog-preview">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Últimos artículos</h2>
+        <a href="/blog" class="view-all">Ver todos &rarr;</a>
+      </div>
+      <div class="posts-grid">
+        {posts.map((post) => (
+          <a href={`/blog/${post.id.replace(/\.md$/, '')}`} class="post-card">
+            <div class="post-meta">
+              <span class="post-category">{post.data.category}</span>
+              <span class="post-date">{new Date(post.data.pubDate).toLocaleDateString('es-AR', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+            </div>
+            <h3 class="post-title">{post.data.title}</h3>
+            <p class="post-desc">{post.data.description}</p>
+            <span class="post-link">Leer artículo &rarr;</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA CONTACTO -->
+  <section class="cta">
+    <div class="container">
+      <div class="cta-inner">
+        <h2 class="cta-titulo">¿Trabajamos juntos?</h2>
+        <p class="cta-texto">Si querés capacitar a tu equipo, incorporar IA en tu
+  }}
+>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-inner">
         <p class="hero-eyebrow">Consultor&iacute;a &middot; Capacitaci&oacute;n &middot; Certificaci&oacute;n PMP&reg;</p>
         <h1 class="hero-headline">Gestion&aacute; proyectos complejos<br />con metodolog&iacute;a e IA.</h1>
         <p class="hero-sub">Valeria Yashan &mdash; PMP&reg; certificada desde 2013, autora de 4 libros y consultora en gesti&oacute;n de proyectos e inteligencia artificial aplicada para equipos en Argentina y Latinoam&eacute;rica.</p>
