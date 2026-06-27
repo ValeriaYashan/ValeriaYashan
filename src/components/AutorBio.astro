@@ -1,0 +1,75 @@
+---
+---
+
+<aside class="autor-bio">
+  <img src="/images/valeria-yashan.jpg" alt="Valeria Yashan, consultora PMP® y autora" class="autor-foto" width="72" height="72" loading="lazy" />
+  <div class="autor-info">
+    <p class="autor-nombre">Valeria Yashan</p>
+    <p class="autor-descripcion">
+      PMP® #1613335 · MBA · Ingeniería Industrial. Consultora en gestión de proyectos e IA aplicada, docente universitaria y autora de
+      <a href="/libro">4 libros sobre Project Management</a>.
+      Trabaja con equipos y organizaciones en Argentina, LATAM y España.
+    </p>
+    <a href="/sobre-mi" class="autor-link">Conocé más sobre Valeria →</a>
+  </div>
+</aside>
+
+<style>
+  .autor-bio {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+    margin-top: var(--space-xl);
+    padding: var(--space-md);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+  }
+  .autor-foto {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 2px solid var(--color-border);
+  }
+  .autor-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+  .autor-nombre {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--color-text);
+    margin: 0;
+  }
+  .autor-descripcion {
+    font-size: 0.875rem;
+    color: var(--color-muted);
+    line-height: 1.6;
+    margin: 0;
+  }
+  .autor-descripcion a {
+    color: var(--color-accent);
+    text-decoration: underline;
+  }
+  .autor-link {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    text-decoration: none;
+    margin-top: 0.15rem;
+  }
+  .autor-link:hover {
+    text-decoration: underline;
+  }
+  @media (max-width: 500px) {
+    .autor-bio {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  }
+</style>

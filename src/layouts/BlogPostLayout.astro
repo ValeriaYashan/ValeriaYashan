@@ -1,5 +1,6 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import AutorBio from '../components/AutorBio.astro';
 
 interface Props {
   title: string;
@@ -18,7 +19,6 @@ const formattedDate = pubDate.toLocaleDateString('es-AR', {
 });
 
 const esIA = category === 'IA';
-
 const ogImage = esIA ? '/images/og-ia.jpg' : '/images/og-pm.jpg';
 
 const ctaTitulo = esIA
@@ -27,6 +27,33 @@ const ctaTitulo = esIA
 const ctaTexto = esIA
   ? 'Acompaño a organizaciones y equipos que quieren integrar IA de forma concreta y sostenible. Sin tecnicismos, con foco en resultados.'
   : 'Trabajo con profesionales que quieren certificarse con comprensión real, no con memorización. Si estás en esa etapa, escribime.';
+
+const pubDateISO = pubDate.toISOString();
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": title,
+  "description": description,
+  "datePublished": pubDateISO,
+  "author": {
+    "@type": "Person",
+    "name": "Valeria Yashan",
+    "url": "https://valeriayashan.com.ar/sobre-mi",
+    "sameAs": [
+      "https://linkedin.com/in/valeriayashan",
+      "https://www.amazon.com/-/es/Valeria-Yashan-ebook/dp/B0H4J29PP5/"
+    ]
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Valeria Yashan",
+    "url": "https://valeriayashan.com.ar"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": `https://valeriayashan.com.ar/blog`
+  }
+};
 ---
 
 <BaseLayout title={title} description={description} image={ogImage}>
@@ -44,7 +71,8 @@ const ctaTexto = esIA
       <slot />
     </div>
 
-    <!-- CTA CONTACTO -->
+    <AutorBio />
+
     <section class="post-cta">
       <p class="post-cta-eyebrow">¿Te resultó útil este artículo?</p>
       <h2 class="post-cta-titulo">{ctaTitulo}</h2>
@@ -52,13 +80,11 @@ const ctaTexto = esIA
       <a href="/contacto" class="btn btn-primary">Contactarme →</a>
     </section>
 
-    <!-- BANNER SUSCRIPCIÓN -->
     <section class="subscribe-banner">
       <div class="subscribe-inner">
         <p class="subscribe-eyebrow">Recursos y artículos de PM e IA</p>
         <h2 class="subscribe-title">Recibí los próximos artículos</h2>
         <p class="subscribe-desc">Subo recursos gratuitos y escribo sobre gestión de proyectos e inteligencia artificial. Sin spam.</p>
-
         <div class="sib-form">
           <div id="sib-form-container" class="sib-form-container">
             <div id="error-message" class="sib-form-message-panel" style="font-family:Helvetica, sans-serif; font-size:16px; text-align:left; color:#661d1d; background-color:#ffeded; border-color:#ff4949; border-radius:3px; max-width:540px;">
@@ -93,9 +119,7 @@ const ctaTexto = esIA
                 </div>
                 <div style="padding: 8px 0;">
                   <div class="sib-form-block" style="text-align:left">
-                    <button class="sib-form-block__button sib-form-block__button-with-loader" style="font-family:Helvetica, sans-serif; font-size:16px; font-weight:700; color:#FFFFFF; background-color:#2D6A4F; border-width:0px; border-radius:3px; padding: 10px 20px; cursor: pointer;" form="sib-form" type="submit">
-                      SUSCRIBIRSE
-                    </button>
+                    <button class="sib-form-block__button sib-form-block__button-with-loader" style="font-family:Helvetica, sans-serif; font-size:16px; font-weight:700; color:#FFFFFF; background-color:#2D6A4F; border-width:0px; border-radius:3px; padding: 10px 20px; cursor: pointer;" form="sib-form" type="submit">SUSCRIBIRSE</button>
                   </div>
                 </div>
                 <input type="text" name="email_address_check" value="" class="input--hidden">
@@ -104,7 +128,6 @@ const ctaTexto = esIA
             </div>
           </div>
         </div>
-
       </div>
     </section>
 
@@ -120,6 +143,8 @@ const ctaTexto = esIA
 </BaseLayout>
 
 <link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
+
+<script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
 
 <script>
   window.REQUIRED_CODE_ERROR_MESSAGE = 'Elige un código de país';
@@ -188,8 +213,6 @@ const ctaTexto = esIA
   .post-body :global(pre) { background: var(--color-surface); padding: var(--space-sm); border-radius: var(--radius); overflow-x: auto; margin-bottom: var(--space-sm); }
   .post-body :global(pre code) { background: none; padding: 0; }
   .post-body :global(hr) { border: none; border-top: 1px solid var(--color-border); margin: var(--space-md) 0; }
-
-  /* CTA CONTACTO */
   .post-cta {
     margin-top: var(--space-xl);
     padding: var(--space-md) var(--space-lg);
@@ -219,19 +242,15 @@ const ctaTexto = esIA
     margin-bottom: 1.25rem;
     max-width: 560px;
   }
-
-  /* NEWSLETTER */
   .subscribe-banner { margin-top: var(--space-lg); padding: var(--space-lg); background: var(--color-surface); border-radius: var(--radius); border-left: 3px solid var(--color-accent); }
   .subscribe-inner { max-width: 560px; margin: 0 auto; text-align: center; }
   .subscribe-eyebrow { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 0.5rem; }
   .subscribe-title { font-family: var(--font-display); font-size: 1.5rem; margin-bottom: 0.5rem; }
   .subscribe-desc { color: var(--color-muted); font-size: 0.95rem; margin-bottom: var(--space-md); }
-
   .post-footer { margin-top: var(--space-lg); padding-top: var(--space-md); border-top: 1px solid var(--color-border); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
   .post-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
   .tag { font-size: 0.75rem; background: var(--color-surface); border: 1px solid var(--color-border); padding: 0.25rem 0.6rem; border-radius: 2rem; color: var(--color-muted); }
   .back-link { font-size: 0.85rem; font-weight: 600; color: var(--color-accent); text-decoration: none; }
-
   @media (max-width: 600px) {
     .post-cta { padding: var(--space-md); }
   }
