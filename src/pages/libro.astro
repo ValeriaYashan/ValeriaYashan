@@ -198,50 +198,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </div>
   </section>
 
-  <hr class="separador" />
-
-  <section class="seccion seccion-destacada">
-    <div class="badge">Producto digital</div>
-    <h2>Pack de Prompts de IA para Project Managers</h2>
-
-    <div class="pack-layout">
-
-      <div class="mockup-contenedor">
-        <div class="mockup-pagina">
-          <div class="mockup-barra-verde"></div>
-          <div class="mockup-barra-gris"></div>
-          <div class="mockup-numero">10</div>
-          <div class="mockup-subtitulo">Prompts de IA<br/>para Project Managers</div>
-          <div class="mockup-lineas">
-            <div class="mockup-linea"></div>
-            <div class="mockup-linea" style="width: 60%"></div>
-            <div class="mockup-linea"></div>
-            <div class="mockup-linea" style="width: 75%"></div>
-            <div class="mockup-linea"></div>
-          </div>
-          <div class="mockup-autor">Valeria Yashan · PMP&#174;</div>
-        </div>
-      </div>
-
-      <div class="pack-info">
-        <p class="seccion-descripcion">10 prompts listos para usar con ChatGPT, Claude o Gemini. Dise&#241;ados espec&#237;ficamente para project managers: gesti&#243;n de riesgos, comunicaci&#243;n con stakeholders, reportes, retrospectivas y m&#225;s.</p>
-        <ul class="lista-features">
-          <li>&#10003; 10 prompts listos para copiar y pegar</li>
-          <li>&#10003; Adaptados al contexto real de PM</li>
-          <li>&#10003; Compatibles con ChatGPT, Claude y Gemini</li>
-          <li>&#10003; PDF descargable, acceso inmediato</li>
-          <li>&#10003; Gu&#237;a de uso inclu&#237;da</li>
-        </ul>
-        <div class="precio-bloque">
-          <span class="precio">USD 12</span>
-          <a href="https://PLACEHOLDER-GUMROAD.gumroad.com/l/PLACEHOLDER" target="_blank" rel="noopener" class="btn-primario">Comprar ahora &#8212; USD 12</a>
-        </div>
-        <p class="nota-pago">Pago seguro v&#237;a Gumroad. Recib&#237;s el PDF por email de forma inmediata.</p>
-      </div>
-
-    </div>
-  </section>
-
 </BaseLayout>
 
 <script>
@@ -539,99 +495,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     font-size: 0.95rem;
   }
 
-  .seccion-destacada {
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: 12px;
-    padding: 2.5rem;
-    max-width: 900px;
-    margin: 3rem auto;
-  }
-
-  .badge {
-    display: inline-block;
-    background: var(--color-accent);
-    color: #fff;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    padding: 0.3rem 0.75rem;
-    border-radius: 4px;
-    margin-bottom: 1rem;
-  }
-
-  .pack-layout {
-    display: grid;
-    grid-template-columns: 180px 1fr;
-    gap: 2.5rem;
-    align-items: start;
-    margin-top: 1.5rem;
-  }
-
-  .mockup-contenedor { width: 160px; padding-bottom: 10px; padding-right: 10px; }
-
-  .mockup-pagina {
-    background: #ffffff;
-    border: 1px solid #e0dfdb;
-    border-radius: 6px;
-    padding: 1.25rem 1rem 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    box-shadow: 6px 6px 0 #d8d8d8;
-  }
-
-  .mockup-barra-verde { height: 5px; width: 55%; background: #2D6A4F; border-radius: 2px; }
-  .mockup-barra-gris { height: 3px; width: 85%; background: #e0dfdb; border-radius: 2px; margin-bottom: 0.25rem; }
-  .mockup-numero { font-family: 'Fraunces', serif; font-size: 2.5rem; font-weight: 900; color: #2D6A4F; line-height: 1; }
-  .mockup-subtitulo { font-family: 'Inter', sans-serif; font-size: 0.65rem; font-weight: 700; color: #1A1A1A; text-transform: uppercase; letter-spacing: 0.04em; line-height: 1.4; }
-  .mockup-lineas { display: flex; flex-direction: column; gap: 0.35rem; margin: 0.5rem 0; }
-  .mockup-linea { height: 2.5px; width: 100%; background: #e0dfdb; border-radius: 1px; }
-  .mockup-autor { font-family: 'Inter', sans-serif; font-size: 0.6rem; color: #6B6B6B; margin-top: 0.25rem; }
-
-  .pack-info .seccion-descripcion { margin-bottom: 1.5rem; }
-
-  .lista-features {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .lista-features li { font-size: 0.95rem; color: var(--color-text); }
-
-  .precio-bloque {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-    margin-bottom: 0.75rem;
-  }
-
-  .precio { font-family: 'Fraunces', serif; font-size: 2rem; font-weight: 700; color: var(--color-text); }
-
-  .btn-primario {
-    display: inline-flex;
-    align-items: center;
-    background: var(--color-accent);
-    color: #fff;
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
-    font-size: 1rem;
-    padding: 0.75rem 1.75rem;
-    border-radius: 6px;
-    text-decoration: none;
-    transition: opacity 0.2s;
-    min-height: 44px;
-  }
-
-  .btn-primario:hover { opacity: 0.88; }
-  .nota-pago { font-size: 0.85rem; color: var(--color-muted); margin: 0; }
-
   @media (max-width: 700px) {
     .hero h1 { font-size: 1.8rem; }
     .grid-libros { grid-template-columns: 1fr; }
@@ -639,10 +502,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .card-libro--horizontal { flex-direction: column; }
     .cover-wrapper-horizontal { border-right: none; border-bottom: 1px solid var(--color-border); }
     .cover-horizontal { width: 130px; }
-    .seccion-destacada { padding: 1.5rem; }
-    .pack-layout { grid-template-columns: 1fr; }
-    .mockup-contenedor { display: none; }
-    .precio-bloque { flex-direction: column; align-items: flex-start; gap: 1rem; }
     .card-botones { flex-direction: column; align-items: flex-start; }
     .btn-amazon, .btn-secundario { width: 100%; justify-content: center; }
   }
