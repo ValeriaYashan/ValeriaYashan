@@ -34,6 +34,27 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </div>
   </section>
 
+  <!-- BADGE PMP -->
+  <section class="badge-section">
+    <div class="container">
+      <div class="badge-wrap">
+        <div class="pmp-badge">
+          <div class="badge-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
+          <p class="badge-titulo">PMP®</p>
+          <p class="badge-subtitulo">Project Management<br>Professional</p>
+          <p class="badge-credencial">#1613335 · desde 2013</p>
+        </div>
+        <div class="badge-texto">
+          <h2 class="badge-h2">Certificación PMP® activa</h2>
+          <p>La certificación Project Management Professional (PMP®) es otorgada por el Project Management Institute (PMI) y es una de las credenciales más reconocidas en gestión de proyectos a nivel global. Requiere experiencia comprobada, formación específica y la aprobación de un examen riguroso.</p>
+          <p>Mi credencial está activa desde 2013 y se mantiene mediante unidades de desarrollo profesional continuo (PDUs).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- TRAYECTORIA -->
   <section class="trayectoria">
     <div class="container">
@@ -240,9 +261,91 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     flex-wrap: wrap;
   }
 
-  .trayectoria {
+  /* BADGE PMP */
+  .badge-section {
     padding: var(--space-lg) 0;
     background-color: var(--color-surface);
+  }
+
+  .badge-wrap {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+  }
+
+  .pmp-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    min-width: 140px;
+    flex-shrink: 0;
+    text-align: center;
+  }
+
+  .badge-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.25rem;
+  }
+
+  .badge-titulo {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin: 0;
+  }
+
+  .badge-subtitulo {
+    font-size: 0.75rem;
+    color: var(--color-muted);
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  .badge-credencial {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    margin: 0;
+  }
+
+  .badge-texto {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    max-width: 600px;
+  }
+
+  .badge-h2 {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin: 0;
+  }
+
+  .badge-texto p {
+    font-size: 0.95rem;
+    color: var(--color-muted);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  /* TRAYECTORIA */
+  .trayectoria {
+    padding: var(--space-lg) 0;
+    background-color: var(--color-bg);
   }
 
   .hitos-grid {
@@ -282,7 +385,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   .formacion {
     padding: var(--space-lg) 0;
-    background-color: var(--color-bg);
+    background-color: var(--color-surface);
   }
 
   .formacion-grid {
@@ -294,7 +397,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   .formacion-item {
     padding: var(--space-md);
-    background: var(--color-surface);
+    background: var(--color-bg);
     border: 1px solid var(--color-border);
     border-radius: var(--radius);
   }
@@ -315,7 +418,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   .enfoque {
     padding: var(--space-lg) 0;
-    background-color: var(--color-surface);
+    background-color: var(--color-bg);
   }
 
   .enfoque-contenido {
@@ -334,7 +437,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   .sectores {
     padding: var(--space-lg) 0;
-    background-color: var(--color-bg);
+    background-color: var(--color-surface);
   }
 
   .sectores-intro {
@@ -356,7 +459,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     font-size: 0.875rem;
     font-weight: 600;
     color: var(--color-accent);
-    background: var(--color-surface);
+    background: var(--color-bg);
     border: 1px solid var(--color-border);
     padding: 0.5rem 1.25rem;
     border-radius: 20px;
@@ -446,6 +549,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     .formacion-grid {
       grid-template-columns: 1fr;
+    }
+
+    .badge-wrap {
+      flex-direction: column;
+      align-items: flex-start;
     }
   }
 </style>
