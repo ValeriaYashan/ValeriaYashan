@@ -151,18 +151,7 @@ const posts = (await getCollection('blog'))
         <h2 class="newsletter-titulo">Herramientas de PM e IA que podés aplicar esta semana</h2>
         <p class="newsletter-desc">Una vez por semana. Sin spam. Solo lo que sirve para gestionar proyectos mejor.</p>
         <div class="newsletter-form">
-          <script type="text/javascript">
-            window.brevoAsyncInit = function() {
-              Brevo.push({
-                create: {
-                  type: 'iframe',
-                  id: 9,
-                  src: 'https://sibforms.com/serve/MUIFANlkVV--cEV3qdMzJJTcJM8LiNkYuGJ8dqJ_DXvJUGt5Wf5yT43Kj_fWHr4i2LJmZk6LlzBH_8RrRnAmxV_bP7o4IFT0TwDkRmFDh2Q9DmAl02_dKqoQD9P3Fz2Bq8Hn9IFr0j5P5TjQaGHPu3PJ9oUQ7N8Y2TxV0W3Pk9'
-                }
-              });
-            };
-          </script>
-          <script async src="https://sibforms.com/forms/end-form/build/main.js"></script>
+          <iframe width="540" height="305" src="https://a55096c1.sibforms.com/v2/serve/MUIFANq7Ejc7HcoQmak19v6LMCBF30dP4TIiNoM1t8h5eSbTtWQ4IfCj01uDg_8U55RsoMLNJS274dzOcW6sbYvfoBK6khQpZNNSUbra8acptq7niSl1gKxXuiLk8lOdtUH57JL4P-QCQjP2XiLqgZY5ki-bFDfXT9W4nYXUiJZgi30UOuLj8-5mdyiWfQA9v6o0zlm6hHMrx78WMg==" frameborder="0" scrolling="auto" allowfullscreen style="display: block; margin-left: auto; margin-right: auto; max-width: 100%;"></iframe>
         </div>
       </div>
     </div>
@@ -414,7 +403,6 @@ const posts = (await getCollection('blog'))
     margin-top: 0.5rem;
   }
 
-  /* YOUTUBE */
   .youtube-section {
     padding: var(--space-lg) 0;
     background-color: var(--color-surface);
@@ -471,7 +459,6 @@ const posts = (await getCollection('blog'))
     opacity: 0.88;
   }
 
-  /* NEWSLETTER */
   .newsletter-section {
     padding: var(--space-lg) 0;
     background-color: var(--color-accent);
@@ -509,37 +496,12 @@ const posts = (await getCollection('blog'))
 
   .newsletter-form {
     display: flex;
-    gap: 0.75rem;
     justify-content: center;
-    flex-wrap: wrap;
   }
 
-  .newsletter-form input[type="email"] {
-    flex: 1;
-    min-width: 220px;
-    max-width: 320px;
-    padding: 0.7rem 1rem;
-    border-radius: 6px;
-    border: none;
-    font-size: 0.9rem;
-    font-family: var(--font-body);
-  }
-
-  .newsletter-form button {
-    background: #ffffff;
-    color: var(--color-accent);
-    font-weight: 600;
-    font-size: 0.9rem;
-    padding: 0.7rem 1.5rem;
-    border-radius: 6px;
-    border: none;
-    cursor: pointer;
-    transition: opacity 0.2s;
-    white-space: nowrap;
-  }
-
-  .newsletter-form button:hover {
-    opacity: 0.9;
+  .newsletter-form iframe {
+    border-radius: 8px;
+    max-width: 100%;
   }
 
   .cta {
@@ -592,16 +554,6 @@ const posts = (await getCollection('blog'))
 
     .posts-grid {
       grid-template-columns: 1fr;
-    }
-
-    .newsletter-form {
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .newsletter-form input[type="email"] {
-      width: 100%;
-      max-width: 100%;
     }
   }
 </style>
