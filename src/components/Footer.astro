@@ -15,7 +15,7 @@ const year = new Date().getFullYear();
         <a href="/libro">Libros</a>
         <a href="/blog">Blog</a>
         <a href="/recursos">Recursos</a>
-        <li><a href="/simulador">Simulador PMP®</a></li>
+        <a href="/simulador">Simulador PMP&reg;</a>
       </div>
     </div>
     <div class="footer-contacto">
@@ -42,6 +42,7 @@ const year = new Date().getFullYear();
     </div>
   </div>
 </footer>
+
 <style>
   .site-footer {
     margin-top: var(--space-xl);
@@ -121,11 +122,15 @@ const year = new Date().getFullYear();
     color: rgba(255,255,255,0.4);
     margin: 0;
   }
+
   @media (max-width: 700px) {
     .footer-inner {
       grid-template-columns: 1fr;
       gap: 1.5rem;
+      padding: 2rem 1.25rem 2.5rem;
+    }
+    .footer-copy-bar {
+      padding: var(--space-sm) 1.25rem;
     }
   }
 </style>
-'@
