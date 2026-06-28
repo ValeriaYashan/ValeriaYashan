@@ -6,659 +6,377 @@ const description = "Practicá preguntas reales del examen PMP® alineadas al EC
 ---
 
 <BaseLayout title={title} description={description}>
-  <main class="simulador-wrap">
-
-    <!-- INTRO -->
-    <div id="intro-screen">
-      <div class="intro-eyebrow">Simulador gratuito · ECO 2026</div>
-      <h1 class="intro-title">Practicá para el PMP®</h1>
-      <p class="intro-desc">10 preguntas seleccionadas del <em>Tomo III — Simulacros de Práctica Intensiva</em>. Distribución real: Personas · Proceso · Entorno de negocio.</p>
-
-      <div class="exam-info-bar">
-        <div class="ei-item">
-          <span class="ei-num">180</span>
-          <span class="ei-label">preguntas en el examen real</span>
-        </div>
-        <div class="ei-sep"></div>
-        <div class="ei-item">
-          <span class="ei-num">230</span>
-          <span class="ei-label">minutos disponibles</span>
-        </div>
-        <div class="ei-sep"></div>
-        <div class="ei-item">
-          <span class="ei-num">~AT</span>
-          <span class="ei-label">puntaje mínimo por dominio</span>
-        </div>
-        <div class="ei-sep"></div>
-        <div class="ei-item">
-          <span class="ei-num">Sin</span>
-          <span class="ei-label">penalización por error</span>
-        </div>
-      </div>
-
-      <p class="intro-strategy">
-        <strong>Estrategia recomendada:</strong> empezá con el banco de preguntas para identificar tus brechas por dominio. Cuando llegues al 80% en los tres dominios, pasá al modo simulacro cronometrado.
-      </p>
-
-      <div class="mode-grid">
-        <div class="mode-card mode-banco">
-          <div class="mode-step">Paso 1 · Empezá aquí</div>
-          <div class="mode-icon">📖</div>
-          <div class="mode-title">Banco de preguntas</div>
-          <p class="mode-desc">Una pregunta por vez. Feedback inmediato con la explicación completa. Ideal para aprender, repasar y detectar brechas sin presión de tiempo.</p>
-          <button class="btn-mode btn-banco" onclick="startMode('banco')">Empezar a estudiar →</button>
-        </div>
-        <div class="mode-card mode-simulacro">
-          <div class="mode-step">Paso 2 · Cuando te sintás listo</div>
-          <div class="mode-icon">⏱</div>
-          <div class="mode-title">Simulacro de examen</div>
-          <p class="mode-desc">10 preguntas · 15 minutos · sin feedback hasta el final. La misma presión del examen real. Resultado con diagnóstico por dominio.</p>
-          <button class="btn-mode btn-simulacro" onclick="startMode('simulacro')">Simular examen →</button>
-        </div>
-      </div>
-
-      <p class="intro-hint">¿Querés el banco completo de 180 preguntas? <a href="/libro">Conocé el Tomo III</a></p>
-    </div>
-
-    <!-- QUIZ -->
-    <div id="quiz-screen" style="display:none">
-      <div class="quiz-topbar">
-        <button class="btn-back" onclick="goBack()">← Volver</button>
-        <div class="quiz-mode-label" id="quiz-mode-label">Banco de preguntas</div>
-        <div class="timer-wrap" id="timer-wrap" style="display:none">
-          <span class="timer-icon">⏱</span>
-          <span id="timer-display">15:00</span>
-        </div>
-      </div>
-
-      <div class="quiz-header">
-        <div class="quiz-progress-text">
-          <span id="q-counter">Pregunta 1 de 10</span>
-          <span class="quiz-domain-badge" id="q-domain">Personas</span>
-        </div>
-        <div class="progress-bar">
-          <div class="progress-fill" id="progress-fill" style="width:10%"></div>
-        </div>
-      </div>
-
-      <div class="quiz-meta">
-        <span class="meta-pill" id="q-tipo">Situacional</span>
-        <span class="meta-pill dif-avanzada" id="q-dif">★ Avanzada</span>
-        <span class="meta-pill meta-id" id="q-id">PMP-22-001</span>
-      </div>
-
-      <p class="question-text" id="q-text"></p>
-
-      <div class="options-list" id="options-list"></div>
-
-      <div class="feedback-box" id="feedback-box" style="display:none">
-        <div class="feedback-header" id="feedback-header"></div>
-        <p class="feedback-body" id="feedback-body"></p>
-      </div>
-
-      <div class="quiz-actions">
-        <button class="btn-confirm" id="btn-confirm" onclick="confirmAnswer()" disabled>Confirmar respuesta</button>
-        <button class="btn-next" id="btn-next" onclick="nextQuestion()" style="display:none">Siguiente →</button>
-      </div>
-    </div>
-
-    <!-- RESULTADO -->
-    <div id="result-screen" style="display:none">
-      <div class="result-header">
-        <div class="result-pct" id="result-pct">80%</div>
-        <div class="result-sub" id="result-sub">8 de 10 correctas</div>
-        <div class="result-mode-label" id="result-mode-label">Banco de preguntas</div>
-      </div>
-
-      <div class="result-msg" id="result-msg"></div>
-
-      <div class="domain-grid">
-        <div class="domain-card">
-          <div class="d-name">Personas</div>
-          <div class="d-pct" id="dp-personas">—</div>
-          <div class="d-diag" id="dd-personas">—</div>
-        </div>
-        <div class="domain-card">
-          <div class="d-name">Proceso</div>
-          <div class="d-pct" id="dp-proceso">—</div>
-          <div class="d-diag" id="dd-proceso">—</div>
-        </div>
-        <div class="domain-card">
-          <div class="d-name">Entorno</div>
-          <div class="d-pct" id="dp-entorno">—</div>
-          <div class="d-diag" id="dd-entorno">—</div>
-        </div>
-      </div>
-
-      <div class="result-actions">
-        <button class="btn-retry" onclick="retryMode()">Repetir este modo</button>
-        <button class="btn-switch" id="btn-switch" onclick="switchMode()">Probar el otro modo →</button>
-      </div>
-      <div class="result-ctas">
-        <a class="btn-libro" href="/libro">Ver el Tomo III completo →</a>
-        <a class="btn-consulta" href="https://calendly.com/valeriayashan/30min" target="_blank" rel="noopener">Hablemos sobre tu preparación</a>
-      </div>
-    </div>
-
-  </main>
-</BaseLayout>
-
-<script is:inline>
-const PREGUNTAS = [
-  {
-    id: "PMP-22-001", dominio: "Personas", tipo: "Situacional", dificultad: "avanzada",
-    texto: "Liderás un equipo híbrido de 14 personas distribuidas entre Colombia, Chile y México. Tres meses después del inicio, la analista senior informa que dos integrantes se sienten excluidos de las decisiones técnicas, aunque participan en las ceremonias ágiles. Hasta ahora habías asumido que la participación en dailys era suficiente para mantener la integración. ¿Qué debés hacer?",
-    opciones: { A: "Ampliar el tiempo de las dailys para incluir rondas de opinión de todos los integrantes.", B: "Facilitar conversaciones individuales con los integrantes afectados para entender sus perspectivas y redefinir su rol en las decisiones técnicas.", C: "Informar al sponsor que el equipo requiere reorganización para resolver problemas de integración.", D: "Documentar el incidente como un riesgo de equipo y aplicar el plan de respuesta de riesgos." },
-    correcta: "B",
-    explicacion: "La exclusión percibida de decisiones técnicas es un problema de integración y confianza, no de tiempo en reuniones. El director debe escuchar directamente a los afectados antes de tomar medidas."
-  },
-  {
-    id: "PMP-22-003", dominio: "Personas", tipo: "Situacional", dificultad: "avanzada",
-    texto: "Sos responsable del desarrollo de un sistema de trazabilidad de medicamentos en una farmacéutica de Buenos Aires, regulado por ANMAT. El equipo técnico toma decisiones de arquitectura sin documentarlas ni comunicarlas, generando impactos en el alcance y plazos no previstos. Un integrante senior argumenta que la documentación ralentiza al equipo. ¿Cuál es la mejor respuesta?",
-    opciones: { A: "Acordar con el equipo un mecanismo liviano de registro de decisiones técnicas con impacto, sin ralentizar la velocidad de entrega.", B: "Exigir que todas las decisiones técnicas sean aprobadas por la directora antes de implementarse.", C: "Escalar al PMO para que establezca estándares de documentación aplicables al equipo técnico.", D: "Aceptar el argumento del equipo senior y confiar en que comunicarán los impactos cuando sean relevantes." },
-    correcta: "A",
-    explicacion: "El desafío es equilibrar la autonomía técnica con la gobernanza en un proyecto regulado. Un mecanismo liviano (como un ADR) permite capturar decisiones con impacto sin convertir la documentación en un cuello de botella."
-  },
-  {
-    id: "PMP-22-005", dominio: "Personas", tipo: "Situacional", dificultad: "avanzada",
-    texto: "Dos ingenieros senior de tu equipo en Ciudad de México tienen un conflicto recurrente sobre la arquitectura del sistema. Los debates se extienden en las dailys más allá del tiempo asignado. Ya intentaste mediar en dos reuniones previas sin llegar a un acuerdo. El sprint vence en cuatro días. ¿Qué debés hacer?",
-    opciones: { A: "Tomar una decisión técnica definitiva basándote en tu criterio y comunicarla al equipo como política del proyecto.", B: "Establecer un criterio de decisión técnica acordado con ambos ingenieros y el equipo, y definir quién tiene la última palabra en ausencia de consenso.", C: "Separar a los dos ingenieros en subequipos diferentes para evitar que el conflicto continúe.", D: "Solicitar al sponsor que intervenga para mediar entre los dos ingenieros senior." },
-    correcta: "B",
-    explicacion: "Cuando la mediación directa no produce consenso, el paso correcto es establecer un mecanismo de resolución de disputas técnicas: definir criterios y quién tiene autoridad de cierre. Esto es gobernanza del equipo, no imposición."
-  },
-  {
-    id: "PMP-22-009", dominio: "Personas", tipo: "Conceptual", dificultad: "intermedia",
-    texto: "¿Qué distingue a un equipo autogestionado de un equipo con autonomía operativa?",
-    opciones: { A: "Un equipo autogestionado no necesita un director de proyectos; un equipo con autonomía operativa sí.", B: "Un equipo autogestionado decide cómo organizar su trabajo, quién hace qué y cómo resolver sus obstáculos, mientras que un equipo con autonomía operativa solo decide cómo ejecutar tareas definidas externamente.", C: "Un equipo autogestionado trabaja siempre con enfoque ágil; un equipo con autonomía operativa trabaja con enfoque predictivo.", D: "Un equipo autogestionado elimina la necesidad de retrospectivas porque resuelve sus problemas de forma continua." },
-    correcta: "B",
-    explicacion: "La diferencia clave es el alcance de la autonomía: un equipo autogestionado determina su organización interna, distribución de trabajo y mecanismos de resolución. La autonomía operativa solo cubre la ejecución de tareas definidas externamente."
-  },
-  {
-    id: "PMP-22-022", dominio: "Proceso", tipo: "Cálculo", dificultad: "intermedia",
-    texto: "Revisás los indicadores de valor ganado de un proyecto de manufactura al final del período 6.\n\nPV = 850.000 | EV = 720.000 | AC = 790.000\n\nFórmulas: SV = EV − PV | CV = EV − AC\n\n¿Cuál es la interpretación correcta?",
-    opciones: { A: "El proyecto está adelantado en cronograma y por debajo del presupuesto.", B: "El proyecto está retrasado en cronograma y por encima del presupuesto.", C: "El proyecto está adelantado en cronograma y por encima del presupuesto.", D: "El proyecto está retrasado en cronograma y por debajo del presupuesto." },
-    correcta: "B",
-    explicacion: "SV = 720.000 − 850.000 = −130.000 (negativo = retraso). CV = 720.000 − 790.000 = −70.000 (negativo = por encima del presupuesto). Ambos indicadores negativos confirman la situación."
-  },
-  {
-    id: "PMP-22-023", dominio: "Proceso", tipo: "Situacional", dificultad: "avanzada",
-    texto: "Al inicio del Sprint 7, el Product Owner propone incorporar 5 historias de usuario de alta prioridad surgidas de un focus group reciente. El equipo tiene capacidad para 3 historias adicionales. El sprint ya está planificado. ¿Qué debés hacer?",
-    opciones: { A: "Aceptar las cinco historias y extender el sprint dos semanas adicionales.", B: "Rechazar las cinco historias hasta el siguiente sprint sin análisis adicional.", C: "Facilitar con el PO la priorización de las historias nuevas contra el contenido actual del sprint, y proteger el sprint commitment del equipo.", D: "Agregar las cinco historias al sprint y reducir las historias originales planificadas para compensar." },
-    correcta: "C",
-    explicacion: "En Scrum, el Sprint Backlog protege el compromiso del equipo. Las historias nuevas deben ingresar al Product Backlog y competir en el próximo Sprint Planning. La directora facilita la conversación sin violar el sprint commitment."
-  },
-  {
-    id: "PMP-22-030", dominio: "Proceso", tipo: "Situacional", dificultad: "avanzada",
-    texto: "Liderás un proyecto de construcción al mes 8 de 18.\n\nBAC = 2.400.000 | EAC = 3.100.000 | ETC = 1.850.000\n\nFórmulas: EAC = BAC/CPI | ETC = EAC − AC\n\nEl sponsor pregunta si es viable completar dentro del presupuesto original. ¿Qué le respondés?",
-    opciones: { A: "No, la estimación actual al completar (EAC) supera el presupuesto en 700.000. Se requiere una acción correctiva para reducir el costo remanente.", B: "Sí, el ETC restante (1.850.000) es menor que el BAC (2.400.000), por lo que el proyecto puede completarse dentro del presupuesto.", C: "No es posible determinarlo con los datos disponibles sin conocer el SPI y el CPI actuales.", D: "Sí, si el equipo mejora su eficiencia en la segunda mitad, el EAC puede reducirse al BAC original." },
-    correcta: "A",
-    explicacion: "EAC = 3.100.000 > BAC = 2.400.000. La diferencia de 700.000 es el costo adicional proyectado. ETC es el costo restante estimado, no el total — la comparación correcta es siempre EAC vs. BAC."
-  },
-  {
-    id: "PMP-22-041", dominio: "Proceso", tipo: "Situacional", dificultad: "basica",
-    texto: "Estás cerrando un proyecto de desarrollo de software. El cliente aceptó formalmente todos los entregables. ¿Cuál de las siguientes actividades NO es parte del proceso de cierre?",
-    opciones: { A: "Liberar formalmente los recursos del proyecto.", B: "Documentar las lecciones aprendidas.", C: "Iniciar la fase de planificación del siguiente proyecto.", D: "Archivar los documentos del proyecto en el repositorio organizacional." },
-    correcta: "C",
-    explicacion: "El proceso de cierre incluye: liberación de recursos, lecciones aprendidas y archivo de documentación. Iniciar la planificación del siguiente proyecto corresponde a un proyecto diferente, no al cierre del actual."
-  },
-  {
-    id: "PMP-22-050", dominio: "Entorno de negocio", tipo: "Conceptual", dificultad: "intermedia",
-    texto: "Al evaluar si un nuevo proyecto debe iniciarse, ¿cuál describe correctamente el propósito del caso de negocio?",
-    opciones: { A: "El caso de negocio documenta los requisitos del proyecto para que el equipo los implemente.", B: "El caso de negocio justifica la necesidad del proyecto, documenta los beneficios esperados y sirve como base para la decisión de inversión.", C: "El caso de negocio define el cronograma y el presupuesto preliminar del proyecto.", D: "El caso de negocio es un documento que el director de proyectos actualiza durante la ejecución para reportar el estado." },
-    correcta: "B",
-    explicacion: "El caso de negocio justifica por qué el proyecto debe realizarse: explica el problema u oportunidad, analiza opciones y documenta los beneficios esperados. No es un documento de requisitos, cronograma ni reporte de estado."
-  },
-  {
-    id: "PMP-22-049", dominio: "Entorno de negocio", tipo: "Situacional", dificultad: "intermedia",
-    texto: "Gestionás un proyecto de expansión al e-commerce internacional. El caso de negocio proyecta un retorno del 180% en 24 meses. A mitad de la ejecución, el análisis actualizado indica que el retorno se redujo al 95% por cambios en tipo de cambio y aranceles. ¿Cuál es la acción correcta?",
-    opciones: { A: "Continuar el proyecto ya que la inversión está comprometida y no puede recuperarse.", B: "Actualizar el caso de negocio con las nuevas proyecciones, presentarlo al sponsor y evaluar si el proyecto sigue siendo viable.", C: "Reducir el presupuesto del proyecto para mejorar el retorno ajustado.", D: "Solicitar al equipo financiero que revise las proyecciones hasta que el retorno vuelva al 180%." },
-    correcta: "B",
-    explicacion: "El caso de negocio debe revisarse cuando cambian las condiciones del entorno. El director actualiza las proyecciones y las presenta al sponsor para que decida con información actualizada. Continuar sin revisión es la falacia del costo hundido."
-  }
-];
-
-let mode = 'banco';
-let current = 0;
-let selected = null;
-let confirmed = false;
-let resultados = [];
-let timerInterval = null;
-let timerSeconds = 900;
-
-function startMode(m) {
-  mode = m;
-  current = 0;
-  selected = null;
-  confirmed = false;
-  resultados = [];
-
-  document.getElementById('intro-screen').style.display = 'none';
-  document.getElementById('quiz-screen').style.display = 'block';
-  document.getElementById('quiz-mode-label').textContent = m === 'banco' ? 'Banco de preguntas' : 'Simulacro de examen';
-
-  if (m === 'simulacro') {
-    timerSeconds = 900;
-    document.getElementById('timer-wrap').style.display = 'flex';
-    updateTimerDisplay();
-    timerInterval = setInterval(() => {
-      timerSeconds--;
-      updateTimerDisplay();
-      if (timerSeconds <= 0) {
-        clearInterval(timerInterval);
-        showResult();
-      }
-    }, 1000);
-  } else {
-    document.getElementById('timer-wrap').style.display = 'none';
-  }
-
-  renderQuestion();
-}
-
-function updateTimerDisplay() {
-  const m = Math.floor(timerSeconds / 60);
-  const s = timerSeconds % 60;
-  const display = m + ':' + (s < 10 ? '0' : '') + s;
-  const el = document.getElementById('timer-display');
-  el.textContent = display;
-  el.style.color = timerSeconds <= 120 ? '#A32D2D' : '';
-}
-
-function renderQuestion() {
-  const q = PREGUNTAS[current];
-  selected = null;
-  confirmed = false;
-
-  document.getElementById('q-counter').textContent = 'Pregunta ' + (current + 1) + ' de ' + PREGUNTAS.length;
-  const badge = document.getElementById('q-domain');
-  badge.textContent = q.dominio;
-  const domSlug = q.dominio.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,'-');
-  badge.className = 'quiz-domain-badge domain-' + domSlug;
-
-  document.getElementById('progress-fill').style.width = (((current + 1) / PREGUNTAS.length) * 100) + '%';
-  document.getElementById('q-tipo').textContent = q.tipo;
-
-  const difMap = { avanzada: '★ Avanzada', intermedia: '· Intermedia', basica: '○ Básica' };
-  const difEl = document.getElementById('q-dif');
-  difEl.textContent = difMap[q.dificultad] || q.dificultad;
-  difEl.className = 'meta-pill dif-' + q.dificultad;
-
-  document.getElementById('q-id').textContent = q.id;
-  document.getElementById('q-text').textContent = q.texto;
-
-  const container = document.getElementById('options-list');
-  container.innerHTML = '';
-  Object.entries(q.opciones).forEach(([letra, texto]) => {
-    const div = document.createElement('div');
-    div.className = 'option-item';
-    div.id = 'opt-' + letra;
-    div.innerHTML = '<span class="opt-letter">' + letra + '</span><span class="opt-text">' + texto + '</span>';
-    div.addEventListener('click', () => pickOption(letra));
-    container.appendChild(div);
-  });
-
-  document.getElementById('feedback-box').style.display = 'none';
-  const btnConfirm = document.getElementById('btn-confirm');
-  const btnNext = document.getElementById('btn-next');
-  btnConfirm.style.display = 'inline-flex';
-  btnConfirm.disabled = true;
-  btnNext.style.display = 'none';
-}
-
-function pickOption(letra) {
-  if (confirmed) return;
-  selected = letra;
-  document.querySelectorAll('.option-item').forEach(el => el.classList.remove('selected'));
-  document.getElementById('opt-' + letra).classList.add('selected');
-  document.getElementById('btn-confirm').disabled = false;
-}
-
-function confirmAnswer() {
-  if (!selected || confirmed) return;
-  confirmed = true;
-  const q = PREGUNTAS[current];
-  const esCorrecta = selected === q.correcta;
-  resultados.push({ dominio: q.dominio, correcta: esCorrecta });
-
-  document.querySelectorAll('.option-item').forEach(el => el.classList.remove('selected'));
-
-  if (mode === 'banco') {
-    if (esCorrecta) {
-      document.getElementById('opt-' + selected).classList.add('correct');
-    } else {
-      document.getElementById('opt-' + selected).classList.add('wrong');
-      document.getElementById('opt-' + q.correcta).classList.add('correct');
-    }
-    const fb = document.getElementById('feedback-box');
-    fb.style.display = 'block';
-    fb.className = 'feedback-box ' + (esCorrecta ? 'fb-correct' : 'fb-wrong');
-    document.getElementById('feedback-header').textContent = esCorrecta ? '✓ Respuesta correcta' : '✗ Incorrecta — la correcta es ' + q.correcta;
-    document.getElementById('feedback-body').textContent = q.explicacion;
-  } else {
-    document.getElementById('opt-' + selected).classList.add(esCorrecta ? 'correct' : 'wrong');
-  }
-
-  document.getElementById('btn-confirm').style.display = 'none';
-  const btnNext = document.getElementById('btn-next');
-  btnNext.style.display = 'inline-flex';
-  btnNext.textContent = current < PREGUNTAS.length - 1 ? 'Siguiente →' : 'Ver resultado →';
-}
-
-function nextQuestion() {
-  current++;
-  if (current < PREGUNTAS.length) {
-    renderQuestion();
-  } else {
-    showResult();
-  }
-}
-
-function showResult() {
-  if (timerInterval) clearInterval(timerInterval);
-  document.getElementById('quiz-screen').style.display = 'none';
-  document.getElementById('result-screen').style.display = 'block';
-
-  const total = resultados.length;
-  const correctas = resultados.filter(r => r.correcta).length;
-  const pct = Math.round((correctas / total) * 100);
-
-  document.getElementById('result-pct').textContent = pct + '%';
-  document.getElementById('result-sub').textContent = correctas + ' de ' + total + ' correctas';
-  document.getElementById('result-mode-label').textContent = mode === 'banco' ? 'Banco de preguntas' : 'Simulacro de examen';
-
-  let msg = '';
-  if (pct >= 80) msg = 'Buen resultado. Dominás el contenido de este bloque. Probá el simulacro cronometrado si todavía no lo hiciste.';
-  else if (pct >= 60) msg = 'Zona de riesgo. Repasá los dominios con menor puntaje antes de presentar el examen.';
-  else msg = 'Necesitás refuerzo. Volvé a los Tomos I y II en los dominios con brechas y practicá de nuevo.';
-  document.getElementById('result-msg').textContent = msg;
-
-  const dominios = ['Personas', 'Proceso', 'Entorno de negocio'];
-  const slugs = ['personas', 'proceso', 'entorno'];
-  dominios.forEach((d, i) => {
-    const pregs = resultados.filter(r => r.dominio === d);
-    const slug = slugs[i];
-    if (pregs.length === 0) {
-      document.getElementById('dp-' + slug).textContent = '—';
-      document.getElementById('dd-' + slug).textContent = 'Sin preguntas';
-      return;
-    }
-    const pctD = Math.round((pregs.filter(r => r.correcta).length / pregs.length) * 100);
-    document.getElementById('dp-' + slug).textContent = pctD + '%';
-    let diag, cls;
-    if (pctD >= 80) { diag = 'Consolidado ✓'; cls = 'diag-ok'; }
-    else if (pctD >= 60) { diag = 'Zona de riesgo'; cls = 'diag-risk'; }
-    else { diag = 'Refuerzo necesario'; cls = 'diag-low'; }
-    const diagEl = document.getElementById('dd-' + slug);
-    diagEl.textContent = diag;
-    diagEl.className = 'd-diag ' + cls;
-  });
-
-  const btnSwitch = document.getElementById('btn-switch');
-  btnSwitch.textContent = mode === 'banco' ? 'Probar simulacro cronometrado →' : 'Volver al banco de preguntas →';
-}
-
-function retryMode() {
-  startMode(mode);
-}
-
-function switchMode() {
-  startMode(mode === 'banco' ? 'simulacro' : 'banco');
-}
-
-function goBack() {
-  if (timerInterval) clearInterval(timerInterval);
-  document.getElementById('quiz-screen').style.display = 'none';
-  document.getElementById('result-screen').style.display = 'none';
-  document.getElementById('intro-screen').style.display = 'block';
-}
-</script>
 
 <style>
-.simulador-wrap {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 3rem 1.5rem 5rem;
-}
-
-/* INTRO */
-.intro-eyebrow {
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-  color: var(--color-accent);
-  margin-bottom: 1rem;
-  text-align: center;
-}
-.intro-title {
-  font-family: 'Fraunces', serif;
-  font-size: clamp(2rem, 5vw, 3rem);
-  font-weight: 900;
-  color: var(--color-text);
-  margin-bottom: 1rem;
-  line-height: 1.1;
-  text-align: center;
-}
-.intro-desc {
-  font-size: 1rem;
-  color: var(--color-muted);
-  max-width: 520px;
-  margin: 0 auto 2rem;
-  line-height: 1.7;
-  text-align: center;
-}
-
-.exam-info-bar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1.25rem;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: 10px;
-  padding: 1.25rem 1.5rem;
-  margin-bottom: 1.5rem;
-  flex-wrap: wrap;
-}
+.sim-wrap { max-width: 720px; margin: 0 auto; padding: 3rem 1.5rem 5rem; }
+.intro-eyebrow { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: #2D6A4F; margin-bottom: 1rem; text-align: center; display: block; }
+.intro-title { font-family: 'Fraunces', serif; font-size: clamp(2rem, 5vw, 3rem); font-weight: 900; color: #1A1A1A; margin-bottom: 1rem; line-height: 1.1; text-align: center; }
+.intro-desc { font-size: 1rem; color: #6B6B6B; max-width: 520px; margin: 0 auto 2rem; line-height: 1.7; text-align: center; }
+.exam-info-bar { display: flex; align-items: center; justify-content: center; gap: 1.25rem; background: #F2F1EE; border: 1px solid #E0DFDB; border-radius: 10px; padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
 .ei-item { text-align: center; }
-.ei-num { display: block; font-size: 1.4rem; font-weight: 700; color: var(--color-text); }
-.ei-label { font-size: 0.72rem; color: var(--color-muted); text-transform: uppercase; letter-spacing: 0.05em; }
-.ei-sep { width: 1px; height: 32px; background: var(--color-border); }
-
-.intro-strategy {
-  font-size: 0.9rem;
-  color: var(--color-muted);
-  background: #E1F5EE;
-  border-left: 3px solid var(--color-accent);
-  border-radius: 0 6px 6px 0;
-  padding: 0.75rem 1rem;
-  margin-bottom: 2rem;
-  line-height: 1.6;
-}
-.intro-strategy strong { color: var(--color-accent); }
-
-.mode-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  margin-bottom: 1.5rem;
-}
-.mode-card {
-  border: 1px solid var(--color-border);
-  border-radius: 10px;
-  padding: 1.5rem;
-  background: var(--color-bg);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.mode-banco { border-color: var(--color-accent); background: #F0FAF5; }
-.mode-step { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: var(--color-accent); }
+.ei-num { display: block; font-size: 1.4rem; font-weight: 700; color: #1A1A1A; }
+.ei-label { font-size: 0.72rem; color: #6B6B6B; text-transform: uppercase; letter-spacing: 0.05em; }
+.ei-sep { width: 1px; height: 32px; background: #E0DFDB; }
+.intro-strategy { font-size: 0.9rem; color: #6B6B6B; background: #E1F5EE; border-left: 3px solid #2D6A4F; border-radius: 0 6px 6px 0; padding: 0.75rem 1rem; margin-bottom: 2rem; line-height: 1.6; }
+.intro-strategy strong { color: #2D6A4F; }
+.mode-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 1.5rem; }
+.mode-card { border: 1px solid #E0DFDB; border-radius: 10px; padding: 1.5rem; background: #FAFAF8; display: flex; flex-direction: column; gap: 8px; }
+.mode-banco { border-color: #2D6A4F; background: #F0FAF5; }
+.mode-step { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: #2D6A4F; }
 .mode-icon { font-size: 1.5rem; }
-.mode-title { font-family: 'Fraunces', serif; font-size: 1.15rem; font-weight: 700; color: var(--color-text); }
-.mode-desc { font-size: 0.875rem; color: var(--color-muted); line-height: 1.6; flex: 1; }
-.btn-mode {
-  margin-top: 0.5rem;
-  padding: 0.65rem 1rem;
-  border-radius: 6px;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.875rem;
-  font-weight: 600;
-  cursor: pointer;
-  border: none;
-  transition: background 0.15s;
-  text-align: left;
-}
-.btn-banco { background: var(--color-accent); color: #fff; }
+.mode-title { font-family: 'Fraunces', serif; font-size: 1.15rem; font-weight: 700; color: #1A1A1A; }
+.mode-desc { font-size: 0.875rem; color: #6B6B6B; line-height: 1.6; flex: 1; }
+.btn-mode { margin-top: 0.5rem; padding: 0.65rem 1rem; border-radius: 6px; font-family: 'Inter', sans-serif; font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: background 0.15s; text-align: left; }
+.btn-banco { background: #2D6A4F; color: #fff; border: none; }
 .btn-banco:hover { background: #1B4332; }
-.btn-simulacro { background: var(--color-surface); color: var(--color-text); border: 1px solid var(--color-border); }
-.btn-simulacro:hover { background: #E1F5EE; border-color: var(--color-accent); color: var(--color-accent); }
-
-.intro-hint { text-align: center; font-size: 0.875rem; color: var(--color-muted); }
-.intro-hint a { color: var(--color-accent); text-decoration: underline; }
-
-/* QUIZ */
-.quiz-topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1.5rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--color-border);
-}
-.btn-back { background: none; border: none; cursor: pointer; font-size: 0.875rem; color: var(--color-muted); padding: 0; font-family: 'Inter', sans-serif; }
-.btn-back:hover { color: var(--color-text); }
-.quiz-mode-label { font-size: 0.8rem; font-weight: 600; color: var(--color-muted); text-transform: uppercase; letter-spacing: 0.06em; }
-.timer-wrap { display: flex; align-items: center; gap: 5px; font-size: 0.9rem; font-weight: 600; color: var(--color-text); }
-
+.btn-simulacro { background: #F2F1EE; color: #1A1A1A; border: 1px solid #E0DFDB; }
+.btn-simulacro:hover { background: #E1F5EE; border-color: #2D6A4F; color: #2D6A4F; }
+.intro-hint { text-align: center; font-size: 0.875rem; color: #6B6B6B; }
+.intro-hint a { color: #2D6A4F; }
+.quiz-topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid #E0DFDB; }
+.btn-back { background: none; border: none; cursor: pointer; font-size: 0.875rem; color: #6B6B6B; padding: 0; font-family: 'Inter', sans-serif; }
+.btn-back:hover { color: #1A1A1A; }
+.quiz-mode-label { font-size: 0.8rem; font-weight: 600; color: #6B6B6B; text-transform: uppercase; letter-spacing: 0.06em; }
+.timer-wrap { display: flex; align-items: center; gap: 5px; font-size: 0.9rem; font-weight: 600; color: #1A1A1A; }
 .quiz-header { margin-bottom: 1.25rem; }
-.quiz-progress-text { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
-.quiz-progress-text span:first-child { font-size: 0.875rem; color: var(--color-muted); }
-.quiz-domain-badge { font-size: 0.72rem; font-weight: 600; padding: 3px 10px; border-radius: 20px; letter-spacing: 0.03em; }
-.domain-personas { background: #E1F5EE; color: #0F6E56; }
-.domain-proceso { background: #EEEDFE; color: #3C3489; }
-.domain-entorno-de-negocio { background: #FAEEDA; color: #854F0B; }
-
-.progress-bar { width: 100%; height: 4px; background: var(--color-border); border-radius: 2px; overflow: hidden; }
-.progress-fill { height: 100%; background: var(--color-accent); border-radius: 2px; transition: width 0.35s ease; }
-
+.quiz-progress-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+.q-counter-text { font-size: 0.875rem; color: #6B6B6B; }
+.domain-badge { font-size: 0.72rem; font-weight: 600; padding: 3px 10px; border-radius: 20px; letter-spacing: 0.03em; }
+.dom-personas { background: #E1F5EE; color: #0F6E56; }
+.dom-proceso { background: #EEEDFE; color: #3C3489; }
+.dom-entorno { background: #FAEEDA; color: #854F0B; }
+.progress-bar { width: 100%; height: 4px; background: #E0DFDB; border-radius: 2px; overflow: hidden; }
+.progress-fill { height: 100%; background: #2D6A4F; border-radius: 2px; transition: width 0.35s ease; }
 .quiz-meta { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 1.25rem; }
-.meta-pill { font-size: 0.7rem; font-weight: 600; padding: 3px 9px; border-radius: 20px; border: 1px solid var(--color-border); color: var(--color-muted); text-transform: uppercase; letter-spacing: 0.04em; }
+.meta-pill { font-size: 0.7rem; font-weight: 600; padding: 3px 9px; border-radius: 20px; border: 1px solid #E0DFDB; color: #6B6B6B; text-transform: uppercase; letter-spacing: 0.04em; }
 .dif-avanzada { background: #FCEBEB; border-color: #F7C1C1; color: #A32D2D; }
 .dif-intermedia { background: #FAEEDA; border-color: #FAC775; color: #854F0B; }
 .dif-basica { background: #EAF3DE; border-color: #C0DD97; color: #3B6D11; }
-.meta-id { font-family: monospace; }
-
-.question-text {
-  font-family: 'Fraunces', serif;
-  font-size: 1.05rem;
-  line-height: 1.75;
-  color: var(--color-text);
-  margin-bottom: 1.5rem;
-  white-space: pre-line;
-}
-
-.options-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 1.25rem; }
-.option-item {
-  display: flex; align-items: flex-start; gap: 12px;
-  padding: 14px 16px; border: 1px solid var(--color-border);
-  border-radius: 8px; cursor: pointer; background: var(--color-bg);
-  transition: border-color 0.15s, background 0.15s;
-}
-.option-item:hover { border-color: var(--color-accent); background: #E1F5EE; }
-.option-item.selected { border-color: var(--color-accent); background: #E1F5EE; }
-.option-item.correct { border-color: #3B6D11; background: #EAF3DE; cursor: default; }
-.option-item.wrong { border-color: #A32D2D; background: #FCEBEB; cursor: default; }
-.opt-letter {
-  width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--color-border);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 0.8rem; font-weight: 600; color: var(--color-muted);
-  flex-shrink: 0; background: #fff; font-family: 'Inter', sans-serif;
-}
-.option-item.selected .opt-letter { background: var(--color-accent); border-color: var(--color-accent); color: #fff; }
-.option-item.correct .opt-letter { background: #3B6D11; border-color: #3B6D11; color: #fff; }
-.option-item.wrong .opt-letter { background: #A32D2D; border-color: #A32D2D; color: #fff; }
-.opt-text { font-size: 0.9rem; line-height: 1.55; color: var(--color-text); padding-top: 4px; }
-
+.question-text { font-family: 'Fraunces', serif; font-size: 1.05rem; line-height: 1.75; color: #1A1A1A; margin-bottom: 1.5rem; white-space: pre-line; }
+.options-list { display: flex; flex-direction: column; gap: 0; margin-bottom: 1.25rem; padding: 0; }
 .feedback-box { padding: 14px 16px; border-radius: 8px; margin-bottom: 1.25rem; border: 1px solid; }
-.fb-correct { background: #EAF3DE; border-color: #97C459; }
-.fb-wrong { background: #FCEBEB; border-color: #F09595; }
-.feedback-header { font-size: 0.875rem; font-weight: 600; margin-bottom: 6px; font-family: 'Inter', sans-serif; }
-.fb-correct .feedback-header { color: #27500A; }
-.fb-wrong .feedback-header { color: #791F1F; }
-.feedback-body { font-size: 0.875rem; line-height: 1.65; color: var(--color-text); }
-
+.fb-ok { background: #EAF3DE; border-color: #97C459; }
+.fb-err { background: #FCEBEB; border-color: #F09595; }
+.fb-header { font-size: 0.875rem; font-weight: 600; margin-bottom: 6px; font-family: 'Inter', sans-serif; }
+.fb-ok .fb-header { color: #27500A; }
+.fb-err .fb-header { color: #791F1F; }
+.fb-body { font-size: 0.875rem; line-height: 1.65; color: #1A1A1A; }
 .quiz-actions { display: flex; justify-content: flex-end; gap: 10px; }
-.btn-confirm {
-  padding: 0.7rem 1.5rem; border: 1px solid var(--color-border); border-radius: 6px;
-  background: var(--color-accent); color: #fff;
-  font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600;
-  cursor: pointer; display: inline-flex; align-items: center; transition: background 0.15s;
-}
+.btn-confirm { padding: 0.7rem 1.5rem; border: none; border-radius: 6px; background: #2D6A4F; color: #fff; font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: background 0.15s; }
 .btn-confirm:hover:not(:disabled) { background: #1B4332; }
 .btn-confirm:disabled { opacity: 0.4; cursor: not-allowed; }
-.btn-next {
-  padding: 0.7rem 1.5rem; border: none; border-radius: 6px;
-  background: var(--color-accent); color: #fff;
-  font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600;
-  cursor: pointer; display: inline-flex; align-items: center; transition: background 0.15s;
-}
+.btn-next { padding: 0.7rem 1.5rem; border: none; border-radius: 6px; background: #2D6A4F; color: #fff; font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: background 0.15s; }
 .btn-next:hover { background: #1B4332; }
-
-/* RESULTADO */
 .result-header { text-align: center; margin-bottom: 1rem; }
-.result-pct { font-family: 'Fraunces', serif; font-size: 4.5rem; font-weight: 900; color: var(--color-accent); line-height: 1; }
-.result-sub { font-size: 1rem; color: var(--color-muted); margin-top: 4px; }
-.result-mode-label { display: inline-block; margin-top: 8px; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: var(--color-muted); }
-
-.result-msg {
-  font-size: 0.9rem; color: var(--color-muted); line-height: 1.65;
-  background: var(--color-surface); border: 1px solid var(--color-border);
-  border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 1.5rem; text-align: center;
-}
-
+.result-pct { font-family: 'Fraunces', serif; font-size: 4.5rem; font-weight: 900; color: #2D6A4F; line-height: 1; }
+.result-sub { font-size: 1rem; color: #6B6B6B; margin-top: 4px; }
+.result-mode { display: inline-block; margin-top: 8px; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: #6B6B6B; }
+.result-msg { font-size: 0.9rem; color: #6B6B6B; line-height: 1.65; background: #F2F1EE; border: 1px solid #E0DFDB; border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 1.5rem; text-align: center; }
 .domain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 1.5rem; }
-.domain-card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px; padding: 1rem; text-align: center; }
-.d-name { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-muted); margin-bottom: 6px; }
-.d-pct { font-size: 1.5rem; font-weight: 700; color: var(--color-text); margin-bottom: 4px; }
+.domain-card { background: #F2F1EE; border: 1px solid #E0DFDB; border-radius: 8px; padding: 1rem; text-align: center; }
+.d-name { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: #6B6B6B; margin-bottom: 6px; }
+.d-pct { font-size: 1.5rem; font-weight: 700; color: #1A1A1A; margin-bottom: 4px; }
 .d-diag { font-size: 0.75rem; font-weight: 500; }
 .diag-ok { color: #27500A; }
 .diag-risk { color: #854F0B; }
 .diag-low { color: #A32D2D; }
-
 .result-actions { display: flex; gap: 10px; justify-content: center; margin-bottom: 1rem; flex-wrap: wrap; }
-.btn-retry {
-  padding: 0.7rem 1.25rem; border: 1px solid var(--color-border); border-radius: 6px;
-  background: var(--color-bg); color: var(--color-text);
-  font-family: 'Inter', sans-serif; font-size: 0.875rem; font-weight: 500; cursor: pointer;
-}
-.btn-retry:hover { background: var(--color-surface); }
-.btn-switch {
-  padding: 0.7rem 1.25rem; border: none; border-radius: 6px;
-  background: var(--color-accent); color: #fff;
-  font-family: 'Inter', sans-serif; font-size: 0.875rem; font-weight: 600; cursor: pointer;
-}
+.btn-retry { padding: 0.7rem 1.25rem; border: 1px solid #E0DFDB; border-radius: 6px; background: #FAFAF8; color: #1A1A1A; font-family: 'Inter', sans-serif; font-size: 0.875rem; font-weight: 500; cursor: pointer; }
+.btn-retry:hover { background: #F2F1EE; }
+.btn-switch { padding: 0.7rem 1.25rem; border: none; border-radius: 6px; background: #2D6A4F; color: #fff; font-family: 'Inter', sans-serif; font-size: 0.875rem; font-weight: 600; cursor: pointer; }
 .btn-switch:hover { background: #1B4332; }
-
 .result-ctas { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-.btn-libro {
-  padding: 0.65rem 1.25rem; border: 1px solid var(--color-accent); border-radius: 6px;
-  color: var(--color-accent); font-family: 'Inter', sans-serif; font-size: 0.875rem;
-  font-weight: 600; text-decoration: none; transition: background 0.15s;
-}
+.btn-libro { padding: 0.65rem 1.25rem; border: 1px solid #2D6A4F; border-radius: 6px; color: #2D6A4F; font-family: 'Inter', sans-serif; font-size: 0.875rem; font-weight: 600; text-decoration: none; }
 .btn-libro:hover { background: #E1F5EE; }
-.btn-consulta {
-  padding: 0.65rem 1.25rem; border: 1px solid var(--color-border); border-radius: 6px;
-  color: var(--color-muted); font-family: 'Inter', sans-serif; font-size: 0.875rem;
-  font-weight: 400; text-decoration: none; transition: background 0.15s;
-}
-.btn-consulta:hover { background: var(--color-surface); color: var(--color-text); }
-
+.btn-consulta { padding: 0.65rem 1.25rem; border: 1px solid #E0DFDB; border-radius: 6px; color: #6B6B6B; font-family: 'Inter', sans-serif; font-size: 0.875rem; text-decoration: none; }
+.btn-consulta:hover { background: #F2F1EE; color: #1A1A1A; }
 @media (max-width: 600px) {
   .mode-grid { grid-template-columns: 1fr; }
   .domain-grid { grid-template-columns: 1fr; }
-  .exam-info-bar { gap: 0.75rem; }
   .ei-sep { display: none; }
   .result-actions, .result-ctas { flex-direction: column; align-items: stretch; text-align: center; }
 }
 </style>
+
+<div class="sim-wrap">
+
+  <div id="s-intro">
+    <span class="intro-eyebrow">Simulador gratuito · ECO 2026</span>
+    <h1 class="intro-title">Practicá para el PMP®</h1>
+    <p class="intro-desc">10 preguntas seleccionadas del <em>Tomo III — Simulacros de Práctica Intensiva</em>. Distribución real: Personas · Proceso · Entorno de negocio.</p>
+    <div class="exam-info-bar">
+      <div class="ei-item"><span class="ei-num">180</span><span class="ei-label">preguntas en el examen</span></div>
+      <div class="ei-sep"></div>
+      <div class="ei-item"><span class="ei-num">230</span><span class="ei-label">minutos disponibles</span></div>
+      <div class="ei-sep"></div>
+      <div class="ei-item"><span class="ei-num">~AT</span><span class="ei-label">puntaje mínimo</span></div>
+      <div class="ei-sep"></div>
+      <div class="ei-item"><span class="ei-num">Sin</span><span class="ei-label">penalización por error</span></div>
+    </div>
+    <p class="intro-strategy"><strong>Estrategia recomendada:</strong> empezá con el banco de preguntas para identificar tus brechas por dominio. Cuando llegues al 80% en los tres dominios, pasá al simulacro cronometrado.</p>
+    <div class="mode-grid">
+      <div class="mode-card mode-banco">
+        <div class="mode-step">Paso 1 · Empezá aquí</div>
+        <div class="mode-icon">📖</div>
+        <div class="mode-title">Banco de preguntas</div>
+        <p class="mode-desc">Una pregunta por vez. Feedback inmediato con la explicación completa. Ideal para aprender y detectar brechas sin presión de tiempo.</p>
+        <button class="btn-mode btn-banco" id="btn-banco">Empezar a estudiar →</button>
+      </div>
+      <div class="mode-card">
+        <div class="mode-step">Paso 2 · Cuando te sintás listo</div>
+        <div class="mode-icon">⏱</div>
+        <div class="mode-title">Simulacro de examen</div>
+        <p class="mode-desc">10 preguntas · 15 minutos · sin feedback hasta el final. La misma presión del examen real. Resultado con diagnóstico por dominio.</p>
+        <button class="btn-mode btn-simulacro" id="btn-simulacro">Simular examen →</button>
+      </div>
+    </div>
+    <p class="intro-hint">¿Querés el banco completo de 180 preguntas? <a href="/libro">Conocé el Tomo III</a></p>
+  </div>
+
+  <div id="s-quiz" style="display:none">
+    <div class="quiz-topbar">
+      <button class="btn-back" id="btn-back">← Volver</button>
+      <span class="quiz-mode-label" id="q-mode-label">BANCO DE PREGUNTAS</span>
+      <div class="timer-wrap" id="timer-wrap" style="display:none"><span>⏱</span><span id="timer-txt">15:00</span></div>
+    </div>
+    <div class="quiz-header">
+      <div class="quiz-progress-row">
+        <span class="q-counter-text" id="q-counter">Pregunta 1 de 10</span>
+        <span class="domain-badge dom-personas" id="q-domain">Personas</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="q-progress" style="width:10%"></div></div>
+    </div>
+    <div class="quiz-meta">
+      <span class="meta-pill" id="q-tipo">Situacional</span>
+      <span class="meta-pill dif-avanzada" id="q-dif">★ Avanzada</span>
+      <span class="meta-pill" id="q-id">PMP-22-001</span>
+    </div>
+    <p class="question-text" id="q-text"></p>
+    <ul class="options-list" id="q-options"></ul>
+    <div class="feedback-box fb-ok" id="q-feedback" style="display:none">
+      <div class="fb-header" id="fb-header"></div>
+      <p class="fb-body" id="fb-body"></p>
+    </div>
+    <div class="quiz-actions">
+      <button class="btn-confirm" id="btn-confirm" disabled>Confirmar respuesta</button>
+      <button class="btn-next" id="btn-next" style="display:none">Siguiente →</button>
+    </div>
+  </div>
+
+  <div id="s-result" style="display:none">
+    <div class="result-header">
+      <div class="result-pct" id="r-pct">80%</div>
+      <div class="result-sub" id="r-sub">8 de 10 correctas</div>
+      <span class="result-mode" id="r-mode">Banco de preguntas</span>
+    </div>
+    <p class="result-msg" id="r-msg"></p>
+    <div class="domain-grid">
+      <div class="domain-card"><div class="d-name">Personas</div><div class="d-pct" id="dp-p">—</div><div class="d-diag" id="dd-p">—</div></div>
+      <div class="domain-card"><div class="d-name">Proceso</div><div class="d-pct" id="dp-pr">—</div><div class="d-diag" id="dd-pr">—</div></div>
+      <div class="domain-card"><div class="d-name">Entorno</div><div class="d-pct" id="dp-e">—</div><div class="d-diag" id="dd-e">—</div></div>
+    </div>
+    <div class="result-actions">
+      <button class="btn-retry" id="btn-retry">Repetir este modo</button>
+      <button class="btn-switch" id="btn-switch">Probar el otro modo →</button>
+    </div>
+    <div class="result-ctas">
+      <a class="btn-libro" href="/libro">Ver el Tomo III completo →</a>
+      <a class="btn-consulta" href="https://calendly.com/valeriayashan/30min" target="_blank" rel="noopener">Hablemos sobre tu preparación</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function() {
+  var QS = [
+    { id:"PMP-22-001", dom:"Personas", tipo:"Situacional", dif:"avanzada", txt:"Liderás un equipo híbrido de 14 personas distribuidas entre Colombia, Chile y México. Tres meses después del inicio, la analista senior informa que dos integrantes se sienten excluidos de las decisiones técnicas, aunque participan en las ceremonias ágiles. Hasta ahora habías asumido que la participación en dailys era suficiente para mantener la integración. ¿Qué debés hacer?", ops:["Ampliar el tiempo de las dailys para incluir rondas de opinión de todos los integrantes.","Facilitar conversaciones individuales con los integrantes afectados para entender sus perspectivas y redefinir su rol en las decisiones técnicas.","Informar al sponsor que el equipo requiere reorganización para resolver problemas de integración.","Documentar el incidente como un riesgo de equipo y aplicar el plan de respuesta de riesgos."], ok:1, exp:"La exclusión percibida de decisiones técnicas es un problema de integración y confianza, no de tiempo en reuniones. El director debe escuchar directamente a los afectados antes de tomar medidas." },
+    { id:"PMP-22-003", dom:"Personas", tipo:"Situacional", dif:"avanzada", txt:"Sos responsable del desarrollo de un sistema de trazabilidad de medicamentos en una farmacéutica de Buenos Aires, regulado por ANMAT. El equipo técnico toma decisiones de arquitectura sin documentarlas ni comunicarlas, generando impactos en el alcance y plazos no previstos. Un integrante senior argumenta que la documentación ralentiza al equipo. ¿Cuál es la mejor respuesta?", ops:["Acordar con el equipo un mecanismo liviano de registro de decisiones técnicas con impacto, sin ralentizar la velocidad de entrega.","Exigir que todas las decisiones técnicas sean aprobadas por la directora antes de implementarse.","Escalar al PMO para que establezca estándares de documentación aplicables al equipo técnico.","Aceptar el argumento del equipo senior y confiar en que comunicarán los impactos cuando sean relevantes."], ok:0, exp:"El desafío es equilibrar la autonomía técnica con la gobernanza en un proyecto regulado. Un mecanismo liviano (como un ADR) permite capturar decisiones con impacto sin convertir la documentación en un cuello de botella." },
+    { id:"PMP-22-005", dom:"Personas", tipo:"Situacional", dif:"avanzada", txt:"Dos ingenieros senior de tu equipo en Ciudad de México tienen un conflicto recurrente sobre la arquitectura del sistema. Los debates se extienden en las dailys más allá del tiempo asignado. Ya intentaste mediar en dos reuniones previas sin llegar a un acuerdo. El sprint vence en cuatro días. ¿Qué debés hacer?", ops:["Tomar una decisión técnica definitiva basándote en tu criterio y comunicarla al equipo como política del proyecto.","Establecer un criterio de decisión técnica acordado con ambos ingenieros y el equipo, y definir quién tiene la última palabra en ausencia de consenso.","Separar a los dos ingenieros en subequipos diferentes para evitar que el conflicto continúe.","Solicitar al sponsor que intervenga para mediar entre los dos ingenieros senior."], ok:1, exp:"Cuando la mediación directa no produce consenso, el paso correcto es establecer un mecanismo de resolución de disputas técnicas: definir criterios y quién tiene autoridad de cierre." },
+    { id:"PMP-22-009", dom:"Personas", tipo:"Conceptual", dif:"intermedia", txt:"¿Qué distingue a un equipo autogestionado de un equipo con autonomía operativa?", ops:["Un equipo autogestionado no necesita un director de proyectos; un equipo con autonomía operativa sí.","Un equipo autogestionado decide cómo organizar su trabajo, quién hace qué y cómo resolver sus obstáculos, mientras que un equipo con autonomía operativa solo decide cómo ejecutar tareas definidas externamente.","Un equipo autogestionado trabaja siempre con enfoque ágil; un equipo con autonomía operativa trabaja con enfoque predictivo.","Un equipo autogestionado elimina la necesidad de retrospectivas porque resuelve sus problemas de forma continua."], ok:1, exp:"La diferencia clave es el alcance de la autonomía: un equipo autogestionado determina su organización interna, distribución de trabajo y mecanismos de resolución. La autonomía operativa solo cubre la ejecución de tareas definidas externamente." },
+    { id:"PMP-22-022", dom:"Proceso", tipo:"Cálculo", dif:"intermedia", txt:"Revisás los indicadores de valor ganado al final del período 6.\n\nPV = 850.000 | EV = 720.000 | AC = 790.000\nSV = EV − PV | CV = EV − AC\n\n¿Cuál es la interpretación correcta?", ops:["El proyecto está adelantado en cronograma y por debajo del presupuesto.","El proyecto está retrasado en cronograma y por encima del presupuesto.","El proyecto está adelantado en cronograma y por encima del presupuesto.","El proyecto está retrasado en cronograma y por debajo del presupuesto."], ok:1, exp:"SV = 720.000 − 850.000 = −130.000 (retraso). CV = 720.000 − 790.000 = −70.000 (por encima del presupuesto). Ambos indicadores negativos confirman la situación." },
+    { id:"PMP-22-023", dom:"Proceso", tipo:"Situacional", dif:"avanzada", txt:"Al inicio del Sprint 7, el Product Owner propone incorporar 5 historias de usuario de alta prioridad surgidas de un focus group reciente. El equipo tiene capacidad para 3 historias adicionales. El sprint ya está planificado. ¿Qué debés hacer?", ops:["Aceptar las cinco historias y extender el sprint dos semanas adicionales.","Rechazar las cinco historias hasta el siguiente sprint sin análisis adicional.","Facilitar con el PO la priorización de las historias nuevas contra el contenido actual del sprint, y proteger el sprint commitment del equipo.","Agregar las cinco historias al sprint y reducir las historias originales planificadas para compensar."], ok:2, exp:"En Scrum, el Sprint Backlog protege el compromiso del equipo. Las historias nuevas deben ingresar al Product Backlog y competir en el próximo Sprint Planning." },
+    { id:"PMP-22-030", dom:"Proceso", tipo:"Situacional", dif:"avanzada", txt:"Liderás un proyecto de construcción al mes 8 de 18.\n\nBAC = 2.400.000 | EAC = 3.100.000 | ETC = 1.850.000\nEAC = BAC/CPI | ETC = EAC − AC\n\nEl sponsor pregunta si es viable completar dentro del presupuesto original. ¿Qué le respondés?", ops:["No, la estimación actual al completar (EAC) supera el presupuesto en 700.000. Se requiere una acción correctiva para reducir el costo remanente.","Sí, el ETC restante (1.850.000) es menor que el BAC (2.400.000), por lo que el proyecto puede completarse dentro del presupuesto.","No es posible determinarlo con los datos disponibles sin conocer el SPI y el CPI actuales.","Sí, si el equipo mejora su eficiencia en la segunda mitad, el EAC puede reducirse al BAC original."], ok:0, exp:"EAC = 3.100.000 > BAC = 2.400.000. La diferencia de 700.000 es el costo adicional proyectado. La comparación correcta es siempre EAC vs. BAC, no ETC vs. BAC." },
+    { id:"PMP-22-041", dom:"Proceso", tipo:"Situacional", dif:"basica", txt:"Estás cerrando un proyecto de desarrollo de software. El cliente aceptó formalmente todos los entregables. ¿Cuál de las siguientes actividades NO es parte del proceso de cierre?", ops:["Liberar formalmente los recursos del proyecto.","Documentar las lecciones aprendidas.","Iniciar la fase de planificación del siguiente proyecto.","Archivar los documentos del proyecto en el repositorio organizacional."], ok:2, exp:"El proceso de cierre incluye: liberación de recursos, lecciones aprendidas y archivo de documentación. Iniciar la planificación del siguiente proyecto corresponde a un proyecto diferente." },
+    { id:"PMP-22-050", dom:"Entorno de negocio", tipo:"Conceptual", dif:"intermedia", txt:"Al evaluar si un nuevo proyecto debe iniciarse, ¿cuál describe correctamente el propósito del caso de negocio?", ops:["El caso de negocio documenta los requisitos del proyecto para que el equipo los implemente.","El caso de negocio justifica la necesidad del proyecto, documenta los beneficios esperados y sirve como base para la decisión de inversión.","El caso de negocio define el cronograma y el presupuesto preliminar del proyecto.","El caso de negocio es un documento que el director de proyectos actualiza durante la ejecución para reportar el estado."], ok:1, exp:"El caso de negocio justifica por qué el proyecto debe realizarse: explica el problema u oportunidad, analiza opciones y documenta los beneficios esperados." },
+    { id:"PMP-22-049", dom:"Entorno de negocio", tipo:"Situacional", dif:"intermedia", txt:"Gestionás un proyecto de expansión al e-commerce internacional. El caso de negocio proyecta un retorno del 180% en 24 meses. A mitad de la ejecución, el análisis actualizado indica que el retorno se redujo al 95% por cambios en tipo de cambio y aranceles. ¿Cuál es la acción correcta?", ops:["Continuar el proyecto ya que la inversión está comprometida y no puede recuperarse.","Actualizar el caso de negocio con las nuevas proyecciones, presentarlo al sponsor y evaluar si el proyecto sigue siendo viable.","Reducir el presupuesto del proyecto para mejorar el retorno ajustado.","Solicitar al equipo financiero que revise las proyecciones hasta que el retorno vuelva al 180%."], ok:1, exp:"El caso de negocio debe revisarse cuando cambian las condiciones del entorno. Continuar sin revisión es la falacia del costo hundido." }
+  ];
+
+  var LETRAS = ['A','B','C','D'];
+  var mode = 'banco', cur = 0, sel = -1, confirmed = false, results = [], tmr = null, secs = 900;
+
+  var ESTILO_BASE = 'display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border:1px solid #E0DFDB;border-radius:8px;cursor:pointer;background:#FAFAF8;margin-bottom:10px;list-style:none;transition:border-color 0.15s,background 0.15s;';
+  var ESTILO_SEL  = 'display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border:1px solid #2D6A4F;border-radius:8px;cursor:pointer;background:#E1F5EE;margin-bottom:10px;list-style:none;';
+  var ESTILO_OK   = 'display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border:1px solid #3B6D11;border-radius:8px;cursor:default;background:#EAF3DE;margin-bottom:10px;list-style:none;';
+  var ESTILO_ERR  = 'display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border:1px solid #A32D2D;border-radius:8px;cursor:default;background:#FCEBEB;margin-bottom:10px;list-style:none;';
+
+  function show(id) {
+    ['s-intro','s-quiz','s-result'].forEach(function(s) {
+      document.getElementById(s).style.display = s===id ? 'block' : 'none';
+    });
+  }
+
+  function startMode(m) {
+    mode = m; cur = 0; sel = -1; confirmed = false; results = [];
+    if (tmr) clearInterval(tmr);
+    show('s-quiz');
+    document.getElementById('q-mode-label').textContent = m==='banco' ? 'BANCO DE PREGUNTAS' : 'SIMULACRO DE EXAMEN';
+    var tw = document.getElementById('timer-wrap');
+    if (m==='simulacro') {
+      secs = 900; tw.style.display='flex'; updateTimer();
+      tmr = setInterval(function(){ secs--; updateTimer(); if(secs<=0){ clearInterval(tmr); showResult(); }}, 1000);
+    } else {
+      tw.style.display='none';
+    }
+    renderQ();
+  }
+
+  function updateTimer() {
+    var m = Math.floor(secs/60), s = secs%60;
+    var el = document.getElementById('timer-txt');
+    el.textContent = m+':'+(s<10?'0':'')+s;
+    el.style.color = secs<=120 ? '#A32D2D' : '#1A1A1A';
+  }
+
+  function domClass(d) {
+    if(d==='Personas') return 'domain-badge dom-personas';
+    if(d==='Proceso') return 'domain-badge dom-proceso';
+    return 'domain-badge dom-entorno';
+  }
+
+  function renderQ() {
+    var q = QS[cur]; sel=-1; confirmed=false;
+    document.getElementById('q-counter').textContent = 'Pregunta '+(cur+1)+' de '+QS.length;
+    var db = document.getElementById('q-domain');
+    db.textContent = q.dom; db.className = domClass(q.dom);
+    document.getElementById('q-progress').style.width = (((cur+1)/QS.length)*100)+'%';
+    document.getElementById('q-tipo').textContent = q.tipo;
+    var difMap = {avanzada:'★ Avanzada', intermedia:'· Intermedia', basica:'○ Básica'};
+    var de = document.getElementById('q-dif');
+    de.textContent = difMap[q.dif]||q.dif;
+    de.className = 'meta-pill dif-'+q.dif;
+    document.getElementById('q-id').textContent = q.id;
+    document.getElementById('q-text').textContent = q.txt;
+
+    var ul = document.getElementById('q-options');
+    ul.innerHTML = '';
+    q.ops.forEach(function(txt, i) {
+      var li = document.createElement('li');
+      li.setAttribute('style', ESTILO_BASE);
+      var badge = document.createElement('span');
+      badge.setAttribute('style', 'min-width:28px;height:28px;border-radius:50%;border:1px solid #E0DFDB;display:inline-flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:600;color:#6B6B6B;flex-shrink:0;background:#fff;font-family:Inter,sans-serif;');
+      badge.textContent = LETRAS[i];
+      var body = document.createElement('span');
+      body.setAttribute('style', 'font-size:0.9rem;line-height:1.55;color:#1A1A1A;padding-top:3px;');
+      body.textContent = txt;
+      li.appendChild(badge);
+      li.appendChild(body);
+      (function(idx, badgeEl){ 
+        li.addEventListener('click', function(){ pick(idx, badgeEl); });
+      })(i, badge);
+      ul.appendChild(li);
+    });
+
+    document.getElementById('q-feedback').style.display = 'none';
+    var bc = document.getElementById('btn-confirm');
+    var bn = document.getElementById('btn-next');
+    bc.style.display='inline-block'; bc.disabled=true;
+    bn.style.display='none';
+  }
+
+  function pick(i, badgeEl) {
+    if(confirmed) return;
+    sel = i;
+    var items = document.querySelectorAll('#q-options li');
+    items.forEach(function(el, idx) {
+      el.setAttribute('style', idx===i ? ESTILO_SEL : ESTILO_BASE);
+      var b = el.querySelector('span');
+      if(idx===i){ b.style.background='#2D6A4F'; b.style.borderColor='#2D6A4F'; b.style.color='#fff'; }
+      else { b.style.background='#fff'; b.style.borderColor='#E0DFDB'; b.style.color='#6B6B6B'; }
+    });
+    document.getElementById('btn-confirm').disabled = false;
+  }
+
+  function confirmAnswer() {
+    if(sel<0||confirmed) return;
+    confirmed = true;
+    var q = QS[cur];
+    var ok = sel===q.ok;
+    results.push({dom:q.dom, ok:ok});
+
+    var items = document.querySelectorAll('#q-options li');
+    items.forEach(function(el, i) {
+      var b = el.querySelector('span');
+      if(i===q.ok){
+        el.setAttribute('style', ESTILO_OK);
+        b.style.background='#3B6D11'; b.style.borderColor='#3B6D11'; b.style.color='#fff';
+      } else if(i===sel && !ok){
+        el.setAttribute('style', ESTILO_ERR);
+        b.style.background='#A32D2D'; b.style.borderColor='#A32D2D'; b.style.color='#fff';
+      } else {
+        el.setAttribute('style', ESTILO_BASE);
+        b.style.background='#fff'; b.style.borderColor='#E0DFDB'; b.style.color='#6B6B6B';
+      }
+      el.style.cursor='default';
+    });
+
+    if(mode==='banco'){
+      var fb = document.getElementById('q-feedback');
+      fb.style.display='block';
+      fb.className = 'feedback-box '+(ok?'fb-ok':'fb-err');
+      document.getElementById('fb-header').textContent = ok ? '✓ Respuesta correcta' : '✗ Incorrecta — la correcta es '+LETRAS[q.ok];
+      document.getElementById('fb-body').textContent = q.exp;
+    }
+
+    document.getElementById('btn-confirm').style.display='none';
+    var bn = document.getElementById('btn-next');
+    bn.style.display='inline-block';
+    bn.textContent = cur<QS.length-1 ? 'Siguiente →' : 'Ver resultado →';
+  }
+
+  function next() {
+    cur++;
+    if(cur<QS.length) renderQ(); else showResult();
+  }
+
+  function showResult() {
+    if(tmr) clearInterval(tmr);
+    show('s-result');
+    var total=results.length, correctas=results.filter(function(r){return r.ok;}).length;
+    var pct=Math.round((correctas/total)*100);
+    document.getElementById('r-pct').textContent=pct+'%';
+    document.getElementById('r-sub').textContent=correctas+' de '+total+' correctas';
+    document.getElementById('r-mode').textContent=mode==='banco'?'Banco de preguntas':'Simulacro de examen';
+    var msg='';
+    if(pct>=80) msg='Buen resultado. Dominás el contenido de este bloque. Probá el simulacro cronometrado si todavía no lo hiciste.';
+    else if(pct>=60) msg='Zona de riesgo. Repasá los dominios con menor puntaje antes del examen.';
+    else msg='Necesitás refuerzo. Volvé a los Tomos I y II en los dominios con brechas y practicá de nuevo.';
+    document.getElementById('r-msg').textContent=msg;
+
+    [['Personas','dp-p','dd-p'],['Proceso','dp-pr','dd-pr'],['Entorno de negocio','dp-e','dd-e']].forEach(function(arr){
+      var d=arr[0], pid=arr[1], did=arr[2];
+      var pregs=results.filter(function(r){return r.dom===d;});
+      if(!pregs.length){ document.getElementById(pid).textContent='—'; document.getElementById(did).textContent='Sin preguntas'; return; }
+      var p=Math.round((pregs.filter(function(r){return r.ok;}).length/pregs.length)*100);
+      document.getElementById(pid).textContent=p+'%';
+      var diag,cls;
+      if(p>=80){diag='Consolidado ✓';cls='diag-ok';}
+      else if(p>=60){diag='Zona de riesgo';cls='diag-risk';}
+      else{diag='Refuerzo necesario';cls='diag-low';}
+      var de=document.getElementById(did); de.textContent=diag; de.className='d-diag '+cls;
+    });
+    document.getElementById('btn-switch').textContent = mode==='banco'?'Probar simulacro cronometrado →':'Volver al banco de preguntas →';
+  }
+
+  document.getElementById('btn-banco').addEventListener('click', function(){ startMode('banco'); });
+  document.getElementById('btn-simulacro').addEventListener('click', function(){ startMode('simulacro'); });
+  document.getElementById('btn-back').addEventListener('click', function(){ if(tmr) clearInterval(tmr); show('s-intro'); });
+  document.getElementById('btn-confirm').addEventListener('click', confirmAnswer);
+  document.getElementById('btn-next').addEventListener('click', next);
+  document.getElementById('btn-retry').addEventListener('click', function(){ startMode(mode); });
+  document.getElementById('btn-switch').addEventListener('click', function(){ startMode(mode==='banco'?'simulacro':'banco'); });
+
+})();
+</script>
+
+</BaseLayout>
