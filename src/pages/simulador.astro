@@ -97,6 +97,14 @@ const description = "Practicá preguntas reales del examen PMP® alineadas al EC
 .btn-libro:hover { background: #E1F5EE; }
 .btn-consulta { padding: 0.65rem 1.25rem; border: 1px solid #E0DFDB; border-radius: 6px; color: #6B6B6B; font-family: 'Inter', sans-serif; font-size: 0.875rem; text-decoration: none; }
 .btn-consulta:hover { background: #F2F1EE; color: #1A1A1A; }
+.que-incluye { background: #F2F1EE; border: 1px solid #E0DFDB; border-radius: 10px; padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 10px; }
+.qi-item { display: flex; align-items: flex-start; gap: 10px; font-size: 0.9rem; color: #1A1A1A; line-height: 1.5; }
+.qi-check { color: #2D6A4F; font-weight: 700; flex-shrink: 0; font-size: 1rem; }
+.como-funciona { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 2rem; }
+.cf-step { background: #FAFAF8; border: 1px solid #E0DFDB; border-radius: 10px; padding: 1.25rem; display: flex; flex-direction: column; gap: 8px; }
+.cf-num { width: 32px; height: 32px; border-radius: 50%; background: #2D6A4F; color: #fff; font-weight: 700; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; }
+.cf-txt { font-size: 0.875rem; color: #6B6B6B; line-height: 1.55; }
+.cf-txt strong { color: #1A1A1A; display: block; margin-bottom: 3px; }
 @media (max-width: 600px) {
   .mode-grid { grid-template-columns: 1fr; }
   .domain-grid { grid-template-columns: 1fr; }
@@ -143,6 +151,27 @@ const description = "Practicá preguntas reales del examen PMP® alineadas al EC
         <button class="btn-mode btn-simulacro" id="btn-simulacro">Simular examen →</button>
       </div>
     </div>
+    <div class="que-incluye">
+  <div class="qi-item"><span class="qi-check">✓</span><span>33 preguntas tipo examen alineadas al ECO 2026 — extraídas del Tomo III</span></div>
+  <div class="qi-item"><span class="qi-check">✓</span><span>Explicación de cada respuesta: por qué la correcta lo es y por qué las demás no</span></div>
+  <div class="qi-item"><span class="qi-check">✓</span><span>Dos modos: banco de estudio con feedback inmediato y simulacro cronometrado</span></div>
+  <div class="qi-item"><span class="qi-check">✓</span><span>Diagnóstico por dominio ECO al final: Personas · Proceso · Entorno de negocio</span></div>
+  <div class="qi-item"><span class="qi-check">✓</span><span>Gratis, sin registro, desde cualquier dispositivo</span></div>
+</div>
+<div class="como-funciona">
+  <div class="cf-step">
+    <div class="cf-num">1</div>
+    <div class="cf-txt"><strong>Elegí la cantidad</strong><br>10, 20 o 33 preguntas según el tiempo que tenés</div>
+  </div>
+  <div class="cf-step">
+    <div class="cf-num">2</div>
+    <div class="cf-txt"><strong>Respondé a tu ritmo</strong><br>Banco de estudio o simulacro cronometrado</div>
+  </div>
+  <div class="cf-step">
+    <div class="cf-num">3</div>
+    <div class="cf-txt"><strong>Revisá tu diagnóstico</strong><br>Resultado por dominio con acción recomendada</div>
+  </div>
+</div>
     <p class="intro-hint">¿Querés el banco completo de 180 preguntas? <a href="/libro">Conocé el Tomo III</a></p>
   </div>
 
