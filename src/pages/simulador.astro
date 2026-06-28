@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const title = "Simulador PMP® 2026 | Valeria Yashan";
-const description = "Practicá preguntas reales del examen PMP® alineadas al ECO 2026. Dos modos: banco de preguntas con feedback inmediato o simulacro cronometrado. Basado en los libros de Valeria Yashan, PMP®.";
+const description = "Practicá preguntas reales del examen PMP® alineadas al ECO 2026. 33 preguntas extraídas del Tomo III. Dos modos: banco con feedback inmediato o simulacro cronometrado.";
 ---
 
 <BaseLayout title={title} description={description}>
@@ -17,8 +17,13 @@ const description = "Practicá preguntas reales del examen PMP® alineadas al EC
 .ei-num { display: block; font-size: 1.4rem; font-weight: 700; color: #1A1A1A; }
 .ei-label { font-size: 0.72rem; color: #6B6B6B; text-transform: uppercase; letter-spacing: 0.05em; }
 .ei-sep { width: 1px; height: 32px; background: #E0DFDB; }
-.intro-strategy { font-size: 0.9rem; color: #6B6B6B; background: #E1F5EE; border-left: 3px solid #2D6A4F; border-radius: 0 6px 6px 0; padding: 0.75rem 1rem; margin-bottom: 2rem; line-height: 1.6; }
+.intro-strategy { font-size: 0.9rem; color: #6B6B6B; background: #E1F5EE; border-left: 3px solid #2D6A4F; border-radius: 0 6px 6px 0; padding: 0.75rem 1rem; margin-bottom: 1.5rem; line-height: 1.6; }
 .intro-strategy strong { color: #2D6A4F; }
+.qty-selector { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 2rem; flex-wrap: wrap; }
+.qty-label { font-size: 0.875rem; color: #6B6B6B; }
+.qty-btn { padding: 6px 16px; border: 1px solid #E0DFDB; border-radius: 20px; background: #FAFAF8; color: #6B6B6B; font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 500; cursor: pointer; transition: all 0.15s; }
+.qty-btn.active { background: #2D6A4F; border-color: #2D6A4F; color: #fff; }
+.qty-btn:hover:not(.active) { border-color: #2D6A4F; color: #2D6A4F; }
 .mode-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 1.5rem; }
 .mode-card { border: 1px solid #E0DFDB; border-radius: 10px; padding: 1.5rem; background: #FAFAF8; display: flex; flex-direction: column; gap: 8px; }
 .mode-banco { border-color: #2D6A4F; background: #F0FAF5; }
@@ -52,7 +57,9 @@ const description = "Practicá preguntas reales del examen PMP® alineadas al EC
 .dif-avanzada { background: #FCEBEB; border-color: #F7C1C1; color: #A32D2D; }
 .dif-intermedia { background: #FAEEDA; border-color: #FAC775; color: #854F0B; }
 .dif-basica { background: #EAF3DE; border-color: #C0DD97; color: #3B6D11; }
+.meta-multiple { background: #EEEDFE; border-color: #CECBF6; color: #3C3489; }
 .question-text { font-family: 'Fraunces', serif; font-size: 1.05rem; line-height: 1.75; color: #1A1A1A; margin-bottom: 1.5rem; white-space: pre-line; }
+.multiple-hint { font-size: 0.8rem; color: #3C3489; background: #EEEDFE; border: 1px solid #CECBF6; border-radius: 6px; padding: 6px 12px; margin-bottom: 1rem; display: none; }
 .options-list { display: flex; flex-direction: column; gap: 0; margin-bottom: 1.25rem; padding: 0; }
 .feedback-box { padding: 14px 16px; border-radius: 8px; margin-bottom: 1.25rem; border: 1px solid; }
 .fb-ok { background: #EAF3DE; border-color: #97C459; }
@@ -103,7 +110,7 @@ const description = "Practicá preguntas reales del examen PMP® alineadas al EC
   <div id="s-intro">
     <span class="intro-eyebrow">Simulador gratuito · ECO 2026</span>
     <h1 class="intro-title">Practicá para el PMP®</h1>
-    <p class="intro-desc">10 preguntas seleccionadas del <em>Tomo III — Simulacros de Práctica Intensiva</em>. Distribución real: Personas · Proceso · Entorno de negocio.</p>
+    <p class="intro-desc">Preguntas extraídas del <em>Tomo III — Simulacros de Práctica Intensiva</em>. Distribución real: Personas · Proceso · Entorno de negocio.</p>
     <div class="exam-info-bar">
       <div class="ei-item"><span class="ei-num">180</span><span class="ei-label">preguntas en el examen</span></div>
       <div class="ei-sep"></div>
@@ -114,6 +121,12 @@ const description = "Practicá preguntas reales del examen PMP® alineadas al EC
       <div class="ei-item"><span class="ei-num">Sin</span><span class="ei-label">penalización por error</span></div>
     </div>
     <p class="intro-strategy"><strong>Estrategia recomendada:</strong> empezá con el banco de preguntas para identificar tus brechas por dominio. Cuando llegues al 80% en los tres dominios, pasá al simulacro cronometrado.</p>
+    <div class="qty-selector">
+      <span class="qty-label">Cantidad de preguntas:</span>
+      <button class="qty-btn active" data-qty="10">10</button>
+      <button class="qty-btn" data-qty="20">20</button>
+      <button class="qty-btn" data-qty="33">33 (completo)</button>
+    </div>
     <div class="mode-grid">
       <div class="mode-card mode-banco">
         <div class="mode-step">Paso 1 · Empezá aquí</div>
@@ -126,7 +139,7 @@ const description = "Practicá preguntas reales del examen PMP® alineadas al EC
         <div class="mode-step">Paso 2 · Cuando te sintás listo</div>
         <div class="mode-icon">⏱</div>
         <div class="mode-title">Simulacro de examen</div>
-        <p class="mode-desc">10 preguntas · 15 minutos · sin feedback hasta el final. La misma presión del examen real. Resultado con diagnóstico por dominio.</p>
+        <p class="mode-desc">Sin feedback hasta el final. La misma presión del examen real. Resultado con diagnóstico por dominio ECO.</p>
         <button class="btn-mode btn-simulacro" id="btn-simulacro">Simular examen →</button>
       </div>
     </div>
@@ -151,6 +164,7 @@ const description = "Practicá preguntas reales del examen PMP® alineadas al EC
       <span class="meta-pill dif-avanzada" id="q-dif">★ Avanzada</span>
       <span class="meta-pill" id="q-id">PMP-22-001</span>
     </div>
+    <div class="multiple-hint" id="multiple-hint">✦ Seleccioná todas las respuestas correctas antes de confirmar</div>
     <p class="question-text" id="q-text"></p>
     <ul class="options-list" id="q-options"></ul>
     <div class="feedback-box fb-ok" id="q-feedback" style="display:none">
@@ -189,26 +203,60 @@ const description = "Practicá preguntas reales del examen PMP® alineadas al EC
 
 <script>
 (function() {
-  var QS = [
-    { id:"PMP-22-001", dom:"Personas", tipo:"Situacional", dif:"avanzada", txt:"Liderás un equipo híbrido de 14 personas distribuidas entre Colombia, Chile y México. Tres meses después del inicio, la analista senior informa que dos integrantes se sienten excluidos de las decisiones técnicas, aunque participan en las ceremonias ágiles. Hasta ahora habías asumido que la participación en dailys era suficiente para mantener la integración. ¿Qué debés hacer?", ops:["Ampliar el tiempo de las dailys para incluir rondas de opinión de todos los integrantes.","Facilitar conversaciones individuales con los integrantes afectados para entender sus perspectivas y redefinir su rol en las decisiones técnicas.","Informar al sponsor que el equipo requiere reorganización para resolver problemas de integración.","Documentar el incidente como un riesgo de equipo y aplicar el plan de respuesta de riesgos."], ok:1, exp:"La exclusión percibida de decisiones técnicas es un problema de integración y confianza, no de tiempo en reuniones. El director debe escuchar directamente a los afectados antes de tomar medidas." },
-    { id:"PMP-22-003", dom:"Personas", tipo:"Situacional", dif:"avanzada", txt:"Sos responsable del desarrollo de un sistema de trazabilidad de medicamentos en una farmacéutica de Buenos Aires, regulado por ANMAT. El equipo técnico toma decisiones de arquitectura sin documentarlas ni comunicarlas, generando impactos en el alcance y plazos no previstos. Un integrante senior argumenta que la documentación ralentiza al equipo. ¿Cuál es la mejor respuesta?", ops:["Acordar con el equipo un mecanismo liviano de registro de decisiones técnicas con impacto, sin ralentizar la velocidad de entrega.","Exigir que todas las decisiones técnicas sean aprobadas por la directora antes de implementarse.","Escalar al PMO para que establezca estándares de documentación aplicables al equipo técnico.","Aceptar el argumento del equipo senior y confiar en que comunicarán los impactos cuando sean relevantes."], ok:0, exp:"El desafío es equilibrar la autonomía técnica con la gobernanza en un proyecto regulado. Un mecanismo liviano (como un ADR) permite capturar decisiones con impacto sin convertir la documentación en un cuello de botella." },
-    { id:"PMP-22-005", dom:"Personas", tipo:"Situacional", dif:"avanzada", txt:"Dos ingenieros senior de tu equipo en Ciudad de México tienen un conflicto recurrente sobre la arquitectura del sistema. Los debates se extienden en las dailys más allá del tiempo asignado. Ya intentaste mediar en dos reuniones previas sin llegar a un acuerdo. El sprint vence en cuatro días. ¿Qué debés hacer?", ops:["Tomar una decisión técnica definitiva basándote en tu criterio y comunicarla al equipo como política del proyecto.","Establecer un criterio de decisión técnica acordado con ambos ingenieros y el equipo, y definir quién tiene la última palabra en ausencia de consenso.","Separar a los dos ingenieros en subequipos diferentes para evitar que el conflicto continúe.","Solicitar al sponsor que intervenga para mediar entre los dos ingenieros senior."], ok:1, exp:"Cuando la mediación directa no produce consenso, el paso correcto es establecer un mecanismo de resolución de disputas técnicas: definir criterios y quién tiene autoridad de cierre." },
-    { id:"PMP-22-009", dom:"Personas", tipo:"Conceptual", dif:"intermedia", txt:"¿Qué distingue a un equipo autogestionado de un equipo con autonomía operativa?", ops:["Un equipo autogestionado no necesita un director de proyectos; un equipo con autonomía operativa sí.","Un equipo autogestionado decide cómo organizar su trabajo, quién hace qué y cómo resolver sus obstáculos, mientras que un equipo con autonomía operativa solo decide cómo ejecutar tareas definidas externamente.","Un equipo autogestionado trabaja siempre con enfoque ágil; un equipo con autonomía operativa trabaja con enfoque predictivo.","Un equipo autogestionado elimina la necesidad de retrospectivas porque resuelve sus problemas de forma continua."], ok:1, exp:"La diferencia clave es el alcance de la autonomía: un equipo autogestionado determina su organización interna, distribución de trabajo y mecanismos de resolución. La autonomía operativa solo cubre la ejecución de tareas definidas externamente." },
-    { id:"PMP-22-022", dom:"Proceso", tipo:"Cálculo", dif:"intermedia", txt:"Revisás los indicadores de valor ganado al final del período 6.\n\nPV = 850.000 | EV = 720.000 | AC = 790.000\nSV = EV − PV | CV = EV − AC\n\n¿Cuál es la interpretación correcta?", ops:["El proyecto está adelantado en cronograma y por debajo del presupuesto.","El proyecto está retrasado en cronograma y por encima del presupuesto.","El proyecto está adelantado en cronograma y por encima del presupuesto.","El proyecto está retrasado en cronograma y por debajo del presupuesto."], ok:1, exp:"SV = 720.000 − 850.000 = −130.000 (retraso). CV = 720.000 − 790.000 = −70.000 (por encima del presupuesto). Ambos indicadores negativos confirman la situación." },
-    { id:"PMP-22-023", dom:"Proceso", tipo:"Situacional", dif:"avanzada", txt:"Al inicio del Sprint 7, el Product Owner propone incorporar 5 historias de usuario de alta prioridad surgidas de un focus group reciente. El equipo tiene capacidad para 3 historias adicionales. El sprint ya está planificado. ¿Qué debés hacer?", ops:["Aceptar las cinco historias y extender el sprint dos semanas adicionales.","Rechazar las cinco historias hasta el siguiente sprint sin análisis adicional.","Facilitar con el PO la priorización de las historias nuevas contra el contenido actual del sprint, y proteger el sprint commitment del equipo.","Agregar las cinco historias al sprint y reducir las historias originales planificadas para compensar."], ok:2, exp:"En Scrum, el Sprint Backlog protege el compromiso del equipo. Las historias nuevas deben ingresar al Product Backlog y competir en el próximo Sprint Planning." },
-    { id:"PMP-22-030", dom:"Proceso", tipo:"Situacional", dif:"avanzada", txt:"Liderás un proyecto de construcción al mes 8 de 18.\n\nBAC = 2.400.000 | EAC = 3.100.000 | ETC = 1.850.000\nEAC = BAC/CPI | ETC = EAC − AC\n\nEl sponsor pregunta si es viable completar dentro del presupuesto original. ¿Qué le respondés?", ops:["No, la estimación actual al completar (EAC) supera el presupuesto en 700.000. Se requiere una acción correctiva para reducir el costo remanente.","Sí, el ETC restante (1.850.000) es menor que el BAC (2.400.000), por lo que el proyecto puede completarse dentro del presupuesto.","No es posible determinarlo con los datos disponibles sin conocer el SPI y el CPI actuales.","Sí, si el equipo mejora su eficiencia en la segunda mitad, el EAC puede reducirse al BAC original."], ok:0, exp:"EAC = 3.100.000 > BAC = 2.400.000. La diferencia de 700.000 es el costo adicional proyectado. La comparación correcta es siempre EAC vs. BAC, no ETC vs. BAC." },
-    { id:"PMP-22-041", dom:"Proceso", tipo:"Situacional", dif:"basica", txt:"Estás cerrando un proyecto de desarrollo de software. El cliente aceptó formalmente todos los entregables. ¿Cuál de las siguientes actividades NO es parte del proceso de cierre?", ops:["Liberar formalmente los recursos del proyecto.","Documentar las lecciones aprendidas.","Iniciar la fase de planificación del siguiente proyecto.","Archivar los documentos del proyecto en el repositorio organizacional."], ok:2, exp:"El proceso de cierre incluye: liberación de recursos, lecciones aprendidas y archivo de documentación. Iniciar la planificación del siguiente proyecto corresponde a un proyecto diferente." },
-    { id:"PMP-22-050", dom:"Entorno de negocio", tipo:"Conceptual", dif:"intermedia", txt:"Al evaluar si un nuevo proyecto debe iniciarse, ¿cuál describe correctamente el propósito del caso de negocio?", ops:["El caso de negocio documenta los requisitos del proyecto para que el equipo los implemente.","El caso de negocio justifica la necesidad del proyecto, documenta los beneficios esperados y sirve como base para la decisión de inversión.","El caso de negocio define el cronograma y el presupuesto preliminar del proyecto.","El caso de negocio es un documento que el director de proyectos actualiza durante la ejecución para reportar el estado."], ok:1, exp:"El caso de negocio justifica por qué el proyecto debe realizarse: explica el problema u oportunidad, analiza opciones y documenta los beneficios esperados." },
-    { id:"PMP-22-049", dom:"Entorno de negocio", tipo:"Situacional", dif:"intermedia", txt:"Gestionás un proyecto de expansión al e-commerce internacional. El caso de negocio proyecta un retorno del 180% en 24 meses. A mitad de la ejecución, el análisis actualizado indica que el retorno se redujo al 95% por cambios en tipo de cambio y aranceles. ¿Cuál es la acción correcta?", ops:["Continuar el proyecto ya que la inversión está comprometida y no puede recuperarse.","Actualizar el caso de negocio con las nuevas proyecciones, presentarlo al sponsor y evaluar si el proyecto sigue siendo viable.","Reducir el presupuesto del proyecto para mejorar el retorno ajustado.","Solicitar al equipo financiero que revise las proyecciones hasta que el retorno vuelva al 180%."], ok:1, exp:"El caso de negocio debe revisarse cuando cambian las condiciones del entorno. Continuar sin revisión es la falacia del costo hundido." }
-  ];
-
-  var LETRAS = ['A','B','C','D'];
-  var mode = 'banco', cur = 0, sel = -1, confirmed = false, results = [], tmr = null, secs = 900;
-
-  var ESTILO_BASE = 'display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border:1px solid #E0DFDB;border-radius:8px;cursor:pointer;background:#FAFAF8;margin-bottom:10px;list-style:none;transition:border-color 0.15s,background 0.15s;';
+var QS = [
+  {id:"PMP-22-001",dom:"Personas",tipo:"Situacional",dif:"intermedia",txt:"Liderás un equipo híbrido de 14 personas distribuidas entre Colombia, Chile y México en una consultora de tecnología en Bogotá. Tres meses después del inicio, la analista senior del equipo chileno informa que dos integrantes se sienten excluidos de las decisiones técnicas, aunque participan en las ceremonias ágiles. Hasta ahora habías asumido que la participación en dailys era suficiente para mantener la integración. ¿Qué debes hacer?",ops:["Ampliar el tiempo de las dailys para incluir rondas de opinión de todos los integrantes.","Facilitar conversaciones individuales con los integrantes afectados para entender sus perspectivas y redefinir su rol en las decisiones técnicas.","Informar al sponsor que el equipo requiere reorganización para resolver problemas de integración.","Documentar el incidente como un riesgo de equipo y aplicar el plan de respuesta de riesgos previamente establecido."],ok:1,multi:false,exp:"La exclusión percibida de decisiones técnicas es un problema de integración y confianza, no de tiempo en reuniones. La directora debe escuchar directamente a los afectados para entender la raíz del problema antes de tomar medidas."},
+  {id:"PMP-22-002",dom:"Personas",tipo:"Respuesta múltiple",dif:"intermedia",txt:"El proyecto de infraestructura vial que gestionas en una constructora de Lima está bajo cronograma comprimido. El equipo ha comenzado a mostrar señales de agotamiento: se pierden revisiones técnicas opcionales, la calidad de los entregables ha bajado y hay más conflictos entre subequipos. Seleccione DOS acciones que debes priorizar.",ops:["Revisar con el sponsor el cronograma para evaluar si hay margen de ajuste en los hitos no contractuales.","Emitir un comunicado formal al equipo recordando la importancia del proyecto para la empresa.","Facilitar una retrospectiva enfocada en carga de trabajo y sostenibilidad del ritmo actual.","Agregar un supervisor de calidad externo para recuperar los estándares de entregables.","Contratar dos recursos adicionales para distribuir la carga y reducir el ritmo de trabajo."],ok:[0,2],multi:true,exp:"Las señales de agotamiento indican que el ritmo actual no es sostenible. La retrospectiva permite al equipo identificar causas y proponer soluciones. Revisar el cronograma con el sponsor es la acción sistémica correcta cuando hay presión estructural."},
+  {id:"PMP-22-003",dom:"Personas",tipo:"Situacional",dif:"avanzada",txt:"Eres responsable del desarrollo de un sistema de trazabilidad de medicamentos en una farmacéutica de Buenos Aires, regulado por ANMAT. El equipo técnico, altamente especializado, toma decisiones de arquitectura sin documentarlas ni comunicarlas, lo que genera impactos en el alcance y los plazos que no estaban previstos. Un integrante senior argumenta que la documentación ralentiza al equipo. ¿Cuál es la mejor respuesta?",ops:["Acordar con el equipo un mecanismo liviano de registro de decisiones técnicas con impacto, sin ralentizar la velocidad de entrega.","Exigir que todas las decisiones técnicas sean aprobadas por la directora antes de implementarse.","Escalar al PMO la situación para que establezca estándares de documentación aplicables al equipo técnico.","Aceptar el argumento del equipo senior y confiar en que comunicarán los impactos cuando sean relevantes."],ok:0,multi:false,exp:"El desafío es equilibrar la autonomía técnica con la gobernanza necesaria en un proyecto regulado. Un mecanismo liviano de decisiones (como un ADR) permite capturar decisiones con impacto sin convertir la documentación en un cuello de botella."},
+  {id:"PMP-22-004",dom:"Personas",tipo:"Situacional",dif:"intermedia",txt:"Durante el Sprint 5 de un proyecto de retail bancario en Santiago de Chile, incorporas dos nuevos integrantes al equipo. En la primera reunión de planificación, proponen soluciones que contradicen decisiones técnicas ya tomadas. No están al tanto del historial del proyecto. ¿Qué debes hacer?",ops:["Pedir a los nuevos integrantes que observen sin proponer hasta completar tres sprints.","Facilitar una sesión de contexto donde el equipo comparte el historial de decisiones técnicas y los nuevos integrantes comprenden el por qué antes del próximo sprint.","Incorporar las propuestas de los nuevos integrantes como puntos del backlog para evaluarlas en el siguiente sprint.","Informar al Product Owner que la incorporación tardía de recursos está afectando la velocidad del equipo."],ok:1,multi:false,exp:"La raíz del problema es la brecha de contexto: los nuevos integrantes no conocen las decisiones ya tomadas. Una sesión de transferencia de conocimiento resuelve esto de forma proactiva sin excluirlos ni desestimar sus aportes."},
+  {id:"PMP-22-005",dom:"Personas",tipo:"Situacional",dif:"avanzada",txt:"Dos ingenieros senior de tu equipo en una empresa de telecomunicaciones en Ciudad de México tienen un conflicto recurrente sobre la arquitectura del sistema. Los debates se extienden en las dailys más allá del tiempo asignado. Ya intentaste mediar en dos reuniones previas sin llegar a un acuerdo. El sprint vence en cuatro días. ¿Qué debes hacer?",ops:["Tomar una decisión técnica definitiva basándose en tu criterio y comunicarla al equipo como política del proyecto.","Establecer un criterio de decisión técnica acordado con ambos ingenieros y el equipo, y definir quién tiene la última palabra en ausencia de consenso.","Separar a los dos ingenieros en subequipos diferentes para evitar que el conflicto continúe.","Solicitar al sponsor que intervenga para mediar entre los dos ingenieros senior."],ok:1,multi:false,exp:"Cuando la mediación directa no produce consenso, el paso correcto es establecer un mecanismo de resolución de disputas técnicas: definir criterios y quién tiene autoridad de cierre cuando el debate se estanca. Esto es gobernanza del equipo, no imposición."},
+  {id:"PMP-22-006",dom:"Personas",tipo:"Relacionar columnas",dif:"intermedia",txt:"Según el modelo de liderazgo situacional, relaciona cada situación con el estilo de liderazgo más adecuado.\n\n1. Equipo nuevo con poca experiencia en el dominio técnico\n2. Equipo experto con alta motivación y autonomía demostrada\n3. Equipo con experiencia técnica pero baja motivación en la fase actual\n4. Equipo con motivación alta, pero habilidades en desarrollo\n\nA. Delegar: dar autonomía y responsabilidad de resultados\nB. Dirigir: instrucciones claras y supervisión cercana\nC. Motivar: reconocer aportes y conectar el trabajo con el propósito\nD. Orientar: explicar el por qué y desarrollar habilidades con acompañamiento",ops:["1-A, 2-B, 3-C, 4-D","1-B, 2-A, 3-C, 4-D","1-B, 2-C, 3-A, 4-D","1-D, 2-A, 3-C, 4-B"],ok:1,multi:false,exp:"El modelo de liderazgo situacional adapta el estilo al nivel de desarrollo: equipos nuevos necesitan dirección clara (B); equipos expertos y autónomos funcionan mejor con delegación (A); equipos con habilidades pero baja motivación responden a motivación y propósito (C); equipos con motivación pero habilidades en desarrollo necesitan orientación (D)."},
+  {id:"PMP-22-007",dom:"Personas",tipo:"Situacional",dif:"intermedia",txt:"Un integrante de tu equipo en una consultora de transformación digital en Medellín, que hasta el mes anterior entregaba resultados consistentes, ha comenzado a llegar tarde a las reuniones y entregar tareas con calidad inferior. No tienes información sobre si hay razones personales detrás. ¿Cuál es el primer paso correcto?",ops:["Convocar una reunión de equipo para abordar el tema de forma colectiva y restablecer los estándares de desempeño.","Tener una conversación privada con el integrante para entender su situación antes de tomar cualquier medida.","Documentar los incidentes como evidencia de bajo desempeño y enviarlos a Recursos Humanos.","Redistribuir las tareas del integrante a otros miembros del equipo para proteger los entregables del sprint."],ok:1,multi:false,exp:"El primer paso ante una caída en el desempeño de un integrante previamente consistente es comprender la causa antes de actuar. Una conversación privada respeta la dignidad de la persona y puede revelar factores desconocidos."},
+  {id:"PMP-22-008",dom:"Personas",tipo:"Situacional",dif:"avanzada",txt:"Liderás un proyecto híbrido de modernización del core bancario en un banco de desarrollo de Quito. El equipo predictivo y el ágil se culpan mutuamente cuando los entregables en la interfaz no coinciden. No existe un protocolo de integración entre ambas partes. ¿Qué acción tiene mayor impacto?",ops:["Unificar a ambos equipos bajo una única metodología para eliminar la fricción entre enfoques.","Definir un protocolo de integración con puntos de sincronización, responsabilidades claras en la interfaz y criterios de aceptación compartidos.","Asignar a un integrante de cada equipo como enlace y dejar que gestionen la integración de forma autónoma.","Escalar al sponsor el conflicto metodológico para que tome una decisión sobre el enfoque del proyecto."],ok:1,multi:false,exp:"El problema es la ausencia de un protocolo de integración en el modelo híbrido. La solución es definir puntos de sincronización, roles en la interfaz y criterios de aceptación compartidos que ambos equipos entiendan y acepten."},
+  {id:"PMP-22-009",dom:"Personas",tipo:"Conceptual",dif:"intermedia",txt:"¿Qué distingue a un equipo autogestionado de un equipo con autonomía operativa?",ops:["Un equipo autogestionado no necesita un director de proyectos; un equipo con autonomía operativa sí.","Un equipo autogestionado decide cómo organizar su trabajo, quién hace qué y cómo resolver sus obstáculos, mientras que un equipo con autonomía operativa solo decide cómo ejecutar tareas definidas externamente.","Un equipo autogestionado trabaja siempre con enfoque ágil; un equipo con autonomía operativa trabaja con enfoque predictivo.","Un equipo autogestionado elimina la necesidad de retrospectivas porque resuelve sus problemas de forma continua."],ok:1,multi:false,exp:"La diferencia clave es el alcance de la autonomía: un equipo autogestionado determina su organización interna, distribución de trabajo y mecanismos de resolución de problemas, mientras que la autonomía operativa solo cubre la ejecución de tareas definidas externamente."},
+  {id:"PMP-22-010",dom:"Personas",tipo:"Situacional",dif:"intermedia",txt:"Acabás de recibir la notificación de que tres integrantes de tu equipo en una empresa de logística en Guadalajara renunciarán en 30 días. Los tres tienen conocimiento técnico crítico que no está documentado. Quedan 18 meses de proyecto. ¿Cuál es la acción de mayor impacto inmediato?",ops:["No informar al equipo hasta que la reducción sea oficial y exista un plan de ajuste.","Informar al equipo de la situación tan pronto como sea posible con los datos disponibles, explicar el impacto esperado y colaborar en identificar opciones de ajuste.","Informar solo a los líderes técnicos del equipo para que gestionen la incertidumbre internamente.","Esperar a que el equipo pregunte directamente y responder con la información disponible en ese momento."],ok:1,multi:false,exp:"La transparencia es un principio central del rol del director de proyectos. Informar al equipo de forma oportuna, con los datos disponibles y enfocándose en las opciones, genera confianza y permite una respuesta colectiva."},
+  {id:"PMP-22-015",dom:"Personas",tipo:"Situacional",dif:"avanzada",txt:"Gestionás un proyecto predictivo de 18 meses en una empresa de seguros en Asunción. A mitad del proyecto, tres integrantes con conocimiento técnico crítico no documentado comunican que aceptarán ofertas externas en 30 días. ¿Cuál es la acción de mayor impacto?",ops:["Iniciar un proceso de reclutamiento urgente para reemplazar a los tres integrantes antes de que renuncien.","Solicitar al sponsor autorización para ofrecer incentivos de retención que superen las ofertas externas.","Organizar transferencias de conocimiento estructuradas con los tres integrantes antes de su salida, y activar paralelamente el plan de gestión de recursos.","Renegociar el cronograma del proyecto con el cliente dado el impacto inevitable en los plazos."],ok:2,multi:false,exp:"El riesgo crítico no es la salida en sí, sino la pérdida del conocimiento no documentado. La acción de mayor impacto es capturar ese conocimiento antes de la salida mientras se activa el plan de recursos."},
+  {id:"PMP-22-016",dom:"Personas",tipo:"Ordenamiento",dif:"intermedia",txt:"Debés gestionar una situación de conflicto escalonado en tu equipo. Ordená las siguientes acciones en la secuencia correcta.\n\nA. Escalar a la gerencia o RRHH si las conversaciones no resuelven el conflicto\nB. Escuchar individualmente a las partes involucradas\nC. Facilitar una conversación conjunta entre las partes para buscar solución colaborativa\nD. Implementar la solución acordada y monitorear la dinámica del equipo",ops:["A → B → C → D","B → C → D → A","C → B → D → A","B → A → C → D"],ok:1,multi:false,exp:"La secuencia correcta es: (1) escuchar individualmente para entender perspectivas, (2) facilitar la conversación conjunta cuando ambas partes están preparadas, (3) implementar y monitorear la solución, (4) escalar solo si el proceso colaborativo no produce resultado."},
+  {id:"PMP-22-019",dom:"Personas",tipo:"Situacional",dif:"intermedia",txt:"Liderás la formación de un equipo scrum en una consultora de tecnología en Buenos Aires. El equipo tiene integrantes con distintos niveles de experiencia en ágil y necesita establecer sus normas de trabajo para el primer sprint. ¿Cuál es la acción más efectiva?",ops:["Establecer las normas de trabajo por tu cuenta y comunicarlas como estándares del proyecto.","Facilitar una sesión de acuerdo de equipo donde los integrantes definan colectivamente las normas de trabajo adaptadas a sus preferencias y al contexto del proyecto.","Adoptar las normas de trabajo del sprint anterior del equipo ágil más cercano de la empresa.","Posponer la definición de normas hasta que el equipo tenga más experiencia trabajando juntos."],ok:1,multi:false,exp:"Las normas de trabajo en un equipo ágil son más efectivas cuando son definidas por el propio equipo, no impuestas externamente. Facilitar un acuerdo colectivo aumenta el compromiso y la apropiación."},
+  {id:"PMP-22-020",dom:"Personas",tipo:"Situacional",dif:"avanzada",txt:"Gestionás un proyecto de alta visibilidad en una empresa fintech en Bogotá donde el sponsor interviene directamente con el equipo técnico sin informarte. Sus instrucciones a veces contradicen las decisiones del equipo. ¿Cuál es la mejor acción?",ops:["Solicitar al equipo que ignore las instrucciones del sponsor y siga únicamente las decisiones del director de proyectos.","Tener una conversación privada con el sponsor para acordar los canales de comunicación y el proceso de toma de decisiones, y dejar claro el impacto de las intervenciones directas no coordinadas.","Escalar la situación al comité de gobernanza del proyecto para que defina una política de intervención del sponsor.","Aceptar la dinámica como parte de un proyecto de alta visibilidad y adaptar el equipo para manejar instrucciones contradictorias."],ok:1,multi:false,exp:"El problema es de gobernanza y comunicación entre la directora y el sponsor. La solución es abordar directamente con el sponsor los canales de comunicación y el impacto de las intervenciones no coordinadas."},
+  {id:"PMP-22-021",dom:"Proceso",tipo:"Situacional",dif:"intermedia",txt:"Estás gestionando la fase de ejecución de un proyecto en Lima cuando el equipo implementa una funcionalidad adicional no contemplada en el alcance original, a solicitud verbal de un usuario final. El equipo argumenta que era pequeño y no valía el proceso formal. ¿Cuál es la acción correcta?",ops:["Autorizar al equipo técnico a implementar ajustes adicionales de inmediato para no perder tiempo.","Evaluar el impacto técnico y de proyecto con el equipo antes de emitir una solicitud de cambio formal.","Informar al cliente del problema y solicitar su aprobación antes de cualquier análisis técnico.","Registrar el problema como un riesgo en el registro de riesgos y monitorear su evolución."],ok:1,multi:false,exp:"El primer paso ante un hallazgo técnico con impacto potencial es analizar el impacto antes de actuar o escalar. El director debe cuantificar el impacto en tiempo, costo y alcance, y luego emitir una solicitud de cambio formal si corresponde."},
+  {id:"PMP-22-022",dom:"Proceso",tipo:"Cálculo",dif:"intermedia",txt:"Revisás los indicadores de valor ganado de un proyecto de manufactura en Guadalajara al final del período 6. PV = 850.000, EV = 720.000, AC = 790.000. ¿Cuál es la interpretación correcta?",ops:["El proyecto está adelantado en cronograma y por debajo del presupuesto.","El proyecto está retrasado en cronograma y por encima del presupuesto.","El proyecto está adelantado en cronograma y por encima del presupuesto.","El proyecto está retrasado en cronograma y por debajo del presupuesto."],ok:1,multi:false,exp:"SV = EV - PV = 720.000 - 850.000 = -130.000 (negativo = retraso). CV = EV - AC = 720.000 - 790.000 = -70.000 (negativo = por encima del presupuesto). Fórmulas: SV = EV − PV | CV = EV − AC"},
+  {id:"PMP-22-023",dom:"Proceso",tipo:"Situacional",dif:"avanzada",txt:"Al inicio del Sprint 7 de un proyecto de desarrollo de producto en Medellín, el Product Owner propone incorporar 5 historias de usuario de alta prioridad surgidas de un focus group reciente. El equipo tiene capacidad para 3 historias adicionales. El sprint ya está planificado. ¿Qué debes hacer?",ops:["Aceptar las cinco historias y extender el sprint dos semanas adicionales.","Rechazar las cinco historias hasta el siguiente sprint sin análisis adicional.","Facilitar con el PO la priorización de las historias nuevas contra el contenido actual del sprint, y proteger el sprint commitment del equipo.","Agregar las cinco historias al sprint y reducir las historias originales planificadas para compensar."],ok:2,multi:false,exp:"En Scrum, el Sprint Backlog protege el compromiso del equipo. Las historias nuevas deben ingresar al Product Backlog y competir en el próximo Sprint Planning. La directora facilita la conversación entre el PO y el equipo para gestionar la expectativa sin violar el sprint commitment."},
+  {id:"PMP-22-025",dom:"Proceso",tipo:"Respuesta múltiple",dif:"avanzada",txt:"Estás revisando el plan de gestión de riesgos de un proyecto de implementación de ERP en Colombia. El análisis cualitativo identificó 5 riesgos de alta probabilidad e impacto. Seleccione DOS afirmaciones correctas sobre cómo proceder.",ops:["Todos los riesgos de alta probabilidad e impacto deben escalarse automáticamente al sponsor.","Cada riesgo debe tener una estrategia de respuesta asignada y un dueño de riesgo designado.","Los riesgos identificados deben ingresarse al análisis cuantitativo de riesgos si el proyecto lo justifica.","Los riesgos de alta probabilidad e impacto siempre deben ser mitigados, nunca aceptados.","Una vez identificada la estrategia de respuesta, el riesgo puede eliminarse del registro de riesgos."],ok:[1,2],multi:true,exp:"Todo riesgo priorizado debe tener una estrategia de respuesta y un dueño responsable (B). Si el proyecto lo justifica, el análisis cuantitativo permite modelar el impacto financiero o de cronograma (C)."},
+  {id:"PMP-22-027",dom:"Proceso",tipo:"Situacional",dif:"avanzada",txt:"A 3 semanas del cierre de un proyecto de sistema de telemedicina en Ciudad de México, el equipo de QA detecta vulnerabilidades críticas de seguridad en dos módulos. Resolver los problemas requiere 4 semanas adicionales. ¿Cuál es la acción correcta?",ops:["Lanzar el sistema en la fecha prevista y planificar un parche de seguridad en la primera semana post-lanzamiento.","Evaluar con el equipo técnico, el área legal y el sponsor las opciones disponibles, incluyendo postergar el lanzamiento, y emitir una recomendación fundamentada.","Escalar al cliente la decisión de si lanzar o postergar sin hacer una recomendación propia.","Pedir al equipo que trabaje horas extra para resolver las vulnerabilidades en la fecha original."],ok:1,multi:false,exp:"Las vulnerabilidades críticas en un sistema de salud son un problema de compliance que no puede ignorarse. El director debe evaluar todas las opciones con los actores clave y proponer una recomendación."},
+  {id:"PMP-22-030",dom:"Proceso",tipo:"Situacional",dif:"avanzada",txt:"Liderás un proyecto de construcción de planta industrial en Quito al mes 8 de 18. BAC = 2.400.000, EAC = 3.100.000, ETC = 1.850.000. El sponsor pregunta si es viable completar dentro del presupuesto original. ¿Qué le respondés?",ops:["No, la estimación actual al completar (EAC) supera el presupuesto en 700.000. Se requiere una acción correctiva para reducir el costo remanente.","Sí, el ETC restante (1.850.000) es menor que el BAC (2.400.000), por lo que el proyecto puede completarse dentro del presupuesto.","No es posible determinarlo con los datos disponibles sin conocer el SPI y el CPI actuales.","Sí, si el equipo mejora su eficiencia en la segunda mitad, el EAC puede reducirse al BAC original."],ok:0,multi:false,exp:"EAC = 3.100.000 > BAC = 2.400.000. La diferencia de 700.000 representa el costo adicional proyectado al completar. Se requieren acciones correctivas. Fórmulas: EAC = BAC/CPI | ETC = EAC − AC"},
+  {id:"PMP-22-033",dom:"Proceso",tipo:"Situacional",dif:"avanzada",txt:"Gestionás un proyecto híbrido de sensores IoT para agricultura en Córdoba, Argentina. Durante la fase iterativa de pruebas de campo, el equipo detecta que la tasa de error en condiciones de alta humedad es del 18%, muy por encima del umbral de calidad del 3%. ¿Cuál es la acción más adecuada?",ops:["Continuar la fase iterativa y acumular más datos antes de tomar una decisión.","Detener la fase iterativa, escalar el hallazgo con evidencia al sponsor y al proveedor de sensores, y evaluar si la fase predictiva de diseño debe revisarse.","Ajustar el umbral de calidad del 3% al 20% para alinearlo con los resultados observados.","Reemplazar los sensores actuales con un modelo alternativo de forma inmediata sin análisis adicional."],ok:1,multi:false,exp:"Una tasa de error del 18% vs. un criterio del 3% es una desviación de calidad crítica que requiere acción inmediata. El director debe detener la iteración para evitar acumular más trabajo defectuoso, escalar con evidencia y evaluar si el problema tiene raíz en el diseño."},
+  {id:"PMP-22-034",dom:"Proceso",tipo:"Ordenamiento",dif:"intermedia",txt:"En un proyecto de construcción en Lima debés gestionar una solicitud de cambio de alcance. Ordená las siguientes actividades en la secuencia correcta.\n\nA. Comunicar la decisión y actualizar los documentos del proyecto\nB. Registrar la solicitud de cambio en el log de cambios\nC. Analizar el impacto en tiempo, costo, calidad y riesgos\nD. Presentar el análisis al Comité de Control de Cambios para decisión\nE. Implementar el cambio si fue aprobado",ops:["C → B → D → E → A","B → D → C → E → A","B → C → D → E → A","D → B → C → A → E"],ok:2,multi:false,exp:"El proceso correcto de control de cambios es: (1) registrar la solicitud, (2) analizar el impacto integral, (3) presentar al CCB para decisión, (4) implementar si fue aprobado, (5) comunicar y actualizar documentación. No se implementa antes de la aprobación."},
+  {id:"PMP-22-039",dom:"Proceso",tipo:"Situacional",dif:"avanzada",txt:"Gestionás un proyecto ágil de plataforma de gestión de contratos de energía en Buenos Aires. Tu equipo tiene velocidad promedio de 42 puntos por sprint en los últimos 6 sprints. El backlog restante tiene 380 puntos. La fecha de lanzamiento está en 8 sprints. ¿Cuál es la conclusión correcta y la acción apropiada?",ops:["El proyecto está en riesgo: con velocidad de 42 pts/sprint, en 8 sprints se completarían 336 pts, dejando 44 pts sin completar. La directora debe informar al PO y evaluar opciones con el cliente.","El proyecto está encaminado: la velocidad puede mejorar en los próximos sprints y compensar la diferencia.","El proyecto completará el backlog en exactamente 9,05 sprints, por lo que requiere una extensión de 1 sprint.","El proyecto está en riesgo, pero la solución es agregar historias al backlog para motivar al equipo a aumentar su velocidad."],ok:0,multi:false,exp:"42 pts × 8 sprints = 336 pts completados vs. 380 pts restantes. El proyecto tiene un déficit de 44 pts con la fecha comprometida. La directora debe informar al Product Owner con datos y evaluar opciones: reducir el alcance, aumentar la velocidad si hay capacidad real, o renegociar la fecha."},
+  {id:"PMP-22-041",dom:"Proceso",tipo:"Situacional",dif:"basica",txt:"Estás cerrando un proyecto de desarrollo de software en Quito. El cliente ha aceptado formalmente todos los entregables. ¿Cuál de las siguientes actividades NO es parte del proceso de cierre?",ops:["Liberar formalmente los recursos del proyecto.","Documentar las lecciones aprendidas.","Iniciar la fase de planificación del siguiente proyecto.","Archivar los documentos del proyecto en el repositorio organizacional."],ok:2,multi:false,exp:"El proceso de cierre incluye: liberación de recursos (A), documentación de lecciones aprendidas (B) y archivo de documentación (D). Iniciar la planificación del siguiente proyecto (C) es una actividad de un proyecto diferente y no es parte del cierre del proyecto actual."},
+  {id:"PMP-22-043",dom:"Proceso",tipo:"Respuesta múltiple",dif:"intermedia",txt:"Revisás el proceso de estimación en un proyecto de una empresa de seguros en Lima. Seleccione DOS características que distinguen la estimación por analogía de la estimación paramétrica.",ops:["La estimación por analogía usa datos de proyectos similares anteriores como base.","La estimación paramétrica usa una relación matemática entre variables del proyecto para calcular el costo o el tiempo.","La estimación por analogía siempre es más precisa que la estimación paramétrica.","La estimación paramétrica no puede aplicarse en proyectos de software.","La estimación por analogía requiere más datos históricos que la estimación paramétrica."],ok:[0,1],multi:true,exp:"La estimación por analogía (A) se basa en comparar con proyectos similares previos. La estimación paramétrica (B) usa una relación matemática estadística (ej. costo por m², horas por punto de función) para calcular el estimado."},
+  {id:"PMP-22-046",dom:"Entorno de negocio",tipo:"Situacional",dif:"intermedia",txt:"Gestionás la implementación de un sistema de pagos digitales en una fintech de São Paulo. A mitad del proyecto, el banco central emite una regulación que modifica los requisitos de cifrado. El equipo estima 6 semanas adicionales para cumplirla. ¿Cuál es la acción correcta?",ops:["Evaluar el impacto de la nueva regulación con el equipo legal y técnico, emitir una solicitud de cambio formal y comunicar al sponsor con opciones de respuesta.","Continuar con el plan original y adaptar el cifrado después del lanzamiento como una actualización.","Escalar inmediatamente al cliente para que decida si continuar o cancelar el proyecto.","Solicitar al equipo técnico que reduzca la estimación de 6 semanas a 3 para no impactar la fecha."],ok:0,multi:false,exp:"Un cambio regulatorio externo es un cambio de alcance forzado que requiere proceso de control de cambios. El director debe cuantificar el impacto, formalizar la solicitud de cambio y presentar opciones al sponsor."},
+  {id:"PMP-22-048",dom:"Entorno de negocio",tipo:"Situacional",dif:"avanzada",txt:"Gestionás el desarrollo de una planta de procesamiento de litio en el norte de Argentina con aprobación regulatoria condicional. Al mes 12, las pruebas muestran consumo hídrico un 22% por encima de los límites aprobados. ¿Cuál es la acción más adecuada?",ops:["Continuar las pruebas y documentar los excesos como datos de referencia para futura renegociación con la autoridad ambiental.","Detener las actividades que generan exceso de consumo, escalar con evidencia al sponsor y al equipo legal, y desarrollar un plan de corrección antes de retomar.","Ajustar los reportes de consumo para cumplir formalmente con los límites aprobados.","Solicitar al equipo de operaciones que optimice el proceso para reducir el consumo antes de informar a cualquier parte."],ok:1,multi:false,exp:"El incumplimiento del plan de manejo ambiental puede poner en riesgo la aprobación regulatoria del proyecto completo. La acción inmediata es detener las actividades en incumplimiento, escalar con evidencia y desarrollar un plan de corrección."},
+  {id:"PMP-22-049",dom:"Entorno de negocio",tipo:"Situacional",dif:"intermedia",txt:"Gestionás un proyecto de expansión al e-commerce internacional en una empresa de retail en Lima. El caso de negocio proyecta un retorno del 180% en 24 meses. A mitad de la ejecución, el análisis actualizado indica que el retorno se redujo al 95% por cambios en tipo de cambio y aranceles. ¿Cuál es la acción correcta?",ops:["Continuar el proyecto ya que la inversión está comprometida y no puede recuperarse.","Actualizar el caso de negocio con las nuevas proyecciones, presentarlo al sponsor y evaluar si el proyecto sigue siendo viable.","Reducir el presupuesto del proyecto para mejorar el retorno ajustado.","Solicitar al equipo financiero que revise las proyecciones hasta que el retorno vuelva al 180%."],ok:1,multi:false,exp:"El caso de negocio debe revisarse cuando cambian las condiciones del entorno. El director debe actualizar las proyecciones y presentarlas al sponsor para que decida si el proyecto sigue siendo viable."},
+  {id:"PMP-22-050",dom:"Entorno de negocio",tipo:"Conceptual",dif:"intermedia",txt:"Al evaluar si un nuevo proyecto debe iniciarse, ¿cuál de las siguientes opciones describe correctamente el propósito del caso de negocio?",ops:["El caso de negocio documenta los requisitos del proyecto para que el equipo los implemente.","El caso de negocio justifica la necesidad del proyecto, documenta los beneficios esperados y sirve como base para la decisión de inversión.","El caso de negocio define el cronograma y el presupuesto preliminar del proyecto.","El caso de negocio es un documento que el director de proyectos actualiza durante la ejecución para reportar el estado del proyecto."],ok:1,multi:false,exp:"El caso de negocio justifica por qué el proyecto debe realizarse: explica el problema u oportunidad, analiza opciones, documenta los beneficios esperados y sirve como base para la decisión de inversión."},
+  {id:"PMP-22-053",dom:"Entorno de negocio",tipo:"Situacional",dif:"avanzada",txt:"Gestionás el desarrollo de una plataforma de aprendizaje adaptativo con IA en Ciudad de México. Durante las pruebas, el equipo de ética detecta que el modelo recomienda contenidos avanzados predominantemente a estudiantes de escuelas privadas y básicos a los de escuelas públicas. El lanzamiento está a 3 semanas. ¿Cuál es la acción más adecuada?",ops:["Lanzar la plataforma con el modelo actual y planificar una mejora del modelo en la versión 2.0.","Suspender el lanzamiento, documentar el sesgo con evidencia, escalar al sponsor y al área de ética, y evaluar si el modelo puede corregirse en tiempo o si el lanzamiento debe postponerse.","Ajustar manualmente las recomendaciones para el lanzamiento y corregir el modelo después.","Informar al cliente del sesgo y dejar que decida si lanzar o no sin hacer una recomendación propia."],ok:1,multi:false,exp:"Un sesgo de IA con impacto diferencial en equidad educativa es un problema ético y de riesgo reputacional que no puede ignorarse. La directora debe suspender, documentar, escalar y evaluar las opciones con evidencia."},
+  {id:"PMP-22-055",dom:"Entorno de negocio",tipo:"Situacional",dif:"basica",txt:"Debés reportar el estado del proyecto al portafolio. El proyecto completó el 60% del alcance, gastó el 65% del presupuesto y está 2 semanas detrás del cronograma. ¿Cuál es la descripción más precisa?",ops:["El proyecto está en riesgo: hay sobrecosto relativo y retraso en el cronograma.","El proyecto está encaminado: el avance de alcance es del 60% y el gasto es normal.","El proyecto está adelantado: completó más alcance del que corresponde al gasto.","El proyecto está cancelado por los indicadores negativos de desempeño."],ok:0,multi:false,exp:"Gastar el 65% del presupuesto habiendo completado el 60% del alcance indica CPI < 1 (ineficiencia de costos); estar 2 semanas detrás del cronograma confirma el retraso (SPI < 1). El proyecto está en riesgo y debe reportarse como tal."},
+  {id:"PMP-22-058",dom:"Entorno de negocio",tipo:"Situacional",dif:"basica",txt:"El sistema de ruteo automatizado que liderás en una empresa de logística en Quito reemplazará funciones del equipo de despacho. ¿Cuál es la acción más importante en la fase de planificación?",ops:["Planificar la capacitación técnica del equipo de despacho en el nuevo sistema.","Evaluar el impacto humano y organizacional del cambio, identificar interesados afectados y desarrollar un plan de gestión del cambio que incluya comunicación, capacitación y transición de roles.","Documentar la reducción de personal como un beneficio del proyecto en el caso de negocio.","Informar al equipo de despacho del cambio solo cuando el sistema esté listo para implementarse."],ok:1,multi:false,exp:"Los cambios organizacionales que afectan roles y funciones requieren un plan de gestión del cambio integral: análisis de impacto, identificación de interesados, comunicación temprana, capacitación y transición de roles."},
+  {id:"PMP-22-059",dom:"Entorno de negocio",tipo:"Respuesta múltiple",dif:"intermedia",txt:"Evaluás el portafolio de proyectos propuestos para el siguiente año en una empresa de tecnología en Buenos Aires. Seleccione DOS criterios que deben incluirse en un modelo de priorización de portafolio.",ops:["Alineación estratégica con los objetivos de la organización.","Preferencia personal del CEO sobre los proyectos.","Retorno esperado sobre la inversión y viabilidad financiera.","Número de recursos disponibles en el departamento de TI.","Popularidad del proyecto entre los empleados."],ok:[0,2],multi:true,exp:"Los modelos de priorización de portafolio deben incluir criterios objetivos y estratégicos: la alineación estratégica (A) garantiza que los proyectos contribuyen a los objetivos organizacionales; el retorno esperado y viabilidad financiera (C) garantizan que el portafolio es económicamente sostenible."}
+];
+  var LETRAS = ['A','B','C','D','E'];
+  var ESTILO_BASE = 'display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border:1px solid #E0DFDB;border-radius:8px;cursor:pointer;background:#FAFAF8;margin-bottom:10px;list-style:none;';
   var ESTILO_SEL  = 'display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border:1px solid #2D6A4F;border-radius:8px;cursor:pointer;background:#E1F5EE;margin-bottom:10px;list-style:none;';
   var ESTILO_OK   = 'display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border:1px solid #3B6D11;border-radius:8px;cursor:default;background:#EAF3DE;margin-bottom:10px;list-style:none;';
   var ESTILO_ERR  = 'display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border:1px solid #A32D2D;border-radius:8px;cursor:default;background:#FCEBEB;margin-bottom:10px;list-style:none;';
+
+  var mode = 'banco', qty = 10, cur = 0, confirmed = false, results = [], tmr = null, secs = 0;
+  var activeQ = [];
+  var selMulti = [];
+  var selSingle = -1;
+
+  // Selector de cantidad
+  document.querySelectorAll('.qty-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.qty-btn').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      qty = parseInt(btn.getAttribute('data-qty'));
+    });
+  });
 
   function show(id) {
     ['s-intro','s-quiz','s-result'].forEach(function(s) {
@@ -216,14 +264,26 @@ const description = "Practicá preguntas reales del examen PMP® alineadas al EC
     });
   }
 
+  function shuffle(arr) {
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+
   function startMode(m) {
-    mode = m; cur = 0; sel = -1; confirmed = false; results = [];
+    mode = m; cur = 0; confirmed = false; results = [];
+    selMulti = []; selSingle = -1;
     if (tmr) clearInterval(tmr);
+    activeQ = shuffle(QS).slice(0, Math.min(qty, QS.length));
     show('s-quiz');
     document.getElementById('q-mode-label').textContent = m==='banco' ? 'BANCO DE PREGUNTAS' : 'SIMULACRO DE EXAMEN';
     var tw = document.getElementById('timer-wrap');
     if (m==='simulacro') {
-      secs = 900; tw.style.display='flex'; updateTimer();
+      secs = activeQ.length * 90;
+      tw.style.display='flex'; updateTimer();
       tmr = setInterval(function(){ secs--; updateTimer(); if(secs<=0){ clearInterval(tmr); showResult(); }}, 1000);
     } else {
       tw.style.display='none';
@@ -245,18 +305,20 @@ const description = "Practicá preguntas reales del examen PMP® alineadas al EC
   }
 
   function renderQ() {
-    var q = QS[cur]; sel=-1; confirmed=false;
-    document.getElementById('q-counter').textContent = 'Pregunta '+(cur+1)+' de '+QS.length;
+    var q = activeQ[cur]; confirmed=false; selMulti=[]; selSingle=-1;
+    document.getElementById('q-counter').textContent = 'Pregunta '+(cur+1)+' de '+activeQ.length;
     var db = document.getElementById('q-domain');
     db.textContent = q.dom; db.className = domClass(q.dom);
-    document.getElementById('q-progress').style.width = (((cur+1)/QS.length)*100)+'%';
+    document.getElementById('q-progress').style.width = (((cur+1)/activeQ.length)*100)+'%';
     document.getElementById('q-tipo').textContent = q.tipo;
     var difMap = {avanzada:'★ Avanzada', intermedia:'· Intermedia', basica:'○ Básica'};
     var de = document.getElementById('q-dif');
-    de.textContent = difMap[q.dif]||q.dif;
-    de.className = 'meta-pill dif-'+q.dif;
+    de.textContent = difMap[q.dif]||q.dif; de.className='meta-pill dif-'+q.dif;
     document.getElementById('q-id').textContent = q.id;
     document.getElementById('q-text').textContent = q.txt;
+
+    var hint = document.getElementById('multiple-hint');
+    hint.style.display = q.multi ? 'block' : 'none';
 
     var ul = document.getElementById('q-options');
     ul.innerHTML = '';
@@ -264,79 +326,97 @@ const description = "Practicá preguntas reales del examen PMP® alineadas al EC
       var li = document.createElement('li');
       li.setAttribute('style', ESTILO_BASE);
       var badge = document.createElement('span');
-      badge.setAttribute('style', 'min-width:28px;height:28px;border-radius:50%;border:1px solid #E0DFDB;display:inline-flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:600;color:#6B6B6B;flex-shrink:0;background:#fff;font-family:Inter,sans-serif;');
+      badge.setAttribute('style','min-width:28px;height:28px;border-radius:50%;border:1px solid #E0DFDB;display:inline-flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:600;color:#6B6B6B;flex-shrink:0;background:#fff;font-family:Inter,sans-serif;');
       badge.textContent = LETRAS[i];
       var body = document.createElement('span');
-      body.setAttribute('style', 'font-size:0.9rem;line-height:1.55;color:#1A1A1A;padding-top:3px;');
+      body.setAttribute('style','font-size:0.9rem;line-height:1.55;color:#1A1A1A;padding-top:3px;');
       body.textContent = txt;
-      li.appendChild(badge);
-      li.appendChild(body);
-      (function(idx, badgeEl){ 
-        li.addEventListener('click', function(){ pick(idx, badgeEl); });
-      })(i, badge);
+      li.appendChild(badge); li.appendChild(body);
+      (function(idx){ li.addEventListener('click', function(){ pick(idx); }); })(i);
       ul.appendChild(li);
     });
 
-    document.getElementById('q-feedback').style.display = 'none';
+    document.getElementById('q-feedback').style.display='none';
     var bc = document.getElementById('btn-confirm');
     var bn = document.getElementById('btn-next');
     bc.style.display='inline-block'; bc.disabled=true;
     bn.style.display='none';
   }
 
-  function pick(i, badgeEl) {
+  function pick(i) {
     if(confirmed) return;
-    sel = i;
+    var q = activeQ[cur];
     var items = document.querySelectorAll('#q-options li');
-    items.forEach(function(el, idx) {
-      el.setAttribute('style', idx===i ? ESTILO_SEL : ESTILO_BASE);
-      var b = el.querySelector('span');
-      if(idx===i){ b.style.background='#2D6A4F'; b.style.borderColor='#2D6A4F'; b.style.color='#fff'; }
-      else { b.style.background='#fff'; b.style.borderColor='#E0DFDB'; b.style.color='#6B6B6B'; }
-    });
-    document.getElementById('btn-confirm').disabled = false;
+    if(q.multi) {
+      var idx = selMulti.indexOf(i);
+      if(idx>=0) selMulti.splice(idx,1); else selMulti.push(i);
+      items.forEach(function(el, j) {
+        var b = el.querySelector('span');
+        var isSel = selMulti.indexOf(j)>=0;
+        el.setAttribute('style', isSel ? ESTILO_SEL : ESTILO_BASE);
+        b.style.background = isSel ? '#2D6A4F' : '#fff';
+        b.style.borderColor = isSel ? '#2D6A4F' : '#E0DFDB';
+        b.style.color = isSel ? '#fff' : '#6B6B6B';
+      });
+      document.getElementById('btn-confirm').disabled = selMulti.length===0;
+    } else {
+      selSingle = i;
+      items.forEach(function(el, j) {
+        var b = el.querySelector('span');
+        el.setAttribute('style', j===i ? ESTILO_SEL : ESTILO_BASE);
+        b.style.background = j===i ? '#2D6A4F' : '#fff';
+        b.style.borderColor = j===i ? '#2D6A4F' : '#E0DFDB';
+        b.style.color = j===i ? '#fff' : '#6B6B6B';
+      });
+      document.getElementById('btn-confirm').disabled = false;
+    }
   }
 
   function confirmAnswer() {
-    if(sel<0||confirmed) return;
+    if(confirmed) return;
+    var q = activeQ[cur];
+    var ok;
+    if(q.multi) {
+      var correctSet = Array.isArray(q.ok) ? q.ok : [q.ok];
+      var selSorted = selMulti.slice().sort();
+      var corrSorted = correctSet.slice().sort();
+      ok = selSorted.length===corrSorted.length && selSorted.every(function(v,i){ return v===corrSorted[i]; });
+    } else {
+      ok = selSingle===q.ok;
+    }
     confirmed = true;
-    var q = QS[cur];
-    var ok = sel===q.ok;
     results.push({dom:q.dom, ok:ok});
 
     var items = document.querySelectorAll('#q-options li');
-    items.forEach(function(el, i) {
+    var correctArr = Array.isArray(q.ok) ? q.ok : [q.ok];
+    items.forEach(function(el,i) {
       var b = el.querySelector('span');
-      if(i===q.ok){
-        el.setAttribute('style', ESTILO_OK);
-        b.style.background='#3B6D11'; b.style.borderColor='#3B6D11'; b.style.color='#fff';
-      } else if(i===sel && !ok){
-        el.setAttribute('style', ESTILO_ERR);
-        b.style.background='#A32D2D'; b.style.borderColor='#A32D2D'; b.style.color='#fff';
-      } else {
-        el.setAttribute('style', ESTILO_BASE);
-        b.style.background='#fff'; b.style.borderColor='#E0DFDB'; b.style.color='#6B6B6B';
-      }
+      var isCorrect = correctArr.indexOf(i)>=0;
+      var isWrong = q.multi ? (selMulti.indexOf(i)>=0 && !isCorrect) : (i===selSingle && !ok);
+      if(isCorrect){ el.setAttribute('style',ESTILO_OK); b.style.background='#3B6D11'; b.style.borderColor='#3B6D11'; b.style.color='#fff'; }
+      else if(isWrong){ el.setAttribute('style',ESTILO_ERR); b.style.background='#A32D2D'; b.style.borderColor='#A32D2D'; b.style.color='#fff'; }
+      else { el.setAttribute('style',ESTILO_BASE); b.style.background='#fff'; b.style.borderColor='#E0DFDB'; b.style.color='#6B6B6B'; }
       el.style.cursor='default';
     });
 
     if(mode==='banco'){
+      var correctLetters = correctArr.map(function(i){ return LETRAS[i]; }).join(' y ');
       var fb = document.getElementById('q-feedback');
       fb.style.display='block';
-      fb.className = 'feedback-box '+(ok?'fb-ok':'fb-err');
-      document.getElementById('fb-header').textContent = ok ? '✓ Respuesta correcta' : '✗ Incorrecta — la correcta es '+LETRAS[q.ok];
+      fb.className='feedback-box '+(ok?'fb-ok':'fb-err');
+      document.getElementById('fb-header').textContent = ok ? '✓ Respuesta correcta' : '✗ Incorrecta — la correcta es '+correctLetters;
       document.getElementById('fb-body').textContent = q.exp;
     }
 
     document.getElementById('btn-confirm').style.display='none';
     var bn = document.getElementById('btn-next');
     bn.style.display='inline-block';
-    bn.textContent = cur<QS.length-1 ? 'Siguiente →' : 'Ver resultado →';
+    bn.textContent = cur<activeQ.length-1 ? 'Siguiente →' : 'Ver resultado →';
   }
 
   function next() {
     cur++;
-    if(cur<QS.length) renderQ(); else showResult();
+    if(cur<activeQ.length) renderQ(); else showResult();
   }
 
   function showResult() {
@@ -352,9 +432,8 @@ const description = "Practicá preguntas reales del examen PMP® alineadas al EC
     else if(pct>=60) msg='Zona de riesgo. Repasá los dominios con menor puntaje antes del examen.';
     else msg='Necesitás refuerzo. Volvé a los Tomos I y II en los dominios con brechas y practicá de nuevo.';
     document.getElementById('r-msg').textContent=msg;
-
     [['Personas','dp-p','dd-p'],['Proceso','dp-pr','dd-pr'],['Entorno de negocio','dp-e','dd-e']].forEach(function(arr){
-      var d=arr[0], pid=arr[1], did=arr[2];
+      var d=arr[0],pid=arr[1],did=arr[2];
       var pregs=results.filter(function(r){return r.dom===d;});
       if(!pregs.length){ document.getElementById(pid).textContent='—'; document.getElementById(did).textContent='Sin preguntas'; return; }
       var p=Math.round((pregs.filter(function(r){return r.ok;}).length/pregs.length)*100);
