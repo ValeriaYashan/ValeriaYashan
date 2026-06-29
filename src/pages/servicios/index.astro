@@ -15,6 +15,50 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     </div>
   </section>
 
+  <!-- PILARES -->
+  <section class="pilares">
+    <div class="container">
+      <p class="section-eyebrow">Cómo trabajo</p>
+      <h2 class="pilares-titulo">Cuatro áreas donde puedo acompañar a tu organización</h2>
+      <p class="pilares-lead">Cada intervención está diseñada para que el cambio ocurra en la operación real, no solo en papel.</p>
+      <div class="pilares-grid">
+
+        <div class="pilar-card">
+          <div class="pilar-icono">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+          </div>
+          <h3 class="pilar-titulo">Gestión de proyectos</h3>
+          <p class="pilar-texto">Estructuro metodologías aplicables: desde la planificación hasta el cierre, con foco en que el equipo pueda sostenerlo solo.</p>
+        </div>
+
+        <div class="pilar-card">
+          <div class="pilar-icono">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+          </div>
+          <h3 class="pilar-titulo">Procesos y eficiencia</h3>
+          <p class="pilar-texto">Identifico dónde se pierde tiempo y energía, y diseño circuitos más simples, trazables y escalables.</p>
+        </div>
+
+        <div class="pilar-card">
+          <div class="pilar-icono">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a8 8 0 0 1 8 8c0 3.5-2 6.5-5 7.9V20H9v-2.1C6 16.5 4 13.5 4 10a8 8 0 0 1 8-8z"/><path d="M9 21h6"/></svg>
+          </div>
+          <h3 class="pilar-titulo">IA aplicada a equipos</h3>
+          <p class="pilar-texto">Incorporo IA de forma concreta: herramientas, flujos y hábitos que las personas realmente usan, no solo demuestran.</p>
+        </div>
+
+        <div class="pilar-card">
+          <div class="pilar-icono">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3 class="pilar-titulo">Capacitación de equipos</h3>
+          <p class="pilar-texto">Diseño programas formativos que se traducen en práctica. No solo conceptos: metodologías que quedan instaladas.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <section class="servicios-seccion">
     <div class="container">
       <div class="servicios-grid">
@@ -107,6 +151,76 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     line-height: 1.7;
   }
 
+  /* PILARES */
+  .pilares {
+    padding: var(--space-lg) 0;
+    background-color: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .section-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+    margin: 0 0 0.25rem;
+  }
+
+  .pilares-titulo {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
+    font-weight: 700;
+    color: var(--color-text);
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+
+  .pilares-lead {
+    font-size: 1rem;
+    color: var(--color-muted);
+    max-width: 520px;
+    line-height: 1.7;
+    margin-bottom: var(--space-md);
+  }
+
+  .pilares-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+
+  .pilar-card {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-left: 3px solid var(--color-accent);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 1.25rem 1rem;
+  }
+
+  .pilar-icono {
+    color: var(--color-accent);
+    margin-bottom: 0.75rem;
+    display: flex;
+  }
+
+  .pilar-titulo {
+    font-family: 'Fraunces', serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 0.4rem;
+    line-height: 1.3;
+  }
+
+  .pilar-texto {
+    font-size: 0.82rem;
+    color: var(--color-muted);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  /* SERVICIOS */
   .servicios-seccion {
     padding: var(--space-lg) 0;
     border-top: 1px solid var(--color-border);
@@ -222,13 +336,23 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     background: var(--color-surface);
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: 700px) {
+    .pilares-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
     .servicios-grid {
       grid-template-columns: 1fr;
     }
 
     .servicios-hero h1 {
       font-size: 1.8rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .pilares-grid {
+      grid-template-columns: 1fr;
     }
   }
 </style>
