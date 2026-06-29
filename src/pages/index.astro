@@ -35,8 +35,8 @@ const posts = (await getCollection('blog'))
     <div class="container">
       <div class="hero-inner">
         <p class="hero-eyebrow">Consultoría &middot; Capacitación &middot; Certificación PMP®</p>
-        <h1 class="hero-headline">Gestioná proyectos complejos<br />con metodología e IA.</h1>
-        <p class="hero-sub">Valeria Yashan &mdash; PMP® certificada desde 2013, autora de 4 libros y consultora en gestión de proyectos e inteligencia artificial aplicada para equipos en Argentina y Latinoamérica.</p>
+        <h1 class="hero-headline">Tus proyectos, ejecutados con<br />metodología real e IA integrada.</h1>
+        <p class="hero-sub">Valeria Yashan &mdash; PMP® desde 2013, autora de 4 libros y consultora en gestión de proyectos e IA. Trabajo con equipos en Argentina, LATAM y España que quieren gestionar mejor y usar IA de forma concreta.</p>
         <div class="hero-actions">
           <a href="/servicios" class="btn btn-primary">Ver servicios</a>
           <a href="/blog" class="btn btn-outline">Leer artículos</a>
@@ -100,6 +100,50 @@ const posts = (await getCollection('blog'))
     </div>
   </section>
 
+  <!-- TESTIMONIOS -->
+  <section class="testimonios">
+    <div class="container">
+      <p class="section-eyebrow">Testimonios</p>
+      <h2 class="section-title">Lo que dicen quienes trabajaron conmigo</h2>
+      <div class="testimonios-grid">
+
+        <div class="testimonio-card">
+          <p class="testimonio-texto">"Texto del testimonio. Resultado concreto que obtuvo esta persona trabajando con Valeria."</p>
+          <div class="testimonio-autor">
+            <div class="testimonio-avatar">N</div>
+            <div>
+              <p class="testimonio-nombre">Nombre Apellido</p>
+              <p class="testimonio-rol">Rol · Empresa</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonio-card">
+          <p class="testimonio-texto">"Texto del testimonio. Resultado concreto que obtuvo esta persona trabajando con Valeria."</p>
+          <div class="testimonio-autor">
+            <div class="testimonio-avatar">N</div>
+            <div>
+              <p class="testimonio-nombre">Nombre Apellido</p>
+              <p class="testimonio-rol">Rol · Empresa</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonio-card">
+          <p class="testimonio-texto">"Texto del testimonio. Resultado concreto que obtuvo esta persona trabajando con Valeria."</p>
+          <div class="testimonio-autor">
+            <div class="testimonio-avatar">N</div>
+            <div>
+              <p class="testimonio-nombre">Nombre Apellido</p>
+              <p class="testimonio-rol">Rol · Empresa</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <!-- BLOG PREVIEW -->
   <section class="blog-preview">
     <div class="container">
@@ -148,10 +192,10 @@ const posts = (await getCollection('blog'))
     <div class="container">
       <div class="newsletter-inner">
         <p class="newsletter-eyebrow">Newsletter semanal</p>
-        <h2 class="newsletter-titulo">Herramientas de PM e IA que podés aplicar esta semana</h2>
-        <p class="newsletter-desc">Una vez por semana. Sin spam. Solo lo que sirve para gestionar proyectos mejor.</p>
+        <h2 class="newsletter-titulo">Un recurso de PM o IA aplicable esta semana — directo a tu bandeja.</h2>
+        <p class="newsletter-desc">Suscribite y recibí de regalo el checklist de cierre de proyecto que uso con mis clientes. Sin spam.</p>
         <div class="newsletter-form">
-          <iframe width="540" height="305" src="https://a55096c1.sibforms.com/v2/serve/MUIFANq7Ejc7HcoQmak19v6LMCBF30dP4TIiNoM1t8h5eSbTtWQ4IfCj01uDg_8U55RsoMLNJS274dzOcW6sbYvfoBK6khQpZNNSUbra8acptq7niSl1gKxXuiLk8lOdtUH57JL4P-QCQjP2XiLqgZY5ki-bFDfXT9W4nYXUiJZgi30UOuLj8-5mdyiWfQA9v6o0zlm6hHMrx78WMg==" frameborder="0" scrolling="auto" allowfullscreen style="display: block; margin-left: auto; margin-right: auto; max-width: 100%;"></iframe>
+          <iframe width="540" height="420" src="https://a55096c1.sibforms.com/v2/serve/MUIFANq7Ejc7HcoQmak19v6LMCBF30dP4TIiNoM1t8h5eSbTtWQ4IfCj01uDg_8U55RsoMLNJS274dzOcW6sbYvfoBK6khQpZNNSUbra8acptq7niSl1gKxXuiLk8lOdtUH57JL4P-QCQjP2XiLqgZY5ki-bFDfXT9W4nYXUiJZgi30UOuLj8-5mdyiWfQA9v6o0zlm6hHMrx78WMg==" frameborder="0" scrolling="auto" allowfullscreen style="display: block; margin-left: auto; margin-right: auto; max-width: 100%;"></iframe>
         </div>
       </div>
     </div>
@@ -315,9 +359,75 @@ const posts = (await getCollection('blog'))
     margin: 0 0 0.25rem;
   }
 
-  .blog-preview {
+  /* TESTIMONIOS */
+  .testimonios {
     padding: var(--space-lg) 0;
     background-color: var(--color-bg);
+  }
+
+  .testimonios-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+    margin-top: var(--space-md);
+  }
+
+  .testimonio-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .testimonio-texto {
+    font-size: 0.95rem;
+    color: var(--color-text);
+    line-height: 1.7;
+    font-style: italic;
+    margin: 0;
+    flex: 1;
+  }
+
+  .testimonio-autor {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .testimonio-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    color: white;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .testimonio-nombre {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin: 0;
+  }
+
+  .testimonio-rol {
+    font-size: 0.8rem;
+    color: var(--color-muted);
+    margin: 0;
+  }
+
+  .blog-preview {
+    padding: var(--space-lg) 0;
+    background-color: var(--color-surface);
   }
 
   .section-header {
@@ -341,7 +451,7 @@ const posts = (await getCollection('blog'))
   }
 
   .post-card {
-    background: var(--color-surface);
+    background: var(--color-bg);
     border: 1px solid var(--color-border);
     border-radius: var(--radius);
     padding: var(--space-md);
@@ -369,7 +479,7 @@ const posts = (await getCollection('blog'))
     text-transform: uppercase;
     letter-spacing: 0.06em;
     color: var(--color-accent);
-    background: var(--color-bg);
+    background: var(--color-surface);
     padding: 2px 8px;
     border-radius: 20px;
   }
@@ -405,7 +515,7 @@ const posts = (await getCollection('blog'))
 
   .youtube-section {
     padding: var(--space-lg) 0;
-    background-color: var(--color-surface);
+    background-color: var(--color-bg);
   }
 
   .youtube-construccion {
@@ -414,7 +524,7 @@ const posts = (await getCollection('blog'))
     align-items: center;
     text-align: center;
     padding: 3rem 2rem;
-    background: var(--color-bg);
+    background: var(--color-surface);
     border: 1px dashed var(--color-border);
     border-radius: 12px;
     max-width: 560px;
@@ -553,6 +663,10 @@ const posts = (await getCollection('blog'))
     }
 
     .posts-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .testimonios-grid {
       grid-template-columns: 1fr;
     }
   }
