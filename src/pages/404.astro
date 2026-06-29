@@ -3,52 +3,62 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout
-  title="Página no encontrada"
-  description="La página que buscás no existe. Volvé al inicio de valeriayashan.com.ar"
+  title="Página no encontrada — Valeria Yashan"
+  description="La página que buscás no existe o fue movida."
 >
-  <div class="container page-404">
-    <div class="mark-accent">
-      <p class="eyebrow">404</p>
-      <h1>Página no encontrada</h1>
-      <p class="lead">La página que buscás no existe o fue movida. Podés volver al inicio o explorar el contenido disponible.</p>
+  <section class="not-found">
+    <div class="container">
+      <div class="not-found-inner">
+        <span class="not-found-numero">404</span>
+        <h1 class="not-found-titulo">Página no encontrada</h1>
+        <p class="not-found-desc">La página que buscás no existe o fue movida. Podés volver al inicio o explorar el contenido desde el menú.</p>
+        <div class="not-found-acciones">
+          <a href="/" class="btn btn-primary">Ir al inicio</a>
+          <a href="/blog" class="btn btn-outline">Ver artículos</a>
+          <a href="/contacto" class="btn btn-outline">Contactarme</a>
+        </div>
+      </div>
     </div>
-    <div class="links-404">
-      <a href="/" class="btn btn-primary">Ir al inicio</a>
-      <a href="/blog" class="btn btn-outline">Ver artículos</a>
-      <a href="/recursos" class="btn btn-outline">Ver recursos</a>
-    </div>
-  </div>
+  </section>
 </BaseLayout>
 
 <style>
-  .page-404 {
+  .not-found {
     padding: var(--space-xl) 0;
     min-height: 60vh;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    align-items: center;
   }
-
-  .eyebrow {
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--color-accent);
-    margin-bottom: 0.5rem;
-  }
-
-  .lead {
-    font-size: 1.1rem;
-    color: var(--color-muted);
-    max-width: 480px;
-    margin-top: var(--space-sm);
-  }
-
-  .links-404 {
+  .not-found-inner {
+    max-width: 520px;
     display: flex;
+    flex-direction: column;
     gap: 1rem;
+  }
+  .not-found-numero {
+    font-family: var(--font-display);
+    font-size: 6rem;
+    font-weight: 900;
+    color: var(--color-border);
+    line-height: 1;
+  }
+  .not-found-titulo {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin: 0;
+  }
+  .not-found-desc {
+    font-size: 1rem;
+    color: var(--color-muted);
+    line-height: 1.7;
+    margin: 0;
+  }
+  .not-found-acciones {
+    display: flex;
+    gap: 0.75rem;
     flex-wrap: wrap;
-    margin-top: var(--space-lg);
+    margin-top: 0.5rem;
   }
 </style>
