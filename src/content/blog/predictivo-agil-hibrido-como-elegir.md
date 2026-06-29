@@ -4,6 +4,7 @@ description: "Cuándo usar enfoque predictivo, ágil o híbrido en gestión de p
 pubDate: "2026-06-28"
 category: "Project Management"
 tags: ["PMP", "Ágil", "Híbrido", "PMBOK", "Project Management"]
+image: "/images/blog/predictivo-agil-hibrido-como-elegir.jpg"
 ---
 
 Una de las preguntas más frecuentes entre quienes se preparan para el PMP — y también entre quienes ya lo tienen — es cuándo usar cada enfoque. ¿Predictivo? ¿Ágil? ¿Híbrido?

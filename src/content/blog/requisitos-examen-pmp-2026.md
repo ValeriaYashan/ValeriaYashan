@@ -4,6 +4,7 @@ description: "Todo lo que necesitás saber para postularte al examen PMP en 2026
 pubDate: "2026-06-21"
 category: "Project Management"
 tags: ["PMP", "Certificación", "PMI", "Project Management", "Requisitos"]
+image: "/images/blog/requisitos-examen-pmp-2026.jpg"
 ---
 
 La certificación PMP es la más reconocida en gestión de proyectos a nivel mundial. Pero antes de pensar en estudiar o en los simulacros, hay una pregunta que muchos candidatos no se hacen a tiempo: ¿califico para rendir el examen?

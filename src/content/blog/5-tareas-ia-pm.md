@@ -4,6 +4,7 @@ description: "La IA puede hacer mucho por un project manager. Pero hay decisione
 pubDate: "2026-06-13"
 category: "IA"
 tags: ["IA", "Project Management", "Productividad", "Herramientas digitales"]
+image: "/images/blog/5-tareas-ia-pm.jpg"
 ---
 
 La conversación sobre IA y gestión de proyectos suele caer en uno de dos extremos: "la IA va a reemplazar a los PMs" o "la IA es solo una moda". Ninguno de los dos es útil.

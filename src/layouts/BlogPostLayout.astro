@@ -8,9 +8,10 @@ interface Props {
   pubDate: Date;
   category: string;
   tags: string[];
+  image?: string;
 }
 
-const { title, description, pubDate, category, tags } = Astro.props;
+const { title, description, pubDate, category, tags, image } = Astro.props;
 
 const formattedDate = pubDate.toLocaleDateString('es-AR', {
   year: 'numeric',
@@ -19,7 +20,7 @@ const formattedDate = pubDate.toLocaleDateString('es-AR', {
 });
 
 const esIA = category === 'IA';
-const ogImage = esIA ? '/images/og-ia.jpg' : '/images/og-pm.jpg';
+const ogImage = image || (esIA ? '/images/og-ia.jpg' : '/images/og-pm.jpg');
 
 const ctaTitulo = esIA
   ? '¿Querés incorporar IA en tu equipo?'
@@ -35,6 +36,7 @@ const articleSchema = {
   "headline": title,
   "description": description,
   "datePublished": pubDateISO,
+  "image": ogImage ? `https://valeriayashan.com.ar${ogImage}` : undefined,
   "author": {
     "@type": "Person",
     "name": "Valeria Yashan",
@@ -58,6 +60,13 @@ const articleSchema = {
 
 <BaseLayout title={title} description={description} image={ogImage}>
   <div class="container post-container">
+
+    {image && (
+      <div class="post-imagen-wrap">
+        <img src={image} alt={title} class="post-imagen" width="1200" height="630" loading="eager" />
+      </div>
+    )}
+
     <header class="post-header mark-accent">
       <div class="post-meta">
         <span class="post-category">{category}</span>
@@ -196,6 +205,18 @@ const articleSchema = {
   .post-container {
     padding-top: var(--space-lg);
     padding-bottom: var(--space-xl);
+  }
+  .post-imagen-wrap {
+    margin-bottom: var(--space-md);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .post-imagen {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 1200 / 630;
+    object-fit: cover;
   }
   .post-header { margin-bottom: var(--space-lg); }
   .post-meta { display: flex; align-items: center; gap: 1rem; margin-bottom: var(--space-sm); }

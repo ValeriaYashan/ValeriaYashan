@@ -4,6 +4,7 @@ description: "La IA no reemplaza al PM. Pero el PM que no entiende IA va a queda
 pubDate: "2026-06-11"
 category: "IA"
 tags: ["IA", "Project Management", "Estrategia"]
+image: "/images/blog/por-que-los-project-managers-necesitan-entender-ia.jpg"
 ---
 
 La inteligencia artificial ya no es un tema de IT. Es un tema de gestión.

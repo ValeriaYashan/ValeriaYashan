@@ -4,6 +4,7 @@ description: "Muchos candidatos al PMP estudian mucho y aun así no aprueban. Es
 pubDate: "2026-07-05"
 category: "Project Management"
 tags: ["PMP", "Certificación", "Estudio", "PMI", "Project Management"]
+image: "/images/blog/errores-comunes-estudiar-pmp.jpg"
 ---
 
 La tasa de aprobación del examen PMP es de alrededor del 60%. Eso significa que cuatro de cada diez personas que rinden no aprueban — y muchas de ellas estudiaron durante meses.

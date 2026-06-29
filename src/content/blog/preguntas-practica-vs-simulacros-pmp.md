@@ -4,6 +4,7 @@ description: "Las preguntas de práctica del Tomo II y los simulacros del Tomo I
 pubDate: "2026-06-15"
 category: "Project Management"
 tags: ["PMP", "Simulacros", "Estudio PMP", "PMBOK", "Certificación"]
+image: "/images/blog/preguntas-practica-vs-simulacros-pmp.jpg"
 ---
 
 *¿Para qué sirven las preguntas de práctica si los simulacros ya están en otro libro?*

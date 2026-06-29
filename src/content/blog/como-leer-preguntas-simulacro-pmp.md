@@ -4,6 +4,7 @@ description: "Las preguntas del examen PMP están diseñadas para confundir. Apr
 pubDate: "2026-07-12"
 category: "Project Management"
 tags: ["PMP", "Simulacro", "Certificación", "Examen", "Project Management"]
+image: "/images/blog/como-leer-preguntas-simulacro-pmp.jpg"
 ---
 
 Hay candidatos al PMP que conocen perfectamente los conceptos y aun así fallan preguntas que deberían responder bien. El problema no es el conocimiento — es cómo leen las preguntas.

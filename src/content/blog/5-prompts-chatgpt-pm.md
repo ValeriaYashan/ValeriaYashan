@@ -4,6 +4,7 @@ description: "Los mejores prompts para project managers no son genéricos: son e
 pubDate: "2026-06-14"
 category: "IA"
 tags: ["IA", "Project Management", "Productividad", "ChatGPT", "Prompts"]
+image: "/images/blog/5-prompts-chatgpt-pm.jpg"
 ---
 
 Hay miles de listas de prompts para project managers en internet. La mayoría son genéricas, teóricas o directamente inútiles en la práctica. Si buscás prompts para project managers que realmente funcionen en el trabajo diario, esta es la lista que necesitás.

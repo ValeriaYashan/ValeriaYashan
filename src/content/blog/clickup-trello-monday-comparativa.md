@@ -4,6 +4,7 @@ description: "Comparativa práctica de ClickUp, Trello y Monday para project man
 pubDate: "2026-06-27"
 category: "Project Management"
 tags: ["ClickUp", "Trello", "Monday", "Herramientas PM", "Project Management"]
+image: "/images/blog/clickup-trello-monday-comparativa.jpg"
 ---
 
 La pregunta aparece siempre en los equipos que quieren dejar Excel o WhatsApp y empezar a gestionar proyectos con una herramienta real: ¿ClickUp, Trello o Monday?

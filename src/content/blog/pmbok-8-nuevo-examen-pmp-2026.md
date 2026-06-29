@@ -4,6 +4,7 @@ description: "El 9 de julio de 2026 entra en vigor el nuevo examen PMP con el EC
 pubDate: "2026-06-14"
 category: "Project Management"
 tags: ["PMP", "PMBOK", "Certificación", "Project Management", "ECO"]
+image: "/images/blog/pmbok-8-nuevo-examen-pmp-2026.jpg"
 ---
 
 El 9 de julio de 2026 el examen PMP cambia. No es un rumor ni una actualización menor: es la revisión más importante de la certificación en los últimos cinco años, alineada con el lanzamiento del **PMBOK® Guide Eighth Edition** y un nuevo Exam Content Outline (ECO).

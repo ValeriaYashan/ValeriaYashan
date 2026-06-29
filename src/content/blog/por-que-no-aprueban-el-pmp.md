@@ -4,6 +4,7 @@ description: "La tasa de reprobación del examen PMP no es un misterio. Estos so
 pubDate: "2026-06-27"
 category: "Project Management"
 tags: ["PMP", "Certificación", "Estudio", "PMI", "Examen PMP"]
+image: "/images/blog/por-que-no-aprueban-el-pmp.jpg"
 ---
 
 El examen PMP tiene una tasa de aprobación de alrededor del 60%. Eso significa que cuatro de cada diez personas que rinden no aprueban — y la mayoría de ellas estudió durante meses.
