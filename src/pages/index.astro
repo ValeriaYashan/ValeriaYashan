@@ -100,6 +100,51 @@ const posts = (await getCollection('blog'))
     </div>
   </section>
 
+  <!-- ¿TE SUENA FAMILIAR? -->
+  <section class="problemas">
+    <div class="container">
+      <p class="section-eyebrow">¿Te suena familiar?</p>
+      <h2 class="section-title">Cuando los proyectos crecen, la gestión no siempre los acompaña</h2>
+      <p class="problemas-lead">Muchas organizaciones avanzan con iniciativas valiosas pero sin una estructura que las sostenga. Estas son las señales más frecuentes.</p>
+      <div class="problemas-grid">
+        <div class="problema-card">
+          <span class="problema-num">01</span>
+          <h3 class="problema-titulo">Los proyectos se demoran sin razón clara</h3>
+          <p class="problema-texto">Hay esfuerzo, pero las fechas se corren y nadie sabe exactamente por qué.</p>
+        </div>
+        <div class="problema-card">
+          <span class="problema-num">02</span>
+          <h3 class="problema-titulo">El equipo trabaja sin metodología</h3>
+          <p class="problema-texto">Cada persona gestiona a su manera. El resultado depende de quién esté a cargo ese día.</p>
+        </div>
+        <div class="problema-card">
+          <span class="problema-num">03</span>
+          <h3 class="problema-titulo">La IA no termina de implementarse</h3>
+          <p class="problema-texto">Se habla de IA en todas las reuniones, pero en la operación real nada cambia.</p>
+        </div>
+        <div class="problema-card">
+          <span class="problema-num">04</span>
+          <h3 class="problema-titulo">Las decisiones se toman sin datos</h3>
+          <p class="problema-texto">Falta visibilidad del estado real de los proyectos para priorizar correctamente.</p>
+        </div>
+        <div class="problema-card">
+          <span class="problema-num">05</span>
+          <h3 class="problema-titulo">La capacitación no se traduce en práctica</h3>
+          <p class="problema-texto">Los equipos reciben formación, pero vuelven al trabajo y siguen haciendo lo mismo.</p>
+        </div>
+        <div class="problema-card">
+          <span class="problema-num">06</span>
+          <h3 class="problema-titulo">Todo depende de una sola persona</h3>
+          <p class="problema-texto">Si quien sabe está ausente, el proyecto frena. La organización no puede escalar así.</p>
+        </div>
+      </div>
+      <div class="problemas-cta">
+        <p class="problemas-cta-texto">Si alguno de estos escenarios te resulta familiar, puedo ayudarte.</p>
+        <a href="/servicios" class="btn btn-primary">Ver cómo trabajo &rarr;</a>
+      </div>
+    </div>
+  </section>
+
   <!-- TESTIMONIOS -->
   <section class="testimonios" style="display:none">
     <div class="container">
@@ -357,6 +402,73 @@ const posts = (await getCollection('blog'))
     letter-spacing: 0.08em;
     color: var(--color-accent);
     margin: 0 0 0.25rem;
+  }
+
+  /* PROBLEMAS */
+  .problemas {
+    padding: var(--space-lg) 0;
+    background-color: var(--color-bg);
+  }
+
+  .problemas-lead {
+    font-size: 1rem;
+    color: var(--color-muted);
+    max-width: 560px;
+    line-height: 1.7;
+    margin-bottom: var(--space-md);
+  }
+
+  .problemas-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: var(--space-md);
+  }
+
+  .problema-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 1.25rem 1rem;
+  }
+
+  .problema-num {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+    margin-bottom: 0.6rem;
+  }
+
+  .problema-titulo {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 0.4rem;
+    line-height: 1.35;
+  }
+
+  .problema-texto {
+    font-size: 0.82rem;
+    color: var(--color-muted);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  .problemas-cta {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding-top: var(--space-sm);
+    flex-wrap: wrap;
+  }
+
+  .problemas-cta-texto {
+    font-size: 0.95rem;
+    color: var(--color-muted);
+    margin: 0;
   }
 
   /* TESTIMONIOS */
@@ -660,6 +772,15 @@ const posts = (await getCollection('blog'))
 
     .metricas-grid {
       grid-template-columns: repeat(3, 1fr);
+    }
+
+    .problemas-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .problemas-cta {
+      flex-direction: column;
+      align-items: flex-start;
     }
 
     .posts-grid {
