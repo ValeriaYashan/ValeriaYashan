@@ -109,7 +109,7 @@ Tenés un año desde la aprobación para rendir el examen, con hasta tres intent
 
 **En centro Pearson VUE:** Vas a una sede habilitada, con computadora y condiciones controladas. Disponible en varias ciudades de Argentina y América Latina.
 
-**En línea desde casa:** Rendís con un supervisor remoto (proctor) que monitorea a través de cámara. El examen puede hacerse en español. La comunicación con el proctor es en inglés o japonés, pero es mínima — básicamente verificar identidad al inicio.
+**En línea desde casa:** Rendís con un supervisor remoto (proctor) que monitorea a través de cámara. El examen puede hacerse en español. La comunicación con el proctor es en inglés, pero es mínima — básicamente verificar identidad al inicio.
 
 ---
 
