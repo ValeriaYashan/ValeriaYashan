@@ -59,6 +59,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     </div>
   </section>
 
+  <!-- SERVICIOS -->
   <section class="servicios-seccion">
     <div class="container">
       <div class="servicios-grid">
@@ -109,6 +110,53 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     </div>
   </section>
 
+  <!-- PROCESO -->
+  <section class="proceso">
+    <div class="container">
+      <p class="section-eyebrow">El proceso</p>
+      <h2 class="proceso-titulo">De la primera reunión a los primeros resultados</h2>
+      <div class="proceso-grid">
+
+        <div class="paso">
+          <div class="paso-header">
+            <span class="paso-num">01</span>
+            <div class="paso-linea"></div>
+          </div>
+          <h3 class="paso-titulo">Diagnóstico</h3>
+          <p class="paso-texto">Entiendo el estado real del proyecto o equipo, sin suposiciones. Identifico dónde está el problema y qué hace falta.</p>
+        </div>
+
+        <div class="paso">
+          <div class="paso-header">
+            <span class="paso-num">02</span>
+            <div class="paso-linea"></div>
+          </div>
+          <h3 class="paso-titulo">Plan a medida</h3>
+          <p class="paso-texto">Definimos prioridades y el enfoque que tiene sentido para tu contexto, tu equipo y tus tiempos reales.</p>
+        </div>
+
+        <div class="paso">
+          <div class="paso-header">
+            <span class="paso-num">03</span>
+            <div class="paso-linea"></div>
+          </div>
+          <h3 class="paso-titulo">Implementación</h3>
+          <p class="paso-texto">Trabajo con el equipo para instalar lo que se definió. No solo recomendaciones: acompañamiento hasta que funcione.</p>
+        </div>
+
+        <div class="paso paso--last">
+          <div class="paso-header">
+            <span class="paso-num">04</span>
+          </div>
+          <h3 class="paso-titulo">Resultados medibles</h3>
+          <p class="paso-texto">Establecemos indicadores claros desde el inicio para evaluar el avance y saber que el cambio se sostiene.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
   <section class="servicios-cta">
     <div class="container">
       <div class="cta-inner">
@@ -151,13 +199,6 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     line-height: 1.7;
   }
 
-  /* PILARES */
-  .pilares {
-    padding: var(--space-lg) 0;
-    background-color: var(--color-surface);
-    border-top: 1px solid var(--color-border);
-  }
-
   .section-eyebrow {
     font-size: 0.75rem;
     font-weight: 600;
@@ -165,6 +206,13 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     letter-spacing: 0.08em;
     color: var(--color-accent);
     margin: 0 0 0.25rem;
+  }
+
+  /* PILARES */
+  .pilares {
+    padding: var(--space-lg) 0;
+    background-color: var(--color-surface);
+    border-top: 1px solid var(--color-border);
   }
 
   .pilares-titulo {
@@ -292,6 +340,84 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     align-self: flex-start;
   }
 
+  /* PROCESO */
+  .proceso {
+    padding: var(--space-lg) 0;
+    background-color: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .proceso-titulo {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
+    font-weight: 700;
+    color: var(--color-text);
+    line-height: 1.2;
+    margin-bottom: var(--space-md);
+  }
+
+  .proceso-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+
+  .paso {
+    padding: 1.5rem 1.25rem 1.5rem 0;
+    border-right: 1px solid var(--color-border);
+    padding-right: 1.5rem;
+    margin-right: 0;
+  }
+
+  .paso--last {
+    border-right: none;
+    padding-right: 0;
+  }
+
+  .paso-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .paso-num {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .paso-linea {
+    flex: 1;
+    height: 1px;
+    background: var(--color-border);
+  }
+
+  .paso-titulo {
+    font-family: 'Fraunces', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 0.4rem;
+    line-height: 1.3;
+  }
+
+  .paso-texto {
+    font-size: 0.85rem;
+    color: var(--color-muted);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  /* CTA */
   .servicios-cta {
     background: var(--color-accent);
     padding: var(--space-lg) 0 var(--space-xl);
@@ -341,6 +467,23 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       grid-template-columns: 1fr 1fr;
     }
 
+    .proceso-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .paso {
+      border-right: none;
+      padding-right: 0;
+      border-bottom: 1px solid var(--color-border);
+      padding-bottom: 1.25rem;
+    }
+
+    .paso--last {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
     .servicios-grid {
       grid-template-columns: 1fr;
     }
@@ -352,6 +495,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
   @media (max-width: 480px) {
     .pilares-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .proceso-grid {
       grid-template-columns: 1fr;
     }
   }
