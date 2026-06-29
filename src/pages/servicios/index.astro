@@ -106,6 +106,13 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
           <span class="btn-servicio">Ver servicio &#8594;</span>
         </a>
 
+        <a href="/servicios/consultoria-pymes" class="servicio-card servicio-card--pymes">
+          <p class="servicio-num">07</p>
+          <h2>Consultor&#237;a para PyMEs</h2>
+          <p>Para empresas que crecieron y necesitan ordenar su gesti&#243;n, estructurar sus proyectos e incorporar IA de forma concreta. Sin tecnicismos, con foco en resultados.</p>
+          <span class="btn-servicio">Ver servicio &#8594;</span>
+        </a>
+
       </div>
     </div>
   </section>
@@ -460,6 +467,29 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
   .btn-primary-white:hover {
     background: var(--color-surface);
+  }
+
+  .servicio-card--pymes {
+    border-color: var(--color-accent);
+    background: var(--color-accent);
+    grid-column: 1 / -1;
+  }
+
+  .servicio-card--pymes h2 {
+    color: #ffffff;
+  }
+
+  .servicio-card--pymes p {
+    color: rgba(255,255,255,0.85);
+  }
+
+  .servicio-card--pymes .btn-servicio {
+    color: #ffffff;
+    border-bottom-color: #ffffff;
+  }
+
+  .servicio-card--pymes .servicio-num {
+    color: rgba(255,255,255,0.6);
   }
 
   @media (max-width: 700px) {
