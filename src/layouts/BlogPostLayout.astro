@@ -61,11 +61,9 @@ const articleSchema = {
 <BaseLayout title={title} description={description} image={ogImage}>
   <div class="container post-container">
 
-    {image && (
-      <div class="post-imagen-wrap">
-        <img src={image} alt={title} class="post-imagen" width="1200" height="630" loading="eager" />
-      </div>
-    )}
+    <div class="post-imagen-wrap" style={!image ? "display:none" : ""}>
+      <img src={image || ""} alt={title} class="post-imagen" width="1200" height="630" loading="eager" />
+    </div>
 
     <header class="post-header mark-accent">
       <div class="post-meta">
