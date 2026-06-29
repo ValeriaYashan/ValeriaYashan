@@ -1,4 +1,4 @@
----
+﻿---
 title: "Por qué el 40% de los candidatos PMP no aprueba en el primer intento (y qué hacer diferente)"
 description: "La tasa de reprobación del examen PMP no es un misterio. Estos son los patrones más comunes que llevan a un candidato a no aprobar, y qué hacen diferente los que sí lo logran."
 pubDate: "2026-06-27"

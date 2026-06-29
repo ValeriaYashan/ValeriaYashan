@@ -1,4 +1,4 @@
----
+﻿---
 title: "Requisitos para rendir el PMP en 2026: experiencia, horas y cómo aplicar paso a paso"
 description: "Todo lo que necesitás saber para postularte al examen PMP en 2026: experiencia laboral, horas de formación, costo y el proceso de aplicación explicado paso a paso."
 pubDate: "2026-06-21"

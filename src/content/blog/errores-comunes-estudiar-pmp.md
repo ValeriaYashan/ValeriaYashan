@@ -1,4 +1,4 @@
----
+﻿---
 title: "Los 5 errores más comunes al estudiar para el PMP (y cómo evitarlos)"
 description: "Muchos candidatos al PMP estudian mucho y aun así no aprueban. Estos son los cinco errores más frecuentes en la preparación y qué hacer en cambio."
 pubDate: "2026-07-05"
