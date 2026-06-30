@@ -145,7 +145,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
       </div>
 
-     <div class="card-libro">
+      <div class="card-libro">
         <div class="cover-wrapper">
           <img src="/images/cover-tomo-3.webp" alt="Tomo III — Práctica y Simulacros PMP" class="cover" loading="lazy" />
         </div>
@@ -171,6 +171,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <p>¿Querés los tres tomos juntos?</p>
       <a href="https://www.amazon.com/-/es/dp/B0H4JF5FNH?binding=kindle_edition&ref_=saga_dp_bnx_dsk_sdp" target="_blank" rel="noopener" class="btn-amazon">Ver serie completa en Amazon ↗</a>
     </div>
+
+    <div class="libro-cta">
+      <p class="libro-cta-eyebrow">¿Tenés los libros y querés ir más lejos?</p>
+      <h2 class="libro-cta-titulo">Preparate para el PMP® con acompañamiento real</h2>
+      <p class="libro-cta-texto">Si querés llegar al examen con comprensión real del contenido y no solo con memorización, puedo acompañarte en el proceso.</p>
+      <a href="/servicios/certificacion-pmp" class="btn-primary">Ver servicio de preparación PMP® →</a>
+    </div>
+
   </section>
 
   <hr class="separador" />
@@ -496,6 +504,56 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     font-size: 0.95rem;
   }
 
+  .libro-cta {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-left: 3px solid var(--color-accent);
+    border-radius: 0 8px 8px 0;
+    padding: 1.75rem 2rem;
+    margin-top: 2rem;
+  }
+
+  .libro-cta-eyebrow {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+    margin-bottom: 0.4rem;
+  }
+
+  .libro-cta-titulo {
+    font-family: 'Fraunces', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 0.5rem;
+  }
+
+  .libro-cta-texto {
+    font-size: 0.9rem;
+    color: var(--color-muted);
+    line-height: 1.65;
+    margin-bottom: 1.25rem;
+    max-width: 560px;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    background: var(--color-accent);
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .btn-primary:hover { opacity: 0.88; }
+
   @media (max-width: 700px) {
     .hero h1 { font-size: 1.8rem; }
     .grid-libros { grid-template-columns: 1fr; }
@@ -505,5 +563,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .cover-horizontal { width: 130px; }
     .card-botones { flex-direction: column; align-items: flex-start; }
     .btn-amazon, .btn-secundario { width: 100%; justify-content: center; }
+    .libro-cta { padding: 1.25rem; }
   }
 </style>
