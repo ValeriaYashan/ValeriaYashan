@@ -418,11 +418,17 @@ const posts = (await getCollection('blog'))
     margin-bottom: var(--space-md);
   }
 
-  .problemas-grid {
+ .problemas-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
     margin-bottom: var(--space-md);
+  }
+
+  @media (max-width: 900px) and (min-width: 701px) {
+    .problemas-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 
   .problema-card {
