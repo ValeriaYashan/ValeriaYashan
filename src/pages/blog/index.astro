@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ArticleCard from '../../components/ArticleCard.astro';
-import { getCollection, render } from 'astro:content';
+import { getCollection } from 'astro:content';
 
 const allPosts = await getCollection('blog');
 
@@ -15,6 +15,8 @@ const posts = await Promise.all(
       return { post, readingTime };
     })
 );
+
+const categories = ['Todos', ...new Set(posts.map(p => p.post.data.category))];
 ---
 
 <BaseLayout
@@ -32,16 +34,31 @@ const posts = await Promise.all(
       </p>
     </header>
 
-    <section class="posts-grid">
+    <div class="filter-bar">
+      {categories.map(cat => (
+        <button
+          class="filter-btn"
+          data-category={cat}
+          aria-pressed={cat === 'Todos' ? 'true' : 'false'}
+        >
+          {cat}
+        </button>
+      ))}
+    </div>
+
+    <section class="posts-grid" id="posts-grid">
       {posts.map(({ post, readingTime }) => (
-        <ArticleCard
-          title={post.data.title}
-          description={post.data.description}
-          pubDate={post.data.pubDate}
-          category={post.data.category}
-          slug={post.id.replace(/\.md$/, '')}
-          readingTime={readingTime}
-        />
+        <div class="post-wrapper" data-category={post.data.category}>
+          <ArticleCard
+            title={post.data.title}
+            description={post.data.description}
+            pubDate={post.data.pubDate}
+            category={post.data.category}
+            tags={post.data.tags ?? []}
+            slug={post.id.replace(/\.md$/, '')}
+            readingTime={readingTime}
+          />
+        </div>
       ))}
     </section>
 
@@ -54,6 +71,31 @@ const posts = await Promise.all(
 
   </div>
 </BaseLayout>
+
+<script>
+  (function () {
+    const buttons = document.querySelectorAll('.filter-btn');
+    const wrappers = document.querySelectorAll('.post-wrapper');
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const selected = btn.getAttribute('data-category');
+
+        buttons.forEach(b => b.setAttribute('aria-pressed', 'false'));
+        btn.setAttribute('aria-pressed', 'true');
+
+        wrappers.forEach(wrapper => {
+          const cat = wrapper.getAttribute('data-category');
+          if (selected === 'Todos' || cat === selected) {
+            wrapper.style.display = 'block';
+          } else {
+            wrapper.style.display = 'none';
+          }
+        });
+      });
+    });
+  })();
+</script>
 
 <style>
   .page-container {
@@ -81,6 +123,38 @@ const posts = await Promise.all(
     margin-top: var(--space-sm);
     margin-bottom: 0;
     line-height: 1.7;
+  }
+
+  .filter-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    max-width: 900px;
+  }
+
+  .filter-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 0.45rem 1rem;
+    border-radius: 20px;
+    border: 1px solid var(--color-border);
+    background: var(--color-bg);
+    color: var(--color-muted);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .filter-btn:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+
+  .filter-btn[aria-pressed="true"] {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: #ffffff;
   }
 
   .posts-grid {
