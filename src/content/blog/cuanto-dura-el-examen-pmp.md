@@ -75,4 +75,6 @@ Si llegás al examen habiendo hecho al menos tres simulacros completos cronometr
 - Usá los descansos, especialmente el segundo.
 - Entrenás el tiempo en los simulacros, no el día del examen.
 
-Si todavía no hiciste simulacros completos cronometrados, es el paso más importante que podés dar ahora mismo. El [simulador de práctica PMP](/simulador) de este sitio te permite practicar en condiciones similares a las del examen real.
+Si todavía no hiciste simulacros completos cronometrados, es el paso más importante que podés hacer ahora mismo. El [simulador de práctica PMP](/simulador) de este sitio te permite practicar en condiciones similares a las del examen real.
+
+Si estás organizando tu preparación, también te puede servir leer [cómo planificar el estudio en 12 semanas](/blog/plan-de-estudio-pmp-semanas) y [los errores más comunes al estudiar para el PMP](/blog/errores-comunes-estudiar-pmp).

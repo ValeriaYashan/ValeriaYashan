@@ -90,3 +90,5 @@ Estudiar el contenido es necesario pero no suficiente. Lo que separa a quien apr
 Eso se entrena con preguntas de práctica, no con lectura. La regla general es que por cada hora de estudio de contenido deberías dedicar al menos una hora a responder y analizar preguntas.
 
 Si querés practicar desde ahora, el [simulador PMP](/simulador) de este sitio tiene preguntas en el formato del examen real para que empieces a entrenar el razonamiento desde el primer día.
+
+Para complementar este plan, leé también [cuánto dura el examen PMP y cómo distribuir el tiempo](/blog/cuanto-dura-el-examen-pmp) y [por qué muchos candidatos no aprueban el PMP](/blog/por-que-no-aprueban-el-pmp).
