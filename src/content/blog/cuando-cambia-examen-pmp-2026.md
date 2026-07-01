@@ -1,5 +1,5 @@
 ---
-title: "¿Cuándo cambia el examen PMP en 2026?"
+title: "¿Cuándo cambia el examen PMP en 2026? Qué necesitás saber"
 description: "El examen PMP cambia en julio de 2026 con el nuevo ECO y el PMBOK® Guide 8. Te explico qué cambia, qué se mantiene y cómo prepararte si rendís este año."
 pubDate: "2026-07-01"
 category: "Project Management"

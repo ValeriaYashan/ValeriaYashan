@@ -1,5 +1,5 @@
 ﻿---
-title: "Por qué los project managers necesitan entender IA (aunque no sean técnicos)"
+title: "IA para project managers: por qué no podés ignorarla"
 description: "La IA no reemplaza al PM. Pero el PM que no entiende IA va a quedar fuera de los proyectos que importan."
 pubDate: "2026-06-11"
 category: "IA"
