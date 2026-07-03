@@ -92,4 +92,4 @@ Con esa base, la IA puede resumir, analizar y generar en segundos lo que antes l
 - Los mejores resultados vienen de combinar los dos: ChatGPT para diseñar, Notion para ejecutar y documentar.
 - La calidad del output depende de la calidad de lo que tenés documentado en Notion.
 
-Si querés ver más formas de aplicar IA en proyectos, revisá el artículo [5 tareas que la IA puede hacer por vos como PM](/blog/5-tareas-ia-pm).
+Si querés ver más formas de aplicar IA en proyectos, revisá el artículo [5 tareas que la IA puede hacer por vos como PM](/blog/5-tareas-ia-pm). Para ver prompts concretos que podés usar hoy mismo, mirá [5 prompts para project managers que uso todas las semanas](/blog/5-prompts-chatgpt-pm). Y si tu enfoque está en la gestión de riesgos, leé cómo aplicar [IA para gestión de riesgos en proyectos](/blog/ia-generativa-gestionar-riesgos-proyectos).
