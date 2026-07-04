@@ -77,6 +77,42 @@ const posts = (await getCollection('blog'))
     </div>
   </section>
 
+
+  <!-- PARA QUIÉN ES ESTO -->
+  <section class="para-quien">
+    <div class="container">
+      <p class="section-eyebrow">¿Es para mí?</p>
+      <h2 class="section-title">Este espacio es para vos si...</h2>
+      <div class="para-quien-grid">
+
+        <div class="para-quien-card">
+          <div class="para-quien-icono">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          </div>
+          <h3 class="para-quien-titulo">Liderás proyectos y querés hacerlo con metodología real</h3>
+          <p class="para-quien-texto">Tu equipo trabaja, pero los proyectos se demoran, las responsabilidades no están claras o las decisiones se toman sin datos. Querés cambiar eso con un sistema que funcione.</p>
+        </div>
+
+        <div class="para-quien-card">
+          <div class="para-quien-icono">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          </div>
+          <h3 class="para-quien-titulo">Querés incorporar IA en tu trabajo sin perder el control</h3>
+          <p class="para-quien-texto">Escuchás hablar de IA en todas partes pero no sabés cómo aplicarla de forma concreta en tu día a día como PM. Buscás resultados reales, no teoría.</p>
+        </div>
+
+        <div class="para-quien-card">
+          <div class="para-quien-icono">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <h3 class="para-quien-titulo">Estás preparándote para la certificación PMP®</h3>
+          <p class="para-quien-texto">Querés certificarte pero no sabés por dónde empezar, cuánto tiempo dedicar o qué material usar. Buscás acompañamiento de alguien que ya recorrió ese camino.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <!-- MÉTRICAS -->
   <section class="metricas">
     <div class="container">
@@ -813,7 +849,11 @@ const posts = (await getCollection('blog'))
   }
 
   @media (max-width: 700px) {
-    .hero-inner {
+    .para-quien-grid {
+      grid-template-columns: 1fr;
+    }
+
+        .hero-inner {
       grid-template-columns: 1fr;
     }
 
@@ -859,4 +899,69 @@ const posts = (await getCollection('blog'))
       grid-template-columns: 1fr;
     }
   }
+
+  /* PARA QUIÉN ES ESTO */
+  .para-quien {
+    padding: var(--space-lg) 0;
+    background: var(--color-accent);
+  }
+
+  .para-quien .section-eyebrow {
+    color: rgba(255,255,255,0.6);
+  }
+
+  .para-quien .section-title {
+    color: #ffffff;
+    margin-bottom: var(--space-md);
+  }
+
+  .para-quien-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .para-quien-card {
+    background: rgba(255,255,255,0.10);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: var(--radius);
+    padding: 1.5rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    transition: background 0.2s;
+  }
+
+  .para-quien-card:hover {
+    background: rgba(255,255,255,0.15);
+  }
+
+  .para-quien-icono {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    flex-shrink: 0;
+  }
+
+  .para-quien-titulo {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 1.35;
+    margin: 0;
+  }
+
+  .para-quien-texto {
+    font-size: 0.875rem;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.65;
+    margin: 0;
+  }
+
 </style>
