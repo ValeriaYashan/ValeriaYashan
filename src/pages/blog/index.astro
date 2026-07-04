@@ -63,13 +63,68 @@ const categories = ['Todos', ...new Set(posts.map(p => p.post.data.category))];
       ))}
     </section>
 
-    <section class="blog-newsletter">
-      <p class="newsletter-label">Newsletter</p>
-      <h2 class="newsletter-titulo">Recibí los próximos artículos</h2>
-      <p class="newsletter-desc">Sin spam. Solo cuando publico algo que vale la pena leer.</p>
-      <a href="/recursos#newsletter" class="btn-newsletter">Suscribirme →</a>
-    </section>
-
+   <section class="blog-newsletter">
+  <p class="newsletter-label">Newsletter</p>
+  <h2 class="newsletter-titulo">Recibí los próximos artículos</h2>
+  <p class="newsletter-desc">Sin spam. Solo cuando publico algo que vale la pena leer.</p>
+  <Fragment set:html={`
+    <style>
+      #sib-container input::placeholder { font-family: Helvetica, sans-serif; text-align: left; color: #c0ccda; }
+      #sib-container a { text-decoration: underline; color: #2BB2FC; }
+      :where(.sib-form-message-panel) { display: none; }
+    </style>
+    <link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
+    <div class="sib-form" style="text-align:left; background-color:transparent;">
+      <div id="sib-form-container" class="sib-form-container">
+        <div id="error-message" class="sib-form-message-panel" style="font-family:Helvetica,sans-serif;font-size:16px;text-align:left;color:#661d1d;background-color:#ffeded;border-color:#ff4949;border-radius:3px;max-width:540px;">
+          <div class="sib-form-message-panel__text sib-form-message-panel__text--center">
+            <span class="sib-form-message-panel__inner-text">No hemos podido validar tu suscripción.</span>
+          </div>
+        </div>
+        <div id="success-message" class="sib-form-message-panel" style="font-family:Helvetica,sans-serif;font-size:16px;text-align:left;color:#085229;background-color:#e7faf0;border-color:#13ce66;border-radius:3px;max-width:540px;">
+          <div class="sib-form-message-panel__text sib-form-message-panel__text--center">
+            <span class="sib-form-message-panel__inner-text">Se ha realizado tu suscripción.</span>
+          </div>
+        </div>
+        <div id="sib-container" class="sib-container--large sib-container--vertical" style="max-width:540px;text-align:left;background-color:transparent;border:none;direction:ltr;margin:0 auto;"
+          <form id="sib-form" method="POST" action="https://a55096c1.sibforms.com/serve/MUIFANq7Ejc7HcoQmak19v6LMCBF30dP4TIiNoM1t8h5eSbTtWQ4IfCj01uDg_8U55RsoMLNJS274dzOcW6sbYvfoBK6khQpZNNSUbra8acptq7niSl1gKxXuiLk8lOdtUH57JL4P-QCQjP2XiLqgZY5ki-bFDfXT9W4nYXUiJZgi30UOuLj8-5mdyiWfQA9v6o0zlm6hHMrx78WMg==" data-type="subscription">
+            <div style="padding:8px 0;">
+              <div class="sib-input sib-form-block">
+                <div class="form__entry entry_block">
+                  <div class="form__label-row">
+                    <label class="entry__label" style="font-weight:700;text-align:left;font-family:Helvetica,sans-serif;font-size:16px;color:#3c4858;" for="EMAIL" data-required="*">Tu email</label>
+                    <div class="entry__field">
+                      <input class="input" type="text" id="EMAIL" name="EMAIL" autocomplete="off" value="" placeholder="tu@email.com" data-required="true" required />
+                    </div>
+                  </div>
+                  <label class="entry__error entry__error--primary" style="font-family:Helvetica,sans-serif;font-size:16px;text-align:left;color:#661d1d;background-color:#ffeded;border-color:#ff4949;border-radius:3px;"></label>
+                </div>
+              </div>
+            </div>
+            <div style="padding:8px 0;">
+              <div class="sib-form-block" style="text-align:left">
+                <button class="sib-form-block__button sib-form-block__button-with-loader" style="font-family:Helvetica,sans-serif;font-size:16px;font-weight:700;color:#FFFFFF;background-color:#2D6A4F;border-width:0px;border-radius:6px;padding:12px 24px;cursor:pointer;" form="sib-form" type="submit">
+                  SUSCRIBIRME
+                </button>
+              </div>
+            </div>
+            <input type="text" name="email_address_check" value="" class="input--hidden">
+            <input type="hidden" name="locale" value="es">
+          </form>
+        </div>
+      </div>
+    </div>
+    <script>
+      window.REQUIRED_CODE_ERROR_MESSAGE = 'Elige un código de país';
+      window.LOCALE = 'es';
+      window.EMAIL_INVALID_MESSAGE = "Email inválido. Verificá el formato e intentá de nuevo.";
+      window.REQUIRED_ERROR_MESSAGE = "Este campo no puede quedar vacío.";
+      window.GENERIC_INVALID_MESSAGE = "Información inválida. Verificá el formato e intentá de nuevo.";
+      var AUTOHIDE = Boolean(0);
+    <\/script>
+    <script defer src="https://sibforms.com/forms/end-form/build/main.js"><\/script>
+  `} />
+</section>
   </div>
 </BaseLayout>
 
