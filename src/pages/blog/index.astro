@@ -57,6 +57,7 @@ const categories = ['Todos', ...new Set(posts.map(p => p.post.data.category))];
             tags={post.data.tags ?? []}
             slug={post.id.replace(/\.md$/, '')}
             readingTime={readingTime}
+            image={post.data.image}
           />
         </div>
       ))}

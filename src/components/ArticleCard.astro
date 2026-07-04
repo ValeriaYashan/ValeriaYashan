@@ -7,9 +7,10 @@ interface Props {
   slug: string;
   readingTime?: number;
   tags?: string[];
+  image?: string;
 }
 
-const { title, description, pubDate, category, slug, readingTime = 5, tags = [] } = Astro.props;
+const { title, description, pubDate, category, slug, readingTime = 5, tags = [], image } = Astro.props;
 
 const formattedDate = pubDate.toLocaleDateString('es-AR', {
   day: 'numeric',
@@ -20,25 +21,48 @@ const formattedDate = pubDate.toLocaleDateString('es-AR', {
 
 <article class="article-card">
   <a href={`/blog/${slug}`} class="card-link">
-    <div class="card-meta">
-      <span class="card-category">{category}</span>
-      <span class="card-reading">{readingTime} min</span>
-    </div>
 
-    {tags.length > 0 && (
-      <div class="card-tags">
-        {tags.map(tag => (
-          <span class="card-tag">{tag}</span>
-        ))}
+    {image && (
+      <div class="card-imagen-wrap">
+        <img
+          src={image}
+          alt={title}
+          class="card-imagen"
+          width="800"
+          height="420"
+          loading="lazy"
+        />
       </div>
     )}
 
-    <h2 class="card-title">{title}</h2>
-    <p class="card-description">{description}</p>
-    <div class="card-footer">
-      <time datetime={pubDate.toISOString()} class="card-date">{formattedDate}</time>
-      <span class="card-cta">Leer →</span>
+    {!image && (
+      <div class="card-imagen-placeholder">
+        <span class="card-imagen-category">{category}</span>
+      </div>
+    )}
+
+    <div class="card-body">
+      <div class="card-meta">
+        <span class="card-category">{category}</span>
+        <span class="card-reading">{readingTime} min</span>
+      </div>
+
+      {tags.length > 0 && (
+        <div class="card-tags">
+          {tags.map(tag => (
+            <span class="card-tag">{tag}</span>
+          ))}
+        </div>
+      )}
+
+      <h2 class="card-title">{title}</h2>
+      <p class="card-description">{description}</p>
+      <div class="card-footer">
+        <time datetime={pubDate.toISOString()} class="card-date">{formattedDate}</time>
+        <span class="card-cta">Leer →</span>
+      </div>
     </div>
+
   </a>
 </article>
 
@@ -47,7 +71,7 @@ const formattedDate = pubDate.toLocaleDateString('es-AR', {
     background: var(--color-bg);
     border: 1px solid var(--color-border);
     border-radius: 12px;
-    padding: 1.5rem;
+    overflow: hidden;
     transition: border-color 0.15s ease;
   }
 
@@ -58,10 +82,53 @@ const formattedDate = pubDate.toLocaleDateString('es-AR', {
   .card-link {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
     text-decoration: none;
     color: inherit;
     height: 100%;
+  }
+
+  .card-imagen-wrap {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+  }
+
+  .card-imagen {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+
+  .article-card:hover .card-imagen {
+    transform: scale(1.03);
+  }
+
+  .card-imagen-placeholder {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: var(--color-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card-imagen-category {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: rgba(255,255,255,0.7);
+  }
+
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.25rem 1.5rem 1.5rem;
+    flex: 1;
   }
 
   .card-meta {
@@ -105,7 +172,7 @@ const formattedDate = pubDate.toLocaleDateString('es-AR', {
 
   .card-title {
     font-family: 'Fraunces', serif;
-    font-size: 1.25rem;
+    font-size: 1.15rem;
     font-weight: 700;
     color: var(--color-text);
     line-height: 1.35;
@@ -119,7 +186,7 @@ const formattedDate = pubDate.toLocaleDateString('es-AR', {
 
   .card-description {
     color: var(--color-muted);
-    font-size: 0.9rem;
+    font-size: 0.875rem;
     line-height: 1.6;
     margin: 0;
     flex: 1;
