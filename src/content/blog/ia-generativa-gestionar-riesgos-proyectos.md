@@ -2,6 +2,7 @@
 title: "IA para gestión de riesgos en proyectos: guía práctica"
 description: "La IA generativa puede ayudarte a identificar, analizar y documentar riesgos en proyectos más rápido y con mayor cobertura. Acá te muestro cómo aplicarla en la práctica."
 pubDate: "2026-07-01"
+image: "/images/blog/ia-generativa-gestionar-riesgos-proyectos.jpg"
 category: "IA"
 tags: ["IA", "Gestión de riesgos", "Project Management", "ChatGPT"]
 ---

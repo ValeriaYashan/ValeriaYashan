@@ -2,6 +2,7 @@
 title: "Plan de estudio para el PMP: cómo organizarte en 12 semanas"
 description: "Un plan de estudio realista para aprobar el examen PMP en 12 semanas, con dedicación de 8 a 10 horas semanales. Semana a semana, sin adivinanzas."
 pubDate: "2026-07-01"
+image: "/images/blog/plan-de-estudio-pmp-semanas.jpg"
 category: "Project Management"
 tags: ["PMP", "Examen PMP", "Plan de estudio", "Certificación"]
 ---
