@@ -12,6 +12,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <p class="page-eyebrow">Contacto</p>
       <h1>Conversemos</h1>
       <p class="page-lead">Si tenés una consulta profesional, una propuesta de colaboración o querés que acompañe a tu equipo, escribime. Respondo en menos de 48 horas.</p>
+      <p class="page-ubicacion">📍 Buenos Aires, Argentina · También trabajo con equipos en LATAM y España</p>
     </header>
 
     <section class="contact-lista">
@@ -23,6 +24,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="contact-info">
           <p class="contact-titulo">WhatsApp</p>
           <p class="contact-desc">La forma más rápida de contactarme. Para consultas concretas y propuestas de trabajo.</p>
+          <p class="contact-numero">+54 11 4079-1007</p>
         </div>
         <span class="contact-accion">Escribime por WhatsApp &rarr;</span>
       </a>
@@ -101,7 +103,20 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     font-size: 1.05rem;
     color: var(--color-muted);
     line-height: 1.7;
+    margin: 0 0 0.5rem;
+  }
+
+  .page-ubicacion {
+    font-size: 0.9rem;
+    color: var(--color-muted);
     margin: 0;
+  }
+
+  .contact-numero {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin: 0.25rem 0 0;
   }
 
   .contact-lista {
