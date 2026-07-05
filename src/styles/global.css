@@ -51,4 +51,4 @@ img { max-width: 100%; display: block; }
 }
 
 /* ── GOOGLE FONTS ── */
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@700;900&family=Inter:wght@400;500;600&display=swap');
+/* Fuentes cargadas en BaseLayout.astro via <link> para mejor rendimiento */

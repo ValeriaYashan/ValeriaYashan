@@ -42,6 +42,9 @@ const imageURL = new URL(image, Astro.site);
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={imageURL} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,700&family=Inter:wght@400;500;600&display=swap" />
     {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DK70Z7NVB9"></script>
     <script>
