@@ -45,12 +45,14 @@ const posts = (await getCollection('blog'))
         </div>
         <div class="hero-foto-wrap">
           <img
-            src="/images/valeria-yashan.webp"
+            src="/images/foto-valeria-busto.webp"
             alt="Valeria Yashan, consultora PMP® en gestión de proyectos e inteligencia artificial"
             class="hero-foto"
             width="480"
-            height="600"
+            height="480"
             loading="eager"
+            fetchpriority="high"
+            decoding="async"
           />
         </div>
       </div>
