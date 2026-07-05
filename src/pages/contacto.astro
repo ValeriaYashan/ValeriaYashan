@@ -12,7 +12,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <p class="page-eyebrow">Contacto</p>
       <h1>Conversemos</h1>
       <p class="page-lead">Si tenés una consulta profesional, una propuesta de colaboración o querés que acompañe a tu equipo, escribime. Respondo en menos de 48 horas.</p>
-      <p class="page-ubicacion">📍 Buenos Aires, Argentina · También trabajo con equipos en LATAM y España</p>
     </header>
 
     <section class="contact-lista">
@@ -66,6 +65,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <h2 class="contact-cta-titulo">¿No sabés por dónde empezar?</h2>
       <p class="contact-cta-texto">Contame brevemente qué necesita tu equipo u organización y te cuento cómo puedo ayudarte. Sin compromiso.</p>
       <a href="https://wa.me/541140791007?text=Hola%20Valeria%2C%20me%20contacto%20desde%20tu%20web%20porque%20necesito..." target="_blank" rel="noopener noreferrer" class="btn-verde">Escribime por WhatsApp &rarr;</a>
+      <p class="contact-ubicacion">📍 Buenos Aires, Argentina · También trabajo con equipos en LATAM y España</p>
     </section>
 
   </div>
@@ -116,6 +116,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     font-size: 0.85rem;
     font-weight: 600;
     color: var(--color-text);
+    margin: 0.25rem 0 0;
+  }
+
+  .contact-ubicacion {
+    font-size: 0.85rem;
+    color: var(--color-muted);
     margin: 0.25rem 0 0;
   }
 
