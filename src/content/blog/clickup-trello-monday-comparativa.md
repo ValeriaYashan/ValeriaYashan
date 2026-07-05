@@ -119,6 +119,8 @@ Las tres herramientas tienen guías prácticas completas en este sitio, con ejem
 - [Guía de Trello para Project Managers →](/herramientas/trello)
 - [Guía de ClickUp para Project Managers →](/herramientas/clickup)
 - [Guía de Monday para Project Managers →](/herramientas/monday)
+- [Cómo implementar Monday.com en tu empresa →](/blog/implementar-monday-com-argentina)
+- [Asana para gestión de proyectos: guía práctica →](/blog/asana-para-gestion-de-proyectos)
 
 ---
 
