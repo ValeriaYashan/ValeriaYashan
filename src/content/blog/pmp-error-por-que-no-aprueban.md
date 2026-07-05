@@ -38,7 +38,7 @@ Si querés entender la diferencia en profundidad, tengo un artículo sobre [preg
 
 Muchos candidatos con experiencia en gestión de proyectos tradicional estudian casi exclusivamente el enfoque predictivo — que es lo que conocen — y subestiman el peso del contenido ágil en el examen.
 
-El ECO actual distribuye aproximadamente el 50% de las preguntas entre enfoques ágiles e híbridos. Un candidato que no entiende Scrum, Kanban, sprints y retrospectivas va a tener problemas con la mitad del examen, independientemente de cuánto sepa de PMBOK.
+El ECO actual tiene un peso significativo de preguntas con enfoque ágil e híbrido — que muchos candidatos con perfil predictivo subestiman. Un candidato que no entiende Scrum, Kanban, sprints y retrospectivas va a tener problemas con una parte importante del examen, independientemente de cuánto sepa de PMBOK.
 
 ---
 
