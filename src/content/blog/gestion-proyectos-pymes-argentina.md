@@ -62,3 +62,7 @@ Con un proyecto bien gestionado, el equipo aprende qué funciona para su context
 ---
 
 ¿Querés implementar gestión de proyectos en tu empresa? Escribime a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar) o agendá una llamada en [Calendly](https://calendly.com/valeriayashan/30min).
+
+---
+
+Si ya tenés estructura básica y querés escalar, leé [cómo armar una PMO en una empresa argentina](/blog/como-armar-pmo-argentina). Para entender cuándo tiene sentido incorporar un PM externo, [cuándo una pyme necesita un PM externo](/blog/cuando-una-pyme-necesita-un-pm-externo). Y para elegir la herramienta correcta, [Notion vs ClickUp: cuál elegir para tu equipo](/blog/notion-vs-clickup-cual-elegir).

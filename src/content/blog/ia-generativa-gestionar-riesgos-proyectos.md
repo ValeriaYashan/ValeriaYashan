@@ -71,3 +71,7 @@ Esa información viene del equipo y de la experiencia del PM. La IA amplía la c
 - La IA acelera la documentación; el PM asegura la relevancia.
 
 Si querés ver más prompts aplicados a gestión de proyectos, revisá el artículo [5 prompts de ChatGPT para project managers](/blog/5-prompts-chatgpt-pm). Para entender qué otras tareas podés delegar a IA como PM, leé también [5 tareas de PM que podés delegar a IA hoy (y 3 que nunca deberías)](/blog/5-tareas-ia-pm). Y si querés usar Notion para documentar y hacer seguimiento de los riesgos identificados, mirá [cómo usar Notion con IA para gestionar proyectos](/blog/notion-ia-para-gestionar-proyectos).
+
+---
+
+Para profundizar con prompts específicos de gestión de riesgos, leé [IA para gestionar riesgos en proyectos](/blog/ia-para-gestionar-riesgos-proyectos). Y para ver otros casos de uso de IA en PM, [automatizar reportes de proyectos con IA](/blog/automatizar-reportes-proyectos-con-ia) y [NotebookLM para project managers](/blog/notebooklm-para-project-managers).

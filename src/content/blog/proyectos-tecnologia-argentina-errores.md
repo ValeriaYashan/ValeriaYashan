@@ -70,3 +70,7 @@ Cuando el proyecto necesita una decisión que cruza áreas — cambiar una fecha
 ---
 
 ¿Tu empresa está por arrancar un proyecto de tecnología y querés evitar estos errores desde el inicio? Escribime a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar) o agendá una llamada en [Calendly](https://calendly.com/valeriayashan/30min).
+
+---
+
+Para evitar estos errores desde el inicio, leé [cómo implementar gestión de proyectos en tu empresa](/blog/como-implementar-gestion-de-proyectos). Si el problema es estructural, [cómo armar una PMO en una empresa argentina](/blog/como-armar-pmo-argentina) te da el camino. Y si evaluás contratar ayuda externa, [cómo elegir una consultora de gestión de proyectos](/blog/como-elegir-una-consultora-de-proyectos).

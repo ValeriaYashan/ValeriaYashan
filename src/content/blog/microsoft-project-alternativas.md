@@ -99,3 +99,7 @@ La herramienta que el equipo realmente usa siempre supera a la herramienta técn
 ---
 
 ¿Estás evaluando qué herramienta implementar? Escribime a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar) o por [WhatsApp](https://wa.me/5491140791007).
+
+---
+
+Para comparar las dos alternativas más populares en detalle, leé [Notion vs ClickUp: cuál elegir para tu equipo](/blog/notion-vs-clickup-cual-elegir). Si tu proyecto es de ingeniería, [sistema de gestión de proyectos en Notion](/blog/notion-sistema-gestion-proyectos-ingenieria) muestra un caso concreto. Y para equipos de desarrollo, [Jira para gestión de proyectos](/blog/jira-para-gestion-de-proyectos).

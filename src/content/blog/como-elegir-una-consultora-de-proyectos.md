@@ -78,3 +78,7 @@ Eso no se certifica. Pero se evalúa.
 ---
 
 Si estás evaluando incorporar gestión de proyectos a tu organización, puedo ayudarte a definir qué necesitás antes de buscar a quién contratarlo. Escribime a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar) o agendá una llamada en [Calendly](https://calendly.com/valeriayashan/30min).
+
+---
+
+Si primero querés entender qué necesita tu empresa, leé [cómo implementar gestión de proyectos en tu organización](/blog/como-implementar-gestion-de-proyectos). Para ver qué implica armar una PMO interna como alternativa, [cómo armar una PMO en una empresa argentina](/blog/como-armar-pmo-argentina). Y para el contexto local de proyectos, [errores frecuentes en proyectos de tecnología en Argentina](/blog/proyectos-tecnologia-argentina-errores).

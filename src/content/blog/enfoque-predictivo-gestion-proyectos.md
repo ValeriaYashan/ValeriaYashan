@@ -84,3 +84,7 @@ Eso es lo que distingue a un PM que aplica metodología de uno que simplemente s
 ---
 
 *Valeria Yashan es PMP® #1613335, MBA e Ingeniera Industrial. Consultora, docente y autora de cuatro libros sobre gestión de proyectos e IA aplicada. Trabajó con equipos en Argentina, LATAM y España. [Conocé más sobre Valeria](/sobre-mi).*
+
+---
+
+Para comparar el enfoque predictivo con ágil e híbrido, leé [Predictivo, ágil o híbrido: cómo elegir el enfoque correcto](/blog/predictivo-agil-hibrido-como-elegir). Y para ver cómo esto aparece en el examen PMP, [PMBOK® 8 y el nuevo examen PMP 2026](/blog/pmbok-8-nuevo-examen-pmp-2026).

@@ -103,3 +103,7 @@ Si querés profundizar en cómo elegir el enfoque correcto para cada tipo de pro
 ---
 
 *Valeria Yashan es PMP® #1613335, MBA e Ingeniera Industrial. Consultora, docente y autora de cuatro libros sobre gestión de proyectos e IA aplicada. Trabajó con equipos en Argentina, LATAM y España. [Conocé más sobre Valeria](/sobre-mi).*
+
+---
+
+Para entender qué reemplaza al agilismo puro, leé [Predictivo, ágil o híbrido: cómo elegir el enfoque correcto](/blog/predictivo-agil-hibrido-como-elegir). Y para ver cómo el examen PMP refleja este cambio, [PMBOK® 8 y el nuevo examen PMP 2026](/blog/pmbok-8-nuevo-examen-pmp-2026).

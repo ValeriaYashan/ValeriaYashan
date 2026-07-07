@@ -81,3 +81,7 @@ El examen PMP es difícil, pero es predecible. Quienes aprueban no son necesaria
 ---
 
 *Valeria Yashan es PMP® #1613335, MBA e Ingeniera Industrial. Consultora, docente y autora de cuatro libros sobre gestión de proyectos e IA aplicada. Trabajó con equipos en Argentina, LATAM y España. [Conocé más sobre Valeria](/sobre-mi).*
+
+---
+
+Para estructurar bien la preparación desde el inicio, leé [plan de estudio para el PMP semana a semana](/blog/plan-de-estudio-pmp-semanas). Y para practicar con el tipo de preguntas del examen real, [cómo leer una pregunta de simulacro PMP sin caer en las trampas](/blog/como-leer-preguntas-simulacro-pmp).

@@ -114,3 +114,7 @@ Si querés ver cómo encaja esto en tu carrera, tengo un artículo sobre [cómo 
 ---
 
 *Valeria Yashan es PMP® #1613335, MBA e Ingeniera Industrial. Consultora, docente y autora de cuatro libros sobre gestión de proyectos e IA aplicada. Trabajó con equipos en Argentina, LATAM y España. [Conocé más sobre Valeria](/sobre-mi).*
+
+---
+
+Para ver cómo la IA está redefiniendo este perfil, leé [el perfil del project manager en la era de la IA](/blog/pm-ia-perfil-profesional-redefinicion). Si estás evaluando certificarte, [PMP vs PRINCE2 vs Scrum Master: cuál hacer primero](/blog/diferencia-pmp-prince2-scrum-master). Y para entender qué pide el mercado argentino hoy, [certificaciones PM en el mercado laboral argentino](/blog/certificaciones-pm-mercado-laboral-argentina).

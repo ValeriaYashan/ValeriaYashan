@@ -79,3 +79,7 @@ Si llegás al examen habiendo hecho al menos tres simulacros completos cronometr
 Si todavía no hiciste simulacros completos cronometrados, es el paso más importante que podés hacer ahora mismo. El [simulador de práctica PMP](/simulador) de este sitio te permite practicar en condiciones similares a las del examen real.
 
 Si estás organizando tu preparación, también te puede servir leer [cómo planificar el estudio en 12 semanas](/blog/plan-de-estudio-pmp-semanas) y [los errores más comunes al estudiar para el PMP](/blog/errores-comunes-estudiar-pmp).
+
+---
+
+Ahora que sabés cuánto dura el examen, el paso siguiente es saber cómo leer las preguntas sin caer en las trampas: [cómo leer una pregunta de simulacro PMP](/blog/como-leer-preguntas-simulacro-pmp). Para entender qué cambió en el examen desde julio 2026, [PMBOK® 8 y el nuevo examen PMP 2026](/blog/pmbok-8-nuevo-examen-pmp-2026). Y para no cometer los errores más comunes en la preparación, [errores comunes al estudiar para el PMP](/blog/errores-comunes-estudiar-pmp).

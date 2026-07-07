@@ -101,3 +101,7 @@ La adopción de herramientas es un proyecto en sí mismo. No alcanza con instala
 ---
 
 ¿Estás evaluando qué herramienta implementar en tu equipo? Escribime a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar) o por [WhatsApp](https://wa.me/5491140791007) y lo vemos juntos.
+
+---
+
+Si estás comparando herramientas, leé [Notion vs ClickUp: cuál elegir para tu equipo](/blog/notion-vs-clickup-cual-elegir) y [alternativas a Microsoft Project](/blog/microsoft-project-alternativas). Para una comparativa completa de las herramientas más usadas, [ClickUp, Trello y Monday: cuál elegir](/blog/clickup-trello-monday-comparativa).

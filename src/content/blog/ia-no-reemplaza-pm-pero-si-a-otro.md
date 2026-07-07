@@ -87,3 +87,7 @@ Si querés entender cómo incorporar IA a tu perfil profesional de forma concret
 ---
 
 *Valeria Yashan es PMP® #1613335, MBA e Ingeniera Industrial. Consultora, docente y autora de cuatro libros sobre gestión de proyectos e IA aplicada. Trabajó con equipos en Argentina, LATAM y España. [Conocé más sobre Valeria](/sobre-mi).*
+
+---
+
+Para entender cómo incorporar IA en tu trabajo sin perder el foco, leé [5 prompts para project managers](/blog/5-prompts-chatgpt-pm) y [NotebookLM para project managers](/blog/notebooklm-para-project-managers). Y para ver el impacto en el perfil profesional, [el perfil del project manager en la era de la IA](/blog/pm-ia-perfil-profesional-redefinicion).

@@ -108,3 +108,7 @@ Si querés seguir explorando herramientas de gestión de proyectos, en la secci�
 ---
 
 *Valeria Yashan es PMP® #1613335, MBA e Ingeniera Industrial. Consultora, docente y autora de cuatro libros sobre gestión de proyectos e IA aplicada. Trabajó con equipos en Argentina, LATAM y España. [Conocé más sobre Valeria](/sobre-mi).*
+
+---
+
+Si también evaluás otras herramientas, leé [ClickUp, Trello y Monday: cuál elegir](/blog/clickup-trello-monday-comparativa) y [Notion vs ClickUp: cuál elegir para tu equipo](/blog/notion-vs-clickup-cual-elegir). Para una comparativa más amplia incluyendo MS Project, [alternativas a Microsoft Project](/blog/microsoft-project-alternativas).

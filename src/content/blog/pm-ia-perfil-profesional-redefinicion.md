@@ -102,3 +102,7 @@ La IA hace más rápido lo que ya sabés hacer bien. Esa sigue siendo tu ventaja
 ---
 
 *Valeria Yashan es PMP® #1613335, MBA e Ingeniera Industrial. Consultora, docente y autora de cuatro libros sobre gestión de proyectos e IA aplicada. Trabajó con equipos en Argentina, LATAM y España. [Conocé más sobre Valeria](/sobre-mi).*
+
+---
+
+Para empezar a usar IA en tu trabajo hoy, leé [5 prompts para project managers](/blog/5-prompts-chatgpt-pm) y [NotebookLM para project managers](/blog/notebooklm-para-project-managers). Y para ver cómo automatizar los reportes que más tiempo consumen, [automatizar reportes de proyectos con IA](/blog/automatizar-reportes-proyectos-con-ia).

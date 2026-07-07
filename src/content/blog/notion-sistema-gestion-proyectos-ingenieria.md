@@ -85,3 +85,7 @@ Si lo usás, me interesa saber qué modificaste y por qué. Cada equipo tiene su
 ---
 
 ¿Usás Notion para gestionar proyectos? ¿Qué tenés armado? Escribime a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar) o dejame un mensaje por [WhatsApp](https://wa.me/5491140791007).
+
+---
+
+Para comparar Notion con otras herramientas, leé [Notion vs ClickUp: cuál elegir](/blog/notion-vs-clickup-cual-elegir) y [cómo usar Notion con IA para gestionar proyectos](/blog/notion-ia-para-gestionar-proyectos). Si evaluás más opciones, [alternativas a Microsoft Project](/blog/microsoft-project-alternativas) tiene una comparativa completa.

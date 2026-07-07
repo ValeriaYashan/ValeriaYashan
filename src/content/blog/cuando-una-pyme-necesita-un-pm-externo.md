@@ -83,3 +83,7 @@ Si querés conversar sobre tu situación específica y evaluar si tiene sentido 
 ---
 
 *Valeria Yashan es PMP® #1613335, MBA e Ingeniera Industrial. Consultora, docente y autora de cuatro libros sobre gestión de proyectos e IA aplicada. Trabajó con equipos en Argentina, LATAM y España. [Conocé más sobre Valeria](/sobre-mi).*
+
+---
+
+Si decidís contratar un PM externo, leé primero [cómo elegir una consultora de gestión de proyectos](/blog/como-elegir-una-consultora-de-proyectos). Para entender qué implica implementar gestión de proyectos en tu empresa, [cómo implementar gestión de proyectos](/blog/como-implementar-gestion-de-proyectos). Y para el contexto de pymes argentinas, [gestión de proyectos en pymes argentinas](/blog/gestion-proyectos-pymes-argentina).

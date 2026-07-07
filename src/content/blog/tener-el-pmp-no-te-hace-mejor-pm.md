@@ -87,3 +87,7 @@ Si estás en proceso de preparación y querés entender qué evalúa realmente e
 ---
 
 *Valeria Yashan es PMP® #1613335, MBA e Ingeniera Industrial. Consultora, docente y autora de cuatro libros sobre gestión de proyectos e IA aplicada. Trabajó con equipos en Argentina, LATAM y España. [Conocé más sobre Valeria](/sobre-mi).*
+
+---
+
+Si ya tenés o buscás el PMP, leé [¿vale la pena sacar el PMP en Argentina?](/blog/pmp-vale-la-pena-en-argentina) para una mirada honesta sobre el retorno. Y para ver cómo la IA está cambiando el perfil del PM más allá de la certificación, [el perfil del project manager en la era de la IA](/blog/pm-ia-perfil-profesional-redefinicion).

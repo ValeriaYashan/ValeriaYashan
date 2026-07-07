@@ -61,3 +61,7 @@ Lo que sí conviene es elegir materiales de estudio publicados o actualizados en
 - Si recién empezás, elegí materiales de 2026 y arrancá con el ECO vigente.
 
 Para prepararte con preguntas en el formato del examen actual, podés usar el [simulador PMP](/simulador) de este sitio. Y si querés entender cómo distribuir el tiempo durante el examen, leé también [cuánto dura el examen PMP y cómo distribuir el tiempo](/blog/cuanto-dura-el-examen-pmp).
+
+---
+
+Para entender en detalle qué cambia con el nuevo ECO, leé [PMBOK® 8 y el nuevo examen PMP 2026](/blog/pmbok-8-nuevo-examen-pmp-2026). Si estás definiendo cómo estudiar, [el plan de estudio para el PMP](/blog/plan-de-estudio-pmp-semanas) te da una estructura semana a semana. Y para verificar que cumplís los requisitos antes de aplicar, [requisitos para rendir el PMP en 2026](/blog/requisitos-examen-pmp-2026).

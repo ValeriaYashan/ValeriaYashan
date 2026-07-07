@@ -114,3 +114,7 @@ Para reportes recurrentes, vale la pena crear un proyecto o hilo dedicado en la 
 ---
 
 ¿Querés implementar esto con tu equipo? Escribime a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar) o por [WhatsApp](https://wa.me/5491140791007).
+
+---
+
+Si querés explorar más usos de IA en proyectos, leé [cómo usar IA para gestionar riesgos](/blog/ia-para-gestionar-riesgos-proyectos) y [NotebookLM para project managers](/blog/notebooklm-para-project-managers). Para ver los prompts que más uso en mi trabajo diario, [5 prompts para project managers](/blog/5-prompts-chatgpt-pm).

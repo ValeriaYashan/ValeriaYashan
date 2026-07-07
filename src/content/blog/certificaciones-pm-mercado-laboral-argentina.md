@@ -83,3 +83,7 @@ Desde 2020, muchos PMs argentinos trabajan para empresas del exterior. En esos c
 ---
 
 ¿Tenés dudas sobre qué certificación conviene para tu perfil? Escribime a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar) y lo evaluamos juntos.
+
+---
+
+Si decidiste hacer el PMP, empezá por los requisitos: [experiencia requerida para el PMP: cómo documentarla](/blog/experiencia-requerida-para-el-pmp). Para comparar el PMP con PRINCE2 y Scrum Master, [PMP vs PRINCE2 vs Scrum Master: cuál hacer primero](/blog/diferencia-pmp-prince2-scrum-master). Y si todavía evaluás si vale la inversión, [¿vale la pena sacar el PMP en Argentina?](/blog/pmp-vale-la-pena-en-argentina).

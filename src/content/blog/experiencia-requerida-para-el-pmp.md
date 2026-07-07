@@ -97,3 +97,7 @@ Lo que sí importa: los proyectos no pueden superponerse en el tiempo. Si lidera
 ---
 
 ¿Tenés dudas sobre si tu experiencia califica para el PMP? Escribime a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar) y te ayudo a evaluarlo.
+
+---
+
+Si todavía estás evaluando si el PMP vale la pena, leé [¿vale la pena sacar el PMP en Argentina?](/blog/pmp-vale-la-pena-en-argentina). Para entender qué cambia en el examen desde julio 2026, [PMBOK® 8 y el nuevo examen PMP 2026](/blog/pmbok-8-nuevo-examen-pmp-2026). Y si querés comparar el PMP con otras certificaciones, [PMP vs PRINCE2 vs Scrum Master: cuál hacer primero](/blog/diferencia-pmp-prince2-scrum-master).

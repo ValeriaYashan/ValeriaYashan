@@ -150,3 +150,7 @@ Eso no es automatizar la gestión de riesgos. Es usar mejor el tiempo disponible
 ---
 
 ¿Querés implementar un proceso de gestión de riesgos con IA en tu organización? Escribime a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar) o por [WhatsApp](https://wa.me/5491140791007).
+
+---
+
+Para complementar la gestión de riesgos con IA, leé también [cómo automatizar reportes de proyectos con IA](/blog/automatizar-reportes-proyectos-con-ia) y [NotebookLM para project managers](/blog/notebooklm-para-project-managers). Para ver cómo integrar IA en tu trabajo diario, [5 prompts para project managers](/blog/5-prompts-chatgpt-pm).

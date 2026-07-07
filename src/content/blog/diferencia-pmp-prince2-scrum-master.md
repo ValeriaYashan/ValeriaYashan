@@ -89,3 +89,7 @@ Si tenés que elegir una sola para empezar y ya tenés experiencia en PM: PMP. S
 ---
 
 ¿Tenés dudas sobre cuál certificación hacer según tu perfil? Escribime a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar) y lo vemos juntos.
+
+---
+
+Si ya elegiste el PMP, el siguiente paso es verificar los requisitos: [experiencia requerida para el PMP: cómo documentarla](/blog/experiencia-requerida-para-el-pmp). Para entender qué demanda el mercado local, [certificaciones PM en el mercado laboral argentino](/blog/certificaciones-pm-mercado-laboral-argentina). Y para evaluar si la inversión tiene sentido para vos, [¿vale la pena sacar el PMP en Argentina?](/blog/pmp-vale-la-pena-en-argentina).

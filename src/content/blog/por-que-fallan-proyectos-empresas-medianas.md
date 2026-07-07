@@ -95,3 +95,7 @@ Si tu organización está en un punto donde los proyectos no están saliendo bie
 ---
 
 *Valeria Yashan es PMP® #1613335, MBA e Ingeniera Industrial. Consultora, docente y autora de cuatro libros sobre gestión de proyectos e IA aplicada. Trabajó con equipos en Argentina, LATAM y España. [Conocé más sobre Valeria](/sobre-mi).*
+
+---
+
+Para evitar los errores más comunes, leé [cómo implementar gestión de proyectos en tu empresa](/blog/como-implementar-gestion-de-proyectos). En el contexto argentino hay factores adicionales: [errores frecuentes en proyectos de tecnología en Argentina](/blog/proyectos-tecnologia-argentina-errores). Y si el problema es estructural, [cómo armar una PMO en una empresa argentina](/blog/como-armar-pmo-argentina).

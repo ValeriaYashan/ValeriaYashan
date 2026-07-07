@@ -95,3 +95,7 @@ Es gratuito, no requiere configuración técnica y se puede empezar a usar en me
 ---
 
 ¿Querés incorporar IA en la gestión de tus proyectos? Escribime a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar) o por [WhatsApp](https://wa.me/5491140791007).
+
+---
+
+Para más casos de uso de IA en proyectos, leé [cómo automatizar reportes con IA](/blog/automatizar-reportes-proyectos-con-ia) y [cómo usar IA para gestionar riesgos](/blog/ia-para-gestionar-riesgos-proyectos). Y si querés empezar con prompts concretos, [5 prompts para project managers](/blog/5-prompts-chatgpt-pm).

@@ -83,3 +83,7 @@ Los mejores PMs que conozco no son los que más frameworks conocen. Son los que 
 ---
 
 *Valeria Yashan es PMP® #1613335, MBA e Ingeniera Industrial. Consultora, docente y autora de cuatro libros sobre gestión de proyectos e IA aplicada. Trabajó con equipos en Argentina, LATAM y España. [Conocé más sobre Valeria](/sobre-mi).*
+
+---
+
+Para ver qué sí funciona en la práctica, leé [cómo implementar gestión de proyectos en tu empresa](/blog/como-implementar-gestion-de-proyectos). Y para entender cuándo los enfoques ágiles ayudan y cuándo no, [Predictivo, ágil o híbrido: cómo elegir el enfoque correcto](/blog/predictivo-agil-hibrido-como-elegir).

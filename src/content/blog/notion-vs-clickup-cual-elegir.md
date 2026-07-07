@@ -76,3 +76,7 @@ Notion, por su flexibilidad, también puede volverse un caos si no tiene estruct
 ---
 
 ¿Estás evaluando implementar alguna de estas herramientas en tu equipo? Escribime a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar) o por [WhatsApp](https://wa.me/5491140791007).
+
+---
+
+Si también evaluás otras herramientas, leé [Jira para gestión de proyectos](/blog/jira-para-gestion-de-proyectos) y [alternativas a Microsoft Project](/blog/microsoft-project-alternativas). Para ver cómo usar Notion en proyectos de ingeniería, [sistema de gestión de proyectos en Notion](/blog/notion-sistema-gestion-proyectos-ingenieria).

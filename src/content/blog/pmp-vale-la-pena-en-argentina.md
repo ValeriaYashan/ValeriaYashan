@@ -86,3 +86,7 @@ Si tenés la experiencia, el tiempo y el presupuesto, vale la pena. Si alguna de
 ---
 
 ¿Estás evaluando si hacer el PMP? Escribime a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar) y te ayudo a evaluar tu situación específica.
+
+---
+
+Si ya decidiste que sí, el siguiente paso es verificar que cumplís los requisitos: [experiencia requerida para el PMP: cómo documentarla](/blog/experiencia-requerida-para-el-pmp). Para entender qué piden las empresas argentinas hoy, [certificaciones PM en el mercado laboral argentino](/blog/certificaciones-pm-mercado-laboral-argentina). Y para comparar el PMP con otras opciones, [PMP vs PRINCE2 vs Scrum Master](/blog/diferencia-pmp-prince2-scrum-master).

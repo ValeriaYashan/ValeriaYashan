@@ -113,3 +113,7 @@ En esos casos, un consultor externo puede diseñar la estructura, acompañar los
 ---
 
 ¿Estás evaluando implementar una PMO en tu empresa? Agendá una llamada en [Calendly](https://calendly.com/valeriayashan/30min) o escribime a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar).
+
+---
+
+Antes de armar la PMO, es clave tener claro el proceso base: [cómo implementar gestión de proyectos en tu empresa](/blog/como-implementar-gestion-de-proyectos). Si evaluás apoyo externo para la implementación, leé [cómo elegir una consultora de gestión de proyectos](/blog/como-elegir-una-consultora-de-proyectos). Y para entender los errores más frecuentes en el contexto local, [errores frecuentes en proyectos de tecnología en Argentina](/blog/proyectos-tecnologia-argentina-errores).
