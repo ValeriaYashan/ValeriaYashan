@@ -17,6 +17,16 @@ const posts = await Promise.all(
 );
 
 const categories = ['Todos', ...new Set(posts.map(p => p.post.data.category))];
+
+// Índice de búsqueda serializado para el cliente
+const searchIndex = posts.map(({ post, readingTime }) => ({
+  slug: post.id.replace(/\.md$/, ''),
+  title: post.data.title,
+  description: post.data.description ?? '',
+  category: post.data.category,
+  tags: (post.data.tags ?? []).join(' '),
+  readingTime,
+}));
 ---
 
 <BaseLayout
@@ -34,6 +44,20 @@ const categories = ['Todos', ...new Set(posts.map(p => p.post.data.category))];
       </p>
     </header>
 
+    <div class="search-bar">
+      <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <input
+        type="search"
+        id="search-input"
+        placeholder="Buscar artículos..."
+        autocomplete="off"
+        aria-label="Buscar artículos"
+      />
+      <button id="search-clear" aria-label="Limpiar búsqueda" style="display:none">✕</button>
+    </div>
+
     <div class="filter-bar">
       {categories.map(cat => (
         <button
@@ -46,9 +70,15 @@ const categories = ['Todos', ...new Set(posts.map(p => p.post.data.category))];
       ))}
     </div>
 
+    <p id="search-count" class="search-count" style="display:none"></p>
+
     <section class="posts-grid" id="posts-grid">
       {posts.map(({ post, readingTime }) => (
-        <div class="post-wrapper" data-category={post.data.category}>
+        <div
+          class="post-wrapper"
+          data-category={post.data.category}
+          data-slug={post.id.replace(/\.md$/, '')}
+        >
           <ArticleCard
             title={post.data.title}
             description={post.data.description}
@@ -62,6 +92,10 @@ const categories = ['Todos', ...new Set(posts.map(p => p.post.data.category))];
         </div>
       ))}
     </section>
+
+    <p id="no-results" class="no-results" style="display:none">
+      No encontré artículos con ese término. Probá con otra palabra.
+    </p>
 
    <section class="blog-newsletter">
   <p class="newsletter-label">Newsletter</p>
@@ -128,27 +162,87 @@ const categories = ['Todos', ...new Set(posts.map(p => p.post.data.category))];
   </div>
 </BaseLayout>
 
-<script>
+<script define:vars={{ searchIndex }}>
   (function () {
+    const input = document.getElementById('search-input');
+    const clearBtn = document.getElementById('search-clear');
     const buttons = document.querySelectorAll('.filter-btn');
     const wrappers = document.querySelectorAll('.post-wrapper');
+    const noResults = document.getElementById('no-results');
+    const countEl = document.getElementById('search-count');
 
+    let activeCategory = 'Todos';
+    let searchTerm = '';
+
+    function normalize(str) {
+      return str
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '');
+    }
+
+    function applyFilters() {
+      const term = normalize(searchTerm.trim());
+      let visible = 0;
+
+      wrappers.forEach(wrapper => {
+        const slug = wrapper.getAttribute('data-slug');
+        const cat = wrapper.getAttribute('data-category');
+        const entry = searchIndex.find(e => e.slug === slug);
+
+        const matchesCategory = activeCategory === 'Todos' || cat === activeCategory;
+
+        let matchesSearch = true;
+        if (term.length > 1 && entry) {
+          const haystack = normalize(
+            [entry.title, entry.description, entry.category, entry.tags].join(' ')
+          );
+          matchesSearch = haystack.includes(term);
+        }
+
+        const show = matchesCategory && matchesSearch;
+        wrapper.style.display = show ? 'block' : 'none';
+        if (show) visible++;
+      });
+
+      // Mensaje sin resultados
+      noResults.style.display = visible === 0 ? 'block' : 'none';
+
+      // Contador de resultados solo cuando hay búsqueda activa
+      if (term.length > 1) {
+        countEl.style.display = 'block';
+        countEl.textContent = visible === 1
+          ? '1 artículo encontrado'
+          : `${visible} artículos encontrados`;
+      } else {
+        countEl.style.display = 'none';
+      }
+    }
+
+    // Filtro por categoría
     buttons.forEach(btn => {
       btn.addEventListener('click', () => {
-        const selected = btn.getAttribute('data-category');
-
+        activeCategory = btn.getAttribute('data-category');
         buttons.forEach(b => b.setAttribute('aria-pressed', 'false'));
         btn.setAttribute('aria-pressed', 'true');
-
-        wrappers.forEach(wrapper => {
-          const cat = wrapper.getAttribute('data-category');
-          if (selected === 'Todos' || cat === selected) {
-            wrapper.style.display = 'block';
-          } else {
-            wrapper.style.display = 'none';
-          }
-        });
+        applyFilters();
       });
+    });
+
+    // Búsqueda por texto
+    input.addEventListener('input', () => {
+      searchTerm = input.value;
+      clearBtn.style.display = searchTerm.length > 0 ? 'inline-flex' : 'none';
+      applyFilters();
+    });
+
+    // Limpiar búsqueda
+    clearBtn.addEventListener('click', () => {
+      input.value = '';
+      searchTerm = '';
+      clearBtn.style.display = 'none';
+      applyFilters();
+      input.focus();
     });
   })();
 </script>
@@ -179,6 +273,77 @@ const categories = ['Todos', ...new Set(posts.map(p => p.post.data.category))];
     margin-top: var(--space-sm);
     margin-bottom: 0;
     line-height: 1.7;
+  }
+
+  /* Barra de búsqueda */
+  .search-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    max-width: 480px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 0.5rem 0.75rem;
+    margin-bottom: 1rem;
+    transition: border-color 0.15s ease;
+  }
+
+  .search-bar:focus-within {
+    border-color: var(--color-accent);
+  }
+
+  .search-icon {
+    color: var(--color-muted);
+    flex-shrink: 0;
+  }
+
+  #search-input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    color: var(--color-text);
+    outline: none;
+  }
+
+  #search-input::placeholder {
+    color: var(--color-muted);
+  }
+
+  #search-clear {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-muted);
+    font-size: 0.8rem;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    transition: color 0.15s ease;
+  }
+
+  #search-clear:hover {
+    color: var(--color-text);
+  }
+
+  .search-count {
+    font-size: 0.82rem;
+    color: var(--color-muted);
+    margin-bottom: 1rem;
+    margin-top: -0.25rem;
+  }
+
+  .no-results {
+    color: var(--color-muted);
+    font-size: 0.95rem;
+    padding: 2rem 0;
+    max-width: 900px;
   }
 
   .filter-bar {
@@ -274,6 +439,10 @@ const categories = ['Todos', ...new Set(posts.map(p => p.post.data.category))];
   @media (max-width: 700px) {
     .posts-grid {
       grid-template-columns: 1fr;
+    }
+
+    .search-bar {
+      max-width: 100%;
     }
   }
 </style>
