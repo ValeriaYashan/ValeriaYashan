@@ -2,7 +2,7 @@
 title: "ClickUp vs Trello vs Monday: cuál elegir para gestionar proyectos"
 description: "Comparativa práctica de ClickUp, Trello y Monday para project managers: diferencias reales, cuándo usar cada uno y cómo decidir según el tipo de proyecto y equipo."
 pubDate: "2026-06-27"
-category: "Project Management"
+category: "Herramientas"
 tags: ["ClickUp", "Trello", "Monday", "Herramientas PM", "Project Management"]
 image: "/images/blog/clickup-trello-monday-comparativa.jpg"
 ---

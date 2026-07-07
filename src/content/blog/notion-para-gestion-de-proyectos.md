@@ -2,7 +2,7 @@
 title: "Notion para gestión de proyectos: cómo usarlo bien"
 description: "Cómo usar Notion para gestionar proyectos: qué funciona, qué no funciona y cómo estructurarlo para que el equipo realmente lo adopte."
 pubDate: "2026-07-04"
-category: "Project Management"
+category: "Herramientas"
 tags: ["Project Management", "Herramientas", "Notion", "Productividad"]
 ---
 

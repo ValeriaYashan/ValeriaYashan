@@ -2,7 +2,7 @@
 title: "Implementar Monday.com en tu empresa: por dónde empezar"
 description: "Cómo implementar Monday.com en equipos de Argentina y LATAM: estructura inicial, errores frecuentes y qué configurar antes de invitar al equipo."
 pubDate: "2026-07-04"
-category: "Project Management"
+category: "Herramientas"
 tags: ["Project Management", "Herramientas", "Monday", "Productividad"]
 ---
 
