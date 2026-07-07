@@ -144,3 +144,5 @@ Si ya cumplís los requisitos y estás en la etapa de práctica intensiva, el **
 [Ver el libro en Amazon →](https://www.amazon.com/dp/B0H58TX7Z4?spcref=PRINT_LISTING) · [Ver todos los libros →](/libro)
 
 Una vez que confirmás que cumplís los requisitos, el siguiente paso es entender qué cambió en el examen: [PMBOK® 8 y el nuevo examen PMP 2026](/blog/pmbok-8-nuevo-examen-pmp-2026). Y para no arrancar con el pie izquierdo, revisá también [los errores más comunes al estudiar para el PMP](/blog/errores-comunes-estudiar-pmp).
+
+Si tenés dudas sobre cómo documentar tu experiencia en la solicitud del PMI, leé [experiencia requerida para el PMP: cómo documentarla](/blog/experiencia-requerida-para-el-pmp). Y si todavía estás evaluando si vale la pena certificarte, [¿vale la pena sacar el PMP en Argentina?](/blog/pmp-vale-la-pena-en-argentina) te da los elementos para decidir.
