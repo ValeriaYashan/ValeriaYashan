@@ -875,6 +875,17 @@ const description = "Practicá para el PMP® con 180 preguntas originales de Val
     if(mode==='simulacro'){switchTab('banco');show('s-intro');}else{switchTab('simulacro');show('s-intro');}
   });
 
+
+  // Exponer funciones al scope global (necesario para onclick en HTML)
+  window.switchTab = switchTab;
+  window.selectBloque = selectBloque;
+  window.selectSim = selectSim;
+  window.selectDom = selectDom;
+  window.startCaso = startCaso;
+  window.toggleInstructivo = toggleInstructivo;
+  window.clearHistorial = clearHistorial;
+  window.toggleMarcada = toggleMarcada;
+
   // Init
   loadMarcadas();
 
