@@ -162,6 +162,55 @@ const description = "Practicá para el PMP® con 180 preguntas originales de Val
   .result-actions, .result-ctas { flex-direction: column; align-items: stretch; text-align: center; }
   .mode-tab { font-size: 0.75rem; padding: 0.5rem 0.6rem; }
 }
+
+
+/* EXPLORADOR ITTO */
+  .itto-filtros { display: flex; gap: 8px; margin-bottom: 1rem; flex-wrap: wrap; }
+  .itto-filter-btn { padding: 5px 12px; border: 1px solid #E0DFDB; border-radius: 20px; background: #FAFAF8; color: #6B6B6B; font-family: 'Inter', sans-serif; font-size: 0.75rem; font-weight: 500; cursor: pointer; transition: all 0.15s; }
+  .itto-filter-btn:hover:not(.active) { border-color: #2D6A4F; color: #2D6A4F; }
+  .itto-filter-btn.active { background: #2D6A4F; border-color: #2D6A4F; color: #fff; }
+  .itto-search { width: 100%; padding: 0.6rem 0.9rem; border: 1px solid #E0DFDB; border-radius: 8px; font-family: 'Inter', sans-serif; font-size: 0.875rem; color: #1A1A1A; background: #FAFAF8; margin-bottom: 1rem; box-sizing: border-box; }
+  .itto-search:focus { outline: none; border-color: #2D6A4F; }
+  .itto-lista { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1rem; }
+  .itto-proceso-btn {
+    display: flex; flex-direction: column; align-items: flex-start;
+    padding: 8px 10px; border: 1px solid #E0DFDB; border-radius: 8px;
+    background: #FAFAF8; cursor: pointer; text-align: left;
+    transition: border-color 0.15s, background 0.15s; width: 100%;
+    font-family: 'Inter', sans-serif; box-sizing: border-box;
+  }
+  .itto-proceso-btn:hover { border-color: #2D6A4F; background: #f0faf5; }
+  .itto-proceso-btn.activo { border-color: #2D6A4F; background: #f0faf5; }
+  .itto-proceso-nombre { font-size: 0.8rem; font-weight: 600; color: #1A1A1A; line-height: 1.35; }
+  .itto-proceso-meta { font-size: 0.68rem; color: #6B6B6B; margin-top: 2px; }
+  .itto-proceso-area { display: none; }
+  .itto-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid #E0DFDB; }
+  .itto-nav-counter { font-size: 0.75rem; color: #6B6B6B; }
+  .itto-nav-btn { padding: 5px 12px; border: 1px solid #E0DFDB; border-radius: 6px; background: #FAFAF8; font-family: 'Inter', sans-serif; font-size: 0.8rem; cursor: pointer; transition: all 0.15s; }
+  .itto-nav-btn:hover:not(:disabled) { border-color: #2D6A4F; color: #2D6A4F; }
+  .itto-nav-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+  .itto-area-badge { display: inline-block; font-size: 0.65rem; font-weight: 700; padding: 2px 8px; border-radius: 20px; margin-bottom: 4px; }
+  .area-inicio { background: #E1F5EE; color: #0F6E56; }
+  .area-planificacion { background: #EEEDFE; color: #3C3489; }
+  .area-ejecucion { background: #FFF3E0; color: #E65100; }
+  .area-mc { background: #FAEEDA; color: #854F0B; }
+  .area-cierre { background: #F3E5F5; color: #6A1B9A; }
+  .itto-detalle { background: white; border: 1px solid #E0DFDB; border-radius: 10px; padding: 1.25rem; }
+  .itto-detalle-titulo { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 700; color: #1A1A1A; margin-bottom: 0.25rem; }
+  .itto-detalle-desc { font-size: 0.82rem; color: #6B6B6B; line-height: 1.6; margin-bottom: 1rem; }
+  .itto-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
+  .itto-col-title { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 0.5rem; }
+  .itto-col-entradas .itto-col-title { color: #1B4332; }
+  .itto-col-herramientas .itto-col-title { color: #854F0B; }
+  .itto-col-salidas .itto-col-title { color: #3C3489; }
+  .itto-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 4px; }
+  .itto-col ul li { font-size: 0.78rem; color: #1A1A1A; line-height: 1.5; padding: 4px 8px; border-radius: 4px; }
+  .itto-col-entradas ul li { background: #E8F5EE; color: #0F6E56; }
+  .itto-col-herramientas ul li { background: #FFF3E0; color: #854F0B; }
+  .itto-col-salidas ul li { background: #EEEDFE; color: #3C3489; }
+  .itto-empty { font-size: 0.875rem; color: #9B9B9B; text-align: center; padding: 2rem; }
+  @media (max-width: 600px) { .itto-cols { grid-template-columns: 1fr; } }
+
 </style>
 
 <div class="sim-wrap">
@@ -1025,8 +1074,8 @@ const description = "Practicá para el PMP® con 180 preguntas originales de Val
       '<div class="itto-nav">' +
         '<span class="itto-nav-counter">' + (idx+1) + ' / ' + total + '</span>' +
         '<div style="display:flex;gap:6px;">' +
-          '<button class="itto-nav-btn" ' + (prevId ? 'onclick="verItto(\\'' + prevId + '\\', true)"' : 'disabled') + '>← Anterior</button>' +
-          '<button class="itto-nav-btn" ' + (nextId ? 'onclick="verItto(\\'' + nextId + '\\', true)"' : 'disabled') + '>Siguiente →</button>' +
+          '<button class="itto-nav-btn" onclick="ittoNavPrev()" ' + (prevId ? '' : 'disabled') + '>← Anterior</button>' +
+          '<button class="itto-nav-btn" onclick="ittoNavNext()" ' + (nextId ? '' : 'disabled') + '>Siguiente →</button>' +
         '</div>' +
       '</div>' +
     '</div>';
@@ -1035,55 +1084,7 @@ const description = "Practicá para el PMP® con 180 preguntas originales de Val
   // Init ITTO cuando se abre la pestaña
   var _origSwitchTab = null;
 
-  // Exponer funciones al scope global (necesario para onclick en HTML)
-
-  /* EXPLORADOR ITTO */
-  .itto-filtros { display: flex; gap: 8px; margin-bottom: 1rem; flex-wrap: wrap; }
-  .itto-filter-btn { padding: 5px 12px; border: 1px solid #E0DFDB; border-radius: 20px; background: #FAFAF8; color: #6B6B6B; font-family: 'Inter', sans-serif; font-size: 0.75rem; font-weight: 500; cursor: pointer; transition: all 0.15s; }
-  .itto-filter-btn:hover:not(.active) { border-color: #2D6A4F; color: #2D6A4F; }
-  .itto-filter-btn.active { background: #2D6A4F; border-color: #2D6A4F; color: #fff; }
-  .itto-search { width: 100%; padding: 0.6rem 0.9rem; border: 1px solid #E0DFDB; border-radius: 8px; font-family: 'Inter', sans-serif; font-size: 0.875rem; color: #1A1A1A; background: #FAFAF8; margin-bottom: 1rem; box-sizing: border-box; }
-  .itto-search:focus { outline: none; border-color: #2D6A4F; }
-  .itto-lista { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1rem; }
-  .itto-proceso-btn {
-    display: flex; flex-direction: column; align-items: flex-start;
-    padding: 8px 10px; border: 1px solid #E0DFDB; border-radius: 8px;
-    background: #FAFAF8; cursor: pointer; text-align: left;
-    transition: border-color 0.15s, background 0.15s; width: 100%;
-    font-family: 'Inter', sans-serif; box-sizing: border-box;
-  }
-  .itto-proceso-btn:hover { border-color: #2D6A4F; background: #f0faf5; }
-  .itto-proceso-btn.activo { border-color: #2D6A4F; background: #f0faf5; }
-  .itto-proceso-nombre { font-size: 0.8rem; font-weight: 600; color: #1A1A1A; line-height: 1.35; }
-  .itto-proceso-meta { font-size: 0.68rem; color: #6B6B6B; margin-top: 2px; }
-  .itto-proceso-area { display: none; }
-  .itto-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid #E0DFDB; }
-  .itto-nav-counter { font-size: 0.75rem; color: #6B6B6B; }
-  .itto-nav-btn { padding: 5px 12px; border: 1px solid #E0DFDB; border-radius: 6px; background: #FAFAF8; font-family: 'Inter', sans-serif; font-size: 0.8rem; cursor: pointer; transition: all 0.15s; }
-  .itto-nav-btn:hover:not(:disabled) { border-color: #2D6A4F; color: #2D6A4F; }
-  .itto-nav-btn:disabled { opacity: 0.35; cursor: not-allowed; }
-  .itto-area-badge { display: inline-block; font-size: 0.65rem; font-weight: 700; padding: 2px 8px; border-radius: 20px; margin-bottom: 4px; }
-  .area-inicio { background: #E1F5EE; color: #0F6E56; }
-  .area-planificacion { background: #EEEDFE; color: #3C3489; }
-  .area-ejecucion { background: #FFF3E0; color: #E65100; }
-  .area-mc { background: #FAEEDA; color: #854F0B; }
-  .area-cierre { background: #F3E5F5; color: #6A1B9A; }
-  .itto-detalle { background: white; border: 1px solid #E0DFDB; border-radius: 10px; padding: 1.25rem; }
-  .itto-detalle-titulo { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 700; color: #1A1A1A; margin-bottom: 0.25rem; }
-  .itto-detalle-desc { font-size: 0.82rem; color: #6B6B6B; line-height: 1.6; margin-bottom: 1rem; }
-  .itto-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
-  .itto-col-title { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 0.5rem; }
-  .itto-col-entradas .itto-col-title { color: #1B4332; }
-  .itto-col-herramientas .itto-col-title { color: #854F0B; }
-  .itto-col-salidas .itto-col-title { color: #3C3489; }
-  .itto-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 4px; }
-  .itto-col ul li { font-size: 0.78rem; color: #1A1A1A; line-height: 1.5; padding: 4px 8px; border-radius: 4px; }
-  .itto-col-entradas ul li { background: #E8F5EE; color: #0F6E56; }
-  .itto-col-herramientas ul li { background: #FFF3E0; color: #854F0B; }
-  .itto-col-salidas ul li { background: #EEEDFE; color: #3C3489; }
-  .itto-empty { font-size: 0.875rem; color: #9B9B9B; text-align: center; padding: 2rem; }
-  @media (max-width: 600px) { .itto-cols { grid-template-columns: 1fr; } }
-  
+  // Exponer funciones al scope global (necesario para onclick en HTML)  
   window.switchTab = function(tab) {
     switchTab(tab);
     if (tab === 'itto') {
@@ -1095,6 +1096,20 @@ const description = "Practicá para el PMP® con 180 preguntas originales de Val
   window.filtrarArea = filtrarArea;
   window.filtrarItto = filtrarItto;
   window.verItto = verItto;
+  window.ittoNavPrev = function() {
+    var pool = ittoAreaActual === 'todos' ? ITTO_DATA : ITTO_DATA.filter(function(p){ return p.area_enfoque === ittoAreaActual; });
+    var q = (document.getElementById('itto-search').value || '').toLowerCase();
+    if (q) pool = pool.filter(function(p){ return p.nombre.toLowerCase().includes(q) || p.entradas.some(function(e){ return e.toLowerCase().includes(q); }) || p.herramientas.some(function(h){ return h.toLowerCase().includes(q); }) || p.salidas.some(function(s){ return s.toLowerCase().includes(q); }); });
+    var idx = pool.findIndex(function(x){ return x.id === ittoSeleccionado; });
+    if (idx > 0) verItto(pool[idx-1].id, true);
+  };
+  window.ittoNavNext = function() {
+    var pool = ittoAreaActual === 'todos' ? ITTO_DATA : ITTO_DATA.filter(function(p){ return p.area_enfoque === ittoAreaActual; });
+    var q = (document.getElementById('itto-search').value || '').toLowerCase();
+    if (q) pool = pool.filter(function(p){ return p.nombre.toLowerCase().includes(q) || p.entradas.some(function(e){ return e.toLowerCase().includes(q); }) || p.herramientas.some(function(h){ return h.toLowerCase().includes(q); }) || p.salidas.some(function(s){ return s.toLowerCase().includes(q); }); });
+    var idx = pool.findIndex(function(x){ return x.id === ittoSeleccionado; });
+    if (idx < pool.length - 1) verItto(pool[idx+1].id, true);
+  };
   window.selectSim = selectSim;
   window.selectDom = selectDom;
   window.startCaso = startCaso;
