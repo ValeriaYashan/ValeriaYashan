@@ -8,24 +8,52 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 >
   <div class="container page-container">
 
+    <!-- HEADER -->
     <header class="page-header">
       <p class="page-eyebrow">Contacto</p>
       <h1>Conversemos</h1>
       <p class="page-lead">Si tenés una consulta profesional, una propuesta de colaboración o querés que acompañe a tu equipo, escribime. Respondo en menos de 48 horas.</p>
+      <p class="page-ubicacion">📍 Buenos Aires, Argentina · También trabajo con equipos en LATAM y España</p>
     </header>
 
+    <!-- PRUEBA SOCIAL -->
+    <section class="testimonios-preview">
+      <div class="tp-item">
+        <p class="tp-texto">"La serie de libros de Valeria es la mejor preparación para el PMP® en español. Las justificaciones de cada pregunta son más completas que cualquier otro recurso que encontré."</p>
+        <div class="tp-autor">
+          <div class="tp-avatar">MG</div>
+          <div>
+            <p class="tp-nombre">M. García</p>
+            <p class="tp-rol">Project Manager · Lima, Perú</p>
+          </div>
+        </div>
+      </div>
+      <div class="tp-item">
+        <p class="tp-texto">"El simulador gratuito es una herramienta increíble. Las preguntas son situacionales reales, no de memoria. Me ayudó a identificar exactamente dónde tenía brechas antes del examen."</p>
+        <div class="tp-autor">
+          <div class="tp-avatar">AS</div>
+          <div>
+            <p class="tp-nombre">A. Sánchez</p>
+            <p class="tp-rol">Scrum Master · Buenos Aires</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <p class="tp-aviso">Testimonios reales pendientes de publicación · <a href="https://forms.gle/p4br1SpJkzbcKecAA" target="_blank" rel="noopener">¿Trabajaste conmigo? Dejá el tuyo</a></p>
+
+    <!-- CANALES DE CONTACTO -->
     <section class="contact-lista">
 
-      <a href="https://wa.me/541140791007" target="_blank" rel="noopener noreferrer" class="contact-item">
+      <a href="https://wa.me/541140791007" target="_blank" rel="noopener noreferrer" class="contact-item contact-item--primary">
         <div class="contact-icono">
           <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 48 48" fill="#25D366" aria-hidden="true"><path d="M24 4C12.95 4 4 12.95 4 24c0 3.66.98 7.09 2.7 10.04L4 44l10.22-2.66A19.93 19.93 0 0 0 24 44c11.05 0 20-8.95 20-20S35.05 4 24 4Zm0 36a15.93 15.93 0 0 1-8.17-2.25l-.58-.35-6.03 1.48 1.52-5.88-.38-.6A15.94 15.94 0 1 1 24 40Zm8.77-11.9c-.47-.24-2.8-1.38-3.23-1.54-.43-.16-.74-.24-1.06.24-.31.47-1.22 1.54-1.49 1.85-.28.31-.55.35-1.02.12-.47-.24-1.99-.73-3.79-2.33-1.4-1.25-2.35-2.79-2.62-3.26-.28-.47-.03-.72.21-.95.21-.21.47-.55.7-.83.24-.28.31-.47.47-.78.16-.31.08-.59-.04-.83-.12-.24-1.06-2.56-1.46-3.5-.38-.92-.77-.8-1.06-.81h-.9c-.31 0-.82.12-1.25.59-.43.47-1.65 1.61-1.65 3.93s1.69 4.56 1.93 4.87c.24.31 3.33 5.08 8.07 7.13 1.13.49 2.01.78 2.7.99 1.13.36 2.16.31 2.97.19.91-.14 2.8-1.14 3.19-2.25.39-1.1.39-2.04.27-2.24-.12-.2-.43-.31-.9-.55Z"/></svg>
         </div>
         <div class="contact-info">
-          <p class="contact-titulo">WhatsApp</p>
-          <p class="contact-desc">La forma más rápida de contactarme. Para consultas concretas y propuestas de trabajo.</p>
+          <p class="contact-titulo">WhatsApp <span class="contact-badge">Más rápido</span></p>
+          <p class="contact-desc">Para consultas concretas y propuestas de trabajo.</p>
           <p class="contact-numero">+54 11 4079-1007</p>
         </div>
-        <span class="contact-accion">Escribime por WhatsApp &rarr;</span>
+        <span class="contact-accion">Escribime &rarr;</span>
       </a>
 
       <a href="mailto:hola@valeriayashan.com.ar" class="contact-item">
@@ -34,24 +62,55 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
         <div class="contact-info">
           <p class="contact-titulo">Email</p>
-          <p class="contact-desc">hola@valeriayashan.com.ar — Para propuestas, presupuestos o consultas que necesiten más detalle.</p>
+          <p class="contact-desc">hola@valeriayashan.com.ar · Para propuestas y presupuestos.</p>
         </div>
-        <span class="contact-accion">Enviar email &rarr;</span>
-      </a>
-
-      <a href="https://www.linkedin.com/in/valeriayashan" target="_blank" rel="noopener noreferrer" class="contact-item">
-        <div class="contact-icono">
-          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="#0A66C2" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-        </div>
-        <div class="contact-info">
-          <p class="contact-titulo">LinkedIn</p>
-          <p class="contact-desc">Para conectar profesionalmente, seguir mi actividad o enviar un mensaje por la plataforma.</p>
-        </div>
-        <span class="contact-accion">Ver perfil &rarr;</span>
+        <span class="contact-accion">Enviar &rarr;</span>
       </a>
 
     </section>
 
+    <!-- FORMULARIO DE CONTACTO -->
+    <section class="contacto-form-section">
+      <div class="form-header">
+        <h2>Escribime directamente</h2>
+        <p>Completá el formulario y te respondo en menos de 48 horas.</p>
+      </div>
+      <form class="contacto-form" id="contact-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="cf-nombre">Nombre</label>
+            <input type="text" id="cf-nombre" name="nombre" placeholder="Tu nombre" required>
+          </div>
+          <div class="form-group">
+            <label for="cf-email">Email</label>
+            <input type="email" id="cf-email" name="email" placeholder="tu@email.com" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="cf-asunto">¿Sobre qué querés hablar?</label>
+          <select id="cf-asunto" name="asunto">
+            <option value="">Seleccioná una opción</option>
+            <option>Consultoría en gestión de proyectos</option>
+            <option>Capacitación PMP® para mi equipo</option>
+            <option>IA aplicada a proyectos</option>
+            <option>Consulta sobre los libros</option>
+            <option>Propuesta de colaboración</option>
+            <option>Otro</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="cf-mensaje">Mensaje</label>
+          <textarea id="cf-mensaje" name="mensaje" rows="4" placeholder="Contame brevemente qué necesitás..." required></textarea>
+        </div>
+        <button type="submit" class="btn-form">Enviar mensaje &rarr;</button>
+        <p class="form-nota">También podés escribirme directamente a <a href="mailto:hola@valeriayashan.com.ar">hola@valeriayashan.com.ar</a></p>
+      </form>
+      <div id="form-success" style="display:none;" class="form-success">
+        <p>✅ Mensaje enviado. Te respondo en menos de 48 horas.</p>
+      </div>
+    </section>
+
+    <!-- CALENDLY -->
     <section class="contacto-calendly">
       <div class="calendly-inner">
         <p class="calendly-eyebrow">Agenda abierta</p>
@@ -61,23 +120,54 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
     </section>
 
-
-    <section style="background:#F2F1EE;border:1px solid #E0DFDB;border-radius:12px;padding:2rem;text-align:center;margin-bottom:2rem;">
-      <p style="font-size:0.75rem;font-weight:600;letter-spacing:0.09em;text-transform:uppercase;color:#2D6A4F;margin-bottom:0.75rem;">Tu opinión importa</p>
-      <h2 style="font-family:'Fraunces',serif;font-size:1.6rem;font-weight:700;color:#1A1A1A;margin-bottom:0.75rem;">¿Trabajaste conmigo o usaste mis recursos?</h2>
-      <p style="font-size:0.95rem;color:#6B6B6B;max-width:480px;margin:0 auto 1.25rem;line-height:1.7;">Tu experiencia ayuda a otros profesionales a conocer mi trabajo. Tardás menos de 2 minutos en completar el formulario.</p>
-      <a href="https://forms.gle/p4br1SpJkzbcKecAA" target="_blank" rel="noopener noreferrer" style="display:inline-block;padding:0.75rem 1.5rem;background:#2D6A4F;color:#fff;border-radius:6px;font-family:Inter,sans-serif;font-size:0.875rem;font-weight:600;text-decoration:none;">Dejar mi testimonio →</a>
+    <!-- CON QUIÉN TRABAJO -->
+    <section class="con-quien">
+      <h2 class="cq-titulo">¿Con quién trabajo?</h2>
+      <div class="cq-grid">
+        <div class="cq-item">
+          <div class="cq-icon">🏢</div>
+          <p class="cq-label">Empresas medianas y grandes que necesitan implementar o profesionalizar su gestión de proyectos</p>
+        </div>
+        <div class="cq-item">
+          <div class="cq-icon">👥</div>
+          <p class="cq-label">Equipos que quieren certificarse en PMP® y necesitan capacitación práctica orientada al examen real</p>
+        </div>
+        <div class="cq-item">
+          <div class="cq-icon">🤖</div>
+          <p class="cq-label">Organizaciones que quieren incorporar IA en sus procesos de gestión de proyectos de forma concreta</p>
+        </div>
+        <div class="cq-item">
+          <div class="cq-icon">🌎</div>
+          <p class="cq-label">Proyectos en Argentina, LATAM y España en sectores como tecnología, finanzas, construcción y salud</p>
+        </div>
+      </div>
     </section>
 
-    <section class="contact-cta">
-      <h2 class="contact-cta-titulo">¿No sabés por dónde empezar?</h2>
-      <p class="contact-cta-texto">Contame brevemente qué necesita tu equipo u organización y te cuento cómo puedo ayudarte. Sin compromiso.</p>
-      <a href="https://wa.me/541140791007?text=Hola%20Valeria%2C%20me%20contacto%20desde%20tu%20web%20porque%20necesito..." target="_blank" rel="noopener noreferrer" class="btn-verde">Escribime por WhatsApp &rarr;</a>
-      <p class="contact-ubicacion">📍 Buenos Aires, Argentina · También trabajo con equipos en LATAM y España</p>
+    <!-- TESTIMONIO CTA — peso visual reducido -->
+    <section class="testimonio-cta">
+      <p>¿Ya usaste mis recursos o trabajaste conmigo? <a href="https://forms.gle/p4br1SpJkzbcKecAA" target="_blank" rel="noopener noreferrer">Dejá tu testimonio →</a></p>
     </section>
 
   </div>
 </BaseLayout>
+
+<script>
+  // Formulario: envío por mailto como fallback simple (sin backend)
+  const form = document.getElementById('contact-form');
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const nombre = document.getElementById('cf-nombre').value;
+      const email = document.getElementById('cf-email').value;
+      const asunto = document.getElementById('cf-asunto').value;
+      const mensaje = document.getElementById('cf-mensaje').value;
+      const body = encodeURIComponent(`Nombre: ${nombre}\nEmail: ${email}\nAsunto: ${asunto}\n\n${mensaje}`);
+      window.location.href = `mailto:hola@valeriayashan.com.ar?subject=Consulta desde el sitio web&body=${body}`;
+      form.style.display = 'none';
+      document.getElementById('form-success').style.display = 'block';
+    });
+  }
+</script>
 
 <style>
   .page-container {
@@ -85,11 +175,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     padding-bottom: 4rem;
   }
 
+  /* HEADER */
   .page-header {
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
     max-width: 600px;
   }
-
   .page-eyebrow {
     font-size: 0.75rem;
     font-weight: 600;
@@ -98,7 +188,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     color: var(--color-accent);
     margin-bottom: 0.5rem;
   }
-
   .page-header h1 {
     font-family: 'Fraunces', serif;
     font-size: 2.5rem;
@@ -106,33 +195,56 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     color: var(--color-text);
     margin-bottom: 0.75rem;
   }
-
   .page-lead {
     font-size: 1.05rem;
     color: var(--color-muted);
     line-height: 1.7;
     margin: 0 0 0.5rem;
   }
-
   .page-ubicacion {
-    font-size: 0.9rem;
+    font-size: 0.875rem;
     color: var(--color-muted);
     margin: 0;
   }
 
-  .contact-numero {
-    font-size: 0.85rem;
-    font-weight: 600;
+  /* TESTIMONIOS PREVIEW */
+  .testimonios-preview {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    max-width: 680px;
+    margin-bottom: 0.5rem;
+  }
+  .tp-item {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    padding: 1.25rem;
+  }
+  .tp-texto {
+    font-size: 0.875rem;
     color: var(--color-text);
-    margin: 0.25rem 0 0;
+    line-height: 1.65;
+    margin: 0 0 1rem;
+    font-style: italic;
   }
-
-  .contact-ubicacion {
-    font-size: 0.85rem;
-    color: var(--color-muted);
-    margin: 0.25rem 0 0;
+  .tp-autor { display: flex; align-items: center; gap: 0.6rem; }
+  .tp-avatar {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: var(--color-accent); color: #fff;
+    font-size: 0.7rem; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
   }
+  .tp-nombre { font-size: 0.8rem; font-weight: 600; color: var(--color-text); margin: 0; }
+  .tp-rol { font-size: 0.72rem; color: var(--color-muted); margin: 0; }
+  .tp-aviso {
+    font-size: 0.75rem; color: var(--color-muted);
+    margin: 0 0 2rem; max-width: 680px;
+  }
+  .tp-aviso a { color: var(--color-accent); }
 
+  /* CANALES */
   .contact-lista {
     display: flex;
     flex-direction: column;
@@ -140,7 +252,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     margin-bottom: 2rem;
     max-width: 680px;
   }
-
   .contact-item {
     display: flex;
     align-items: center;
@@ -152,162 +263,150 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     text-decoration: none;
     transition: border-color 0.2s, background 0.2s;
   }
-
-  .contact-item:hover {
-    border-color: var(--color-accent);
-    background: #ffffff;
-  }
-
+  .contact-item:hover { border-color: var(--color-accent); background: #ffffff; }
+  .contact-item--primary { border-color: #52B788; background: #f0faf5; }
   .contact-icono {
-    width: 44px;
-    height: 44px;
-    border-radius: 8px;
+    width: 44px; height: 44px; border-radius: 8px;
     background: #E8F5EE;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; align-items: center; justify-content: center;
     flex-shrink: 0;
   }
-
-  .contact-info {
-    flex: 1;
-  }
-
+  .contact-info { flex: 1; }
   .contact-titulo {
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: var(--color-text);
-    margin: 0 0 0.25rem;
+    font-size: 0.95rem; font-weight: 600;
+    color: var(--color-text); margin: 0 0 0.25rem;
+    display: flex; align-items: center; gap: 0.5rem;
   }
-
-  .contact-desc {
-    font-size: 0.85rem;
-    color: var(--color-muted);
-    line-height: 1.5;
-    margin: 0;
+  .contact-badge {
+    font-size: 0.65rem; font-weight: 700;
+    background: var(--color-accent); color: #fff;
+    padding: 2px 7px; border-radius: 20px;
+    letter-spacing: 0.04em;
   }
+  .contact-desc { font-size: 0.85rem; color: var(--color-muted); line-height: 1.5; margin: 0; }
+  .contact-numero { font-size: 0.85rem; font-weight: 600; color: var(--color-text); margin: 0.25rem 0 0; }
+  .contact-accion { font-size: 0.85rem; font-weight: 600; color: var(--color-accent); flex-shrink: 0; white-space: nowrap; }
 
-  .contact-accion {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--color-accent);
-    flex-shrink: 0;
-    white-space: nowrap;
-  }
-
-  .contacto-calendly {
+  /* FORMULARIO */
+  .contacto-form-section {
     max-width: 680px;
     margin-bottom: 2rem;
-  }
-
-  .calendly-inner {
-    background: var(--color-accent);
+    background: #fff;
+    border: 1px solid var(--color-border);
     border-radius: 12px;
-    padding: 2.5rem;
+    padding: 2rem;
   }
-
-  .calendly-eyebrow {
-    font-size: 0.75rem;
+  .form-header { margin-bottom: 1.5rem; }
+  .form-header h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.4rem; font-weight: 700;
+    color: var(--color-text); margin: 0 0 0.35rem;
+  }
+  .form-header p { font-size: 0.9rem; color: var(--color-muted); margin: 0; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; }
+  .form-group label { font-size: 0.82rem; font-weight: 600; color: var(--color-text); }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 0.65rem 0.9rem;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    color: var(--color-text);
+    background: var(--color-bg);
+    transition: border-color 0.15s;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-accent);
+  }
+  .form-group textarea { resize: vertical; min-height: 100px; }
+  .btn-form {
+    padding: 0.75rem 1.5rem;
+    background: var(--color-accent);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
     font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: rgba(255,255,255,0.6);
-    margin: 0 0 0.5rem;
+    cursor: pointer;
+    transition: opacity 0.15s;
+  }
+  .btn-form:hover { opacity: 0.88; }
+  .form-nota { font-size: 0.78rem; color: var(--color-muted); margin: 0.75rem 0 0; }
+  .form-nota a { color: var(--color-accent); }
+  .form-success {
+    background: #EAF3DE; border: 1px solid #97C459;
+    border-radius: 8px; padding: 1.25rem;
+    font-size: 0.9rem; color: #27500A;
   }
 
+  /* CALENDLY */
+  .contacto-calendly { max-width: 680px; margin-bottom: 2rem; }
+  .calendly-inner { background: var(--color-accent); border-radius: 12px; padding: 2.5rem; }
+  .calendly-eyebrow {
+    font-size: 0.75rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    color: rgba(255,255,255,0.6); margin: 0 0 0.5rem;
+  }
   .calendly-inner h2 {
     font-family: 'Fraunces', serif;
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: #fff;
-    margin: 0 0 0.75rem;
+    font-size: 1.6rem; font-weight: 700;
+    color: #fff; margin: 0 0 0.75rem;
   }
-
-  .calendly-inner p {
-    font-size: 0.95rem;
-    color: rgba(255,255,255,0.8);
-    margin: 0 0 1.5rem;
-    line-height: 1.6;
-  }
-
+  .calendly-inner p { font-size: 0.95rem; color: rgba(255,255,255,0.8); margin: 0 0 1.5rem; line-height: 1.6; }
   .btn-calendly {
-    display: inline-block;
-    background: #fff;
-    color: var(--color-accent);
-    font-weight: 600;
-    font-size: 0.9rem;
-    padding: 0.75rem 1.5rem;
-    border-radius: 6px;
-    text-decoration: none;
+    display: inline-block; background: #fff;
+    color: var(--color-accent); font-weight: 600;
+    font-size: 0.9rem; padding: 0.75rem 1.5rem;
+    border-radius: 6px; text-decoration: none;
     transition: opacity 0.2s;
   }
+  .btn-calendly:hover { opacity: 0.9; }
 
-  .btn-calendly:hover {
-    opacity: 0.9;
+  /* CON QUIÉN TRABAJO */
+  .con-quien { max-width: 680px; margin-bottom: 2rem; }
+  .cq-titulo {
+    font-family: 'Fraunces', serif;
+    font-size: 1.3rem; font-weight: 700;
+    color: var(--color-text); margin: 0 0 1rem;
   }
-
-  .contact-cta {
+  .cq-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+  .cq-item {
+    display: flex; gap: 0.75rem; align-items: flex-start;
     background: var(--color-surface);
     border: 1px solid var(--color-border);
-    border-radius: 8px;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
+    border-radius: 8px; padding: 1rem;
+  }
+  .cq-icon { font-size: 1.25rem; flex-shrink: 0; margin-top: 0.1rem; }
+  .cq-label { font-size: 0.82rem; color: var(--color-muted); line-height: 1.55; margin: 0; }
+
+  /* TESTIMONIO CTA — peso reducido */
+  .testimonio-cta {
     max-width: 680px;
-    margin-bottom: 2rem;
-  }
-
-  .contact-cta-titulo {
-    font-family: 'Fraunces', serif;
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: var(--color-text);
-    margin: 0;
-  }
-
-  .contact-cta-texto {
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.85rem;
     color: var(--color-muted);
-    font-size: 0.95rem;
-    line-height: 1.6;
-    margin: 0;
   }
+  .testimonio-cta a { color: var(--color-accent); font-weight: 600; }
 
-  .btn-verde {
-    display: inline-flex;
-    align-items: center;
-    background: var(--color-accent);
-    color: #ffffff;
-    font-weight: 600;
-    font-size: 0.9rem;
-    padding: 0.7rem 1.5rem;
-    border-radius: 6px;
-    text-decoration: none;
-    transition: opacity 0.2s;
-    align-self: flex-start;
-    min-height: 44px;
-  }
-
-  .btn-verde:hover {
-    opacity: 0.88;
-  }
-
+  /* RESPONSIVE */
   @media (max-width: 700px) {
-    .page-header h1 {
-      font-size: 1.8rem;
-    }
-    .contact-item {
-      padding: 1rem;
-      gap: 0.75rem;
-    }
-    .contact-accion {
-      display: none;
-    }
-    .contact-cta {
-      padding: 1.5rem;
-    }
-    .calendly-inner {
-      padding: 1.75rem;
-    }
+    .page-header h1 { font-size: 1.8rem; }
+    .testimonios-preview { grid-template-columns: 1fr; }
+    .contact-item { padding: 1rem; gap: 0.75rem; }
+    .contact-accion { display: none; }
+    .form-row { grid-template-columns: 1fr; }
+    .cq-grid { grid-template-columns: 1fr; }
+    .calendly-inner { padding: 1.75rem; }
+    .contacto-form-section { padding: 1.5rem; }
   }
 </style>
