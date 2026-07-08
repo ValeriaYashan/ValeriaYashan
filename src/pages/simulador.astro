@@ -382,7 +382,7 @@ const description = "Practicá para el PMP® con 180 preguntas originales de Val
         <button class="itto-filter-btn" onclick="filtrarArea('Monitoreo y Control')">Monitoreo y Control</button>
         <button class="itto-filter-btn" onclick="filtrarArea('Cierre')">Cierre</button>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+      <div style="display:grid;grid-template-columns:220px 1fr;gap:1rem;align-items:start;">
         <div>
           <div class="itto-lista" id="itto-lista"></div>
         </div>
@@ -987,26 +987,47 @@ const description = "Practicá para el PMP® con 180 preguntas originales de Val
     renderIttoLista(pool);
   }
 
-  function verItto(id) {
+  function verItto(id, fromNav) {
     ittoSeleccionado = id;
-    var p = ITTO_DATA.find(function(x){ return x.id===id; });
+    var pool = ittoAreaActual === 'todos' ? ITTO_DATA : ITTO_DATA.filter(function(p){ return p.area_enfoque === ittoAreaActual; });
+    var q = (document.getElementById('itto-search').value || '').toLowerCase();
+    if (q) pool = pool.filter(function(p){ return p.nombre.toLowerCase().includes(q) || p.entradas.some(function(e){ return e.toLowerCase().includes(q); }) || p.herramientas.some(function(h){ return h.toLowerCase().includes(q); }) || p.salidas.some(function(s){ return s.toLowerCase().includes(q); }); });
+    var idx = pool.findIndex(function(x){ return x.id===id; });
+    var p = pool[idx];
     if (!p) return;
     document.querySelectorAll('.itto-proceso-btn').forEach(function(b){ b.classList.remove('activo'); });
-    event.currentTarget.classList.add('activo');
+    var btn = document.querySelector('.itto-proceso-btn[data-id="' + id + '"]');
+    if (btn) btn.classList.add('activo');
+    var areaColors = {'Inicio':'background:#E1F5EE;color:#0F6E56','Planificación':'background:#EEEDFE;color:#3C3489','Ejecución':'background:#FFF3E0;color:#E65100','Monitoreo y Control':'background:#FAEEDA;color:#854F0B','Cierre':'background:#F3E5F5;color:#6A1B9A'};
+    var areaStyle = areaColors[p.area_enfoque] || '';
+    var prevId = idx > 0 ? pool[idx-1].id : null;
+    var nextId = idx < pool.length-1 ? pool[idx+1].id : null;
+    var total = pool.length;
     var wrap = document.getElementById('itto-detalle-wrap');
     wrap.innerHTML = '<div class="itto-detalle">' +
-      '<div class="itto-detalle-titulo">' + p.nombre + '</div>' +
-      '<div class="itto-detalle-desc">' + p.descripcion + '</div>' +
+      '<div style="margin-bottom:0.75rem;padding-bottom:0.75rem;border-bottom:1px solid #E0DFDB;">' +
+        '<span class="itto-area-badge" style="' + areaStyle + '">' + p.area_enfoque + '</span>' +
+        '<span style="font-size:0.68rem;color:#6B6B6B;margin-left:6px;">' + p.dominio + '</span>' +
+        '<div class="itto-detalle-titulo">' + p.nombre + '</div>' +
+        '<div class="itto-detalle-desc">' + p.descripcion + '</div>' +
+      '</div>' +
       '<div class="itto-cols">' +
-        '<div class="itto-col itto-col-entradas"><div class="itto-col-title">📥 Entradas</div><ul>' +
+        '<div class="itto-col itto-col-entradas"><div class="itto-col-title">Entradas</div><ul>' +
           p.entradas.map(function(e){ return '<li>' + e + '</li>'; }).join('') +
         '</ul></div>' +
-        '<div class="itto-col itto-col-herramientas"><div class="itto-col-title">🔧 Herramientas y Técnicas</div><ul>' +
+        '<div class="itto-col itto-col-herramientas"><div class="itto-col-title">Herramientas</div><ul>' +
           p.herramientas.map(function(h){ return '<li>' + h + '</li>'; }).join('') +
         '</ul></div>' +
-        '<div class="itto-col itto-col-salidas"><div class="itto-col-title">📤 Salidas</div><ul>' +
+        '<div class="itto-col itto-col-salidas"><div class="itto-col-title">Salidas</div><ul>' +
           p.salidas.map(function(s){ return '<li>' + s + '</li>'; }).join('') +
         '</ul></div>' +
+      '</div>' +
+      '<div class="itto-nav">' +
+        '<span class="itto-nav-counter">' + (idx+1) + ' / ' + total + '</span>' +
+        '<div style="display:flex;gap:6px;">' +
+          '<button class="itto-nav-btn" ' + (prevId ? 'onclick="verItto(\\'' + prevId + '\\', true)"' : 'disabled') + '>← Anterior</button>' +
+          '<button class="itto-nav-btn" ' + (nextId ? 'onclick="verItto(\\'' + nextId + '\\', true)"' : 'disabled') + '>Siguiente →</button>' +
+        '</div>' +
       '</div>' +
     '</div>';
   }
@@ -1025,20 +1046,23 @@ const description = "Practicá para el PMP® con 180 preguntas originales de Val
   .itto-search:focus { outline: none; border-color: #2D6A4F; }
   .itto-lista { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1rem; }
   .itto-proceso-btn {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 0.75rem 1rem; border: 1px solid #E0DFDB; border-radius: 8px;
+    display: flex; flex-direction: column; align-items: flex-start;
+    padding: 8px 10px; border: 1px solid #E0DFDB; border-radius: 8px;
     background: #FAFAF8; cursor: pointer; text-align: left;
     transition: border-color 0.15s, background 0.15s; width: 100%;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', sans-serif; box-sizing: border-box;
   }
   .itto-proceso-btn:hover { border-color: #2D6A4F; background: #f0faf5; }
   .itto-proceso-btn.activo { border-color: #2D6A4F; background: #f0faf5; }
-  .itto-proceso-nombre { font-size: 0.875rem; font-weight: 600; color: #1A1A1A; }
-  .itto-proceso-meta { font-size: 0.72rem; color: #6B6B6B; margin-top: 0.2rem; }
-  .itto-proceso-area {
-    font-size: 0.65rem; font-weight: 700; padding: 2px 8px; border-radius: 20px;
-    white-space: nowrap; flex-shrink: 0;
-  }
+  .itto-proceso-nombre { font-size: 0.8rem; font-weight: 600; color: #1A1A1A; line-height: 1.35; }
+  .itto-proceso-meta { font-size: 0.68rem; color: #6B6B6B; margin-top: 2px; }
+  .itto-proceso-area { display: none; }
+  .itto-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid #E0DFDB; }
+  .itto-nav-counter { font-size: 0.75rem; color: #6B6B6B; }
+  .itto-nav-btn { padding: 5px 12px; border: 1px solid #E0DFDB; border-radius: 6px; background: #FAFAF8; font-family: 'Inter', sans-serif; font-size: 0.8rem; cursor: pointer; transition: all 0.15s; }
+  .itto-nav-btn:hover:not(:disabled) { border-color: #2D6A4F; color: #2D6A4F; }
+  .itto-nav-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+  .itto-area-badge { display: inline-block; font-size: 0.65rem; font-weight: 700; padding: 2px 8px; border-radius: 20px; margin-bottom: 4px; }
   .area-inicio { background: #E1F5EE; color: #0F6E56; }
   .area-planificacion { background: #EEEDFE; color: #3C3489; }
   .area-ejecucion { background: #FFF3E0; color: #E65100; }
@@ -1054,9 +1078,9 @@ const description = "Practicá para el PMP® con 180 preguntas originales de Val
   .itto-col-salidas .itto-col-title { color: #3C3489; }
   .itto-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 4px; }
   .itto-col ul li { font-size: 0.78rem; color: #1A1A1A; line-height: 1.5; padding: 4px 8px; border-radius: 4px; }
-  .itto-col-entradas ul li { background: #E8F5EE; }
-  .itto-col-herramientas ul li { background: #FFF3E0; }
-  .itto-col-salidas ul li { background: #EEEDFE; }
+  .itto-col-entradas ul li { background: #E8F5EE; color: #0F6E56; }
+  .itto-col-herramientas ul li { background: #FFF3E0; color: #854F0B; }
+  .itto-col-salidas ul li { background: #EEEDFE; color: #3C3489; }
   .itto-empty { font-size: 0.875rem; color: #9B9B9B; text-align: center; padding: 2rem; }
   @media (max-width: 600px) { .itto-cols { grid-template-columns: 1fr; } }
   
