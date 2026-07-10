@@ -1,0 +1,540 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Guía de Power BI para Project Managers — Dashboards de gestión de proyectos" description="Cómo usar Power BI para visualizar el estado real de tus proyectos: KPIs de avance, plazos, recursos y riesgos en un solo dashboard. Guía práctica de Valeria Yashan, PMP®.">
+
+  <div class="guia-container">
+
+    <nav class="breadcrumb">
+      <a href="/herramientas">Herramientas</a>
+      <span>→</span>
+      <span>Power BI para Project Managers</span>
+    </nav>
+
+    <header class="guia-header">
+      <span class="guia-tag">Reportes y dashboards</span>
+      <h1>Guía de Power BI para Project Managers</h1>
+      <p class="guia-lead">Cómo construir un dashboard de gestión de proyectos en Power BI que muestre el estado real de tu portfolio: avance por proyecto, hitos críticos, uso de recursos y alertas de riesgo. Todo en una sola pantalla, actualizable y compartible con la dirección.</p>
+      <div class="guia-meta">
+        <span>Nivel: intermedio</span>
+        <span>·</span>
+        <span>Herramienta: Power BI Desktop (gratuito)</span>
+        <span>·</span>
+        <span>Autora: Valeria Yashan</span>
+      </div>
+    </header>
+
+    <nav class="tabla-contenidos">
+      <p class="toc-titulo">Contenido de esta guía</p>
+      <ol>
+        <li><a href="#que-es-power-bi">Qué es Power BI y por qué los PMs lo necesitan</a></li>
+        <li><a href="#cuando-usarlo">Cuándo usar Power BI (y cuándo no)</a></li>
+        <li><a href="#caso-aplicado">Caso aplicado: dashboard de gestión de proyectos</a></li>
+        <li><a href="#kpis">Los KPIs esenciales para un PM</a></li>
+        <li><a href="#estructura-datos">Cómo estructurar los datos antes de empezar</a></li>
+        <li><a href="#primeros-pasos">Primeros pasos: instalar y conectar datos</a></li>
+        <li><a href="#visualizaciones">Visualizaciones clave para PMs</a></li>
+        <li><a href="#errores-frecuentes">Errores frecuentes y cómo evitarlos</a></li>
+      </ol>
+    </nav>
+
+    <div class="guia-contenido">
+
+      <section id="que-es-power-bi">
+        <h2>1. Qué es Power BI y por qué los PMs lo necesitan</h2>
+        <p>Power BI es la herramienta de Business Intelligence de Microsoft. Permite conectar fuentes de datos (Excel, bases de datos, servicios en la nube), transformarlos y visualizarlos en dashboards interactivos que se actualizan automáticamente.</p>
+        <p>Para un Project Manager, Power BI resuelve un problema concreto: <strong>la información de los proyectos suele estar fragmentada</strong>. El cronograma en un Excel, los riesgos en otro, los costos en el ERP, el estado del equipo en el chat. Power BI conecta todo eso y genera una vista única, consistente y actualizada.</p>
+
+        <h3>Lo que cambia cuando tenés un buen dashboard de proyectos</h3>
+        <ul>
+          <li>Las reuniones de seguimiento dejan de ser sesiones para recopilar datos y pasan a ser sesiones para tomar decisiones.</li>
+          <li>La dirección tiene visibilidad real sin necesitar a nadie que les explique "cómo van las cosas".</li>
+          <li>Los desvíos aparecen antes de convertirse en problemas críticos.</li>
+          <li>Los informes de estado dejan de ser trabajo manual semanal.</li>
+        </ul>
+
+        <div class="nota-practica">
+          <p><strong>Nota práctica:</strong> Power BI Desktop es gratuito. Para publicar y compartir dashboards en la web necesitás Power BI Service (incluido en Microsoft 365 Business o como licencia Pro separada). Para empezar y aprender, el Desktop gratuito es suficiente.</p>
+        </div>
+      </section>
+
+      <section id="cuando-usarlo">
+        <h2>2. Cuándo usar Power BI (y cuándo no)</h2>
+
+        <h3>Power BI conviene cuando:</h3>
+        <ul>
+          <li>Gestionás más de 3 proyectos simultáneos y necesitás visibilidad de portfolio.</li>
+          <li>Tu organización ya usa Microsoft 365 (la integración es nativa con Excel, SharePoint, Teams).</li>
+          <li>Necesitás reportes recurrentes para dirección o clientes que se actualicen solos.</li>
+          <li>Los datos ya existen pero están en distintas fuentes y nadie los cruza.</li>
+          <li>Querés mostrar KPIs de proyectos de forma profesional sin construir nada desde cero cada vez.</li>
+        </ul>
+
+        <h3>Power BI no conviene cuando:</h3>
+        <ul>
+          <li>Gestionás un solo proyecto pequeño: un Excel bien armado alcanza.</li>
+          <li>El equipo no tiene ninguna disciplina de carga de datos: el dashboard va a mostrar basura.</li>
+          <li>Necesitás gestionar tareas y asignaciones: eso lo hacen Asana, ClickUp o Monday. Power BI solo visualiza, no gestiona.</li>
+        </ul>
+
+        <div class="nota-practica">
+          <p><strong>Regla de oro:</strong> Power BI es una herramienta de visualización, no de gestión. No reemplaza a tu herramienta de tareas. La complementa. La combinación más frecuente: ClickUp o Monday para gestionar el día a día + Power BI para reportar a la dirección.</p>
+        </div>
+      </section>
+
+      <section id="caso-aplicado">
+        <h2>3. Caso aplicado: dashboard de gestión de proyectos</h2>
+
+        <div class="caso-card">
+          <p class="caso-label">Ejemplo de aplicación real</p>
+          <h3>El problema que resuelve este tipo de dashboard</h3>
+          <p>Una organización gestiona múltiples proyectos en paralelo. La dirección quiere ver en una sola pantalla el estado de cada uno: qué porcentaje está completado, qué hitos vencen esta semana, qué proyectos están en riesgo y cómo se distribuyen los recursos entre iniciativas.</p>
+          <p>El equipo de proyectos carga el avance semanalmente en un Excel compartido. Power BI se conecta a ese Excel y genera el dashboard automáticamente: sin copiar datos, sin formatear tablas, sin preparar presentaciones.</p>
+        </div>
+
+        <h3>Qué muestra un dashboard de gestión de proyectos bien construido</h3>
+        <ul>
+          <li><strong>Vista de portfolio:</strong> todos los proyectos activos con su estado (verde / amarillo / rojo), porcentaje de avance y fecha de cierre estimada.</li>
+          <li><strong>Hitos críticos:</strong> los próximos 30 días con hitos vencidos, en curso y completados por proyecto.</li>
+          <li><strong>KPIs de rendimiento:</strong> SPI (Schedule Performance Index), CPI (Cost Performance Index) y variación de alcance si los datos lo permiten.</li>
+          <li><strong>Distribución de recursos:</strong> horas asignadas vs. horas disponibles por persona o equipo.</li>
+          <li><strong>Registro de riesgos:</strong> riesgos activos por severidad y proyecto, con responsable y fecha de revisión.</li>
+        </ul>
+
+        <h3>Cómo se usa en la práctica</h3>
+        <ol>
+          <li>El equipo carga el avance semanal en el Excel de origen (o en la herramienta de gestión conectada).</li>
+          <li>Power BI actualiza el dashboard automáticamente al abrir el archivo o en la frecuencia configurada.</li>
+          <li>En la reunión de seguimiento, el PM abre el dashboard en pantalla grande y conduce la conversación desde los datos.</li>
+          <li>La dirección tiene acceso al dashboard publicado en Power BI Service y puede consultarlo en cualquier momento sin pedir informe a nadie.</li>
+        </ol>
+
+        <div class="nota-practica">
+          <p><strong>Lo que este tipo de solución resuelve en concreto:</strong> elimina el trabajo manual de preparar el informe semanal, reduce las reuniones de "¿cómo vamos?" y da a la dirección la autonomía de consultar el estado sin interrumpir al equipo.</p>
+        </div>
+      </section>
+
+      <section id="kpis">
+        <h2>4. Los KPIs esenciales para un PM</h2>
+        <p>Antes de construir cualquier visualización, definí qué vas a medir. Estos son los indicadores más relevantes para un dashboard de gestión de proyectos:</p>
+
+        <h3>KPIs de avance</h3>
+        <ul>
+          <li><strong>% de avance por proyecto:</strong> tareas completadas / tareas totales × 100.</li>
+          <li><strong>% de hitos completados en fecha:</strong> hitos cumplidos a tiempo / hitos totales × 100.</li>
+          <li><strong>Variación de cronograma:</strong> diferencia entre la fecha planificada y la fecha real de cierre de fases.</li>
+        </ul>
+
+        <h3>KPIs de recursos</h3>
+        <ul>
+          <li><strong>Utilización de recursos:</strong> horas reales trabajadas / horas planificadas por persona.</li>
+          <li><strong>Concentración de carga:</strong> qué personas están asignadas a más del 100% de su capacidad.</li>
+        </ul>
+
+        <h3>KPIs de riesgo</h3>
+        <ul>
+          <li><strong>Cantidad de riesgos activos por proyecto.</strong></li>
+          <li><strong>Riesgos de alta severidad sin plan de respuesta asignado.</strong></li>
+          <li><strong>Riesgos vencidos (sin revisión en los últimos 14 días).</strong></li>
+        </ul>
+
+        <div class="nota-practica">
+          <p><strong>Criterio de selección:</strong> incluí solo los KPIs que tu equipo puede mantener actualizados. Un dashboard con 3 indicadores reales vale más que uno con 15 indicadores a medias.</p>
+        </div>
+      </section>
+
+      <section id="estructura-datos">
+        <h2>5. Cómo estructurar los datos antes de empezar</h2>
+        <p>El error más común al construir un dashboard en Power BI es empezar con los datos mal estructurados. Power BI funciona mejor con datos en formato tabular plano: una fila por registro, una columna por atributo.</p>
+
+        <h3>Estructura recomendada para un registro de proyectos</h3>
+        <p>Un Excel simple con estas columnas es suficiente para alimentar un dashboard funcional:</p>
+        <ul>
+          <li><strong>ID_Proyecto</strong> — identificador único (ej: P001, P002)</li>
+          <li><strong>Nombre_Proyecto</strong></li>
+          <li><strong>Estado</strong> — En curso / En riesgo / Pausado / Cerrado</li>
+          <li><strong>Porcentaje_Avance</strong> — número entre 0 y 100</li>
+          <li><strong>Fecha_Inicio_Plan</strong></li>
+          <li><strong>Fecha_Cierre_Plan</strong></li>
+          <li><strong>Fecha_Cierre_Real</strong> — vacío si está en curso</li>
+          <li><strong>Responsable_PM</strong></li>
+          <li><strong>Sponsor</strong></li>
+          <li><strong>Categoria</strong> — Tecnología / Infraestructura / Transformación / etc.</li>
+        </ul>
+
+        <h3>Estructura para hitos</h3>
+        <ul>
+          <li><strong>ID_Proyecto</strong> — para cruzar con la tabla de proyectos</li>
+          <li><strong>Nombre_Hito</strong></li>
+          <li><strong>Fecha_Plan</strong></li>
+          <li><strong>Fecha_Real</strong></li>
+          <li><strong>Estado_Hito</strong> — Pendiente / Completado / Vencido</li>
+        </ul>
+
+        <div class="nota-practica">
+          <p><strong>Regla crítica:</strong> no mezclés filas de proyectos con filas de hitos en la misma tabla. Power BI relaciona tablas separadas mucho mejor de lo que procesa tablas mezcladas. Un Excel con dos pestañas (Proyectos e Hitos) es la base correcta.</p>
+        </div>
+      </section>
+
+      <section id="primeros-pasos">
+        <h2>6. Primeros pasos: instalar y conectar datos</h2>
+
+        <h3>Instalar Power BI Desktop</h3>
+        <ol>
+          <li>Ingresá a <strong>powerbi.microsoft.com</strong> y descargá Power BI Desktop (gratuito, solo Windows).</li>
+          <li>Instalá con las opciones por defecto.</li>
+          <li>Al abrir, podés iniciar sesión con tu cuenta de Microsoft o continuar sin cuenta (solo para uso local).</li>
+        </ol>
+
+        <h3>Conectar tu Excel de proyectos</h3>
+        <ol>
+          <li>En Power BI Desktop, hacé clic en <strong>Obtener datos → Excel</strong>.</li>
+          <li>Seleccioná tu archivo Excel.</li>
+          <li>En el navegador, seleccioná las hojas que querés importar (Proyectos, Hitos, etc.).</li>
+          <li>Hacé clic en <strong>Cargar</strong>.</li>
+        </ol>
+
+        <h3>Relacionar las tablas</h3>
+        <ol>
+          <li>Andá a la vista <strong>Modelo</strong> (ícono de diagrama en la barra lateral).</li>
+          <li>Power BI suele detectar automáticamente la relación entre tablas que comparten el campo <strong>ID_Proyecto</strong>.</li>
+          <li>Si no la detecta, arrastrá el campo ID_Proyecto de la tabla Proyectos al campo ID_Proyecto de la tabla Hitos.</li>
+        </ol>
+      </section>
+
+      <section id="visualizaciones">
+        <h2>7. Visualizaciones clave para PMs</h2>
+        <p>Estas son las visualizaciones más útiles para un dashboard de gestión de proyectos, en orden de prioridad:</p>
+
+        <h3>Tarjetas de resumen (Cards)</h3>
+        <p>Para mostrar de un vistazo: total de proyectos activos, porcentaje promedio de avance del portfolio, cantidad de hitos vencidos, proyectos en riesgo.</p>
+
+        <h3>Gráfico de barras apiladas</h3>
+        <p>Para comparar el avance entre proyectos. Eje Y: nombre del proyecto. Eje X: porcentaje completado. Coloreado por estado (verde / amarillo / rojo).</p>
+
+        <h3>Tabla con formato condicional</h3>
+        <p>Para la lista de hitos próximos: nombre del hito, proyecto, fecha plan, fecha real, estado. Con formato condicional que pone en rojo los vencidos y en amarillo los que vencen en los próximos 7 días.</p>
+
+        <h3>Gráfico de Gantt simplificado</h3>
+        <p>Power BI no tiene un visual de Gantt nativo, pero podés instalar el visual <strong>Gantt Chart by xViz</strong> desde el marketplace de AppSource. Permite mostrar el cronograma de todos los proyectos en una vista de barras horizontales con fechas reales vs. planificadas.</p>
+
+        <h3>Segmentadores (Slicers)</h3>
+        <p>Agregar filtros interactivos por: responsable PM, categoría de proyecto, período, estado. Permiten que quien usa el dashboard explore los datos sin modificar nada.</p>
+
+        <div class="nota-practica">
+          <p><strong>Criterio de diseño:</strong> ponés los KPIs más críticos arriba a la izquierda. El ojo va ahí primero. Dejá los filtros y segmentadores a la derecha o arriba. Cada visual debe responder una sola pregunta. Si un gráfico necesita ser explicado, está mal diseñado.</p>
+        </div>
+      </section>
+
+      <section id="errores-frecuentes">
+        <h2>8. Errores frecuentes y cómo evitarlos</h2>
+
+        <h3>Error 1: Datos sucios en el origen</h3>
+        <p>Si el Excel tiene fechas escritas como texto ("15/03/26"), estados escritos de formas distintas ("En curso", "en curso", "En Curso") o celdas combinadas, Power BI no va a procesar bien los datos. La solución es limpiar el origen antes de conectar, no en Power BI.</p>
+
+        <h3>Error 2: Demasiados visuales en una sola página</h3>
+        <p>Un dashboard de proyectos no es un informe de 15 páginas en una pantalla. Tres o cuatro visuales bien elegidos comunican mejor que diez comprimidos. Si tenés más información, usá pestañas (páginas) dentro del mismo reporte.</p>
+
+        <h3>Error 3: Colores sin significado</h3>
+        <p>Rojo, amarillo y verde tienen un significado universal en gestión de proyectos. Usarlos para otra cosa confunde. Si el estado de un proyecto es "En riesgo", el color debe ser amarillo o rojo, no celeste porque "combina con la paleta de la empresa".</p>
+
+        <h3>Error 4: No definir quién carga los datos</h3>
+        <p>Un dashboard se actualiza tan bien como los datos que lo alimentan. Si nadie es responsable de actualizar el Excel de origen cada semana, el dashboard va a quedar desactualizado y va a perder credibilidad rápido. Antes de construirlo, definí el proceso de carga.</p>
+
+        <h3>Error 5: Empezar por las visualizaciones antes que por las preguntas</h3>
+        <p>El orden correcto es: primero definir qué preguntas tiene que responder el dashboard (¿qué proyectos están en riesgo? ¿cuántos hitos vencen esta semana? ¿quién tiene más carga?), después diseñar los visuales. No al revés.</p>
+      </section>
+
+    </div>
+
+    <section class="guia-cta">
+      <div class="cta-inner">
+        <h2>¿Necesitás un dashboard de proyectos para tu organización?</h2>
+        <p>Puedo ayudarte a definir los KPIs, estructurar los datos y construir el dashboard en Power BI adaptado a tu portfolio de proyectos real.</p>
+        <a href="/contacto" class="btn-cta-guia">Consultame →</a>
+      </div>
+    </section>
+
+    <section class="autor-bio">
+      <img src="/images/valeria-yashan.webp" alt="Valeria Yashan, consultora PMP® en gestión de proyectos e IA" class="autor-foto" width="64" height="64" />
+      <div class="autor-texto">
+        <p class="autor-nombre">Valeria Yashan</p>
+        <p>PMP® #1613335, MBA e Ingeniera Industrial. Consultora, docente y autora de 4 libros sobre gestión de proyectos e IA. <a href="/sobre-mi">Conocé más sobre Valeria →</a></p>
+      </div>
+    </section>
+
+  </div>
+
+</BaseLayout>
+
+<style>
+  .guia-container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 5rem;
+  }
+
+  .breadcrumb {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    font-size: 0.85rem;
+    color: var(--color-muted);
+    margin-bottom: 2.5rem;
+    padding-top: 1.5rem;
+  }
+
+  .breadcrumb a {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .breadcrumb a:hover { text-decoration: underline; }
+
+  .guia-tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+
+  .guia-header h1 {
+    font-family: 'Fraunces', serif;
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: var(--color-text);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .guia-lead {
+    font-size: 1.1rem;
+    color: var(--color-muted);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+
+  .guia-meta {
+    font-size: 0.85rem;
+    color: var(--color-muted);
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+  }
+
+  .tabla-contenidos {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 1.5rem 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .toc-titulo {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .tabla-contenidos ol {
+    margin: 0;
+    padding-left: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .tabla-contenidos a {
+    color: var(--color-accent);
+    text-decoration: none;
+    font-size: 0.95rem;
+  }
+
+  .tabla-contenidos a:hover { text-decoration: underline; }
+
+  .guia-contenido {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .guia-contenido section h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 1rem;
+    padding-top: 0.5rem;
+  }
+
+  .guia-contenido section h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin: 1.5rem 0 0.5rem;
+  }
+
+  .guia-contenido p {
+    color: var(--color-muted);
+    line-height: 1.75;
+    margin-bottom: 0.75rem;
+  }
+
+  .guia-contenido ul,
+  .guia-contenido ol {
+    padding-left: 1.5rem;
+    color: var(--color-muted);
+    line-height: 1.75;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .guia-contenido li strong {
+    color: var(--color-text);
+  }
+
+  .nota-practica {
+    background: var(--color-surface);
+    border-left: 3px solid var(--color-accent);
+    border-radius: 0 6px 6px 0;
+    padding: 1rem 1.25rem;
+    margin-top: 1.25rem;
+  }
+
+  .nota-practica p {
+    margin: 0;
+    font-size: 0.95rem;
+  }
+
+  .caso-card {
+    background: #EBF5F0;
+    border: 1px solid #B7DEC9;
+    border-radius: 10px;
+    padding: 1.5rem 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .caso-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--color-accent);
+    margin-bottom: 0.75rem !important;
+  }
+
+  .caso-card h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin: 0 0 0.75rem !important;
+  }
+
+  .caso-card p {
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .guia-cta {
+    margin-top: 4rem;
+    background: var(--color-accent);
+    border-radius: 12px;
+    padding: 2.5rem 2rem;
+    text-align: center;
+  }
+
+  .cta-inner {
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  .guia-cta h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+  }
+
+  .guia-cta p {
+    color: rgba(255,255,255,0.85);
+    font-size: 0.95rem;
+    line-height: 1.65;
+    margin-bottom: 1.5rem;
+  }
+
+  .btn-cta-guia {
+    display: inline-flex;
+    align-items: center;
+    background: #ffffff;
+    color: var(--color-accent);
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 0.8rem 1.75rem;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .btn-cta-guia:hover { opacity: 0.9; }
+
+  .autor-bio {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .autor-foto {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .autor-nombre {
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 0.25rem !important;
+  }
+
+  .autor-texto p {
+    font-size: 0.9rem;
+    color: var(--color-muted);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .autor-texto a {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .autor-texto a:hover { text-decoration: underline; }
+
+  @media (max-width: 700px) {
+    .guia-header h1 {
+      font-size: 1.7rem;
+    }
+
+    .guia-meta {
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+  }
+</style>
