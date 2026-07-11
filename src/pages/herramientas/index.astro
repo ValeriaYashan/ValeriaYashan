@@ -9,11 +9,22 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     <p class="bajada">Cada guía está escrita desde la práctica de la gestión de proyectos, no desde el manual de la herramienta.</p>
   </section>
 
-  <section class="herramientas-grid">
+  <section class="filtros-section">
+    <div class="filtros-wrap">
+      <button class="filtro-btn activo" data-categoria="todas">Todas</button>
+      <button class="filtro-btn" data-categoria="Gestión de tareas y equipos">Gestión de tareas y equipos</button>
+      <button class="filtro-btn" data-categoria="Gestión de proyectos completa">Gestión de proyectos completa</button>
+      <button class="filtro-btn" data-categoria="Visualización y reportes">Visualización y reportes</button>
+      <button class="filtro-btn" data-categoria="Colaboración y talleres">Colaboración y talleres</button>
+    </div>
+    <p class="filtro-count"><span id="count">10</span> herramientas</p>
+  </section>
 
-    <article class="herramienta-card">
+  <section class="herramientas-grid" id="herramientas-grid">
+
+    <article class="herramienta-card" data-categoria="Gestión de tareas y equipos">
       <div class="herramienta-header">
-        <span class="herramienta-tag">Gestión de tareas</span>
+        <span class="herramienta-tag">Gestión de tareas y equipos</span>
       </div>
       <h2>Asana para Project Managers</h2>
       <p>Cómo configurar y usar Asana para gestionar proyectos reales: desde la cuenta hasta el seguimiento semanal del equipo.</p>
@@ -24,9 +35,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <a href="/herramientas/asana" class="btn-herramienta">Leer guía</a>
     </article>
 
-    <article class="herramienta-card">
+    <article class="herramienta-card" data-categoria="Gestión de tareas y equipos">
       <div class="herramienta-header">
-        <span class="herramienta-tag">Gestión de tareas</span>
+        <span class="herramienta-tag">Gestión de tareas y equipos</span>
       </div>
       <h2>ClickUp para Project Managers</h2>
       <p>Guía práctica de ClickUp aplicada a la gestión de proyectos: estructura, automatizaciones y seguimiento de equipo.</p>
@@ -37,9 +48,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <a href="/herramientas/clickup" class="btn-herramienta">Leer guía</a>
     </article>
 
-    <article class="herramienta-card">
+    <article class="herramienta-card" data-categoria="Gestión de tareas y equipos">
       <div class="herramienta-header">
-        <span class="herramienta-tag">Gestión de tareas</span>
+        <span class="herramienta-tag">Gestión de tareas y equipos</span>
       </div>
       <h2>Trello para Project Managers</h2>
       <p>Guía práctica de Trello para equipos que dan sus primeros pasos en herramientas digitales: tableros, Cards y Power-Ups.</p>
@@ -50,9 +61,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <a href="/herramientas/trello" class="btn-herramienta">Leer guía</a>
     </article>
 
-    <article class="herramienta-card">
+    <article class="herramienta-card" data-categoria="Gestión de tareas y equipos">
       <div class="herramienta-header">
-        <span class="herramienta-tag">Gestión de tareas</span>
+        <span class="herramienta-tag">Gestión de tareas y equipos</span>
       </div>
       <h2>Monday para Project Managers</h2>
       <p>Guía práctica de Monday.com aplicada a la gestión de proyectos: columnas, dashboards y automatizaciones para equipos medianos.</p>
@@ -63,9 +74,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <a href="/herramientas/monday" class="btn-herramienta">Leer guía</a>
     </article>
 
-    <article class="herramienta-card">
+    <article class="herramienta-card" data-categoria="Gestión de proyectos completa">
       <div class="herramienta-header">
-        <span class="herramienta-tag">Gestión de proyectos</span>
+        <span class="herramienta-tag">Gestión de proyectos completa</span>
       </div>
       <h2>Notion para Project Managers</h2>
       <p>Cómo diseñar un sistema de gestión de proyectos en Notion: bases de datos relacionadas, vistas por rol, automatizaciones y plantillas reutilizables.</p>
@@ -76,9 +87,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <a href="/herramientas/notion" class="btn-herramienta">Leer guía</a>
     </article>
 
-    <article class="herramienta-card">
+    <article class="herramienta-card" data-categoria="Visualización y reportes">
       <div class="herramienta-header">
-        <span class="herramienta-tag">Reportes y dashboards</span>
+        <span class="herramienta-tag">Visualización y reportes</span>
       </div>
       <h2>Power BI para Project Managers</h2>
       <p>Cómo usar Power BI para visualizar el estado real de tus proyectos: KPIs de avance, plazos, recursos y riesgos en un solo dashboard.</p>
@@ -87,6 +98,58 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         <span class="herramienta-estado disponible">Disponible</span>
       </div>
       <a href="/herramientas/power-bi" class="btn-herramienta">Leer guía</a>
+    </article>
+
+    <article class="herramienta-card" data-categoria="Gestión de proyectos completa">
+      <div class="herramienta-header">
+        <span class="herramienta-tag">Gestión de proyectos completa</span>
+      </div>
+      <h2>Zoho Projects para Project Managers</h2>
+      <p>Cómo evaluar si Zoho Projects es la herramienta correcta para tu equipo: funcionalidades, comparativa, ventajas y limitaciones reales.</p>
+      <div class="herramienta-meta">
+        <span class="herramienta-nivel">Nivel: evaluación</span>
+        <span class="herramienta-estado disponible">Disponible</span>
+      </div>
+      <a href="/herramientas/zoho-projects" class="btn-herramienta">Leer guía</a>
+    </article>
+
+    <article class="herramienta-card" data-categoria="Colaboración y talleres">
+      <div class="herramienta-header">
+        <span class="herramienta-tag">Colaboración y talleres</span>
+      </div>
+      <h2>Miro para Project Managers</h2>
+      <p>Cómo usar Miro para planificar sprints, facilitar retrospectivas, mapear procesos y conducir talleres con equipos distribuidos.</p>
+      <div class="herramienta-meta">
+        <span class="herramienta-nivel">Nivel: inicial</span>
+        <span class="herramienta-estado disponible">Disponible</span>
+      </div>
+      <a href="/herramientas/miro" class="btn-herramienta">Leer guía</a>
+    </article>
+
+    <article class="herramienta-card" data-categoria="Colaboración y talleres">
+      <div class="herramienta-header">
+        <span class="herramienta-tag">Colaboración y talleres</span>
+      </div>
+      <h2>Mural para Project Managers</h2>
+      <p>Cómo usar Mural para facilitar talleres de design thinking, retrospectivas profundas y co-creación con grupos distribuidos.</p>
+      <div class="herramienta-meta">
+        <span class="herramienta-nivel">Nivel: inicial</span>
+        <span class="herramienta-estado disponible">Disponible</span>
+      </div>
+      <a href="/herramientas/mural" class="btn-herramienta">Leer guía</a>
+    </article>
+
+    <article class="herramienta-card" data-categoria="Colaboración y talleres">
+      <div class="herramienta-header">
+        <span class="herramienta-tag">Colaboración y talleres</span>
+      </div>
+      <h2>Lucidchart para Project Managers</h2>
+      <p>Cómo usar Lucidchart para documentar procesos, crear diagramas de flujo, EDT, organigramas y mapas de responsabilidades.</p>
+      <div class="herramienta-meta">
+        <span class="herramienta-nivel">Nivel: inicial</span>
+        <span class="herramienta-estado disponible">Disponible</span>
+      </div>
+      <a href="/herramientas/lucidchart" class="btn-herramienta">Leer guía</a>
     </article>
 
   </section>
@@ -101,6 +164,35 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   </section>
 
 </BaseLayout>
+
+<script>
+  (function() {
+    var botones = document.querySelectorAll('.filtro-btn');
+    var cards = document.querySelectorAll('.herramienta-card');
+    var count = document.getElementById('count');
+
+    botones.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var categoria = this.getAttribute('data-categoria');
+
+        botones.forEach(function(b) { b.classList.remove('activo'); });
+        this.classList.add('activo');
+
+        var visible = 0;
+        cards.forEach(function(card) {
+          if (categoria === 'todas' || card.getAttribute('data-categoria') === categoria) {
+            card.style.display = 'flex';
+            visible++;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        if (count) count.textContent = visible;
+      });
+    });
+  })();
+</script>
 
 <style>
   .herramientas-hero {
@@ -124,12 +216,60 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     line-height: 1.6;
   }
 
+  .filtros-section {
+    max-width: 900px;
+    margin: 0 auto 0;
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .filtros-wrap {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .filtro-btn {
+    background: transparent;
+    border: 1px solid var(--color-border);
+    border-radius: 20px;
+    padding: 0.4rem 1rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--color-muted);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .filtro-btn:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+
+  .filtro-btn.activo {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: #ffffff;
+    font-weight: 600;
+  }
+
+  .filtro-count {
+    font-size: 0.82rem;
+    color: var(--color-muted);
+    margin: 0;
+  }
+
   .herramientas-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
     max-width: 900px;
-    margin: 3rem auto 5rem;
+    margin: 2rem auto 5rem;
     padding: 0 1.5rem;
   }
 
@@ -141,6 +281,11 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    transition: border-color 0.2s;
+  }
+
+  .herramienta-card:hover {
+    border-color: var(--color-accent);
   }
 
   .herramienta-tag {
@@ -267,6 +412,11 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
     .herramientas-hero h1 {
       font-size: 1.8rem;
+    }
+
+    .filtros-section {
+      flex-direction: column;
+      align-items: flex-start;
     }
   }
 </style>

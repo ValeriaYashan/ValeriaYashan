@@ -1,0 +1,245 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Guía de Miro para Project Managers — Colaboración visual y talleres" description="Cómo usar Miro en gestión de proyectos: planificación ágil, retrospectivas, mapas de proceso y talleres con equipos distribuidos. Guía práctica de Valeria Yashan, PMP®.">
+
+  <div class="guia-container">
+
+    <nav class="breadcrumb">
+      <a href="/herramientas">Herramientas</a>
+      <span>→</span>
+      <span>Miro para Project Managers</span>
+    </nav>
+
+    <header class="guia-header">
+      <span class="guia-tag">Colaboración y talleres</span>
+      <h1>Miro para Project Managers</h1>
+      <p class="guia-lead">Miro es la pizarra colaborativa más usada en gestión de proyectos. Permite planificar sprints, facilitar retrospectivas, mapear procesos y conducir talleres con equipos distribuidos en tiempo real o de forma asíncrona.</p>
+      <div class="guia-meta">
+        <span>Nivel: inicial</span>
+        <span>·</span>
+        <span>Herramienta: Miro (plan gratuito y pagos)</span>
+        <span>·</span>
+        <span>Autora: Valeria Yashan</span>
+      </div>
+    </header>
+
+    <nav class="tabla-contenidos">
+      <p class="toc-titulo">Contenido de esta guía</p>
+      <ol>
+        <li><a href="#que-es">Qué es Miro y para qué lo usan los PMs</a></li>
+        <li><a href="#cuando-usarlo">Cuándo usar Miro (y cuándo no)</a></li>
+        <li><a href="#caso-aplicado">Caso aplicado: taller de planificación de proyecto</a></li>
+        <li><a href="#usos-clave">Los 5 usos más valiosos para un PM</a></li>
+        <li><a href="#primeros-pasos">Primeros pasos: crear tu primer tablero</a></li>
+        <li><a href="#plantillas">Plantillas más útiles para PMs</a></li>
+        <li><a href="#errores">Errores frecuentes y cómo evitarlos</a></li>
+      </ol>
+    </nav>
+
+    <div class="guia-contenido">
+
+      <section id="que-es">
+        <h2>1. Qué es Miro y para qué lo usan los PMs</h2>
+        <p>Miro es una pizarra digital colaborativa que permite trabajar visualmente con equipos en tiempo real o de forma asíncrona. A diferencia de las herramientas de gestión de tareas, Miro no organiza el trabajo — lo facilita. Es el espacio donde el equipo piensa, conversa y decide antes de ejecutar.</p>
+        <p>Para un Project Manager, Miro resuelve un problema concreto: <strong>las reuniones de planificación y los talleres son difíciles de facilitar de forma remota</strong>. Una pizarra física funciona cuando todos están en la misma sala. Miro lleva esa dinámica al entorno digital sin perder la colaboración en tiempo real.</p>
+
+        <h3>Dónde aparece Miro en el ciclo de un proyecto</h3>
+        <ul>
+          <li><strong>Inicio:</strong> talleres de kick-off, definición de alcance, mapas de stakeholders.</li>
+          <li><strong>Planificación:</strong> descomposición del trabajo, planificación de sprints, estimación con Planning Poker.</li>
+          <li><strong>Ejecución:</strong> tableros Kanban visuales, seguimiento de impedimentos, coordinación entre equipos.</li>
+          <li><strong>Cierre:</strong> retrospectivas, lecciones aprendidas, mapas de proceso del estado final.</li>
+        </ul>
+
+        <div class="nota-practica">
+          <p><strong>Dato clave:</strong> Miro tiene más de 60 millones de usuarios y es la herramienta de colaboración visual más adoptada en entornos ágiles. Su plan gratuito permite 3 tableros activos — suficiente para empezar a usarlo en proyectos reales.</p>
+        </div>
+      </section>
+
+      <section id="cuando-usarlo">
+        <h2>2. Cuándo usar Miro (y cuándo no)</h2>
+
+        <h3>Miro conviene cuando:</h3>
+        <ul>
+          <li>Facilitás talleres o reuniones de planificación con equipos distribuidos o híbridos.</li>
+          <li>Necesitás que el equipo piense y decida visualmente — mapas de proceso, diagramas, brainstorming.</li>
+          <li>Trabajás con metodologías ágiles y necesitás un espacio para retrospectivas y planificación de sprints.</li>
+          <li>Querés documentar el proceso de un taller de forma que todos puedan consultarlo después.</li>
+          <li>Necesitás presentar información compleja a stakeholders de forma visual e interactiva.</li>
+        </ul>
+
+        <h3>Miro no conviene cuando:</h3>
+        <ul>
+          <li>Necesitás gestionar tareas con responsables, fechas y estados — eso lo hacen Asana, ClickUp o Notion.</li>
+          <li>El equipo no tiene hábito de trabajo visual — la curva de adopción puede ser un obstáculo.</li>
+          <li>Necesitás documentación estructurada y permanente — Miro es para trabajar, no para archivar.</li>
+        </ul>
+
+        <div class="nota-practica">
+          <p><strong>Regla de uso:</strong> Miro complementa a tu herramienta de gestión de tareas, no la reemplaza. El flujo típico es: taller en Miro → decisiones y tareas pasan a Asana/ClickUp/Notion. Miro es donde pensás; la herramienta de PM es donde ejecutás.</p>
+        </div>
+      </section>
+
+      <section id="caso-aplicado">
+        <h2>3. Caso aplicado: taller de planificación de proyecto</h2>
+
+        <div class="caso-card">
+          <p class="caso-label">Ejemplo de aplicación real</p>
+          <h3>El problema que resuelve este tipo de taller</h3>
+          <p>Un equipo distribuido necesita alinear el alcance de un proyecto nuevo. Hay personas en distintas ciudades y el PM no puede reunirlos físicamente. Las reuniones por videoconferencia con presentaciones de PowerPoint no generan participación real — algunos hablan, la mayoría escucha.</p>
+          <p>Con Miro, el PM facilita un taller de 90 minutos donde todos participan simultáneamente: cada persona agrega notas adhesivas con sus ideas, el equipo agrupa y prioriza en tiempo real, y al final del taller el tablero documenta las decisiones tomadas. El resultado es visible para todos, editable y compartible sin necesidad de redactar un acta.</p>
+        </div>
+
+        <h3>Cómo se estructura el taller en Miro</h3>
+        <ol>
+          <li><strong>Sección de contexto:</strong> el PM prepara una zona con la información del proyecto — objetivo, restricciones, stakeholders clave.</li>
+          <li><strong>Zona de brainstorming:</strong> cada participante agrega notas adhesivas con sus ideas o preguntas en silencio (5-7 minutos).</li>
+          <li><strong>Agrupación y discusión:</strong> el equipo agrupa las notas por temas y discute las más relevantes.</li>
+          <li><strong>Zona de decisiones:</strong> las decisiones tomadas se registran en una sección fija del tablero.</li>
+          <li><strong>Próximos pasos:</strong> las acciones concretas se listan con responsable y fecha — después se pasan a la herramienta de tareas.</li>
+        </ol>
+      </section>
+
+      <section id="usos-clave">
+        <h2>4. Los 5 usos más valiosos para un PM</h2>
+
+        <h3>1. Retrospectivas ágiles</h3>
+        <p>El uso más frecuente de Miro en gestión de proyectos. El PM prepara un tablero con las secciones clásicas (Qué salió bien / Qué mejorar / Qué probar) y el equipo completa notas adhesivas de forma simultánea. Más participación, menos tiempo, mejor resultado que una retrospectiva en presentación.</p>
+
+        <h3>2. Planificación de sprints</h3>
+        <p>Tablero con el backlog del sprint, las capacidades del equipo y el objetivo de la iteración. El equipo mueve tarjetas, estima y distribuye el trabajo visualmente. Especialmente útil cuando el equipo no usa Jira o quiere un espacio más flexible para la ceremonia de planificación.</p>
+
+        <h3>3. Mapas de proceso</h3>
+        <p>Diagramar el proceso actual y el proceso futuro de una organización antes de implementar cambios. El PM facilita la construcción del mapa con los propios involucrados — el resultado es más preciso y tiene más adhesión que un mapa construido solo por el consultor.</p>
+
+        <h3>4. Talleres de kick-off</h3>
+        <p>El inicio de proyecto más efectivo que existe: todos los stakeholders en el mismo tablero, construyendo juntos el mapa de objetivos, riesgos iniciales y expectativas. En 2 horas se genera más alineación que en semanas de reuniones individuales.</p>
+
+        <h3>5. Mapas de stakeholders</h3>
+        <p>Visualizar quién tiene interés en el proyecto, cuánto poder tiene y cuál es su postura. El mapa de stakeholders en Miro es colaborativo — el equipo lo construye y actualiza junto, en lugar de que el PM lo haga solo en una planilla.</p>
+
+        <div class="nota-practica">
+          <p><strong>El mayor valor de Miro para un PM:</strong> convierte reuniones pasivas (donde uno habla y los demás escuchan) en talleres activos (donde todos construyen al mismo tiempo). Eso mejora la calidad de las decisiones y el compromiso del equipo con lo decidido.</p>
+        </div>
+      </section>
+
+      <section id="primeros-pasos">
+        <h2>5. Primeros pasos: crear tu primer tablero</h2>
+        <ol>
+          <li>Ingresá a <strong>miro.com</strong> y creá una cuenta gratuita.</li>
+          <li>Creá un nuevo tablero desde el dashboard.</li>
+          <li>Explorá el panel de herramientas de la izquierda: notas adhesivas, formas, conectores, texto y plantillas.</li>
+          <li>Antes de tu primera sesión con el equipo, prepará el tablero con las secciones y las instrucciones visibles — el equipo no debería llegar a un tablero en blanco.</li>
+          <li>Invitá a los participantes por email o compartí el link del tablero con permisos de edición.</li>
+        </ol>
+
+        <div class="nota-practica">
+          <p><strong>Consejo para la primera sesión:</strong> dedicá los primeros 5 minutos a que todos agreguen una nota adhesiva con su nombre y cómo se sienten hoy. Sirve para verificar que todos pueden editar el tablero y rompe el hielo antes de entrar al contenido.</p>
+        </div>
+      </section>
+
+      <section id="plantillas">
+        <h2>6. Plantillas más útiles para PMs</h2>
+        <p>Miro tiene una biblioteca de plantillas gratuitas. Las más útiles para gestión de proyectos:</p>
+        <ul>
+          <li><strong>Retrospectiva Start/Stop/Continue</strong> — para equipos que hacen iteraciones cortas.</li>
+          <li><strong>Retrospectiva 4Ls (Liked/Learned/Lacked/Longed for)</strong> — más profunda, ideal para cierres de proyecto.</li>
+          <li><strong>Kanban Board</strong> — para seguimiento visual de tareas en talleres o reuniones de equipo.</li>
+          <li><strong>Mind Map</strong> — para descomponer el alcance del proyecto en el kick-off.</li>
+          <li><strong>Stakeholder Map</strong> — para mapear interesados al inicio del proyecto.</li>
+          <li><strong>User Story Map</strong> — para planificación ágil con foco en el usuario.</li>
+          <li><strong>SWOT Analysis</strong> — para análisis de contexto en proyectos estratégicos.</li>
+        </ul>
+      </section>
+
+      <section id="errores">
+        <h2>7. Errores frecuentes y cómo evitarlos</h2>
+
+        <div class="error-item">
+          <h3>Llegar a la sesión sin preparar el tablero</h3>
+          <p>El tablero en blanco genera confusión y pierde tiempo valioso. Siempre prepará las secciones, las instrucciones y los ejemplos antes de la sesión. El equipo debería poder empezar a trabajar sin que el PM explique cómo funciona Miro.</p>
+        </div>
+
+        <div class="error-item">
+          <h3>Usar Miro para gestionar tareas</h3>
+          <p>Miro no es una herramienta de seguimiento. Si empezás a usar notas adhesivas como sistema de tareas con responsables y fechas, vas a terminar con un tablero desactualizado que nadie consulta. Las decisiones de Miro pasan a tu herramienta de PM.</p>
+        </div>
+
+        <div class="error-item">
+          <h3>No compartir el tablero después de la sesión</h3>
+          <p>El tablero de Miro es el acta de la reunión. Si no lo compartís con todos los participantes después de la sesión, el trabajo colaborativo pierde valor. Enviá el link al finalizar y asegurate de que todos tengan acceso de lectura.</p>
+        </div>
+
+        <div class="error-item">
+          <h3>Tableros demasiado grandes y sin estructura</h3>
+          <p>Un tablero sin zonas claramente delimitadas se convierte en un caos visual. Usá marcos (frames) para organizar las secciones y poné títulos visibles. Cada zona del tablero debe responder una pregunta específica.</p>
+        </div>
+      </section>
+
+    </div>
+
+    <div class="guia-footer">
+      <div class="autor-box">
+        <img src="/images/valeria-yashan.webp" alt="Valeria Yashan, consultora PMP® en gestión de proyectos e IA" class="autor-foto" />
+        <div class="autor-info">
+          <p class="autor-nombre">Valeria Yashan</p>
+          <p class="autor-desc">PMP® #1613335 · MBA · Ingeniera Industrial. Consultora, docente y autora de 4 libros sobre gestión de proyectos e IA.</p>
+          <a href="/sobre-mi">Conocé más sobre Valeria →</a>
+        </div>
+      </div>
+      <div class="cta-box">
+        <h3>¿Querés incorporar talleres colaborativos en tus proyectos?</h3>
+        <p>Puedo ayudarte a diseñar y facilitar talleres de planificación, retrospectivas y kick-offs con tu equipo usando Miro.</p>
+        <a href="/contacto" class="btn-cta">Hablemos →</a>
+      </div>
+    </div>
+
+  </div>
+
+</BaseLayout>
+
+<style>
+  .guia-container { max-width: 780px; margin: 0 auto; padding: 2rem 1.5rem 5rem; }
+  .breadcrumb { display: flex; gap: 0.5rem; align-items: center; font-size: 0.85rem; color: var(--color-muted); margin-bottom: 2rem; margin-top: 1rem; }
+  .breadcrumb a { color: var(--color-accent); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .guia-tag { font-size: 0.75rem; font-weight: 600; color: var(--color-accent); text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 0.75rem; }
+  .guia-header h1 { font-family: 'Fraunces', serif; font-size: 2.4rem; font-weight: 900; color: var(--color-text); margin-bottom: 1rem; line-height: 1.2; }
+  .guia-lead { font-size: 1.1rem; color: var(--color-muted); line-height: 1.7; margin-bottom: 1rem; }
+  .guia-meta { display: flex; gap: 0.5rem; font-size: 0.82rem; color: var(--color-muted); flex-wrap: wrap; margin-bottom: 2.5rem; }
+  .tabla-contenidos { background: var(--color-surface); border: 1px solid var(--color-border); border-left: 3px solid var(--color-accent); border-radius: 0 6px 6px 0; padding: 1.5rem 2rem; margin-bottom: 3rem; }
+  .toc-titulo { font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-muted); margin-bottom: 0.75rem; }
+  .tabla-contenidos ol { margin: 0; padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.4rem; }
+  .tabla-contenidos a { color: var(--color-text); text-decoration: none; font-size: 0.95rem; }
+  .tabla-contenidos a:hover { color: var(--color-accent); }
+  .guia-contenido section { margin-bottom: 3.5rem; padding-bottom: 3.5rem; border-bottom: 1px solid var(--color-border); }
+  .guia-contenido section:last-child { border-bottom: none; }
+  .guia-contenido h2 { font-family: 'Fraunces', serif; font-size: 1.7rem; font-weight: 700; color: var(--color-text); margin-bottom: 1.2rem; }
+  .guia-contenido h3 { font-size: 1.05rem; font-weight: 600; color: var(--color-text); margin-top: 1.75rem; margin-bottom: 0.6rem; }
+  .guia-contenido p { color: var(--color-text); line-height: 1.8; margin-bottom: 1rem; }
+  .guia-contenido ul, .guia-contenido ol { padding-left: 1.5rem; margin-bottom: 1rem; display: flex; flex-direction: column; gap: 0.4rem; }
+  .guia-contenido li { color: var(--color-text); line-height: 1.7; }
+  .nota-practica { background: var(--color-surface); border-left: 3px solid var(--color-accent); border-radius: 0 6px 6px 0; padding: 1rem 1.25rem; margin-top: 1.5rem; }
+  .nota-practica p { margin: 0; font-size: 0.92rem; color: var(--color-muted); }
+  .caso-card { background: #EBF5F0; border: 1px solid #B7DEC9; border-radius: 10px; padding: 1.5rem 2rem; margin-bottom: 1.5rem; }
+  .caso-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--color-accent); margin-bottom: 0.75rem; }
+  .caso-card h3 { font-family: 'Fraunces', serif; font-size: 1.15rem; font-weight: 700; color: var(--color-text); margin: 0 0 0.75rem; }
+  .caso-card p { font-size: 0.95rem; color: var(--color-muted); line-height: 1.7; margin-bottom: 0.5rem; }
+  .error-item { margin-bottom: 2rem; }
+  .error-item h3 { margin-top: 0; }
+  .guia-footer { margin-top: 4rem; display: flex; flex-direction: column; gap: 2rem; }
+  .autor-box { display: flex; gap: 1.25rem; align-items: flex-start; padding: 1.5rem; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 10px; }
+  .autor-foto { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+  .autor-nombre { font-weight: 700; font-size: 1rem; margin-bottom: 0.25rem; color: var(--color-text); }
+  .autor-desc { font-size: 0.88rem; color: var(--color-muted); margin-bottom: 0.5rem; }
+  .autor-info a { font-size: 0.88rem; color: var(--color-accent); text-decoration: none; }
+  .autor-info a:hover { text-decoration: underline; }
+  .cta-box { background: var(--color-accent); color: #ffffff; padding: 2rem; border-radius: 10px; }
+  .cta-box h3 { font-family: 'Fraunces', serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem; color: #ffffff; }
+  .cta-box p { font-size: 0.95rem; opacity: 0.9; margin-bottom: 1.25rem; color: #ffffff; }
+  .btn-cta { display: inline-block; background: #ffffff; color: var(--color-accent); padding: 0.65rem 1.4rem; border-radius: 6px; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
+  .btn-cta:hover { opacity: 0.9; }
+  @media (max-width: 700px) { .guia-header h1 { font-size: 1.8rem; } .autor-box { flex-direction: column; } }
+</style>

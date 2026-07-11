@@ -1,0 +1,261 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Guía de Lucidchart para Project Managers — Diagramas y mapas de proceso" description="Cómo usar Lucidchart en gestión de proyectos: diagramas de flujo, mapas de proceso, organigramas y documentación técnica. Guía práctica de Valeria Yashan, PMP®.">
+
+  <div class="guia-container">
+
+    <nav class="breadcrumb">
+      <a href="/herramientas">Herramientas</a>
+      <span>→</span>
+      <span>Lucidchart para Project Managers</span>
+    </nav>
+
+    <header class="guia-header">
+      <span class="guia-tag">Colaboración y talleres</span>
+      <h1>Lucidchart para Project Managers</h1>
+      <p class="guia-lead">Lucidchart es la herramienta de diagramación más usada en entornos profesionales. Para un PM, es el lugar donde se documentan procesos, se diseñan flujos de trabajo y se crean los entregables visuales que estructuran la comunicación con el equipo y los stakeholders.</p>
+      <div class="guia-meta">
+        <span>Nivel: inicial</span>
+        <span>·</span>
+        <span>Herramienta: Lucidchart (plan gratuito y pagos)</span>
+        <span>·</span>
+        <span>Autora: Valeria Yashan</span>
+      </div>
+    </header>
+
+    <nav class="tabla-contenidos">
+      <p class="toc-titulo">Contenido de esta guía</p>
+      <ol>
+        <li><a href="#que-es">Qué es Lucidchart y para qué lo usan los PMs</a></li>
+        <li><a href="#cuando-usarlo">Cuándo usar Lucidchart</a></li>
+        <li><a href="#caso-aplicado">Caso aplicado: documentación de proceso antes y después</a></li>
+        <li><a href="#diagramas-clave">Los diagramas más útiles para un PM</a></li>
+        <li><a href="#primeros-pasos">Primeros pasos</a></li>
+        <li><a href="#integraciones">Integraciones con otras herramientas de PM</a></li>
+        <li><a href="#lucidchart-vs-miro">Lucidchart vs. Miro: cuál usar para qué</a></li>
+      </ol>
+    </nav>
+
+    <div class="guia-contenido">
+
+      <section id="que-es">
+        <h2>1. Qué es Lucidchart y para qué lo usan los PMs</h2>
+        <p>Lucidchart es una herramienta de diagramación en la nube que permite crear diagramas de flujo, mapas de procesos, organigramas, diagramas de arquitectura y cualquier representación visual estructurada. A diferencia de Miro o Mural, Lucidchart no es una pizarra de trabajo colaborativo — es una herramienta de documentación y diseño visual profesional.</p>
+        <p>Para un Project Manager, la diferencia es importante: <strong>Miro es donde el equipo trabaja en vivo; Lucidchart es donde se documenta el resultado</strong>. El mapa de proceso que construyeron juntos en Miro se limpia, estructura y versiona en Lucidchart para convertirse en un entregable formal.</p>
+
+        <h3>Dónde aparece Lucidchart en el ciclo de un proyecto</h3>
+        <ul>
+          <li><strong>Diagnóstico:</strong> mapear el proceso actual ("as-is") para identificar ineficiencias y cuellos de botella.</li>
+          <li><strong>Diseño:</strong> diseñar el proceso futuro ("to-be") y los flujos de trabajo de la solución.</li>
+          <li><strong>Planificación:</strong> crear la EDT (Estructura de Desglose del Trabajo) visual del proyecto.</li>
+          <li><strong>Comunicación:</strong> organigramas de equipo, mapas de responsabilidades (RACI visual), diagramas de arquitectura para comunicar con stakeholders técnicos.</li>
+          <li><strong>Entrega:</strong> documentación de procesos como entregable final del proyecto.</li>
+        </ul>
+
+        <div class="nota-practica">
+          <p><strong>Por qué Lucidchart y no Visio:</strong> Microsoft Visio es la alternativa clásica pero requiere instalación local y licencia cara. Lucidchart funciona en el navegador, tiene plan gratuito, permite colaboración en tiempo real y se integra con Google Drive, Confluence y otras herramientas que los PMs ya usan.</p>
+        </div>
+      </section>
+
+      <section id="cuando-usarlo">
+        <h2>2. Cuándo usar Lucidchart</h2>
+
+        <h3>Lucidchart conviene cuando:</h3>
+        <ul>
+          <li>Necesitás documentar procesos como entregable formal — el resultado debe verse profesional y estar versionado.</li>
+          <li>Trabajás en proyectos de mejora de procesos o transformación organizacional donde el mapa "as-is / to-be" es un entregable clave.</li>
+          <li>Necesitás crear organigramas, diagramas de flujo o estructuras que otras herramientas no generan bien.</li>
+          <li>Tenés que comunicar arquitecturas o flujos complejos a stakeholders técnicos y no técnicos.</li>
+          <li>Querés que la documentación del proyecto sea reutilizable y fácilmente actualizable.</li>
+        </ul>
+
+        <h3>Lucidchart no conviene cuando:</h3>
+        <ul>
+          <li>Necesitás colaboración en tiempo real en un taller — Miro o Mural son más adecuados para eso.</li>
+          <li>El diagrama es temporal y no necesitará ser reutilizado — una pizarra o hasta un papel son suficientes.</li>
+          <li>Necesitás gestionar tareas o proyectos — Lucidchart no tiene esa funcionalidad.</li>
+        </ul>
+      </section>
+
+      <section id="caso-aplicado">
+        <h2>3. Caso aplicado: documentación de proceso antes y después</h2>
+
+        <div class="caso-card">
+          <p class="caso-label">Ejemplo de aplicación real</p>
+          <h3>El problema que resuelve este tipo de documentación</h3>
+          <p>Una empresa de servicios quiere mejorar su proceso de atención al cliente. Antes de rediseñar nada, el PM necesita documentar cómo funciona el proceso hoy — quién hace qué, en qué orden, qué decisiones se toman y dónde se generan los cuellos de botella.</p>
+          <p>El PM facilita entrevistas con el equipo y talleres de mapeo (en Miro), y después traslada el proceso a Lucidchart para crear la versión limpia y formal del diagrama "as-is". Una vez aprobado el rediseño, documenta el proceso "to-be" en el mismo formato. Ambos diagramas quedan como entregables del proyecto — el cliente tiene documentado cómo era y cómo es el proceso después de la intervención.</p>
+        </div>
+
+        <h3>El valor de documentar "as-is" y "to-be"</h3>
+        <ul>
+          <li>El diagrama "as-is" genera consenso sobre cómo funciona realmente el proceso — muchas veces el equipo no tiene una visión compartida.</li>
+          <li>El diagrama "to-be" es el norte del proyecto — todos saben hacia dónde van y qué cambia.</li>
+          <li>La comparación entre ambos es el argumento más claro para justificar el valor de la intervención.</li>
+        </ul>
+      </section>
+
+      <section id="diagramas-clave">
+        <h2>4. Los diagramas más útiles para un PM</h2>
+
+        <h3>Diagrama de flujo de proceso</h3>
+        <p>El más frecuente en gestión de proyectos. Muestra la secuencia de actividades, las decisiones (rombos) y los actores involucrados. Útil para documentar cualquier proceso operativo, desde la aprobación de un presupuesto hasta el proceso de entrega de un servicio.</p>
+
+        <h3>Diagrama de swimlanes (carriles)</h3>
+        <p>Variante del diagrama de flujo donde cada actor o área tiene su propio carril horizontal. Permite ver de un vistazo quién hace qué y dónde se producen los traspasos entre áreas — los puntos donde más frecuentemente ocurren errores y demoras.</p>
+
+        <h3>Estructura de Desglose del Trabajo (EDT / WBS)</h3>
+        <p>La EDT visual del proyecto en formato árbol. Lucidchart permite construirla de forma jerárquica y compartirla con el equipo como referencia durante la planificación.</p>
+
+        <h3>Organigrama del proyecto</h3>
+        <p>El equipo del proyecto con roles, responsabilidades y relaciones de reporte. Útil en proyectos con muchos involucrados para que todos sepan a quién recurrir para qué.</p>
+
+        <h3>Diagrama RACI visual</h3>
+        <p>La matriz RACI (Responsable, Aprueba, Consultado, Informado) en formato visual con colores por rol. Más legible que una tabla en Excel y más fácil de comunicar en una reunión de kick-off.</p>
+
+        <h3>Mapa de sistemas e integraciones</h3>
+        <p>Para proyectos de tecnología o transformación digital: qué sistemas existen, cómo se conectan y qué datos fluyen entre ellos. Permite al PM comunicar la arquitectura técnica a stakeholders no técnicos.</p>
+
+        <div class="nota-practica">
+          <p><strong>El diagrama que más valor genera por esfuerzo:</strong> el swimlane del proceso actual. En 2 horas de trabajo produce un entregable que genera más claridad organizacional que semanas de reuniones. Si vas a aprender un solo tipo de diagrama en Lucidchart, empezá por este.</p>
+        </div>
+      </section>
+
+      <section id="primeros-pasos">
+        <h2>5. Primeros pasos</h2>
+        <ol>
+          <li>Ingresá a <strong>lucidchart.com</strong> y creá una cuenta gratuita (incluye 3 documentos editables).</li>
+          <li>Desde el dashboard, creá un nuevo documento y elegí una plantilla de la categoría "Flowchart" o "Process".</li>
+          <li>Familiarizate con el panel de formas de la izquierda — las formas estándar de diagramas de flujo (rectángulo = actividad, rombo = decisión, óvalo = inicio/fin) están en la sección "Flowchart".</li>
+          <li>Para crear un swimlane: buscá "swimlane" en la barra de búsqueda de formas o usá la plantilla predefinida.</li>
+          <li>Compartí el documento con tu equipo o cliente usando el botón "Share" — podés dar acceso de edición o solo de visualización.</li>
+        </ol>
+
+        <div class="nota-practica">
+          <p><strong>Truco de productividad:</strong> Lucidchart permite importar datos desde Excel para generar diagramas automáticamente. Si tenés una lista de actividades en una planilla, podés importarla y Lucidchart genera la estructura base del diagrama. Ahorrás el 60% del tiempo de construcción.</p>
+        </div>
+      </section>
+
+      <section id="integraciones">
+        <h2>6. Integraciones con otras herramientas de PM</h2>
+        <ul>
+          <li><strong>Google Drive / Google Docs:</strong> los diagramas de Lucidchart se insertan directamente en documentos de Google con actualización automática — cuando modificás el diagrama en Lucidchart, se actualiza en el documento.</li>
+          <li><strong>Confluence:</strong> integración nativa para equipos que documentan en Confluence. El diagrama se inserta como un macro que se actualiza desde Lucidchart.</li>
+          <li><strong>Microsoft 365:</strong> integración con Word, PowerPoint y Teams para insertar diagramas en documentos y presentaciones.</li>
+          <li><strong>Slack:</strong> compartí diagramas directamente en canales de Slack con preview.</li>
+          <li><strong>Jira:</strong> vinculá diagramas de flujo a tickets de Jira para documentar el contexto de cada iniciativa.</li>
+        </ul>
+      </section>
+
+      <section id="lucidchart-vs-miro">
+        <h2>7. Lucidchart vs. Miro: cuál usar para qué</h2>
+        <p>La pregunta más frecuente es cuándo usar Lucidchart y cuándo usar Miro. No son competidoras — son complementarias.</p>
+
+        <div class="comparativa-simple">
+          <div class="comp-fila header">
+            <div class="comp-col">Situación</div>
+            <div class="comp-col">Usar</div>
+          </div>
+          <div class="comp-fila">
+            <div class="comp-col">Taller de mapeo de proceso con el equipo</div>
+            <div class="comp-col si">Miro</div>
+          </div>
+          <div class="comp-fila">
+            <div class="comp-col">Documentar el proceso como entregable formal</div>
+            <div class="comp-col si">Lucidchart</div>
+          </div>
+          <div class="comp-fila">
+            <div class="comp-col">Retrospectiva o planificación de sprint</div>
+            <div class="comp-col si">Miro</div>
+          </div>
+          <div class="comp-fila">
+            <div class="comp-col">EDT o RACI para presentar a la dirección</div>
+            <div class="comp-col si">Lucidchart</div>
+          </div>
+          <div class="comp-fila">
+            <div class="comp-col">Brainstorming y co-creación</div>
+            <div class="comp-col si">Miro / Mural</div>
+          </div>
+          <div class="comp-fila">
+            <div class="comp-col">Documentación técnica de sistemas</div>
+            <div class="comp-col si">Lucidchart</div>
+          </div>
+        </div>
+
+        <div class="nota-practica">
+          <p><strong>El flujo que funciona:</strong> taller en Miro → decisiones tomadas → documentación en Lucidchart → entregable compartido con el cliente. Miro captura el proceso de pensamiento; Lucidchart captura el resultado.</p>
+        </div>
+      </section>
+
+    </div>
+
+    <div class="guia-footer">
+      <div class="autor-box">
+        <img src="/images/valeria-yashan.webp" alt="Valeria Yashan, consultora PMP® en gestión de proyectos e IA" class="autor-foto" />
+        <div class="autor-info">
+          <p class="autor-nombre">Valeria Yashan</p>
+          <p class="autor-desc">PMP® #1613335 · MBA · Ingeniera Industrial. Consultora, docente y autora de 4 libros sobre gestión de proyectos e IA.</p>
+          <a href="/sobre-mi">Conocé más sobre Valeria →</a>
+        </div>
+      </div>
+      <div class="cta-box">
+        <h3>¿Necesitás documentar o rediseñar procesos en tu organización?</h3>
+        <p>Mapeo procesos, identifico ineficiencias y diseño el proceso futuro con entregables visuales claros para tu equipo y tu dirección.</p>
+        <a href="/contacto" class="btn-cta">Hablemos →</a>
+      </div>
+    </div>
+
+  </div>
+
+</BaseLayout>
+
+<style>
+  .guia-container { max-width: 780px; margin: 0 auto; padding: 2rem 1.5rem 5rem; }
+  .breadcrumb { display: flex; gap: 0.5rem; align-items: center; font-size: 0.85rem; color: var(--color-muted); margin-bottom: 2rem; margin-top: 1rem; }
+  .breadcrumb a { color: var(--color-accent); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .guia-tag { font-size: 0.75rem; font-weight: 600; color: var(--color-accent); text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 0.75rem; }
+  .guia-header h1 { font-family: 'Fraunces', serif; font-size: 2.4rem; font-weight: 900; color: var(--color-text); margin-bottom: 1rem; line-height: 1.2; }
+  .guia-lead { font-size: 1.1rem; color: var(--color-muted); line-height: 1.7; margin-bottom: 1rem; }
+  .guia-meta { display: flex; gap: 0.5rem; font-size: 0.82rem; color: var(--color-muted); flex-wrap: wrap; margin-bottom: 2.5rem; }
+  .tabla-contenidos { background: var(--color-surface); border: 1px solid var(--color-border); border-left: 3px solid var(--color-accent); border-radius: 0 6px 6px 0; padding: 1.5rem 2rem; margin-bottom: 3rem; }
+  .toc-titulo { font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-muted); margin-bottom: 0.75rem; }
+  .tabla-contenidos ol { margin: 0; padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.4rem; }
+  .tabla-contenidos a { color: var(--color-text); text-decoration: none; font-size: 0.95rem; }
+  .tabla-contenidos a:hover { color: var(--color-accent); }
+  .guia-contenido section { margin-bottom: 3.5rem; padding-bottom: 3.5rem; border-bottom: 1px solid var(--color-border); }
+  .guia-contenido section:last-child { border-bottom: none; }
+  .guia-contenido h2 { font-family: 'Fraunces', serif; font-size: 1.7rem; font-weight: 700; color: var(--color-text); margin-bottom: 1.2rem; }
+  .guia-contenido h3 { font-size: 1.05rem; font-weight: 600; color: var(--color-text); margin-top: 1.75rem; margin-bottom: 0.6rem; }
+  .guia-contenido p { color: var(--color-text); line-height: 1.8; margin-bottom: 1rem; }
+  .guia-contenido ul, .guia-contenido ol { padding-left: 1.5rem; margin-bottom: 1rem; display: flex; flex-direction: column; gap: 0.4rem; }
+  .guia-contenido li { color: var(--color-text); line-height: 1.7; }
+  .nota-practica { background: var(--color-surface); border-left: 3px solid var(--color-accent); border-radius: 0 6px 6px 0; padding: 1rem 1.25rem; margin-top: 1.5rem; }
+  .nota-practica p { margin: 0; font-size: 0.92rem; color: var(--color-muted); }
+  .caso-card { background: #EBF5F0; border: 1px solid #B7DEC9; border-radius: 10px; padding: 1.5rem 2rem; margin-bottom: 1.5rem; }
+  .caso-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--color-accent); margin-bottom: 0.75rem; }
+  .caso-card h3 { font-family: 'Fraunces', serif; font-size: 1.15rem; font-weight: 700; color: var(--color-text); margin: 0 0 0.75rem; }
+  .caso-card p { font-size: 0.95rem; color: var(--color-muted); line-height: 1.7; margin-bottom: 0.5rem; }
+  .comparativa-simple { border: 1px solid var(--color-border); border-radius: 8px; overflow: hidden; margin: 1.5rem 0; font-size: 0.88rem; }
+  .comp-fila { display: grid; grid-template-columns: 2fr 1fr; border-top: 1px solid var(--color-border); }
+  .comp-fila.header { background: var(--color-accent); color: #fff; font-weight: 600; border-top: none; }
+  .comp-fila:nth-child(even) { background: var(--color-surface); }
+  .comp-col { padding: 0.65rem 0.75rem; display: flex; align-items: center; color: var(--color-text); }
+  .comp-fila.header .comp-col { color: #fff; }
+  .si { color: #065F46; font-weight: 600; }
+  .guia-footer { margin-top: 4rem; display: flex; flex-direction: column; gap: 2rem; }
+  .autor-box { display: flex; gap: 1.25rem; align-items: flex-start; padding: 1.5rem; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 10px; }
+  .autor-foto { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+  .autor-nombre { font-weight: 700; font-size: 1rem; margin-bottom: 0.25rem; color: var(--color-text); }
+  .autor-desc { font-size: 0.88rem; color: var(--color-muted); margin-bottom: 0.5rem; }
+  .autor-info a { font-size: 0.88rem; color: var(--color-accent); text-decoration: none; }
+  .autor-info a:hover { text-decoration: underline; }
+  .cta-box { background: var(--color-accent); color: #ffffff; padding: 2rem; border-radius: 10px; }
+  .cta-box h3 { font-family: 'Fraunces', serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem; color: #ffffff; }
+  .cta-box p { font-size: 0.95rem; opacity: 0.9; margin-bottom: 1.25rem; color: #ffffff; }
+  .btn-cta { display: inline-block; background: #ffffff; color: var(--color-accent); padding: 0.65rem 1.4rem; border-radius: 6px; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
+  .btn-cta:hover { opacity: 0.9; }
+  @media (max-width: 700px) { .guia-header h1 { font-size: 1.8rem; } .autor-box { flex-direction: column; } }
+</style>
