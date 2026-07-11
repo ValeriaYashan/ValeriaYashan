@@ -1,0 +1,576 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Guía de Notion para Project Managers — Sistema de gestión de proyectos" description="Cómo diseñar e implementar un sistema de gestión de proyectos en Notion: bases de datos relacionadas, vistas por rol, automatizaciones y plantillas reutilizables. Guía práctica de Valeria Yashan, PMP®.">
+
+  <div class="guia-container">
+
+    <nav class="breadcrumb">
+      <a href="/herramientas">Herramientas</a>
+      <span>→</span>
+      <span>Notion para Project Managers</span>
+    </nav>
+
+    <header class="guia-header">
+      <span class="guia-tag">Gestión de proyectos</span>
+      <h1>Notion para Project Managers</h1>
+      <p class="guia-lead">Cómo diseñar e implementar un sistema de gestión de proyectos en Notion que centralice la información, automatice el seguimiento y dé visibilidad clara a cada rol: PM, equipo técnico y dirección.</p>
+      <div class="guia-meta">
+        <span>Nivel: intermedio</span>
+        <span>·</span>
+        <span>Herramienta: Notion (plan gratuito y Plus)</span>
+        <span>·</span>
+        <span>Autora: Valeria Yashan</span>
+      </div>
+    </header>
+
+    <nav class="tabla-contenidos">
+      <p class="toc-titulo">Contenido de esta guía</p>
+      <ol>
+        <li><a href="#que-es-notion">Qué es Notion y por qué los PMs lo usan</a></li>
+        <li><a href="#cuando-usarlo">Cuándo conviene Notion (y cuándo no)</a></li>
+        <li><a href="#caso-aplicado">Caso aplicado: sistema de gestión de proyectos</a></li>
+        <li><a href="#arquitectura">La arquitectura: bases de datos relacionadas</a></li>
+        <li><a href="#vistas">Vistas personalizadas por rol</a></li>
+        <li><a href="#automatizaciones">Automatizaciones nativas para PMs</a></li>
+        <li><a href="#plantilla">Plantilla de proyecto tipo: duplicar y usar</a></li>
+        <li><a href="#errores-frecuentes">Errores frecuentes y cómo evitarlos</a></li>
+      </ol>
+    </nav>
+
+    <div class="guia-contenido">
+
+      <section id="que-es-notion">
+        <h2>1. Qué es Notion y por qué los PMs lo usan</h2>
+        <p>Notion es un espacio de trabajo flexible que combina documentos, bases de datos, wikis y tableros en una sola herramienta. A diferencia de Asana o ClickUp, que son herramientas de gestión de tareas, Notion es más parecido a un sistema que cada equipo construye según sus necesidades.</p>
+        <p>Para un Project Manager, eso es una ventaja y una responsabilidad: Notion puede ser exactamente lo que tu equipo necesita, pero requiere diseño previo. Sin arquitectura clara, se convierte en un repositorio de páginas sin conexión que nadie consulta.</p>
+
+        <h3>¿Qué problemas resuelve bien?</h3>
+        <ul>
+          <li>Centralizar información dispersa en múltiples herramientas y carpetas compartidas.</li>
+          <li>Conectar proyectos, tareas, recursos y hitos en un sistema relacionado donde todo habla con todo.</li>
+          <li>Dar visibilidad diferenciada: la dirección ve el dashboard ejecutivo, el equipo ve su tablero de tareas, el PM ve el panorama completo.</li>
+          <li>Documentar el proyecto mientras se gestiona, sin saltar a otra herramienta.</li>
+        </ul>
+
+        <h3>¿Qué no resuelve?</h3>
+        <ul>
+          <li>No es una herramienta de comunicación. No reemplaza Slack ni el email.</li>
+          <li>No tiene Gantt nativo avanzado: para proyectos con cronogramas muy detallados, MS Project o ClickUp cubren mejor esa necesidad.</li>
+          <li>No funciona si el equipo no tiene disciplina de carga. Como toda herramienta, es tan buena como los datos que contiene.</li>
+        </ul>
+
+        <div class="nota-practica">
+          <p><strong>Nota práctica:</strong> El plan gratuito de Notion incluye páginas y bases de datos ilimitadas para uso individual. Para equipos con más de un miembro que necesiten colaborar en bases de datos, el plan Plus (USD 8/mes por miembro) es el mínimo recomendado.</p>
+        </div>
+      </section>
+
+      <section id="cuando-usarlo">
+        <h2>2. Cuándo conviene Notion (y cuándo no)</h2>
+
+        <h3>Notion conviene cuando:</h3>
+        <ul>
+          <li>Gestionás proyectos que también requieren documentación: especificaciones, actas, decisiones, lecciones aprendidas.</li>
+          <li>Tu equipo necesita una única fuente de verdad donde convivan las tareas y la información del proyecto.</li>
+          <li>Querés un sistema adaptado a tu forma de trabajar, no una herramienta que te impone una estructura.</li>
+          <li>Tenés varios tipos de proyectos con estructuras distintas y necesitás flexibilidad para manejarlos diferente.</li>
+          <li>La dirección necesita visibilidad ejecutiva sin acceder a los detalles operativos del equipo.</li>
+        </ul>
+
+        <h3>Notion no conviene cuando:</h3>
+        <ul>
+          <li>El equipo busca algo simple para empezar: Asana o Trello tienen menor curva de entrada.</li>
+          <li>Necesitás dependencias complejas entre tareas y alertas automáticas: ClickUp lo cubre mejor.</li>
+          <li>La organización ya tiene Microsoft 365 y quiere todo integrado: Teams + Planner puede ser más práctico.</li>
+        </ul>
+
+        <div class="nota-practica">
+          <p><strong>Regla de decisión:</strong> Si tu mayor problema es la dispersión de información y la falta de visibilidad centralizada, Notion es una excelente respuesta. Si tu mayor problema es la coordinación de tareas en tiempo real en equipos grandes, evaluá primero ClickUp o Asana.</p>
+        </div>
+      </section>
+
+      <section id="caso-aplicado">
+        <h2>3. Caso aplicado: sistema de gestión de proyectos</h2>
+
+        <div class="caso-card">
+          <p class="caso-label">Ejemplo de aplicación real</p>
+          <h3>El problema que resuelve este tipo de sistema</h3>
+          <p>Una organización gestiona múltiples proyectos simultáneos con equipos distintos. La información está fragmentada: el estado de cada proyecto en un Excel, las tareas en emails y mensajes, los documentos en carpetas de Drive sin estructura. El PM dedica horas semanales a consolidar información para preparar el reporte a la dirección.</p>
+          <p>La solución es un sistema en Notion con cuatro bases de datos relacionadas: Proyectos, Tareas, Recursos e Hitos. Cada registro conecta con los demás. El PM ve el panorama completo; el equipo ve solo sus tareas; la dirección ve el dashboard ejecutivo. Nadie necesita preguntar cómo va un proyecto: está visible en tiempo real.</p>
+        </div>
+
+        <h3>Qué incluye un sistema bien diseñado</h3>
+        <ul>
+          <li><strong>Base de datos Proyectos:</strong> estado, responsable, fechas, categoría y métricas de avance.</li>
+          <li><strong>Base de datos Tareas:</strong> vinculada a Proyectos. Cada tarea tiene responsable, fecha, prioridad y estado.</li>
+          <li><strong>Base de datos Hitos:</strong> vinculada a Proyectos. Fechas planificadas vs. reales, semáforo de estado.</li>
+          <li><strong>Base de datos Recursos:</strong> personas o equipos asignados a proyectos, con carga horaria estimada.</li>
+          <li><strong>Dashboard ejecutivo:</strong> vista filtrada para dirección con KPIs y estado de portfolio.</li>
+          <li><strong>Plantilla de proyecto:</strong> página duplicable con estructura predefinida para cada nuevo encargo.</li>
+        </ul>
+
+        <div class="nota-practica">
+          <p><strong>Lo que cambia en la práctica:</strong> el reporte semanal deja de ser trabajo manual. La dirección consulta el dashboard cuando quiere. El equipo actualiza sus tareas directamente. El PM gestiona excepciones, no consolida datos.</p>
+        </div>
+      </section>
+
+      <section id="arquitectura">
+        <h2>4. La arquitectura: bases de datos relacionadas</h2>
+        <p>Este es el concepto central de un sistema de gestión en Notion. No son páginas sueltas: son bases de datos que se relacionan entre sí, como tablas de una base de datos relacional pero sin necesidad de programar nada.</p>
+
+        <h3>La estructura de arriba hacia abajo</h3>
+        <ul>
+          <li><strong>Proyectos:</strong> el nivel más alto. Cada proyecto es un registro con nombre, estado, responsable PM, fechas de inicio y cierre, y categoría.</li>
+          <li><strong>Hitos:</strong> vinculados a un Proyecto. Cada hito tiene fecha planificada, fecha real y estado (Pendiente / Completado / Vencido).</li>
+          <li><strong>Tareas:</strong> vinculadas a un Proyecto y opcionalmente a un Hito. Cada tarea tiene responsable, fecha límite, prioridad y estado.</li>
+          <li><strong>Recursos:</strong> personas o equipos. Cada recurso puede vincularse a múltiples proyectos y tareas para ver su carga total.</li>
+        </ul>
+
+        <h3>Cómo crear la relación entre bases de datos</h3>
+        <ol>
+          <li>En la base de datos Tareas, agregá una propiedad de tipo <strong>Relación</strong>.</li>
+          <li>Seleccioná la base de datos Proyectos como destino.</li>
+          <li>Notion crea automáticamente la relación inversa: desde cada Proyecto podés ver todas sus Tareas vinculadas.</li>
+          <li>Repetí el proceso para vincular Hitos y Recursos con Proyectos.</li>
+        </ol>
+
+        <h3>Propiedades esenciales por base de datos</h3>
+        <p>Para Proyectos: Estado (Activo / En riesgo / Pausado / Cerrado), Responsable PM, Fecha inicio, Fecha cierre planificada, Fecha cierre real, Categoría, % Avance (fórmula o campo manual).</p>
+        <p>Para Tareas: Proyecto (relación), Responsable, Fecha límite, Prioridad (Alta / Media / Baja), Estado (Por hacer / En progreso / Bloqueada / Completada).</p>
+        <p>Para Hitos: Proyecto (relación), Fecha planificada, Fecha real, Estado, Responsable.</p>
+
+        <div class="nota-practica">
+          <p><strong>Criterio de diseño:</strong> empezá con las propiedades mínimas que el equipo realmente va a completar. Podés agregar campos después. Un sistema con 5 propiedades bien mantenidas vale más que uno con 20 propiedades vacías.</p>
+        </div>
+      </section>
+
+      <section id="vistas">
+        <h2>5. Vistas personalizadas por rol</h2>
+        <p>Una de las mayores ventajas de Notion es que la misma base de datos puede mostrarse de formas completamente distintas según quién la consulta. No hay que duplicar información: solo configurar vistas con filtros y agrupaciones distintas.</p>
+
+        <h3>Vista para el PM: panorama completo</h3>
+        <ul>
+          <li>Tabla de todos los proyectos activos con estado, responsable y fechas.</li>
+          <li>Vista de hitos próximos (filtro: fecha planificada en los próximos 30 días).</li>
+          <li>Vista de tareas vencidas en todos los proyectos (filtro: fecha límite menor a hoy + estado ≠ Completada).</li>
+        </ul>
+
+        <h3>Vista para el equipo técnico: tablero Kanban</h3>
+        <ul>
+          <li>Base de datos Tareas filtrada por responsable (cada persona ve solo sus tareas).</li>
+          <li>Agrupada por Estado: Por hacer / En progreso / Bloqueada / Completada.</li>
+          <li>Sin columnas de costo, fechas de proyecto ni información estratégica.</li>
+        </ul>
+
+        <h3>Vista para la dirección: dashboard ejecutivo</h3>
+        <ul>
+          <li>Gallery o tabla de Proyectos con estado visual (semáforo mediante etiqueta de color).</li>
+          <li>Solo campos relevantes: nombre, estado, responsable PM, fecha de cierre y % avance.</li>
+          <li>Filtro: solo proyectos con estado Activo o En riesgo.</li>
+          <li>Sin acceso a tareas individuales ni recursos.</li>
+        </ul>
+
+        <div class="nota-practica">
+          <p><strong>Cómo compartir vistas específicas:</strong> en Notion podés compartir un enlace a una vista específica con permisos de solo lectura. La dirección accede al dashboard sin necesidad de cuenta ni de ver el resto del workspace.</p>
+        </div>
+      </section>
+
+      <section id="automatizaciones">
+        <h2>6. Automatizaciones nativas para PMs</h2>
+        <p>Notion tiene un motor de automatizaciones nativo que permite crear reglas del tipo "cuando ocurre X, hacer Y". No reemplaza herramientas como Zapier para flujos complejos, pero cubre los casos más frecuentes de un PM sin necesitar configuración externa.</p>
+
+        <h3>Automatizaciones útiles para gestión de proyectos</h3>
+        <ul>
+          <li><strong>Cuando una tarea se marca Completada → notificar al PM:</strong> el responsable del proyecto recibe un aviso automático sin necesitar revisar el tablero constantemente.</li>
+          <li><strong>Cuando el estado de un Hito cambia a Vencido → cambiar el estado del Proyecto a En riesgo:</strong> el semáforo del proyecto se actualiza automáticamente cuando un hito no se cumple.</li>
+          <li><strong>Cuando se crea una tarea nueva → asignar prioridad Media por defecto:</strong> reduce el trabajo de configuración inicial.</li>
+          <li><strong>Cuando una tarea cambia a Bloqueada → notificar al PM:</strong> visibilidad inmediata de impedimentos sin esperar la reunión de seguimiento.</li>
+        </ul>
+
+        <h3>Cómo crear una automatización en Notion</h3>
+        <ol>
+          <li>Abrí la base de datos donde querés crear la regla.</li>
+          <li>Hacé clic en el ícono de rayo (⚡) en la barra superior de la base de datos.</li>
+          <li>Seleccioná <strong>Nueva automatización</strong>.</li>
+          <li>Definí el disparador (cuándo) y la acción (qué hacer).</li>
+          <li>Guardá y activá la regla.</li>
+        </ol>
+
+        <div class="nota-practica">
+          <p><strong>Límite a tener en cuenta:</strong> las automatizaciones nativas de Notion están disponibles en el plan Plus y superiores. En el plan gratuito no están habilitadas. Para flujos más complejos (integración con Slack, Gmail o sistemas externos), Zapier o Make son la alternativa.</p>
+        </div>
+      </section>
+
+      <section id="plantilla">
+        <h2>7. Plantilla de proyecto tipo: duplicar y usar</h2>
+        <p>Uno de los mayores ahorros de tiempo en Notion es tener una plantilla de proyecto que se duplica con cada nuevo encargo. En lugar de crear la estructura desde cero cada vez, duplicás la plantilla y empezás a cargar información inmediatamente.</p>
+
+        <h3>Qué debe incluir una plantilla de proyecto</h3>
+        <ul>
+          <li><strong>Encabezado:</strong> nombre del proyecto, cliente, PM responsable, fechas de inicio y cierre, estado.</li>
+          <li><strong>Resumen ejecutivo:</strong> bloque de texto con objetivo, alcance y criterios de éxito. Se completa al inicio del proyecto.</li>
+          <li><strong>Hitos clave:</strong> vista filtrada de la base de datos Hitos mostrando solo los hitos de este proyecto.</li>
+          <li><strong>Tablero de tareas:</strong> vista Kanban filtrada por este proyecto.</li>
+          <li><strong>Registro de riesgos:</strong> tabla simple con descripción, probabilidad, impacto, plan de respuesta y responsable.</li>
+          <li><strong>Registro de decisiones:</strong> log de las decisiones tomadas durante el proyecto, con fecha y responsable.</li>
+          <li><strong>Lecciones aprendidas:</strong> sección que se completa al cierre del proyecto.</li>
+        </ul>
+
+        <h3>Cómo crear y usar la plantilla</h3>
+        <ol>
+          <li>Creá una página con la estructura completa del proyecto.</li>
+          <li>En el menú de la página (tres puntos), seleccioná <strong>Convertir en plantilla</strong>.</li>
+          <li>La próxima vez que necesités crear un proyecto, usá <strong>Nueva página desde plantilla</strong> y elegí esta plantilla.</li>
+          <li>Notion duplica toda la estructura con las secciones vacías listas para completar.</li>
+        </ol>
+
+        <div class="nota-practica">
+          <p><strong>Beneficio concreto:</strong> la plantilla garantiza que todos los proyectos tienen la misma estructura mínima. Cuando alguien necesita información sobre un proyecto —sea el PM, la dirección o un nuevo integrante del equipo— sabe exactamente dónde buscar.</p>
+        </div>
+      </section>
+
+      <section id="errores-frecuentes">
+        <h2>8. Errores frecuentes y cómo evitarlos</h2>
+
+        <div class="error-item">
+          <h3>Construir el sistema sin definir primero la arquitectura</h3>
+          <p>El error más común es empezar a crear páginas y bases de datos sin un diseño previo. El resultado es un workspace con información duplicada, relaciones inconsistentes y nadie que sepa dónde buscar qué. Antes de crear la primera base de datos, dibujá en papel cómo se relacionan los objetos que necesitás gestionar.</p>
+        </div>
+
+        <div class="error-item">
+          <h3>Crear demasiadas propiedades desde el inicio</h3>
+          <p>La flexibilidad de Notion tienta a agregar campos para todo. El problema: si el equipo no completa las propiedades de forma consistente, el sistema pierde valor rápido. Empezá con las propiedades mínimas indispensables y agregá complejidad solo cuando la necesitás de verdad.</p>
+        </div>
+
+        <div class="error-item">
+          <h3>No definir quién puede hacer qué</h3>
+          <p>Notion tiene permisos por workspace, página y base de datos. Sin una política clara, el equipo termina editando cosas que no debería o no puede ver lo que necesita. Antes del lanzamiento, definí qué acceso tiene cada rol: PM, equipo, dirección, cliente (si aplica).</p>
+        </div>
+
+        <div class="error-item">
+          <h3>Usarlo como repositorio de documentos, no como sistema vivo</h3>
+          <p>Notion se convierte en un cementerio de páginas cuando se usa solo para guardar documentos que nadie actualiza. El valor real está en las bases de datos relacionadas y las vistas que muestran el estado actual del proyecto. Si el equipo solo sube PDFs y no actualiza tareas ni hitos, el sistema no funciona.</p>
+        </div>
+
+        <div class="error-item">
+          <h3>No hacer onboarding con el equipo</h3>
+          <p>Un sistema bien diseñado falla si el equipo no sabe usarlo. Antes de lanzar, dedicá al menos una sesión de 45-60 minutos para mostrar al equipo cómo funciona el sistema, qué se espera de cada rol y dónde encontrar cada cosa. La documentación de uso dentro del propio Notion ayuda a resolver dudas después.</p>
+        </div>
+      </section>
+
+    </div>
+
+    <div class="guia-footer">
+      <div class="autor-box">
+        <img src="/images/valeria-yashan.webp" alt="Valeria Yashan, consultora PMP® en gestión de proyectos e IA" class="autor-foto" />
+        <div class="autor-info">
+          <p class="autor-nombre">Valeria Yashan</p>
+          <p class="autor-desc">PMP® #1613335 · MBA · Ingeniera Industrial. Consultora, docente y autora de 4 libros sobre gestión de proyectos e IA.</p>
+          <a href="/sobre-mi">Conocé más sobre Valeria →</a>
+        </div>
+      </div>
+
+      <div class="cta-box">
+        <h3>¿Querés implementar un sistema de proyectos en Notion para tu organización?</h3>
+        <p>Diseño la arquitectura, configuro las bases de datos y capacito a tu equipo para que el sistema funcione desde el primer día.</p>
+        <a href="/contacto" class="btn-cta">Hablemos →</a>
+      </div>
+    </div>
+
+  </div>
+
+</BaseLayout>
+
+<style>
+  .guia-container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 5rem;
+  }
+
+  .breadcrumb {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    font-size: 0.85rem;
+    color: var(--color-muted);
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+  }
+
+  .breadcrumb a {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .breadcrumb a:hover {
+    text-decoration: underline;
+  }
+
+  .guia-tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+
+  .guia-header h1 {
+    font-family: 'Fraunces', serif;
+    font-size: 2.4rem;
+    font-weight: 900;
+    color: var(--color-text);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .guia-lead {
+    font-size: 1.1rem;
+    color: var(--color-muted);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+
+  .guia-meta {
+    display: flex;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--color-muted);
+    flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+  }
+
+  .tabla-contenidos {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-left: 3px solid var(--color-accent);
+    border-radius: 0 6px 6px 0;
+    padding: 1.5rem 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .toc-titulo {
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .tabla-contenidos ol {
+    margin: 0;
+    padding-left: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .tabla-contenidos a {
+    color: var(--color-text);
+    text-decoration: none;
+    font-size: 0.95rem;
+  }
+
+  .tabla-contenidos a:hover {
+    color: var(--color-accent);
+  }
+
+  .guia-contenido section {
+    margin-bottom: 3.5rem;
+    padding-bottom: 3.5rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .guia-contenido section:last-child {
+    border-bottom: none;
+  }
+
+  .guia-contenido h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 1.2rem;
+  }
+
+  .guia-contenido h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-top: 2rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .guia-contenido p {
+    color: var(--color-text);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+
+  .guia-contenido ul,
+  .guia-contenido ol {
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .guia-contenido li {
+    color: var(--color-text);
+    line-height: 1.7;
+    margin-bottom: 0.4rem;
+  }
+
+  .nota-practica {
+    background: var(--color-surface);
+    border-left: 3px solid var(--color-accent);
+    border-radius: 0 6px 6px 0;
+    padding: 1rem 1.25rem;
+    margin-top: 1.5rem;
+  }
+
+  .nota-practica p {
+    margin: 0;
+    font-size: 0.92rem;
+    color: var(--color-muted);
+  }
+
+  .caso-card {
+    background: #EBF5F0;
+    border: 1px solid #B7DEC9;
+    border-radius: 10px;
+    padding: 1.5rem 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .caso-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--color-accent);
+    margin-bottom: 0.75rem;
+  }
+
+  .caso-card h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin: 0 0 0.75rem;
+  }
+
+  .caso-card p {
+    font-size: 0.95rem;
+    color: var(--color-muted);
+    line-height: 1.7;
+    margin-bottom: 0.5rem;
+  }
+
+  .error-item {
+    margin-bottom: 2rem;
+  }
+
+  .error-item h3 {
+    margin-top: 0;
+  }
+
+  .guia-footer {
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .autor-box {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+    padding: 1.5rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+  }
+
+  .autor-foto {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .autor-nombre {
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+    color: var(--color-text);
+  }
+
+  .autor-desc {
+    font-size: 0.88rem;
+    color: var(--color-muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .autor-info a {
+    font-size: 0.88rem;
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .autor-info a:hover {
+    text-decoration: underline;
+  }
+
+  .cta-box {
+    background: var(--color-accent);
+    color: #ffffff;
+    padding: 2rem;
+    border-radius: 10px;
+  }
+
+  .cta-box h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #ffffff;
+  }
+
+  .cta-box p {
+    font-size: 0.95rem;
+    opacity: 0.9;
+    margin-bottom: 1.25rem;
+    color: #ffffff;
+  }
+
+  .btn-cta {
+    display: inline-block;
+    background: #ffffff;
+    color: var(--color-accent);
+    padding: 0.65rem 1.4rem;
+    border-radius: 6px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+  }
+
+  .btn-cta:hover {
+    opacity: 0.9;
+  }
+
+  @media (max-width: 700px) {
+    .guia-header h1 {
+      font-size: 1.8rem;
+    }
+
+    .autor-box {
+      flex-direction: column;
+    }
+  }
+</style>
