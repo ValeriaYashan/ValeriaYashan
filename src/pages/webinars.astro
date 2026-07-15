@@ -1,0 +1,422 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const pageTitle = "Webinars gratuitos — Valeria Yashan";
+const pageDescription = "Webinars en vivo y grabados sobre gestión de proyectos, inteligencia artificial y herramientas para equipos. Participá desde YouTube.";
+
+const webinars = [
+  {
+    titulo: "Gestioná tu negocio en una sola plataforma",
+    subtitulo: "Conocé ClickUp: proyectos, tareas e IA integradas",
+    descripcion: "Te invitamos a conocer ClickUp, la herramienta que te permite organizar proyectos, gestionar tareas y aprovechar las capacidades de IA integradas. Lo mejor: todo dentro de una sola plataforma.",
+    puntos: [
+      {
+        icono: "🗂️",
+        texto: "Cómo centralizar información y dar seguimiento de forma más ordenada."
+      },
+      {
+        icono: "🤖",
+        texto: "Cómo usar la IA integrada para resumir contexto, priorizar tareas y agilizar acciones."
+      },
+      {
+        icono: "📈",
+        texto: "Cómo automatizar procesos para ahorrar tiempo y mejorar la productividad."
+      },
+      {
+        icono: "🛟",
+        texto: "Casos prácticos para equipos que buscan crecer con más eficiencia."
+      }
+    ],
+    estado: "proximo", // "proximo" | "disponible"
+    cta_texto: "Ver en YouTube",
+    cta_url: "https://www.youtube.com/@ValeriaYashanPM",
+    etiqueta: "Próximamente"
+  }
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+
+  <main class="webinars-main">
+
+    <!-- Hero -->
+    <section class="webinars-hero">
+      <div class="container">
+        <p class="eyebrow">Canal de YouTube</p>
+        <h1>Webinars gratuitos</h1>
+        <p class="hero-desc">
+          Encuentros en vivo y grabados sobre gestión de proyectos, herramientas digitales e inteligencia artificial aplicada.
+          Sin costo, sin registro. Solo conectate.
+        </p>
+      </div>
+    </section>
+
+    <!-- Listado de webinars -->
+    <section class="webinars-lista">
+      <div class="container">
+
+        {webinars.map((w) => (
+          <article class={`webinar-card ${w.estado}`}>
+            <div class="webinar-meta">
+              <span class={`badge badge-${w.estado}`}>{w.etiqueta}</span>
+            </div>
+
+            <div class="webinar-body">
+              <div class="webinar-info">
+                <h2>{w.titulo}</h2>
+                <p class="webinar-subtitulo">{w.subtitulo}</p>
+                <p class="webinar-descripcion">{w.descripcion}</p>
+
+                <ul class="webinar-puntos">
+                  {w.puntos.map((p) => (
+                    <li>
+                      <span class="punto-icono">{p.icono}</span>
+                      <span>{p.texto}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <a
+                  href={w.cta_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class={`btn-webinar ${w.estado === 'proximo' ? 'btn-secundario' : 'btn-primario'}`}
+                >
+                  {w.cta_texto}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                    <polyline points="15 3 21 3 21 9"/>
+                    <line x1="10" y1="14" x2="21" y2="3"/>
+                  </svg>
+                </a>
+              </div>
+
+              <div class="webinar-visual" aria-hidden="true">
+                <div class="youtube-preview">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polygon points="10 8 16 12 10 16 10 8"/>
+                  </svg>
+                  <span>YouTube</span>
+                </div>
+              </div>
+            </div>
+          </article>
+        ))}
+
+      </div>
+    </section>
+
+    <!-- CTA canal -->
+    <section class="webinars-canal">
+      <div class="container">
+        <div class="canal-box">
+          <p class="canal-label">¿Querés estar al tanto de los próximos webinars?</p>
+          <h2>Suscribite al canal de YouTube</h2>
+          <p>Publicamos nuevos webinars, tutoriales y recursos sobre gestión de proyectos e IA.<br />Es gratuito y podés cancelar cuando quieras.</p>
+          <a
+            href="https://www.youtube.com/@ValeriaYashanPM"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-canal"
+          >
+            Ir al canal
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+              <polyline points="15 3 21 3 21 9"/>
+              <line x1="10" y1="14" x2="21" y2="3"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+</BaseLayout>
+
+<style>
+  /* ─── Layout base ─── */
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* ─── Hero ─── */
+  .webinars-hero {
+    padding: 4rem 0 3rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin: 0 0 0.75rem;
+  }
+
+  .webinars-hero h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    color: var(--color-text);
+    margin: 0 0 1rem;
+    line-height: 1.15;
+  }
+
+  .hero-desc {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.05rem;
+    color: var(--color-muted);
+    max-width: 600px;
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  /* ─── Lista de webinars ─── */
+  .webinars-lista {
+    padding: 4rem 0;
+  }
+
+  .webinar-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .webinar-card.proximo {
+    border-left: 4px solid var(--color-accent);
+  }
+
+  .webinar-card.disponible {
+    border-left: 4px solid #52B788;
+  }
+
+  /* Badge */
+  .webinar-meta {
+    margin-bottom: 1.5rem;
+  }
+
+  .badge {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.75rem;
+    border-radius: 4px;
+  }
+
+  .badge-proximo {
+    background: #e8f4ef;
+    color: var(--color-accent);
+  }
+
+  .badge-disponible {
+    background: #d4edda;
+    color: #1B4332;
+  }
+
+  /* Body del card */
+  .webinar-body {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  .webinar-info h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--color-text);
+    margin: 0 0 0.4rem;
+    line-height: 1.25;
+  }
+
+  .webinar-subtitulo {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--color-accent);
+    margin: 0 0 1rem;
+  }
+
+  .webinar-descripcion {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    color: var(--color-muted);
+    line-height: 1.6;
+    margin: 0 0 1.5rem;
+  }
+
+  /* Puntos */
+  .webinar-puntos {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .webinar-puntos li {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    color: var(--color-text);
+    line-height: 1.5;
+  }
+
+  .punto-icono {
+    flex-shrink: 0;
+    font-size: 1rem;
+    margin-top: 0.05rem;
+  }
+
+  /* Botones */
+  .btn-webinar {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 0.7rem 1.4rem;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: opacity 0.15s ease;
+  }
+
+  .btn-webinar:hover {
+    opacity: 0.85;
+  }
+
+  .btn-primario {
+    background: var(--color-accent);
+    color: #ffffff;
+  }
+
+  .btn-secundario {
+    background: transparent;
+    color: var(--color-accent);
+    border: 1.5px solid var(--color-accent);
+  }
+
+  /* Visual YouTube placeholder */
+  .webinar-visual {
+    flex-shrink: 0;
+  }
+
+  .youtube-preview {
+    width: 140px;
+    height: 140px;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    color: var(--color-muted);
+  }
+
+  .youtube-preview span {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--color-muted);
+  }
+
+  /* ─── CTA canal ─── */
+  .webinars-canal {
+    padding: 0 0 5rem;
+  }
+
+  .canal-box {
+    background: var(--color-accent);
+    border-radius: 12px;
+    padding: 3rem 2.5rem;
+    text-align: center;
+    color: #ffffff;
+  }
+
+  .canal-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.75;
+    margin: 0 0 0.75rem;
+  }
+
+  .canal-box h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: #ffffff;
+    margin: 0 0 1rem;
+  }
+
+  .canal-box p {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    opacity: 0.9;
+    margin: 0 auto 2rem;
+    max-width: 480px;
+  }
+
+  .btn-canal {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #ffffff;
+    color: var(--color-accent);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: opacity 0.15s ease;
+  }
+
+  .btn-canal:hover {
+    opacity: 0.9;
+  }
+
+  /* ─── Responsive ─── */
+  @media (max-width: 700px) {
+    .webinar-card {
+      padding: 1.75rem 1.25rem;
+    }
+
+    .webinar-body {
+      grid-template-columns: 1fr;
+    }
+
+    .webinar-visual {
+      display: none;
+    }
+
+    .canal-box {
+      padding: 2.5rem 1.5rem;
+    }
+
+    .canal-box h2 {
+      font-size: 1.5rem;
+    }
+  }
+</style>
