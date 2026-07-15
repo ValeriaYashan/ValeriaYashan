@@ -33,7 +33,7 @@ Serie de 3 tomos alineada con el PMBOK® Guide 8ª edición y el ECO vigente des
 → [Ver en Amazon](https://www.amazon.com/-/es/dp/B0H4JF5FNH?binding=kindle_edition&ref_=saga_dp_bnx_dsk_sdp)
 
 **PM MOM**  
-Gestión de proyectos aplicada a la maternidad temprana.  
+Gestión de proyectos aplicada a la maternidad.  
 → [Ver en Amazon](https://www.amazon.com/-/es/dp/B0H34Y8KJ7?binding=paperback&ref=dbs_dp_rwt_sb_pc_tpbk)
 
 ---
