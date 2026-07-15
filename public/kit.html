@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kit de Estudio PMP 2026 — Descarga gratuita · Valeria Yashan</title>
+<meta name="description" content="Descargá gratis el Kit de Estudio PMP 2026: plan de preparación, herramientas por dominio ECO y 30 fórmulas fundamentales. Alineado con PMBOK 8 y ECO julio 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ── Reset & base ─────────────────────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --azul-oscuro:  #1F4E79;
+    --azul-medio:   #2E6099;
+    --azul-claro:   #BDD7EE;
+    --azul-muy-claro: #DEEAF1;
+    --dorado:       #C9A84C;
+    --dorado-claro: #F5E6B8;
+    --blanco:       #FFFFFF;
+    --gris-texto:   #2C2C2C;
+    --gris-suave:   #F4F7FA;
+    --verde:        #375623;
+    --naranja:      #C55A11;
+    --violeta:      #4B0082;
+    --borde:        #D6E4F0;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    color: var(--gris-texto);
+    background: var(--blanco);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Utilidades ──────────────────────────────────────────────────────── */
+  .container {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  .display { font-family: 'Playfair Display', serif; }
+  .dorado  { color: var(--dorado); }
+  .blanco  { color: var(--blanco); }
+
+  /* ── NAV ─────────────────────────────────────────────────────────────── */
+  nav {
+    background: var(--azul-oscuro);
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 2px solid var(--dorado);
+  }
+  .nav-brand {
+    font-family: 'Playfair Display', serif;
+    color: var(--blanco);
+    font-size: 1.05rem;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: 0.01em;
+  }
+  .nav-brand span { color: var(--dorado); }
+  .nav-cta {
+    background: var(--dorado);
+    color: var(--azul-oscuro);
+    padding: 8px 18px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+  .nav-cta:hover { background: #b8952e; }
+
+  /* ── HERO ─────────────────────────────────────────────────────────────── */
+  .hero {
+    background: linear-gradient(135deg, var(--azul-oscuro) 0%, #163d61 60%, #0e2a44 100%);
+    padding: 72px 0 64px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 380px; height: 380px;
+    border-radius: 50%;
+    background: rgba(201,168,76,0.06);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -40px;
+    width: 260px; height: 260px;
+    border-radius: 50%;
+    background: rgba(189,215,238,0.05);
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 56px;
+    align-items: start;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(201,168,76,0.15);
+    border: 1px solid rgba(201,168,76,0.35);
+    color: var(--dorado);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 20px;
+    margin-bottom: 22px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 7px; height: 7px;
+    background: var(--dorado);
+    border-radius: 50%;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.75rem;
+    font-weight: 900;
+    color: var(--blanco);
+    line-height: 1.15;
+    margin-bottom: 20px;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--dorado);
+  }
+
+  .hero-desc {
+    color: var(--azul-claro);
+    font-size: 1.05rem;
+    line-height: 1.65;
+    margin-bottom: 28px;
+    max-width: 520px;
+  }
+
+  /* Barras ECO — firma visual */
+  .eco-bars {
+    margin-bottom: 32px;
+  }
+  .eco-label {
+    font-size: 0.78rem;
+    color: rgba(189,215,238,0.7);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .eco-bar-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 7px;
+  }
+  .eco-bar-name {
+    font-size: 0.78rem;
+    color: var(--azul-claro);
+    width: 120px;
+    flex-shrink: 0;
+  }
+  .eco-bar-track {
+    flex: 1;
+    height: 7px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .eco-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 1.2s cubic-bezier(.4,0,.2,1);
+  }
+  .eco-bar-pct {
+    font-size: 0.78rem;
+    color: var(--dorado);
+    font-weight: 600;
+    width: 32px;
+    text-align: right;
+  }
+
+  .hero-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.14);
+    color: var(--blanco);
+    font-size: 0.8rem;
+    padding: 5px 11px;
+    border-radius: 4px;
+  }
+  .badge-icon { font-size: 0.9rem; }
+
+  /* ── FORMULARIO HERO ─────────────────────────────────────────────────── */
+  .hero-form-card {
+    background: var(--blanco);
+    border-radius: 10px;
+    padding: 32px 28px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+    position: relative;
+  }
+  .form-header {
+    text-align: center;
+    margin-bottom: 22px;
+  }
+  .form-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    color: var(--azul-oscuro);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .form-sub {
+    font-size: 0.82rem;
+    color: #666;
+  }
+
+  .kit-items {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-bottom: 22px;
+    padding: 14px 16px;
+    background: var(--azul-muy-claro);
+    border-radius: 7px;
+    border-left: 3px solid var(--azul-medio);
+  }
+  .kit-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    font-size: 0.82rem;
+    color: var(--gris-texto);
+    line-height: 1.4;
+  }
+  .kit-item-num {
+    background: var(--azul-oscuro);
+    color: var(--blanco);
+    font-size: 0.68rem;
+    font-weight: 700;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .form-field {
+    margin-bottom: 13px;
+  }
+  .form-field label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--azul-oscuro);
+    margin-bottom: 5px;
+  }
+  .form-field input {
+    width: 100%;
+    padding: 10px 13px;
+    border: 1.5px solid var(--borde);
+    border-radius: 6px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.88rem;
+    color: var(--gris-texto);
+    transition: border-color 0.15s;
+    background: var(--blanco);
+  }
+  .form-field input:focus {
+    outline: none;
+    border-color: var(--azul-medio);
+    box-shadow: 0 0 0 3px rgba(46,96,153,0.12);
+  }
+  .form-field input::placeholder { color: #aaa; }
+
+  .btn-descarga {
+    width: 100%;
+    padding: 14px;
+    background: var(--azul-oscuro);
+    color: var(--blanco);
+    border: none;
+    border-radius: 7px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+    letter-spacing: 0.01em;
+  }
+  .btn-descarga:hover { background: var(--azul-medio); transform: translateY(-1px); }
+  .btn-descarga:active { transform: translateY(0); }
+
+  .form-privacy {
+    font-size: 0.72rem;
+    color: #999;
+    text-align: center;
+    margin-top: 10px;
+    line-height: 1.4;
+  }
+
+  /* Estado de éxito */
+  .success-state {
+    display: none;
+    text-align: center;
+    padding: 16px 0;
+  }
+  .success-icon {
+    font-size: 2.8rem;
+    margin-bottom: 10px;
+  }
+  .success-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--azul-oscuro);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .success-text {
+    font-size: 0.85rem;
+    color: #555;
+    line-height: 1.5;
+  }
+  .success-links {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .download-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: opacity 0.15s;
+  }
+  .download-btn:hover { opacity: 0.85; }
+  .dl-1 { background: var(--azul-oscuro); color: var(--blanco); }
+  .dl-2 { background: var(--verde); color: var(--blanco); }
+  .dl-3 { background: var(--naranja); color: var(--blanco); }
+
+  /* ── SECCIÓN: QUÉ INCLUYE ─────────────────────────────────────────────── */
+  .section-incluye {
+    padding: 72px 0;
+    background: var(--blanco);
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--azul-oscuro);
+    font-weight: 700;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+  .section-sub {
+    text-align: center;
+    color: #666;
+    font-size: 0.95rem;
+    margin-bottom: 48px;
+  }
+
+  .archivos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .archivo-card {
+    border: 1.5px solid var(--borde);
+    border-radius: 10px;
+    padding: 28px 24px;
+    position: relative;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .archivo-card:hover {
+    box-shadow: 0 8px 32px rgba(31,78,121,0.1);
+    transform: translateY(-2px);
+  }
+  .archivo-num {
+    position: absolute;
+    top: -14px;
+    left: 20px;
+    font-family: 'Playfair Display', serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 3px 10px;
+    border-radius: 10px;
+    text-transform: uppercase;
+  }
+  .an-1 { background: var(--azul-oscuro); color: var(--blanco); }
+  .an-2 { background: var(--verde); color: var(--blanco); }
+  .an-3 { background: var(--naranja); color: var(--blanco); }
+
+  .archivo-icon { font-size: 2rem; margin-bottom: 12px; }
+  .archivo-titulo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--azul-oscuro);
+    font-weight: 700;
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .archivo-desc {
+    font-size: 0.85rem;
+    color: #555;
+    line-height: 1.55;
+    margin-bottom: 16px;
+  }
+  .archivo-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .archivo-items li {
+    font-size: 0.8rem;
+    color: #444;
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+  }
+  .archivo-items li::before {
+    content: '→';
+    color: var(--azul-medio);
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* ── SECCIÓN: PARA QUIÉN ─────────────────────────────────────────────── */
+  .section-quien {
+    padding: 64px 0;
+    background: var(--gris-suave);
+    border-top: 1px solid var(--borde);
+    border-bottom: 1px solid var(--borde);
+  }
+  .perfiles-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    max-width: 780px;
+    margin: 0 auto;
+  }
+  .perfil-card {
+    background: var(--blanco);
+    border-radius: 9px;
+    padding: 22px 20px;
+    display: flex;
+    gap: 14px;
+    border: 1px solid var(--borde);
+  }
+  .perfil-emoji { font-size: 1.8rem; flex-shrink: 0; }
+  .perfil-titulo {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--azul-oscuro);
+    margin-bottom: 4px;
+  }
+  .perfil-desc {
+    font-size: 0.82rem;
+    color: #666;
+    line-height: 1.5;
+  }
+
+  /* ── SECCIÓN: SOBRE VALERIA ──────────────────────────────────────────── */
+  .section-autora {
+    padding: 72px 0;
+    background: var(--blanco);
+  }
+  .autora-inner {
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 56px;
+    align-items: center;
+  }
+  .autora-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--dorado);
+    margin-bottom: 10px;
+  }
+  .autora-nombre {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--azul-oscuro);
+    font-weight: 700;
+    margin-bottom: 14px;
+    line-height: 1.2;
+  }
+  .autora-bio {
+    font-size: 0.92rem;
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+  .autora-creds {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+  .cred {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.85rem;
+    color: var(--gris-texto);
+  }
+  .cred-dot {
+    width: 7px; height: 7px;
+    background: var(--dorado);
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 5px;
+  }
+
+  .autora-stat-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .stat-card {
+    background: var(--azul-oscuro);
+    border-radius: 9px;
+    padding: 22px 18px;
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    color: var(--dorado);
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .stat-label {
+    font-size: 0.78rem;
+    color: var(--azul-claro);
+    line-height: 1.4;
+  }
+  .stat-card.light {
+    background: var(--azul-muy-claro);
+  }
+  .stat-card.light .stat-num { color: var(--azul-oscuro); }
+  .stat-card.light .stat-label { color: var(--azul-medio); }
+
+  /* ── CTA FINAL ───────────────────────────────────────────────────────── */
+  .section-cta {
+    background: linear-gradient(135deg, var(--azul-oscuro) 0%, #163d61 100%);
+    padding: 72px 0;
+    text-align: center;
+  }
+  .cta-titulo {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--blanco);
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .cta-sub {
+    color: var(--azul-claro);
+    font-size: 1rem;
+    margin-bottom: 32px;
+  }
+  .cta-btn {
+    display: inline-block;
+    background: var(--dorado);
+    color: var(--azul-oscuro);
+    padding: 15px 36px;
+    border-radius: 7px;
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: background 0.15s, transform 0.1s;
+  }
+  .cta-btn:hover { background: #b8952e; transform: translateY(-1px); }
+
+  /* ── FOOTER ──────────────────────────────────────────────────────────── */
+  footer {
+    background: #0e1e2e;
+    padding: 28px 24px;
+    text-align: center;
+  }
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+  .footer-links a {
+    color: var(--azul-claro);
+    text-decoration: none;
+    font-size: 0.82rem;
+    transition: color 0.15s;
+  }
+  .footer-links a:hover { color: var(--dorado); }
+  .footer-legal {
+    font-size: 0.72rem;
+    color: #556;
+    line-height: 1.6;
+    max-width: 620px;
+    margin: 0 auto;
+  }
+
+  /* ── RESPONSIVE ──────────────────────────────────────────────────────── */
+  @media (max-width: 860px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 2.1rem; }
+    .hero-form-card { max-width: 480px; }
+    .archivos-grid { grid-template-columns: 1fr; }
+    .perfiles-grid { grid-template-columns: 1fr; }
+    .autora-inner { grid-template-columns: 1fr; }
+    .autora-stat-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 520px) {
+    .hero { padding: 48px 0 40px; }
+    .hero h1 { font-size: 1.7rem; }
+    .section-title { font-size: 1.5rem; }
+    .cta-titulo { font-size: 1.5rem; }
+    nav { padding: 12px 16px; }
+    .nav-brand { font-size: 0.9rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="https://valeriayashan.com.ar" class="nav-brand">
+    Valeria Yashan <span>PMP®</span>
+  </a>
+  <a href="#formulario" class="nav-cta">Descargar gratis</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-inner">
+
+      <!-- Texto izquierda -->
+      <div>
+        <div class="hero-eyebrow">Descarga gratuita · ECO vigente desde julio 2026</div>
+
+        <h1>El kit de estudio PMP que se alinea con el <em>examen real</em></h1>
+
+        <p class="hero-desc">
+          3 archivos PDF listos para usar. Plan de preparación personalizado,
+          herramientas y técnicas organizadas por dominio ECO, y las 30 fórmulas
+          fundamentales con ejemplos resueltos. Alineado con PMBOK® Guide —
+          Octava Edición.
+        </p>
+
+        <!-- Barras ECO — firma visual -->
+        <div class="eco-bars">
+          <div class="eco-label">Distribución del examen PMP 2026</div>
+          <div class="eco-bar-row">
+            <span class="eco-bar-name">I · Personas</span>
+            <div class="eco-bar-track">
+              <div class="eco-bar-fill" style="width:33%; background:#BDD7EE;"></div>
+            </div>
+            <span class="eco-bar-pct">33%</span>
+          </div>
+          <div class="eco-bar-row">
+            <span class="eco-bar-name">II · Proceso</span>
+            <div class="eco-bar-track">
+              <div class="eco-bar-fill" style="width:41%; background:#C9A84C;"></div>
+            </div>
+            <span class="eco-bar-pct">41%</span>
+          </div>
+          <div class="eco-bar-row">
+            <span class="eco-bar-name">III · Entorno</span>
+            <div class="eco-bar-track">
+              <div class="eco-bar-fill" style="width:26%; background:#7FB3D3;"></div>
+            </div>
+            <span class="eco-bar-pct">26%</span>
+          </div>
+        </div>
+
+        <div class="hero-badges">
+          <span class="badge"><span class="badge-icon">📋</span> 3 archivos PDF</span>
+          <span class="badge"><span class="badge-icon">✅</span> PMBOK® 8</span>
+          <span class="badge"><span class="badge-icon">🆓</span> 100% gratuito</span>
+          <span class="badge"><span class="badge-icon">🌎</span> En español</span>
+        </div>
+      </div>
+
+      <!-- Formulario derecha -->
+      <div id="formulario">
+        <div class="hero-form-card">
+          <div class="form-header">
+            <div class="form-title">Recibí el kit ahora</div>
+            <div class="form-sub">Sin costo · Sin tarjeta · Sin spam</div>
+          </div>
+
+          <div class="kit-items">
+            <div class="kit-item">
+              <span class="kit-item-num">1</span>
+              <span><strong>Plan de preparación</strong> — 4 planes adaptados a tu perfil (4 a 12 semanas)</span>
+            </div>
+            <div class="kit-item">
+              <span class="kit-item-num">2</span>
+              <span><strong>Herramientas por dominio ECO</strong> — cuándo aplicar cada técnica en el examen</span>
+            </div>
+            <div class="kit-item">
+              <span class="kit-item-num">3</span>
+              <span><strong>30 fórmulas fundamentales</strong> — con interpretación y ejemplos resueltos</span>
+            </div>
+          </div>
+
+          <form id="kitForm">
+            <div class="form-field">
+              <label for="nombre">Nombre completo</label>
+              <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required autocomplete="name">
+            </div>
+            <div class="form-field">
+              <label for="email">Email profesional</label>
+              <input type="email" id="email" name="email" placeholder="tu@empresa.com" required autocomplete="email">
+            </div>
+            <div class="form-field">
+              <label for="empresa">Empresa u organización <span style="color:#aaa;font-weight:400">(opcional)</span></label>
+              <input type="text" id="empresa" name="empresa" placeholder="Donde trabajás o estudiás">
+            </div>
+            <button type="submit" class="btn-descarga">
+              Descargar el Kit PMP 2026 →
+            </button>
+            <p class="form-privacy">
+              Tu información no se comparte con terceros.<br>
+              Podés darte de baja cuando quieras.
+            </p>
+          </form>
+
+          <!-- Estado de éxito -->
+          <div class="success-state" id="successState">
+            <div class="success-icon">🎉</div>
+            <div class="success-title">¡Listo! Ya podés descargar el kit</div>
+            <p class="success-text">
+              Hacé clic en cada archivo para descargarlo.<br>
+              También te enviamos los links por mail.
+            </p>
+            <div class="success-links">
+              <a href="#" class="download-btn dl-1">
+                📋 Archivo 1 — Plan de preparación
+              </a>
+              <a href="#" class="download-btn dl-2">
+                🛠 Archivo 2 — Herramientas por dominio ECO
+              </a>
+              <a href="#" class="download-btn dl-3">
+                🔢 Archivo 3 — 30 Fórmulas fundamentales
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- QUÉ INCLUYE -->
+<section class="section-incluye">
+  <div class="container">
+    <h2 class="section-title">Qué incluye el kit</h2>
+    <p class="section-sub">Tres archivos diseñados para complementarse entre sí durante tu preparación</p>
+
+    <div class="archivos-grid">
+
+      <div class="archivo-card">
+        <span class="archivo-num an-1">Archivo 1</span>
+        <div class="archivo-icon">📋</div>
+        <div class="archivo-titulo">Plan de preparación para el examen</div>
+        <p class="archivo-desc">
+          Cuatro planes adaptados a tu disponibilidad de tiempo y punto de partida.
+          Incluye selector de perfil, criterios de avance y checklist semanal.
+        </p>
+        <ul class="archivo-items">
+          <li>Plan D1: 4 semanas · 12–15 h/semana (perfil intensivo)</li>
+          <li>Plan D2: 6 semanas · 10–12 h/semana</li>
+          <li>Plan D3: 8 semanas · 8–10 h/semana ★ Recomendado</li>
+          <li>Plan D4: 12 semanas · 5–7 h/semana (sin base PMI)</li>
+          <li>Checklist semanal imprimible + guía de los 3 días previos</li>
+        </ul>
+      </div>
+
+      <div class="archivo-card">
+        <span class="archivo-num an-2">Archivo 2</span>
+        <div class="archivo-icon">🛠</div>
+        <div class="archivo-titulo">Herramientas y técnicas por dominio ECO</div>
+        <p class="archivo-desc">
+          Organizado por los tres dominios del examen, no por procesos del PMBOK 6.
+          Para cada herramienta: qué es, cuándo aplicarla y si corresponde a enfoque
+          predictivo, ágil o híbrido.
+        </p>
+        <ul class="archivo-items">
+          <li>Dominio I (Personas): liderazgo, conflictos, interesados, comunicación</li>
+          <li>Dominio II (Proceso): EVM, cronograma, calidad, riesgos, adquisiciones</li>
+          <li>Dominio III (Entorno): gobernanza, compliance, IA, sostenibilidad</li>
+          <li>Tabla resumen por enfoque de delivery (predictivo · ágil · híbrido)</li>
+        </ul>
+      </div>
+
+      <div class="archivo-card">
+        <span class="archivo-num an-3">Archivo 3</span>
+        <div class="archivo-icon">🔢</div>
+        <div class="archivo-titulo">30 fórmulas fundamentales</div>
+        <p class="archivo-desc">
+          Las fórmulas más evaluadas en el examen PMP con interpretación de resultados
+          y ejemplos resueltos. Incluye la errata de la segunda impresión del PMBOK 8.
+        </p>
+        <ul class="archivo-items">
+          <li>EVM completo: PV, EV, AC, CV, SV, CPI, SPI, EAC, ETC, VAC, TCPI</li>
+          <li>Cronograma: holgura total y libre, PERT, canales de comunicación</li>
+          <li>Calidad: CoQ, Regla de los 7, límites de control</li>
+          <li>Riesgos: EMV, árbol de decisión, reserva de contingencia</li>
+          <li>Alcance: arrastre y estabilidad de requisitos (errata PMBOK 8 aplicada)</li>
+          <li>Ágil: velocidad, burndown, capacidad por sprint</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PARA QUIÉN -->
+<section class="section-quien">
+  <div class="container">
+    <h2 class="section-title">¿Para quién es este kit?</h2>
+    <p class="section-sub">Diseñado para profesionales hispanohablantes de América Latina</p>
+
+    <div class="perfiles-grid">
+      <div class="perfil-card">
+        <span class="perfil-emoji">🎯</span>
+        <div>
+          <div class="perfil-titulo">Candidatos al examen PMP</div>
+          <p class="perfil-desc">Que se preparan para rendir en 2026 y necesitan orientarse con el nuevo ECO y el PMBOK 8 antes de entrar de lleno al material.</p>
+        </div>
+      </div>
+      <div class="perfil-card">
+        <span class="perfil-emoji">🔄</span>
+        <div>
+          <div class="perfil-titulo">Re-examinados</div>
+          <p class="perfil-desc">Que rindieron con el ECO anterior y necesitan actualizar su preparación al esquema vigente desde julio 2026.</p>
+        </div>
+      </div>
+      <div class="perfil-card">
+        <span class="perfil-emoji">🏢</span>
+        <div>
+          <div class="perfil-titulo">Responsables de L&D y capacitación</div>
+          <p class="perfil-desc">Que evalúan programas de preparación PMP para sus equipos y quieren material de referencia en español alineado al estándar vigente.</p>
+        </div>
+      </div>
+      <div class="perfil-card">
+        <span class="perfil-emoji">👩‍🏫</span>
+        <div>
+          <div class="perfil-titulo">Instructores y docentes de PM</div>
+          <p class="perfil-desc">Que necesitan material actualizado al PMBOK 8 y el ECO 2026 para complementar sus programas de formación.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE LA AUTORA -->
+<section class="section-autora">
+  <div class="container">
+    <div class="autora-inner">
+      <div>
+        <div class="autora-eyebrow">Quién lo preparó</div>
+        <h2 class="autora-nombre">Valeria Yashan,<br>PMP®</h2>
+        <p class="autora-bio">
+          Directora de proyectos certificada, docente universitaria e instructora en
+          programas de maestría en gestión de proyectos. Más de 15 años liderando
+          proyectos de transformación digital, tecnología y consultoría estratégica
+          en organizaciones de Argentina y América Latina.
+        </p>
+        <p class="autora-bio">
+          Este kit surge de su trabajo con candidatos que buscaban material de calidad
+          en español, adaptado a contextos latinoamericanos y alineado con el estándar
+          vigente — no con ediciones anteriores del PMBOK.
+        </p>
+        <div class="autora-creds">
+          <div class="cred">
+            <span class="cred-dot"></span>
+            <span>Certificada PMP® por Project Management Institute</span>
+          </div>
+          <div class="cred">
+            <span class="cred-dot"></span>
+            <span>Instructora en programas de maestría en gestión de proyectos</span>
+          </div>
+          <div class="cred">
+            <span class="cred-dot"></span>
+            <span>Autora de la serie <em>Dirección de Proyectos: Guía de Preparación para la Certificación</em> (3 tomos · Amazon KDP)</span>
+          </div>
+          <div class="cred">
+            <span class="cred-dot"></span>
+            <span>Consultora en gestión de proyectos y transformación digital</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="autora-stat-grid">
+        <div class="stat-card">
+          <div class="stat-num">15+</div>
+          <div class="stat-label">años de experiencia en dirección de proyectos</div>
+        </div>
+        <div class="stat-card light">
+          <div class="stat-num">3</div>
+          <div class="stat-label">tomos publicados alineados con PMBOK 8</div>
+        </div>
+        <div class="stat-card light">
+          <div class="stat-num">329</div>
+          <div class="stat-label">preguntas originales de práctica en la serie</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">100%</div>
+          <div class="stat-label">en español · contextos latinoamericanos</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="section-cta">
+  <div class="container">
+    <h2 class="cta-titulo">Empezá tu preparación con el pie derecho</h2>
+    <p class="cta-sub">Descargá el kit ahora — gratuito, sin condiciones.</p>
+    <a href="#formulario" class="cta-btn">Quiero el Kit PMP 2026 →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-links">
+    <a href="https://valeriayashan.com.ar" target="_blank">valeriayashan.com.ar</a>
+    <a href="https://www.linkedin.com/in/valeriayashan" target="_blank">LinkedIn</a>
+    <a href="https://www.youtube.com/@valeriayashanPM" target="_blank">YouTube</a>
+    <a href="https://www.instagram.com/valeria_yashan/" target="_blank">Instagram</a>
+  </div>
+  <p class="footer-legal">
+    © 2026 Valeria Yashan. Todos los derechos reservados.<br>
+    "PMI", "PMP" y "PMBOK" son marcas registradas de Project Management Institute, Inc.
+    Este material es independiente y no está autorizado ni afiliado a PMI de ninguna manera.
+  </p>
+</footer>
+
+<script>
+  // Formulario conectado a Mailchimp
+  const form = document.getElementById('kitForm');
+  const success = document.getElementById('successState');
+
+  // Links de descarga
+  const LINKS = {
+    archivo1: 'https://docs.google.com/document/d/1GvIxHxg2cPDTYNM8tBh9wVAbHUIXdsub/export?format=docx',
+    archivo2: 'https://docs.google.com/document/d/1Q1o5v20KLI6UXgBmsuoy0GCbLWOqPUk-/export?format=docx',
+    archivo3: 'https://docs.google.com/document/d/1vSDX0l9CPfAENygweRZ_r7egNrsdU8eK/export?format=docx',
+  };
+
+  // Actualizar hrefs de los botones de descarga
+  document.querySelector('.dl-1').href = LINKS.archivo1;
+  document.querySelector('.dl-2').href = LINKS.archivo2;
+  document.querySelector('.dl-3').href = LINKS.archivo3;
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const btn = form.querySelector('.btn-descarga');
+    btn.textContent = 'Enviando...';
+    btn.disabled = true;
+
+    const nombre   = document.getElementById('nombre').value.trim();
+    const email    = document.getElementById('email').value.trim();
+    const empresa  = document.getElementById('empresa').value.trim();
+
+    // Enviar a Mailchimp via jsonp (evita CORS)
+    const url = 'https://valeriayashan.us17.list-manage.com/subscribe/post-json' +
+      '?u=5a97f49798d4c975c9ecfe52b' +
+      '&id=da4df8d995' +
+      '&f_id=008e4be2f0' +
+      '&EMAIL=' + encodeURIComponent(email) +
+      '&FNAME=' + encodeURIComponent(nombre.split(' ')[0]) +
+      '&LNAME=' + encodeURIComponent(nombre.split(' ').slice(1).join(' ')) +
+      '&COMPANY=' + encodeURIComponent(empresa) +
+      '&c=mailchimpCallback';
+
+    window.mailchimpCallback = function(data) {
+      // Mostrar descarga independientemente del resultado
+      form.style.display = 'none';
+      success.style.display = 'block';
+    };
+
+    const script = document.createElement('script');
+    script.src = url;
+    document.body.appendChild(script);
+
+    // Fallback: si tarda más de 4 segundos, mostrar descarga igual
+    setTimeout(function() {
+      if (form.style.display !== 'none') {
+        form.style.display = 'none';
+        success.style.display = 'block';
+      }
+    }, 4000);
+  });
+
+  // Smooth scroll
+  document.querySelectorAll('a[href="#formulario"]').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('formulario').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+</script>
+
+</body>
+</html>
