@@ -1,0 +1,212 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Contenido — Valeria Yashan"
+  description="Libros, simulador PMP®, cursos en Udemy, recursos descargables y guías de herramientas de gestión de proyectos. Todo el contenido de Valeria Yashan en un lugar."
+>
+
+  <section class="contenido-hero">
+    <div class="container">
+      <p class="page-eyebrow">Contenido</p>
+      <h1>Todo lo que creé para ayudarte a gestionar mejor</h1>
+      <p class="page-lead">Libros, simuladores, cursos, recursos descargables y guías prácticas. Elegí por dónde empezar.</p>
+    </div>
+  </section>
+
+  <section class="contenido-grid-section">
+    <div class="container">
+      <div class="contenido-grid">
+
+        <a href="/libro" class="contenido-card">
+          <div class="contenido-card-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          </div>
+          <div class="contenido-card-body">
+            <h2 class="contenido-card-titulo">Libros</h2>
+            <p class="contenido-card-desc">4 libros publicados en Amazon. <em>PM MOM</em> y la trilogía <em>Dirección de Proyectos</em>, guía de preparación PMP® alineada con el PMBOK® 8.</p>
+            <span class="contenido-card-link">Ver libros →</span>
+          </div>
+        </a>
+
+        <a href="/simulador" class="contenido-card contenido-card--highlight">
+          <div class="contenido-card-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="contenido-card-body">
+            <div class="contenido-badge">Gratuito</div>
+            <h2 class="contenido-card-titulo">Simulador PMP®</h2>
+            <p class="contenido-card-desc">180 preguntas reales de examen. Modo práctica y modo simulacro. Basado en el ECO 2026 y el PMBOK® 8.</p>
+            <span class="contenido-card-link">Ir al simulador →</span>
+          </div>
+        </a>
+
+        <a href="/cursos" class="contenido-card">
+          <div class="contenido-card-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+          </div>
+          <div class="contenido-card-body">
+            <h2 class="contenido-card-titulo">Cursos en Udemy</h2>
+            <p class="contenido-card-desc">Cursos grabados de gestión de proyectos e IA aplicada. A tu ritmo, con acceso de por vida.</p>
+            <span class="contenido-card-link">Ver cursos →</span>
+          </div>
+        </a>
+
+        <a href="/recursos" class="contenido-card">
+          <div class="contenido-card-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          </div>
+          <div class="contenido-card-body">
+            <div class="contenido-badge">Gratuito</div>
+            <h2 class="contenido-card-titulo">Recursos descargables</h2>
+            <p class="contenido-card-desc">PDFs, checklists y plantillas para gestión de proyectos. Descargá y usá desde el primer día.</p>
+            <span class="contenido-card-link">Ver recursos →</span>
+          </div>
+        </a>
+
+        <a href="/herramientas" class="contenido-card">
+          <div class="contenido-card-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+          <div class="contenido-card-body">
+            <h2 class="contenido-card-titulo">Herramientas</h2>
+            <p class="contenido-card-desc">Guías prácticas de ClickUp, Asana, Notion, Monday, Trello, Miro y más. Cómo usarlas en proyectos reales.</p>
+            <span class="contenido-card-link">Ver guías →</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .contenido-hero {
+    padding: var(--space-xl) 0 var(--space-lg);
+  }
+
+  .page-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .contenido-hero h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 900;
+    color: var(--color-text);
+    line-height: 1.15;
+    margin-bottom: 1rem;
+    max-width: 600px;
+  }
+
+  .page-lead {
+    font-size: 1.05rem;
+    color: var(--color-muted);
+    max-width: 520px;
+    line-height: 1.7;
+  }
+
+  .contenido-grid-section {
+    padding: 0 0 var(--space-xl);
+  }
+
+  .contenido-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .contenido-card {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 1.75rem;
+    display: flex;
+    gap: 1.25rem;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.2s;
+  }
+
+  .contenido-card:hover {
+    border-color: var(--color-accent);
+  }
+
+  .contenido-card--highlight {
+    border-color: var(--color-accent);
+    background: var(--color-surface);
+  }
+
+  .contenido-card-icon {
+    width: 44px;
+    height: 44px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-accent);
+    flex-shrink: 0;
+  }
+
+  .contenido-card--highlight .contenido-card-icon {
+    background: var(--color-bg);
+  }
+
+  .contenido-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .contenido-badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-accent);
+    background: #E8F4EE;
+    padding: 2px 8px;
+    border-radius: 20px;
+    align-self: flex-start;
+  }
+
+  .contenido-card-titulo {
+    font-family: 'Fraunces', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--color-text);
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .contenido-card-desc {
+    font-size: 0.875rem;
+    color: var(--color-muted);
+    line-height: 1.6;
+    margin: 0;
+    flex: 1;
+  }
+
+  .contenido-card-link {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    margin-top: 0.25rem;
+  }
+
+  @media (max-width: 700px) {
+    .contenido-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
