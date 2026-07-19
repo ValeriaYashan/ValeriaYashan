@@ -22,6 +22,13 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         <p class="page-lead">Talleres y programas de formación para equipos que necesitan gestionar mejor sus proyectos. Contenido práctico basado en el PMBOK® Guide y metodologías ágiles e híbridas, adaptado al contexto real de tu organización.</p>
       </header>
 
+      <nav class="servicio-indice" aria-label="Ir a sección">
+        <a href="#temas">Temas y módulos</a>
+        <a href="#modalidades">Modalidades</a>
+        <a href="#enfoque">Mi enfoque</a>
+        <a href="#faq">Preguntas frecuentes</a>
+      </nav>
+
       <div class="servicio-body">
 
         <section class="servicio-section">
@@ -45,7 +52,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         </section>
 
         <section class="servicio-section">
-          <h2>Temas y módulos disponibles</h2>
+          <h2 id="temas">Temas y módulos disponibles</h2>
           <p>Los programas se arman según las necesidades del equipo. Estos son los módulos más frecuentemente solicitados:</p>
           <ul class="servicio-list">
             <li><strong>Fundamentos de gestión de proyectos:</strong> ciclo de vida, roles, documentos clave y procesos básicos</li>
@@ -59,7 +66,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         </section>
 
         <section class="servicio-section">
-          <h2>Modalidades de entrega</h2>
+          <h2 id="modalidades">Modalidades de entrega</h2>
           <p>Los programas se adaptan al formato que mejor funciona para el equipo y la organización:</p>
           <ul class="servicio-list">
             <li><strong>Taller intensivo:</strong> una o dos jornadas de trabajo concentrado, ideal para equipos con tiempo limitado</li>
@@ -71,13 +78,13 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         </section>
 
         <section class="servicio-section">
-          <h2>Mi enfoque</h2>
+          <h2 id="enfoque">Mi enfoque</h2>
           <p>No es teoría de libro. Es PM aplicado al trabajo concreto de tu equipo. Como docente universitaria y autora de una serie de libros de preparación PMP®, llevo el contenido técnico a ejemplos que el equipo reconoce como propios. El resultado es conocimiento que se aplica desde el primer día después de la capacitación.</p>
           <p>Cada programa empieza con una evaluación del equipo — qué saben, qué hacen en la práctica, qué problemas concretos tienen. A partir de ahí diseño el contenido para que sea relevante, no genérico. No uso los mismos materiales para un equipo de tecnología que para uno de energía o finanzas.</p>
         </section>
 
         <section class="servicio-section">
-          <h2>Preguntas frecuentes</h2>
+          <h2 id="faq">Preguntas frecuentes</h2>
 
           <div class="faq-item">
             <h3>¿Cuántas personas pueden participar en un taller in-company?</h3>
@@ -107,8 +114,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         <h2>¿Querés capacitar a tu equipo en Project Management?</h2>
         <p>Contame cuántas personas son, qué experiencia tienen y qué problemas concretos querés resolver.</p>
         <div class="cta-buttons">
-          <a href="/contacto" class="btn-primary">Escribime &#8594;</a>
-          <a href="https://wa.me/541140791007" target="_blank" rel="noopener" class="btn-secondary">WhatsApp &#8594;</a>
+          <a href="https://wa.me/5491140791007?text=Hola%20Valeria%2C%20quiero%20capacitar%20a%20mi%20equipo%20en%20Project%20Management" class="btn-primary" target="_blank" rel="noopener">Escribime por WhatsApp &#8594;</a>
+          <a href="https://wa.me/5491140791007?text=Hola%20Valeria%2C%20quiero%20capacitar%20a%20mi%20equipo%20en%20Project%20Management" target="_blank" rel="noopener" class="btn-secondary">WhatsApp &#8594;</a>
         </div>
       </div>
 
@@ -328,4 +335,27 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   }
 
   .nav-back:hover, .nav-next:hover { text-decoration: underline; }
+
+  .servicio-indice {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: var(--space-md);
+  }
+
+  .servicio-indice a {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    background: #E8F4EE;
+    padding: 4px 12px;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+
+  .servicio-indice a:hover {
+    background: #d2ecde;
+  }
+
 </style>
