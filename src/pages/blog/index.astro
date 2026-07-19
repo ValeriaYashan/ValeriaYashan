@@ -71,32 +71,7 @@ const searchIndex = posts.map(({ post, readingTime }) => ({
 
     <p id="search-count" class="search-count" style="display:none"></p>
 
-    <section class="posts-grid" id="posts-grid">
-      {posts.map(({ post, readingTime }) => (
-        <div
-          class="post-wrapper"
-          data-category={post.data.category}
-          data-slug={post.id.replace(/\.md$/, '')}
-        >
-          <ArticleCard
-            title={post.data.title}
-            description={post.data.description}
-            pubDate={post.data.pubDate}
-            category={post.data.category}
-            tags={post.data.tags ?? []}
-            slug={post.id.replace(/\.md$/, '')}
-            readingTime={readingTime}
-            image={post.data.image}
-          />
-        </div>
-      ))}
-    </section>
-
-    <p id="no-results" class="no-results" style="display:none">
-      No encontré artículos con ese término. Probá con otra palabra.
-    </p>
-
-   <section class="blog-newsletter">
+<section class="blog-newsletter">
   <p class="newsletter-label">Newsletter</p>
   <h2 class="newsletter-titulo">Recibí los próximos artículos</h2>
   <p class="newsletter-desc">Sin spam. Solo cuando publico algo que vale la pena leer.</p>
@@ -158,6 +133,31 @@ const searchIndex = posts.map(({ post, readingTime }) => ({
     <script defer src="https://sibforms.com/forms/end-form/build/main.js"><\/script>
   `} />
 </section>
+
+    <section class="posts-grid" id="posts-grid">
+      {posts.map(({ post, readingTime }) => (
+        <div
+          class="post-wrapper"
+          data-category={post.data.category}
+          data-slug={post.id.replace(/\.md$/, '')}
+        >
+          <ArticleCard
+            title={post.data.title}
+            description={post.data.description}
+            pubDate={post.data.pubDate}
+            category={post.data.category}
+            tags={post.data.tags ?? []}
+            slug={post.id.replace(/\.md$/, '')}
+            readingTime={readingTime}
+            image={post.data.image}
+          />
+        </div>
+      ))}
+    </section>
+
+    <p id="no-results" class="no-results" style="display:none">
+      No encontré artículos con ese término. Probá con otra palabra.
+    </p>
   </div>
 </BaseLayout>
 
@@ -387,8 +387,8 @@ const searchIndex = posts.map(({ post, readingTime }) => ({
 
   .blog-newsletter {
     max-width: 900px;
-    margin-top: var(--space-lg);
-    padding: 2rem;
+    margin-bottom: var(--space-lg);
+    padding: 1.5rem 2rem;
     background: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: 12px;
