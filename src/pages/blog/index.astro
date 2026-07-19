@@ -159,7 +159,6 @@ const searchIndex = posts.map(({ post, readingTime }) => ({
       No encontré artículos con ese término. Probá con otra palabra.
     </p>
   </div>
-</BaseLayout>
 
 <script define:vars={{ searchIndex }}>
   (function () {
@@ -245,6 +244,8 @@ const searchIndex = posts.map(({ post, readingTime }) => ({
     });
   })();
 </script>
+
+</BaseLayout>
 
 <style>
   .page-container {
