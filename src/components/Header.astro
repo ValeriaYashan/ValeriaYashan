@@ -10,7 +10,7 @@
     <!-- NAV DESKTOP -->
     <nav class="nav-desktop" aria-label="Navegación principal">
       <ul class="nav-list">
-        <li><a href="/" class="nav-link">Inicio</a></li>
+
         <li><a href="/sobre-mi" class="nav-link">Sobre mí</a></li>
 
         <!-- Servicios con dropdown -->
@@ -25,17 +25,30 @@
             <li role="none"><a href="/servicios/consultoria-ia" class="dropdown-link" role="menuitem">Consultoría en IA Aplicada</a></li>
             <li role="none"><a href="/servicios/certificacion-pmp" class="dropdown-link" role="menuitem">Preparación para PMP®</a></li>
             <li role="none"><a href="/servicios/clases-ia" class="dropdown-link dropdown-link--highlight" role="menuitem">Clases Prácticas de IA ✨</a></li>
-            <li role="none"><a href="/cursos" class="dropdown-link dropdown-link--udemy" role="menuitem">Cursos en Udemy 🎓</a></li>
             <li role="none"><a href="/webinars" class="dropdown-link dropdown-link--highlight" role="menuitem">Webinars gratuitos 🎙️</a></li>
           </ul>
         </li>
 
-        <li><a href="/libro" class="nav-link">Libros</a></li>
+        <!-- Capacitaciones — ítem visible -->
+        <li><a href="/capacitaciones" class="nav-link nav-link--accent">Capacitaciones</a></li>
+
+        <!-- Contenido con dropdown -->
+        <li class="nav-item--dropdown">
+          <a href="#" class="nav-link nav-dropdown-trigger">
+            Contenido <span class="nav-arrow" aria-hidden="true">&#8964;</span>
+          </a>
+          <ul class="nav-dropdown" role="menu">
+            <li role="none"><a href="/libro" class="dropdown-link" role="menuitem">Libros</a></li>
+            <li role="none"><a href="/simulador" class="dropdown-link dropdown-link--highlight" role="menuitem">Simulador PMP®</a></li>
+            <li role="none"><a href="/cursos" class="dropdown-link dropdown-link--udemy" role="menuitem">Cursos en Udemy 🎓</a></li>
+            <li role="none"><a href="/recursos" class="dropdown-link" role="menuitem">Recursos</a></li>
+            <li role="none"><a href="/herramientas" class="dropdown-link" role="menuitem">Herramientas</a></li>
+          </ul>
+        </li>
+
         <li><a href="/blog" class="nav-link">Blog</a></li>
-        <li><a href="/simulador" class="nav-link nav-link--accent">Simulador PMP®</a></li>
-        <li><a href="/recursos" class="nav-link">Recursos</a></li>
-        <li><a href="/herramientas" class="nav-link">Herramientas</a></li>
         <li><a href="/contacto" class="nav-link">Contacto</a></li>
+
       </ul>
     </nav>
 
@@ -75,15 +88,21 @@
         <li><a href="/servicios/consultoria-ia" class="nav-mobile-sublink">Consultoría en IA Aplicada</a></li>
         <li><a href="/servicios/certificacion-pmp" class="nav-mobile-sublink">Preparación para PMP®</a></li>
         <li><a href="/servicios/clases-ia" class="nav-mobile-sublink nav-mobile-sublink--accent">Clases Prácticas de IA ✨</a></li>
-        <li><a href="/cursos" class="nav-mobile-sublink nav-mobile-sublink--udemy">Cursos en Udemy 🎓</a></li>
         <li><a href="/webinars" class="nav-mobile-sublink nav-mobile-sublink--accent">Webinars gratuitos 🎙️</a></li>
       </ul>
     </li>
-    <li><a href="/libro" class="nav-mobile-link">Libros</a></li>
+    <li><a href="/capacitaciones" class="nav-mobile-link nav-mobile-link--accent">Capacitaciones</a></li>
+    <li>
+      <a href="#" class="nav-mobile-link">Contenido</a>
+      <ul class="nav-mobile-sub">
+        <li><a href="/libro" class="nav-mobile-sublink">Libros</a></li>
+        <li><a href="/simulador" class="nav-mobile-sublink nav-mobile-sublink--accent">Simulador PMP®</a></li>
+        <li><a href="/cursos" class="nav-mobile-sublink nav-mobile-sublink--udemy">Cursos en Udemy 🎓</a></li>
+        <li><a href="/recursos" class="nav-mobile-sublink">Recursos</a></li>
+        <li><a href="/herramientas" class="nav-mobile-sublink">Herramientas</a></li>
+      </ul>
+    </li>
     <li><a href="/blog" class="nav-mobile-link">Blog</a></li>
-    <li><a href="/simulador" class="nav-mobile-link nav-mobile-link--accent">Simulador PMP®</a></li>
-    <li><a href="/recursos" class="nav-mobile-link">Recursos</a></li>
-    <li><a href="/herramientas" class="nav-mobile-link">Herramientas</a></li>
     <li><a href="/contacto" class="nav-mobile-link">Contacto</a></li>
   </ul>
 
@@ -153,7 +172,7 @@
 
   .nav-link--accent {
     color: var(--color-accent);
-    font-weight: 600;
+    font-weight: 700;
   }
 
   /* DROPDOWN */
@@ -236,11 +255,6 @@
   }
 
   .dropdown-link--udemy {
-    color: #FF9900;
-    font-weight: 600;
-  }
-
-  .nav-mobile-sublink--udemy {
     color: #FF9900;
     font-weight: 600;
   }
@@ -332,7 +346,7 @@
     display: block;
   }
 
-  /* PANEL LATERAL */
+  /* PANEL LATERAL MOBILE */
   .nav-mobile {
     position: fixed;
     top: 0;
@@ -411,7 +425,7 @@
 
   .nav-mobile-link--accent {
     color: var(--color-accent);
-    font-weight: 600;
+    font-weight: 700;
   }
 
   .nav-mobile-sub {
@@ -439,6 +453,11 @@
 
   .nav-mobile-sublink--accent {
     color: var(--color-accent);
+    font-weight: 600;
+  }
+
+  .nav-mobile-sublink--udemy {
+    color: #FF9900;
     font-weight: 600;
   }
 
