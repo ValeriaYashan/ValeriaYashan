@@ -48,6 +48,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
         <div class="cap-oferta-card">
           <div class="cap-oferta-num">01</div>
+          <div class="cap-formato-badge">8 sesiones · 2h c/u · Vivo por Zoom</div>
           <h3 class="cap-oferta-titulo">Preparación para el examen PMP®</h3>
           <p class="cap-oferta-desc">
             Preparate para rendir y aprobar la certificación más reconocida en gestión de proyectos a nivel mundial.
@@ -71,6 +72,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
         <div class="cap-oferta-card">
           <div class="cap-oferta-num">02</div>
+          <div class="cap-formato-badge">4 sesiones · 2h c/u · Vivo por Zoom</div>
           <h3 class="cap-oferta-titulo">IA aplicada para Project Managers</h3>
           <p class="cap-oferta-desc">
             Aprendé a usar inteligencia artificial de forma concreta en tu trabajo diario como PM.
@@ -94,6 +96,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
         <div class="cap-oferta-card">
           <div class="cap-oferta-num">03</div>
+          <div class="cap-formato-badge">A medida · Grupos cerrados · Vivo por Zoom</div>
           <h3 class="cap-oferta-titulo">Gestión de Proyectos para equipos</h3>
           <p class="cap-oferta-desc">
             Capacitación práctica para equipos que quieren estructurar su forma de trabajar.
@@ -119,6 +122,68 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </div>
   </section>
 
+  <!-- TESTIMONIOS -->
+  <section class="cap-testimonios">
+    <div class="cap-inner">
+      <h2 class="cap-section-titulo">Lo que dicen quienes ya pasaron por acá</h2>
+      <div class="cap-testimonios-grid">
+
+        <div class="cap-testimonio">
+          <p class="cap-testimonio-texto">"Aprobé el PMP en el primer intento. La preparación con Valeria fue clave — no solo el contenido, sino la estrategia para el día del examen."</p>
+          <div class="cap-testimonio-autor">
+            <div class="cap-testimonio-avatar">MG</div>
+            <div>
+              <p class="cap-testimonio-nombre">M. González</p>
+              <p class="cap-testimonio-rol">Project Manager · Argentina</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="cap-testimonio">
+          <p class="cap-testimonio-texto">"Empecé a usar IA en mis proyectos desde la primera sesión. No es teoría: cada ejercicio lo apliqué directamente a mi trabajo real."</p>
+          <div class="cap-testimonio-autor">
+            <div class="cap-testimonio-avatar">LR</div>
+            <div>
+              <p class="cap-testimonio-nombre">L. Rodríguez</p>
+              <p class="cap-testimonio-rol">Líder de proyectos · España</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- POR QUÉ ZOOM -->
+  <section class="cap-zoom">
+    <div class="cap-inner">
+      <h2 class="cap-section-titulo">¿Por qué en vivo por Zoom?</h2>
+
+      <div class="cap-zoom-grid">
+        <div class="cap-zoom-item">
+          <div class="cap-zoom-icono"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+          <h3 class="cap-zoom-titulo">Sin límites geográficos</h3>
+          <p class="cap-zoom-desc">Participan profesionales de Argentina, LATAM y España en la misma sesión.</p>
+        </div>
+        <div class="cap-zoom-item">
+          <div class="cap-zoom-icono"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <h3 class="cap-zoom-titulo">Grupos reducidos</h3>
+          <p class="cap-zoom-desc">Grupos pequeños para que puedas preguntar, participar y recibir atención real.</p>
+        </div>
+        <div class="cap-zoom-item">
+          <div class="cap-zoom-icono"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg></div>
+          <h3 class="cap-zoom-titulo">Con grabación incluida</h3>
+          <p class="cap-zoom-desc">Si no podés asistir a una sesión, tenés acceso a la grabación para no perderte nada.</p>
+        </div>
+        <div class="cap-zoom-item">
+          <div class="cap-zoom-icono"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+          <h3 class="cap-zoom-titulo">Acompañamiento directo</h3>
+          <p class="cap-zoom-desc">Acceso a Valeria para consultas entre sesiones, sin intermediarios.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ACCESO A SESIONES — para alumnos activos -->
   <section class="cap-acceso">
     <div class="cap-inner">
@@ -129,7 +194,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </p>
 
       <div class="cap-acceso-box">
-        <div class="cap-acceso-icono">📩</div>
+        <div class="cap-acceso-icono"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
         <div class="cap-acceso-texto">
           <p class="cap-acceso-titulo">El link de Zoom llega por email antes de cada sesión</p>
           <p class="cap-acceso-desc">
@@ -150,56 +215,27 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </div>
   </section>
 
-  <!-- POR QUÉ ZOOM -->
-  <section class="cap-zoom">
-    <div class="cap-inner">
-      <h2 class="cap-section-titulo">¿Por qué en vivo por Zoom?</h2>
-
-      <div class="cap-zoom-grid">
-        <div class="cap-zoom-item">
-          <p class="cap-zoom-icono">🌍</p>
-          <h3 class="cap-zoom-titulo">Sin límites geográficos</h3>
-          <p class="cap-zoom-desc">Participan profesionales de Argentina, LATAM y España en la misma sesión.</p>
-        </div>
-        <div class="cap-zoom-item">
-          <p class="cap-zoom-icono">👥</p>
-          <h3 class="cap-zoom-titulo">Grupos reducidos</h3>
-          <p class="cap-zoom-desc">Grupos pequeños para que puedas preguntar, participar y recibir atención real.</p>
-        </div>
-        <div class="cap-zoom-item">
-          <p class="cap-zoom-icono">🎥</p>
-          <h3 class="cap-zoom-titulo">Con grabación incluida</h3>
-          <p class="cap-zoom-desc">Si no podés asistir a una sesión, tenés acceso a la grabación para no perderte nada.</p>
-        </div>
-        <div class="cap-zoom-item">
-          <p class="cap-zoom-icono">💬</p>
-          <h3 class="cap-zoom-titulo">Acompañamiento directo</h3>
-          <p class="cap-zoom-desc">Acceso a Valeria para consultas entre sesiones, sin intermediarios.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- CTA FINAL -->
   <section class="cap-cta-final">
     <div class="cap-inner">
-      <h2 class="cap-cta-titulo">¿Te interesa alguna capacitación?</h2>
+      <h2 class="cap-cta-titulo">¿Cuándo arranca la próxima cohorte?</h2>
       <p class="cap-cta-sub">
-        Escribime por WhatsApp y te cuento los detalles de la próxima cohorte disponible.
+        Escribime y te cuento las fechas disponibles. Los grupos son reducidos y los cupos se llenan rápido.
       </p>
       <div class="cap-cta-btns">
         <a
-          href="https://wa.me/541140791007?text=Hola%20Valeria%2C%20me%20interesan%20tus%20capacitaciones%20por%20Zoom"
-          class="btn-primary"
+          href="https://wa.me/5491140791007?text=Hola%20Valeria%2C%20quiero%20saber%20las%20fechas%20de%20la%20pr%C3%B3xima%20cohorte"
+          class="cap-btn-verde-blanco"
           target="_blank"
           rel="noopener"
         >
-          Escribime por WhatsApp
+          Consultame por WhatsApp
         </a>
-        <a href="https://calendly.com/valeriayashan/30min" class="btn-secondary" target="_blank" rel="noopener">
-          Agendá una llamada de 30 min
+        <a href="https://calendly.com/valeriayashan/30min" class="cap-btn-outline-blanco" target="_blank" rel="noopener">
+          Agendá una llamada gratuita
         </a>
       </div>
+      <p class="cap-cta-garantia">Te respondo en menos de 24 horas.</p>
     </div>
   </section>
 
@@ -536,4 +572,181 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     justify-content: center;
     flex-wrap: wrap;
   }
+
+  /* ─── BADGES DE FORMATO ─── */
+  .cap-formato-badge {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-accent);
+    background: #E8F4EE;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 0.25rem;
+  }
+
+  /* ─── TESTIMONIOS ─── */
+  .cap-testimonios {
+    padding: 4rem 1.5rem;
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .cap-testimonios-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+
+  @media (max-width: 700px) {
+    .cap-testimonios-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .cap-testimonio {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    padding: 1.5rem 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .cap-testimonio-texto {
+    font-size: 0.975rem;
+    color: var(--color-text);
+    line-height: 1.7;
+    font-style: italic;
+    margin: 0;
+    flex: 1;
+  }
+
+  .cap-testimonio-autor {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .cap-testimonio-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .cap-testimonio-nombre {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin: 0;
+  }
+
+  .cap-testimonio-rol {
+    font-size: 0.8rem;
+    color: var(--color-muted);
+    margin: 0;
+  }
+
+  /* ─── ÍCONOS SVG en "¿Por qué Zoom?" ─── */
+  .cap-zoom-icono {
+    width: 44px;
+    height: 44px;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-accent);
+    margin-bottom: 0.75rem;
+  }
+
+  /* ─── CTA FINAL VERDE ─── */
+  .cap-cta-final {
+    padding: 4rem 1.5rem;
+    background: var(--color-accent);
+    border-top: 1px solid var(--color-border);
+    text-align: center;
+  }
+
+  .cap-cta-titulo {
+    font-family: 'Fraunces', serif;
+    font-size: 1.9rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 0.75rem;
+    line-height: 1.25;
+  }
+
+  .cap-cta-sub {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 1.75rem;
+    line-height: 1.6;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cap-cta-btns {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 0.75rem;
+  }
+
+  .cap-btn-verde-blanco {
+    display: inline-block;
+    background: #ffffff;
+    color: var(--color-accent);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: opacity 0.15s;
+  }
+
+  .cap-btn-verde-blanco:hover {
+    opacity: 0.9;
+  }
+
+  .cap-btn-outline-blanco {
+    display: inline-block;
+    background: transparent;
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 0.72rem 1.5rem;
+    border-radius: 6px;
+    border: 1.5px solid rgba(255,255,255,0.6);
+    text-decoration: none;
+    transition: border-color 0.15s, background 0.15s;
+  }
+
+  .cap-btn-outline-blanco:hover {
+    border-color: #ffffff;
+    background: rgba(255,255,255,0.1);
+  }
+
+  .cap-cta-garantia {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.65);
+    margin: 0;
+  }
+
 </style>

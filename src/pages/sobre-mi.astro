@@ -134,11 +134,33 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="container">
       <p class="section-eyebrow">Enfoque</p>
       <h2 class="section-title">Cómo trabajo</h2>
-      <div class="enfoque-contenido">
-        <p>Mi enfoque combina metodología probada con adaptación al contexto real de cada organización. No existen soluciones genéricas: cada equipo tiene su historia, su cultura y sus desafíos específicos.</p>
-        <p>En consultoría de gestión de proyectos, parto siempre del diagnóstico. Antes de proponer cualquier cambio, entiendo cómo funciona el equipo, qué herramientas usa, qué fricción existe en los procesos actuales y cuáles son los objetivos concretos que la organización quiere alcanzar.</p>
-        <p>En la incorporación de inteligencia artificial, trabajo desde lo práctico. No propongo implementar IA porque está de moda, sino porque resuelve un problema concreto. Cada herramienta, cada flujo, cada prompt que trabajo con un equipo tiene un propósito claro y un resultado medible.</p>
-        <p>En capacitación y formación, diseño programas que combinan teoría con ejercicios aplicados al trabajo real de los participantes. El conocimiento que no se puede usar al día siguiente no tiene valor.</p>
+      <p class="enfoque-intro">Metodología probada, adaptada al contexto real de cada organización. No existen soluciones genéricas: cada equipo tiene su historia, su cultura y sus desafíos específicos.</p>
+      <div class="enfoque-cards">
+
+        <div class="enfoque-card">
+          <div class="enfoque-card-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <h3 class="enfoque-card-titulo">Consultoría en proyectos</h3>
+          <p class="enfoque-card-desc">Parto siempre del diagnóstico. Entiendo cómo funciona el equipo, qué fricción existe en los procesos actuales y cuáles son los objetivos concretos antes de proponer cualquier cambio.</p>
+        </div>
+
+        <div class="enfoque-card">
+          <div class="enfoque-card-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><path d="M12 8v4l3 3"/></svg>
+          </div>
+          <h3 class="enfoque-card-titulo">IA aplicada</h3>
+          <p class="enfoque-card-desc">No implemento IA porque está de moda, sino porque resuelve un problema concreto. Cada herramienta, flujo y prompt tiene un propósito claro y un resultado medible.</p>
+        </div>
+
+        <div class="enfoque-card">
+          <div class="enfoque-card-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3 class="enfoque-card-titulo">Capacitación y formación</h3>
+          <p class="enfoque-card-desc">Diseño programas que combinan teoría con ejercicios aplicados al trabajo real. El conocimiento que no se puede usar al día siguiente no tiene valor.</p>
+        </div>
+
       </div>
     </div>
   </section>
@@ -167,9 +189,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <h2 class="cta-titulo">¿Trabajamos juntos?</h2>
         <p class="cta-desc">Si tenés un proyecto, un equipo o una organización que quiere mejorar su forma de gestionar, escribime. Contame qué necesitás y vemos cómo puedo ayudarte.</p>
         <div class="cta-actions">
-          <a href="/contacto" class="btn btn-primary">Escribime</a>
+          <a href="https://wa.me/5491140791007?text=Hola%20Valeria%2C%20te%20escribo%20desde%20tu%20web" class="btn btn-primary" target="_blank" rel="noopener">Consultame por WhatsApp</a>
           <a href="/libro" class="btn btn-outline">Ver mis libros</a>
         </div>
+        <p class="cta-garantia">Te respondo en menos de 24 horas.</p>
       </div>
     </div>
   </section>
@@ -421,18 +444,64 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     background-color: var(--color-bg);
   }
 
-  .enfoque-contenido {
-    max-width: 720px;
-    margin-top: var(--space-md);
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .enfoque-contenido p {
+  .enfoque-intro {
     font-size: 1rem;
     color: var(--color-muted);
     line-height: 1.75;
+    max-width: 640px;
+    margin-top: 0.5rem;
+    margin-bottom: var(--space-md);
+  }
+
+  .enfoque-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 0;
+  }
+
+  .enfoque-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .enfoque-card-icon {
+    width: 44px;
+    height: 44px;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-accent);
+    flex-shrink: 0;
+  }
+
+  .enfoque-card-titulo {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin: 0;
+  }
+
+  .enfoque-card-desc {
+    font-size: 0.9rem;
+    color: var(--color-muted);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  @media (max-width: 700px) {
+    .enfoque-cards {
+      grid-template-columns: 1fr;
+    }
   }
 
   .sectores {
@@ -514,6 +583,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .sobre-cta .btn-outline:hover {
     border-color: white;
     background: rgba(255,255,255,0.1);
+  }
+
+  .cta-garantia {
+    margin-top: 0.75rem;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.65);
   }
 
   .section-eyebrow {
