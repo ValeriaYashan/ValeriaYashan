@@ -80,6 +80,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </div>
   </section>
 
+
+  <section class="contenido-cta">
+    <div class="container">
+      <p class="contenido-cta-texto">¿Querés implementar esto con tu equipo? <a href="https://wa.me/5491140791007?text=Hola%20Valeria%2C%20vi%20tu%20contenido%20y%20quiero%20implementarlo%20con%20mi%20equipo" target="_blank" rel="noopener" class="contenido-cta-link">Escribime por WhatsApp →</a></p>
+    </div>
+  </section>
+
 </BaseLayout>
 
 <style>
@@ -119,7 +126,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   .contenido-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
   }
 
@@ -202,6 +209,33 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     font-weight: 600;
     color: var(--color-accent);
     margin-top: 0.25rem;
+  }
+
+  .contenido-cta {
+    padding: 1.5rem 0 var(--space-xl);
+  }
+
+  .contenido-cta-texto {
+    font-size: 0.95rem;
+    color: var(--color-muted);
+    margin: 0;
+  }
+
+  .contenido-cta-link {
+    color: var(--color-accent);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .contenido-cta-link:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  @media (max-width: 900px) {
+    .contenido-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 
   @media (max-width: 700px) {
