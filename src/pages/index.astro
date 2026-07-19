@@ -37,7 +37,7 @@ const posts = (await getCollection('blog'))
         <div class="hero-texto">
           <p class="hero-eyebrow">Consultoría &middot; Capacitación &middot; Certificación PMP®</p>
           <h1 class="hero-headline">Tus proyectos, ejecutados con metodología real e IA integrada.</h1>
-          <p class="hero-sub">PMP® desde 2013, autora de 4 libros y consultora en gestión de proyectos e IA. Trabajo con equipos en Argentina, LATAM y España que quieren gestionar mejor y usar IA de forma concreta.</p>
+          <p class="hero-sub">PMP® desde 2013, autora de 4 libros y consultora en gestión de proyectos e IA. La única combinación de certificación, experiencia en campo, docencia universitaria y publicación académica aplicada a tus proyectos.</p>
           <div class="hero-actions">
             <a href="/servicios" class="btn btn-primary">Ver servicios</a>
             <a href="https://calendly.com/valeriayashan/30min" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Agendá una sesión gratuita de 30 min &rarr;</a>
@@ -268,19 +268,28 @@ const posts = (await getCollection('blog'))
           <div class="cap-card-icon">🎯</div>
           <h3 class="cap-card-titulo">Preparación para el examen PMP®</h3>
           <p class="cap-card-desc">Preparate para rendir y aprobar la certificación más reconocida en gestión de proyectos. Teoría aplicada, simulacros y estrategia para el examen.</p>
-          <a href="https://wa.me/541140791007?text=Hola%20Valeria%2C%20me%20interesa%20la%20capacitaci%C3%B3n%20de%20Preparaci%C3%B3n%20PMP%C2%AE" class="cap-card-cta" target="_blank" rel="noopener">Consultá por WhatsApp →</a>
+          <div class="cap-card-actions">
+            <a href="/capacitaciones" class="cap-card-link">Ver detalles →</a>
+            <a href="https://wa.me/541140791007?text=Hola%20Valeria%2C%20me%20interesa%20la%20capacitaci%C3%B3n%20de%20Preparaci%C3%B3n%20PMP%C2%AE" class="cap-card-cta" target="_blank" rel="noopener">Consultá por WhatsApp →</a>
+          </div>
         </div>
         <div class="cap-card">
           <div class="cap-card-icon">🤖</div>
           <h3 class="cap-card-titulo">IA aplicada para Project Managers</h3>
           <p class="cap-card-desc">Prompts reales, flujos de trabajo con IA y herramientas concretas para aplicar inteligencia artificial en la gestión diaria de proyectos.</p>
-          <a href="https://wa.me/541140791007?text=Hola%20Valeria%2C%20me%20interesa%20la%20capacitaci%C3%B3n%20de%20IA%20para%20Project%20Managers" class="cap-card-cta" target="_blank" rel="noopener">Consultá por WhatsApp →</a>
+          <div class="cap-card-actions">
+            <a href="/capacitaciones" class="cap-card-link">Ver detalles →</a>
+            <a href="https://wa.me/541140791007?text=Hola%20Valeria%2C%20me%20interesa%20la%20capacitaci%C3%B3n%20de%20IA%20para%20Project%20Managers" class="cap-card-cta" target="_blank" rel="noopener">Consultá por WhatsApp →</a>
+          </div>
         </div>
         <div class="cap-card">
           <div class="cap-card-icon">📋</div>
           <h3 class="cap-card-titulo">Gestión de Proyectos para equipos</h3>
           <p class="cap-card-desc">Capacitación práctica para equipos que quieren estructurar su forma de trabajar, definir responsabilidades y hacer seguimiento real de sus proyectos.</p>
-          <a href="https://wa.me/541140791007?text=Hola%20Valeria%2C%20me%20interesa%20la%20capacitaci%C3%B3n%20de%20Gesti%C3%B3n%20de%20Proyectos%20para%20equipos" class="cap-card-cta" target="_blank" rel="noopener">Consultá por WhatsApp →</a>
+          <div class="cap-card-actions">
+            <a href="/capacitaciones" class="cap-card-link">Ver detalles →</a>
+            <a href="https://wa.me/541140791007?text=Hola%20Valeria%2C%20me%20interesa%20la%20capacitaci%C3%B3n%20de%20Gesti%C3%B3n%20de%20Proyectos%20para%20equipos" class="cap-card-cta" target="_blank" rel="noopener">Consultá por WhatsApp →</a>
+          </div>
         </div>
       </div>
       <div class="cap-footer">
@@ -364,7 +373,10 @@ const posts = (await getCollection('blog'))
       <div class="cta-inner">
         <h2 class="cta-titulo">¿Trabajamos juntos?</h2>
         <p class="cta-texto">Si querés capacitar a tu equipo, incorporar IA en tu organización o necesitás acompañamiento en gestión de proyectos, escribime.</p>
-        <a href="/contacto" class="btn btn-primary">Contactar</a>
+        <div class="cta-actions">
+          <a href="https://calendly.com/valeriayashan/30min" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Agendá una llamada gratuita →</a>
+          <a href="/contacto" class="btn btn-outline">Escribime</a>
+        </div>
       </div>
     </div>
   </section>
@@ -777,12 +789,31 @@ const posts = (await getCollection('blog'))
     flex: 1;
   }
 
+  .cap-card-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: auto;
+  }
+
+  .cap-card-link {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--color-muted);
+    text-decoration: none;
+  }
+
+  .cap-card-link:hover {
+    color: var(--color-text);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
   .cap-card-cta {
     font-size: 0.875rem;
     font-weight: 600;
     color: var(--color-accent);
     text-decoration: none;
-    margin-top: auto;
     display: inline-block;
   }
 
@@ -1104,6 +1135,13 @@ const posts = (await getCollection('blog'))
     margin: 0;
   }
 
+  .cta-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
   @media (max-width: 700px) {
     .para-quien-grid {
       grid-template-columns: 1fr !important;
@@ -1157,6 +1195,17 @@ const posts = (await getCollection('blog'))
 
     .cap-grid {
       grid-template-columns: 1fr;
+    }
+
+    .cta-actions {
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .cta-actions .btn {
+      width: 100%;
+      text-align: center;
+      justify-content: center;
     }
   }
 
