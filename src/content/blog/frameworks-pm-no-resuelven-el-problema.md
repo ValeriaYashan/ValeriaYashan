@@ -4,6 +4,7 @@ description: "SAFe, Scrum, PRINCE2, PMBOK: los frameworks de gestión de proyect
 pubDate: "2026-07-04"
 category: "Project Management"
 tags: ["Project Management", "Metodologías", "Liderazgo", "Ágil"]
+image: "/images/blog/frameworks-pm-no-resuelven-el-problema.jpg"
 ---
 
 Cada pocos años aparece un nuevo framework que promete resolver los problemas de gestión de proyectos que los anteriores no pudieron. Scrum reemplazó al waterfall. SAFe escaló Scrum. Ahora hay frameworks para escalar SAFe.

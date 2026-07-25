@@ -4,6 +4,7 @@ description: "Las señales concretas que indican que tu empresa necesita incorpo
 pubDate: "2026-07-04"
 category: "Project Management"
 tags: ["Project Management", "Consultoría", "PyMEs", "Gestión de proyectos"]
+image: "/images/blog/cuando-una-pyme-necesita-un-pm-externo.jpg"
 ---
 
 Hay un momento en la vida de muchas PyMEs en que los proyectos dejan de salir bien — no por falta de talento ni de recursos, sino porque nadie está gestionándolos con metodología.

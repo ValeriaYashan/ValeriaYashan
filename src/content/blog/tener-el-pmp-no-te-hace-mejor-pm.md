@@ -4,6 +4,7 @@ description: "La certificación PMP es valiosa, pero no garantiza que sepas gest
 pubDate: "2026-07-04"
 category: "Project Management"
 tags: ["Project Management", "Certificación PMP", "Carrera profesional", "Liderazgo"]
+image: "/images/blog/tener-el-pmp-no-te-hace-mejor-pm.jpg"
 ---
 
 Hay algo incómodo que nadie dice en voz alta en la comunidad PM: conocés a personas con el PMP que son mediocres gestionando proyectos reales. Y conocés personas sin ninguna certificación que son extraordinarias.

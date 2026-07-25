@@ -4,6 +4,7 @@ description: "Las causas reales detrás del fracaso de proyectos en empresas med
 pubDate: "2026-07-04"
 category: "Project Management"
 tags: ["Project Management", "Consultoría", "Gestión de proyectos", "PyMEs"]
+image: "/images/blog/por-que-fallan-proyectos-empresas-medianas.jpg"
 ---
 
 El 70% de los proyectos no alcanza sus objetivos originales de plazo, costo o alcance. En empresas medianas, ese porcentaje es aún mayor — porque tienen la complejidad de una empresa grande sin los recursos ni la estructura de una.

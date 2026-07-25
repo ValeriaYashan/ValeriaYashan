@@ -4,6 +4,7 @@ description: "Los datos administrativos de una PyME son una mina sin explotar. C
 pubDate: "2026-07-10"
 category: "Project Management"
 tags: ["gestión de proyectos", "KPIs", "eficiencia operativa", "PyMEs", "análisis de datos"]
+image: "/images/blog/eficiencia-administrativa-pymes-datos-decisiones.jpg"
 ---
 
 Hay un problema que se repite en casi todas las PyMEs con las que trabajo: tienen datos, pero no tienen información.

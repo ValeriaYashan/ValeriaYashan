@@ -4,6 +4,7 @@ description: "Si tenés experiencia en gestión de proyectos y querés incorpora
 pubDate: "2026-07-04"
 category: "Project Management"
 tags: ["Project Management", "IA", "Certificación PMP", "Carrera profesional"]
+image: "/images/blog/pm-ia-perfil-profesional-redefinicion.jpg"
 ---
 
 Hay una conversación que se repite en muchos equipos de proyecto ahora mismo.

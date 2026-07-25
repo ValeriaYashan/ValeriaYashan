@@ -4,6 +4,7 @@ description: "No todos los project managers son iguales. Tu perfil, estilo de tr
 pubDate: "2026-07-04"
 category: "Project Management"
 tags: ["Project Management", "Liderazgo", "Carrera profesional"]
+image: "/images/blog/perfil-pm-tipo-de-proyectos.jpg"
 ---
 
 Hay una pregunta que pocos PMs se hacen en serio: ¿en qué tipo de proyectos realmente rindo mejor?

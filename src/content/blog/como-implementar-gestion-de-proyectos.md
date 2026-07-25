@@ -4,6 +4,7 @@ description: "Guía práctica para implementar gestión de proyectos en una orga
 pubDate: "2026-07-04"
 category: "Project Management"
 tags: ["Project Management", "Consultoría", "PyMEs", "Metodologías"]
+image: "/images/blog/como-implementar-gestion-de-proyectos.jpg"
 ---
 
 Implementar gestión de proyectos en una organización que nunca la tuvo es uno de los desafíos más frecuentes — y más mal encarados — en empresas medianas.

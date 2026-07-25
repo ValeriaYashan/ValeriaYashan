@@ -4,6 +4,7 @@ description: "Los errores más frecuentes que llevan a reprobar el examen PMP y 
 pubDate: "2026-07-04"
 category: "Project Management"
 tags: ["Certificación PMP", "Project Management", "Examen PMP"]
+image: "/images/blog/pmp-error-por-que-no-aprueban.jpg"
 ---
 
 Reprobar el examen PMP no siempre significa que el candidato no sabe gestión de proyectos. En muchos casos, significa que estudió de la manera equivocada.

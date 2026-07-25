@@ -4,6 +4,7 @@ description: "Qué es el enfoque predictivo en gestión de proyectos, cómo se d
 pubDate: "2026-07-04"
 category: "Project Management"
 tags: ["Project Management", "Certificación PMP", "PMBOK", "Metodologías"]
+image: "/images/blog/enfoque-predictivo-gestion-proyectos.jpg"
 ---
 
 El enfoque predictivo es el modelo tradicional de gestión de proyectos. Define el alcance, el cronograma y el presupuesto al inicio del proyecto y trabaja para cumplirlos. También se lo conoce como enfoque en cascada o *waterfall*.

@@ -4,7 +4,7 @@ description: "Un sistema completo en Notion para gestionar proyectos de ingenier
 pubDate: "2026-07-07"
 category: "Project Management"
 tags: ["Notion", "Herramientas", "Gestión de Proyectos", "Productividad"]
-image: "/images/blog/notion-gestion-proyectos-ingenieria.jpg"
+image: "/images/blog/notion-sistema-gestion-proyectos-ingenieria.jpg"
 ---
 
 Hay una pregunta que escucho seguido en mis consultorías: ¿realmente necesito un software de gestión de proyectos de €300 por mes?

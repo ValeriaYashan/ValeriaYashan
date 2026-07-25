@@ -4,6 +4,7 @@ description: "Cómo usar Notion para gestionar proyectos: qué funciona, qué no
 pubDate: "2026-07-04"
 category: "Herramientas"
 tags: ["Project Management", "Herramientas", "Notion", "Productividad"]
+image: "/images/blog/notion-para-gestion-de-proyectos.jpg"
 ---
 
 Notion es una de las herramientas más versátiles del mercado. Permite combinar documentación, bases de datos, tareas y wikis en un mismo lugar — lo cual es su mayor ventaja y, al mismo tiempo, su mayor trampa.

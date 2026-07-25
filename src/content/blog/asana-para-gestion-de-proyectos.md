@@ -4,6 +4,7 @@ description: "Qué es Asana, para qué tipo de proyectos funciona bien, cómo es
 pubDate: "2026-07-04"
 category: "Herramientas"
 tags: ["Project Management", "Herramientas", "Asana", "Productividad"]
+image: "/images/blog/asana-para-gestion-de-proyectos.jpg"
 ---
 
 Asana es una de las herramientas de gestión de proyectos más usadas en equipos medianos y grandes. Tiene una interfaz clara, integra bien con otras plataformas y cubre la mayoría de los flujos de trabajo que necesita un proyecto estándar.

@@ -4,6 +4,7 @@ description: "El agilismo como se practicó en la última década está en crisi
 pubDate: "2026-07-04"
 category: "Project Management"
 tags: ["Project Management", "Ágil", "Metodologías", "PMBOK"]
+image: "/images/blog/fin-del-agilismo-que-esta-cambiando.jpg"
 ---
 
 Hace diez años, decir que eras "ágil" era suficiente para que te tomaran en serio en cualquier conversación sobre gestión de proyectos. Hoy, en muchas organizaciones, la palabra genera escepticismo — y en algunos casos, abierto rechazo.

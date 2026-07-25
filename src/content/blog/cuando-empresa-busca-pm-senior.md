@@ -4,6 +4,7 @@ description: "Detrás de cada aviso de PM Senior hay un problema concreto que la
 pubDate: "2026-07-10"
 category: "Project Management"
 tags: ["Project Management", "liderazgo", "equipos", "gestión de proyectos"]
+image: "/images/blog/cuando-empresa-busca-pm-senior.jpg"
 ---
 
 Hace poco leí un aviso de búsqueda de PM Senior. Decía algo así:

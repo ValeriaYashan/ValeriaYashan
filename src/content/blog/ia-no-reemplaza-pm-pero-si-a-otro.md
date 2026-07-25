@@ -4,6 +4,7 @@ description: "La inteligencia artificial no elimina el trabajo del project manag
 pubDate: "2026-07-04"
 category: "Project Management"
 tags: ["Project Management", "IA", "Carrera profesional", "Herramientas"]
+image: "/images/blog/ia-no-reemplaza-pm-pero-si-a-otro.jpg"
 ---
 
 Cada vez que sale una herramienta de IA nueva, aparecen dos reacciones predecibles. La primera: "esto va a reemplazar a los PMs". La segunda: "la IA nunca va a poder hacer lo que hacemos nosotros".
