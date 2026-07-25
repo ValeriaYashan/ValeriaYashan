@@ -71,7 +71,7 @@ Identificar riesgos al inicio del proyecto se percibe, en muchas organizaciones,
 
 El resultado es que los riesgos aparecen igual — pero sin plan de respuesta, en el peor momento posible, y con mucho menos tiempo para resolverlos.
 
-La gestión de riesgos no es pesimismo. Es la diferencia entre resolver un problema en dos horas y resolver una crisis en dos semanas. Si querés profundizar en esto, tengo un artículo sobre [IA generativa para gestionar riesgos en proyectos](/blog/ia-generativa-gestionar-riesgos-proyectos).
+La gestión de riesgos no es pesimismo. Es la diferencia entre resolver un problema en dos horas y resolver una crisis en dos semanas. Si querés profundizar en esto, tengo un artículo sobre [IA generativa para gestionar riesgos en proyectos](/blog/ia-para-gestionar-riesgos-proyectos).
 
 ---
 

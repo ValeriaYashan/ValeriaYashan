@@ -131,6 +131,18 @@ Indicame:
 4. ¿Qué acciones de respuesta están vencidas o sin responsable asignado?
 ```
 
+## Cómo integrarlo al proceso real
+
+La IA funciona mejor como punto de partida, no como resultado final. El flujo que recomiendo:
+
+**Paso 1 — Sesión de identificación con IA.** Antes de la reunión de riesgos con el equipo, usá la IA para generar una lista inicial. Esa lista no es el registro de riesgos: es el insumo para la conversación.
+
+**Paso 2 — Validación con el equipo.** Llevá la lista a la reunión. El equipo descarta lo que no aplica, ajusta probabilidades e impactos según el contexto real, y agrega lo que la IA no contempló.
+
+**Paso 3 — Documentación asistida.** Para los riesgos validados, usá la IA para redactar las fichas completas. El PM revisa y firma cada una.
+
+**Paso 4 — Revisión periódica.** En cada revisión del registro de riesgos, pedile a la IA que analice si hay riesgos nuevos dado el avance actual del proyecto.
+
 ## Qué no puede hacer la IA en gestión de riesgos
 
 La IA identifica bien riesgos genéricos y comunes. Donde tiene limitaciones:
@@ -153,4 +165,4 @@ Eso no es automatizar la gestión de riesgos. Es usar mejor el tiempo disponible
 
 ---
 
-Para complementar la gestión de riesgos con IA, leé también [cómo automatizar reportes de proyectos con IA](/blog/automatizar-reportes-proyectos-con-ia) y [NotebookLM para project managers](/blog/notebooklm-para-project-managers). Para ver cómo integrar IA en tu trabajo diario, [5 prompts para project managers](/blog/5-prompts-chatgpt-pm).
+Para complementar la gestión de riesgos con IA, leé también [cómo automatizar reportes de proyectos con IA](/blog/automatizar-reportes-proyectos-con-ia) y [NotebookLM para project managers](/blog/notebooklm-para-project-managers). Para ver cómo integrar IA en tu trabajo diario, [5 prompts para project managers](/blog/5-prompts-chatgpt-pm) y [5 tareas de PM que podés delegar a IA](/blog/5-tareas-ia-pm). Y si querés documentar y hacer seguimiento del registro de riesgos, [cómo usar Notion con IA para gestionar proyectos](/blog/notion-ia-para-gestionar-proyectos).
