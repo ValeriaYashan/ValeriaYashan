@@ -1,6 +1,6 @@
 ---
 title: "5 prompts para project managers que uso todas las semanas"
-description: "Los mejores prompts para project managers no son genéricos: son específicos, probados y con resultado concreto. Estos son los 5 que uso en mi trabajo real como PM."
+description: "Los mejores prompts para project managers no son genéricos: son específicos y probados. Estos son los 5 que uso todas las semanas en proyectos reales."
 pubDate: "2026-06-14"
 category: "IA"
 tags: ["IA", "Project Management", "Productividad", "ChatGPT", "Prompts"]

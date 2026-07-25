@@ -1,6 +1,6 @@
 ---
-title: "Eficiencia administrativa en PyMEs: cómo convertir datos en decisiones"
-description: "Los datos administrativos de una PyME son una mina sin explotar. Cómo identificar KPIs, detectar cuellos de botella y transformar números en decisiones estratégicas."
+title: "Eficiencia administrativa en PyMEs: de datos a decisiones"
+description: "Los datos administrativos de una PyME son una mina sin explotar. Cómo elegir los KPIs correctos, detectar cuellos de botella y convertir números en decisiones."
 pubDate: "2026-07-10"
 category: "Project Management"
 tags: ["gestión de proyectos", "KPIs", "eficiencia operativa", "PyMEs", "análisis de datos"]

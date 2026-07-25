@@ -1,6 +1,6 @@
 ---
 title: "Cómo armar una PMO en una empresa argentina"
-description: "Guía práctica para implementar una Oficina de Gestión de Proyectos (PMO) en empresas medianas argentinas: por dónde empezar, qué errores evitar y cómo justificar la inversión."
+description: "Guía práctica para implementar una PMO en empresas medianas argentinas: por dónde empezar, qué errores evitar y cómo justificar la inversión ante la dirección."
 pubDate: "2026-07-07"
 category: "Project Management"
 tags: ["PMO", "Argentina", "Project Management", "Organizaciones"]

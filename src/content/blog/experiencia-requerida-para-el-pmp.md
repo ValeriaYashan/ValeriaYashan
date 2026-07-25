@@ -1,6 +1,6 @@
 ---
 title: "Experiencia requerida para el PMP: cómo documentarla"
-description: "Cuánta experiencia necesitás para aplicar al PMP, cómo documentarla correctamente en la solicitud del PMI y qué errores evitar para no quedar fuera de la auditoría."
+description: "Cuánta experiencia necesitás para aplicar al PMP, cómo documentarla bien en la solicitud del PMI y qué errores te dejan afuera si te toca la auditoría."
 pubDate: "2026-07-07"
 category: "Project Management"
 tags: ["PMP", "Certificación", "PMI", "Examen PMP"]

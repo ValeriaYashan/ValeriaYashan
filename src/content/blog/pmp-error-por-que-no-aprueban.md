@@ -1,6 +1,6 @@
 ---
 title: "PMP error: por qué muchos candidatos no aprueban"
-description: "Los errores más frecuentes que llevan a reprobar el examen PMP y cómo evitarlos. No son falta de conocimiento — son errores de enfoque y preparación."
+description: "Los errores más frecuentes que llevan a reprobar el examen PMP y cómo evitarlos. No son falta de conocimiento: son errores de enfoque y de preparación."
 pubDate: "2026-07-04"
 category: "Project Management"
 tags: ["Certificación PMP", "Project Management", "Examen PMP"]

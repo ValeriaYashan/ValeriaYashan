@@ -1,6 +1,6 @@
 ﻿---
-title: "Preguntas de práctica vs. simulacros PMP: no son lo mismo y no se reemplazan"
-description: "Las preguntas de práctica del Tomo II y los simulacros del Tomo III cumplen funciones distintas en la preparación PMP. Entendé por qué no son intercambiables y cómo usarlas en secuencia."
+title: "Preguntas de práctica vs. simulacros PMP: no son lo mismo"
+description: "Las preguntas de práctica y los simulacros cumplen funciones distintas en la preparación PMP. Por qué no son intercambiables y cómo usarlos en secuencia."
 pubDate: "2026-06-15"
 category: "Project Management"
 tags: ["PMP", "Simulacros", "Estudio PMP", "PMBOK", "Certificación"]

@@ -1,6 +1,6 @@
 ---
-title: "PMBOK® 8 y el nuevo examen PMP 2026: qué cambia, qué se mantiene y cómo prepararte"
-description: "El 9 de julio de 2026 entra en vigor el nuevo examen PMP con el ECO actualizado y alineado al PMBOK® Guide Eighth Edition. Si estás estudiando ahora, esto es lo que necesitás saber."
+title: "PMBOK® 8 y el nuevo examen PMP 2026: qué cambia"
+description: "El 9 de julio de 2026 entra en vigor el nuevo examen PMP, con el ECO actualizado y alineado al PMBOK® 8. Si estás estudiando ahora, esto es lo que cambia."
 pubDate: "2026-06-14"
 category: "Project Management"
 tags: ["PMP", "PMBOK", "Certificación", "Project Management", "ECO"]

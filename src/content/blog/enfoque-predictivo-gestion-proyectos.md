@@ -1,6 +1,6 @@
 ---
 title: "Enfoque predictivo en proyectos: qué es y cuándo usarlo"
-description: "Qué es el enfoque predictivo en gestión de proyectos, cómo se diferencia del ágil y cuándo conviene aplicarlo según el tipo de proyecto y contexto."
+description: "Qué es el enfoque predictivo en gestión de proyectos, en qué se diferencia del ágil y cuándo conviene aplicarlo según el tipo de proyecto y el contexto."
 pubDate: "2026-07-04"
 category: "Project Management"
 tags: ["Project Management", "Certificación PMP", "PMBOK", "Metodologías"]

@@ -1,6 +1,6 @@
 ---
 title: "¿Cuánto dura el examen PMP y cómo distribuir el tiempo?"
-description: "El examen PMP tiene 180 preguntas y 230 minutos. Te explico cómo distribuir el tiempo por bloque para no quedarte sin minutos al final."
+description: "El examen PMP tiene 180 preguntas y 230 minutos. Cómo distribuir el tiempo por bloque, cuándo usar los descansos y por qué muchos se quedan sin minutos."
 pubDate: "2026-07-01"
 image: "/images/blog/cuanto-dura-el-examen-pmp.jpg"
 category: "Project Management"

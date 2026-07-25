@@ -1,6 +1,6 @@
 ﻿---
-title: "5 tareas de PM que podés delegar a IA hoy (y 3 que nunca deberías)"
-description: "La IA puede hacer mucho por un project manager. Pero hay decisiones que siguen siendo tuyas. Guía práctica con ejemplos reales."
+title: "5 tareas de PM que podés delegar a IA (y 3 que no)"
+description: "La IA puede hacer mucho por un project manager, pero hay decisiones que siguen siendo tuyas. Guía práctica con 5 tareas para delegar y 3 que conviene no soltar."
 pubDate: "2026-06-13"
 category: "IA"
 tags: ["IA", "Project Management", "Productividad", "Herramientas digitales"]

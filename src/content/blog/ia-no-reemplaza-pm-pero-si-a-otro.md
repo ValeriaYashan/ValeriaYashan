@@ -1,6 +1,6 @@
 ---
 title: "La IA no te va a reemplazar. Pero sí a otro PM."
-description: "La inteligencia artificial no elimina el trabajo del project manager. Pero amplía tanto la brecha entre quienes la usan y quienes no, que la diferencia empieza a importar."
+description: "La inteligencia artificial no elimina el trabajo del project manager. Pero abre tanta brecha entre quien la usa y quien no, que la diferencia ya se nota."
 pubDate: "2026-07-04"
 category: "Project Management"
 tags: ["Project Management", "IA", "Carrera profesional", "Herramientas"]

@@ -1,6 +1,6 @@
 ---
 title: "¿El fin del agilismo? Lo que está cambiando en 2026"
-description: "El agilismo como se practicó en la última década está en crisis. Qué falló, qué sigue siendo válido y hacia dónde va la gestión de proyectos."
+description: "El agilismo como se practicó en la última década está en crisis. Qué falló, qué sigue siendo válido y hacia dónde va la gestión de proyectos ágil en 2026."
 pubDate: "2026-07-04"
 category: "Project Management"
 tags: ["Project Management", "Ágil", "Metodologías", "PMBOK"]

@@ -1,6 +1,6 @@
 ---
 title: "Por qué fallan los proyectos en empresas medianas"
-description: "Las causas reales detrás del fracaso de proyectos en empresas medianas: no son técnicas ni de presupuesto. Son de gestión, comunicación y estructura."
+description: "Las causas reales detrás del fracaso de proyectos en empresas medianas no son técnicas ni de presupuesto. Son de gestión, comunicación y estructura interna."
 pubDate: "2026-07-04"
 category: "Project Management"
 tags: ["Project Management", "Consultoría", "Gestión de proyectos", "PyMEs"]

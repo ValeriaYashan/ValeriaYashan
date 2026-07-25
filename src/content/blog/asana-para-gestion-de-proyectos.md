@@ -1,6 +1,6 @@
 ---
 title: "Asana para gestión de proyectos: guía práctica"
-description: "Qué es Asana, para qué tipo de proyectos funciona bien, cómo estructurar un proyecto desde cero y cuándo conviene usarlo frente a otras herramientas."
+description: "Qué es Asana, para qué proyectos funciona bien, cómo estructurar uno desde cero y cuándo conviene frente a otras herramientas de gestión de proyectos."
 pubDate: "2026-07-04"
 category: "Herramientas"
 tags: ["Project Management", "Herramientas", "Asana", "Productividad"]

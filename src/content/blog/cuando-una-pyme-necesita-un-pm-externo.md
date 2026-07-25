@@ -1,6 +1,6 @@
 ---
 title: "Cuándo una PyME necesita un PM externo"
-description: "Las señales concretas que indican que tu empresa necesita incorporar un project manager externo y qué esperar de ese proceso."
+description: "Las señales concretas que indican que tu empresa necesita un project manager externo, qué esperar de ese proceso y cuándo conviene resolverlo internamente."
 pubDate: "2026-07-04"
 category: "Project Management"
 tags: ["Project Management", "Consultoría", "PyMEs", "Gestión de proyectos"]

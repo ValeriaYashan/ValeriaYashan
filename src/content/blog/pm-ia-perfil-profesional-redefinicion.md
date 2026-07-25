@@ -1,6 +1,6 @@
 ---
 title: "PM e IA: cómo redefinir tu perfil profesional hoy"
-description: "Si tenés experiencia en gestión de proyectos y querés incorporar IA a tu perfil, esta guía te muestra por dónde empezar, qué aprender y qué evitar."
+description: "Si tenés experiencia en gestión de proyectos y querés incorporar IA a tu perfil, esta guía muestra por dónde empezar, qué aprender y qué conviene evitar."
 pubDate: "2026-07-04"
 category: "Project Management"
 tags: ["Project Management", "IA", "Certificación PMP", "Carrera profesional"]

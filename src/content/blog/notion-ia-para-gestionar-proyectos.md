@@ -1,6 +1,6 @@
 ---
 title: "Cómo usar Notion con IA para gestionar proyectos"
-description: "Notion tiene IA integrada y se puede combinar con ChatGPT para gestionar proyectos de forma más eficiente. Te muestro cómo aplicarlo en la práctica."
+description: "Notion tiene IA integrada y se combina bien con ChatGPT para gestionar proyectos. Cómo aplicarlo en la práctica, qué conviene automatizar y qué dejar manual."
 pubDate: "2026-07-01"
 image: "/images/blog/notion-ia-para-gestionar-proyectos.jpg"
 category: "IA"

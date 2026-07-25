@@ -1,6 +1,6 @@
 ---
 title: "Automatizar reportes de proyectos con IA"
-description: "Cómo usar ChatGPT y Claude para generar reportes de avance, status reports y comunicaciones de proyecto en minutos, con prompts listos para usar."
+description: "Cómo usar ChatGPT y Claude para generar reportes de avance, status reports y comunicaciones de proyecto en minutos, con prompts listos para copiar y usar."
 pubDate: "2026-07-07"
 category: "IA"
 tags: ["IA", "Automatización", "Project Management", "Prompts", "Productividad"]

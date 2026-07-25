@@ -1,6 +1,6 @@
 ---
 title: "Alternativas a Microsoft Project en 2026"
-description: "Las mejores alternativas a Microsoft Project para equipos que no necesitan (o no pueden pagar) una licencia enterprise: comparativa práctica con criterios reales."
+description: "Las mejores alternativas a Microsoft Project para equipos que no necesitan una licencia enterprise: comparativa práctica con criterios de decisión reales."
 pubDate: "2026-07-07"
 category: "Herramientas"
 tags: ["Microsoft Project", "Herramientas", "Project Management", "Productividad"]

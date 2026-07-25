@@ -1,6 +1,6 @@
 ---
-title: "Cuando una empresa busca un PM Senior, ¿qué problema intenta resolver?"
-description: "Detrás de cada aviso de PM Senior hay un problema concreto que la organización no sabe nombrar. Entender cuál es cambia completamente la decisión de contratación."
+title: "Qué problema resuelve realmente un PM Senior"
+description: "Detrás de cada aviso de PM Senior hay un problema que la organización no sabe nombrar. Entender cuál es cambia por completo la decisión de contratación."
 pubDate: "2026-07-10"
 category: "Project Management"
 tags: ["Project Management", "liderazgo", "equipos", "gestión de proyectos"]

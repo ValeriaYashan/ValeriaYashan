@@ -1,6 +1,6 @@
 ﻿---
 title: "Cómo leer preguntas de simulacro PMP sin caer en las trampas"
-description: "Las preguntas del examen PMP están diseñadas para confundir. Aprendé a leerlas con una técnica sistemática que te ayuda a identificar la respuesta correcta aunque todas parezcan válidas."
+description: "Las preguntas del examen PMP están diseñadas para confundir. Una técnica sistemática para identificar la respuesta correcta aunque todas parezcan válidas."
 pubDate: "2026-07-12"
 category: "Project Management"
 tags: ["PMP", "Simulacro", "Certificación", "Examen", "Project Management"]

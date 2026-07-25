@@ -1,6 +1,6 @@
 ---
 title: "Tener el PMP no te hace mejor PM. Y eso está bien."
-description: "La certificación PMP es valiosa, pero no garantiza que sepas gestionar proyectos reales. La diferencia entre el título y la competencia es más grande de lo que parece."
+description: "La certificación PMP es valiosa, pero no garantiza que sepas gestionar proyectos reales. La brecha entre el título y la competencia es mayor de lo que parece."
 pubDate: "2026-07-04"
 category: "Project Management"
 tags: ["Project Management", "Certificación PMP", "Carrera profesional", "Liderazgo"]

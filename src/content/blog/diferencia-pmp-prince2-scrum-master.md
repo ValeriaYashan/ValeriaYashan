@@ -1,6 +1,6 @@
 ---
 title: "PMP vs PRINCE2 vs Scrum Master: cuál hacer primero"
-description: "Diferencias reales entre las tres certificaciones de gestión de proyectos más reconocidas: PMP, PRINCE2 y Scrum Master. Cuál conviene según tu perfil y objetivos."
+description: "Diferencias reales entre PMP, PRINCE2 y Scrum Master: qué certifica cada una, cuánto cuestan y cuál conviene hacer primero según tu perfil y tu mercado."
 pubDate: "2026-07-07"
 category: "Project Management"
 tags: ["PMP", "PRINCE2", "Scrum", "Certificación", "Carrera Profesional"]

@@ -1,6 +1,6 @@
 ---
 title: "¿Vale la pena sacar el PMP en Argentina?"
-description: "Análisis real del valor del PMP en el mercado laboral argentino: costo, tiempo, ROI y en qué casos conviene certificarse y en cuáles no."
+description: "Análisis real del valor del PMP en el mercado laboral argentino: costo, tiempo de preparación, retorno y en qué casos no conviene certificarse todavía."
 pubDate: "2026-07-07"
 category: "Project Management"
 tags: ["PMP", "Certificación", "Argentina", "Carrera Profesional"]

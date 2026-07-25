@@ -1,6 +1,6 @@
 ---
 title: "Por qué los frameworks de PM no resuelven el problema"
-description: "SAFe, Scrum, PRINCE2, PMBOK: los frameworks de gestión de proyectos no fallan por ser malos. Fallan cuando se usan como sustituto del criterio."
+description: "SAFe, Scrum, PRINCE2, PMBOK: los frameworks de gestión de proyectos no fallan por ser malos. Fallan cuando se usan como sustituto del criterio propio."
 pubDate: "2026-07-04"
 category: "Project Management"
 tags: ["Project Management", "Metodologías", "Liderazgo", "Ágil"]
