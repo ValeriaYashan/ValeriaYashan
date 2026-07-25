@@ -1,9 +1,10 @@
 ---
 title: "Jira vs ClickUp: qué elegir para tu equipo"
-description: "Comparativa práctica entre Jira y ClickUp desde la perspectiva de un Project Manager: costos ocultos, IA integrada y criterios reales para decidir."
+description: "Comparativa entre Jira y ClickUp desde la mirada de un project manager: el costo que no aparece en la factura, IA integrada y cuándo tiene sentido cada una."
 pubDate: "2026-07-21"
 category: "Project Management"
 tags: ["herramientas", "ClickUp", "Jira", "gestión de proyectos", "productividad"]
+image: "/images/blog/jira-vs-clickup-que-elegir-para-tu-equipo.jpg"
 ---
 
 Cuando evaluás herramientas para tu equipo, la pregunta no es "¿cuál es mejor?" sino "¿cuál genera menos fricción para las personas que la van a usar todos los días?".

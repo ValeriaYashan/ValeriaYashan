@@ -1,9 +1,10 @@
 ---
 title: "ISO 21500: qué es y para qué sirve"
-description: "Qué es la ISO 21500, cómo se estructura y qué aporta a los equipos que gestionan proyectos. Guía práctica para project managers."
+description: "Qué es la ISO 21500, cómo se estructura, en qué se diferencia del PMBOK y qué aporta a los equipos que gestionan proyectos. Guía para project managers."
 pubDate: "2026-07-15"
 category: "Project Management"
 tags: ["ISO 21500", "gestión de proyectos", "estándares", "PMBOK", "Project Management"]
+image: "/images/blog/iso-21500-gestion-de-proyectos.jpg"
 ---
 
 Si trabajás en gestión de proyectos, probablemente ya escuchaste hablar de la ISO 21500. Es un estándar internacional que define buenas prácticas para dirigir proyectos, y que hoy es referencia en organizaciones de todo el mundo.

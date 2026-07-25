@@ -1,9 +1,10 @@
 ---
 title: "¿Qué es la certificación PMP® y para qué sirve?"
-description: "La certificación PMP® es el estándar global en gestión de proyectos. Conocé qué es, quién la avala, qué perfil la necesita y qué puertas abre en el mercado laboral."
+description: "La certificación PMP® es el estándar global en gestión de proyectos. Qué es, quién la avala, qué perfil la necesita y qué puertas abre en el mercado laboral."
 pubDate: "2026-07-16"
 category: "Certificación PMP®"
 tags: ["PMP", "certificación", "PMI", "gestión de proyectos", "carrera profesional"]
+image: "/images/blog/que-es-la-certificacion-pmp.jpg"
 ---
 
 

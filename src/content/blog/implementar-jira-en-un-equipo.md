@@ -4,6 +4,7 @@ description: "Implementar Jira en un equipo falla más por gestión del cambio q
 pubDate: "2026-07-24"
 category: "Herramientas"
 tags: ["Jira", "Herramientas", "Project Management", "Adopción"]
+image: "/images/blog/implementar-jira-en-un-equipo.jpg"
 ---
 
 El patrón se repite con una regularidad que ya no me sorprende. Una organización decide profesionalizar la gestión de proyectos, evalúa herramientas durante semanas, elige Jira, paga las licencias y organiza una capacitación de dos horas. Tres meses después, la mitad del equipo volvió a la planilla compartida y las decisiones importantes se toman por WhatsApp.

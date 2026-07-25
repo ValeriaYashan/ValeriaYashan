@@ -1,6 +1,6 @@
 ﻿---
 title: "IA para project managers: por qué no podés ignorarla"
-description: "La IA no reemplaza al PM. Pero el PM que no entiende IA va a quedar fuera de los proyectos que importan."
+description: "La IA no reemplaza al project manager, pero el PM que no la entiende queda fuera de los proyectos que importan. Qué necesita entender y por qué es el puente."
 pubDate: "2026-06-11"
 category: "IA"
 tags: ["IA", "Project Management", "Estrategia"]

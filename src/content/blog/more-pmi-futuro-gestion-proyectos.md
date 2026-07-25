@@ -1,9 +1,10 @@
 ---
-title: "M.O.R.E.: el nuevo estándar del PMI para PMs"
-description: "M.O.R.E. es el nuevo marco del PMI que redefine el éxito en proyectos. Descubrí los 4 principios con ejemplos reales y cómo aplicarlos hoy."
+title: "M.O.R.E.: el nuevo marco del PMI para PMs"
+description: "M.O.R.E. es el marco con el que el PMI redefine el éxito en proyectos. Los 4 principios explicados con ejemplos reales y cómo empezar a aplicarlos hoy."
 pubDate: "2026-07-19"
 category: "Project Management"
 tags: ["PMI", "M.O.R.E.", "gestión de proyectos", "PMP", "liderazgo", "valor"]
+image: "/images/blog/more-pmi-futuro-gestion-proyectos.jpg"
 ---
 
 El PMI acaba de redefinir lo que significa ser un buen project manager. Y no, no es sobre entregar en tiempo y presupuesto.

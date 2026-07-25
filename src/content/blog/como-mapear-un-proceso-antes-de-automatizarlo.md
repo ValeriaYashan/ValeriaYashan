@@ -1,9 +1,10 @@
 ---
 title: "Cómo mapear un proceso antes de automatizarlo"
-description: "Automatizar un proceso mal diseñado solo acelera el error. Aprendé a mapearlo primero: pasos, herramientas y errores frecuentes."
+description: "Automatizar un proceso mal diseñado solo acelera el error. Cómo mapearlo primero: los cuatro pasos, qué herramientas usar y los errores más frecuentes."
 pubDate: "2026-07-15"
 category: "Project Management"
 tags: ["automatización", "procesos", "gestión de proyectos", "workflows", "productividad"]
+image: "/images/blog/como-mapear-un-proceso-antes-de-automatizarlo.jpg"
 ---
 
 Uno de los errores más frecuentes que veo en equipos que quieren automatizar es que arrancan por la herramienta. Buscan un software, lo implementan, y a los tres meses descubren que automatizaron un proceso que estaba roto desde antes.
