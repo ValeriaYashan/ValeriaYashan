@@ -1,12 +1,10 @@
 ---
-title: "Cómo implementar Jira en un equipo sin que lo abandonen a los tres meses"
-pubDate: "2026-07-24"
+title: "Cómo implementar Jira sin que el equipo lo abandone"
 description: "Implementar Jira en un equipo falla más por gestión del cambio que por configuración. Seis decisiones que definen si la herramienta sobrevive al tercer mes."
-slug: "implementar-jira-en-un-equipo"
-tags: ["Jira", "Herramientas de gestión", "Gestión de Proyectos", "Adopción", "Equipos"]
+pubDate: "2026-07-24"
+category: "Herramientas"
+tags: ["Jira", "Herramientas", "Project Management", "Adopción"]
 ---
-
-# Cómo implementar Jira en un equipo sin que lo abandonen a los tres meses
 
 El patrón se repite con una regularidad que ya no me sorprende. Una organización decide profesionalizar la gestión de proyectos, evalúa herramientas durante semanas, elige Jira, paga las licencias y organiza una capacitación de dos horas. Tres meses después, la mitad del equipo volvió a la planilla compartida y las decisiones importantes se toman por WhatsApp.
 
@@ -98,16 +96,10 @@ Si estás por implementar una herramienta o ya tenés una que el equipo dejó de
 
 ---
 
-### Seguí leyendo
+¿Estás implementando una herramienta de gestión o tenés una que el equipo dejó de usar? Escribime a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar) o por [WhatsApp](https://wa.me/5491140791007) y lo vemos juntos.
 
-Si todavía estás definiendo si Jira es la herramienta adecuada para tu contexto, empezá por [Jira para gestión de proyectos: guía práctica](/blog/jira-para-gestion-de-proyectos/), donde explico cómo funciona, para qué tipo de proyectos tiene sentido y cómo estructurarlo desde cero.
+---
 
-<!-- COMPLETAR: agregar acá los links internos a las comparativas ya publicadas
-     (ClickUp/Trello/Monday · Notion vs ClickUp · alternativas a Microsoft Project).
-     No los incluí porque no tengo confirmados los slugs exactos. -->
+Si todavía estás definiendo si Jira es la herramienta adecuada para tu contexto, empezá por [Jira para gestión de proyectos: guía práctica](/blog/jira-para-gestion-de-proyectos). Si estás comparando opciones, leé [ClickUp, Trello y Monday: cuál elegir](/blog/clickup-trello-monday-comparativa), [Notion vs ClickUp: cuál elegir para tu equipo](/blog/notion-vs-clickup-cual-elegir) y [alternativas a Microsoft Project](/blog/microsoft-project-alternativas).
 
-### Recibí esto antes que nadie
-
-Cada dos semanas mando una edición con herramientas, criterios y casos reales de gestión de proyectos e IA aplicada. Sin teoría de manual. [Suscribite gratis a PM & IA aplicada](https://valeriayashanpm.substack.com).
-
-También publico contenido en video en [@ValeriaYashanPM](https://www.youtube.com/@ValeriaYashanPM).
+Cada dos semanas mando una edición con herramientas, criterios y casos reales de gestión de proyectos e IA aplicada. [Suscribite gratis a PM & IA aplicada](https://valeriayashanpm.substack.com). También publico contenido en video en [@ValeriaYashanPM](https://www.youtube.com/@ValeriaYashanPM).
