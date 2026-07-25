@@ -4,10 +4,8 @@ description: "La certificación PMP® es el estándar global en gestión de proy
 pubDate: "2026-07-16"
 category: "Certificación PMP®"
 tags: ["PMP", "certificación", "PMI", "gestión de proyectos", "carrera profesional"]
-slug: "que-es-la-certificacion-pmp"
 ---
 
-# ¿Qué es la certificación PMP® y para qué sirve?
 
 La certificación PMP® (Project Management Professional) es la credencial más reconocida a nivel mundial en gestión de proyectos. La emite el **Project Management Institute (PMI)**, una organización sin fines de lucro fundada en 1969 con sede en Pensilvania, Estados Unidos, que hoy tiene presencia en más de 200 países y más de 700.000 miembros activos.
 
