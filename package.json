@@ -7,7 +7,11 @@
   },
   "scripts": {
     "dev": "astro dev",
+    "check": "node scripts/check-blog.mjs",
+    "check:strict": "node scripts/check-blog.mjs --strict",
+    "prebuild": "node scripts/check-blog.mjs",
     "build": "astro build",
+    "build:sin-check": "astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
