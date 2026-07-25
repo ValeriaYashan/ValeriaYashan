@@ -158,3 +158,7 @@ Eso es M.O.R.E. Y es exactamente lo que la profesión necesita hoy.
 ---
 
 *¿Querés profundizar en cómo aplicar estos principios en tu equipo o prepararte para el PMP® 2026? [Escribime](/contacto) y coordinamos.*
+
+---
+
+M.O.R.E. no es contenido del examen, pero el cambio de fondo que refleja sí aparece ahí: el detalle está en [qué cambia con el PMBOK® 8 y el nuevo examen PMP 2026](/blog/pmbok-8-nuevo-examen-pmp-2026). Y si la pregunta es cómo se traduce todo esto en tu perfil profesional, [PM e IA: cómo se redefine el perfil](/blog/pm-ia-perfil-profesional-redefinicion).

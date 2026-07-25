@@ -84,3 +84,7 @@ La preparación lleva en promedio entre 3 y 6 meses dependiendo de la experienci
 ---
 
 Valeria Yashan es consultora PMP® certificada desde 2013 y autora de cuatro libros especializados en gestión de proyectos, incluyendo una serie completa de preparación para el examen PMP® alineada con el ECO 2026 y el PMBOK® 8. Si estás considerando certificarte y querés recorrer ese camino con orientación experta, podés conocer más sobre su acompañamiento personalizado en [valeriayashan.com.ar/servicios/certificacion-pmp](/servicios/certificacion-pmp).
+
+---
+
+El siguiente paso concreto es verificar si calificás: [requisitos para rendir el PMP en 2026](/blog/requisitos-examen-pmp-2026) y [experiencia requerida: cómo documentarla](/blog/experiencia-requerida-para-el-pmp). Si todavía estás evaluando la inversión, [¿vale la pena sacar el PMP en Argentina?](/blog/pmp-vale-la-pena-en-argentina). Y si ya decidiste, [un plan de estudio realista en semanas](/blog/plan-de-estudio-pmp-semanas).

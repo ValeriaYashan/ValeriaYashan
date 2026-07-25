@@ -32,6 +32,8 @@ Es la certificación más mencionada en avisos de trabajo de nivel sénior en Ar
 
 En estos contextos, el PMP es con frecuencia un requisito para acceder a posiciones de PM senior o de dirección de programas.
 
+Aunque el aviso diga "PMP excluyente", lo que la empresa está comprando casi nunca es la sigla. Lo analizo en [cuando una empresa busca un PM Senior, ¿qué problema intenta resolver?](/blog/cuando-empresa-busca-pm-senior).
+
 **Rango salarial referencial (2026):** posiciones con PMP en empresas multinacionales locales van desde USD 2.500 a USD 5.000 mensuales en roles sénior, dependiendo del sector y la empresa.
 
 ### Scrum Master (PSM / CSM)

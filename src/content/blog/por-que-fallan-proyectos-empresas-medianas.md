@@ -91,6 +91,8 @@ Reconocer estas causas es el primer paso. El segundo es decidir qué cambiar.
 
 No hace falta implementar una metodología compleja de un día para el otro. La mayoría de estas causas se resuelven con cambios simples: definir bien el alcance antes de empezar, asignar un responsable claro, actualizar el plan cada semana, documentar las decisiones.
 
+Ahí está la razón de fondo por la que adoptar un framework rara vez alcanza: [los frameworks de PM no resuelven el problema](/blog/frameworks-pm-no-resuelven-el-problema), organizan la forma de trabajar sobre un problema que alguien tiene que definir primero.
+
 Si tu organización está en un punto donde los proyectos no están saliendo bien y querés trabajar en eso con acompañamiento profesional, podés [contactarme](/contacto). También podés leer sobre [cómo implementar gestión de proyectos desde cero](/blog/como-implementar-gestion-de-proyectos) si preferís empezar por tu cuenta.
 
 ---

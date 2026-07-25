@@ -90,6 +90,8 @@ Escribí algo como: *"Incorporo IA generativa en la producción de documentos de
 
 El número es el tuyo. Puede ser distinto. Pero tiene que ser concreto — porque eso es lo que diferencia una declaración de intención de una credencial real.
 
+Ese ejercicio sale mucho mejor si antes tenés claro desde qué lugar gestionás: [qué tipo de PM sos y qué proyectos te van mejor](/blog/perfil-pm-tipo-de-proyectos).
+
 ---
 
 ## El fondo de la cuestión

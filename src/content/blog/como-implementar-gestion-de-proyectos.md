@@ -95,6 +95,8 @@ Después del proyecto piloto, una retrospectiva honesta:
 
 Esas respuestas definen qué ajustar antes de escalar la metodología al resto de la organización.
 
+Si querés pasar de la retrospectiva cualitativa a indicadores que se sostengan mes a mes, escribí sobre [cómo convertir datos en decisiones en una PyME](/blog/eficiencia-administrativa-pymes-datos-decisiones).
+
 ---
 
 ## Lo que más frena la implementación

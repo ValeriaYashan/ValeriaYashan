@@ -102,6 +102,8 @@ El flujo más eficiente que encontré:
 
 El paso de revisión es obligatorio. La IA no conoce el contexto político del proyecto, las sensibilidades del cliente ni los matices que a vos te llevó semanas entender. Eso lo ponés vos.
 
+Y antes de automatizar algo más grande que un reporte, conviene entender bien qué estás automatizando: [cómo mapear un proceso antes de automatizarlo](/blog/como-mapear-un-proceso-antes-de-automatizarlo).
+
 ## Qué herramienta usar
 
 Tanto ChatGPT como Claude funcionan bien para esto. La diferencia práctica:

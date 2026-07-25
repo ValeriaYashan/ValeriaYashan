@@ -106,3 +106,7 @@ Si alguna de esas condiciones no se cumple, la automatización va a heredar el p
 El mapeo de procesos no es burocracia. Es la diferencia entre implementar una solución y resolver un problema. Antes de preguntarte "¿con qué herramienta automatizo esto?", preguntate "¿entiendo exactamente qué estoy automatizando?".
 
 Si trabajás con equipos que necesitan ordenar sus procesos antes de dar el salto a la automatización, [escribime](/contacto) y lo analizamos juntos.
+
+---
+
+Si el proceso ya está mapeado y querés ver la automatización en concreto, el caso más rápido de implementar son los reportes: [automatizar reportes de proyectos con IA](/blog/automatizar-reportes-proyectos-con-ia). Para ver qué otras tareas conviene delegar — y cuáles no —, [5 tareas de PM que podés delegar a IA](/blog/5-tareas-ia-pm). Y si el desorden es más de fondo que de herramienta, empezá por [cómo implementar gestión de proyectos desde cero](/blog/como-implementar-gestion-de-proyectos).

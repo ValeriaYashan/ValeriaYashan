@@ -36,6 +36,8 @@ El enfoque predictivo funciona mejor cuando:
 
 **Ejemplos típicos:** construcción de un edificio, desarrollo de software con especificaciones cerradas, implementación de un sistema ERP con requerimientos definidos, lanzamiento de un producto con fecha de salida al mercado fija.
 
+Si querés el detalle del enfoque predictivo — fases, documentación mínima y en qué contextos sigue siendo la mejor decisión y no la más cómoda — lo desarrollo en [enfoque predictivo en proyectos: qué es y cuándo usarlo](/blog/enfoque-predictivo-gestion-proyectos).
+
 ---
 
 ## Cuándo usar el enfoque ágil
@@ -48,6 +50,8 @@ El enfoque ágil funciona mejor cuando:
 - **Los cambios son esperados y bienvenidos.** El contexto cambia rápido y el proyecto necesita adaptarse.
 
 **Ejemplos típicos:** desarrollo de software de producto, diseño de experiencia de usuario, proyectos de innovación, campañas de marketing digital con ajuste continuo.
+
+Una aclaración de contexto: que el agilismo esté siendo cuestionado no significa que el enfoque ágil haya dejado de servir. Sobre ese debate escribí [¿el fin del agilismo? Lo que está cambiando en 2026](/blog/fin-del-agilismo-que-esta-cambiando).
 
 ---
 

@@ -98,6 +98,8 @@ En ese caso, empezá con una herramienta más simple (ClickUp o Notion) y migrá
 
 La adopción de herramientas es un proyecto en sí mismo. No alcanza con instalar Jira y esperar que el equipo lo use.
 
+Cómo se hace esa adopción para que no se caiga a las tres semanas lo desarrollo paso a paso en [cómo implementar Jira sin que el equipo lo abandone](/blog/implementar-jira-en-un-equipo).
+
 ---
 
 ¿Estás evaluando qué herramienta implementar en tu equipo? Escribime a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar) o por [WhatsApp](https://wa.me/5491140791007) y lo vemos juntos.

@@ -54,6 +54,8 @@ Certifica conocimiento del framework Scrum y la capacidad de facilitar equipos �
 | Vigencia | 3 años (PDUs) | 3–5 años | Varía |
 | Costo aproximado | USD 544+ | USD 300–600 | USD 150–400 |
 
+Un apunte que ordena la comparación: las tres son credenciales de personas. El estándar de organización es otra cosa, y ahí entra [ISO 21500: qué es y para qué sirve](/blog/iso-21500-gestion-de-proyectos) — un marco de directrices que la empresa adopta, no una certificación que rindas vos.
+
 ## Cuál conviene según tu perfil
 
 ### Si dirigís proyectos en LATAM o España y buscás reconocimiento amplio: **PMP**

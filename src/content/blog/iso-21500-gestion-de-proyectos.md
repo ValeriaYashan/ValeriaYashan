@@ -78,3 +78,7 @@ La ISO 21500 es un marco sólido y reconocido internacionalmente que aporta estr
 Para un project manager, conocerla amplía la perspectiva y aporta argumentos concretos cuando trabajás con organizaciones que buscan estandarizar sus procesos o alinearse con normativas internacionales.
 
 Si estás preparando el examen PMP® o querés profundizar en estándares de gestión de proyectos, [el simulador gratuito](/simulador) es un buen punto de partida para poner a prueba tus conocimientos.
+
+---
+
+La ISO 21500 aporta el lenguaje común, pero la estructura que lo sostiene es otra discusión: [cómo armar una PMO en una empresa argentina](/blog/como-armar-pmo-argentina). Y si te interesa el estándar del lado de la certificación individual, [qué cambia con el PMBOK® 8 y el nuevo examen PMP 2026](/blog/pmbok-8-nuevo-examen-pmp-2026).

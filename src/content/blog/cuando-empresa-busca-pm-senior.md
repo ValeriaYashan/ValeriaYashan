@@ -101,3 +101,7 @@ Si la respuesta es vaga ("queremos que los proyectos vayan mejor"), el problema 
 ---
 
 *¿Estás evaluando cómo mejorar la gestión de proyectos en tu organización? Puedo ayudarte a diagnosticar qué necesitás antes de decidir. [Escribime →](/contacto)*
+
+---
+
+A veces el problema no se resuelve con una contratación permanente: [cuándo una PyME necesita un PM externo](/blog/cuando-una-pyme-necesita-un-pm-externo). Si la decisión es tercerizar, los criterios están en [cómo elegir una consultora de proyectos](/blog/como-elegir-una-consultora-de-proyectos). Y para entender qué está pidiendo hoy el mercado local, [certificaciones PM en el mercado laboral argentino](/blog/certificaciones-pm-mercado-laboral-argentina).

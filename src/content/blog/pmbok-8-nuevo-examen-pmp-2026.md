@@ -103,6 +103,8 @@ Eso no significa que todo lo que estudiaste hasta ahora quede obsoleto. Los fund
 
 Si estás en proceso de preparación, la clave es saber exactamente qué versión del ECO aplica a tu examen y orientar los simulacros en consecuencia.
 
+Si recién estás entendiendo de qué se trata la credencial, empezá por [qué es la certificación PMP y qué acredita realmente](/blog/que-es-la-certificacion-pmp). Si ya estás en carrera y lo único que necesitás es la fecha y el calendario de transición, está todo en [cuándo cambia el examen PMP en 2026](/blog/cuando-cambia-examen-pmp-2026). Y si te interesa hacia dónde va la profesión más allá del examen, el PMI viene empujando un marco propio que no reemplaza al PMBOK: [M.O.R.E. y el futuro de la gestión de proyectos](/blog/more-pmi-futuro-gestion-proyectos).
+
 ---
 
 ## Recurso para la etapa final de preparación

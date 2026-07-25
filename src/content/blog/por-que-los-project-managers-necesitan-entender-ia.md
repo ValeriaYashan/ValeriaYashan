@@ -42,3 +42,5 @@ Y si estás preparando la certificación PMP, el nuevo examen incorpora intelige
 *Este artículo es parte del blog de Valeria Yashan sobre PM e IA aplicada.*
 
 Si ya estás convencido y querés empezar, el mejor punto de entrada son los [5 prompts para project managers que uso todas las semanas](/blog/5-prompts-chatgpt-pm). Y para ver qué tareas podés delegar a IA desde hoy mismo, leé [5 tareas de PM que podés delegar a IA (y 3 que nunca deberías)](/blog/5-tareas-ia-pm).
+
+Y si la pregunta de fondo es qué pasa con tu puesto, la respuesta corta está acá: [la IA no te va a reemplazar, pero sí a otro PM](/blog/ia-no-reemplaza-pm-pero-si-a-otro).

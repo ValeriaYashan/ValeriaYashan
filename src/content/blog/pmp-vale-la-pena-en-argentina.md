@@ -83,6 +83,8 @@ Lo que no hizo: abrirme puertas automáticamente ni generar ingresos por sí sol
 
 Si tenés la experiencia, el tiempo y el presupuesto, vale la pena. Si alguna de esas tres variables falta, primero resolvé eso.
 
+Ahora, que valga la pena no significa que te vuelva mejor project manager de un día para el otro. Sobre esa confusión escribí [tener el PMP no te hace mejor PM — y eso está bien](/blog/tener-el-pmp-no-te-hace-mejor-pm).
+
 ---
 
 ¿Estás evaluando si hacer el PMP? Escribime a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar) y te ayudo a evaluar tu situación específica.
