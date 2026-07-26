@@ -26,7 +26,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </div>
           <p class="sobre-bajada">Combino más de diez años de experiencia en gestión de proyectos con una mirada práctica sobre cómo la inteligencia artificial puede transformar la forma en que los equipos planifican, ejecutan y miden resultados.</p>
           <div class="sobre-actions">
-            <a href="/contacto" class="btn btn-primary">Escribime</a>
+            <a href="https://wa.me/5491140791007?text=Hola%20Valeria%2C%20te%20escribo%20desde%20tu%20p%C3%A1gina%20sobre%20m%C3%AD" class="btn btn-primary" target="_blank" rel="noopener">Consultame por WhatsApp</a>
             <a href="/servicios" class="btn btn-outline">Ver servicios</a>
           </div>
         </div>
@@ -458,6 +458,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
     margin-top: 0;
+    align-items: stretch;
   }
 
   .enfoque-card {
@@ -471,16 +472,18 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
 
   .enfoque-card-icon {
-    width: 44px;
-    height: 44px;
-    background: var(--color-bg);
-    border: 1px solid var(--color-border);
-    border-radius: 8px;
+    width: 36px;
+    height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--color-accent);
     flex-shrink: 0;
+  }
+
+  .enfoque-card-icon svg {
+    width: 28px;
+    height: 28px;
   }
 
   .enfoque-card-titulo {
@@ -496,6 +499,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     color: var(--color-muted);
     line-height: 1.65;
     margin: 0;
+    flex: 1;
   }
 
   @media (max-width: 700px) {
