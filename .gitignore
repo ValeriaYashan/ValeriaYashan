@@ -24,3 +24,11 @@ pnpm-debug.log*
 .idea/
 
 .claude/
+
+# planning files (locales, no versionar)
+task_plan.md
+findings.md
+progress.md
+
+# respaldo binario previo al strip de BOM
+.bom-backup/
