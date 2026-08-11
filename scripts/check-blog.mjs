@@ -19,6 +19,7 @@ const RAIZ      = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const BLOG      = join(RAIZ, 'src', 'content', 'blog');
 const IMAGENES  = join(RAIZ, 'public', 'images', 'blog');
 const PAGINAS   = join(RAIZ, 'src', 'pages');
+const PUBLICO   = join(RAIZ, 'public');
 
 // Las cuatro en uso al 24/07/2026. Una categoría nueva no rompe nada (el schema
 // acepta cualquier string) pero crea un chip nuevo en el filtro de /blog.
@@ -119,6 +120,8 @@ for (const archivo of archivos) {
       else internos++;
     } else if (destino.startsWith('/pmp/')) {
       internos++;                                     // rutas de QR, siempre válidas
+    } else if (existsSync(join(PUBLICO, destino))) {
+      internos++;                                     // archivo estático real en public/ (xlsx, pdf, etc.)
     } else if (rutas && !rutas.has(destino)) {
       E(`link a una ruta que no existe: ${destino}`);
     } else internos++;
