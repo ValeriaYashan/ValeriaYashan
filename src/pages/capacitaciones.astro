@@ -141,6 +141,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           >
             Consultá disponibilidad →
           </a>
+          <a href="#folleto-iso9000" class="cap-oferta-folleto-link">
+            Ver folleto completo →
+          </a>
         </div>
 
       </div>
@@ -148,7 +151,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   </section>
 
   <!-- FOLLETO DE CAPACITACIONES -->
-  <section class="cap-folleto">
+  <section class="cap-folleto" id="folleto-iso9000">
     <div class="cap-inner">
       <div class="cap-folleto-grid">
         <div class="cap-folleto-text">
@@ -440,6 +443,19 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     flex-direction: column;
     gap: 0.75rem;
     transition: border-color 0.2s;
+  }
+
+  .cap-oferta-folleto-link {
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .cap-oferta-folleto-link:hover {
+    text-decoration: underline;
   }
 
   .cap-oferta-card:hover {
