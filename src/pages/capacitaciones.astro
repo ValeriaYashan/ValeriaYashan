@@ -118,6 +118,61 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </a>
         </div>
 
+        <div class="cap-oferta-card">
+          <div class="cap-oferta-num">04</div>
+          <div class="cap-formato-badge">4 sesiones · 2h c/u · Vivo por Zoom</div>
+          <h3 class="cap-oferta-titulo">Actualización Estratégica ISO 9000:2026 / 9001:2026</h3>
+          <p class="cap-oferta-desc">
+            Programa para consultores y personas que trabajan en Calidad. Recorre, en orden, todo lo que
+            hace falta para acompañar a un cliente desde la edición 2015 hasta la 2026, con un caso
+            transversal real de principio a fin.
+          </p>
+          <ul class="cap-oferta-lista">
+            <li>Nueva arquitectura normativa y los 7 Principios</li>
+            <li>Cultura de calidad, economía circular y tecnologías emergentes</li>
+            <li>Pensamiento basado en riesgo (cambios anticipados)</li>
+            <li>Plan de transición de 10 hitos y gobernanza</li>
+          </ul>
+          <a
+            href="https://wa.me/541140791007?text=Hola%20Valeria%2C%20me%20interesa%20la%20Actualizaci%C3%B3n%20Estrat%C3%A9gica%20ISO%209000%3A2026%20%2F%209001%3A2026"
+            class="cap-oferta-cta"
+            target="_blank"
+            rel="noopener"
+          >
+            Consultá disponibilidad →
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOLLETO DE CAPACITACIONES -->
+  <section class="cap-folleto">
+    <div class="cap-inner">
+      <div class="cap-folleto-grid">
+        <div class="cap-folleto-text">
+          <h2 class="cap-section-titulo">Descargá el programa de ISO 9000/9001</h2>
+          <p class="cap-section-sub">
+            Recorré el folleto completo de la Actualización Estratégica ISO 9000:2026 / ISO 9001:2026:
+            las 4 sesiones, objetivos de cada clase, agenda y el caso transversal Lácteos del Sur S.A.
+          </p>
+          <a
+            href="/capacitaciones/folleto-actualizacion-iso9000-9001.pdf"
+            class="btn-primary"
+            download
+          >
+            Descargar PDF
+          </a>
+        </div>
+        <div class="cap-folleto-embed">
+          <iframe
+            src="https://heyzine.com/flip-book/f6c963877b.html"
+            loading="lazy"
+            allowfullscreen
+            title="Folleto Actualización Estratégica ISO 9000:2026 / 9001:2026 — Valeria Yashan"
+          ></iframe>
+        </div>
       </div>
     </div>
   </section>
@@ -366,7 +421,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   .cap-oferta-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 1.25rem;
   }
 
@@ -450,6 +505,48 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .cap-oferta-cta:hover {
     text-decoration: underline;
     text-underline-offset: 3px;
+  }
+
+  /* ─── FOLLETO ─── */
+  .cap-folleto {
+    padding: 4rem 1.5rem;
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .cap-folleto-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 2.5rem;
+    align-items: center;
+  }
+
+  @media (max-width: 900px) {
+    .cap-folleto-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .cap-folleto-embed {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    background: var(--color-bg);
+  }
+
+  .cap-folleto-embed iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  @media (max-width: 500px) {
+    .cap-folleto-embed {
+      aspect-ratio: 3 / 4;
+    }
   }
 
   /* ─── ACCESO ALUMNOS ─── */
