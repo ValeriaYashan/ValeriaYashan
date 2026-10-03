@@ -2,7 +2,10 @@
 // src/pages/capacitaciones.astro
 // Página de capacitaciones en vivo por Zoom — Valeria Yashan
 import BaseLayout from '../layouts/BaseLayout.astro';
-import FolletosPmp from '../components/FolletosPmp.astro';
+
+const FORMULARIO_URL = 'https://forms.gle/uptWqab7ZEafp47Z9';
+const FOLLETO_PMP_URL = 'https://heyzine.com/flip-book/8201887df0.html';
+const FOLLETO_ISO_URL = 'https://heyzine.com/flip-book/f6c963877b.html';
 ---
 
 <BaseLayout
@@ -32,6 +35,7 @@ import FolletosPmp from '../components/FolletosPmp.astro';
         <a href="https://calendly.com/valeriayashan/30min" class="btn-secondary" target="_blank" rel="noopener">
           Agendá una llamada
         </a>
+        <a href="#acceso" class="cap-link-acceso">Ya estoy inscripto/a ↓</a>
       </div>
     </div>
   </section>
@@ -49,7 +53,7 @@ import FolletosPmp from '../components/FolletosPmp.astro';
 
         <div class="cap-oferta-card">
           <div class="cap-oferta-num">01</div>
-          <div class="cap-formato-badge">8 sesiones · 2h c/u · Vivo por Zoom</div>
+          <div class="cap-formato-badge">6 sesiones · 2h c/u · Vivo por Zoom</div>
           <h3 class="cap-oferta-titulo">Preparación para el examen PMP®</h3>
           <p class="cap-oferta-desc">
             Preparate para rendir y aprobar la certificación más reconocida en gestión de proyectos a nivel mundial.
@@ -61,13 +65,21 @@ import FolletosPmp from '../components/FolletosPmp.astro';
             <li>Estrategia para el examen</li>
             <li>Acompañamiento en la inscripción al PMI</li>
           </ul>
-          <a
-            href="https://wa.me/541140791007?text=Hola%20Valeria%2C%20me%20interesa%20la%20capacitaci%C3%B3n%20de%20Preparaci%C3%B3n%20PMP%C2%AE"
-            class="cap-oferta-cta"
-            target="_blank"
-            rel="noopener"
-          >
-            Consultá disponibilidad →
+          <div class="cap-oferta-acciones">
+            <a href={FORMULARIO_URL} class="btn-primary" target="_blank" rel="noopener">
+              Inscribirme
+            </a>
+            <a
+              href="https://wa.me/541140791007?text=Hola%20Valeria%2C%20me%20interesa%20la%20capacitaci%C3%B3n%20de%20Preparaci%C3%B3n%20PMP%C2%AE"
+              class="btn-secondary"
+              target="_blank"
+              rel="noopener"
+            >
+              Consultar por WhatsApp
+            </a>
+          </div>
+          <a href="#folleto-pmp" class="cap-oferta-folleto-link">
+            Ver folleto completo →
           </a>
         </div>
 
@@ -151,8 +163,39 @@ import FolletosPmp from '../components/FolletosPmp.astro';
     </div>
   </section>
 
-  <!-- FOLLETO DE CAPACITACIONES -->
-  <section class="cap-folleto" id="folleto-iso9000">
+  <!-- FOLLETO PMP -->
+  <section class="cap-folleto" id="folleto-pmp">
+    <div class="cap-inner">
+      <div class="cap-folleto-grid">
+        <div class="cap-folleto-text">
+          <h2 class="cap-section-titulo">Programa de preparación PMP®</h2>
+          <p class="cap-section-sub">
+            Contenidos, sesiones, metodología y cómo trabajamos hasta el día del examen.
+            Recorré el folleto acá mismo o abrilo en pantalla completa.
+          </p>
+          <div class="cap-folleto-btns">
+            <a href={FORMULARIO_URL} class="btn-primary" target="_blank" rel="noopener">
+              Inscribirme
+            </a>
+            <a href={FOLLETO_PMP_URL} class="btn-secondary" target="_blank" rel="noopener">
+              Abrir en pantalla completa
+            </a>
+          </div>
+        </div>
+        <div class="cap-folleto-embed">
+          <iframe
+            src={FOLLETO_PMP_URL}
+            loading="lazy"
+            allowfullscreen
+            title="Folleto Programa de Preparación PMP® — Valeria Yashan"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOLLETO ISO -->
+  <section class="cap-folleto cap-folleto--claro" id="folleto-iso9000">
     <div class="cap-inner">
       <div class="cap-folleto-grid">
         <div class="cap-folleto-text">
@@ -171,7 +214,7 @@ import FolletosPmp from '../components/FolletosPmp.astro';
         </div>
         <div class="cap-folleto-embed">
           <iframe
-            src="https://heyzine.com/flip-book/f6c963877b.html"
+            src={FOLLETO_ISO_URL}
             loading="lazy"
             allowfullscreen
             title="Folleto Actualización Estratégica ISO 9000:2026 / 9001:2026 — Valeria Yashan"
@@ -180,8 +223,6 @@ import FolletosPmp from '../components/FolletosPmp.astro';
       </div>
     </div>
   </section>
-
-  <FolletosPmp />
 
   <!-- TESTIMONIOS -->
   <section class="cap-testimonios">
@@ -246,7 +287,7 @@ import FolletosPmp from '../components/FolletosPmp.astro';
   </section>
 
   <!-- ACCESO A SESIONES — para alumnos activos -->
-  <section class="cap-acceso">
+  <section class="cap-acceso" id="acceso">
     <div class="cap-inner">
       <h2 class="cap-section-titulo">¿Ya estás inscripto/a?</h2>
       <p class="cap-section-sub">
@@ -279,21 +320,21 @@ import FolletosPmp from '../components/FolletosPmp.astro';
   <!-- CTA FINAL -->
   <section class="cap-cta-final">
     <div class="cap-inner">
-      <h2 class="cap-cta-titulo">¿Cuándo arranca la próxima cohorte?</h2>
+      <h2 class="cap-cta-titulo">¿Querés sumarte a la próxima cohorte?</h2>
       <p class="cap-cta-sub">
-        Escribime y te cuento las fechas disponibles. Los grupos son reducidos y los cupos se llenan rápido.
+        Consultame las fechas disponibles. Los grupos son reducidos y los cupos se llenan rápido.
       </p>
       <div class="cap-cta-btns">
+        <a href={FORMULARIO_URL} class="cap-btn-verde-blanco" target="_blank" rel="noopener">
+          Inscribirme
+        </a>
         <a
           href="https://wa.me/5491140791007?text=Hola%20Valeria%2C%20quiero%20saber%20las%20fechas%20de%20la%20pr%C3%B3xima%20cohorte"
-          class="cap-btn-verde-blanco"
+          class="cap-btn-outline-blanco"
           target="_blank"
           rel="noopener"
         >
           Consultame por WhatsApp
-        </a>
-        <a href="https://calendly.com/valeriayashan/30min" class="cap-btn-outline-blanco" target="_blank" rel="noopener">
-          Agendá una llamada
         </a>
       </div>
       <p class="cap-cta-garantia">Te respondo en menos de 24 horas.</p>
@@ -417,6 +458,21 @@ import FolletosPmp from '../components/FolletosPmp.astro';
     display: flex;
     gap: 0.75rem;
     flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .cap-link-acceso {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    text-decoration: none;
+    padding: 0.5rem 0.25rem;
+  }
+
+  .cap-link-acceso:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
 
   /* ─── OFERTA ─── */
@@ -459,6 +515,13 @@ import FolletosPmp from '../components/FolletosPmp.astro';
 
   .cap-oferta-folleto-link:hover {
     text-decoration: underline;
+  }
+
+  .cap-oferta-acciones {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
   }
 
   .cap-oferta-card:hover {
@@ -526,11 +589,16 @@ import FolletosPmp from '../components/FolletosPmp.astro';
     text-underline-offset: 3px;
   }
 
-  /* ─── FOLLETO ─── */
+  /* ─── FOLLETOS ─── */
   .cap-folleto {
     padding: 4rem 1.5rem;
     background: var(--color-surface);
     border-top: 1px solid var(--color-border);
+    scroll-margin-top: 80px;
+  }
+
+  .cap-folleto--claro {
+    background: var(--color-bg);
   }
 
   .cap-folleto-grid {
@@ -544,6 +612,12 @@ import FolletosPmp from '../components/FolletosPmp.astro';
     .cap-folleto-grid {
       grid-template-columns: 1fr;
     }
+  }
+
+  .cap-folleto-btns {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
   }
 
   .cap-folleto-embed {
@@ -574,6 +648,7 @@ import FolletosPmp from '../components/FolletosPmp.astro';
     background: var(--color-surface);
     border-top: 1px solid var(--color-border);
     border-bottom: 1px solid var(--color-border);
+    scroll-margin-top: 80px;
   }
 
   .cap-acceso-box {
@@ -657,36 +732,6 @@ import FolletosPmp from '../components/FolletosPmp.astro';
     font-size: 0.875rem;
     color: var(--color-muted);
     line-height: 1.55;
-  }
-
-  /* ─── CTA FINAL ─── */
-  .cap-cta-final {
-    padding: 4rem 1.5rem;
-    background: var(--color-surface);
-    border-top: 1px solid var(--color-border);
-    text-align: center;
-  }
-
-  .cap-cta-titulo {
-    font-family: 'Fraunces', serif;
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: var(--color-text);
-    margin-bottom: 0.75rem;
-  }
-
-  .cap-cta-sub {
-    font-size: 1rem;
-    color: var(--color-muted);
-    margin-bottom: 1.75rem;
-    line-height: 1.6;
-  }
-
-  .cap-cta-btns {
-    display: flex;
-    gap: 0.75rem;
-    justify-content: center;
-    flex-wrap: wrap;
   }
 
   /* ─── BADGES DE FORMATO ─── */
