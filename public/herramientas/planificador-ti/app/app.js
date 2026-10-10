@@ -9,7 +9,7 @@
     SCHEMA_VERSION: 2,
     SITE_URL: "https://valeriayashan.com.ar",
     PRESENTATION_URL: "/herramientas/planificador-ti/",
-    SUBSCRIBE_URL: "/herramientas/planificador-ti/suscribirse/",
+    LEAD_ENABLED: false, SUBSCRIBE_URL: "/herramientas/planificador-ti/suscribirse/",
     CONTACT_URL: "/contacto",
     TRAINING_URL: "/capacitaciones",
     WHATSAPP_URL: "", // FALTA: enlace de WhatsApp del sitio (ej. https://wa.me/54911XXXXXXXX?text=...). Vacío = el botón no se muestra.
@@ -1215,7 +1215,7 @@
 
   /* ===================== captación (no bloquea) ===================== */
   function maybeShowLead(trigger) {
-    if (leadShownThisSession || store.get("ptTI.lead") === "dismissed" || store.get("ptTI.lead") === "opened") return;
+    if (!CONFIG.LEAD_ENABLED) return; if (leadShownThisSession || store.get("ptTI.lead") === "dismissed" || store.get("ptTI.lead") === "opened") return;
     leadShownThisSession = true;
     var c = $("leadCard");
     c.innerHTML = '<p><strong>' + esc(CONFIG.LEAD_TITLE) + "</strong> " + esc(CONFIG.LEAD_TEXT) + '</p><div class="leadActions"><button type="button" class="btn-primary" data-action="openSubscribe" data-origin="' + esc(trigger) + '" data-fid="lead:yes">Quiero suscribirme</button><button type="button" data-action="dismissLead" data-fid="lead:no">Ahora no</button></div>';
