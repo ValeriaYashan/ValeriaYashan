@@ -69,7 +69,8 @@
   var CHARTER_FIELDS = [
     { key: "objective", label: "Objetivo SMART (a completar por el alumno)", full: true, ph: "Escribí el objetivo SMART del proyecto..." },
     { key: "sponsor", label: "Patrocinador (sponsor)" }, { key: "budget", label: "Presupuesto autorizado" }, { key: "duration", label: "Duración estimada" },
-    { key: "contingency", label: "Reserva de contingencia (monto y criterio, a completar)", full: true, ph: "¿Cuánta reserva de contingencia tiene el proyecto y con qué criterio se calculó?" },
+    { key: "contingency", label: "Reserva de contingencia (opcional): riesgos conocidos, dentro de la línea base", full: true, ph: "Monto y criterio, ligado a riesgos identificados del registro. Si no hay reserva aprobada, indicalo." },
+    { key: "mgmtReserve", label: "Reserva de gestión (opcional): riesgos desconocidos, fuera de la línea base, la autoriza la dirección", full: true, ph: "Monto y quién autoriza su uso. No se asigna a un riesgo puntual. Si no hay, indicalo." },
     { key: "deliverable", label: "Entregable principal", full: true }, { key: "scopeIn", label: "Alcance — dentro", full: true },
     { key: "scopeOut", label: "Alcance — fuera (a completar)", full: true, ph: "¿Qué queda explícitamente fuera del alcance?" },
     { key: "constraints", label: "Restricciones", full: true }, { key: "stakeholders", label: "Partes interesadas clave", full: true }
@@ -289,7 +290,7 @@
     if (ab === null) return "Los costos diarios son editables en la tabla de abajo: el acta de constitución no trae un presupuesto numérico para comparar con el BAC.";
     var diff = Math.round(m.BAC - ab);
     return "Presupuesto autorizado en el acta de constitución: " + usd(ab) + ". " + (Math.abs(diff) <= 1
-      ? "El BAC coincide con ese presupuesto: los costos diarios de este caso se distribuyeron en proporción a la duración y al tipo de recurso de cada tarea (distribución didáctica, no una estimación ascendente). El BAC es la línea base de costos; las reservas de contingencia y de gestión no se discriminan."
+      ? "El BAC coincide con ese presupuesto: los costos diarios de este caso se distribuyeron en proporción a la duración y al tipo de recurso de cada tarea (distribución didáctica, no una estimación ascendente). El BAC es la línea base de costos: incluye la reserva de contingencia si está dentro de ella y excluye siempre la reserva de gestión (presupuesto del proyecto = línea base de costos + reserva de gestión)."
       : "El BAC (" + usd(m.BAC) + ") difiere en " + usd(Math.abs(diff)) + " del presupuesto del acta " + (diff > 0 ? "por encima" : "por debajo") + ": cambiaste duraciones, costos o tareas (las tareas nuevas usan una tarifa didáctica). Revisá el BAC, actualizá el acta con una solicitud de cambio o recalibrá los costos diarios con el botón \"Recalibrar costos al presupuesto del acta\".") +
       " Podés editar los costos diarios en la tabla de abajo.";
   }
@@ -520,7 +521,7 @@
     risks.forEach(function (r) { if (r.type !== "Oportunidad") r.type = "Amenaza"; });
     stakeholders = []; teamCharter = {}; mgmtPlan = {}; changeRequest = {};
     charter = clone(proj.charter || {});
-    charter.contingency = charter.contingency || "";
+    charter.contingency = charter.contingency || ""; charter.mgmtReserve = charter.mgmtReserve || "";
     comms = (charter.stakeholders || "").split(",").slice(0, 2).map(function (s, i) {
       return { id: "C" + (i + 1), stakeholder: s.trim(), info: i === 0 ? "Avance general del proyecto" : "Impacto en su área",
         freq: i === 0 ? "Semanal" : "Quincenal", channel: "Reunión / email", owner: "PM" };
@@ -982,8 +983,14 @@
     else add(G1, "ok", "El acta tiene objetivo, con alguna cifra o fecha.");
     if (!String(charter.scopeIn || "").trim() || !String(charter.scopeOut || "").trim()) add(G1, "miss", "El alcance del acta está incompleto: tienen que figurar qué entra y qué queda fuera.");
     else add(G1, "ok", "El acta define qué entra y qué queda fuera del alcance.");
-    if (!String(charter.contingency || "").trim()) add(G1, "miss", "Falta la reserva de contingencia en el acta de constitución.");
-    else add(G1, "ok", "El acta indica la reserva de contingencia.");
+    // Las reservas son opcionales (PMBOK 8, Figura 2-25): su ausencia no es un faltante, solo se sugiere explicitarlas.
+    var rc = String(charter.contingency || "").trim(), rg = String(charter.mgmtReserve || "").trim();
+    if (!rc && !rg) add(G1, "warn", "El acta no menciona reservas. Son opcionales, pero conviene indicar si hay reserva de contingencia (riesgos conocidos, dentro de la línea base) y reserva de gestión (riesgos desconocidos, fuera de la línea base), o aclarar que no hay.");
+    else {
+      add(G1, "ok", "El acta se pronuncia sobre las reservas.");
+      if (rc && rg && rc.toLowerCase() === rg.toLowerCase()) add(G1, "warn", "La reserva de contingencia y la de gestión tienen el mismo texto: son distintas en propósito y en quién autoriza su uso.");
+      if (rc && !risks.length) add(G1, "warn", "Hay reserva de contingencia pero el registro de riesgos está vacío: la contingencia se asigna a riesgos conocidos e identificados.");
+    }
     var ab = parseBudget(charter.budget);
     if (ab === null) add(G1, "warn", "El acta no tiene un presupuesto numérico para comparar con el BAC.");
     else if (Math.abs(Math.round(m.BAC - ab)) > 1) add(G1, "miss", "El BAC (" + usd(m.BAC) + ") difiere del presupuesto del acta (" + usd(ab) + ") en " + usd(Math.abs(m.BAC - ab)) + ".");
@@ -1445,7 +1452,7 @@
     changeRequest = sanitizeObj(obj.changeRequest, CR_FIELDS);
     raciAssignments = obj.raciAssignments && typeof obj.raciAssignments === "object" ? obj.raciAssignments : {};
     raciPeople = Array.isArray(obj.raciPeople) ? obj.raciPeople.map(function (x) { return str(x, 100); }) : [];
-    charter = {}; Object.keys(clone(proj.charter || {})).concat(["objective", "scopeOut", "contingency"]).forEach(function (k) { charter[k] = str(obj.charter && obj.charter[k] !== undefined ? obj.charter[k] : (proj.charter || {})[k], 4000); });
+    charter = {}; Object.keys(clone(proj.charter || {})).concat(["objective", "scopeOut", "contingency", "mgmtReserve"]).forEach(function (k) { charter[k] = str(obj.charter && obj.charter[k] !== undefined ? obj.charter[k] : (proj.charter || {})[k], 4000); });
     comms = sanitizeList(obj.comms, ["id", "stakeholder", "info", "freq", "channel", "owner"]);
     changeLog = sanitizeList(obj.changeLog, ["id", "fecha", "desc", "impacto", "estado", "aprobadoPor"]);
     decisionLog = sanitizeList(obj.decisionLog, ["id", "fecha", "decision", "contexto", "responsable"]);
