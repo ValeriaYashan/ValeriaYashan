@@ -52,6 +52,7 @@
       <span class="sep" aria-hidden="true"></span>
       <button type="button" class="primary" data-action="exportExcel">Exportar a Excel</button>
       <button type="button" data-action="exportCsv">Exportar CSV</button>
+      <button type="button" data-action="exportIcs">Calendario (.ics)</button>
       <button type="button" data-action="print">Imprimir</button>
       <span class="sep" aria-hidden="true"></span>
       <button type="button" data-action="undo" aria-label="Deshacer (Ctrl+Z)">Deshacer</button>
@@ -165,6 +166,8 @@
     <div class="toolbar" role="group" aria-label="Paneles: Control y cierre">
       <span class="grp-title">Control y cierre</span>
       <button type="button" id="evmToggleBtn" data-panel="evm" aria-controls="evmpanel">Mostrar valor ganado (EVM)</button>
+      <button type="button" id="statusToggleBtn" data-panel="status" aria-controls="statuspanel">Mostrar informe de estado semanal</button>
+      <button type="button" id="issuesToggleBtn" data-panel="issues" aria-controls="issuespanel">Mostrar problemas y acciones</button>
       <button type="button" id="closeToggleBtn" data-panel="close" aria-controls="closepanel">Mostrar cierre del proyecto</button>
     </div>
     <div class="toolbar" role="group" aria-label="Paneles de apoyo">
@@ -172,6 +175,7 @@
       <button type="button" id="holidayToggleBtn" data-panel="holidays" aria-controls="holidaypanel">Mostrar feriados y calendario</button>
       <button type="button" id="resToggleBtn" data-panel="res" aria-controls="respanel">Mostrar vista de recursos</button>
       <button type="button" id="kanbanToggleBtn" data-panel="kanban" aria-controls="kanbanpanel">Mostrar Kanban</button>
+      <button type="button" id="threeToggleBtn" data-panel="three" aria-controls="threepanel">Mostrar estimación de tres puntos (PERT)</button>
       <button type="button" id="checkToggleBtn" data-panel="check" aria-controls="checkpanel">Mostrar control de coherencia</button>
     </div>
 
@@ -192,7 +196,7 @@
       <div class="pbody" id="riskBody"></div>
     </section>
     <section id="commspanel" class="panel" aria-labelledby="commsH">
-      <div class="phead"><h2 id="commsH">Plan de comunicaciones</h2><button type="button" data-action="addComm">Agregar fila</button></div>
+      <div class="phead"><h2 id="commsH">Plan de comunicaciones</h2><button type="button" data-action="addComm">Agregar fila</button><button type="button" data-action="exportIcs">Descargar calendario (.ics)</button></div>
       <div class="pbody" id="commsBody"></div>
     </section>
     <section id="teampanel" class="panel" aria-labelledby="teamH">
@@ -239,6 +243,18 @@
         </div>
         <div id="cierreBox" class="cierreBox" hidden></div>
       </div>
+    </section>
+    <section id="statuspanel" class="panel" aria-labelledby="statusH">
+      <div class="phead"><h2 id="statusH">Informe de estado semanal</h2></div>
+      <div class="pbody" id="statusBody"></div>
+    </section>
+    <section id="issuespanel" class="panel" aria-labelledby="issuesH">
+      <div class="phead"><h2 id="issuesH">Registro de problemas y acciones</h2></div>
+      <div class="pbody" id="issuesBody"></div>
+    </section>
+    <section id="threepanel" class="panel" aria-labelledby="threeH">
+      <div class="phead"><h2 id="threeH">Estimación de tres puntos (PERT) y probabilidad de cumplir la fecha</h2></div>
+      <div class="pbody" id="threeBody"></div>
     </section>
     <section id="holidaypanel" class="panel" aria-labelledby="holidayH">
       <div class="phead"><h2 id="holidayH">Feriados y calendario</h2><span class="note" id="holidayNote" style="margin:0"></span></div>

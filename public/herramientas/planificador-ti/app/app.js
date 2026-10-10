@@ -6,7 +6,8 @@
   /* ===================== CONFIGURACIÓN (completar lo que falta) ===================== */
   var CONFIG = {
     APP_ID: "planificador-ti-valeriayashan",
-    SCHEMA_VERSION: 2,
+    SCHEMA_VERSION: 3,        // 3: dependencias tipadas, tres puntos, problemas y acciones, riesgos con valor monetario y solicitudes de cambio
+    STORAGE_KEY_VERSION: 2,   // la clave de guardado local sigue en v2 para no perder el progreso ya guardado en los navegadores
     SITE_URL: "https://valeriayashan.com.ar",
     PRESENTATION_URL: "/herramientas/planificador-ti/",
     LEAD_ENABLED: false, SUBSCRIBE_URL: "/herramientas/planificador-ti/suscribirse/",
@@ -120,6 +121,7 @@
   var risks = [], raciAssignments = {}, raciPeople = [];
   var charter = {}, comms = [], changeLog = [], decisionLog = [], lessons = "";
   var stakeholders = [], teamCharter = {}, mgmtPlan = {}, changeRequest = {};
+  var issues = [], crList = [];
   var autosaveTimer = 0, autosaveFailed = false, lastSavedAt = "";
   var history = [], future = [];
   var holidays = [], holidayCountry = "AR", holidayYear = 0;
@@ -133,7 +135,7 @@
   var firstRender = true;
   var leadShownThisSession = false;
 
-  function cloneTasks(list) { return list.map(function (t) { var c = Object.assign({}, t); c.preds = t.preds.slice(); c.extraResources = (t.extraResources || []).slice(); return c; }); }
+  function cloneTasks(list) { return list.map(function (t) { var c = Object.assign({}, t); c.preds = t.preds.slice(); c.extraResources = (t.extraResources || []).slice(); if (t.deps) c.deps = clone(t.deps); return c; }); }
   function clonePhases(list) { return list.map(function (ph) { return { id: ph.id, name: ph.name, children: ph.children.slice() }; }); }
   function taskById(id) { for (var i = 0; i < tasks.length; i++) if (tasks[i].id === id) return tasks[i]; return null; }
   function startDateValue() { return $("startDate").value || "2026-01-05"; }
@@ -187,16 +189,67 @@
     }
     return list.filter(function (t) { return !seen.has(t.id); }).map(function (t) { return t.id; });
   }
+  /* ---- dependencias tipadas: FC (fin-comienzo, por defecto), CC (comienzo-comienzo), FF (fin-fin), CF (comienzo-fin), con desfase en días ---- */
+  var DEP_ES = { FS: "FC", SS: "CC", FF: "FF", SF: "CF" };
+  var DEP_FROM = { FC: "FS", CC: "SS", FF: "FF", CF: "SF", FS: "FS", SS: "SS", SF: "SF" };
+  function depOf(t, p) { var d = t.deps && t.deps[p]; return d ? { type: d.type, lag: d.lag || 0 } : { type: "FS", lag: 0 }; }
+  function predLabel(t, p) {
+    var d = depOf(t, p);
+    if (d.type === "FS" && !d.lag) return p;
+    return p + DEP_ES[d.type] + (d.lag ? (d.lag > 0 ? "+" : "") + d.lag : "");
+  }
+  function predsText(t) { return t.preds.map(function (p) { return predLabel(t, p); }).join(", "); }
+  // Lee "1.1.2, 1.2.1CC+2, 1.3FF-1": ID de la tarea, tipo opcional (FC, CC, FF, CF) y desfase opcional en días.
+  function parsePredSpec(text, selfId, list) {
+    var out = { preds: [], deps: {}, error: "" }, ids = {};
+    list.forEach(function (x) { ids[x.id] = true; });
+    var toks = String(text || "").split(",").map(function (x) { return x.trim(); }).filter(Boolean);
+    for (var i = 0; i < toks.length; i++) {
+      var tok = toks[i], id = tok, type = "FS", lag = 0;
+      if (!ids[tok]) {
+        var m = tok.match(/^(.*?)\s*(FC|CC|FF|CF|FS|SS|SF)?\s*([+\-]\s*\d+)?$/i);
+        if (!m || !m[1] || !ids[m[1].trim()]) { out.error = 'No entiendo "' + tok + '". Escribí el ID de la tarea y, si hace falta, el tipo (FC, CC, FF o CF) y el desfase en días, por ejemplo 1.2.3CC+2. IDs disponibles: ' + list.map(function (x) { return x.id; }).slice(0, 12).join(", ") + "…"; return out; }
+        id = m[1].trim();
+        if (m[2]) type = DEP_FROM[m[2].toUpperCase()];
+        if (m[3]) lag = parseInt(m[3].replace(/\s/g, ""), 10);
+      }
+      if (id === selfId) { out.error = "Una tarea no puede depender de sí misma."; return out; }
+      if (out.preds.indexOf(id) >= 0) { out.error = "La predecesora " + id + " está repetida."; return out; }
+      if (Math.abs(lag) > 2000) { out.error = "El desfase de " + id + " tiene que estar entre -2000 y 2000 días."; return out; }
+      out.preds.push(id);
+      if (type !== "FS" || lag) out.deps[id] = { type: type, lag: lag };
+    }
+    return out;
+  }
+  function cleanDeps(t) {
+    if (!t.deps || typeof t.deps !== "object") return undefined;
+    var out = {}, any = false;
+    Object.keys(t.deps).forEach(function (k) {
+      var d = t.deps[k];
+      if (t.preds.indexOf(k) >= 0 && d && DEP_ES[d.type] !== undefined && (d.type !== "FS" || d.lag)) { out[k] = { type: d.type, lag: isNum(d.lag) ? Math.round(d.lag) : 0 }; any = true; }
+    });
+    return any ? out : undefined;
+  }
   function computeScheduleOn(list) {
     var byId = {}; list.forEach(function (t) { byId[t.id] = t; });
     var cyclic = detectCycle(list), cycSet = new Set(cyclic);
-    list.forEach(function (t) { delete t._es; delete t._ef; t._lf = undefined; });
+    list.forEach(function (t) { delete t._es; delete t._ef; delete t._ls; t._lf = undefined; });
+    // Pasada hacia adelante: cada dependencia fija un piso para el inicio. FC: inicio >= fin de la predecesora + desfase (el solape del seguimiento rápido resta);
+    // CC: inicio >= inicio de la predecesora + desfase; FF: fin >= fin de la predecesora + desfase; CF: fin >= inicio de la predecesora + desfase.
     function ES(t) {
       if (t._es !== undefined) return t._es;
       t._es = 0; // corta recursión ante datos inesperados
       var dep = 0;
       if (!cycSet.has(t.id) && t.preds.length) {
-        var vals = t.preds.filter(function (p) { return byId[p]; }).map(function (p) { return EF(byId[p]) - (t.overlapDays || 0); });
+        var vals = [];
+        t.preds.forEach(function (p) {
+          var pt = byId[p]; if (!pt) return;
+          var d = depOf(t, p);
+          if (d.type === "SS") vals.push(ES(pt) + d.lag);
+          else if (d.type === "FF") vals.push(EF(pt) + d.lag - t.dur);
+          else if (d.type === "SF") vals.push(ES(pt) + d.lag - t.dur);
+          else vals.push(EF(pt) + d.lag - (t.overlapDays || 0));
+        });
         if (vals.length) dep = Math.max(0, Math.max.apply(null, vals));
       }
       t._es = dep + (t.levelDelay || 0);
@@ -207,12 +260,20 @@
     var projectEnd = list.length ? Math.max.apply(null, list.map(function (t) { return t._ef; })) : 0;
     var succ = {}; list.forEach(function (t) { succ[t.id] = []; });
     list.forEach(function (t) { t.preds.forEach(function (p) { if (succ[p] && !cycSet.has(t.id)) succ[p].push(t.id); }); });
+    // Pasada hacia atrás: el fin más tardío de cada tarea es el menor de los límites que le imponen sus sucesoras, y nunca pasa del fin del proyecto.
     function LF(t) {
       if (t._lf !== undefined) return t._lf;
-      var s = succ[t.id];
-      // si el sucesor está solapado (seguimiento rápido), su inicio más tardío se adelanta ese solapamiento
-      t._lf = s.length === 0 ? projectEnd : Math.min.apply(null, s.map(function (id) { return LS(byId[id]) + (byId[id].overlapDays || 0); }));
-      return t._lf;
+      var lf = projectEnd;
+      succ[t.id].forEach(function (id) {
+        var s = byId[id], d = depOf(s, t.id), v;
+        if (d.type === "SS") v = LS(s) - d.lag + t.dur;
+        else if (d.type === "FF") v = LF(s) - d.lag;
+        else if (d.type === "SF") v = LF(s) - d.lag + t.dur;
+        else v = LS(s) - d.lag + (s.overlapDays || 0); // si la sucesora está solapada (seguimiento rápido), el fin más tardío se adelanta ese solape
+        if (v < lf) lf = v;
+      });
+      t._lf = lf;
+      return lf;
     }
     function LS(t) { LF(t); t._ls = t._lf - t.dur; return t._ls; }
     list.forEach(LS);
@@ -267,10 +328,11 @@
     var n = parseInt(m[0].replace(/[.,]/g, ""), 10);
     return isNaN(n) || n <= 0 ? null : n;
   }
+  function targetBudget() { var ab = parseBudget(charter.budget); return ab === null ? null : ab + approvedCostImpact(); }
   function suggestedCutoff() { return Math.max(1, Math.round(originalProjectEnd * CONFIG.CUTOFF_FRACTION)); }
   // Escala los costos diarios de todas las tareas para que el BAC coincida con el presupuesto del acta; el residuo se absorbe en la tarea más larga.
   function recalibrateCosts() {
-    var ab = parseBudget(charter.budget);
+    var ab = targetBudget();
     if (ab === null) { notify("El acta no tiene un presupuesto numérico: completá \"Presupuesto autorizado\" en el acta de constitución."); return; }
     var m = computeEVM();
     if (!(m.BAC > 0)) { notify("No hay costos para recalibrar: el BAC es 0."); return; }
@@ -286,10 +348,10 @@
     notify("Costos diarios recalibrados: el BAC ahora coincide con el presupuesto del acta (" + usd(ab) + ").");
   }
   function budgetNote(m) {
-    var ab = parseBudget(charter.budget);
+    var a0 = parseBudget(charter.budget), appr = approvedCostImpact(), ab = a0 === null ? null : a0 + appr;
     if (ab === null) return "Los costos diarios son editables en la tabla de abajo: el acta de constitución no trae un presupuesto numérico para comparar con el BAC.";
     var diff = Math.round(m.BAC - ab);
-    return "Presupuesto autorizado en el acta de constitución: " + usd(ab) + ". " + (Math.abs(diff) <= 1
+    return "Presupuesto autorizado en el acta de constitución: " + usd(a0) + ". " + (appr ? "Los cambios aprobados con impacto en el costo suman " + usd(appr) + ", por lo que la línea base de costos vigente es " + usd(ab) + ". " : "") + (Math.abs(diff) <= 1
       ? "El BAC coincide con ese presupuesto: los costos diarios de este caso se distribuyeron en proporción a la duración y al tipo de recurso de cada tarea (distribución didáctica, no una estimación ascendente). El BAC es la línea base de costos: incluye la reserva de contingencia si está dentro de ella y excluye siempre la reserva de gestión (presupuesto del proyecto = línea base de costos + reserva de gestión)."
       : "El BAC (" + usd(m.BAC) + ") difiere en " + usd(Math.abs(diff)) + " del presupuesto del acta " + (diff > 0 ? "por encima" : "por debajo") + ": cambiaste duraciones, costos o tareas (las tareas nuevas usan una tarifa didáctica). Revisá el BAC, actualizá el acta con una solicitud de cambio o recalibrá los costos diarios con el botón \"Recalibrar costos al presupuesto del acta\".") +
       " Podés editar los costos diarios en la tabla de abajo.";
@@ -338,7 +400,7 @@
     return JSON.stringify({ tasks: cloneTasks(tasks), phases: clonePhases(phases), baselines: baselines, risks: risks,
       raciAssignments: raciAssignments, raciPeople: raciPeople, charter: charter, comms: comms, changeLog: changeLog,
       decisionLog: decisionLog, lessons: lessons, cutoffDay: cutoffDay, acActual: acActual, nearThreshold: nearThreshold, meta: metaState(),
-      stakeholders: stakeholders, teamCharter: teamCharter, mgmtPlan: mgmtPlan, changeRequest: changeRequest });
+      stakeholders: stakeholders, teamCharter: teamCharter, mgmtPlan: mgmtPlan, changeRequest: changeRequest, issues: issues, crList: crList });
   }
   function pushHistory() {
     history.push(fullSnapshotStr());
@@ -353,6 +415,7 @@
     charter = s.charter || {}; comms = s.comms || []; changeLog = s.changeLog || []; decisionLog = s.decisionLog || [];
     lessons = s.lessons || ""; cutoffDay = s.cutoffDay; acActual = s.acActual; nearThreshold = s.nearThreshold;
     stakeholders = s.stakeholders || []; teamCharter = s.teamCharter || {}; mgmtPlan = s.mgmtPlan || {}; changeRequest = s.changeRequest || {};
+    issues = s.issues || []; crList = s.crList || [];
     var m = s.meta || {};
     holidays = m.holidays || holidays; holidayCountry = m.holidayCountry || holidayCountry; holidayYear = m.holidayYear || holidayYear;
     if (m.startDate) $("startDate").value = m.startDate;
@@ -519,7 +582,7 @@
     cutoffDay = suggestedCutoff();
     risks = clone(proj.risks || []); raciAssignments = {}; raciPeople = [];
     risks.forEach(function (r) { if (r.type !== "Oportunidad") r.type = "Amenaza"; });
-    stakeholders = []; teamCharter = {}; mgmtPlan = {}; changeRequest = {};
+    stakeholders = []; teamCharter = {}; mgmtPlan = {}; changeRequest = {}; issues = []; crList = []; simResult = null;
     charter = clone(proj.charter || {});
     charter.contingency = charter.contingency || ""; charter.mgmtReserve = charter.mgmtReserve || "";
     comms = (charter.stakeholders || "").split(",").slice(0, 2).map(function (s, i) {
@@ -613,7 +676,7 @@
           '<td class="dur"><input class="cell-input durInput' + (locked ? " locked" : "") + '" type="number" min="0" max="2000" value="' + t.dur + '" data-change="dur" data-id="' + id + '" data-fid="dur:' + id + '" aria-label="Duración en días hábiles de la tarea ' + id + '"' + (locked ? ' title="No se puede acelerar: depende de un tercero"' : "") + "></td>" +
           '<td class="dates"><input type="date" class="cell-input dateInput" data-change="dateStart" data-id="' + id + '" data-fid="ds:' + id + '" value="' + esc(startISO(t)) + '" aria-label="Inicio de la tarea ' + id + '"></td>' +
           '<td class="dates"><input type="date" class="cell-input dateInput" data-change="dateFinish" data-id="' + id + '" data-fid="df:' + id + '" value="' + esc(finishISO(t)) + '" aria-label="Fin (último día hábil) de la tarea ' + id + '"></td>' +
-          '<td class="pred">' + (t.preds.map(esc).join(", ") || "—") + "</td>" +
+          '<td class="pred"><input type="text" class="cell-input predInput" value="' + esc(predsText(t)) + '" placeholder="—" data-change="preds" data-id="' + id + '" data-fid="pr:' + id + '" aria-label="Predecesoras de la tarea ' + id + '. IDs separados por coma; tipo FC, CC, FF o CF y desfase opcionales, por ejemplo 1.2.1CC+2"></td>' +
           '<td class="slack">' + (t.dur === 0 ? "—" : (t.critical ? "0 (crítica)" : t.slack + "d")) + "</td>" +
           '<td class="pct"><input class="cell-input pctInput" type="number" min="0" max="100" value="' + t.pct + '" data-change="pct" data-id="' + id + '" data-fid="pct:' + id + '" aria-label="Porcentaje completado de la tarea ' + id + '"></td>' +
           '<td class="actcol"><button type="button" class="delBtn" data-action="deleteTask" data-id="' + id + '" data-fid="del:' + id + '" aria-label="Eliminar la tarea ' + id + '">✕</button></td></tr>';
@@ -689,7 +752,7 @@
     tasks.forEach(function (t) {
       t.preds.forEach(function (pid) {
         var p = byId[pid]; if (!p) return;
-        var x1 = p._ef * DAY_PX, y1 = rowCenterY[p.id], x2 = t._es * DAY_PX, y2 = rowCenterY[t.id];
+        var dp = depOf(t, pid), x1 = (dp.type === "SS" || dp.type === "SF" ? p._es : p._ef) * DAY_PX, y1 = rowCenterY[p.id], x2 = (dp.type === "FF" || dp.type === "SF" ? t._ef : t._es) * DAY_PX, y2 = rowCenterY[t.id];
         if (y1 === undefined || y2 === undefined) return;
         var crit = p.critical && t.critical, midX = x1 + Math.max((x2 - x1) / 2, 8);
         var path = document.createElementNS(NS, "path");
@@ -733,7 +796,7 @@
 
   /* ---- seguimiento rápido (fast-track) elegible ---- */
   function renderFastTrackControls(byId) {
-    var sel = $("ftSelect"), cands = leafTasks().filter(function (t) { return t.preds.length > 0 && t.dur > 0; });
+    var sel = $("ftSelect"), cands = leafTasks().filter(function (t) { return t.dur > 0 && t.preds.some(function (p) { return depOf(t, p).type === "FS"; }); });
     if (!cands.length) { sel.innerHTML = ""; $("ftBtn").disabled = true; return; }
     if (!ftTaskId || !cands.some(function (t) { return t.id === ftTaskId; })) {
       var pref = cands.filter(function (t) { return t.crashCostPerDay; })[0] || cands[0]; ftTaskId = pref.id;
@@ -755,7 +818,7 @@
     if (t.overlapDays > 0) t.overlapDays = 0;
     else {
       computeSchedule(tasks);
-      var minPred = Math.min.apply(null, t.preds.map(function (p) { var x = taskById(p); return x ? x.dur : t.dur; }));
+      var minPred = Math.min.apply(null, t.preds.filter(function (p) { return depOf(t, p).type === "FS"; }).map(function (p) { var x = taskById(p); return x ? x.dur : t.dur; }));
       t.overlapDays = Math.max(1, Math.min(Math.round(t.dur * ftPct / 100), minPred));
     }
     render();
@@ -787,7 +850,12 @@
     check: { id: "checkpanel", btn: "checkToggleBtn", label: "control de coherencia", render: renderChecks },
     comms: { id: "commspanel", btn: "commsToggleBtn", label: "plan de comunicaciones", render: renderComms },
     kanban: { id: "kanbanpanel", btn: "kanbanToggleBtn", label: "Kanban", render: renderKanban },
-    close: { id: "closepanel", btn: "closeToggleBtn", label: "cierre del proyecto", render: renderCloseLogs }
+    close: { id: "closepanel", btn: "closeToggleBtn", label: "cierre del proyecto", render: renderCloseLogs },
+    status: { id: "statuspanel", btn: "statusToggleBtn", label: "informe de estado semanal", render: renderStatusPanel },
+    issues: { id: "issuespanel", btn: "issuesToggleBtn", label: "problemas y acciones", render: renderIssuesPanel },
+    three: { id: "threepanel", btn: "threeToggleBtn", label: "estimación de tres puntos", render: renderThreePanel },
+    reserves: { id: "reservespanel", btn: "reservesToggleBtn", label: "análisis de reservas (VME)", render: renderReservesPanel },
+    changes: { id: "changespanel", btn: "changesToggleBtn", label: "control de cambios", render: renderChangesPanel }
   };
   function togglePanel(key) {
     var p = PANELS[key]; panelsOn[key] = !panelsOn[key];
@@ -834,7 +902,7 @@
       '<p class="note">' + budgetNote(m) + (m.acEstimated ? " Todavía no cargaste costo real: se usa CA = VE (CPI = 1) como estimación." : "") + "</p>" +
       cutoffWarning(m) +
       '<div class="evmActions">' +
-      (parseBudget(charter.budget) !== null && Math.abs(Math.round(m.BAC - parseBudget(charter.budget))) > 1 ? '<button type="button" data-action="recalibrateCosts" data-fid="recal">Recalibrar costos al presupuesto del acta</button>' : "") +
+      (targetBudget() !== null && Math.abs(Math.round(m.BAC - targetBudget())) > 1 ? '<button type="button" data-action="recalibrateCosts" data-fid="recal">Recalibrar costos al presupuesto del acta</button>' : "") +
       '<button type="button" data-action="useSuggestedCutoff" data-fid="cutsug">Usar el corte sugerido (' + Math.round(CONFIG.CUTOFF_FRACTION * 100) + '% del plazo)</button></div>' +
       '<div class="evmGrid">' +
       card(usd(m.BAC), "BAC — Presupuesto al cierre") + card(usd(m.PV), "VP — Valor planificado") + card(usd(m.EV), "VE — Valor ganado") +
@@ -991,10 +1059,10 @@
       if (rc && rg && rc.toLowerCase() === rg.toLowerCase()) add(G1, "warn", "La reserva de contingencia y la de gestión tienen el mismo texto: son distintas en propósito y en quién autoriza su uso.");
       if (rc && !risks.length) add(G1, "warn", "Hay reserva de contingencia pero el registro de riesgos está vacío: la contingencia se asigna a riesgos conocidos e identificados.");
     }
-    var ab = parseBudget(charter.budget);
+    var ab = parseBudget(charter.budget), tb = targetBudget(), appr = approvedCostImpact();
     if (ab === null) add(G1, "warn", "El acta no tiene un presupuesto numérico para comparar con el BAC.");
-    else if (Math.abs(Math.round(m.BAC - ab)) > 1) add(G1, "miss", "El BAC (" + usd(m.BAC) + ") difiere del presupuesto del acta (" + usd(ab) + ") en " + usd(Math.abs(m.BAC - ab)) + ".");
-    else add(G1, "ok", "El BAC coincide con el presupuesto del acta (" + usd(ab) + ").");
+    else if (Math.abs(Math.round(m.BAC - tb)) > 1) add(G1, "miss", "El BAC (" + usd(m.BAC) + ") difiere del presupuesto del acta" + (appr ? " más los cambios aprobados" : "") + " (" + usd(tb) + ") en " + usd(Math.abs(m.BAC - tb)) + ".");
+    else add(G1, "ok", appr ? "El BAC coincide con el presupuesto del acta (" + usd(ab) + ") más los cambios aprobados (" + usd(appr) + ")." : "El BAC coincide con el presupuesto del acta (" + usd(ab) + ").");
     if (!stakeholders.length) add(G1, "miss", "El registro de interesados está vacío.");
     else {
       var faltan = charterStakeholderList().filter(function (c) { return !stakeholders.some(function (s) { return nameMatches(s.name, c.name); }); });
@@ -1023,6 +1091,13 @@
       else add(G2, "ok", "Todas las respuestas empiezan con una estrategia válida para su tipo.");
       var noOwn = risks.filter(function (r) { return !String(r.owner || "").trim(); });
       if (noOwn.length) add(G2, "warn", "Riesgos sin responsable: " + noOwn.map(function (r) { return r.id; }).join(", ") + ".");
+    }
+    if (EGCI && rc) {
+      var rd = reserveData();
+      if (rd.cont !== null) {
+        if (!rd.withData) add(G2, "warn", "Hay reserva de contingencia pero no cargaste probabilidad e impacto en USD de los riesgos: no se puede comparar con el VME.");
+        else { var vv = reserveVerdict(rd.cont, rd.vmeAll); add(G2, vv.k === "ok" ? "ok" : "warn", "Contingencia declarada (" + usd(rd.cont) + ") contra el VME de las amenazas (" + usd(rd.vmeAll) + "): " + vv.t + "."); }
+      }
     }
     ensureRaciPeople();
     var anyRaci = lt.some(function (t) { return raciPeople.some(function (p) { return (raciAssignments[t.id] || {})[p]; }); });
@@ -1062,6 +1137,10 @@
     if (ncr === 0) add(G3, "miss", "La solicitud de cambio está vacía.");
     else if (ncr < CR_FIELDS.length) add(G3, "warn", "La solicitud de cambio tiene " + ncr + " de " + CR_FIELDS.length + " campos completos.");
     else add(G3, "ok", "La solicitud de cambio está completa.");
+    var odi = issues.filter(function (x) { return x.status !== "Cerrado" && x.due && x.due < cutoffISO(); });
+    if (odi.length) add(G3, "warn", odi.length + " problema(s) o acción(es) vencidos a la fecha de corte: " + odi.map(function (x) { return x.id; }).join(", ") + ".");
+    var pcr = crList.filter(function (x) { return x.status === "Pendiente"; });
+    if (pcr.length) add(G3, "warn", pcr.length + " solicitud(es) de cambio pendiente(s) de decisión: " + pcr.map(function (x) { return x.id; }).join(", ") + ".");
     add(G3, "warn", "Revisá a mano que el informe final sea coherente con el acta: el alcance, el presupuesto y los riesgos tienen que reaparecer.");
     return out;
   }
@@ -1132,8 +1211,9 @@
       "2. RIESGOS REGISTRADOS (" + risks.length + ")\n" + (risks.map(function (r) { return "- [" + (r.type || "Amenaza") + " · " + r.category + "] " + r.desc + " — puntaje P×I " + riskScore(r.prob, r.impact) + "/9, respuesta: " + r.response; }).join("\n") || "— sin riesgos cargados —") + "\n\n" +
       "3. CAMBIOS (" + changeLog.length + ")\n" + (changeLog.map(function (c) { return "- " + c.fecha + " · " + c.desc + " — impacto: " + (c.impacto || "—") + " — " + c.estado + " (aprobado por: " + (c.aprobadoPor || "—") + ")"; }).join("\n") || "— sin cambios registrados —") + "\n\n" +
       "4. DECISIONES (" + decisionLog.length + ")\n" + (decisionLog.map(function (d) { return "- " + d.fecha + " · " + d.decision + " — contexto: " + (d.contexto || "—") + " (responsable: " + (d.responsable || "—") + ")"; }).join("\n") || "— sin decisiones registradas —") + "\n\n" +
-      "5. LECCIONES APRENDIDAS (" + list.length + ")\n" + list.map(function (l, i) { return (i + 1) + ". " + l; }).join("\n") + "\n\n" +
-      "6. CIERRE FORMAL\nTareas al 100%: " + tasks.filter(function (t) { return t.pct === 100; }).length + " de " + tasks.length + ".\n\n" + CONFIG.ATTRIBUTION;
+      (issues.length ? "5. PROBLEMAS Y ACCIONES (" + issues.length + ")\n" + issues.map(function (x) { return "- [" + x.type + " · " + x.status + "] " + x.id + " " + x.desc + " — responsable: " + (x.owner || "—") + (x.due ? ", límite " + x.due : "") + (x.taskId ? " (tarea " + x.taskId + ")" : ""); }).join("\n") + "\n\n" : "") +
+      (issues.length ? "6" : "5") + ". LECCIONES APRENDIDAS (" + list.length + ")\n" + list.map(function (l, i) { return (i + 1) + ". " + l; }).join("\n") + "\n\n" +
+      (issues.length ? "7" : "6") + ". CIERRE FORMAL\nTareas al 100%: " + tasks.filter(function (t) { return t.pct === 100; }).length + " de " + tasks.length + ".\n\n" + CONFIG.ATTRIBUTION;
     return txt;
   }
   function copyInforme() {
@@ -1163,6 +1243,374 @@
       }).join("") || '<span class="note">Ninguno cargado para este año.</span>') + "</div>";
   }
 
+  /* ===================== mejoras para el trabajo diario del PM ===================== */
+  function num(v) { var n = parseFloat(String(v == null ? "" : v).replace(",", ".")); return isNaN(n) ? null : n; }
+  function cutoffISO() { return workdayISO(cutoffDay); }
+  function idx2(n) { return isFinite(n) ? n.toFixed(2) : "—"; }
+  function lightOf(v, ok, warn) { return v >= ok ? "verde" : (v >= warn ? "ámbar" : "rojo"); }
+  function lightClass(l) { return l === "verde" ? "ok" : (l === "ámbar" ? "warn" : (l === "rojo" ? "bad" : "na")); }
+  function caseTitle() { return CASOS[currentProjectId] ? CASOS[currentProjectId].title : ""; }
+  function isThreat(r) { return r.type !== "Oportunidad"; }
+  function isOpenRisk(r) { return !r.status || r.status === "Abierto"; }
+  function dl(name, mime, content) {
+    var blob = new Blob([content], { type: mime }), url = URL.createObjectURL(blob), a = document.createElement("a");
+    a.href = url; a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+  }
+
+  /* ---- 1. informe de estado semanal ---- */
+  // Una tarea está atrasada si, a la fecha de corte, tendría que llevar al menos 10 puntos más de avance que el que tiene (contra la línea base vigente).
+  function statusData() {
+    var m = computeEVM(), cut = cutoffDay, late = [], critLate = [];
+    leafTasks().forEach(function (t) {
+      var pr = m.planned.schedule[t.id] || { es: t._es, ef: t._ef, dur: t.dur };
+      var exp = pr.dur > 0 ? Math.max(0, Math.min(100, (cut - pr.es) / pr.dur * 100)) : (pr.es < cut ? 100 : 0);
+      if (exp - t.pct >= 10) { var row = { t: t, exp: Math.round(exp) }; late.push(row); if (t.critical) critLate.push(row); }
+    });
+    var thr = risks.filter(function (r) { return isThreat(r) && isOpenRisk(r); }).map(function (r) { return { r: r, sc: riskScore(r.prob, r.impact) }; }).sort(function (a, b) { return b.sc - a.sc; });
+    var today = cutoffISO(), openIssues = issues.filter(function (x) { return x.status !== "Cerrado"; });
+    var overdue = openIssues.filter(function (x) { return x.due && x.due < today; });
+    var sched = m.PV > 0 ? lightOf(m.SPI, 0.95, 0.85) : "sin dato";
+    var cost = m.acEstimated ? "sin dato" : lightOf(m.CPI, 0.95, 0.85);
+    var rk = !thr.length ? (risks.length ? "verde" : "sin dato") : (riskClass(thr[0].sc) === "r" ? "rojo" : (riskClass(thr[0].sc) === "a" ? "ámbar" : "verde"));
+    var approved = changeLog.filter(function (c) { return c.estado === "Aprobado"; });
+    return { m: m, late: late, critLate: critLate, thr: thr, openIssues: openIssues, overdue: overdue, sched: sched, cost: cost, rk: rk, approved: approved, today: today };
+  }
+  function listLines(arr, max) { return arr.slice(0, max).join("\n") + (arr.length > max ? "\n… y " + (arr.length - max) + " más" : ""); }
+  function statusRows(d) {
+    var m = d.m;
+    return [
+      ["Fecha de corte", d.today],
+      ["Estado del cronograma", d.sched.toUpperCase() + (m.PV > 0 ? " · SPI " + idx2(m.SPI) : "")],
+      ["Estado del costo", d.cost.toUpperCase() + (m.acEstimated ? " · falta cargar el costo real" : " · CPI " + idx2(m.CPI))],
+      ["Estado de los riesgos", d.rk.toUpperCase() + (d.thr.length ? " · " + d.thr.length + " amenaza(s) abierta(s), la más alta con puntaje " + d.thr[0].sc + "/9" : "")],
+      ["Avance planificado / real", pct(m.PV, m.BAC) + " / " + pct(m.EV, m.BAC)],
+      ["BAC", usd(m.BAC)], ["VP (valor planificado)", usd(m.PV)], ["VE (valor ganado)", usd(m.EV)],
+      ["CA (costo real)", usd(m.AC) + (m.acEstimated ? " — estimado igual al VE, sin costo real cargado" : "")],
+      ["CPI / SPI", idx2(m.CPI) + " / " + idx2(m.SPI)], ["CV / SV", usd(m.CV) + " / " + usd(m.SV)], ["EAC / VAC", usd(m.EAC) + " / " + usd(m.VAC)],
+      ["Ruta crítica", tasks.filter(function (t) { return t.critical; }).map(function (t) { return t.id; }).join(", ") || "—"],
+      ["Tareas críticas atrasadas (" + d.critLate.length + ")", d.critLate.length ? listLines(d.critLate.map(function (x) { return x.t.id + " " + x.t.name + ": " + x.t.pct + "% real, " + x.exp + "% esperado"; }), 6) : "Ninguna"],
+      ["Otras tareas atrasadas (" + (d.late.length - d.critLate.length) + ")", d.late.length - d.critLate.length ? listLines(d.late.filter(function (x) { return !x.t.critical; }).map(function (x) { return x.t.id + " " + x.t.name; }), 6) : "Ninguna"],
+      ["Riesgos más altos", d.thr.length ? listLines(d.thr.slice(0, 3).map(function (x) { return x.r.id + " (" + x.sc + "/9): " + x.r.desc; }), 3) : "Sin amenazas abiertas"],
+      ["Cambios aprobados (" + d.approved.length + ")", d.approved.length ? listLines(d.approved.map(function (c) { return c.fecha + " · " + c.desc + (c.impacto ? " (" + c.impacto + ")" : ""); }), 5) : "Ninguno"],
+      ["Problemas abiertos / acciones vencidas", d.openIssues.length + " / " + d.overdue.length + (d.overdue.length ? "\n" + listLines(d.overdue.map(function (x) { return x.id + " " + x.desc + " (límite " + x.due + ", " + (x.owner || "sin responsable") + ")"; }), 4) : "")],
+      ["Línea base usada", m.planned.label]
+    ];
+  }
+  function buildStatusText() {
+    var d = statusData(), m = d.m, t = caseTitle(), L = [];
+    L.push("Asunto: Informe de estado — " + t + " — corte al " + d.today, "");
+    L.push("Estado general: cronograma " + d.sched.toUpperCase() + ", costo " + d.cost.toUpperCase() + ", riesgos " + d.rk.toUpperCase() + ".");
+    L.push("Avance: " + pct(m.EV, m.BAC) + " real contra " + pct(m.PV, m.BAC) + " planificado. SPI " + idx2(m.SPI) + ", CPI " + idx2(m.CPI) + (m.acEstimated ? " (sin costo real cargado, el costo no es informativo)" : "") + ".", "");
+    L.push("Cronograma: " + (d.critLate.length ? d.critLate.length + " tarea(s) crítica(s) atrasada(s): " + d.critLate.slice(0, 4).map(function (x) { return x.t.id + " " + x.t.name; }).join("; ") + "." : "ninguna tarea crítica atrasada.") + (d.late.length - d.critLate.length ? " Otras tareas atrasadas: " + (d.late.length - d.critLate.length) + "." : ""));
+    L.push("Costo: BAC " + usd(m.BAC) + ", valor ganado " + usd(m.EV) + ", costo real " + usd(m.AC) + (m.acEstimated ? " (estimado)" : "") + ", estimación al cierre " + usd(m.EAC) + ".");
+    L.push("Riesgos: " + (d.thr.length ? d.thr.slice(0, 3).map(function (x) { return x.r.id + " (" + x.sc + "/9) " + x.r.desc; }).join("; ") + "." : "sin amenazas abiertas."));
+    L.push("Cambios aprobados: " + (d.approved.length ? d.approved.map(function (c) { return c.desc; }).join("; ") + "." : "ninguno."));
+    L.push("Problemas y acciones: " + d.openIssues.length + " abierto(s)" + (d.overdue.length ? ", " + d.overdue.length + " vencido(s): " + d.overdue.slice(0, 4).map(function (x) { return x.id + " " + x.desc; }).join("; ") : "") + ".", "");
+    L.push(CONFIG.ATTRIBUTION);
+    return L.join("\n");
+  }
+  function renderStatusPanel() {
+    var d = statusData(), m = d.m;
+    var card = function (label, light, detail) { return '<div class="stCard st-' + lightClass(light) + '"><div class="v">' + esc(light.toUpperCase()) + '</div><div class="l">' + esc(label) + '</div><div class="d">' + esc(detail) + "</div></div>"; };
+    $("statusBody").innerHTML = '<p class="note" style="margin-top:0">Se calcula con la fecha de corte del panel de valor ganado (' + esc(d.today) + ') y la línea base ' + esc(m.planned.label) + '. Semáforo de cronograma y de costo: verde desde 0,95, ámbar desde 0,85, rojo por debajo. Semáforo de riesgos: según el puntaje más alto de las amenazas abiertas. Una tarea cuenta como atrasada si, a la fecha de corte, tendría que llevar al menos 10 puntos más de avance que el que tiene.</p>' +
+      '<div class="stGrid">' + card("Cronograma", d.sched, m.PV > 0 ? "SPI " + idx2(m.SPI) : "sin valor planificado") + card("Costo", d.cost, m.acEstimated ? "cargá el costo real" : "CPI " + idx2(m.CPI)) + card("Riesgos", d.rk, d.thr.length ? "puntaje máximo " + d.thr[0].sc + "/9" : "sin amenazas abiertas") + "</div>" +
+      '<div class="evmActions"><button type="button" data-action="copyStatus" data-fid="st:copy">Copiar texto para el correo</button><button type="button" class="primary" data-action="exportStatusPdf" data-fid="st:pdf">Exportar PDF de una página</button></div>' +
+      '<div id="statusBox" class="cierreBox">' + esc(buildStatusText()) + "</div>" +
+      '<h3 style="margin:16px 0 8px;font-size:13px">Detalle del informe</h3>' + tblHtml(["Indicador", "Valor"], statusRows(d));
+  }
+  function copyStatus() {
+    if (!navigator.clipboard) { notify("Tu navegador no permite copiar automáticamente. Seleccioná el texto manualmente."); return; }
+    navigator.clipboard.writeText(buildStatusText()).then(function () { track("exportar_informe_estado", { formato: "texto", caso_id: currentProjectId }); notify("Informe copiado: pegalo en el cuerpo del correo."); }, function () { notify("No se pudo copiar automáticamente. Seleccioná el texto manualmente."); });
+  }
+  function exportStatusPdf() {
+    var d = statusData();
+    $("printArea").innerHTML = '<div class="onepage"><h1>Informe de estado — ' + esc(caseTitle()) + '</h1><div class="sub">Corte al ' + esc(d.today) + " · Patrocinador: " + esc(charter.sponsor || "—") + " · Generado " + esc(dateToISO(new Date())) + "</div>" + tblHtml(["Indicador", "Valor"], statusRows(d)) + '<div class="attribPrint">' + esc(CONFIG.ATTRIBUTION) + "</div></div>";
+    var prev = document.title; document.title = "Informe_estado_" + currentProjectId + "_" + d.today;
+    window.addEventListener("afterprint", function () { document.title = prev; }, { once: true });
+    track("exportar_informe_estado", { formato: "pdf", caso_id: currentProjectId });
+    notify("En el cuadro de impresión elegí \"Guardar como PDF\".");
+    setTimeout(function () { window.print(); }, 200);
+  }
+
+  /* ---- 3. registro de problemas y acciones ---- */
+  var ISSUE_STATUS = ["Abierto", "En curso", "Cerrado"];
+  function nextIssueId(type) { var p = type === "Acción" ? "AC" : "PR", n = 1; while (issues.some(function (x) { return x.id === p + n; })) n++; return p + n; }
+  function addIssue() {
+    var none = "(ninguna)";
+    return askForm("Agregar problema o acción", [
+      { key: "type", label: "Tipo", type: "select", options: ["Problema", "Acción"], value: "Problema", hint: "Problema: algo que ya ocurrió y hay que resolver (un riesgo que ocurrió pasa a ser un problema). Acción: algo que una persona tiene que hacer." },
+      { key: "desc", label: "Descripción", value: "", required: true },
+      { key: "owner", label: "Responsable", value: "PM" },
+      { key: "due", label: "Fecha límite (opcional)", type: "date", value: "" },
+      { key: "taskId", label: "Tarea vinculada", type: "select", options: [none].concat(tasks.map(function (t) { return t.id; })), value: none }
+    ], "Agregar").then(function (r) {
+      if (!r) return; pushHistory();
+      issues.push({ id: nextIssueId(r.type), type: r.type, desc: r.desc.trim(), owner: r.owner || "PM", due: r.due || "", status: "Abierto", taskId: r.taskId === none ? "" : r.taskId });
+      render();
+    });
+  }
+  function renderIssuesPanel() {
+    var today = cutoffISO(), open = issues.filter(function (x) { return x.status !== "Cerrado"; }), late = open.filter(function (x) { return x.due && x.due < today; });
+    function inp(x, key, label, w, type) { return '<input type="' + (type || "text") + '" class="cell-input" style="width:' + w + '" value="' + esc(x[key] || "") + '" data-change="issueField" data-id="' + esc(x.id) + '" data-key="' + key + '" data-fid="is:' + key + ":" + esc(x.id) + '" aria-label="' + label + " de " + esc(x.id) + '">'; }
+    function sel(x, key, label, list) { return '<select class="cell-input" data-change="issueField" data-id="' + esc(x.id) + '" data-key="' + key + '" data-fid="is:' + key + ":" + esc(x.id) + '" aria-label="' + label + " de " + esc(x.id) + '">' + list.map(function (o) { return '<option value="' + esc(o[0]) + '"' + (x[key] === o[0] ? " selected" : "") + ">" + esc(o[1]) + "</option>"; }).join("") + "</select>"; }
+    var taskOpts = [["", "—"]].concat(tasks.map(function (t) { return [t.id, t.id]; })), stOpts = ISSUE_STATUS.map(function (s) { return [s, s]; });
+    var h = '<p class="note" style="margin-top:0">' + open.length + " abierto(s), " + late.length + " vencido(s) a la fecha de corte (" + esc(today) + "), " + (issues.length - open.length) + ' cerrado(s). Un problema ya ocurrió; un riesgo que se materializa pasa acá. Este registro alimenta el informe de estado y sirve de insumo al escribir las lecciones aprendidas: las lecciones las redactás vos.</p>' +
+      '<div class="evmActions"><button type="button" data-action="addIssue" data-fid="is:add">Agregar problema o acción</button></div>' +
+      '<table class="simpletable"><caption class="sr-only">Registro de problemas y acciones</caption><thead><tr><th scope="col">ID</th><th scope="col">Tipo</th><th scope="col">Descripción</th><th scope="col">Responsable</th><th scope="col">Fecha límite</th><th scope="col">Estado</th><th scope="col">Tarea</th><th scope="col"><span class="sr-only">Acciones</span></th></tr></thead><tbody>' +
+      (issues.map(function (x) {
+        var isLate = x.status !== "Cerrado" && x.due && x.due < today;
+        return '<tr class="' + (isLate ? "issueLate" : "") + '"><td>' + esc(x.id) + "</td><td>" + esc(x.type) + "</td><td>" + inp(x, "desc", "Descripción", "260px") + "</td><td>" + inp(x, "owner", "Responsable", "110px") + "</td><td>" + inp(x, "due", "Fecha límite", "130px", "date") + (isLate ? ' <b class="issueTag">Vencido</b>' : "") + "</td><td>" + sel(x, "status", "Estado", stOpts) + "</td><td>" + sel(x, "taskId", "Tarea vinculada", taskOpts) +
+          '</td><td><button type="button" class="delBtn" data-action="deleteIssue" data-id="' + esc(x.id) + '" data-fid="is:del:' + esc(x.id) + '" aria-label="Eliminar ' + esc(x.id) + '">✕</button></td></tr>';
+      }).join("") || '<tr><td colspan="8">Todavía no hay problemas ni acciones registrados.</td></tr>') + "</tbody></table>";
+    h += '<h3 style="margin:18px 0 8px;font-size:13px">Decisiones registradas (se cargan en el panel de cierre)</h3><table class="simpletable"><caption class="sr-only">Decisiones registradas</caption><thead><tr><th scope="col">Fecha</th><th scope="col">Decisión</th><th scope="col">Responsable</th></tr></thead><tbody>' +
+      (decisionLog.map(function (d) { return "<tr><td>" + esc(d.fecha) + "</td><td>" + esc(d.decision) + "</td><td>" + esc(d.responsable) + "</td></tr>"; }).join("") || '<tr><td colspan="3">Sin decisiones registradas.</td></tr>') + "</tbody></table>";
+    $("issuesBody").innerHTML = h;
+  }
+
+  /* ---- 5. estimación de tres puntos (PERT) y probabilidad de cumplir la fecha ---- */
+  var simResult = null;
+  function hasThree(t) { return isNum(t.opt) && isNum(t.pess); }
+  function pertExpected(t) { return hasThree(t) ? (t.opt + 4 * t.dur + t.pess) / 6 : t.dur; }
+  function pertSd(t) { return hasThree(t) ? (t.pess - t.opt) / 6 : 0; }
+  function threeOk(t) { return !hasThree(t) || (t.opt <= t.dur && t.dur <= t.pess); }
+  function normCdf(z) { // aproximación de Abramowitz y Stegun, error menor a 1,5e-7
+    var s = z < 0 ? -1 : 1, x = Math.abs(z) / Math.SQRT2, p = 0.3275911, tt = 1 / (1 + p * x);
+    var y = 1 - (((((1.061405429 * tt - 1.453152027) * tt) + 1.421413741) * tt - 0.284496736) * tt + 0.254829592) * tt * Math.exp(-x * x);
+    return 0.5 * (1 + s * y);
+  }
+  function mulberry32(a) { return function () { a |= 0; a = a + 0x6D2B79F5 | 0; var t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+  function triSample(u, a, c, b) { if (b <= a) return a; c = Math.min(Math.max(c, a), b); var fc = (c - a) / (b - a); return u < fc ? a + Math.sqrt(u * (b - a) * (c - a)) : b - Math.sqrt((1 - u) * (b - a) * (b - c)); }
+  function commitDay() { return dayOffsetFromDate(plannedFinishDate()) + 1; } // fin comprometido, en días hábiles desde el inicio (límite exclusivo)
+  // PERT sobre la red: se calcula el cronograma con la duración esperada de cada tarea; el desvío estándar sale de las tareas críticas de esa red.
+  function pertAnalysis() {
+    computeSchedule(tasks);
+    var list = cloneTasks(tasks);
+    list.forEach(function (t) { t.dur = pertExpected(taskById(t.id)); });
+    var res = computeScheduleOn(list), crit = list.filter(function (t) { return Math.abs(t.slack) < 1e-6 && !t.cycleError; });
+    var variance = crit.reduce(function (s, t) { var sd = pertSd(taskById(t.id)); return s + sd * sd; }, 0), sd = Math.sqrt(variance), E = res.projectEnd, commit = commitDay();
+    var P = sd > 0 ? normCdf((commit - E) / sd) : (E <= commit + 1e-9 ? 1 : 0);
+    return { E: E, sd: sd, P: P, commit: commit, date: workdayISO(Math.max(0, Math.ceil(E - 1e-9) - 1)), critIds: crit.map(function (t) { return t.id; }) };
+  }
+  function threeSignature() {
+    return JSON.stringify(tasks.map(function (t) { return [t.id, t.dur, t.opt, t.pess, t.preds, t.deps, t.levelDelay, t.overlapDays]; })) + "|" + commitDay() + "|" + startDateValue() + "|" + holidays.length;
+  }
+  // Simulación: cada tarea toma una duración al azar entre optimista y pesimista (distribución triangular con la probable como moda); se recalcula la red completa cada vez.
+  function runSimulation() {
+    var list = cloneTasks(tasks), n = 3000, rnd = mulberry32(20261010), ends = [], commit = commitDay();
+    if (!list.some(hasThree)) { notify("Cargá al menos una tarea con duración optimista y pesimista para simular."); return; }
+    list.forEach(function (t) { t._m = t.dur; });
+    for (var i = 0; i < n; i++) {
+      list.forEach(function (t) { t.dur = hasThree(t) ? Math.max(0, Math.round(triSample(rnd(), t.opt, t._m, t.pess))) : t._m; });
+      ends.push(computeScheduleOn(list).projectEnd);
+    }
+    ends.sort(function (a, b) { return a - b; });
+    var q = function (p) { return workdayISO(Math.max(0, ends[Math.min(n - 1, Math.floor(p * n))] - 1)); };
+    var ok = ends.filter(function (e) { return e <= commit; }).length;
+    simResult = { sig: threeSignature(), n: n, P: ok / n, p50: q(0.5), p80: q(0.8), p90: q(0.9) };
+    track("simular_fecha", { caso_id: currentProjectId });
+    render();
+  }
+  function renderThreePanel() {
+    var lt = leafTasks().filter(function (t) { return t.dur > 0; }), any = lt.some(hasThree), pa = pertAnalysis(), plannedEnd = plannedFinishDate();
+    var pc = function (p) { return (p * 100).toFixed(0) + " %"; };
+    var card = function (v, l, warn) { return '<div class="evmCard' + (warn ? " warn" : "") + '"><div class="v">' + v + '</div><div class="l">' + l + "</div></div>"; };
+    var h = '<p class="note" style="margin-top:0">Duración probable = la duración de la tabla de tareas. Cargá la optimista y la pesimista de las tareas que más incertidumbre tienen (las demás se toman como fijas). Duración esperada de cada tarea = (optimista + 4 × probable + pesimista) ÷ 6; desvío estándar = (pesimista − optimista) ÷ 6. La fecha comprometida es el fin planificado: <b>' + esc(plannedEnd) + "</b>.</p>";
+    if (any) {
+      h += '<div class="evmGrid">' + card(esc(pa.date), "Fin esperado (PERT)", pa.E - 1e-9 > pa.commit) + card(pa.E.toFixed(1) + " d", "Duración esperada del proyecto") + card(pa.sd.toFixed(1) + " d", "Desvío estándar (tareas críticas)") + card(pc(pa.P), "Probabilidad de cumplir la fecha (PERT, distribución normal)", pa.P < 0.5) + "</div>";
+      var fresh = simResult && simResult.sig === threeSignature();
+      h += '<div class="evmActions"><button type="button" class="primary" data-action="runSim" data-fid="th:sim">' + (fresh ? "Recalcular simulación" : "Simular fecha de fin (3.000 corridas)") + "</button></div>";
+      if (fresh) h += '<div class="evmGrid">' + card(pc(simResult.P), "Probabilidad de cumplir la fecha (simulación)", simResult.P < 0.5) + card(esc(simResult.p50), "Fin con 50 % de confianza") + card(esc(simResult.p80), "Fin con 80 % de confianza") + card(esc(simResult.p90), "Fin con 90 % de confianza") + "</div>";
+      else if (simResult) h += '<p class="banner" role="status" style="border:1px solid var(--gantt-near)">La simulación quedó desactualizada: cambiaste duraciones, dependencias o la fecha comprometida. Volvé a simularla.</p>';
+      h += '<p class="note">El PERT suma lo que pasa en las tareas críticas de la red con duraciones esperadas y supone independencia entre tareas. La simulación recalcula la red completa miles de veces, así que también captura las rutas casi críticas que pueden pasar a ser críticas. Los dos métodos suponen tareas independientes y estimaciones razonables: si las estimaciones son optimistas, la probabilidad también lo es.</p>';
+    } else h += '<p class="banner" role="status" style="border:1px solid var(--gantt-near)">Todavía no cargaste ninguna estimación de tres puntos. Cargá optimista y pesimista en al menos una tarea para ver la probabilidad de cumplir la fecha.</p>';
+    h += '<div class="evmActions"><button type="button" data-action="threeExample" data-fid="th:ex">Cargar un rango de ejemplo en la ruta crítica (−20 % / +50 %)</button><button type="button" data-action="threeClear" data-fid="th:clr">Borrar todas las estimaciones</button></div>';
+    h += '<table class="simpletable"><caption class="sr-only">Estimaciones de tres puntos por tarea</caption><thead><tr><th scope="col">Tarea</th><th scope="col">Optimista</th><th scope="col">Probable</th><th scope="col">Pesimista</th><th scope="col">Esperada (PERT)</th><th scope="col">Desvío</th><th scope="col">Control</th></tr></thead><tbody>' + lt.map(function (t) {
+      var id = esc(t.id);
+      function f(k, lab) { return '<input type="number" class="cell-input" style="width:76px" min="0" max="2000" placeholder="—" value="' + (isNum(t[k]) ? t[k] : "") + '" data-change="threeField" data-id="' + id + '" data-key="' + k + '" data-fid="th:' + k + ":" + id + '" aria-label="Duración ' + lab + " de la tarea " + id + '">'; }
+      return "<tr><td>" + id + " " + esc(t.name) + (t.critical ? ' <b class="issueTag">crítica</b>' : "") + "</td><td>" + f("opt", "optimista") + "</td><td>" + t.dur + "</td><td>" + f("pess", "pesimista") + "</td><td>" + (hasThree(t) ? pertExpected(t).toFixed(1) : "—") + "</td><td>" + (hasThree(t) ? pertSd(t).toFixed(2) : "—") + "</td><td>" + (threeOk(t) ? "" : '<b class="issueTag">Optimista ≤ probable ≤ pesimista</b>') + "</td></tr>";
+    }).join("") + "</tbody></table>";
+    $("threeBody").innerHTML = h;
+  }
+
+  /* ---- 2. análisis de reservas con valor monetario esperado (VME), versión alumnos ---- */
+  var RISK_STATUS = ["Abierto", "Ocurrió", "Cerrado sin ocurrir"];
+  function riskMoney(r) { var p = num(r.probPct), i = num(r.impactUsd); return (p === null || i === null) ? null : Math.round(p / 100 * i); }
+  // Criterio didáctico: falta si la reserva es menor que el VME; alcanza si lo cubre con hasta 25 % de margen; sobra si lo supera por más de eso.
+  function reserveVerdict(reserve, need) {
+    if (!(need > 0)) return { k: "na", t: "sin VME cargado" };
+    var ratio = reserve / need;
+    if (ratio < 1) return { k: "bad", t: "FALTA: la reserva cubre " + Math.round(ratio * 100) + " % del VME" };
+    if (ratio <= 1.25) return { k: "ok", t: "ALCANZA: cubre el VME con un margen de hasta 25 %" };
+    return { k: "warn", t: "SOBRA: es más de 1,25 veces el VME; revisá si está inflada" };
+  }
+  function reserveData() {
+    var thr = risks.filter(isThreat), opp = risks.filter(function (r) { return !isThreat(r); });
+    var sum = function (arr, f) { return arr.reduce(function (s, r) { return s + (f(r) || 0); }, 0); };
+    return { cont: parseBudget(charter.contingency), mg: parseBudget(charter.mgmtReserve), vmeAll: sum(thr, riskMoney), vmeOpen: sum(thr.filter(isOpenRisk), riskMoney),
+      consumed: sum(thr.filter(function (r) { return r.status === "Ocurrió"; }), function (r) { return num(r.actualCost); }),
+      vmeOpp: sum(opp.filter(function (r) { return r.status !== "Cerrado sin ocurrir"; }), riskMoney), withData: risks.filter(function (r) { return riskMoney(r) !== null; }).length };
+  }
+  function renderReservesPanel() {
+    var d = reserveData(), none = d.cont === null;
+    var card = function (v, l, warn) { return '<div class="evmCard' + (warn ? " warn" : "") + '"><div class="v">' + v + '</div><div class="l">' + l + "</div></div>"; };
+    var h = '<p class="note" style="margin-top:0">VME = probabilidad × impacto en USD de cada riesgo. La contingencia se compara con el VME de las <b>amenazas</b> (riesgos conocidos, dentro de la línea base); las oportunidades no la aumentan. La reserva de gestión es para riesgos desconocidos, queda fuera de la línea base y no se asigna a un riesgo puntual. Las dos son opcionales (PMBOK 8).</p>';
+    h += '<p class="note">Monto de contingencia leído del acta: <b>' + (none ? "ninguno (el texto no tiene un monto)" : usd(d.cont)) + "</b>. Se toma el primer número del texto del campo; si no es el monto, escribilo primero, por ejemplo \"USD 90.000\". Reserva de gestión declarada: <b>" + (d.mg === null ? "ninguna con monto" : usd(d.mg)) + "</b> (fuera de la línea base).</p>";
+    h += '<div class="evmGrid">' + card(usd(d.vmeAll), "VME de las amenazas (dimensionamiento)") + card(usd(d.vmeOpen), "VME de las amenazas todavía abiertas") + card(usd(d.consumed), "Consumo real (riesgos que ocurrieron)", !none && d.consumed > d.cont) + card(usd(d.vmeOpp), "VME de las oportunidades (informativo)") + (none ? "" : card(usd(d.cont - d.consumed), "Saldo de la contingencia", d.cont - d.consumed < 0)) + "</div>";
+    if (none) h += '<p class="banner" role="status" style="border:1px solid var(--gantt-near)">El acta no declara un monto de contingencia. El VME de las amenazas es ' + usd(d.vmeAll) + ': decidí si lo cubrís con una reserva, si aceptás el riesgo de forma pasiva o si respondés de otra manera. No tener reserva es una decisión válida si está explicada.</p>';
+    else {
+      var v1 = reserveVerdict(d.cont, d.vmeAll), saldo = d.cont - d.consumed, v2 = reserveVerdict(Math.max(0, saldo), d.vmeOpen);
+      h += '<ul class="checkList"><li class="chk ' + v1.k + '"><span class="tag">Inicio</span> Contingencia declarada (' + usd(d.cont) + ") contra el VME de todas las amenazas (" + usd(d.vmeAll) + "): " + esc(v1.t) + ".</li>" +
+        '<li class="chk ' + (saldo < 0 ? "bad" : v2.k) + '"><span class="tag">Hoy</span> ' + (saldo < 0 ? "La contingencia se agotó: los riesgos que ocurrieron costaron " + usd(d.consumed) + ", " + usd(-saldo) + " más que la reserva. Lo que excede no sale de la línea base: hace falta una solicitud de cambio, que puede financiarse con reserva de gestión si la dirección la autoriza." : "Saldo de contingencia (" + usd(saldo) + ") contra el VME de las amenazas abiertas (" + usd(d.vmeOpen) + "): " + esc(v2.t) + ".") + "</li></ul>";
+    }
+    h = h.replace(/class="chk bad"/g, 'class="chk miss"');
+    h += '<table class="simpletable"><caption class="sr-only">Análisis monetario de los riesgos</caption><thead><tr><th scope="col">Riesgo</th><th scope="col">Tipo</th><th scope="col">Probabilidad (%)</th><th scope="col">Impacto (USD)</th><th scope="col">VME (USD)</th><th scope="col">Estado</th><th scope="col">Costo real (USD)</th></tr></thead><tbody>' + (risks.map(function (r) {
+      var id = esc(r.id), vm = riskMoney(r), st = r.status || "Abierto";
+      return "<tr><td>" + id + " " + esc(r.desc) + "</td><td>" + esc(r.type || "Amenaza") + '</td><td><input type="number" class="cell-input" style="width:80px" min="0" max="100" placeholder="—" value="' + esc(r.probPct || "") + '" data-change="riskField" data-id="' + id + '" data-key="probPct" data-fid="rf:probPct:' + id + '" aria-label="Probabilidad en porcentaje del riesgo ' + id + '"></td>' +
+        '<td><input type="number" class="cell-input" style="width:110px" min="0" placeholder="—" value="' + esc(r.impactUsd || "") + '" data-change="riskField" data-id="' + id + '" data-key="impactUsd" data-fid="rf:impactUsd:' + id + '" aria-label="Impacto en dólares del riesgo ' + id + '"></td><td>' + (vm === null ? "—" : usd(vm)) + "</td>" +
+        '<td><select class="cell-input" data-change="riskField" data-id="' + id + '" data-key="status" data-fid="rf:status:' + id + '" aria-label="Estado del riesgo ' + id + '">' + RISK_STATUS.map(function (s) { return '<option value="' + esc(s) + '"' + (st === s ? " selected" : "") + ">" + esc(s) + "</option>"; }).join("") + "</select></td>" +
+        '<td>' + (r.status === "Ocurrió" ? '<input type="number" class="cell-input" style="width:110px" min="0" placeholder="—" value="' + esc(r.actualCost || "") + '" data-change="riskField" data-id="' + id + '" data-key="actualCost" data-fid="rf:actualCost:' + id + '" aria-label="Costo real incurrido del riesgo ' + id + '">' : "—") + "</td></tr>";
+    }).join("") || '<tr><td colspan="7">Todavía no hay riesgos: cargalos en el registro de riesgos.</td></tr>') + "</tbody></table>";
+    $("reservesBody").innerHTML = h;
+  }
+
+  /* ---- 4. control de cambios completo, versión alumnos ---- */
+  function crApplied(c) { return c.status === "Aprobada" && !!c.baselineName; }
+  function approvedCostImpact() { return crList.filter(crApplied).reduce(function (s, c) { return s + (num(c.impactCost) || 0); }, 0); }
+  function caseBac() {
+    var proj = CASOS[currentProjectId]; if (!proj) return 0;
+    return proj.tasks.reduce(function (s, t) { return s + t.dur * ((t.dailyCost !== undefined && t.dailyCost !== null) ? t.dailyCost : defaultDailyCost(t.resource)); }, 0);
+  }
+  function nextCrId() { var n = crList.length + 1; while (crList.some(function (x) { return x.id === "SC" + n; })) n++; return "SC" + n; }
+  function crTaskCheck(taskId, days, cost) {
+    if (!taskId) return (days || cost) ? "Elegí la tarea que absorbe el impacto para poder aplicarlo." : "";
+    var t = taskById(taskId); if (!t) return "La tarea elegida no existe.";
+    var nd = Math.max(0, t.dur + days);
+    if (nd === 0 && (cost !== 0 || t.dur > 0)) return "La tarea " + taskId + " quedaría con duración 0 y no se puede repartir el costo en ella. Elegí otra tarea o cambiá los días.";
+    return "";
+  }
+  function addCr() {
+    var none = "(ninguna)", lt = leafTasks();
+    return askForm("Nueva solicitud de cambio", [
+      { key: "title", label: "Título", value: "", required: true },
+      { key: "requester", label: "Solicitante", value: "" },
+      { key: "desc", label: "Descripción y justificación", type: "textarea", rows: 3, value: "" },
+      { key: "task", label: "Tarea que absorbe el impacto", type: "select", options: [none].concat(lt.map(function (t) { return t.id + " " + t.name; })), value: none, hint: "El impacto en días se suma a la duración de esa tarea y el cronograma se recalcula al aprobar." },
+      { key: "impactDays", label: "Impacto en el cronograma: días hábiles de más (o de menos, con signo menos) en esa tarea", type: "number", value: 0, required: true },
+      { key: "impactCost", label: "Impacto en el costo: cambio total del BAC en USD (con signo menos si baja)", type: "number", value: 0, required: true, hint: "La herramienta ajusta el costo diario de esa tarea para que el BAC cambie exactamente este monto. Si alargar la tarea cuesta más, ponelo acá." },
+      { key: "impactScope", label: "Impacto en el alcance, los riesgos y la calidad", value: "" }
+    ], "Registrar", function (v) { return crTaskCheck(v.task === none ? "" : v.task.split(" ")[0], v.impactDays, v.impactCost); }).then(function (r) {
+      if (!r) return; pushHistory();
+      crList.push({ id: nextCrId(), title: r.title.trim(), requester: r.requester, desc: r.desc, taskId: r.task === none ? "" : r.task.split(" ")[0], impactDays: String(r.impactDays), impactCost: String(r.impactCost), impactScope: r.impactScope, status: "Pendiente", who: "", date: "", baselineName: "", bacBefore: "", bacAfter: "", endBefore: "", endAfter: "" });
+      render();
+    });
+  }
+  function fmtImpact(dd, dc, t) { return (dd ? (dd > 0 ? "+" : "") + dd + " días" : "sin cambio de plazo") + ", " + (dc ? (dc > 0 ? "+" : "−") + usd(Math.abs(dc)) : "sin cambio de costo") + (t ? " (tarea " + t.id + ")" : ""); }
+  function nextChangeLogId() { var n = changeLog.length + 1; while (changeLog.some(function (x) { return x.id === "CH" + n; })) n++; return "CH" + n; }
+  function applyChangeRequest(c, who, date) {
+    var t = c.taskId ? taskById(c.taskId) : null, dd = Math.round(num(c.impactDays) || 0), dc = num(c.impactCost) || 0;
+    var err = crTaskCheck(c.taskId, dd, dc); if (err) { notify(err); return; }
+    pushHistory();
+    var bacBefore = computeEVM().BAC, endBefore = computeSchedule(tasks).projectEnd;
+    if (t) t.dur = Math.max(0, t.dur + dd);
+    var res = computeSchedule(tasks), snap = {};
+    tasks.forEach(function (x) { snap[x.id] = { es: res.byId[x.id]._es, ef: res.byId[x.id]._ef }; });
+    var name = "Línea base " + (baselines.length + 1) + " (" + c.id + ")", bl = { name: name, byId: snap, projectEnd: res.projectEnd, visible: true, bac: 0 };
+    baselines.push(bl);
+    if (t) {
+      var m1 = computeEVM(), refDur = snap[t.id].ef - snap[t.id].es, delta = bacBefore + dc - m1.BAC;
+      if (refDur > 0 && Math.abs(delta) > 0.001) t.dailyCost = Math.round((getDailyCost(t) + delta / refDur) * 10000) / 10000;
+    }
+    var after = computeEVM(); bl.bac = after.BAC;
+    c.status = "Aprobada"; c.who = who; c.date = date; c.baselineName = name;
+    c.bacBefore = String(Math.round(bacBefore)); c.bacAfter = String(Math.round(after.BAC)); c.endBefore = String(endBefore); c.endAfter = String(res.projectEnd);
+    changeLog.push({ id: nextChangeLogId(), fecha: date, desc: c.id + " · " + c.title, impacto: fmtImpact(dd, dc, t) + " · " + name, estado: "Aprobado", aprobadoPor: who });
+    track("aprobar_cambio", { caso_id: currentProjectId });
+    render();
+    notify("Cambio " + c.id + " aprobado y aplicado: BAC de " + usd(bacBefore) + " a " + usd(after.BAC) + ", fin del proyecto del día " + endBefore + " al " + res.projectEnd + ". Se creó la " + name + " y se asentó en el registro de cambios.");
+  }
+  function decideCr(id, decision) {
+    var c = crList.filter(function (x) { return x.id === id; })[0]; if (!c) return;
+    var verb = { Aprobada: "Aprobar y aplicar", Rechazada: "Rechazar", Diferida: "Diferir" }[decision];
+    return askForm(verb + " " + c.id + " · " + c.title, [
+      { key: "who", label: "Decide (cargo o nombre)", value: "Patrocinador", required: true },
+      { key: "date", label: "Fecha de la decisión", type: "date", value: cutoffISO(), required: true }
+    ], verb).then(function (r) {
+      if (!r) return;
+      if (decision === "Aprobada") { applyChangeRequest(c, r.who.trim(), r.date); return; }
+      pushHistory(); c.status = decision; c.who = r.who.trim(); c.date = r.date;
+      if (decision === "Rechazada") changeLog.push({ id: nextChangeLogId(), fecha: r.date, desc: c.id + " · " + c.title, impacto: fmtImpact(Math.round(num(c.impactDays) || 0), num(c.impactCost) || 0, c.taskId ? taskById(c.taskId) : null) + " · no aplicado", estado: "Rechazado", aprobadoPor: r.who.trim() });
+      render();
+    });
+  }
+  function renderChangesPanel() {
+    var m = computeEVM(), endNow = m.planned.projectEnd, origBac = caseBac(), applied = crList.filter(crApplied);
+    var card = function (v, l) { return '<div class="evmCard"><div class="v">' + v + '</div><div class="l">' + l + "</div></div>"; };
+    var h = '<p class="note" style="margin-top:0">Cada solicitud tiene su impacto en el cronograma y en el costo. Al aprobarla, la herramienta suma los días a la tarea que elegiste, recalcula el cronograma, ajusta el costo para que el BAC cambie en el monto indicado, <b>fija una nueva línea base</b> y asienta el cambio en el registro de cambios. Rechazar o diferir no toca el plan. Se puede deshacer con el botón Deshacer.</p>' +
+      '<div class="evmGrid">' + card(usd(origBac), "BAC de la línea base original") + card(usd(m.BAC), "BAC de la línea base vigente (" + esc(m.planned.label) + ")") + card("día " + originalProjectEnd + " · " + esc(workdayISO(Math.max(0, originalProjectEnd - 1))), "Fin de la línea base original") + card("día " + endNow + " · " + esc(workdayISO(Math.max(0, endNow - 1))), "Fin de la línea base vigente") + "</div>" +
+      '<p class="note">Cambios aplicados: ' + applied.length + ", con un impacto total en el BAC de " + usd(approvedCostImpact()) + ". Si el BAC difiere del presupuesto del acta por estos cambios, actualizá el acta con la solicitud de cambio correspondiente (DOC-12).</p>" +
+      '<div class="evmActions"><button type="button" data-action="addCr" data-fid="cr:add">Nueva solicitud de cambio</button></div>' +
+      '<table class="simpletable"><caption class="sr-only">Solicitudes de cambio</caption><thead><tr><th scope="col">ID</th><th scope="col">Solicitud</th><th scope="col">Tarea</th><th scope="col">Impacto</th><th scope="col">Estado</th><th scope="col">Decisión</th><th scope="col">Resultado</th><th scope="col"><span class="sr-only">Acciones</span></th></tr></thead><tbody>' +
+      (crList.map(function (c) {
+        var id = esc(c.id), pend = c.status === "Pendiente" || c.status === "Diferida", dd = Math.round(num(c.impactDays) || 0), dc = num(c.impactCost) || 0;
+        return "<tr><td>" + id + "</td><td>" + esc(c.title) + (c.requester ? "<br><small>Solicitante: " + esc(c.requester) + "</small>" : "") + "</td><td>" + esc(c.taskId || "—") + "</td><td>" + esc(fmtImpact(dd, dc, null)) + "</td><td>" + esc(c.status) + "</td><td>" + (c.who ? esc(c.who) + "<br><small>" + esc(c.date) + "</small>" : "—") + "</td><td>" +
+          (crApplied(c) ? "BAC " + usd(num(c.bacBefore)) + " → " + usd(num(c.bacAfter)) + "<br>Fin: día " + esc(c.endBefore) + " → " + esc(c.endAfter) + "<br><small>" + esc(c.baselineName) + "</small>" : "—") + "</td><td>" +
+          (pend ? '<button type="button" data-action="crApprove" data-id="' + id + '" data-fid="cr:ok:' + id + '">Aprobar y aplicar</button> <button type="button" data-action="crReject" data-id="' + id + '" data-fid="cr:no:' + id + '">Rechazar</button>' + (c.status === "Pendiente" ? ' <button type="button" data-action="crDefer" data-id="' + id + '" data-fid="cr:def:' + id + '">Diferir</button>' : "") : "") +
+          (crApplied(c) ? "" : ' <button type="button" class="delBtn" data-action="deleteCr" data-id="' + id + '" data-fid="cr:del:' + id + '" aria-label="Eliminar la solicitud ' + id + '">✕</button>') + "</td></tr>";
+      }).join("") || '<tr><td colspan="8">Todavía no hay solicitudes de cambio.</td></tr>') + "</tbody></table>";
+    $("changesBody").innerHTML = h;
+  }
+
+  /* ---- 6. calendario (.ics) con las comunicaciones y los hitos ---- */
+  function icsEscape(s) { return String(s == null ? "" : s).replace(/\\/g, "\\\\").replace(/;/g, "\;").replace(/,/g, "\\,").replace(/\r?\n/g, "\\n"); }
+  function icsFold(line) {
+    var out = "", cur = 0, first = true;
+    Array.from(line).forEach(function (ch) {
+      var cp = ch.codePointAt(0), b = cp < 0x80 ? 1 : (cp < 0x800 ? 2 : (cp < 0x10000 ? 3 : 4)), limit = first ? 75 : 74;
+      if (cur + b > limit) { out += "\r\n "; cur = 0; first = false; }
+      out += ch; cur += b;
+    });
+    return out;
+  }
+  function icsDate(iso) { return iso.replace(/-/g, ""); }
+  function icsNextDay(iso) { var d = isoToDate(iso); d.setDate(d.getDate() + 1); return dateToISO(d); }
+  function freqRule(freq) {
+    var f = String(freq || "").toLowerCase();
+    if (/diari/.test(f)) return { r: "FREQ=DAILY;BYDAY=MO,TU,WE,TH,FR" };
+    if (/quincen|bisemanal|cada 2 semanas|cada dos semanas/.test(f)) return { r: "FREQ=WEEKLY;INTERVAL=2" };
+    if (/seman/.test(f)) return { r: "FREQ=WEEKLY" };
+    if (/bimestr/.test(f)) return { r: "FREQ=MONTHLY;INTERVAL=2" };
+    if (/trimestr/.test(f)) return { r: "FREQ=MONTHLY;INTERVAL=3" };
+    if (/mensual|cada mes/.test(f)) return { r: "FREQ=MONTHLY" };
+    if (/cierre|final|fin del/.test(f)) return { at: "end" };
+    if (/inicio|kick|arranque/.test(f)) return { at: "start" };
+    return null;
+  }
+  function buildIcs() {
+    var res = computeSchedule(tasks), s0 = workdayISO(0), e0 = workdayISO(Math.max(0, res.projectEnd - 1));
+    var stamp = new Date().toISOString().replace(/[-:]/g, "").replace(/\.\d+/, ""), L = [], nMs = 0, nCom = 0, unknown = [];
+    L.push("BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//valeriayashan.com.ar//Planificador TI//ES", "CALSCALE:GREGORIAN", "METHOD:PUBLISH", "X-WR-CALNAME:" + icsEscape("Planificador TI · " + caseTitle()));
+    function ev(uid, day, summary, desc, rrule) {
+      L.push("BEGIN:VEVENT", "UID:" + uid + "@valeriayashan.com.ar", "DTSTAMP:" + stamp, "DTSTART;VALUE=DATE:" + icsDate(day), "DTEND;VALUE=DATE:" + icsDate(icsNextDay(day)));
+      if (rrule) L.push("RRULE:" + rrule + ";UNTIL=" + icsDate(e0));
+      L.push("SUMMARY:" + icsEscape(summary), "DESCRIPTION:" + icsEscape(desc), "TRANSP:TRANSPARENT", "END:VEVENT");
+    }
+    tasks.filter(function (t) { return t.dur === 0 && !t.cycleError; }).forEach(function (t) { nMs++; ev(currentProjectId + "-hito-" + t.id, startISO(t), "Hito: " + t.name + " (" + t.id + ")", "Hito del proyecto " + caseTitle() + ". Fecha calculada por el planificador; se mueve si cambia el cronograma.", ""); });
+    comms.forEach(function (c, i) {
+      var fr = freqRule(c.freq), day = fr && fr.at === "end" ? e0 : s0, desc = "Información: " + (c.info || "—") + "\nCanal: " + (c.channel || "—") + "\nResponsable: " + (c.owner || "—") + "\nFrecuencia: " + (c.freq || "—") + "\nProyecto: " + caseTitle();
+      if (!fr) { unknown.push(c.stakeholder); desc += "\n(Frecuencia no reconocida: se cargó un solo evento al inicio del proyecto. Ajustalo a mano en tu calendario.)"; }
+      nCom++; ev(currentProjectId + "-com-" + (c.id || i), day, "Comunicación: " + (c.stakeholder || "parte interesada") + " — " + (c.info || ""), desc, fr && fr.r ? fr.r : "");
+    });
+    L.push("END:VCALENDAR");
+    return { text: L.map(icsFold).join("\r\n") + "\r\n", nMs: nMs, nCom: nCom, unknown: unknown };
+  }
+  function exportIcs() {
+    var r = buildIcs();
+    if (!r.nMs && !r.nCom) { notify("No hay hitos ni filas en el plan de comunicaciones para llevar al calendario."); return; }
+    dl("calendario-" + currentProjectId + ".ics", "text/calendar;charset=utf-8", r.text);
+    track("exportar_calendario", { caso_id: currentProjectId });
+    notify("Calendario descargado: " + r.nMs + " hito(s) y " + r.nCom + " comunicación(es). Importalo en Google Calendar o en Outlook (archivo .ics). Son eventos de día completo desde el inicio del proyecto hasta su fin." + (r.unknown.length ? " La frecuencia de " + r.unknown.join(", ") + " no se reconoció y quedó como un solo evento." : ""));
+  }
+
   /* ===================== acciones ===================== */
   function nextCustomId() {
     var nums = tasks.filter(function (t) { return t.id.indexOf("1.6.") === 0; }).map(function (t) { return parseInt(t.id.split(".")[2], 10) || 0; });
@@ -1173,27 +1621,24 @@
     if (!ph) { ph = { id: "1.6", name: "Tareas agregadas", children: [] }; phases.push(ph); }
     return ph;
   }
-  function parsePreds(s) { return s ? s.split(",").map(function (x) { return x.trim(); }).filter(Boolean) : []; }
   function addTask() {
     return askForm("Agregar tarea", [
       { key: "id", label: "ID / EDT", value: nextCustomId(), required: true },
       { key: "name", label: "Nombre de la tarea", value: "Nueva tarea", required: true },
       { key: "dur", label: "Duración en días hábiles (0 = hito)", type: "number", value: 10, min: 0, required: true },
-      { key: "preds", label: "Predecesoras (IDs separados por coma)", value: "", hint: "Disponibles: " + tasks.map(function (t) { return t.id; }).join(", ") },
+      { key: "preds", label: "Predecesoras (IDs separados por coma)", value: "", hint: "Tipos: FC (fin-comienzo, el normal), CC, FF o CF, con desfase opcional: 1.2.1, 1.3.1CC+2, 1.3.2FF-1. Disponibles: " + tasks.map(function (t) { return t.id; }).join(", ") },
       { key: "resource", label: "Recurso responsable", value: "PM" }
     ], "Agregar", function (v) {
       var id = v.id.trim();
       if (taskById(id)) return "Ya existe una tarea con ese ID.";
       if (v.dur < 0 || v.dur > 2000) return "La duración tiene que ser un entero entre 0 y 2000.";
       if (tasks.length >= CONFIG.MAX_TASKS) return "Se alcanzó el máximo de tareas (" + CONFIG.MAX_TASKS + ").";
-      var preds = parsePreds(v.preds);
-      if (preds.indexOf(id) >= 0) return "Una tarea no puede depender de sí misma.";
-      var bad = preds.filter(function (p) { return !taskById(p); });
-      return bad.length ? "Estas predecesoras no existen: " + bad.join(", ") : "";
+      return parsePredSpec(v.preds, id, tasks).error;
     }).then(function (r) {
       if (!r) return;
       pushHistory();
-      tasks.push({ id: r.id.trim(), name: r.name.trim(), dur: r.dur, preds: parsePreds(r.preds), pct: 0, resource: (r.resource || "PM").trim() || "PM", extraResources: [], crashCostPerDay: null, overlapDays: 0, levelDelay: 0, notes: "", acTask: null });
+      var ps = parsePredSpec(r.preds, r.id.trim(), tasks);
+      tasks.push({ id: r.id.trim(), name: r.name.trim(), dur: r.dur, preds: ps.preds, deps: Object.keys(ps.deps).length ? ps.deps : undefined, pct: 0, resource: (r.resource || "PM").trim() || "PM", extraResources: [], crashCostPerDay: null, overlapDays: 0, levelDelay: 0, notes: "", acTask: null });
       ensureCustomPhase().children.push(r.id.trim()); render();
     });
   }
@@ -1202,7 +1647,9 @@
       if (!ok) return;
       pushHistory();
       tasks = tasks.filter(function (t) { return t.id !== id; });
-      tasks.forEach(function (t) { t.preds = t.preds.filter(function (p) { return p !== id; }); });
+      tasks.forEach(function (t) { t.preds = t.preds.filter(function (p) { return p !== id; }); if (t.deps) { delete t.deps[id]; if (!Object.keys(t.deps).length) delete t.deps; } });
+      issues.forEach(function (x) { if (x.taskId === id) x.taskId = ""; });
+      crList.forEach(function (x) { if (x.taskId === id) x.taskId = ""; });
       phases.forEach(function (ph) { ph.children = ph.children.filter(function (c) { return c !== id; }); });
       risks.forEach(function (r) { if (r.taskId === id) r.taskId = ""; });
       delete raciAssignments[id]; render();
@@ -1349,9 +1796,10 @@
       nearThreshold: nearThreshold, cutoffDay: cutoffDay, acActual: acActual, risks: clone(risks), raciAssignments: clone(raciAssignments), raciPeople: raciPeople.slice(),
       charter: clone(charter), comms: clone(comms), changeLog: clone(changeLog), decisionLog: clone(decisionLog), lessons: lessons,
       actualStart: actualStart, actualFinish: actualFinish, plannedFinishOverride: plannedFinishOverride,
-      stakeholders: clone(stakeholders), teamCharter: clone(teamCharter), mgmtPlan: clone(mgmtPlan), changeRequest: clone(changeRequest) };
+      stakeholders: clone(stakeholders), teamCharter: clone(teamCharter), mgmtPlan: clone(mgmtPlan), changeRequest: clone(changeRequest),
+      issues: clone(issues), crList: clone(crList) };
   }
-  function storageKey(pid) { return "ptTI.v" + CONFIG.SCHEMA_VERSION + "." + META.audience + "." + pid; }
+  function storageKey(pid) { return "ptTI.v" + CONFIG.STORAGE_KEY_VERSION + "." + META.audience + "." + pid; }
   function downloadJson() {
     var blob = new Blob([JSON.stringify(serializeState(), null, 2)], { type: "application/json" });
     var url = URL.createObjectURL(blob), a = document.createElement("a");
@@ -1393,6 +1841,15 @@
       if (!isNum(t.dur) || t.dur < 0 || t.dur > 2000) return label + ": la duración de la tarea " + t.id + " no es válida.";
       if (!Array.isArray(t.preds) || t.preds.some(function (p) { return typeof p !== "string"; })) return label + ": las predecesoras de " + t.id + " no son válidas.";
       if (!isNum(t.pct) || t.pct < 0 || t.pct > 100) return label + ": el porcentaje de la tarea " + t.id + " no es válido.";
+      if (t.deps !== undefined && t.deps !== null) {
+        if (typeof t.deps !== "object" || Array.isArray(t.deps)) return label + ": las dependencias de " + t.id + " no son válidas.";
+        var dk = Object.keys(t.deps);
+        for (var q = 0; q < dk.length; q++) {
+          var dd = t.deps[dk[q]];
+          if (t.preds.indexOf(dk[q]) < 0 || !dd || DEP_ES[dd.type] === undefined || (dd.lag !== undefined && !(isNum(dd.lag) && Math.abs(dd.lag) <= 2000))) return label + ": la dependencia de " + t.id + " con " + dk[q] + " no es válida.";
+        }
+      }
+      if ((t.opt !== undefined && t.opt !== null && !(isNum(t.opt) && t.opt >= 0 && t.opt <= 2000)) || (t.pess !== undefined && t.pess !== null && !(isNum(t.pess) && t.pess >= 0 && t.pess <= 2000))) return label + ": las estimaciones de tres puntos de " + t.id + " no son válidas.";
     }
     for (var j = 0; j < list.length; j++) for (var k = 0; k < list[j].preds.length; k++) if (!ids.has(list[j].preds[k])) return label + ": la tarea " + list[j].id + " depende de " + list[j].preds[k] + ", que no existe.";
     return "";
@@ -1429,14 +1886,14 @@
     if (v.error) { notify(v.error); return; }
     var proj = CASOS[obj.projectId];
     currentProjectId = obj.projectId;
-    tasks = obj.tasks.map(function (t) { return Object.assign({}, t, { notes: str(t.notes), acTask: isNum(t.acTask) ? t.acTask : null, extraResources: Array.isArray(t.extraResources) ? t.extraResources.map(function (x) { return str(x, 100); }) : [], overlapDays: isNum(t.overlapDays) ? t.overlapDays : 0, levelDelay: isNum(t.levelDelay) ? t.levelDelay : 0, name: str(t.name, 300), resource: str(t.resource, 100), preds: t.preds.slice(), crashCostPerDay: isNum(t.crashCostPerDay) ? t.crashCostPerDay : null }); });
+    tasks = obj.tasks.map(function (t) { return Object.assign({}, t, { notes: str(t.notes), acTask: isNum(t.acTask) ? t.acTask : null, extraResources: Array.isArray(t.extraResources) ? t.extraResources.map(function (x) { return str(x, 100); }) : [], overlapDays: isNum(t.overlapDays) ? t.overlapDays : 0, levelDelay: isNum(t.levelDelay) ? t.levelDelay : 0, name: str(t.name, 300), resource: str(t.resource, 100), preds: t.preds.slice(), crashCostPerDay: isNum(t.crashCostPerDay) ? t.crashCostPerDay : null, deps: cleanDeps(t), opt: isNum(t.opt) ? t.opt : null, pess: isNum(t.pess) ? t.pess : null }); });
     phases = clonePhases(obj.phases);
     ORIGINAL_DURS = {}; proj.tasks.forEach(function (t) { ORIGINAL_DURS[t.id] = t.dur; });
     var tmp = cloneTasks(proj.tasks.map(function (t) { return Object.assign({}, clone(t), { overlapDays: 0, levelDelay: 0 }); }));
     $("startDate").value = proj.startDate;
     originalProjectEnd = computeScheduleOn(tmp).projectEnd; originalSchedule = {};
     tmp.forEach(function (t) { originalSchedule[t.id] = { es: t._es, ef: t._ef, dur: t.dur }; });
-    baselines = Array.isArray(obj.baselines) ? obj.baselines.filter(function (b) { return b && typeof b.name === "string" && b.byId && isNum(b.projectEnd); }).map(function (b) { return { name: str(b.name, 100), byId: b.byId, projectEnd: b.projectEnd, visible: b.visible !== false }; }) : [];
+    baselines = Array.isArray(obj.baselines) ? obj.baselines.filter(function (b) { return b && typeof b.name === "string" && b.byId && isNum(b.projectEnd); }).map(function (b) { return { name: str(b.name, 100), byId: b.byId, projectEnd: b.projectEnd, visible: b.visible !== false, bac: isNum(b.bac) ? b.bac : undefined }; }) : [];
     scenarios = []; activeScenario = 0;
     if (Array.isArray(obj.scenarios)) obj.scenarios.forEach(function (s) { if (s && typeof s.name === "string" && s.snap && !validateTasks(s.snap.tasksSnap, "esc") && Array.isArray(s.snap.phasesSnap)) scenarios.push({ name: str(s.name, 100), snap: { tasksSnap: s.snap.tasksSnap, phasesSnap: s.snap.phasesSnap } }); });
     if (!scenarios.length) scenarios = [{ name: "Plan original", snap: { tasksSnap: cloneTasks(tasks), phasesSnap: clonePhases(phases) } }];
@@ -1444,8 +1901,13 @@
     nearThreshold = isNum(obj.nearThreshold) && obj.nearThreshold >= 1 ? obj.nearThreshold : 5;
     cutoffDay = isNum(obj.cutoffDay) ? obj.cutoffDay : suggestedCutoff();
     acActual = isNum(obj.acActual) ? obj.acActual : null;
-    risks = sanitizeList(obj.risks, ["id", "desc", "category", "prob", "impact", "response", "owner", "taskId", "type"]);
-    risks.forEach(function (r) { if (r.type !== "Oportunidad") r.type = "Amenaza"; });
+    risks = sanitizeList(obj.risks, ["id", "desc", "category", "prob", "impact", "response", "owner", "taskId", "type", "probPct", "impactUsd", "status", "actualCost"]);
+    risks.forEach(function (r) { if (r.type !== "Oportunidad") r.type = "Amenaza"; if (RISK_STATUS.indexOf(r.status) < 0) r.status = ""; });
+    issues = sanitizeList(obj.issues, ["id", "type", "desc", "owner", "due", "status", "taskId"]);
+    issues.forEach(function (x) { if (x.type !== "Acción") x.type = "Problema"; if (ISSUE_STATUS.indexOf(x.status) < 0) x.status = "Abierto"; if (x.due && !isISO(x.due)) x.due = ""; });
+    crList = sanitizeList(obj.crList, ["id", "title", "requester", "desc", "taskId", "impactDays", "impactCost", "impactScope", "status", "who", "date", "baselineName", "bacBefore", "bacAfter", "endBefore", "endAfter"]);
+    crList.forEach(function (x) { if (["Pendiente", "Aprobada", "Rechazada", "Diferida"].indexOf(x.status) < 0) x.status = "Pendiente"; });
+    simResult = null;
     stakeholders = sanitizeList(obj.stakeholders, STK_KEYS);
     teamCharter = sanitizeObj(obj.teamCharter, TEAM_FIELDS);
     mgmtPlan = sanitizeObj(obj.mgmtPlan, PLAN_FIELDS);
@@ -1491,13 +1953,13 @@
     phases.filter(function (ph) { return ph.children.length; }).forEach(function (ph) {
       var kids = ph.children.map(taskById).filter(Boolean); if (!kids.length) return;
       var s = Math.min.apply(null, kids.map(function (k) { return k._es; })), e = Math.max.apply(null, kids.map(function (k) { return k._ef; }));
-      rows.push({ "EDT": ph.id, "Tarea": ph.name, "Tipo": "Fase (resumen)", "Recurso": "", "Duración (días hábiles)": e - s, "Inicio": workdayISO(s), "Fin": workdayISO(Math.max(0, e - 1)), "Predecesoras": "", "% Completado": "", "Holgura total (días)": "", "Ruta crítica": "" });
+      rows.push({ "EDT": ph.id, "Tarea": ph.name, "Tipo": "Fase (resumen)", "Recurso": "", "Duración (días hábiles)": e - s, "Inicio": workdayISO(s), "Fin": workdayISO(Math.max(0, e - 1)), "Predecesoras": "", "Optimista (días)": "", "Pesimista (días)": "", "Esperada PERT (días)": "", "% Completado": "", "Holgura total (días)": "", "Ruta crítica": "" });
       kids.forEach(function (t) {
-        rows.push({ "EDT": t.id, "Tarea": t.name, "Tipo": t.dur === 0 ? "Hito" : "Tarea", "Recurso": t.resource || "", "Duración (días hábiles)": t.dur, "Inicio": startISO(t), "Fin": finishISO(t), "Predecesoras": t.preds.join(", ") || "—", "% Completado": t.pct + "%", "Holgura total (días)": t.critical ? 0 : t.slack, "Ruta crítica": t.critical ? "Sí" : (t.near ? "Casi crítica" : "No") });
+        rows.push({ "EDT": t.id, "Tarea": t.name, "Tipo": t.dur === 0 ? "Hito" : "Tarea", "Recurso": t.resource || "", "Duración (días hábiles)": t.dur, "Inicio": startISO(t), "Fin": finishISO(t), "Predecesoras": predsText(t) || "—", "Optimista (días)": hasThree(t) ? t.opt : "", "Pesimista (días)": hasThree(t) ? t.pess : "", "Esperada PERT (días)": hasThree(t) ? Math.round(pertExpected(t) * 10) / 10 : "", "% Completado": t.pct + "%", "Holgura total (días)": t.critical ? 0 : t.slack, "Ruta crítica": t.critical ? "Sí" : (t.near ? "Casi crítica" : "No") });
       });
     });
     var ws = X.utils.json_to_sheet(rows);
-    ws["!cols"] = [8, 34, 14, 18, 20, 12, 12, 14, 12, 14, 14].map(function (w) { return { wch: w }; });
+    ws["!cols"] = [8, 34, 14, 18, 20, 12, 12, 16, 14, 14, 16, 12, 14, 14].map(function (w) { return { wch: w }; });
     var r0 = rows.length + 2;
     X.utils.sheet_add_aoa(ws, [[CONFIG.ATTRIBUTION], [CONFIG.SITE_URL], ["Caso: " + (CASOS[currentProjectId] ? CASOS[currentProjectId].title : "") + " · Exportado el " + dateToISO(new Date())]], { origin: { r: r0, c: 0 } });
     var cell = ws["B" + (r0 + 2)]; if (cell) cell.l = { Target: CONFIG.SITE_URL, Tooltip: "valeriayashan.com.ar" };
@@ -1507,10 +1969,12 @@
     var wb = X.utils.book_new();
     X.utils.book_append_sheet(wb, ws, "Cronograma");
     X.utils.book_append_sheet(wb, X.utils.json_to_sheet(resRows), "Asignación de recursos");
-    X.utils.book_append_sheet(wb, X.utils.json_to_sheet(risks.map(function (r) { return { "ID": r.id, "Riesgo": r.desc, "Tipo": r.type || "Amenaza", "Categoría": r.category, "Probabilidad": r.prob, "Impacto": r.impact, "Puntaje (P×I)": riskScore(r.prob, r.impact), "Respuesta": r.response, "Responsable del riesgo": r.owner, "Tarea vinculada": r.taskId || "—" }; })), "Registro de riesgos");
+    X.utils.book_append_sheet(wb, X.utils.json_to_sheet(risks.map(function (r) { return { "ID": r.id, "Riesgo": r.desc, "Tipo": r.type || "Amenaza", "Categoría": r.category, "Probabilidad": r.prob, "Impacto": r.impact, "Puntaje (P×I)": riskScore(r.prob, r.impact), "Respuesta": r.response, "Responsable del riesgo": r.owner, "Tarea vinculada": r.taskId || "—", "Probabilidad (%)": r.probPct || "", "Impacto (USD)": r.impactUsd || "", "VME (USD)": riskMoney(r) === null ? "" : riskMoney(r), "Estado": r.status || "", "Costo real (USD)": r.actualCost || "" }; })), "Registro de riesgos");
     X.utils.book_append_sheet(wb, X.utils.json_to_sheet(comms.map(function (c) { return { "Parte interesada": c.stakeholder, "Información": c.info, "Frecuencia": c.freq, "Canal": c.channel, "Responsable": c.owner }; })), "Comunicaciones");
     X.utils.book_append_sheet(wb, X.utils.json_to_sheet(changeLog.map(function (c) { return { "Fecha": c.fecha, "Cambio": c.desc, "Impacto": c.impacto, "Estado": c.estado, "Aprobado por": c.aprobadoPor }; })), "Registro de cambios");
     X.utils.book_append_sheet(wb, X.utils.json_to_sheet(decisionLog.map(function (d) { return { "Fecha": d.fecha, "Decisión": d.decision, "Contexto": d.contexto, "Responsable": d.responsable }; })), "Registro de decisiones");
+    X.utils.book_append_sheet(wb, X.utils.json_to_sheet(issues.length ? issues.map(function (x) { return { "ID": x.id, "Tipo": x.type, "Descripción": x.desc, "Responsable": x.owner, "Fecha límite": x.due, "Estado": x.status, "Tarea": x.taskId || "—" }; }) : [{ "ID": "", "Descripción": "(sin completar)" }]), "Problemas y acciones");
+    if (crList.length) X.utils.book_append_sheet(wb, X.utils.json_to_sheet(crList.map(function (c) { return { "ID": c.id, "Solicitud": c.title, "Solicitante": c.requester, "Tarea": c.taskId || "—", "Impacto (días)": num(c.impactDays) || 0, "Impacto (USD)": num(c.impactCost) || 0, "Estado": c.status, "Decide": c.who, "Fecha": c.date, "BAC antes": c.bacBefore, "BAC después": c.bacAfter, "Fin antes (día)": c.endBefore, "Fin después (día)": c.endAfter, "Línea base": c.baselineName }; })), "Control de cambios");
     X.utils.book_append_sheet(wb, X.utils.json_to_sheet(stakeholders.map(function (s) { return { "Interesado": s.name, "Rol e interés": s.role, "Poder": s.power, "Interés": s.interest, "Participación actual": s.engNow, "Participación deseada": s.engDesired, "Estrategia": s.strategy }; })), "Interesados");
     X.utils.book_append_sheet(wb, X.utils.json_to_sheet(PLAN_FIELDS.map(function (f) { return { "Área": f.label, "Plan": mgmtPlan[f.key] || "" }; })), "Plan de gestión");
     X.utils.book_append_sheet(wb, X.utils.json_to_sheet(TEAM_FIELDS.map(function (f) { return { "Apartado": f.label, "Acuerdo": teamCharter[f.key] || "" }; })), "Team Charter");
@@ -1565,7 +2029,7 @@
     phases.filter(function (ph) { return ph.children.length; }).forEach(function (ph) {
       edt += '<tr><th colspan="7" scope="colgroup" style="text-align:left">' + esc(ph.id + " " + ph.name) + "</th></tr>";
       ph.children.map(taskById).filter(Boolean).forEach(function (t) {
-        edt += "<tr><td>" + esc(t.id) + "</td><td>" + esc(t.name) + (t.dur === 0 ? " (hito)" : "") + "</td><td>" + t.dur + "</td><td>" + (esc(t.preds.join(", ")) || "—") + "</td><td>" + (esc(t.resource) || "—") + "</td><td>" + esc(startISO(t)) + "</td><td>" + esc(finishISO(t)) + "</td></tr>";
+        edt += "<tr><td>" + esc(t.id) + "</td><td>" + esc(t.name) + (t.dur === 0 ? " (hito)" : "") + "</td><td>" + t.dur + "</td><td>" + (esc(predsText(t)) || "—") + "</td><td>" + (esc(t.resource) || "—") + "</td><td>" + esc(startISO(t)) + "</td><td>" + esc(finishISO(t)) + "</td></tr>";
       });
     });
     edt += "</tbody></table>";
@@ -1574,16 +2038,11 @@
       edt += "<h3>Matriz RACI</h3>" + tblHtml(["Tarea"].concat(raciPeople), leafTasks().map(function (t) { return [t.id + " " + t.name].concat(raciPeople.map(function (p) { return (raciAssignments[t.id] || {})[p] || ""; })); }));
     }
     D["DOC-05"] = { title: withRaci ? "EDT / WBS con matriz RACI" : "EDT / WBS", html: edt };
-    D["DOC-06"] = { title: "Registro de riesgos", html: tblHtml(["#", "Tipo", "Riesgo", "Categoría", "Prob.", "Impacto", "P×I", "Respuesta", "Responsable", "Tarea"], risks.map(function (r) { return [r.id, r.type || "Amenaza", r.desc, r.category, r.prob, r.impact, riskScore(r.prob, r.impact), r.response, r.owner, r.taskId]; })) };
+    var money = risks.some(function (r) { return riskMoney(r) !== null; });
+    D["DOC-06"] = { title: "Registro de riesgos", html: tblHtml(["#", "Tipo", "Riesgo", "Categoría", "Prob.", "Impacto", "P×I"].concat(money ? ["Prob. (%)", "Impacto (USD)", "VME (USD)"] : []).concat(["Respuesta", "Responsable", "Tarea"]), risks.map(function (r) { return [r.id, r.type || "Amenaza", r.desc, r.category, r.prob, r.impact, riskScore(r.prob, r.impact)].concat(money ? [r.probPct, r.impactUsd, riskMoney(r) === null ? "" : usd(riskMoney(r))] : []).concat([r.response, r.owner, r.taskId]); })) };
     D["DOC-07"] = { title: "Plan de comunicaciones", html: tblHtml(["Parte interesada", "Información", "Frecuencia", "Canal", "Responsable"], comms.map(function (c) { return [c.stakeholder, c.info, c.freq, c.channel, c.owner]; })) };
     D["DOC-08"] = { title: "Team Charter", html: kvHtml(TEAM_FIELDS, teamCharter) };
-    var crit = tasks.filter(function (t) { return t.critical; }).map(function (t) { return t.id; }).join(", ");
-    D["DOC-09"] = { title: "Informe de estado (un período)", html: tblHtml(["Indicador", "Valor"], [
-      ["Fecha de corte", workdayISO(cutoffDay)], ["BAC", usd(m.BAC)], ["VP (valor planificado)", usd(m.PV)], ["VE (valor ganado)", usd(m.EV)],
-      ["CA (costo real)", usd(m.AC) + (m.acEstimated ? " — estimado igual al VE, sin costo real cargado" : "")], ["CPI", idx(m.CPI)], ["SPI", idx(m.SPI)],
-      ["CV (variación del costo)", usd(m.CV)], ["SV (variación del cronograma)", usd(m.SV)], ["EAC", usd(m.EAC)], ["VAC", usd(m.VAC)],
-      ["Avance planificado / real", pct(m.PV, m.BAC) + " / " + pct(m.EV, m.BAC)], ["Ruta crítica", crit || "—"], ["Línea base usada", m.planned.label]
-    ]) };
+    D["DOC-09"] = { title: "Informe de estado (un período)", html: tblHtml(["Indicador", "Valor"], statusRows(statusData())) };
     D["DOC-10"] = { title: "Registro de cambios", html: tblHtml(["Fecha", "Cambio", "Impacto", "Estado", "Aprobado por"], changeLog.map(function (c) { return [c.fecha, c.desc, c.impacto, c.estado, c.aprobadoPor]; })) };
     D["DOC-11"] = { title: "Registro de decisiones", html: tblHtml(["Fecha", "Decisión", "Contexto", "Responsable"], decisionLog.map(function (d) { return [d.fecha, d.decision, d.contexto, d.responsable]; })) };
     D["DOC-12"] = { title: "Solicitud de cambio", html: kvHtml(CR_FIELDS, changeRequest) };
@@ -1677,6 +2136,23 @@
       pushHistory(); holidays = holidays.filter(function (h) { return yearOf(h) !== holidayYear; }).concat(r.list).sort(); render();
       notify("Se cargó la lista de " + FERIADOS[holidayCountry].nombre + " " + holidayYear + ". Verificala con la fuente oficial.");
     },
+    copyStatus: copyStatus, exportStatusPdf: exportStatusPdf, exportIcs: exportIcs,
+    addIssue: addIssue, deleteIssue: function (el) { delFrom("¿Eliminar este registro?", function () { return issues; }, function (l) { issues = l; }, el.dataset.id); },
+    runSim: runSimulation,
+    threeExample: function () {
+      computeSchedule(tasks);
+      var crit = leafTasks().filter(function (t) { return t.critical && t.dur > 0; });
+      if (!crit.length) { notify("No hay tareas críticas con duración para completar."); return; }
+      pushHistory();
+      crit.forEach(function (t) { t.opt = Math.min(t.dur, Math.max(1, Math.round(t.dur * 0.8))); t.pess = Math.max(t.dur, Math.round(t.dur * 1.5)); });
+      render(); notify("Cargué un rango de ejemplo (−20 % / +50 %) en " + crit.length + " tarea(s) crítica(s). Reemplazalo con tus estimaciones reales.");
+    },
+    threeClear: function () {
+      if (!tasks.some(function (t) { return isNum(t.opt) || isNum(t.pess); })) return;
+      confirmBox("¿Borrar las estimaciones de tres puntos de todas las tareas?", "Borrar").then(function (ok) { if (ok) { pushHistory(); tasks.forEach(function (t) { t.opt = null; t.pess = null; }); render(); } });
+    },
+    addCr: addCr, crApprove: function (el) { decideCr(el.dataset.id, "Aprobada"); }, crReject: function (el) { decideCr(el.dataset.id, "Rechazada"); }, crDefer: function (el) { decideCr(el.dataset.id, "Diferida"); },
+    deleteCr: function (el) { delFrom("¿Eliminar esta solicitud de cambio?", function () { return crList; }, function (l) { crList = l; }, el.dataset.id); },
     openSubscribe: function (el) { openSubscribe(el.dataset.origin); },
     dismissLead: function () { store.set("ptTI.lead", "dismissed"); $("leadCard").hidden = true; }
   };
@@ -1687,6 +2163,16 @@
       var orig = ORIGINAL_DURS[t.id];
       if (orig !== undefined && v < orig && !t.crashCostPerDay) { el.value = t.dur; notify("No se puede acelerar la tarea " + t.id + ": depende de un tercero."); return; }
       if (v === t.dur) return; pushHistory(); t.dur = v; queueRender();
+    },
+    preds: function (el) {
+      var t = taskById(el.dataset.id); if (!t) return;
+      if (el.value.trim() === predsText(t)) return;
+      var ps = parsePredSpec(el.value, t.id, tasks);
+      if (ps.error) { notify(ps.error); queueRender(); return; }
+      var test = cloneTasks(tasks), tt = test.filter(function (x) { return x.id === t.id; })[0];
+      tt.preds = ps.preds; tt.deps = Object.keys(ps.deps).length ? ps.deps : undefined;
+      if (detectCycle(test).indexOf(t.id) >= 0 && detectCycle(tasks).indexOf(t.id) < 0) { notify("Esas predecesoras crean una dependencia circular: la tarea " + t.id + " terminaría dependiendo de sí misma."); queueRender(); return; }
+      pushHistory(); t.preds = ps.preds; if (Object.keys(ps.deps).length) t.deps = ps.deps; else delete t.deps; queueRender();
     },
     pct: function (el) { var t = taskById(el.dataset.id), v = Math.max(0, Math.min(100, parseInt(el.value, 10) || 0)); if (v === t.pct) return; pushHistory(); t.pct = v; queueRender(); },
     resource: function (el) {
@@ -1724,6 +2210,25 @@
       var s = stakeholders.filter(function (x) { return x.id === el.dataset.id; })[0]; if (!s) return;
       var k = el.dataset.key; if ((s[k] || "") === el.value) return;
       pushHistory(); s[k] = el.value; queueRender();
+    },
+    issueField: function (el) {
+      var x = issues.filter(function (i) { return i.id === el.dataset.id; })[0]; if (!x) return;
+      var k = el.dataset.key; if ((x[k] || "") === el.value) return;
+      pushHistory(); x[k] = el.value; queueRender();
+    },
+    riskField: function (el) {
+      var r = risks.filter(function (x) { return x.id === el.dataset.id; })[0]; if (!r) return;
+      var k = el.dataset.key, v = el.value;
+      if (k === "probPct") { var p = num(v); v = p === null ? "" : String(Math.max(0, Math.min(100, p))); }
+      else if (k === "impactUsd" || k === "actualCost") { var q = num(v); v = q === null ? "" : String(Math.max(0, q)); }
+      if (String(r[k] || "") === v) return;
+      pushHistory(); r[k] = v; queueRender();
+    },
+    threeField: function (el) {
+      var t = taskById(el.dataset.id); if (!t) return;
+      var k = el.dataset.key, v = num(el.value); if (v !== null) v = Math.max(0, Math.min(2000, Math.round(v)));
+      if ((isNum(t[k]) ? t[k] : null) === v) return;
+      pushHistory(); t[k] = v; queueRender();
     },
     taskAc: function (el) { var t = taskById(el.dataset.id); pushHistory(); t.acTask = el.value === "" ? null : Math.max(0, parseFloat(el.value) || 0); queueRender(); },
     dailyCost: function (el) { var t = taskById(el.dataset.id); var v = parseFloat(el.value); pushHistory(); t.dailyCost = isNaN(v) || v < 0 ? null : v; queueRender(); },
@@ -1827,7 +2332,8 @@
     track("herramienta_abierta", { audiencia: META.audience });
   }
   // utilidad de pruebas (no se usa en producción)
-  window.__PTI_TEST__ = { computeScheduleOn: computeScheduleOn, validateState: validateState, getState: function () { return { tasks: tasks, holidays: holidays }; }, workdayISO: workdayISO, dayOffsetFromDate: dayOffsetFromDate, computeEVM: computeEVM };
+  window.__PTI_TEST__ = { computeScheduleOn: computeScheduleOn, validateState: validateState, getState: function () { return { tasks: tasks, holidays: holidays, risks: risks, issues: issues, crList: crList, baselines: baselines, changeLog: changeLog, charter: charter, comms: comms }; }, workdayISO: workdayISO, dayOffsetFromDate: dayOffsetFromDate, computeEVM: computeEVM,
+    parsePredSpec: parsePredSpec, predsText: predsText, buildIcs: buildIcs, statusData: statusData, buildStatusText: buildStatusText, statusRows: statusRows, reserveData: reserveData, pertAnalysis: pertAnalysis, runChecks: runChecks, serializeState: serializeState, applyImport: applyImport, applyChangeRequest: applyChangeRequest, crTaskCheck: crTaskCheck, loadProject: loadProject, buildInformeText: buildInformeText, tiDocs: tiDocs, icsFold: icsFold, getSim: function () { return simResult; }, setCutoff: function (d) { cutoffDay = d; } };
   window.__PTI_ACTIONS__ = { ACTIONS: ACTIONS, CHANGE: CHANGE };
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
 })();

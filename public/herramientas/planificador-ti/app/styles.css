@@ -194,7 +194,8 @@ td.wbs { color: var(--color-muted); width: 44px; }
 td.res { width: 156px; }
 td.dur { width: 58px; }
 td.dates { width: 126px; }
-td.pred { color: var(--color-muted); width: 62px; }
+td.pred { color: var(--color-muted); width: 118px; }
+.predInput { width: 104px; font-size: 12px; }
 td.slack { text-align: right; width: 70px; }
 td.pct { width: 62px; }
 td.actcol { width: 52px; text-align: center; padding: 0 2px; }
@@ -399,3 +400,23 @@ details.advanced .toolbar:last-child { border-bottom: 0; }
 .checkList .miss .tag { color: var(--gantt-critical); }
 td.engcell { text-align: center; }
 td.engcell.on { background: var(--gantt-normal-fill); font-weight: 700; }
+
+/* ---------- Informe de estado, problemas y acciones, tres puntos, reservas y cambios ---------- */
+.stGrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; margin: 10px 0; max-width: 780px; }
+.stCard { border: 1px solid var(--color-border); border-left-width: 6px; border-radius: var(--radius); padding: 10px 12px; background: #fff; }
+.stCard .v { font-weight: 700; font-size: 17px; letter-spacing: .02em; }
+.stCard .l { font-size: 12.5px; color: var(--color-muted); font-weight: 600; }
+.stCard .d { font-size: 12.5px; margin-top: 2px; }
+.stCard.st-ok { border-left-color: var(--color-accent); } .stCard.st-ok .v { color: var(--color-accent); }
+.stCard.st-warn { border-left-color: var(--gantt-near); } .stCard.st-warn .v { color: var(--gantt-near); }
+.stCard.st-bad { border-left-color: var(--gantt-critical); } .stCard.st-bad .v { color: var(--gantt-critical); }
+.stCard.st-na { border-left-color: var(--color-border); } .stCard.st-na .v { color: var(--color-muted); }
+tr.issueLate td { background: var(--gantt-critical-fill); }
+.issueTag { display: inline-block; font-size: 11px; padding: 1px 6px; border-radius: 10px; border: 1px solid var(--gantt-critical); color: var(--gantt-critical); white-space: nowrap; }
+.simpletable td small { color: var(--color-muted); }
+@media print {
+  #printArea .onepage { font-size: 10px; }
+  #printArea .onepage h1 { font-size: 16px; }
+  #printArea .onepage table { font-size: 9.5px; }
+  #printArea .onepage th, #printArea .onepage td { padding: 2px 5px; }
+}
