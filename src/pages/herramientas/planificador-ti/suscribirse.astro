@@ -1,0 +1,43 @@
+---
+/**
+ * Página mínima que se carga dentro del diálogo de suscripción de la herramienta (iframe del mismo origen).
+ * Ruta: /herramientas/planificador-ti/suscribirse/   -> noindex.
+ *
+ * Es una página Astro (no está en public/) para poder usar Fragment set:html con el embed de Brevo,
+ * tal como pediste. Pegá el HTML del formulario que te da Brevo en BREVO_EMBED.
+ *
+ * FALTA: el código de embed del formulario de Brevo (Formularios > Crear > Compartir > Incrustar).
+ * FALTA: qué reciben exactamente las personas y con qué frecuencia (texto de PROMESA).
+ */
+const BREVO_EMBED = ``; // FALTA: pegar acá el HTML/JS de Brevo
+const PROMESA =
+  'Recibí en tu correo plantillas y herramientas de gestión de proyectos como esta, junto con artículos sobre PM aplicado e inteligencia artificial.'; // provisoria
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Suscribite · Valeria Yashan</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" />
+  </head>
+  <body>
+    <p class="promesa">{PROMESA}</p>
+    {
+      BREVO_EMBED
+        ? <Fragment set:html={BREVO_EMBED} />
+        : <p class="falta" role="alert">Falta configurar el formulario de Brevo en <code>suscribirse.astro</code>.</p>
+    }
+    <p class="nota">Podés darte de baja cuando quieras. <a href="/privacidad" target="_top">Política de privacidad</a></p>
+  </body>
+</html>
+
+<style is:global>
+  body { margin: 0; padding: 16px; font: 14px/1.5 'Inter', system-ui, sans-serif; color: #1A1A1A; background: #FAFAF8; }
+  .promesa { margin: 0 0 12px; }
+  .falta { color: #9B2C2C; font-weight: 600; }
+  .nota { font-size: 12px; color: #6B6B6B; }
+  a { color: #2D6A4F; }
+</style>

@@ -1,0 +1,228 @@
+---
+/**
+ * Página de presentación (indexable) del Planificador TI.
+ * Ruta final: /herramientas/planificador-ti/
+ * La herramienta vive en /herramientas/planificador-ti/app/ (noindex, canonical a esta página).
+ *
+ * COMPLETAR antes de publicar (marcado FALTA):
+ *  - BaseLayout / AutorBio: se asumen estas props. Ajustalas a las reales de tu sitio.
+ *  - RELACIONADOS: slugs reales de artículos del blog.
+ *  - OG_IMAGE: imagen WebP específica (1200x630) en public/og/planificador-ti.webp.
+ *  - WHATSAPP_URL: el mismo enlace que usa el resto del sitio.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AutorBio from '../../components/AutorBio.astro';
+
+const SITE = 'https://valeriayashan.com.ar';
+const PAGE_URL = `${SITE}/herramientas/planificador-ti/`;
+// Con /index.html explícito: el servidor de desarrollo de Astro (npm run dev) no sirve el index.html de carpetas de public/.
+const TOOL_URL = '/herramientas/planificador-ti/app/index.html';
+
+const TITLE = 'Planificador de proyectos TI: Gantt, ruta crítica y EVM'; // 55 caracteres
+const DESCRIPTION =
+  'Planificador de proyectos TI en el navegador: cronograma Gantt, ruta crítica, valor ganado, matriz RACI y riesgos. Con casos de ejemplo y exportación a Excel.'; // 158 caracteres
+
+// FALTA: imagen Open Graph WebP específica de la herramienta.
+const OG_IMAGE = '/og/planificador-ti.webp';
+const OG_IMAGE_ALT =
+  'Captura del Planificador TI con un diagrama de Gantt, la ruta crítica resaltada y los indicadores de valor ganado';
+const HAS_OG_IMAGE = false; // pasar a true cuando exista el archivo
+
+// FALTA: enlace de WhatsApp del sitio. Vacío = no se muestra el botón.
+const WHATSAPP_URL = '';
+
+// FALTA: slugs reales de artículos del blog. Solo se renderizan los que tengan slug y título.
+const RELACIONADOS: { slug: string; titulo: string; porque: string }[] = [
+  { slug: '', titulo: '', porque: 'Para profundizar en el cronograma y la ruta crítica' },
+  { slug: '', titulo: '', porque: 'Para profundizar en valor ganado y control de costos' },
+  { slug: '', titulo: '', porque: 'Para profundizar en gestión de riesgos' },
+].filter((r) => r.slug && r.titulo);
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Planificador TI',
+    url: PAGE_URL,
+    description: DESCRIPTION,
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Web (navegador moderno)',
+    inLanguage: 'es',
+    browserRequirements: 'Requiere JavaScript',
+    author: { '@type': 'Person', name: 'Valeria Yashan', url: `${SITE}/sobre-mi` },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${SITE}/` },
+      { '@type': 'ListItem', position: 2, name: 'Herramientas', item: `${SITE}/herramientas/` },
+      { '@type': 'ListItem', position: 3, name: 'Planificador TI', item: PAGE_URL },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title={TITLE}
+  description={DESCRIPTION}
+  canonical={PAGE_URL}
+  image={HAS_OG_IMAGE ? OG_IMAGE : undefined}
+  imageAlt={HAS_OG_IMAGE ? OG_IMAGE_ALT : undefined}
+>
+  {jsonLd.map((o) => <script type="application/ld+json" set:html={JSON.stringify(o)} />)}
+
+  <main class="pt-page">
+    <nav aria-label="Migas de pan" class="pt-crumbs">
+      <a href="/">Inicio</a> › <a href="/herramientas/">Herramientas</a> › <span aria-current="page">Planificador TI</span>
+    </nav>
+
+    <header class="pt-hero">
+      <h1>Planificador de proyectos TI con Gantt, ruta crítica y valor ganado</h1>
+      <p class="pt-lead">
+        Una herramienta que armé para enseñar planificación de proyectos: cargás un caso, mirás el cronograma, movés
+        tareas y ves al instante qué pasa con la fecha de fin, la ruta crítica y el costo. Funciona en el navegador y
+        no necesita cuenta.
+      </p>
+      <p class="pt-actions">
+        <a class="pt-btn pt-btn-primary" href={TOOL_URL}>Abrir el planificador</a>
+        <a class="pt-btn" href="/capacitaciones">Quiero capacitar a mi equipo en esto</a>
+      </p>
+      {HAS_OG_IMAGE && (
+        <img src={OG_IMAGE} alt={OG_IMAGE_ALT} width="1200" height="630" loading="lazy" decoding="async" class="pt-og" />
+      )}
+    </header>
+
+    <section aria-labelledby="que-es">
+      <h2 id="que-es">Qué es el Planificador TI</h2>
+      <p>
+        Es una aplicación web de una sola página con cinco casos de proyecto de tecnología (monitoreo industrial, app de
+        pagos, optimización de rutas, centro de distribución e implementación de un ERP). Cada caso trae fases, tareas,
+        dependencias, riesgos y un acta de constitución para que practiques sobre un proyecto completo y no sobre un
+        ejemplo de dos líneas.
+      </p>
+      <p>
+        Incluye diagrama de Gantt con tareas que se arrastran, cálculo de ruta crítica, optimización de recursos (nivelación), valor
+        ganado (EVM), matriz RACI, registro de riesgos, plan de comunicaciones, tablero Kanban, registro de cambios y
+        decisiones, e informe final. Podés exportar a Excel, a CSV, a JSON o imprimir.
+      </p>
+    </section>
+
+    <section aria-labelledby="para-quien">
+      <h2 id="para-quien">Para quién es</h2>
+      <ul>
+        <li>Quienes se están formando en gestión de proyectos y necesitan practicar con un cronograma real.</li>
+        <li>Líderes técnicos y analistas que pasan a coordinar proyectos y quieren ver el efecto de cada decisión.</li>
+        <li>Docentes y capacitadores que buscan un caso para trabajar en clase.</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="como-usar">
+      <h2 id="como-usar">Cómo usarlo paso a paso</h2>
+      <ol>
+        <li><strong>Elegí un caso</strong> en el selector de la parte superior. Cada caso carga con su fecha de inicio.</li>
+        <li><strong>Revisá los feriados.</strong> Cargá la lista oficial de tu país y año en el panel de calendario; la herramienta avisa cuando falta.</li>
+        <li><strong>Mirá la ruta crítica.</strong> Las tareas en rojo no tienen holgura: si se demoran, se mueve la fecha de fin.</li>
+        <li><strong>Probá cambios.</strong> Arrastrá una barra, cambiá una duración o aplicá seguimiento rápido (fast-track) sobre la tarea que elijas.</li>
+        <li><strong>Fijá una línea base</strong> antes de cambiar nada para comparar escenarios.</li>
+        <li><strong>Controlá costos</strong> en el panel de valor ganado con una fecha de corte.</li>
+        <li><strong>Guardá y exportá.</strong> Descargá el JSON para seguir otro día o exportá a Excel para compartir el cronograma.</li>
+      </ol>
+      <p>Atajos útiles: con el foco en una barra del Gantt, las flechas izquierda y derecha la mueven un día; Ctrl+Z y Ctrl+Y deshacen y rehacen.</p>
+    </section>
+
+    <section aria-labelledby="conceptos">
+      <h2 id="conceptos">Qué conceptos aplica, con ejemplos</h2>
+
+      <h3>Ruta crítica</h3>
+      <p>
+        Es la cadena de tareas dependientes que determina la fecha de fin. Ejemplo: si <em>Aprobación del regulador</em>
+        (30 días) precede a <em>Instalación</em> (60 días) y a <em>Pruebas</em> (15 días), y no hay otra cadena más larga,
+        esas tareas son críticas: un día de atraso en cualquiera es un día de atraso del proyecto. Una tarea con 4 días
+        de holgura total puede demorarse hasta 4 días sin mover la fecha de fin.
+      </p>
+
+      <h3>Valor ganado (EVM)</h3>
+      <p>
+        Compara lo planificado, lo logrado y lo gastado. Ejemplo ilustrativo con números inventados para explicar la
+        fórmula: presupuesto total (BAC) de USD 100.000; a la fecha de corte debería haberse completado el 50 % (valor
+        planificado VP = 50.000), se completó el 40 % (valor ganado VE = 40.000) y se gastaron USD 45.000 (costo real
+        CA). El índice de rendimiento del cronograma SPI = VE / VP = 0,80 (va atrasado) y el de costos CPI = VE / CA = 0,89
+        (cuesta más de lo previsto).
+      </p>
+
+      <h3>Matriz RACI</h3>
+      <p>
+        Asigna a cada tarea quién ejecuta (R), quién es el responsable final (A, accountable), a quién se consulta (C) y a quién se informa (I).
+        Regla del PMBOK 8 que la herramienta señala: una sola persona responsable final (A) por actividad. Si hay dos, en la
+        práctica nadie lo es.
+      </p>
+
+      <h3>Gestión de riesgos</h3>
+      <p>
+        Cada riesgo se califica por probabilidad e impacto. Ejemplo: «el proveedor no cumple los plazos» con
+        probabilidad media e impacto alto es un riesgo para mitigar con cláusulas de penalidad y seguimiento quincenal, y
+        se asocia a la tarea que afecta para que aparezca marcado en el Gantt.
+      </p>
+    </section>
+
+    <section aria-labelledby="limitaciones">
+      <h2 id="limitaciones">Limitaciones que conviene conocer</h2>
+      <ul>
+        <li>Todos los derechos reservados © Valeria Yashan. Podés usar la herramienta gratis en tu navegador; no se autoriza copiarla, redistribuirla ni publicarla en otro sitio sin permiso por escrito.</li>
+        <li>Es una herramienta didáctica: no reemplaza a un software de gestión de proyectos con varios usuarios y control de versiones.</li>
+        <li>Los costos diarios de los casos son una distribución didáctica del presupuesto de cada acta de constitución (en proporción a la duración y al tipo de recurso), no una estimación ascendente.</li>
+        <li>Los feriados precargados son los nacionales de Argentina 2026 y 2027 (los días no laborables con fines turísticos de 2027 todavía no están fijados); verificalos siempre con la fuente oficial.</li>
+        <li>No hay cuenta ni servidor: tus datos se guardan en tu navegador o en el archivo que descargues. Si borrás los datos del navegador sin exportar, se pierden.</li>
+        <li>Calcula con días hábiles y dependencias fin-a-inicio, con solape opcional para el seguimiento rápido.</li>
+      </ul>
+    </section>
+
+    {RELACIONADOS.length > 0 && (
+      <section aria-labelledby="mas">
+        <h2 id="mas">Para seguir leyendo</h2>
+        <ul>
+          {RELACIONADOS.map((r) => (
+            <li>
+              <a href={`/blog/${r.slug}`}>{r.titulo}</a> — {r.porque}.
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    <section class="pt-cta" aria-labelledby="cta">
+      <h2 id="cta">¿Querés que tu equipo planifique así?</h2>
+      <p>
+        Trabajo con equipos para llevar estos conceptos a sus proyectos reales, combinando gestión de proyectos,
+        inteligencia artificial y docencia.
+      </p>
+      <p class="pt-actions">
+        <a class="pt-btn pt-btn-primary" href="/contacto">Quiero capacitar a mi equipo en esto</a>
+        <a class="pt-btn" href="/capacitaciones">Ver capacitaciones</a>
+        {WHATSAPP_URL && <a class="pt-btn" href={WHATSAPP_URL} rel="noopener" target="_blank">Escribime por WhatsApp</a>}
+      </p>
+    </section>
+
+    <AutorBio />
+    <p><a href="/sobre-mi">Conocé más sobre mí</a></p>
+  </main>
+</BaseLayout>
+
+<style>
+  .pt-page { max-width: 760px; margin: 0 auto; padding: 24px 16px 64px; }
+  .pt-page h1, .pt-page h2 { font-family: 'Fraunces', Georgia, serif; }
+  .pt-page h3 { font-family: 'Inter', system-ui, sans-serif; font-weight: 600; margin: 20px 0 6px; }
+  .pt-crumbs { font-size: 13px; color: var(--color-muted); margin-bottom: 16px; }
+  .pt-lead { font-size: 18px; }
+  .pt-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pt-btn {
+    display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 16px;
+    border: 1px solid var(--color-border); border-radius: 6px; background: var(--color-surface);
+    color: var(--color-text); font: 600 14px 'Inter', system-ui, sans-serif; text-decoration: none;
+  }
+  .pt-btn-primary { background: var(--color-accent); border-color: var(--color-accent); color: #fff; }
+  .pt-og { width: 100%; height: auto; border: 1px solid var(--color-border); border-radius: 6px; margin-top: 16px; }
+  .pt-cta { margin-top: 32px; padding: 20px; border: 1px solid var(--color-border); border-radius: 6px; background: var(--color-surface); }
+  section { margin-top: 28px; }
+</style>

@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Planificador TI · Versión para alumnos EGCI</title>
+<meta name="description" content="Planificador de proyectos TI con cronograma Gantt, ruta crítica, valor ganado y matriz RACI. Herramienta de Valeria Yashan.">
+<!-- Versión para alumnos: URL sin enlazar y noindex. NO es privada (ver README). -->
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="theme-color" content="#FAFAF8">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../app/styles.css">
+
+<!-- GA4: solo eventos de uso sin datos personales ni contenido que escriba la persona. -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DK70Z7NVB9"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'G-DK70Z7NVB9', { allow_google_signals: false, allow_ad_personalization_signals: false });
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Saltar al contenido</a>
+
+<div class="app">
+  <header class="titlebar">
+    <div>
+      <h1>Planificador TI <span class="proj" id="projTitle"></span></h1>
+      <span class="sub">Cronograma, ruta crítica, valor ganado, RACI y riesgos en un solo lugar. Todo se calcula en tu navegador.</span>
+    </div>
+    <div class="case-pick">
+      <label for="projectSelect"><strong>Caso de proyecto</strong></label>
+      <select id="projectSelect" data-change="project" aria-describedby="startNote"></select>
+      <span id="dirtyIndicator" class="dirty clean" role="status"></span>
+    </div>
+  </header>
+
+  <p class="disclaimer" id="disclaimer">Herramienta didáctica de planificación. Los feriados, los costos diarios y los valores de ejemplo son editables y deben verificarse con la fuente oficial y con los datos reales de tu proyecto antes de tomar decisiones.</p>
+
+  <main id="main">
+    <!-- Barra de acciones -->
+    <div class="toolbar" role="toolbar" aria-label="Guardar, importar y exportar">
+      <span class="grp-title">Proyecto</span>
+      <button type="button" class="primary" data-action="saveLocal">Guardar progreso</button>
+      <button type="button" data-action="loadLocal">Cargar guardado</button>
+      <button type="button" data-action="downloadJson">Descargar JSON</button>
+      <button type="button" data-action="importJson">Importar JSON</button>
+      <input type="file" id="importFile" accept=".json,application/json" hidden aria-label="Importar un archivo JSON del planificador">
+      <span class="sep" aria-hidden="true"></span>
+      <button type="button" class="primary" data-action="exportExcel">Exportar a Excel</button>
+      <button type="button" data-action="exportCsv">Exportar CSV</button>
+      <button type="button" data-action="print">Imprimir</button>
+      <span class="sep" aria-hidden="true"></span>
+      <button type="button" data-action="undo" aria-label="Deshacer (Ctrl+Z)">Deshacer</button>
+      <button type="button" data-action="redo" aria-label="Rehacer (Ctrl+Y)">Rehacer</button>
+    </div>
+
+    <!-- Fechas y umbral -->
+    <div class="toolbar" role="group" aria-label="Fechas del proyecto">
+      <label class="lbl" for="startDate">Inicio planificado</label>
+      <input type="date" id="startDate" data-change="startDate">
+      <label class="lbl" for="plannedFinishInput">Fin planificado</label>
+      <input type="date" id="plannedFinishInput" data-change="plannedFinish">
+      <label class="lbl" for="actualStartInput">Inicio real</label>
+      <input type="date" id="actualStartInput" data-change="actualStart">
+      <label class="lbl" for="actualFinishInput">Fin real</label>
+      <input type="date" id="actualFinishInput" data-change="actualFinish">
+      <label class="lbl" for="nearThreshold">Casi crítica si la holgura total es de hasta</label>
+      <input type="number" id="nearThreshold" min="1" max="60" value="5" data-change="threshold">
+      <span class="lbl">días</span>
+    </div>
+    <p class="banner info" id="startNote" style="margin:0"></p>
+
+    <!-- Escenarios, línea base, seguimiento rápido y nivelación -->
+    <div class="toolbar" role="group" aria-label="Escenarios y líneas base">
+      <span class="grp-title">Escenarios</span>
+      <button type="button" data-action="saveScenario">Guardar escenario</button>
+      <span id="scenarioChips"></span>
+      <span class="sep" aria-hidden="true"></span>
+      <span class="grp-title">Líneas base</span>
+      <button type="button" data-action="setBaseline">Fijar línea base</button>
+      <span id="baselineChips"></span>
+      <button type="button" data-action="clearBaselines">Quitar todas</button>
+    </div>
+    <div class="toolbar" role="group" aria-label="Aceleración, seguimiento rápido y optimización de recursos">
+      <span class="grp-title">Seguimiento rápido</span>
+      <label class="lbl" for="ftSelect">Tarea</label>
+      <select id="ftSelect" data-change="ftSelect"></select>
+      <label class="lbl" for="ftPct">Solape (% de su duración)</label>
+      <input type="number" id="ftPct" min="5" max="75" value="25" data-change="ftPct">
+      <button type="button" id="ftBtn" data-action="ftToggle">Aplicar seguimiento rápido</button>
+      <span class="sep" aria-hidden="true"></span>
+      <span class="grp-title">Recursos</span>
+      <button type="button" data-action="level">Nivelar recursos (optimización)</button>
+      <button type="button" data-action="undoLevel">Deshacer nivelación</button>
+      <span class="sep" aria-hidden="true"></span>
+      <button type="button" data-action="addTask">Agregar tarea</button>
+    </div>
+
+    <div id="ftBanner" class="banner" hidden role="status"></div>
+    <div id="cycleBanner" class="banner error" hidden role="alert"></div>
+    <div id="calBanner" class="banner" hidden role="status"></div>
+    <div id="status" class="status" role="status" aria-live="polite"></div>
+    <p class="sr-only" id="ganttSummary"></p>
+
+    <!-- Tabla y Gantt -->
+    <div class="board">
+      <div class="taskpane">
+        <table aria-label="Tabla de tareas del cronograma">
+          <caption class="sr-only">Tareas del cronograma. Usá Alt más flechas arriba y abajo para moverte entre filas en la misma columna.</caption>
+          <thead>
+            <tr>
+              <th scope="col">EDT</th>
+              <th scope="col">Tarea</th>
+              <th scope="col">Recurso</th>
+              <th scope="col">Dur.</th>
+              <th scope="col">Inicio</th>
+              <th scope="col">Fin</th>
+              <th scope="col">Pred.</th>
+              <th scope="col">Holgura total</th>
+              <th scope="col">%</th>
+              <th scope="col"><span class="sr-only">Acciones</span></th>
+            </tr>
+          </thead>
+          <tbody id="taskbody"></tbody>
+        </table>
+      </div>
+      <div class="ganttpane">
+        <div id="ganttHeader" class="ganttHeader" aria-hidden="true"></div>
+        <div id="ganttBody" role="group" aria-label="Diagrama de Gantt. Cada barra es un botón: flechas izquierda y derecha la mueven un día."></div>
+      </div>
+    </div>
+
+    <div class="legend" aria-label="Leyenda del Gantt">
+      <span><span class="sw" style="background:var(--gantt-critical-fill);border:1px solid var(--gantt-critical)"></span>Ruta crítica (holgura total 0)</span>
+      <span><span class="sw" style="background:var(--gantt-near-fill);border:1px solid var(--gantt-near)"></span>Casi crítica</span>
+      <span><span class="sw" style="background:var(--gantt-normal-fill);border:1px solid var(--gantt-normal)"></span>Con holgura</span>
+      <span><span class="sw" style="background:var(--gantt-summary)"></span>Fase</span>
+      <span><span class="sw" style="background:var(--gantt-conflict)"></span>Recurso sobreasignado</span>
+      <span>Trazo punteado: holgura. Línea punteada vertical: fecha de corte.</span>
+    </div>
+
+    <div id="leadCard" class="leadCard" hidden role="region" aria-label="Invitación a suscribirse"></div>
+
+    <!-- Botones de paneles -->
+    <div class="toolbar" role="group" aria-label="Paneles de gestión">
+      <button type="button" id="holidayToggleBtn" data-panel="holidays" aria-controls="holidaypanel">Mostrar feriados y calendario</button>
+      <button type="button" id="resToggleBtn" data-panel="res" aria-controls="respanel">Mostrar vista de recursos</button>
+      <button type="button" id="evmToggleBtn" data-panel="evm" aria-controls="evmpanel">Mostrar valor ganado (EVM)</button>
+      <button type="button" id="raciToggleBtn" data-panel="rac" aria-controls="racipanel">Mostrar matriz RACI</button>
+      <button type="button" id="riskToggleBtn" data-panel="risk" aria-controls="riskpanel">Mostrar registro de riesgos</button>
+      <button type="button" id="charterToggleBtn" data-panel="charter" aria-controls="charterpanel">Mostrar acta de constitución</button>
+      <button type="button" id="commsToggleBtn" data-panel="comms" aria-controls="commspanel">Mostrar plan de comunicaciones</button>
+      <button type="button" id="kanbanToggleBtn" data-panel="kanban" aria-controls="kanbanpanel">Mostrar Kanban</button>
+      <button type="button" id="closeToggleBtn" data-panel="close" aria-controls="closepanel">Mostrar cierre del proyecto</button>
+    </div>
+
+    <section id="holidaypanel" class="panel" aria-labelledby="holidayH">
+      <div class="phead"><h2 id="holidayH">Feriados y calendario</h2><span class="note" id="holidayNote" style="margin:0"></span></div>
+      <div class="pbody" id="holidayBody"></div>
+    </section>
+
+    <section id="respanel" class="panel" aria-labelledby="resH">
+      <div class="phead"><h2 id="resH">Vista de recursos</h2></div>
+      <div class="pbody">
+        <div class="resboard">
+          <div class="respane" id="resNames"></div>
+          <div class="resganttpane"><div id="resGanttBody"></div></div>
+        </div>
+        <p class="note">Un recurso aparece como sobreasignado cuando dos tareas suyas se solapan en el tiempo.</p>
+      </div>
+    </section>
+
+    <section id="evmpanel" class="panel" aria-labelledby="evmH">
+      <div class="phead">
+        <h2 id="evmH">Valor ganado (EVM)</h2>
+        <div class="holidayCtl" style="margin:0">
+          <label for="cutoffDate">Fecha de corte</label>
+          <input type="date" id="cutoffDate" data-change="cutoff">
+          <button type="button" data-action="useToday">Usar hoy</button>
+          <label for="acInput">Costo real acumulado (CA, USD)</label>
+          <input type="number" id="acInput" min="0" step="100" data-change="ac" placeholder="opcional">
+        </div>
+      </div>
+      <div class="pbody" id="evmBody"></div>
+    </section>
+
+    <section id="racipanel" class="panel" aria-labelledby="raciH">
+      <div class="phead"><h2 id="raciH">Matriz RACI</h2><button type="button" data-action="addRaciPerson">Agregar persona</button></div>
+      <div class="pbody" id="raciBody"></div>
+    </section>
+
+    <section id="riskpanel" class="panel" aria-labelledby="riskH">
+      <div class="phead"><h2 id="riskH">Registro de riesgos</h2><button type="button" data-action="addRisk">Agregar riesgo</button></div>
+      <div class="pbody" id="riskBody"></div>
+    </section>
+
+    <section id="charterpanel" class="panel" aria-labelledby="charterH">
+      <div class="phead"><h2 id="charterH">Acta de constitución</h2></div>
+      <div class="pbody" id="charterBody"></div>
+    </section>
+
+    <section id="commspanel" class="panel" aria-labelledby="commsH">
+      <div class="phead"><h2 id="commsH">Plan de comunicaciones</h2><button type="button" data-action="addComm">Agregar fila</button></div>
+      <div class="pbody" id="commsBody"></div>
+    </section>
+
+    <section id="kanbanpanel" class="panel" aria-labelledby="kanbanH">
+      <div class="phead"><h2 id="kanbanH">Kanban</h2></div>
+      <div class="pbody" id="kanbanBody"></div>
+    </section>
+
+    <section id="closepanel" class="panel" aria-labelledby="closeH">
+      <div class="phead"><h2 id="closeH">Cierre del proyecto</h2></div>
+      <div class="pbody">
+        <div class="closeCols">
+          <div>
+            <h3>Registro de cambios <button type="button" data-action="addChange">Agregar cambio</button></h3>
+            <div id="changeLogBody"></div>
+          </div>
+          <div>
+            <h3>Registro de decisiones <button type="button" data-action="addDecision">Agregar decisión</button></h3>
+            <div id="decisionLogBody"></div>
+          </div>
+        </div>
+        <h3 style="margin-top:18px"><label for="lessonsInput">Lecciones aprendidas (una por línea, mínimo 5)</label></h3>
+        <textarea id="lessonsInput" class="lessonsArea" rows="5"></textarea>
+        <div class="ctaActions" style="margin:10px 0">
+          <button type="button" class="primary" data-action="genInforme">Generar informe final</button>
+          <button type="button" data-action="copyInforme">Copiar informe</button>
+        </div>
+        <div id="cierreBox" class="cierreBox" hidden></div>
+      </div>
+    </section>
+
+    <!-- CTA al pie de la herramienta -->
+    <section class="cta" aria-labelledby="ctaH">
+      <h2 id="ctaH">¿Querés que tu equipo planifique así?</h2>
+      <p>Trabajo con equipos de TI y de gestión de proyectos para llevar estos conceptos (cronograma, ruta crítica, valor ganado, riesgos) a sus proyectos reales.</p>
+      <div class="ctaActions">
+        <a class="btn btn-primary" href="/contacto">Quiero capacitar a mi equipo en esto</a>
+        <a class="btn" href="/capacitaciones">Ver capacitaciones</a>
+        <a class="btn" id="waBtn" href="#" target="_blank" rel="noopener" hidden>Escribime por WhatsApp</a>
+        <a class="btn" href="/herramientas/planificador-ti/">Cómo usar esta herramienta</a>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div id="printArea" aria-hidden="true"></div>
+<div id="toastBox" role="status" aria-live="polite"></div>
+
+<footer class="attrib">
+  <span>Herramienta de Valeria Yashan · <a href="https://valeriayashan.com.ar">valeriayashan.com.ar</a> · © <span id="year"></span> Valeria Yashan. Todos los derechos reservados.</span>
+  <span class="links">
+    <a href="/contacto">Contacto</a>
+    <a href="/herramientas/planificador-ti/">Sobre esta herramienta</a>
+  </span>
+</footer>
+
+<script src="../app/data/feriados.js"></script>
+<script src="casos-egci.js"></script>
+<script src="../app/app.js"></script>
+</body>
+</html>
