@@ -44,13 +44,11 @@
 
   <main id="main">
     <!-- Barra de acciones -->
-    <div class="toolbar" role="toolbar" aria-label="Guardar, importar y exportar">
+    <div class="toolbar" role="toolbar" aria-label="Copia de seguridad y exportación">
       <span class="grp-title">Proyecto</span>
-      <button type="button" class="primary" data-action="saveLocal">Guardar progreso</button>
-      <button type="button" data-action="loadLocal">Cargar guardado</button>
-      <button type="button" data-action="downloadJson">Descargar JSON</button>
-      <button type="button" data-action="importJson">Importar JSON</button>
-      <input type="file" id="importFile" accept=".json,application/json" hidden aria-label="Importar un archivo JSON del planificador">
+      <button type="button" data-action="downloadJson">Descargar copia de seguridad</button>
+      <button type="button" data-action="importJson">Cargar copia de seguridad</button>
+      <input type="file" id="importFile" accept=".json,application/json" hidden aria-label="Cargar una copia de seguridad del planificador (archivo JSON)">
       <span class="sep" aria-hidden="true"></span>
       <button type="button" class="primary" data-action="exportExcel">Exportar a Excel</button>
       <button type="button" data-action="exportCsv">Exportar CSV</button>
@@ -73,10 +71,14 @@
       <label class="lbl" for="nearThreshold">Casi crítica si la holgura total es de hasta</label>
       <input type="number" id="nearThreshold" min="1" max="60" value="5" data-change="threshold">
       <span class="lbl">días</span>
+      <span class="sep" aria-hidden="true"></span>
+      <button type="button" data-action="addTask">Agregar tarea</button>
     </div>
     <p class="banner info" id="startNote" style="margin:0"></p>
 
-    <!-- Escenarios, línea base, seguimiento rápido y nivelación -->
+    <!-- Herramientas avanzadas: plegadas por defecto (fuera del alcance básico del curso) -->
+    <details class="advanced" id="advancedTools">
+    <summary>Herramientas avanzadas del cronograma: escenarios, líneas base, seguimiento rápido y nivelación de recursos</summary>
     <div class="toolbar" role="group" aria-label="Escenarios y líneas base">
       <span class="grp-title">Escenarios</span>
       <button type="button" data-action="saveScenario">Guardar escenario</button>
@@ -98,9 +100,8 @@
       <span class="grp-title">Recursos</span>
       <button type="button" data-action="level">Nivelar recursos (optimización)</button>
       <button type="button" data-action="undoLevel">Deshacer nivelación</button>
-      <span class="sep" aria-hidden="true"></span>
-      <button type="button" data-action="addTask">Agregar tarea</button>
     </div>
+    </details>
 
     <div id="ftBanner" class="banner" hidden role="status"></div>
     <div id="cycleBanner" class="banner error" hidden role="alert"></div>
@@ -147,35 +148,61 @@
 
     <div id="leadCard" class="leadCard" hidden role="region" aria-label="Invitación a suscribirse"></div>
 
-    <!-- Botones de paneles -->
-    <div class="toolbar" role="group" aria-label="Paneles de gestión">
-      <button type="button" id="holidayToggleBtn" data-panel="holidays" aria-controls="holidaypanel">Mostrar feriados y calendario</button>
-      <button type="button" id="resToggleBtn" data-panel="res" aria-controls="respanel">Mostrar vista de recursos</button>
-      <button type="button" id="evmToggleBtn" data-panel="evm" aria-controls="evmpanel">Mostrar valor ganado (EVM)</button>
-      <button type="button" id="raciToggleBtn" data-panel="rac" aria-controls="racipanel">Mostrar matriz RACI</button>
-      <button type="button" id="riskToggleBtn" data-panel="risk" aria-controls="riskpanel">Mostrar registro de riesgos</button>
+    <!-- Paneles de gestión, agrupados según las entregas del TI -->
+    <div class="toolbar" role="group" aria-label="Paneles: Inicio y planificación">
+      <span class="grp-title">Inicio y planificación</span>
       <button type="button" id="charterToggleBtn" data-panel="charter" aria-controls="charterpanel">Mostrar acta de constitución</button>
+      <button type="button" id="stkToggleBtn" data-panel="stk" aria-controls="stkpanel">Mostrar interesados y participación</button>
+      <button type="button" id="planToggleBtn" data-panel="plan" aria-controls="planpanel">Mostrar plan de gestión</button>
+    </div>
+    <div class="toolbar" role="group" aria-label="Paneles: Riesgos, comunicaciones y equipo">
+      <span class="grp-title">Riesgos, comunicaciones y equipo</span>
+      <button type="button" id="riskToggleBtn" data-panel="risk" aria-controls="riskpanel">Mostrar registro de riesgos</button>
       <button type="button" id="commsToggleBtn" data-panel="comms" aria-controls="commspanel">Mostrar plan de comunicaciones</button>
-      <button type="button" id="kanbanToggleBtn" data-panel="kanban" aria-controls="kanbanpanel">Mostrar Kanban</button>
+      <button type="button" id="teamToggleBtn" data-panel="team" aria-controls="teampanel">Mostrar Team Charter</button>
+      <button type="button" id="raciToggleBtn" data-panel="rac" aria-controls="racipanel">Mostrar matriz RACI</button>
+    </div>
+    <div class="toolbar" role="group" aria-label="Paneles: Control y cierre">
+      <span class="grp-title">Control y cierre</span>
+      <button type="button" id="evmToggleBtn" data-panel="evm" aria-controls="evmpanel">Mostrar valor ganado (EVM)</button>
       <button type="button" id="closeToggleBtn" data-panel="close" aria-controls="closepanel">Mostrar cierre del proyecto</button>
     </div>
+    <div class="toolbar" role="group" aria-label="Paneles de apoyo">
+      <span class="grp-title">Apoyo</span>
+      <button type="button" id="holidayToggleBtn" data-panel="holidays" aria-controls="holidaypanel">Mostrar feriados y calendario</button>
+      <button type="button" id="resToggleBtn" data-panel="res" aria-controls="respanel">Mostrar vista de recursos</button>
+      <button type="button" id="kanbanToggleBtn" data-panel="kanban" aria-controls="kanbanpanel">Mostrar Kanban</button>
+      <button type="button" id="checkToggleBtn" data-panel="check" aria-controls="checkpanel">Mostrar control de coherencia</button>
+    </div>
 
-    <section id="holidaypanel" class="panel" aria-labelledby="holidayH">
-      <div class="phead"><h2 id="holidayH">Feriados y calendario</h2><span class="note" id="holidayNote" style="margin:0"></span></div>
-      <div class="pbody" id="holidayBody"></div>
+    <section id="charterpanel" class="panel" aria-labelledby="charterH">
+      <div class="phead"><h2 id="charterH">Acta de constitución</h2></div>
+      <div class="pbody" id="charterBody"></div>
     </section>
-
-    <section id="respanel" class="panel" aria-labelledby="resH">
-      <div class="phead"><h2 id="resH">Vista de recursos</h2></div>
-      <div class="pbody">
-        <div class="resboard">
-          <div class="respane" id="resNames"></div>
-          <div class="resganttpane"><div id="resGanttBody"></div></div>
-        </div>
-        <p class="note">Un recurso aparece como sobreasignado cuando dos tareas suyas se solapan en el tiempo.</p>
-      </div>
+    <section id="stkpanel" class="panel" aria-labelledby="stkH">
+      <div class="phead"><h2 id="stkH">Interesados y matriz de participación</h2></div>
+      <div class="pbody" id="stkBody"></div>
     </section>
-
+    <section id="planpanel" class="panel" aria-labelledby="planH">
+      <div class="phead"><h2 id="planH">Plan de gestión, versión 1</h2></div>
+      <div class="pbody" id="planBody"></div>
+    </section>
+    <section id="riskpanel" class="panel" aria-labelledby="riskH">
+      <div class="phead"><h2 id="riskH">Registro de riesgos</h2><button type="button" data-action="addRisk">Agregar riesgo</button></div>
+      <div class="pbody" id="riskBody"></div>
+    </section>
+    <section id="commspanel" class="panel" aria-labelledby="commsH">
+      <div class="phead"><h2 id="commsH">Plan de comunicaciones</h2><button type="button" data-action="addComm">Agregar fila</button></div>
+      <div class="pbody" id="commsBody"></div>
+    </section>
+    <section id="teampanel" class="panel" aria-labelledby="teamH">
+      <div class="phead"><h2 id="teamH">Team Charter</h2></div>
+      <div class="pbody" id="teamBody"></div>
+    </section>
+    <section id="racipanel" class="panel" aria-labelledby="raciH">
+      <div class="phead"><h2 id="raciH">Matriz RACI</h2><button type="button" data-action="addRaciPerson">Agregar persona</button></div>
+      <div class="pbody" id="raciBody"></div>
+    </section>
     <section id="evmpanel" class="panel" aria-labelledby="evmH">
       <div class="phead">
         <h2 id="evmH">Valor ganado (EVM)</h2>
@@ -189,32 +216,6 @@
       </div>
       <div class="pbody" id="evmBody"></div>
     </section>
-
-    <section id="racipanel" class="panel" aria-labelledby="raciH">
-      <div class="phead"><h2 id="raciH">Matriz RACI</h2><button type="button" data-action="addRaciPerson">Agregar persona</button></div>
-      <div class="pbody" id="raciBody"></div>
-    </section>
-
-    <section id="riskpanel" class="panel" aria-labelledby="riskH">
-      <div class="phead"><h2 id="riskH">Registro de riesgos</h2><button type="button" data-action="addRisk">Agregar riesgo</button></div>
-      <div class="pbody" id="riskBody"></div>
-    </section>
-
-    <section id="charterpanel" class="panel" aria-labelledby="charterH">
-      <div class="phead"><h2 id="charterH">Acta de constitución</h2></div>
-      <div class="pbody" id="charterBody"></div>
-    </section>
-
-    <section id="commspanel" class="panel" aria-labelledby="commsH">
-      <div class="phead"><h2 id="commsH">Plan de comunicaciones</h2><button type="button" data-action="addComm">Agregar fila</button></div>
-      <div class="pbody" id="commsBody"></div>
-    </section>
-
-    <section id="kanbanpanel" class="panel" aria-labelledby="kanbanH">
-      <div class="phead"><h2 id="kanbanH">Kanban</h2></div>
-      <div class="pbody" id="kanbanBody"></div>
-    </section>
-
     <section id="closepanel" class="panel" aria-labelledby="closeH">
       <div class="phead"><h2 id="closeH">Cierre del proyecto</h2></div>
       <div class="pbody">
@@ -228,6 +229,8 @@
             <div id="decisionLogBody"></div>
           </div>
         </div>
+        <h3 style="margin-top:18px">Solicitud de cambio</h3>
+        <div id="crBody"></div>
         <h3 style="margin-top:18px"><label for="lessonsInput">Lecciones aprendidas (una por línea, mínimo 5)</label></h3>
         <textarea id="lessonsInput" class="lessonsArea" rows="5"></textarea>
         <div class="ctaActions" style="margin:10px 0">
@@ -236,6 +239,28 @@
         </div>
         <div id="cierreBox" class="cierreBox" hidden></div>
       </div>
+    </section>
+    <section id="holidaypanel" class="panel" aria-labelledby="holidayH">
+      <div class="phead"><h2 id="holidayH">Feriados y calendario</h2><span class="note" id="holidayNote" style="margin:0"></span></div>
+      <div class="pbody" id="holidayBody"></div>
+    </section>
+    <section id="respanel" class="panel" aria-labelledby="resH">
+      <div class="phead"><h2 id="resH">Vista de recursos</h2></div>
+      <div class="pbody">
+        <div class="resboard">
+          <div class="respane" id="resNames"></div>
+          <div class="resganttpane"><div id="resGanttBody"></div></div>
+        </div>
+        <p class="note">Un recurso aparece como sobreasignado cuando dos tareas suyas se solapan en el tiempo.</p>
+      </div>
+    </section>
+    <section id="kanbanpanel" class="panel" aria-labelledby="kanbanH">
+      <div class="phead"><h2 id="kanbanH">Kanban</h2></div>
+      <div class="pbody" id="kanbanBody"></div>
+    </section>
+    <section id="checkpanel" class="panel" aria-labelledby="checkH">
+      <div class="phead"><h2 id="checkH">Control de coherencia</h2></div>
+      <div class="pbody" id="checkBody"></div>
     </section>
 
     <!-- CTA al pie de la herramienta -->

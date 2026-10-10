@@ -20,11 +20,14 @@
     XLSX_LOCAL: "vendor/xlsx.full.min.js",
     XLSX_CDN: "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js",
     MAX_FILE_BYTES: 2 * 1024 * 1024,
-    MAX_TASKS: 300
+    MAX_TASKS: 300,
+    AUTOSAVE_MS: 1200,       // espera tras el último cambio antes de guardar solo en este navegador
+    CUTOFF_FRACTION: 0.6     // fecha de corte sugerida del EVM: 60% del plazo planificado
   };
 
   var CASOS = window.PLANIFICADOR_CASOS || {};
   var META = window.PLANIFICADOR_CASOS_META || { audience: "publica" };
+  var EGCI = META.audience === "alumnos-egci"; // versión para alumnos del Máster: habilita índice TI-00, DOC-xx y PDF por entrega
   var FERIADOS = window.PLANIFICADOR_FERIADOS || {};
 
   /* ===================== utilidades ===================== */
@@ -62,6 +65,51 @@
     return isFinite(v) && v > 0 ? v : 30;
   }
 
+  /* ===================== definiciones de los documentos de gestión ===================== */
+  var CHARTER_FIELDS = [
+    { key: "objective", label: "Objetivo SMART (a completar por el alumno)", full: true, ph: "Escribí el objetivo SMART del proyecto..." },
+    { key: "sponsor", label: "Patrocinador (sponsor)" }, { key: "budget", label: "Presupuesto autorizado" }, { key: "duration", label: "Duración estimada" },
+    { key: "contingency", label: "Reserva de contingencia (monto y criterio, a completar)", full: true, ph: "¿Cuánta reserva de contingencia tiene el proyecto y con qué criterio se calculó?" },
+    { key: "deliverable", label: "Entregable principal", full: true }, { key: "scopeIn", label: "Alcance — dentro", full: true },
+    { key: "scopeOut", label: "Alcance — fuera (a completar)", full: true, ph: "¿Qué queda explícitamente fuera del alcance?" },
+    { key: "constraints", label: "Restricciones", full: true }, { key: "stakeholders", label: "Partes interesadas clave", full: true }
+  ];
+  var STK_KEYS = ["id", "name", "role", "power", "interest", "engNow", "engDesired", "strategy"];
+  var LEVELS3 = ["Alto", "Medio", "Bajo"];
+  var ENG_LEVELS = ["Desconocedor", "Reticente", "Neutral", "Partidario", "Líder"];
+  var TEAM_FIELDS = [
+    { key: "values", label: "Valores y principios de trabajo del equipo", full: true },
+    { key: "agreements", label: "Acuerdos de trabajo (horarios, disponibilidad, tiempos de respuesta)", full: true },
+    { key: "meetings", label: "Reuniones del proyecto (cuáles, frecuencia, duración, participantes y objetivo)", full: true, rows: 4 },
+    { key: "channels", label: "Canales y herramientas de comunicación del equipo" },
+    { key: "decisions", label: "Cómo toma decisiones el equipo" },
+    { key: "conflicts", label: "Cómo se resuelven los conflictos y cuándo se escalan", full: true }
+  ];
+  var PLAN_FIELDS = [
+    { key: "scope", label: "Gestión del alcance" }, { key: "schedule", label: "Gestión del cronograma" },
+    { key: "cost", label: "Gestión de costos (incluye cómo se administra la reserva de contingencia)" }, { key: "quality", label: "Gestión de la calidad" },
+    { key: "resources", label: "Gestión de los recursos" }, { key: "communications", label: "Gestión de las comunicaciones" },
+    { key: "risk", label: "Gestión de los riesgos" }, { key: "stakeholders", label: "Gestión de los interesados" },
+    { key: "procurement", label: "Gestión de las adquisiciones" }, { key: "change", label: "Control de cambios (quién aprueba, umbrales, proceso)" }
+  ];
+  var CR_FIELDS = [
+    { key: "title", label: "Título de la solicitud", rows: 1 }, { key: "requester", label: "Solicitante", rows: 1 },
+    { key: "description", label: "Descripción del cambio solicitado", full: true }, { key: "justification", label: "Justificación", full: true },
+    { key: "impactScope", label: "Impacto en el alcance" }, { key: "impactSchedule", label: "Impacto en el cronograma" },
+    { key: "impactCost", label: "Impacto en el costo (USD)" }, { key: "impactRisk", label: "Impacto en los riesgos y la calidad" },
+    { key: "alternatives", label: "Alternativas consideradas", full: true }, { key: "recommendation", label: "Recomendación del director del proyecto", full: true },
+    { key: "decision", label: "Decisión (aprobada, rechazada o diferida) y quién decide", full: true }
+  ];
+  function objByName(n) { return n === "team" ? teamCharter : (n === "plan" ? mgmtPlan : changeRequest); }
+  function renderFieldGrid(objName, fields) {
+    var obj = objByName(objName);
+    return '<div class="charterGrid">' + fields.map(function (f) {
+      var id = "f_" + objName + "_" + f.key;
+      return '<div class="charterField' + (f.full ? " full" : "") + '"><label for="' + id + '">' + esc(f.label) + '</label><textarea id="' + id + '" rows="' + (f.rows || 3) + '" data-change="objField" data-obj="' + objName + '" data-key="' + f.key + '" data-fid="' + objName + ":" + f.key + '">' + esc(obj[f.key] || "") + "</textarea></div>";
+    }).join("") + "</div>";
+  }
+  function filledCount(obj, fields) { return fields.filter(function (f) { return String((obj || {})[f.key] || "").trim(); }).length; }
+
   /* ===================== estado ===================== */
   var DAY_PX = 6;
   var currentProjectId = "";
@@ -70,6 +118,8 @@
   var nearThreshold = 5, baselines = [], cutoffDay = 65, acActual = null;
   var risks = [], raciAssignments = {}, raciPeople = [];
   var charter = {}, comms = [], changeLog = [], decisionLog = [], lessons = "";
+  var stakeholders = [], teamCharter = {}, mgmtPlan = {}, changeRequest = {};
+  var autosaveTimer = 0, autosaveFailed = false, lastSavedAt = "";
   var history = [], future = [];
   var holidays = [], holidayCountry = "AR", holidayYear = 0;
   var isDirty = false;
@@ -209,15 +259,46 @@
     }
     return { schedule: originalSchedule, projectEnd: originalProjectEnd, label: "Plan original" };
   }
-  function parseBudget(txt) { var n = parseInt(String(txt || "").replace(/[^\d]/g, ""), 10); return isNaN(n) || n <= 0 ? null : n; }
+  // Toma el primer importe del texto ("USD 480.000", "usd 1.850.000 (con reserva de 90.000)"), no todos los dígitos pegados.
+  function parseBudget(txt) {
+    var m = String(txt || "").match(/\d{1,3}(?:[.,]\d{3})+|\d+/);
+    if (!m) return null;
+    var n = parseInt(m[0].replace(/[.,]/g, ""), 10);
+    return isNaN(n) || n <= 0 ? null : n;
+  }
+  function suggestedCutoff() { return Math.max(1, Math.round(originalProjectEnd * CONFIG.CUTOFF_FRACTION)); }
+  // Escala los costos diarios de todas las tareas para que el BAC coincida con el presupuesto del acta; el residuo se absorbe en la tarea más larga.
+  function recalibrateCosts() {
+    var ab = parseBudget(charter.budget);
+    if (ab === null) { notify("El acta no tiene un presupuesto numérico: completá \"Presupuesto autorizado\" en el acta de constitución."); return; }
+    var m = computeEVM();
+    if (!(m.BAC > 0)) { notify("No hay costos para recalibrar: el BAC es 0."); return; }
+    pushHistory();
+    var k = ab / m.BAC, planned = m.planned, sum = 0, big = null, bigDur = -1;
+    tasks.forEach(function (t) {
+      var pRef = planned.schedule[t.id] || { dur: t.dur }, dc = Math.round(getDailyCost(t) * k * 10000) / 10000;
+      t.dailyCost = dc; sum += pRef.dur * dc;
+      if (pRef.dur > bigDur) { bigDur = pRef.dur; big = t; }
+    });
+    if (big && bigDur > 0) big.dailyCost = Math.round((big.dailyCost + (ab - sum) / bigDur) * 10000) / 10000;
+    render();
+    notify("Costos diarios recalibrados: el BAC ahora coincide con el presupuesto del acta (" + usd(ab) + ").");
+  }
   function budgetNote(m) {
     var ab = parseBudget(charter.budget);
     if (ab === null) return "Los costos diarios son editables en la tabla de abajo: el acta de constitución no trae un presupuesto numérico para comparar con el BAC.";
     var diff = Math.round(m.BAC - ab);
     return "Presupuesto autorizado en el acta de constitución: " + usd(ab) + ". " + (Math.abs(diff) <= 1
       ? "El BAC coincide con ese presupuesto: los costos diarios de este caso se distribuyeron en proporción a la duración y al tipo de recurso de cada tarea (distribución didáctica, no una estimación ascendente). El BAC es la línea base de costos; las reservas de contingencia y de gestión no se discriminan."
-      : "El BAC (" + usd(m.BAC) + ") difiere en " + usd(Math.abs(diff)) + " del presupuesto del acta " + (diff > 0 ? "por encima" : "por debajo") + ": cambiaste duraciones, costos o tareas (las tareas nuevas usan una tarifa didáctica). Revisá el BAC o actualizá el acta con una solicitud de cambio.") +
+      : "El BAC (" + usd(m.BAC) + ") difiere en " + usd(Math.abs(diff)) + " del presupuesto del acta " + (diff > 0 ? "por encima" : "por debajo") + ": cambiaste duraciones, costos o tareas (las tareas nuevas usan una tarifa didáctica). Revisá el BAC, actualizá el acta con una solicitud de cambio o recalibrá los costos diarios con el botón \"Recalibrar costos al presupuesto del acta\".") +
       " Podés editar los costos diarios en la tabla de abajo.";
+  }
+  // La fecha de corte tiene que caer dentro del plazo planificado; si no, el VP ya es el 100% del BAC (o 0%) y el EVM no sirve para un informe de estado de un período.
+  function cutoffWarning(m) {
+    var end = m.planned.projectEnd;
+    if (cutoffDay >= end) return '<p class="banner" role="status" style="border:1px solid var(--gantt-near)">La fecha de corte (' + esc(workdayISO(cutoffDay)) + ") cae después del fin planificado (" + esc(workdayISO(Math.max(0, end - 1))) + "): el VP ya es el 100% del BAC y el EVM deja de servir para un informe de estado de un período. Elegí una fecha dentro del proyecto.</p>";
+    if (cutoffDay <= 0) return '<p class="banner" role="status" style="border:1px solid var(--gantt-near)">La fecha de corte es el inicio del proyecto: el VP es 0 y no hay período que evaluar. Elegí una fecha posterior.</p>';
+    return "";
   }
   function computeEVM() {
     computeSchedule(tasks);
@@ -255,7 +336,8 @@
   function fullSnapshotStr() {
     return JSON.stringify({ tasks: cloneTasks(tasks), phases: clonePhases(phases), baselines: baselines, risks: risks,
       raciAssignments: raciAssignments, raciPeople: raciPeople, charter: charter, comms: comms, changeLog: changeLog,
-      decisionLog: decisionLog, lessons: lessons, cutoffDay: cutoffDay, acActual: acActual, nearThreshold: nearThreshold, meta: metaState() });
+      decisionLog: decisionLog, lessons: lessons, cutoffDay: cutoffDay, acActual: acActual, nearThreshold: nearThreshold, meta: metaState(),
+      stakeholders: stakeholders, teamCharter: teamCharter, mgmtPlan: mgmtPlan, changeRequest: changeRequest });
   }
   function pushHistory() {
     history.push(fullSnapshotStr());
@@ -269,6 +351,7 @@
     raciAssignments = s.raciAssignments || {}; raciPeople = s.raciPeople || [];
     charter = s.charter || {}; comms = s.comms || []; changeLog = s.changeLog || []; decisionLog = s.decisionLog || [];
     lessons = s.lessons || ""; cutoffDay = s.cutoffDay; acActual = s.acActual; nearThreshold = s.nearThreshold;
+    stakeholders = s.stakeholders || []; teamCharter = s.teamCharter || {}; mgmtPlan = s.mgmtPlan || {}; changeRequest = s.changeRequest || {};
     var m = s.meta || {};
     holidays = m.holidays || holidays; holidayCountry = m.holidayCountry || holidayCountry; holidayYear = m.holidayYear || holidayYear;
     if (m.startDate) $("startDate").value = m.startDate;
@@ -277,13 +360,40 @@
   }
   function undo() { if (!history.length) return; future.push(fullSnapshotStr()); restoreFromStr(history.pop()); setDirty(true); render(); }
   function redo() { if (!future.length) return; history.push(fullSnapshotStr()); restoreFromStr(future.pop()); setDirty(true); render(); }
+  // Guardado automático: cada cambio programa un guardado en este navegador. isDirty = cambios todavía sin guardar en ningún lado.
   function setDirty(v) {
     isDirty = v;
+    if (v) scheduleAutosave();
+    paintSaveState();
+  }
+  function paintSaveState() {
     var el = $("dirtyIndicator");
     if (!el) return;
-    el.className = "dirty" + (v ? "" : " clean");
-    el.innerHTML = '<span class="dot" aria-hidden="true"></span>' + (v ? "Cambios sin guardar" : "Sin cambios pendientes");
+    var msg;
+    if (autosaveFailed) msg = "No se pudo guardar solo: descargá la copia de seguridad";
+    else if (isDirty) msg = "Guardando…";
+    else msg = lastSavedAt ? "Guardado automáticamente a las " + lastSavedAt : "Sin cambios todavía";
+    el.className = "dirty" + (isDirty || autosaveFailed ? "" : " clean");
+    el.innerHTML = '<span class="dot" aria-hidden="true"></span>' + esc(msg);
   }
+  function scheduleAutosave() {
+    if (!currentProjectId) return;
+    clearTimeout(autosaveTimer);
+    autosaveTimer = setTimeout(autosaveNow, CONFIG.AUTOSAVE_MS);
+  }
+  function autosaveNow() {
+    clearTimeout(autosaveTimer); autosaveTimer = 0;
+    if (!currentProjectId || !isDirty) return;
+    var ok = store.set(storageKey(currentProjectId), JSON.stringify(serializeState()));
+    autosaveFailed = !ok;
+    if (ok) {
+      store.set(lastCaseKey(), currentProjectId);
+      var d = new Date(); lastSavedAt = String(d.getHours()).padStart(2, "0") + ":" + String(d.getMinutes()).padStart(2, "0");
+      isDirty = false;
+    }
+    paintSaveState();
+  }
+  function lastCaseKey() { return "ptTI.last." + META.audience; }
 
   /* ===================== diálogos y avisos propios (accesibles) ===================== */
   function notify(msg) {
@@ -405,15 +515,19 @@
     originalSchedule = {};
     tmp.forEach(function (t) { originalSchedule[t.id] = { es: t._es, ef: t._ef, dur: t.dur }; });
     baselines = []; acActual = null; actualStart = ""; actualFinish = ""; plannedFinishOverride = "";
+    cutoffDay = suggestedCutoff();
     risks = clone(proj.risks || []); raciAssignments = {}; raciPeople = [];
+    risks.forEach(function (r) { if (r.type !== "Oportunidad") r.type = "Amenaza"; });
+    stakeholders = []; teamCharter = {}; mgmtPlan = {}; changeRequest = {};
     charter = clone(proj.charter || {});
+    charter.contingency = charter.contingency || "";
     comms = (charter.stakeholders || "").split(",").slice(0, 2).map(function (s, i) {
       return { id: "C" + (i + 1), stakeholder: s.trim(), info: i === 0 ? "Avance general del proyecto" : "Impacto en su área",
         freq: i === 0 ? "Semanal" : "Quincenal", channel: "Reunión / email", owner: "PM" };
     });
     changeLog = []; decisionLog = []; lessons = ""; history = []; future = [];
     scenarios = [{ name: "Plan original", snap: { tasksSnap: cloneTasks(tasks), phasesSnap: clonePhases(phases) } }];
-    activeScenario = 0; ftTaskId = ""; setDirty(false);
+    activeScenario = 0; ftTaskId = ""; lastSavedAt = ""; autosaveFailed = false; clearTimeout(autosaveTimer); setDirty(false);
     $("projectSelect").value = id;
     render();
   }
@@ -467,6 +581,8 @@
     $("projTitle").textContent = CASOS[currentProjectId] ? CASOS[currentProjectId].title : "";
     $("startNote").textContent = CASOS[currentProjectId] ? CASOS[currentProjectId].startNote || "" : "";
     renderFastTrackControls(byId);
+    var adv = $("advancedTools");
+    if (adv && (baselines.length || scenarios.length > 1 || tasks.some(function (t) { return t.overlapDays > 0; }))) adv.open = true;
 
     var totalDays = Math.max.apply(null, [projectEnd, originalProjectEnd].concat(baselines.map(function (b) { return b.projectEnd; }))) + 12;
     var totalWeeks = Math.ceil(totalDays / 5), chartWidth = totalWeeks * 5 * DAY_PX;
@@ -556,7 +672,7 @@
     });
     var totalHeight = rowIndex * RH;
     var tl = document.createElement("div"); tl.className = "today-line"; tl.style.left = (cutoffDay * DAY_PX) + "px"; tl.style.height = totalHeight + "px"; tl.setAttribute("aria-hidden", "true");
-    var tlab = document.createElement("div"); tlab.className = "today-label"; tlab.style.left = (cutoffDay * DAY_PX) + "px"; tlab.textContent = "HOY"; tlab.setAttribute("aria-hidden", "true");
+    var tlab = document.createElement("div"); tlab.className = "today-label"; tlab.style.left = (cutoffDay * DAY_PX) + "px"; tlab.textContent = "CORTE"; tlab.setAttribute("aria-hidden", "true");
     body.appendChild(tl); body.appendChild(tlab);
 
     var NS = "http://www.w3.org/2000/svg", svg = document.createElementNS(NS, "svg");
@@ -664,6 +780,10 @@
     rac: { id: "racipanel", btn: "raciToggleBtn", label: "matriz RACI", render: renderRACI },
     risk: { id: "riskpanel", btn: "riskToggleBtn", label: "registro de riesgos", render: renderRisks },
     charter: { id: "charterpanel", btn: "charterToggleBtn", label: "acta de constitución", render: renderCharter },
+    stk: { id: "stkpanel", btn: "stkToggleBtn", label: "interesados y participación", render: renderStakeholders },
+    plan: { id: "planpanel", btn: "planToggleBtn", label: "plan de gestión", render: renderPlan },
+    team: { id: "teampanel", btn: "teamToggleBtn", label: "Team Charter", render: renderTeam },
+    check: { id: "checkpanel", btn: "checkToggleBtn", label: "control de coherencia", render: renderChecks },
     comms: { id: "commspanel", btn: "commsToggleBtn", label: "plan de comunicaciones", render: renderComms },
     kanban: { id: "kanbanpanel", btn: "kanbanToggleBtn", label: "Kanban", render: renderKanban },
     close: { id: "closepanel", btn: "closeToggleBtn", label: "cierre del proyecto", render: renderCloseLogs }
@@ -711,6 +831,10 @@
     };
     var html = '<p class="note" style="margin-top:0">VP y BAC se calculan contra <b>' + esc(m.planned.label) + "</b> (línea base fija: no cambia aunque muevas tareas). VE y CA reflejan el avance y el costo real. Esta misma función alimenta el informe final, por eso los números coinciden.</p>" +
       '<p class="note">' + budgetNote(m) + (m.acEstimated ? " Todavía no cargaste costo real: se usa CA = VE (CPI = 1) como estimación." : "") + "</p>" +
+      cutoffWarning(m) +
+      '<div class="evmActions">' +
+      (parseBudget(charter.budget) !== null && Math.abs(Math.round(m.BAC - parseBudget(charter.budget))) > 1 ? '<button type="button" data-action="recalibrateCosts" data-fid="recal">Recalibrar costos al presupuesto del acta</button>' : "") +
+      '<button type="button" data-action="useSuggestedCutoff" data-fid="cutsug">Usar el corte sugerido (' + Math.round(CONFIG.CUTOFF_FRACTION * 100) + '% del plazo)</button></div>' +
       '<div class="evmGrid">' +
       card(usd(m.BAC), "BAC — Presupuesto al cierre") + card(usd(m.PV), "VP — Valor planificado") + card(usd(m.EV), "VE — Valor ganado") +
       card(usd(m.AC), "CA — Costo real" + (m.anyTaskAc ? " (por tarea)" : (m.acEstimated ? " (estimado = VE)" : " (global)"))) +
@@ -747,28 +871,31 @@
 
   /* ---- riesgos ---- */
   var RISK_SCALE = { "Baja": 1, "Media": 2, "Alta": 3 };
+  // Estrategias de respuesta (PMBOK): una amenaza se evita, mitiga, transfiere o acepta; una oportunidad se explota, mejora, comparte o acepta; ambas pueden escalarse.
+  var RESP_THREAT = ["Evitar", "Mitigar", "Transferir", "Aceptar", "Escalar"];
+  var RESP_OPP = ["Explotar", "Mejorar", "Compartir", "Aceptar", "Escalar"];
+  function riskStrategy(r) {
+    var first = String(r.response || "").trim().split(/[\s—–\-:.,]/)[0].toLowerCase();
+    var list = r.type === "Oportunidad" ? RESP_OPP : RESP_THREAT;
+    for (var i = 0; i < list.length; i++) if (list[i].toLowerCase() === first) return list[i];
+    return "";
+  }
   function riskScore(p, i) { return (RISK_SCALE[p] || 1) * (RISK_SCALE[i] || 1); }
   function riskClass(e) { return e <= 2 ? "g" : (e <= 4 ? "a" : "r"); }
   function renderRisks() {
-    var h = '<table class="risktable"><caption class="sr-only">Registro de riesgos</caption><thead><tr><th scope="col">#</th><th scope="col">Riesgo</th><th scope="col">Categoría</th><th scope="col">Prob.</th><th scope="col">Impacto</th><th scope="col">Puntaje (P×I)</th><th scope="col">Respuesta</th><th scope="col">Responsable del riesgo</th><th scope="col">Tarea vinculada</th><th scope="col"><span class="sr-only">Acciones</span></th></tr></thead><tbody>';
+    var h = '<table class="risktable"><caption class="sr-only">Registro de riesgos</caption><thead><tr><th scope="col">#</th><th scope="col">Riesgo</th><th scope="col">Tipo</th><th scope="col">Categoría</th><th scope="col">Prob.</th><th scope="col">Impacto</th><th scope="col">Puntaje (P×I)</th><th scope="col">Respuesta</th><th scope="col">Responsable del riesgo</th><th scope="col">Tarea vinculada</th><th scope="col"><span class="sr-only">Acciones</span></th></tr></thead><tbody>';
     risks.forEach(function (r) {
       var e = riskScore(r.prob, r.impact);
       var opts = '<option value="">—</option>' + tasks.map(function (t) { return '<option value="' + esc(t.id) + '"' + (r.taskId === t.id ? " selected" : "") + ">" + esc(t.id) + "</option>"; }).join("");
-      h += "<tr><td>" + esc(r.id) + "</td><td>" + esc(r.desc) + "</td><td>" + esc(r.category) + "</td><td>" + esc(r.prob) + "</td><td>" + esc(r.impact) + '</td><td><span class="expo ' + riskClass(e) + '">' + e + "</span></td><td>" + esc(r.response) + "</td><td>" + esc(r.owner) + '</td><td><select class="cell-input" data-change="riskTask" data-id="' + esc(r.id) + '" data-fid="rt:' + esc(r.id) + '" aria-label="Tarea vinculada al riesgo ' + esc(r.id) + '">' + opts + '</select></td><td><button type="button" class="delBtn" data-action="deleteRisk" data-id="' + esc(r.id) + '" data-fid="rd:' + esc(r.id) + '" aria-label="Eliminar el riesgo ' + esc(r.id) + '">✕</button></td></tr>';
+      h += "<tr><td>" + esc(r.id) + "</td><td>" + esc(r.desc) + "</td><td>" + esc(r.type || "Amenaza") + "</td><td>" + esc(r.category) + "</td><td>" + esc(r.prob) + "</td><td>" + esc(r.impact) + '</td><td><span class="expo ' + riskClass(e) + '">' + e + "</span></td><td>" + esc(r.response) + "</td><td>" + esc(r.owner) + '</td><td><select class="cell-input" data-change="riskTask" data-id="' + esc(r.id) + '" data-fid="rt:' + esc(r.id) + '" aria-label="Tarea vinculada al riesgo ' + esc(r.id) + '">' + opts + '</select></td><td><button type="button" class="delBtn" data-action="deleteRisk" data-id="' + esc(r.id) + '" data-fid="rd:' + esc(r.id) + '" aria-label="Eliminar el riesgo ' + esc(r.id) + '">✕</button></td></tr>';
     });
-    h += '</tbody></table><p class="note">Puntaje = probabilidad × impacto (escala 1 a 3 cada una), una ayuda para priorizar cada riesgo. No es la "exposición al riesgo" del proyecto, que en PMBOK es una medida agregada de todos los riesgos. Los riesgos vinculados a una tarea muestran un aviso sobre su barra en el Gantt.</p>';
+    h += '</tbody></table><p class="note">Un riesgo puede ser una amenaza (evitar, mitigar, transferir, aceptar, escalar) o una oportunidad (explotar, mejorar, compartir, aceptar, escalar). Empezá la respuesta por la estrategia elegida, por ejemplo "Mitigar — ...". Puntaje = probabilidad × impacto (escala 1 a 3 cada una), una ayuda para priorizar cada riesgo. No es la "exposición al riesgo" del proyecto, que en PMBOK es una medida agregada de todos los riesgos. Los riesgos vinculados a una tarea muestran un aviso sobre su barra en el Gantt.</p>';
     $("riskBody").innerHTML = h;
   }
 
   /* ---- charter ---- */
   function renderCharter() {
-    var fields = [
-      { key: "objective", label: "Objetivo SMART (a completar por el alumno)", full: true, ph: "Escribí el objetivo SMART del proyecto..." },
-      { key: "sponsor", label: "Patrocinador (sponsor)" }, { key: "budget", label: "Presupuesto autorizado" }, { key: "duration", label: "Duración estimada" },
-      { key: "deliverable", label: "Entregable principal", full: true }, { key: "scopeIn", label: "Alcance — dentro", full: true },
-      { key: "scopeOut", label: "Alcance — fuera (a completar)", full: true, ph: "¿Qué queda explícitamente fuera del alcance?" },
-      { key: "constraints", label: "Restricciones", full: true }, { key: "stakeholders", label: "Partes interesadas clave", full: true }
-    ];
+    var fields = CHARTER_FIELDS;
     $("charterBody").innerHTML = '<div class="charterGrid">' + fields.map(function (f) {
       return '<div class="charterField' + (f.full ? " full" : "") + '"><label for="ch_' + f.key + '">' + esc(f.label) + '</label><textarea id="ch_' + f.key + '" rows="' + (f.full ? 2 : 1) + '" data-change="charter" data-key="' + f.key + '" data-fid="ch:' + f.key + '" placeholder="' + esc(f.ph || "") + '">' + esc(charter[f.key] || "") + "</textarea></div>";
     }).join("") + "</div>";
@@ -779,6 +906,172 @@
     $("commsBody").innerHTML = '<table class="simpletable"><caption class="sr-only">Plan de comunicaciones</caption><thead><tr><th scope="col">Parte interesada</th><th scope="col">Información</th><th scope="col">Frecuencia</th><th scope="col">Canal</th><th scope="col">Responsable</th><th scope="col"><span class="sr-only">Acciones</span></th></tr></thead><tbody>' + comms.map(function (c) {
       return "<tr><td>" + esc(c.stakeholder) + "</td><td>" + esc(c.info) + "</td><td>" + esc(c.freq) + "</td><td>" + esc(c.channel) + "</td><td>" + esc(c.owner) + '</td><td><button type="button" class="delBtn" data-action="deleteComm" data-id="' + esc(c.id) + '" data-fid="cd:' + esc(c.id) + '" aria-label="Eliminar la fila de ' + esc(c.stakeholder) + '">✕</button></td></tr>';
     }).join("") + "</tbody></table>";
+  }
+
+  /* ---- interesados y matriz de participación ---- */
+  function normName(s) { return String(s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/\(.*?\)/g, " ").replace(/[^a-z0-9 ]/g, " ").replace(/\s+/g, " ").trim(); }
+  function nameMatches(a, b) { a = normName(a); b = normName(b); return !!(a && b && (a === b || a.indexOf(b) >= 0 || b.indexOf(a) >= 0)); }
+  function charterStakeholderList() {
+    return String(charter.stakeholders || "").split(/[,;·]/).map(function (s) { return s.trim(); }).filter(Boolean).map(function (s) {
+      var m = s.match(/^(.*?)\s*\((.*?)\)\s*$/);
+      return m ? { name: m[1].trim(), role: m[2].trim() } : { name: s, role: "" };
+    });
+  }
+  function nextStkId() { var n = stakeholders.length + 1; while (stakeholders.some(function (x) { return x.id === "S" + n; })) n++; return "S" + n; }
+  function renderStakeholders() {
+    function sel(s, key, label, list) {
+      var id = esc(s.id);
+      return '<select class="cell-input" data-change="stkField" data-id="' + id + '" data-key="' + key + '" data-fid="stk:' + key + ":" + id + '" aria-label="' + label + " de " + esc(s.name || s.id) + '"><option value="">—</option>' +
+        list.map(function (o) { return '<option value="' + esc(o) + '"' + (s[key] === o ? " selected" : "") + ">" + esc(o) + "</option>"; }).join("") + "</select>";
+    }
+    function inp(s, key, label, w) {
+      var id = esc(s.id);
+      return '<input type="text" class="cell-input" style="width:' + w + '" value="' + esc(s[key] || "") + '" data-change="stkField" data-id="' + id + '" data-key="' + key + '" data-fid="stk:' + key + ":" + id + '" aria-label="' + label + " de " + esc(s.name || s.id) + '">';
+    }
+    var h = '<div class="evmActions"><button type="button" data-action="addStakeholder" data-fid="stk:add">Agregar interesado</button><button type="button" data-action="preloadStakeholders" data-fid="stk:pre">Precargar desde el acta de constitución</button></div>' +
+      '<table class="simpletable"><caption class="sr-only">Registro de interesados</caption><thead><tr><th scope="col">Interesado</th><th scope="col">Rol e interés en el proyecto</th><th scope="col">Poder</th><th scope="col">Interés</th><th scope="col">Participación actual</th><th scope="col">Participación deseada</th><th scope="col">Estrategia de participación</th><th scope="col"><span class="sr-only">Acciones</span></th></tr></thead><tbody>' +
+      (stakeholders.map(function (s) {
+        return "<tr><td>" + inp(s, "name", "Nombre", "150px") + "</td><td>" + inp(s, "role", "Rol", "200px") + "</td><td>" + sel(s, "power", "Poder", LEVELS3) + "</td><td>" + sel(s, "interest", "Interés", LEVELS3) + "</td><td>" + sel(s, "engNow", "Participación actual", ENG_LEVELS) + "</td><td>" + sel(s, "engDesired", "Participación deseada", ENG_LEVELS) + "</td><td>" + inp(s, "strategy", "Estrategia", "220px") +
+          '</td><td><button type="button" class="delBtn" data-action="deleteStakeholder" data-id="' + esc(s.id) + '" data-fid="stk:del:' + esc(s.id) + '" aria-label="Eliminar a ' + esc(s.name || s.id) + '">✕</button></td></tr>';
+      }).join("") || '<tr><td colspan="8">Todavía no hay interesados. Usá "Precargar desde el acta de constitución" o agregalos de a uno.</td></tr>') + "</tbody></table>";
+    h += '<h3 style="margin:18px 0 8px;font-size:13px">Matriz de participación</h3><table class="simpletable"><caption class="sr-only">Matriz de participación de los interesados: C es la participación actual y D la deseada</caption><thead><tr><th scope="col">Interesado</th>' +
+      ENG_LEVELS.map(function (l) { return '<th scope="col">' + esc(l) + "</th>"; }).join("") + '<th scope="col">Brecha</th></tr></thead><tbody>' +
+      (stakeholders.filter(function (s) { return s.engNow || s.engDesired; }).map(function (s) {
+        var gap = (s.engNow && s.engDesired) ? ENG_LEVELS.indexOf(s.engDesired) - ENG_LEVELS.indexOf(s.engNow) : null;
+        return "<tr><th scope=\"row\">" + esc(s.name) + "</th>" + ENG_LEVELS.map(function (l) {
+          var c = s.engNow === l, d = s.engDesired === l, t = c && d ? "C y D" : (c ? "C" : (d ? "D" : ""));
+          return '<td class="engcell' + (t ? " on" : "") + '">' + (t ? '<span aria-label="' + (c && d ? "actual y deseada" : (c ? "actual" : "deseada")) + '">' + t + "</span>" : "") + "</td>";
+        }).join("") + "<td>" + (gap === null ? "—" : (gap === 0 ? "Sin brecha" : (gap > 0 ? "Hay que subir " + gap + " nivel(es)" : "Hay que bajar " + Math.abs(gap) + " nivel(es)"))) + "</td></tr>";
+      }).join("") || '<tr><td colspan="7">Completá la participación actual y la deseada para ver la matriz.</td></tr>') + "</tbody></table>" +
+      '<p class="note">C es la participación actual y D la deseada (Desconocedor, Reticente, Neutral, Partidario, Líder). Las estrategias de participación tienen que cerrar las brechas que muestra la matriz.</p>';
+    $("stkBody").innerHTML = h;
+  }
+  function addStakeholder() {
+    return askForm("Agregar interesado", [
+      { key: "name", label: "Nombre o rol del interesado", value: "", required: true },
+      { key: "role", label: "Rol e interés en el proyecto", value: "" }
+    ], "Agregar").then(function (r) { if (!r) return; pushHistory(); stakeholders.push({ id: nextStkId(), name: r.name.trim(), role: r.role, power: "", interest: "", engNow: "", engDesired: "", strategy: "" }); render(); });
+  }
+  function preloadStakeholders() {
+    var list = charterStakeholderList().filter(function (c) { return !stakeholders.some(function (s) { return nameMatches(s.name, c.name); }); });
+    if (!list.length) { notify(charterStakeholderList().length ? "Todos los interesados del acta ya están en el registro." : "El acta no tiene partes interesadas para precargar."); return; }
+    pushHistory();
+    list.forEach(function (c) { stakeholders.push({ id: nextStkId(), name: c.name, role: c.role, power: "", interest: "", engNow: "", engDesired: "", strategy: "" }); });
+    render();
+    notify("Se agregaron " + list.length + " interesado(s) del acta. Completá poder, interés, participación y estrategia: eso es parte del análisis.");
+  }
+
+  /* ---- plan de gestión (versión 1) y Team Charter ---- */
+  function renderPlan() {
+    var n = filledCount(mgmtPlan, PLAN_FIELDS);
+    $("planBody").innerHTML = '<p class="note" style="margin-top:0">Plan de gestión del proyecto, versión 1: cómo vas a gestionar cada área. ' + n + " de " + PLAN_FIELDS.length + " áreas completas.</p>" + renderFieldGrid("plan", PLAN_FIELDS);
+  }
+  function renderTeam() {
+    var n = filledCount(teamCharter, TEAM_FIELDS);
+    $("teamBody").innerHTML = '<p class="note" style="margin-top:0">Acuerdos del equipo del proyecto. ' + n + " de " + TEAM_FIELDS.length + " apartados completos.</p>" + renderFieldGrid("team", TEAM_FIELDS);
+  }
+
+  /* ---- control de coherencia: detecta faltantes y desajustes formales, no corrige ---- */
+  function runChecks() {
+    var out = [], m = computeEVM(), lt = leafTasks();
+    function add(g, lvl, text) { out.push({ g: g, lvl: lvl, text: text }); }
+    var G1 = 1, G2 = 2, G3 = 3;
+    // --- inicio y planificación ---
+    if (!String(charter.objective || "").trim()) add(G1, "miss", "El acta no tiene objetivo SMART.");
+    else if (!/\d/.test(charter.objective)) add(G1, "warn", "El objetivo del acta no incluye ninguna cifra ni fecha: revisá que sea medible y tenga plazo.");
+    else add(G1, "ok", "El acta tiene objetivo, con alguna cifra o fecha.");
+    if (!String(charter.scopeIn || "").trim() || !String(charter.scopeOut || "").trim()) add(G1, "miss", "El alcance del acta está incompleto: tienen que figurar qué entra y qué queda fuera.");
+    else add(G1, "ok", "El acta define qué entra y qué queda fuera del alcance.");
+    if (!String(charter.contingency || "").trim()) add(G1, "miss", "Falta la reserva de contingencia en el acta de constitución.");
+    else add(G1, "ok", "El acta indica la reserva de contingencia.");
+    var ab = parseBudget(charter.budget);
+    if (ab === null) add(G1, "warn", "El acta no tiene un presupuesto numérico para comparar con el BAC.");
+    else if (Math.abs(Math.round(m.BAC - ab)) > 1) add(G1, "miss", "El BAC (" + usd(m.BAC) + ") difiere del presupuesto del acta (" + usd(ab) + ") en " + usd(Math.abs(m.BAC - ab)) + ".");
+    else add(G1, "ok", "El BAC coincide con el presupuesto del acta (" + usd(ab) + ").");
+    if (!stakeholders.length) add(G1, "miss", "El registro de interesados está vacío.");
+    else {
+      var faltan = charterStakeholderList().filter(function (c) { return !stakeholders.some(function (s) { return nameMatches(s.name, c.name); }); });
+      if (faltan.length) add(G1, "warn", "Interesados del acta que no están en el registro: " + faltan.map(function (c) { return c.name; }).join(", ") + ".");
+      else add(G1, "ok", "Todos los interesados del acta están en el registro.");
+      var inc = stakeholders.filter(function (s) { return !(s.power && s.interest && s.engNow && s.engDesired && String(s.strategy || "").trim()); });
+      if (inc.length) add(G1, "warn", inc.length + " interesado(s) sin poder, interés, participación actual, participación deseada o estrategia completos: " + inc.map(function (s) { return s.name || s.id; }).join(", ") + ".");
+      else add(G1, "ok", "Los " + stakeholders.length + " interesados tienen el análisis completo.");
+    }
+    var np = filledCount(mgmtPlan, PLAN_FIELDS);
+    if (np === 0) add(G1, "miss", "El plan de gestión (versión 1) está vacío.");
+    else if (np < PLAN_FIELDS.length) add(G1, "warn", "El plan de gestión tiene " + np + " de " + PLAN_FIELDS.length + " áreas completas.");
+    else add(G1, "ok", "El plan de gestión tiene sus " + PLAN_FIELDS.length + " áreas completas.");
+    if (lt.length !== tasks.length) add(G1, "warn", (tasks.length - lt.length) + " tarea(s) no pertenecen a ninguna fase de la EDT.");
+    else add(G1, "ok", "Todas las tareas están dentro de una fase: la EDT tiene tres niveles (proyecto, fase, tarea).");
+    add(G1, "warn", "Revisá a mano que el alcance del acta se refleje en la EDT: la herramienta no puede juzgarlo.");
+    // --- riesgos, comunicaciones, equipo ---
+    var thr = risks.filter(function (r) { return r.type !== "Oportunidad"; }).length, opp = risks.length - thr;
+    if (!risks.length) add(G2, "miss", "El registro de riesgos está vacío.");
+    else {
+      if (!opp) add(G2, "miss", "No hay ninguna oportunidad en el registro de riesgos (solo amenazas).");
+      else if (!thr) add(G2, "miss", "No hay ninguna amenaza en el registro de riesgos (solo oportunidades).");
+      else add(G2, "ok", "El registro tiene " + thr + " amenaza(s) y " + opp + " oportunidad(es).");
+      var badResp = risks.filter(function (r) { return !riskStrategy(r); });
+      if (badResp.length) add(G2, "warn", "La respuesta no empieza con una estrategia válida para su tipo en: " + badResp.map(function (r) { return r.id; }).join(", ") + ".");
+      else add(G2, "ok", "Todas las respuestas empiezan con una estrategia válida para su tipo.");
+      var noOwn = risks.filter(function (r) { return !String(r.owner || "").trim(); });
+      if (noOwn.length) add(G2, "warn", "Riesgos sin responsable: " + noOwn.map(function (r) { return r.id; }).join(", ") + ".");
+    }
+    ensureRaciPeople();
+    var anyRaci = lt.some(function (t) { return raciPeople.some(function (p) { return (raciAssignments[t.id] || {})[p]; }); });
+    if (!anyRaci) add(G2, "miss", "La matriz RACI está vacía.");
+    else {
+      var sinA = [], dobleA = [];
+      lt.forEach(function (t) { var c = raciPeople.filter(function (p) { return (raciAssignments[t.id] || {})[p] === "A"; }).length; if (c === 0) sinA.push(t.id); else if (c > 1) dobleA.push(t.id); });
+      if (dobleA.length) add(G2, "miss", "Actividades con más de una A en el RACI: " + dobleA.join(", ") + ".");
+      if (sinA.length) add(G2, "warn", sinA.length + " actividad(es) sin A en el RACI: " + sinA.slice(0, 8).join(", ") + (sinA.length > 8 ? "…" : "") + ".");
+      if (!dobleA.length && !sinA.length) add(G2, "ok", "Cada actividad del RACI tiene una sola A.");
+    }
+    if (!stakeholders.length) add(G2, "warn", "No se puede verificar que los interesados estén en el plan de comunicaciones: completá primero el registro de interesados.");
+    else {
+      var sinCom = stakeholders.filter(function (s) { return !comms.some(function (c) { return nameMatches(c.stakeholder, s.name); }); });
+      if (sinCom.length) add(G2, "warn", "Interesados del registro que no aparecen en el plan de comunicaciones: " + sinCom.map(function (s) { return s.name; }).join(", ") + ".");
+      else add(G2, "ok", "Todos los interesados del registro aparecen en el plan de comunicaciones.");
+    }
+    if (!String(teamCharter.meetings || "").trim()) add(G2, "miss", "El Team Charter no define las reuniones del proyecto.");
+    var nt = filledCount(teamCharter, TEAM_FIELDS);
+    if (nt === 0) add(G2, "miss", "El Team Charter está vacío.");
+    else if (nt < TEAM_FIELDS.length) add(G2, "warn", "El Team Charter tiene " + nt + " de " + TEAM_FIELDS.length + " apartados completos.");
+    else add(G2, "ok", "El Team Charter está completo.");
+    // --- control y cierre ---
+    var pe = m.planned.projectEnd;
+    if (cutoffDay >= pe || cutoffDay <= 0) add(G3, "miss", "La fecha de corte del EVM cae fuera del cronograma planificado.");
+    else add(G3, "ok", "La fecha de corte del EVM (" + workdayISO(cutoffDay) + ") cae dentro del cronograma.");
+    if (m.acEstimated) add(G3, "warn", "No cargaste costo real: el CA se estima igual al VE y el CPI da 1. Cargá el costo real para que el EVM diga algo.");
+    else add(G3, "ok", "El EVM usa costo real cargado.");
+    var nl = (lessons || "").split("\n").filter(function (s) { return s.trim(); }).length;
+    if (nl < 5) add(G3, "miss", "Lecciones aprendidas: " + nl + " de 5 como mínimo.");
+    else add(G3, "ok", "Las lecciones aprendidas llegan al mínimo de 5 (" + nl + ").");
+    if (!changeLog.length) add(G3, "miss", "El registro de cambios está vacío.");
+    else add(G3, "ok", "El registro de cambios tiene " + changeLog.length + " entrada(s).");
+    if (!decisionLog.length) add(G3, "miss", "El registro de decisiones está vacío.");
+    else add(G3, "ok", "El registro de decisiones tiene " + decisionLog.length + " entrada(s).");
+    var ncr = filledCount(changeRequest, CR_FIELDS);
+    if (ncr === 0) add(G3, "miss", "La solicitud de cambio está vacía.");
+    else if (ncr < CR_FIELDS.length) add(G3, "warn", "La solicitud de cambio tiene " + ncr + " de " + CR_FIELDS.length + " campos completos.");
+    else add(G3, "ok", "La solicitud de cambio está completa.");
+    add(G3, "warn", "Revisá a mano que el informe final sea coherente con el acta: el alcance, el presupuesto y los riesgos tienen que reaparecer.");
+    return out;
+  }
+  // Los textos del acta, del Team Charter, etc. no redibujan la pantalla al editarse (para no perder el clic siguiente); el control de coherencia sí se refresca.
+  function refreshChecks() { if (panelsOn.check) renderChecks(); }
+  function renderChecks() {
+    var list = runChecks(), tag = { ok: "Cumple", warn: "Revisar", miss: "Falta" };
+    var titles = { 1: EGCI ? "Entrega 1 (E1): acta, interesados, plan de gestión y EDT" : "Inicio y planificación", 2: EGCI ? "Entrega 2 (E2): riesgos, comunicaciones, Team Charter y RACI" : "Riesgos, comunicaciones y equipo", 3: EGCI ? "TI final: EVM, cambios, decisiones y cierre" : "Control y cierre" };
+    var cnt = { ok: 0, warn: 0, miss: 0 }; list.forEach(function (c) { cnt[c.lvl]++; });
+    var h = '<p class="note" style="margin-top:0">' + cnt.ok + " cumplen, " + cnt.warn + " para revisar y " + cnt.miss + " faltan.</p>";
+    [1, 2, 3].forEach(function (g) {
+      h += '<h3 style="margin:14px 0 6px;font-size:13px">' + titles[g] + '</h3><ul class="checkList">' + list.filter(function (c) { return c.g === g; }).map(function (c) {
+        return '<li class="chk ' + c.lvl + '"><span class="tag">' + tag[c.lvl] + "</span> " + esc(c.text) + "</li>";
+      }).join("") + "</ul>";
+    });
+    h += '<p class="note">Esta lista detecta faltantes y desajustes formales; no corrige ni evalúa la calidad de lo que escribiste. La integración entre documentos (que el alcance se refleje en la EDT, que los riesgos reaparezcan en el cierre) la mira la corrección.</p>';
+    $("checkBody").innerHTML = h;
   }
 
   /* ---- kanban ---- */
@@ -802,11 +1095,23 @@
       return "<tr><td>" + esc(d.fecha) + "</td><td>" + esc(d.decision) + "</td><td>" + esc(d.contexto) + "</td><td>" + esc(d.responsable) + '</td><td><button type="button" class="delBtn" data-action="deleteDecision" data-id="' + esc(d.id) + '" data-fid="dd:' + esc(d.id) + '" aria-label="Eliminar la decisión ' + esc(d.id) + '">✕</button></td></tr>';
     }).join("") + "</tbody></table>";
     var li = $("lessonsInput"); if (document.activeElement !== li) li.value = lessons;
+    if ($("crBody") && !($("crBody").contains(document.activeElement))) $("crBody").innerHTML = renderFieldGrid("cr", CR_FIELDS);
   }
+  function lessonsList() { return (lessons || "").split("\n").map(function (s) { return s.trim(); }).filter(Boolean); }
+  // El informe final solo ordena lo que la persona registró: lecciones, decisiones y cambios van tal cual los escribió.
   function renderInformeCierre() {
+    var box = $("cierreBox"), n = lessonsList().length;
+    if (n < 5) {
+      box.hidden = false; box.dataset.ready = "0";
+      box.textContent = "Todavía no se puede armar el informe final: escribiste " + n + " lección(es) aprendida(s) y el mínimo es 5. El informe ordena lo que registraste en el cierre; el análisis y las lecciones tienen que ser tuyos.";
+      return;
+    }
+    box.hidden = false; box.dataset.ready = "1"; box.textContent = buildInformeText();
+  }
+  function buildInformeText() {
     var m = computeEVM(), res = computeSchedule(tasks), projectEnd = res.projectEnd;
     var plannedEnd = m.planned.projectEnd, deltaDays = projectEnd - plannedEnd;
-    var list = (lessons || "").split("\n").map(function (s) { return s.trim(); }).filter(Boolean);
+    var list = lessonsList();
     var idx = function (n) { return isFinite(n) ? n.toFixed(2) : "—"; };
     var txt = "INFORME FINAL — " + (CASOS[currentProjectId] ? CASOS[currentProjectId].title : "") + "\n" +
       "Patrocinador: " + (charter.sponsor || "—") + " · Presupuesto autorizado (acta de constitución): " + (charter.budget || "—") + "\n\n" +
@@ -817,17 +1122,16 @@
       "Costos calculados contra la misma línea base que el panel de valor ganado (" + m.planned.label + "):\n" +
       "Presupuesto al cierre (BAC): " + usd(m.BAC) + " · Costo real (CA): " + usd(m.AC) + (m.acEstimated ? " (estimado = VE, sin costo real cargado)" : "") + " · Estimación al cierre (EAC): " + usd(m.EAC) + " · CPI: " + idx(m.CPI) + " · SPI: " + idx(m.SPI) + "\n" +
       budgetNote(m) + "\n\n" +
-      "2. RIESGOS REGISTRADOS (" + risks.length + ")\n" + (risks.map(function (r) { return "- [" + r.category + "] " + r.desc + " — puntaje P×I " + riskScore(r.prob, r.impact) + "/9, respuesta: " + r.response; }).join("\n") || "— sin riesgos cargados —") + "\n\n" +
-      "3. CONTROL DE CAMBIOS\n" + changeLog.length + " cambio(s) registrado(s). " + changeLog.filter(function (c) { return c.estado === "Aprobado"; }).length + " aprobado(s).\n\n" +
-      "4. DECISIONES CLAVE\n" + decisionLog.length + " decisión(es) registrada(s).\n\n" +
-      "5. LECCIONES APRENDIDAS (" + list.length + "/5 mínimo)\n" + (list.length ? list.map(function (l, i) { return (i + 1) + ". " + l; }).join("\n") : "— completar en el cuadro de arriba, mínimo 5 —") + "\n" +
-      (list.length < 5 ? "Faltan " + (5 - list.length) + " lección(es) para cumplir el mínimo de la consigna." : "Cumple el mínimo de 5 lecciones aprendidas.") + "\n\n" +
-      "6. CIERRE FORMAL\nProyecto cerrado con " + tasks.filter(function (t) { return t.pct === 100; }).length + " de " + tasks.length + " tareas al 100%.\n\n" + CONFIG.ATTRIBUTION;
-    var box = $("cierreBox"); box.hidden = false; box.textContent = txt;
+      "2. RIESGOS REGISTRADOS (" + risks.length + ")\n" + (risks.map(function (r) { return "- [" + (r.type || "Amenaza") + " · " + r.category + "] " + r.desc + " — puntaje P×I " + riskScore(r.prob, r.impact) + "/9, respuesta: " + r.response; }).join("\n") || "— sin riesgos cargados —") + "\n\n" +
+      "3. CAMBIOS (" + changeLog.length + ")\n" + (changeLog.map(function (c) { return "- " + c.fecha + " · " + c.desc + " — impacto: " + (c.impacto || "—") + " — " + c.estado + " (aprobado por: " + (c.aprobadoPor || "—") + ")"; }).join("\n") || "— sin cambios registrados —") + "\n\n" +
+      "4. DECISIONES (" + decisionLog.length + ")\n" + (decisionLog.map(function (d) { return "- " + d.fecha + " · " + d.decision + " — contexto: " + (d.contexto || "—") + " (responsable: " + (d.responsable || "—") + ")"; }).join("\n") || "— sin decisiones registradas —") + "\n\n" +
+      "5. LECCIONES APRENDIDAS (" + list.length + ")\n" + list.map(function (l, i) { return (i + 1) + ". " + l; }).join("\n") + "\n\n" +
+      "6. CIERRE FORMAL\nTareas al 100%: " + tasks.filter(function (t) { return t.pct === 100; }).length + " de " + tasks.length + ".\n\n" + CONFIG.ATTRIBUTION;
+    return txt;
   }
   function copyInforme() {
     var box = $("cierreBox");
-    if (box.hidden) { notify("Primero generá el informe."); return; }
+    if (box.hidden || box.dataset.ready !== "1") { notify("Primero generá el informe (hacen falta 5 lecciones aprendidas como mínimo)."); return; }
     if (!navigator.clipboard) { notify("Tu navegador no permite copiar automáticamente. Seleccioná el texto manualmente."); return; }
     navigator.clipboard.writeText(box.textContent).then(function () { notify("Informe copiado al portapapeles."); }, function () { notify("No se pudo copiar automáticamente. Seleccioná el texto manualmente."); });
   }
@@ -976,16 +1280,17 @@
     var none = "(ninguna)";
     return askForm("Agregar riesgo", [
       { key: "desc", label: "Descripción del riesgo", value: "", required: true },
+      { key: "type", label: "Tipo", type: "select", options: ["Amenaza", "Oportunidad"], value: "Amenaza" },
       { key: "category", label: "Categoría", type: "select", options: ["Técnico", "Organizacional", "Externo", "De gestión"], value: "Técnico" },
       { key: "prob", label: "Probabilidad", type: "select", options: ["Baja", "Media", "Alta"], value: "Media" },
       { key: "impact", label: "Impacto", type: "select", options: ["Baja", "Media", "Alta"], value: "Media" },
-      { key: "response", label: "Respuesta planificada", value: "" },
+      { key: "response", label: "Respuesta planificada", value: "", hint: "Empezá por la estrategia. Amenaza: evitar, mitigar, transferir, aceptar o escalar. Oportunidad: explotar, mejorar, compartir, aceptar o escalar." },
       { key: "owner", label: "Responsable del riesgo", value: "PM" },
       { key: "taskId", label: "Tarea vinculada", type: "select", options: [none].concat(tasks.map(function (t) { return t.id; })), value: none }
     ], "Agregar").then(function (r) {
       if (!r) return; pushHistory();
       var n = risks.length + 1; while (risks.some(function (x) { return x.id === "R" + n; })) n++;
-      risks.push({ id: "R" + n, desc: r.desc.trim(), category: r.category, prob: r.prob, impact: r.impact, response: r.response, owner: r.owner || "PM", taskId: r.taskId === none ? "" : r.taskId }); render();
+      risks.push({ id: "R" + n, desc: r.desc.trim(), type: r.type, category: r.category, prob: r.prob, impact: r.impact, response: r.response, owner: r.owner || "PM", taskId: r.taskId === none ? "" : r.taskId }); render();
     });
   }
   function simpleAdd(title, fields, push) {
@@ -1036,24 +1341,26 @@
       tasks: cloneTasks(tasks), phases: clonePhases(phases), baselines: clone(baselines), scenarios: clone(scenarios), activeScenario: activeScenario,
       nearThreshold: nearThreshold, cutoffDay: cutoffDay, acActual: acActual, risks: clone(risks), raciAssignments: clone(raciAssignments), raciPeople: raciPeople.slice(),
       charter: clone(charter), comms: clone(comms), changeLog: clone(changeLog), decisionLog: clone(decisionLog), lessons: lessons,
-      actualStart: actualStart, actualFinish: actualFinish, plannedFinishOverride: plannedFinishOverride };
+      actualStart: actualStart, actualFinish: actualFinish, plannedFinishOverride: plannedFinishOverride,
+      stakeholders: clone(stakeholders), teamCharter: clone(teamCharter), mgmtPlan: clone(mgmtPlan), changeRequest: clone(changeRequest) };
   }
   function storageKey(pid) { return "ptTI.v" + CONFIG.SCHEMA_VERSION + "." + META.audience + "." + pid; }
-  function saveLocal() {
-    var ok = store.set(storageKey(currentProjectId), JSON.stringify(serializeState()));
-    if (ok) { setDirty(false); notify("Progreso guardado en este navegador."); track("guardar_progreso", { metodo: "navegador", caso_id: currentProjectId }); maybeShowLead("guardar"); }
-    else notify("Este navegador no permite guardar. Tu avance sigue en pantalla mientras no cierres la página; descargá el archivo JSON para conservarlo.");
-  }
   function downloadJson() {
     var blob = new Blob([JSON.stringify(serializeState(), null, 2)], { type: "application/json" });
     var url = URL.createObjectURL(blob), a = document.createElement("a");
     a.href = url; a.download = "progreso-" + currentProjectId + ".json"; document.body.appendChild(a); a.click(); a.remove(); setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
-    setDirty(false); track("guardar_progreso", { metodo: "archivo", caso_id: currentProjectId }); maybeShowLead("guardar");
+    track("guardar_progreso", { metodo: "archivo", caso_id: currentProjectId }); maybeShowLead("guardar");
+    notify("Copia de seguridad descargada. El progreso ya se guarda solo en este navegador; esta copia sirve para pasarlo a otra computadora o conservarlo.");
   }
-  function loadLocal() {
-    var s = store.get(storageKey(currentProjectId));
-    if (!s) { notify("No hay progreso guardado de este caso en este navegador."); return; }
-    applyImport(s, "navegador");
+  // Si hay progreso guardado automáticamente de este caso, ofrece restaurarlo (no se pisa hasta que la persona haga un cambio).
+  function maybeRestore(id) {
+    var raw = store.get(storageKey(id));
+    if (!raw) return;
+    var when = "";
+    try { var o = JSON.parse(raw); if (o && o.savedAt) { var d = new Date(o.savedAt); when = d.toLocaleDateString("es-AR") + " " + String(d.getHours()).padStart(2, "0") + ":" + String(d.getMinutes()).padStart(2, "0"); } } catch (e) { return; }
+    confirmBox("Hay progreso guardado de este caso" + (when ? " (" + when + ")" : "") + ". ¿Querés restaurarlo? Si cancelás, empezás el caso desde cero y el guardado anterior se reemplaza recién cuando hagas un cambio.", "Restaurar").then(function (ok) {
+      if (ok) applyImport(raw, "navegador");
+    });
   }
   function importFile(file) {
     if (!file) return;
@@ -1099,6 +1406,11 @@
     if (o.holidays !== undefined && (!Array.isArray(o.holidays) || o.holidays.some(function (h) { return !isISO(h); }))) return { error: "La lista de feriados del archivo tiene fechas inválidas." };
     return { ok: true, legacy: legacy };
   }
+  function sanitizeObj(o, fields) {
+    var out = {};
+    fields.forEach(function (f) { out[f.key] = str(o && typeof o === "object" ? o[f.key] : "", 4000); });
+    return out;
+  }
   function sanitizeList(arr, keys) {
     if (!Array.isArray(arr)) return [];
     return arr.slice(0, 500).filter(function (x) { return x && typeof x === "object"; }).map(function (x) { var o = {}; keys.forEach(function (k) { o[k] = str(x[k], 1000); }); return o; });
@@ -1123,12 +1435,17 @@
     if (!scenarios.length) scenarios = [{ name: "Plan original", snap: { tasksSnap: cloneTasks(tasks), phasesSnap: clonePhases(phases) } }];
     else activeScenario = Math.min(Math.max(0, parseInt(obj.activeScenario, 10) || 0), scenarios.length - 1);
     nearThreshold = isNum(obj.nearThreshold) && obj.nearThreshold >= 1 ? obj.nearThreshold : 5;
-    cutoffDay = isNum(obj.cutoffDay) ? obj.cutoffDay : 65;
+    cutoffDay = isNum(obj.cutoffDay) ? obj.cutoffDay : suggestedCutoff();
     acActual = isNum(obj.acActual) ? obj.acActual : null;
-    risks = sanitizeList(obj.risks, ["id", "desc", "category", "prob", "impact", "response", "owner", "taskId"]);
+    risks = sanitizeList(obj.risks, ["id", "desc", "category", "prob", "impact", "response", "owner", "taskId", "type"]);
+    risks.forEach(function (r) { if (r.type !== "Oportunidad") r.type = "Amenaza"; });
+    stakeholders = sanitizeList(obj.stakeholders, STK_KEYS);
+    teamCharter = sanitizeObj(obj.teamCharter, TEAM_FIELDS);
+    mgmtPlan = sanitizeObj(obj.mgmtPlan, PLAN_FIELDS);
+    changeRequest = sanitizeObj(obj.changeRequest, CR_FIELDS);
     raciAssignments = obj.raciAssignments && typeof obj.raciAssignments === "object" ? obj.raciAssignments : {};
     raciPeople = Array.isArray(obj.raciPeople) ? obj.raciPeople.map(function (x) { return str(x, 100); }) : [];
-    charter = {}; Object.keys(clone(proj.charter || {})).concat(["objective", "scopeOut"]).forEach(function (k) { charter[k] = str(obj.charter && obj.charter[k] !== undefined ? obj.charter[k] : (proj.charter || {})[k], 4000); });
+    charter = {}; Object.keys(clone(proj.charter || {})).concat(["objective", "scopeOut", "contingency"]).forEach(function (k) { charter[k] = str(obj.charter && obj.charter[k] !== undefined ? obj.charter[k] : (proj.charter || {})[k], 4000); });
     comms = sanitizeList(obj.comms, ["id", "stakeholder", "info", "freq", "channel", "owner"]);
     changeLog = sanitizeList(obj.changeLog, ["id", "fecha", "desc", "impacto", "estado", "aprobadoPor"]);
     decisionLog = sanitizeList(obj.decisionLog, ["id", "fecha", "decision", "contexto", "responsable"]);
@@ -1140,7 +1457,7 @@
     actualStart = isISO(obj.actualStart) ? obj.actualStart : ""; actualFinish = isISO(obj.actualFinish) ? obj.actualFinish : ""; plannedFinishOverride = isISO(obj.plannedFinishOverride) ? obj.plannedFinishOverride : "";
     history = []; future = []; ftTaskId = "";
     $("projectSelect").value = currentProjectId; $("nearThreshold").value = nearThreshold;
-    setDirty(false); render();
+    lastSavedAt = ""; setDirty(origen === "archivo"); render();
     notify("Progreso cargado (" + origen + "): " + proj.title + (v.legacy ? ". Era un archivo de formato anterior; se convirtió al formato actual al guardarlo de nuevo." : "."));
   }
 
@@ -1183,10 +1500,14 @@
     var wb = X.utils.book_new();
     X.utils.book_append_sheet(wb, ws, "Cronograma");
     X.utils.book_append_sheet(wb, X.utils.json_to_sheet(resRows), "Asignación de recursos");
-    X.utils.book_append_sheet(wb, X.utils.json_to_sheet(risks.map(function (r) { return { "ID": r.id, "Riesgo": r.desc, "Categoría": r.category, "Probabilidad": r.prob, "Impacto": r.impact, "Puntaje (P×I)": riskScore(r.prob, r.impact), "Respuesta": r.response, "Responsable del riesgo": r.owner, "Tarea vinculada": r.taskId || "—" }; })), "Registro de riesgos");
+    X.utils.book_append_sheet(wb, X.utils.json_to_sheet(risks.map(function (r) { return { "ID": r.id, "Riesgo": r.desc, "Tipo": r.type || "Amenaza", "Categoría": r.category, "Probabilidad": r.prob, "Impacto": r.impact, "Puntaje (P×I)": riskScore(r.prob, r.impact), "Respuesta": r.response, "Responsable del riesgo": r.owner, "Tarea vinculada": r.taskId || "—" }; })), "Registro de riesgos");
     X.utils.book_append_sheet(wb, X.utils.json_to_sheet(comms.map(function (c) { return { "Parte interesada": c.stakeholder, "Información": c.info, "Frecuencia": c.freq, "Canal": c.channel, "Responsable": c.owner }; })), "Comunicaciones");
     X.utils.book_append_sheet(wb, X.utils.json_to_sheet(changeLog.map(function (c) { return { "Fecha": c.fecha, "Cambio": c.desc, "Impacto": c.impacto, "Estado": c.estado, "Aprobado por": c.aprobadoPor }; })), "Registro de cambios");
     X.utils.book_append_sheet(wb, X.utils.json_to_sheet(decisionLog.map(function (d) { return { "Fecha": d.fecha, "Decisión": d.decision, "Contexto": d.contexto, "Responsable": d.responsable }; })), "Registro de decisiones");
+    X.utils.book_append_sheet(wb, X.utils.json_to_sheet(stakeholders.map(function (s) { return { "Interesado": s.name, "Rol e interés": s.role, "Poder": s.power, "Interés": s.interest, "Participación actual": s.engNow, "Participación deseada": s.engDesired, "Estrategia": s.strategy }; })), "Interesados");
+    X.utils.book_append_sheet(wb, X.utils.json_to_sheet(PLAN_FIELDS.map(function (f) { return { "Área": f.label, "Plan": mgmtPlan[f.key] || "" }; })), "Plan de gestión");
+    X.utils.book_append_sheet(wb, X.utils.json_to_sheet(TEAM_FIELDS.map(function (f) { return { "Apartado": f.label, "Acuerdo": teamCharter[f.key] || "" }; })), "Team Charter");
+    X.utils.book_append_sheet(wb, X.utils.json_to_sheet(CR_FIELDS.map(function (f) { return { "Campo": f.label, "Contenido": changeRequest[f.key] || "" }; })), "Solicitud de cambio");
     var ls = (lessons || "").split("\n").map(function (s) { return s.trim(); }).filter(Boolean);
     X.utils.book_append_sheet(wb, X.utils.json_to_sheet(ls.length ? ls.map(function (l, i) { return { "#": i + 1, "Lección aprendida": l }; }) : [{ "#": "", "Lección aprendida": "(sin completar)" }]), "Lecciones aprendidas");
     wb.Props = { Title: "Cronograma — " + (CASOS[currentProjectId] ? CASOS[currentProjectId].title : ""), Author: "Valeria Yashan", Company: "valeriayashan.com.ar" };
@@ -1213,6 +1534,84 @@
     window.print();
   }
 
+  /* ===================== exportar la entrega en PDF, ordenada según el índice TI-00 (versión alumnos) ===================== */
+  function nl2br(s) { return esc(s).replace(/\n/g, "<br>"); }
+  function tblHtml(heads, rows) {
+    return '<table><thead><tr>' + heads.map(function (h) { return '<th scope="col">' + esc(h) + "</th>"; }).join("") + "</tr></thead><tbody>" +
+      (rows.map(function (r) { return "<tr>" + r.map(function (c) { return "<td>" + (nl2br(c == null || c === "" ? "—" : c)) + "</td>"; }).join("") + "</tr>"; }).join("") || '<tr><td colspan="' + heads.length + '">— sin datos —</td></tr>') + "</tbody></table>";
+  }
+  function kvHtml(fields, obj) {
+    return '<table class="kv"><tbody>' + fields.map(function (f) { return '<tr><th scope="row">' + esc(f.label) + "</th><td>" + (nl2br(obj[f.key] || "") || "—") + "</td></tr>"; }).join("") + "</tbody></table>";
+  }
+  function pct(a, b) { return b > 0 ? (a / b * 100).toFixed(1) + "%" : "—"; }
+  function tiDocs(withRaci) {
+    var res = computeSchedule(tasks), m = computeEVM(), idx = function (n) { return isFinite(n) ? n.toFixed(2) : "—"; }, D = {};
+    D["DOC-01"] = { title: "Project Charter (acta de constitución)", html: kvHtml(CHARTER_FIELDS, charter) };
+    D["DOC-02"] = { title: "Registro de interesados", html: tblHtml(["Interesado", "Rol e interés", "Poder", "Interés", "Estrategia de participación"], stakeholders.map(function (s) { return [s.name, s.role, s.power, s.interest, s.strategy]; })) };
+    D["DOC-03"] = { title: "Matriz de participación de los interesados", html: tblHtml(["Interesado", "Participación actual", "Participación deseada", "Brecha"], stakeholders.map(function (s) {
+      var gap = (s.engNow && s.engDesired) ? ENG_LEVELS.indexOf(s.engDesired) - ENG_LEVELS.indexOf(s.engNow) : null;
+      return [s.name, s.engNow, s.engDesired, gap === null ? "—" : (gap === 0 ? "Sin brecha" : (gap > 0 ? "Subir " + gap + " nivel(es)" : "Bajar " + Math.abs(gap) + " nivel(es)"))];
+    })) };
+    D["DOC-04"] = { title: "Plan de gestión del proyecto (versión 1)", html: kvHtml(PLAN_FIELDS, mgmtPlan) };
+    var edt = '<table><thead><tr><th scope="col">EDT</th><th scope="col">Elemento</th><th scope="col">Dur. (días hábiles)</th><th scope="col">Predecesoras</th><th scope="col">Recurso</th><th scope="col">Inicio</th><th scope="col">Fin</th></tr></thead><tbody>' +
+      '<tr><th colspan="7" scope="colgroup" style="text-align:left">1 ' + esc(CASOS[currentProjectId] ? CASOS[currentProjectId].title : "Proyecto") + "</th></tr>";
+    phases.filter(function (ph) { return ph.children.length; }).forEach(function (ph) {
+      edt += '<tr><th colspan="7" scope="colgroup" style="text-align:left">' + esc(ph.id + " " + ph.name) + "</th></tr>";
+      ph.children.map(taskById).filter(Boolean).forEach(function (t) {
+        edt += "<tr><td>" + esc(t.id) + "</td><td>" + esc(t.name) + (t.dur === 0 ? " (hito)" : "") + "</td><td>" + t.dur + "</td><td>" + (esc(t.preds.join(", ")) || "—") + "</td><td>" + (esc(t.resource) || "—") + "</td><td>" + esc(startISO(t)) + "</td><td>" + esc(finishISO(t)) + "</td></tr>";
+      });
+    });
+    edt += "</tbody></table>";
+    if (withRaci) {
+      ensureRaciPeople();
+      edt += "<h3>Matriz RACI</h3>" + tblHtml(["Tarea"].concat(raciPeople), leafTasks().map(function (t) { return [t.id + " " + t.name].concat(raciPeople.map(function (p) { return (raciAssignments[t.id] || {})[p] || ""; })); }));
+    }
+    D["DOC-05"] = { title: withRaci ? "EDT / WBS con matriz RACI" : "EDT / WBS", html: edt };
+    D["DOC-06"] = { title: "Registro de riesgos", html: tblHtml(["#", "Tipo", "Riesgo", "Categoría", "Prob.", "Impacto", "P×I", "Respuesta", "Responsable", "Tarea"], risks.map(function (r) { return [r.id, r.type || "Amenaza", r.desc, r.category, r.prob, r.impact, riskScore(r.prob, r.impact), r.response, r.owner, r.taskId]; })) };
+    D["DOC-07"] = { title: "Plan de comunicaciones", html: tblHtml(["Parte interesada", "Información", "Frecuencia", "Canal", "Responsable"], comms.map(function (c) { return [c.stakeholder, c.info, c.freq, c.channel, c.owner]; })) };
+    D["DOC-08"] = { title: "Team Charter", html: kvHtml(TEAM_FIELDS, teamCharter) };
+    var crit = tasks.filter(function (t) { return t.critical; }).map(function (t) { return t.id; }).join(", ");
+    D["DOC-09"] = { title: "Informe de estado (un período)", html: tblHtml(["Indicador", "Valor"], [
+      ["Fecha de corte", workdayISO(cutoffDay)], ["BAC", usd(m.BAC)], ["VP (valor planificado)", usd(m.PV)], ["VE (valor ganado)", usd(m.EV)],
+      ["CA (costo real)", usd(m.AC) + (m.acEstimated ? " — estimado igual al VE, sin costo real cargado" : "")], ["CPI", idx(m.CPI)], ["SPI", idx(m.SPI)],
+      ["CV (variación del costo)", usd(m.CV)], ["SV (variación del cronograma)", usd(m.SV)], ["EAC", usd(m.EAC)], ["VAC", usd(m.VAC)],
+      ["Avance planificado / real", pct(m.PV, m.BAC) + " / " + pct(m.EV, m.BAC)], ["Ruta crítica", crit || "—"], ["Línea base usada", m.planned.label]
+    ]) };
+    D["DOC-10"] = { title: "Registro de cambios", html: tblHtml(["Fecha", "Cambio", "Impacto", "Estado", "Aprobado por"], changeLog.map(function (c) { return [c.fecha, c.desc, c.impacto, c.estado, c.aprobadoPor]; })) };
+    D["DOC-11"] = { title: "Registro de decisiones", html: tblHtml(["Fecha", "Decisión", "Contexto", "Responsable"], decisionLog.map(function (d) { return [d.fecha, d.decision, d.contexto, d.responsable]; })) };
+    D["DOC-12"] = { title: "Solicitud de cambio", html: kvHtml(CR_FIELDS, changeRequest) };
+    D["DOC-13"] = { title: "Informe de cierre", html: '<pre class="informe">' + esc(buildInformeText()) + "</pre>" };
+    return D;
+  }
+  var TI_SETS = {
+    E1: ["DOC-01", "DOC-02", "DOC-03", "DOC-04", "DOC-05"],
+    E2: ["DOC-01", "DOC-02", "DOC-03", "DOC-04", "DOC-05", "DOC-06", "DOC-07", "DOC-08"],
+    Final: ["DOC-01", "DOC-02", "DOC-03", "DOC-04", "DOC-05", "DOC-06", "DOC-07", "DOC-08", "DOC-09", "DOC-10", "DOC-11", "DOC-12", "DOC-13"]
+  };
+  function exportTiPdf() {
+    return askForm("Exportar la entrega en PDF", [
+      { key: "surname", label: "Apellido (va en el nombre del archivo)", required: true },
+      { key: "fullname", label: "Nombre y apellido (va en la portada)", required: true },
+      { key: "entrega", label: "Entrega", type: "select", options: ["E1", "E2", "TI final"], value: "E1", hint: "E1: DOC-01 a DOC-05. E2: las correcciones del E1 más DOC-05 con RACI, DOC-06, DOC-07 y DOC-08. TI final: los 13 documentos." }
+    ], "Preparar PDF").then(function (r) {
+      if (!r) return;
+      var code = r.entrega === "E1" ? "E1" : (r.entrega === "E2" ? "E2" : "Final");
+      if (code === "Final" && lessonsList().length < 5) { notify("Para exportar el TI final hacen falta 5 lecciones aprendidas como mínimo (panel de cierre)."); return; }
+      var D = tiDocs(code !== "E1"), codes = TI_SETS[code];
+      var label = { E1: "Entrega 1 (E1)", E2: "Entrega 2 (E2)", Final: "Trabajo Integrador final" }[code];
+      var safe = r.surname.normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^A-Za-z0-9]+/g, "") || "Alumno";
+      var cover = '<section class="pcover"><h1>TI-00 · Portada e índice</h1><div class="sub">EGCI Escuela de Gerencia · Máster en Project Management 2026 · Trabajo Integrador</div>' +
+        '<table class="kv"><tbody><tr><th scope="row">Alumno/a</th><td>' + esc(r.fullname) + '</td></tr><tr><th scope="row">Proyecto</th><td>' + esc(CASOS[currentProjectId] ? CASOS[currentProjectId].title : "") + '</td></tr><tr><th scope="row">Entrega</th><td>' + label + '</td></tr><tr><th scope="row">Archivo</th><td>TI_' + esc(safe) + "_" + code + '.pdf</td></tr><tr><th scope="row">Generado</th><td>' + esc(dateToISO(new Date())) + "</td></tr></tbody></table>" +
+        "<h2>Índice</h2><ol class=\"idx\">" + codes.map(function (c) { return "<li>" + c + " · " + esc(D[c].title) + "</li>"; }).join("") + "</ol></section>";
+      $("printArea").innerHTML = cover + codes.map(function (c) { return '<section class="pdoc"><h2>' + c + " · " + esc(D[c].title) + "</h2>" + D[c].html + "</section>"; }).join("") + '<div class="attribPrint">' + esc(CONFIG.ATTRIBUTION) + "</div>";
+      var prev = document.title; document.title = "TI_" + safe + "_" + code;
+      window.addEventListener("afterprint", function () { document.title = prev; }, { once: true });
+      track("exportar_ti_pdf", { entrega: code });
+      notify("En el cuadro de impresión elegí \"Guardar como PDF\". El archivo se va a llamar TI_" + safe + "_" + code + ".pdf.");
+      setTimeout(function () { window.print(); }, 200);
+    });
+  }
+
   /* ===================== captación (no bloquea) ===================== */
   function maybeShowLead(trigger) {
     if (!CONFIG.LEAD_ENABLED) return; if (leadShownThisSession || store.get("ptTI.lead") === "dismissed" || store.get("ptTI.lead") === "opened") return;
@@ -1232,7 +1631,9 @@
 
   /* ===================== eventos ===================== */
   var ACTIONS = {
-    saveLocal: saveLocal, downloadJson: downloadJson, loadLocal: loadLocal, exportCsv: exportCsv, print: printView,
+    downloadJson: downloadJson, exportCsv: exportCsv, print: printView, exportTi: exportTiPdf,
+    addStakeholder: addStakeholder, preloadStakeholders: preloadStakeholders,
+    deleteStakeholder: function (el) { delFrom("¿Eliminar a este interesado del registro?", function () { return stakeholders; }, function (l) { stakeholders = l; }, el.dataset.id); },
     importJson: function () { $("importFile").click(); },
     exportExcel: function (el) { exportExcel(el); },
     saveScenario: saveScenario, setBaseline: setBaseline, addTask: addTask, level: levelResources, undoLevel: undoLeveling, undo: undo, redo: redo,
@@ -1250,10 +1651,16 @@
     cycleKanban: function (el) { var t = taskById(el.dataset.id); if (!t) return; pushHistory(); t.pct = t.pct === 0 ? 50 : (t.pct < 100 ? 100 : 0); render(); },
     genInforme: renderInformeCierre, copyInforme: copyInforme,
     useToday: function () {
-      var today = dateToISO(new Date());
-      if (today < startDateValue()) notify("La fecha de hoy (" + today + ") es anterior al inicio del proyecto (" + startDateValue() + "). Se usa el día 0 como corte.");
-      cutoffDay = dayOffsetFromDate(today); render();
+      var today = dateToISO(new Date()), end = getPlannedRef().projectEnd, d = dayOffsetFromDate(today);
+      if (today < startDateValue() || d >= end) {
+        cutoffDay = suggestedCutoff(); setDirty(true); render();
+        notify("Hoy (" + today + ") cae fuera del cronograma del caso (" + startDateValue() + " a " + workdayISO(Math.max(0, end - 1)) + "). Se usó el corte sugerido: " + workdayISO(cutoffDay) + ".");
+        return;
+      }
+      cutoffDay = d; setDirty(true); render();
     },
+    useSuggestedCutoff: function () { cutoffDay = suggestedCutoff(); setDirty(true); render(); },
+    recalibrateCosts: recalibrateCosts,
     addHoliday: addHoliday, pasteHolidays: pasteHolidays,
     deleteHoliday: function (el) { pushHistory(); holidays = holidays.filter(function (h) { return h !== el.dataset.date; }); render(); },
     clearHolidays: function () { confirmBox("¿Quitar todos los feriados cargados?", "Quitar").then(function (ok) { if (ok) { pushHistory(); holidays = []; render(); } }); },
@@ -1299,22 +1706,33 @@
     actualStart: function (el) { pushHistory(); actualStart = el.value; queueRender(); },
     actualFinish: function (el) { pushHistory(); actualFinish = el.value; queueRender(); },
     plannedFinish: function (el) { pushHistory(); plannedFinishOverride = el.value; queueRender(); },
-    cutoff: function (el) { if (!el.value) return; cutoffDay = dayOffsetFromDate(el.value); queueRender(); },
-    ac: function (el) { var v = parseFloat(el.value); acActual = isNaN(v) ? null : v; queueRender(); },
+    cutoff: function (el) { if (!el.value) return; cutoffDay = dayOffsetFromDate(el.value); setDirty(true); queueRender(); },
+    ac: function (el) { var v = parseFloat(el.value); acActual = isNaN(v) ? null : v; setDirty(true); queueRender(); },
+    objField: function (el) {
+      var obj = objByName(el.dataset.obj), k = el.dataset.key;
+      if ((obj[k] || "") === el.value) return;
+      pushHistory(); obj[k] = el.value; refreshChecks();
+    },
+    stkField: function (el) {
+      var s = stakeholders.filter(function (x) { return x.id === el.dataset.id; })[0]; if (!s) return;
+      var k = el.dataset.key; if ((s[k] || "") === el.value) return;
+      pushHistory(); s[k] = el.value; queueRender();
+    },
     taskAc: function (el) { var t = taskById(el.dataset.id); pushHistory(); t.acTask = el.value === "" ? null : Math.max(0, parseFloat(el.value) || 0); queueRender(); },
     dailyCost: function (el) { var t = taskById(el.dataset.id); var v = parseFloat(el.value); pushHistory(); t.dailyCost = isNaN(v) || v < 0 ? null : v; queueRender(); },
     ftSelect: function (el) { ftTaskId = el.value; queueRender(); },
     ftPct: function (el) { ftPct = Math.max(5, Math.min(75, parseInt(el.value, 10) || 25)); queueRender(); },
     riskTask: function (el) { var r = risks.filter(function (x) { return x.id === el.dataset.id; })[0]; if (r) { pushHistory(); r.taskId = el.value; queueRender(); } },
-    charter: function (el) { if ((charter[el.dataset.key] || "") === el.value) return; pushHistory(); charter[el.dataset.key] = el.value; },
-    lessons: function (el) { if (lessons === el.value) return; pushHistory(); lessons = el.value; },
+    charter: function (el) { if ((charter[el.dataset.key] || "") === el.value) return; pushHistory(); charter[el.dataset.key] = el.value; refreshChecks(); },
+    lessons: function (el) { if (lessons === el.value) return; pushHistory(); lessons = el.value; refreshChecks(); },
     holCountry: function (el) { holidayCountry = el.value; queueRender(); },
     holYear: function (el) { holidayYear = parseInt(el.value, 10); queueRender(); },
     project: function (el) {
       var id = el.value, prev = currentProjectId;
-      function go() { loadProject(id); track("cambio_de_caso", { caso_id: id }); }
+      function go() { loadProject(id); track("cambio_de_caso", { caso_id: id }); maybeRestore(id); }
+      autosaveNow(); // el progreso del caso actual se guarda solo antes de cambiar
       if (!isDirty) { go(); return; }
-      confirmBox("Hay cambios sin guardar en este caso. Si cambiás de caso se pierden. ¿Cambiar igual?", "Cambiar de caso").then(function (ok) { if (ok) go(); else el.value = prev; });
+      confirmBox("No se pudo guardar el progreso de este caso en el navegador y se perdería al cambiar de caso. Descargá la copia de seguridad antes de cambiar. ¿Cambiar igual?", "Cambiar de caso").then(function (ok) { if (ok) go(); else el.value = prev; });
     }
   };
 
@@ -1343,7 +1761,9 @@
       if (n) { var nx = document.querySelector('[data-fid="' + col + ":" + n + '"]'); if (nx) { e.preventDefault(); nx.focus(); } }
     }
   });
-  window.addEventListener("beforeunload", function (e) { if (isDirty) { e.preventDefault(); e.returnValue = ""; return ""; } });
+  // Al cerrar: primero se guarda lo pendiente; solo se avisa si el navegador no dejó guardar.
+  window.addEventListener("beforeunload", function (e) { autosaveNow(); if (isDirty || autosaveFailed) { e.preventDefault(); e.returnValue = ""; return ""; } });
+  document.addEventListener("visibilitychange", function () { if (document.hidden) autosaveNow(); });
 
   /* ---- arrastre del Gantt con pointer events (mouse, táctil, lápiz) + teclado ---- */
   function bindGantt() {
@@ -1394,7 +1814,9 @@
     Array.prototype.forEach.call(document.querySelectorAll("[data-panel]"), function (b) { b.setAttribute("aria-expanded", "false"); });
     $("year").textContent = String(new Date().getFullYear());
     if (CONFIG.WHATSAPP_URL) { var w = $("waBtn"); w.href = CONFIG.WHATSAPP_URL; w.hidden = false; }
-    var first = caseIds()[0]; loadProject(first);
+    var last = store.get(lastCaseKey()), first = (last && CASOS[last]) ? last : caseIds()[0];
+    loadProject(first); maybeRestore(first);
+    if ($("exportTiBtn")) $("exportTiBtn").hidden = !EGCI;
     track("herramienta_abierta", { audiencia: META.audience });
   }
   // utilidad de pruebas (no se usa en producción)
