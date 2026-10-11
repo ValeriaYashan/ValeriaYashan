@@ -6,7 +6,7 @@
   /* ===================== CONFIGURACIÓN (completar lo que falta) ===================== */
   var CONFIG = {
     APP_ID: "planificador-ti-valeriayashan",
-    SCHEMA_VERSION: 3,        // 3: dependencias tipadas, tres puntos, problemas y acciones, riesgos con valor monetario y solicitudes de cambio
+    SCHEMA_VERSION: 4,        // 4: tareas inactivas, cortes de EVM, registro de tiempo, trazabilidad y reglas de alerta; 3: dependencias tipadas, tres puntos, problemas y acciones, riesgos con valor monetario y solicitudes de cambio
     STORAGE_KEY_VERSION: 2,   // la clave de guardado local sigue en v2 para no perder el progreso ya guardado en los navegadores
     SITE_URL: "https://valeriayashan.com.ar",
     PRESENTATION_URL: "/herramientas/planificador-ti/",
@@ -122,6 +122,8 @@
   var charter = {}, comms = [], changeLog = [], decisionLog = [], lessons = "";
   var stakeholders = [], teamCharter = {}, mgmtPlan = {}, changeRequest = {};
   var issues = [], crList = [];
+  var evmCuts = [], timeLog = [], traceItems = [], traceLinks = {}, alertCfg = defaultAlertCfg(), eacMethod = "cpi";
+  function defaultAlertCfg() { return { lateCrit: 10, cpiMin: 0.9, spiMin: 0.9, contPct: 25 }; }
   var autosaveTimer = 0, autosaveFailed = false, lastSavedAt = "";
   var history = [], future = [];
   var holidays = [], holidayCountry = "AR", holidayYear = 0;
@@ -172,7 +174,7 @@
   }
   function startISO(t) { return workdayISO(t._es); }
   // El fin se muestra como el ÚLTIMO día hábil de la tarea (el motor guarda el fin como límite exclusivo).
-  function finishISO(t) { return t.dur === 0 ? workdayISO(t._es) : workdayISO(t._ef - 1); }
+  function finishISO(t) { return t.dur === 0 || t.inactive ? workdayISO(t._es) : workdayISO(t._ef - 1); }
   function plannedFinishDate() { return plannedFinishOverride || workdayISO(Math.max(0, originalProjectEnd - 1)); }
 
   /* ===================== cronograma (CPM) ===================== */
@@ -233,6 +235,7 @@
   function computeScheduleOn(list) {
     var byId = {}; list.forEach(function (t) { byId[t.id] = t; });
     var cyclic = detectCycle(list), cycSet = new Set(cyclic);
+    function D(t) { return t.inactive ? 0 : t.dur; }
     list.forEach(function (t) { delete t._es; delete t._ef; delete t._ls; t._lf = undefined; });
     // Pasada hacia adelante: cada dependencia fija un piso para el inicio. FC: inicio >= fin de la predecesora + desfase (el solape del seguimiento rápido resta);
     // CC: inicio >= inicio de la predecesora + desfase; FF: fin >= fin de la predecesora + desfase; CF: fin >= inicio de la predecesora + desfase.
@@ -246,8 +249,8 @@
           var pt = byId[p]; if (!pt) return;
           var d = depOf(t, p);
           if (d.type === "SS") vals.push(ES(pt) + d.lag);
-          else if (d.type === "FF") vals.push(EF(pt) + d.lag - t.dur);
-          else if (d.type === "SF") vals.push(ES(pt) + d.lag - t.dur);
+          else if (d.type === "FF") vals.push(EF(pt) + d.lag - D(t));
+          else if (d.type === "SF") vals.push(ES(pt) + d.lag - D(t));
           else vals.push(EF(pt) + d.lag - (t.overlapDays || 0));
         });
         if (vals.length) dep = Math.max(0, Math.max.apply(null, vals));
@@ -255,7 +258,7 @@
       t._es = dep + (t.levelDelay || 0);
       return t._es;
     }
-    function EF(t) { ES(t); t._ef = t._es + t.dur; return t._ef; }
+    function EF(t) { ES(t); t._ef = t._es + D(t); return t._ef; }
     list.forEach(EF);
     var projectEnd = list.length ? Math.max.apply(null, list.map(function (t) { return t._ef; })) : 0;
     var succ = {}; list.forEach(function (t) { succ[t.id] = []; });
@@ -266,22 +269,22 @@
       var lf = projectEnd;
       succ[t.id].forEach(function (id) {
         var s = byId[id], d = depOf(s, t.id), v;
-        if (d.type === "SS") v = LS(s) - d.lag + t.dur;
+        if (d.type === "SS") v = LS(s) - d.lag + D(t);
         else if (d.type === "FF") v = LF(s) - d.lag;
-        else if (d.type === "SF") v = LF(s) - d.lag + t.dur;
+        else if (d.type === "SF") v = LF(s) - d.lag + D(t);
         else v = LS(s) - d.lag + (s.overlapDays || 0); // si la sucesora está solapada (seguimiento rápido), el fin más tardío se adelanta ese solape
         if (v < lf) lf = v;
       });
       t._lf = lf;
       return lf;
     }
-    function LS(t) { LF(t); t._ls = t._lf - t.dur; return t._ls; }
+    function LS(t) { LF(t); t._ls = t._lf - D(t); return t._ls; }
     list.forEach(LS);
     list.forEach(function (t) {
       t.slack = t._ls - t._es;
       t.cycleError = cycSet.has(t.id);
-      t.critical = t.slack === 0 && !t.cycleError;
-      t.near = !t.critical && t.slack <= nearThreshold;
+      t.critical = t.slack === 0 && !t.cycleError && !t.inactive;
+      t.near = !t.critical && !t.inactive && t.slack <= nearThreshold;
     });
     return { byId: byId, projectEnd: projectEnd, cyclic: cyclic };
   }
@@ -363,32 +366,68 @@
     if (cutoffDay <= 0) return '<p class="banner" role="status" style="border:1px solid var(--gantt-near)">La fecha de corte es el inicio del proyecto: el VP es 0 y no hay período que evaluar. Elegí una fecha posterior.</p>';
     return "";
   }
-  function computeEVM() {
+  function logCostOf(e, tk) { return isNum(e.cost) && e.cost > 0 ? e.cost : (isNum(e.days) ? e.days * (tk ? getDailyCost(tk) : 0) : 0); }
+  // opts: { cut: día de corte (por defecto el vigente), fromLog: true para calcular el AC solo con el registro de tiempo hasta ese corte, method: "cpi"|"plan"|"cpispi" }
+  function computeEVM(opts) {
+    opts = opts || {};
     computeSchedule(tasks);
+    var cut = opts.cut !== undefined ? opts.cut : cutoffDay, method = opts.method || eacMethod;
+    var cutISO = workdayISO(cut) || "";
     var planned = getPlannedRef();
-    var BAC = 0, PV = 0, EV = 0, perTask = [];
+    var BAC = 0, PV = 0, EV = 0, perTask = [], byId = {};
     tasks.forEach(function (t) {
+      if (t.inactive) return;
       var dc = getDailyCost(t);
       var pRef = planned.schedule[t.id] || { es: t._es, ef: t._ef, dur: t.dur };
       var budget = pRef.dur * dc;
       BAC += budget;
-      PV += Math.max(0, Math.min(cutoffDay - pRef.es, pRef.dur)) * dc;
-      var ev = (t.pct / 100) * budget;
+      PV += Math.max(0, Math.min(cut - pRef.es, pRef.dur)) * dc;
+      var pct = opts.fromLog ? logPctAt(t.id, cutISO) : t.pct;
+      var ev = (pct / 100) * budget;
       EV += ev;
-      perTask.push({ t: t, budget: budget, ev: ev, dc: dc });
+      var row = { t: t, budget: budget, ev: ev, dc: dc }; perTask.push(row); byId[t.id] = row;
     });
-    var anyTaskAc = tasks.some(function (t) { return t.acTask !== null && t.acTask !== undefined; });
-    var AC, acEstimated = false;
+    // Costo real: el valor manual por tarea manda; si no hay, el registro de tiempo (entradas con fecha <= corte); si tampoco, el valor global o se estima igual al VG.
+    var logAC = 0, logHas = {}, anyLog = false;
+    timeLog.forEach(function (e) {
+      if (!e.date || e.date > cutISO) return;
+      var tk = null; tasks.forEach(function (x) { if (x.id === e.taskId) tk = x; });
+      if (tk && tk.inactive) return;
+      logAC += logCostOf(e, tk); logHas[e.taskId] = (logHas[e.taskId] || 0) + logCostOf(e, tk); anyLog = true;
+    });
+    var anyTaskAc = !opts.fromLog && tasks.some(function (t) { return !t.inactive && t.acTask !== null && t.acTask !== undefined; });
+    var AC, acEstimated = false, acFromLog = false;
     if (anyTaskAc) {
-      AC = perTask.reduce(function (s, p) { return s + ((p.t.acTask !== null && p.t.acTask !== undefined) ? p.t.acTask : p.ev); }, 0);
-    } else if (acActual !== null) {
+      AC = perTask.reduce(function (s, p) { var v = p.t.acTask; return s + ((v !== null && v !== undefined) ? v : (logHas[p.t.id] !== undefined ? logHas[p.t.id] : p.ev)); }, 0);
+      if (anyLog) acFromLog = true;
+    } else if (anyLog) {
+      AC = perTask.reduce(function (s, p) { return s + (logHas[p.t.id] !== undefined ? logHas[p.t.id] : p.ev); }, 0); acFromLog = true;
+    } else if (!opts.fromLog && acActual !== null) {
       AC = acActual;
     } else { AC = EV; acEstimated = true; }
     var CPI = AC > 0 ? EV / AC : (EV > 0 ? Infinity : 1);
     var SPI = PV > 0 ? EV / PV : (EV > 0 ? Infinity : 1);
-    var EAC = (CPI > 0 && isFinite(CPI)) ? BAC / CPI : BAC;
-    return { BAC: BAC, PV: PV, EV: EV, AC: AC, CPI: CPI, SPI: SPI, EAC: EAC, VAC: BAC - EAC, CV: EV - AC, SV: EV - PV,
+    var eacCpi = (CPI > 0 && isFinite(CPI)) ? BAC / CPI : BAC;
+    var eacPlan = AC + (BAC - EV);
+    var den = CPI * SPI, eacBoth = (den > 0 && isFinite(den)) ? AC + (BAC - EV) / den : BAC;
+    var EAC = method === "plan" ? eacPlan : (method === "cpispi" ? eacBoth : eacCpi);
+    var ETC = EAC - AC;
+    var tcpiBac = (BAC - AC) !== 0 && (BAC - EV) / (BAC - AC) > 0 ? (BAC - EV) / (BAC - AC) : null;
+    var tcpiEac = (EAC - AC) !== 0 && (BAC - EV) / (EAC - AC) > 0 ? (BAC - EV) / (EAC - AC) : null;
+    var estDur = (SPI > 0 && isFinite(SPI)) ? planned.projectEnd / SPI : null;
+    return { BAC: BAC, PV: PV, EV: EV, AC: AC, CPI: CPI, SPI: SPI, EAC: EAC, VAC: BAC - EAC, CV: EV - AC, SV: EV - PV, ETC: ETC,
+      eacCpi: eacCpi, eacPlan: eacPlan, eacBoth: eacBoth, method: method, tcpiBac: tcpiBac, tcpiEac: tcpiEac, estDur: estDur,
+      cut: cut, cutISO: cutISO, acFromLog: acFromLog,
       planned: planned, perTask: perTask, anyTaskAc: anyTaskAc, acEstimated: acEstimated };
+  }
+  // % de avance de una tarea a una fecha, según el registro de tiempo (última entrada con pct hasta esa fecha); si no hay, el avance vigente.
+  function logPctAt(taskId, iso) {
+    var best = null;
+    timeLog.forEach(function (e) { if (e.taskId === taskId && isNum(e.pct) && e.date <= iso && (!best || e.date >= best.date)) best = e; });
+    if (best) return best.pct;
+    var any = timeLog.some(function (e) { return e.taskId === taskId && isNum(e.pct); });
+    if (any) return 0;
+    var r = 0; tasks.forEach(function (t) { if (t.id === taskId) r = t.pct; }); return r;
   }
 
   /* ===================== deshacer / rehacer ===================== */
@@ -400,7 +439,8 @@
     return JSON.stringify({ tasks: cloneTasks(tasks), phases: clonePhases(phases), baselines: baselines, risks: risks,
       raciAssignments: raciAssignments, raciPeople: raciPeople, charter: charter, comms: comms, changeLog: changeLog,
       decisionLog: decisionLog, lessons: lessons, cutoffDay: cutoffDay, acActual: acActual, nearThreshold: nearThreshold, meta: metaState(),
-      stakeholders: stakeholders, teamCharter: teamCharter, mgmtPlan: mgmtPlan, changeRequest: changeRequest, issues: issues, crList: crList });
+      stakeholders: stakeholders, teamCharter: teamCharter, mgmtPlan: mgmtPlan, changeRequest: changeRequest, issues: issues, crList: crList,
+      evmCuts: evmCuts, timeLog: timeLog, traceItems: traceItems, traceLinks: traceLinks, alertCfg: alertCfg, eacMethod: eacMethod });
   }
   function pushHistory() {
     history.push(fullSnapshotStr());
@@ -416,6 +456,7 @@
     lessons = s.lessons || ""; cutoffDay = s.cutoffDay; acActual = s.acActual; nearThreshold = s.nearThreshold;
     stakeholders = s.stakeholders || []; teamCharter = s.teamCharter || {}; mgmtPlan = s.mgmtPlan || {}; changeRequest = s.changeRequest || {};
     issues = s.issues || []; crList = s.crList || [];
+    evmCuts = s.evmCuts || []; timeLog = s.timeLog || []; traceItems = s.traceItems || []; traceLinks = s.traceLinks || {}; alertCfg = s.alertCfg || defaultAlertCfg(); eacMethod = s.eacMethod || "cpi";
     var m = s.meta || {};
     holidays = m.holidays || holidays; holidayCountry = m.holidayCountry || holidayCountry; holidayYear = m.holidayYear || holidayYear;
     if (m.startDate) $("startDate").value = m.startDate;
@@ -583,15 +624,19 @@
     risks = clone(proj.risks || []); raciAssignments = {}; raciPeople = [];
     risks.forEach(function (r) { if (r.type !== "Oportunidad") r.type = "Amenaza"; });
     stakeholders = []; teamCharter = {}; mgmtPlan = {}; changeRequest = {}; issues = []; crList = []; simResult = null;
+    evmCuts = []; timeLog = []; traceItems = []; traceLinks = {}; alertCfg = defaultAlertCfg(); eacMethod = "cpi";
     charter = clone(proj.charter || {});
     charter.contingency = charter.contingency || ""; charter.mgmtReserve = charter.mgmtReserve || "";
     comms = (charter.stakeholders || "").split(",").slice(0, 2).map(function (s, i) {
       return { id: "C" + (i + 1), stakeholder: s.trim(), info: i === 0 ? "Avance general del proyecto" : "Impacto en su área",
         freq: i === 0 ? "Semanal" : "Quincenal", channel: "Reunión / email", owner: "PM" };
     });
+    traceSeed();
     changeLog = []; decisionLog = []; lessons = ""; history = []; future = [];
     scenarios = [{ name: "Plan original", snap: { tasksSnap: cloneTasks(tasks), phasesSnap: clonePhases(phases) } }];
-    activeScenario = 0; ftTaskId = ""; lastSavedAt = ""; autosaveFailed = false; clearTimeout(autosaveTimer); setDirty(false);
+    activeScenario = 0; ftTaskId = ""; lastSavedAt = ""; autosaveFailed = false; clearTimeout(autosaveTimer);
+    if (silent) { isDirty = false; return; }
+    setDirty(false);
     $("projectSelect").value = id;
     render();
   }
@@ -667,7 +712,7 @@
         if (resOptions.indexOf(t.resource) < 0 && t.resource) opts = '<option value="' + esc(t.resource) + '" selected>' + esc(t.resource) + "</option>" + opts;
         var nExtra = (t.extraResources || []).length;
         var id = esc(t.id);
-        rows += '<tr class="leaf' + (t.critical ? " crit-row" : (t.near ? " near-row" : "")) + '" data-row="' + id + '">' +
+        rows += '<tr class="leaf' + (t.inactive ? " inactive-row" : (t.critical ? " crit-row" : (t.near ? " near-row" : ""))) + '" data-row="' + id + '">' +
           '<td class="wbs">' + id + "</td>" +
           '<td class="name indent-2">' + esc(t.name) + (riskCount ? '<span class="riskTag" title="' + riskCount + ' riesgo(s) asociado(s)" aria-label="' + riskCount + ' riesgo(s) asociado(s)">!</span>' : "") +
           '<button type="button" class="noteBtn" data-action="editNote" data-id="' + id + '" data-fid="note:' + id + '" aria-label="' + (t.notes ? "Editar nota" : "Agregar nota") + " de la tarea " + id + '">' + (t.notes ? "Nota" : "+ nota") + "</button></td>" +
@@ -677,9 +722,9 @@
           '<td class="dates"><input type="date" class="cell-input dateInput" data-change="dateStart" data-id="' + id + '" data-fid="ds:' + id + '" value="' + esc(startISO(t)) + '" aria-label="Inicio de la tarea ' + id + '"></td>' +
           '<td class="dates"><input type="date" class="cell-input dateInput" data-change="dateFinish" data-id="' + id + '" data-fid="df:' + id + '" value="' + esc(finishISO(t)) + '" aria-label="Fin (último día hábil) de la tarea ' + id + '"></td>' +
           '<td class="pred"><input type="text" class="cell-input predInput" value="' + esc(predsText(t)) + '" placeholder="—" data-change="preds" data-id="' + id + '" data-fid="pr:' + id + '" aria-label="Predecesoras de la tarea ' + id + '. IDs separados por coma; tipo FC, CC, FF o CF y desfase opcionales, por ejemplo 1.2.1CC+2"></td>' +
-          '<td class="slack">' + (t.dur === 0 ? "—" : (t.critical ? "0 (crítica)" : t.slack + "d")) + "</td>" +
+          '<td class="slack">' + (t.inactive ? "pausada" : (t.dur === 0 ? "—" : (t.critical ? "0 (crítica)" : t.slack + "d"))) + "</td>" +
           '<td class="pct"><input class="cell-input pctInput" type="number" min="0" max="100" value="' + t.pct + '" data-change="pct" data-id="' + id + '" data-fid="pct:' + id + '" aria-label="Porcentaje completado de la tarea ' + id + '"></td>' +
-          '<td class="actcol"><button type="button" class="delBtn" data-action="deleteTask" data-id="' + id + '" data-fid="del:' + id + '" aria-label="Eliminar la tarea ' + id + '">✕</button></td></tr>';
+          '<td class="actcol"><div class="actrow"><button type="button" class="delBtn why" data-action="explainTask" data-id="' + id + '" data-fid="why:' + id + '" aria-label="¿Por qué esta fecha? Tarea ' + id + '" title="¿Por qué esta fecha?">?</button><button type="button" class="delBtn pause" data-action="toggleInactive" data-id="' + id + '" data-fid="pau:' + id + '" aria-pressed="' + (t.inactive ? "true" : "false") + '" aria-label="' + (t.inactive ? "Reactivar" : "Pausar (qué pasa si no se hace)") + ' la tarea ' + id + '" title="' + (t.inactive ? "Reactivar la tarea" : "Pausar: simula qué pasa si esta tarea no se hace") + '">' + (t.inactive ? "Activar" : "Pausa") + '</button><button type="button" class="delBtn" data-action="deleteTask" data-id="' + id + '" data-fid="del:' + id + '" aria-label="Eliminar la tarea ' + id + '">✕</button></div></td></tr>';
       });
     });
     $("taskbody").innerHTML = rows;
@@ -706,26 +751,40 @@
       bs.setAttribute("aria-hidden", "true"); rs.appendChild(bs); body.appendChild(rs); rowIndex++;
       kids.forEach(function (t) {
         var row = document.createElement("div"); row.className = "ganttRow"; row.style.width = chartWidth + "px"; row.innerHTML = grid;
-        var cls = t.critical ? "critical" : (t.near ? "nearcrit" : "normal");
+        var cls = t.inactive ? "inactive" : (t.critical ? "critical" : (t.near ? "nearcrit" : "normal"));
         var bar = document.createElement("div");
         if (t.dur === 0) { bar.className = "milestone " + cls; bar.style.left = (t._es * DAY_PX - 8) + "px"; }
         else { bar.className = "bar leafbar " + cls + (drag && drag.id === t.id ? " dragging" : ""); bar.style.left = (t._es * DAY_PX) + "px"; bar.style.width = Math.max(t.dur * DAY_PX, 4) + "px"; }
         bar.dataset.bar = t.id; bar.dataset.fid = "bar:" + t.id; bar.tabIndex = 0; bar.setAttribute("role", "button");
-        var estado = t.critical ? "ruta crítica" : (t.near ? "casi crítica" : "con holgura");
+        var estado = t.inactive ? "pausada (escenario: no se hace)" : (t.critical ? "ruta crítica" : (t.near ? "casi crítica" : "con holgura"));
         var label = (t.dur === 0 ? "Hito " : "Tarea ") + t.id + " " + t.name + ", del " + startISO(t) + " al " + finishISO(t) + ", " + estado + ", holgura " + t.slack + " días. Flechas izquierda y derecha: mover un día.";
         bar.setAttribute("aria-label", label); bar.title = t.name + " — arrastrá para mover (holgura " + t.slack + "d)";
         if (t.pct > 0 && t.dur > 0) { var f = document.createElement("div"); f.className = "fill"; f.style.width = t.pct + "%"; f.setAttribute("aria-hidden", "true"); bar.appendChild(f); }
         var rc = risks.filter(function (rk) { return rk.taskId === t.id; });
         if (rc.length) { var rb = document.createElement("div"); rb.className = "barrisk"; rb.textContent = "!"; rb.title = rc.map(function (r) { return r.desc; }).join(" · "); rb.setAttribute("aria-hidden", "true"); bar.appendChild(rb); }
         row.appendChild(bar);
-        if (t.slack > 0) {
+        if (t.slack > 0 && !t.inactive) {
           var gh = document.createElement("div"); gh.className = "ghost" + (t.near ? " near" : ""); gh.style.left = (t._ef * DAY_PX) + "px"; gh.style.width = Math.max(t.slack * DAY_PX, 2) + "px"; gh.setAttribute("aria-hidden", "true"); row.appendChild(gh);
         }
-        baselines.filter(function (bl) { return bl.visible && bl.byId[t.id]; }).forEach(function (bl, i) {
-          var b = bl.byId[t.id], d = document.createElement("div"); d.className = "baseline";
-          d.style.bottom = (3 + i * 4) + "px"; d.style.background = "var(--baseline-" + ((baselines.indexOf(bl) % 4) + 1) + ")";
-          d.style.left = (b.es * DAY_PX) + "px"; d.style.width = Math.max((b.ef - b.es) * DAY_PX, 3) + "px"; d.title = bl.name; d.setAttribute("aria-hidden", "true"); row.appendChild(d);
+        // Línea base superpuesta: la última visible va como banda de 5 px bajo la barra; las anteriores, como trazos finos arriba. Sin líneas base, se muestra el plan original donde difiere.
+        var vis = baselines.filter(function (bl) { return bl.visible && bl.byId[t.id]; }), refEnd = null;
+        vis.forEach(function (bl, i) {
+          var b = bl.byId[t.id], d = document.createElement("div"), latest = i === vis.length - 1;
+          d.className = "baseline" + (latest ? " band" : " thin");
+          d.style.background = "var(--baseline-" + ((baselines.indexOf(bl) % 4) + 1) + ")";
+          if (!latest) d.style.top = (1 + (vis.length - 2 - i) * 3) + "px";
+          d.style.left = (b.es * DAY_PX) + "px"; d.style.width = Math.max((b.ef - b.es) * DAY_PX, 4) + "px"; d.title = "Línea base: " + bl.name + " (" + workdayISO(b.es) + " a " + workdayISO(Math.max(0, b.ef - 1)) + ")"; d.setAttribute("aria-hidden", "true"); row.appendChild(d);
+          if (latest) refEnd = b.ef;
         });
+        if (!baselines.length && originalSchedule[t.id] && !t.inactive && (originalSchedule[t.id].es !== t._es || originalSchedule[t.id].ef !== t._ef)) {
+          var o = originalSchedule[t.id], od = document.createElement("div"); od.className = "baseline band orig";
+          od.style.left = (o.es * DAY_PX) + "px"; od.style.width = Math.max((o.ef - o.es) * DAY_PX, 4) + "px"; od.title = "Plan original (" + workdayISO(o.es) + " a " + workdayISO(Math.max(0, o.ef - 1)) + ")"; od.setAttribute("aria-hidden", "true"); row.appendChild(od);
+          refEnd = o.ef;
+        }
+        if (refEnd !== null && !t.inactive && t.dur > 0 && t._ef !== refEnd) {
+          var vd = t._ef - refEnd, vt = document.createElement("div"); vt.className = "varTag" + (vd > 0 ? " late" : " early");
+          vt.textContent = (vd > 0 ? "+" : "") + vd + "d"; vt.style.left = Math.max(0, t._es * DAY_PX - 4) + "px"; vt.title = "Fin " + Math.abs(vd) + " día(s) " + (vd > 0 ? "después" : "antes") + " de la referencia"; vt.setAttribute("aria-hidden", "true"); row.appendChild(vt);
+        }
         if (drag && drag.id === t.id) {
           var lbl = document.createElement("div"); lbl.className = "draglabel"; lbl.style.left = (t._es * DAY_PX) + "px";
           var shift = (t.levelDelay || 0) - drag.startDelay; lbl.textContent = (shift >= 0 ? "+" : "") + shift + "d"; row.appendChild(lbl);
@@ -768,6 +827,7 @@
 
     renderScenarioChips(); renderBaselineChips();
     Object.keys(PANELS).forEach(function (k) { if (panelsOn[k]) PANELS[k].render(); });
+    paintAlertBadge(); paintInactiveBanner();
 
     if (fid) {
       var el = document.querySelector('[data-fid="' + fid.replace(/"/g, '\\"') + '"]');
@@ -812,6 +872,13 @@
       fb.hidden = false; fb.className = "banner";
     } else fb.hidden = true;
   }
+  function paintInactiveBanner() {
+    var b = $("inactBanner"); if (!b) return;
+    var n = tasks.filter(function (t) { return t.inactive; });
+    if (!n.length) { b.hidden = true; return; }
+    b.textContent = "Escenario con tareas pausadas (" + n.map(function (t) { return t.id; }).join(", ") + "): las fechas, el costo y la ruta crítica se calculan como si esas tareas no se hicieran. No es el plan completo; reactivalas con el botón Activar de la tabla.";
+    b.className = "banner"; b.hidden = false;
+  }
   function toggleFastTrack() {
     var t = taskById(ftTaskId); if (!t) return;
     pushHistory();
@@ -855,13 +922,19 @@
     issues: { id: "issuespanel", btn: "issuesToggleBtn", label: "problemas y acciones", render: renderIssuesPanel },
     three: { id: "threepanel", btn: "threeToggleBtn", label: "estimación de tres puntos", render: renderThreePanel },
     reserves: { id: "reservespanel", btn: "reservesToggleBtn", label: "análisis de reservas (VME)", render: renderReservesPanel },
-    changes: { id: "changespanel", btn: "changesToggleBtn", label: "control de cambios", render: renderChangesPanel }
+    changes: { id: "changespanel", btn: "changesToggleBtn", label: "control de cambios", render: renderChangesPanel },
+    dash: { id: "dashpanel", btn: "dashToggleBtn", label: "panel de control", render: renderDash },
+    port: { id: "portpanel", btn: "portToggleBtn", label: "vista de los cinco casos", render: renderPortfolio },
+    time: { id: "timepanel", btn: "timeToggleBtn", label: "registro de tiempo real", render: renderTimePanel },
+    scen: { id: "scenpanel", btn: "scenToggleBtn", label: "comparación de escenarios", render: renderScenarioPanel },
+    trace: { id: "tracepanel", btn: "traceToggleBtn", label: "trazabilidad de objetivos", render: renderTracePanel }
   };
   function togglePanel(key) {
     var p = PANELS[key]; panelsOn[key] = !panelsOn[key];
     var on = panelsOn[key];
     $(p.id).className = "panel" + (on ? " show" : "");
     var b = $(p.btn); b.textContent = (on ? "Ocultar " : "Mostrar ") + p.label; b.setAttribute("aria-expanded", String(on));
+    if (key === "dash") paintAlertBadge();
     if (on) {
       p.render();
       // El panel se abre en su lugar fijo de la página, que puede quedar lejos de los botones: se lo lleva a la vista.
@@ -911,11 +984,16 @@
       '<button type="button" data-action="useSuggestedCutoff" data-fid="cutsug">Usar el corte sugerido (' + Math.round(CONFIG.CUTOFF_FRACTION * 100) + '% del plazo)</button></div>' +
       '<div class="evmGrid">' +
       card(usd(m.BAC), "BAC — Presupuesto al cierre") + card(usd(m.PV), "VP — Valor planificado") + card(usd(m.EV), "VE — Valor ganado") +
-      card(usd(m.AC), "CA — Costo real" + (m.anyTaskAc ? " (por tarea)" : (m.acEstimated ? " (estimado = VE)" : " (global)"))) +
+      card(usd(m.AC), "CA — Costo real" + (m.anyTaskAc ? " (por tarea)" : (m.acFromLog ? " (registro de tiempo)" : (m.acEstimated ? " (estimado = VE)" : " (global)")))) +
       card(idx(m.CPI), "CPI — Índice de rendimiento de costos", m.CPI < 1) + card(idx(m.SPI), "SPI — Índice de rendimiento del cronograma", m.SPI < 1) +
       card(usd(m.CV), "CV — Variación del costo", m.CV < 0) + card(usd(m.SV), "SV — Variación del cronograma", m.SV < 0) +
-      card(usd(m.EAC), "EAC — Estimación al cierre", m.EAC > m.BAC) + card(usd(m.VAC), "VAC — Variación al cierre", m.VAC < 0) + "</div>" +
+      card(usd(m.EAC), "EAC — Estimación al cierre", m.EAC > m.BAC) + card(usd(m.VAC), "VAC — Variación al cierre", m.VAC < 0) +
+      card(usd(m.ETC), "ETC — Estimación hasta el cierre (lo que falta gastar)") + card(m.tcpiBac === null ? "—" : idx(m.tcpiBac), "TCPI — rendimiento necesario para cerrar en el BAC", m.tcpiBac !== null && m.tcpiBac > 1.1) +
+      card(m.tcpiEac === null ? "—" : idx(m.tcpiEac), "TCPI — rendimiento necesario para cerrar en el EAC", m.tcpiEac !== null && m.tcpiEac > 1.1) +
+      card(m.estDur ? Math.round(m.estDur) + " días hábiles" : "—", "Duración estimada (plan ÷ SPI)", m.estDur !== null && m.estDur > m.planned.projectEnd * 1.05) + "</div>" +
+      '<div class="evmActions"><label class="inl">Cómo se calcula el EAC <select class="cell-input" data-change="eacMethod" data-fid="eacm" aria-label="Método de cálculo de la estimación al cierre"><option value="cpi"' + (eacMethod === "cpi" ? " selected" : "") + '>BAC ÷ CPI (el rendimiento de costos seguirá igual)</option><option value="plan"' + (eacMethod === "plan" ? " selected" : "") + '>CA + (BAC − VE) (lo que falta se gasta según el plan)</option><option value="cpispi"' + (eacMethod === "cpispi" ? " selected" : "") + '>CA + (BAC − VE) ÷ (CPI × SPI) (afectan costo y cronograma)</option></select></label><button type="button" data-action="recordCut" data-fid="cut:rec">Registrar este corte (' + evmCuts.length + ' guardado(s))</button>' + (evmCuts.length ? '<button type="button" data-action="clearCuts" data-fid="cut:clr">Borrar los cortes</button>' : "") + "</div>" +
       '<div class="evmbars">' + bar("VP", m.PV, m.BAC, "var(--color-muted)") + bar("VE", m.EV, m.BAC, "var(--gantt-normal)") + bar("CA", m.AC, m.BAC, "var(--gantt-near)") + "</div>" +
+      '<p class="note">El EAC, el ETC y el TCPI se recalculan con el método elegido (EAC = BAC ÷ CPI por defecto). El TCPI es el CPI que tendrías que sostener de ahora en más para cerrar dentro del BAC (o del EAC): arriba de 1,1 es difícil de lograr. La duración estimada es una aproximación simple (duración planificada ÷ SPI), no un cálculo con el cronograma.</p>' + sCurveHtml(m) + trendHtml(m) +
       '<p class="note">CPI y SPI menores que 1 indican sobrecosto o atraso. Si cargás costo real por tarea, el CA se calcula con esos datos (las tareas sin cargar usan su VE). Si no cargás ninguna, se usa el campo global.</p>' +
       '<h3 style="margin:16px 0 8px;font-size:13px">Costos por tarea</h3><table class="simpletable"><caption class="sr-only">Costo diario, presupuesto, valor ganado (VE) y costo real (CA) por tarea</caption><thead><tr><th scope="col">Tarea</th><th scope="col">Costo diario (supuesto)</th><th scope="col">Presupuesto</th><th scope="col">VE</th><th scope="col">Costo real (CA)</th></tr></thead><tbody>' +
       m.perTask.map(function (p) {
@@ -1083,6 +1161,13 @@
     else add(G1, "ok", "El plan de gestión tiene sus " + PLAN_FIELDS.length + " áreas completas.");
     if (lt.length !== tasks.length) add(G1, "warn", (tasks.length - lt.length) + " tarea(s) no pertenecen a ninguna fase de la EDT.");
     else add(G1, "ok", "Todas las tareas están dentro de una fase: la EDT tiene tres niveles (proyecto, fase, tarea).");
+    var tcv = traceCoverage();
+    if (!tcv.hasObj) add(G1, "warn", "Trazabilidad: no hay objetivos cargados en el panel de trazabilidad, así que no se puede verificar que cada objetivo del acta tenga tareas.");
+    else if (tcv.uncoveredObj.length) add(G1, "warn", "Trazabilidad: objetivo(s) sin ninguna tarea vinculada: " + tcv.uncoveredObj.map(function (x) { return x.id; }).join(", ") + ".");
+    else add(G1, "ok", "Trazabilidad: cada objetivo tiene al menos una tarea vinculada.");
+    if (tcv.hasItems && tcv.orphans.length) add(G1, "warn", "Trazabilidad: " + tcv.orphans.length + " tarea(s) no sirven a ningún objetivo o entregable cargado (" + tcv.orphans.slice(0, 6).map(function (t) { return t.id; }).join(", ") + (tcv.orphans.length > 6 ? ", …" : "") + "). Si son de gestión del proyecto, puede ser correcto.");
+    var npau = tasks.filter(function (t) { return t.inactive; }).length;
+    if (npau) add(G1, "warn", npau + " tarea(s) pausada(s): el cronograma y el costo reflejan un escenario, no el plan completo.");
     add(G1, "warn", "Revisá a mano que el alcance del acta se refleje en la EDT: la herramienta no puede juzgarlo.");
     // --- riesgos, comunicaciones, equipo ---
     var thr = risks.filter(function (r) { return r.type !== "Oportunidad"; }).length, opp = risks.length - thr;
@@ -1267,6 +1352,7 @@
   function statusData() {
     var m = computeEVM(), cut = cutoffDay, late = [], critLate = [];
     leafTasks().forEach(function (t) {
+      if (t.inactive) return;
       var pr = m.planned.schedule[t.id] || { es: t._es, ef: t._ef, dur: t.dur };
       var exp = pr.dur > 0 ? Math.max(0, Math.min(100, (cut - pr.es) / pr.dur * 100)) : (pr.es < cut ? 100 : 0);
       if (exp - t.pct >= 10) { var row = { t: t, exp: Math.round(exp) }; late.push(row); if (t.critical) critLate.push(row); }
@@ -1391,7 +1477,7 @@
     computeSchedule(tasks);
     var list = cloneTasks(tasks);
     list.forEach(function (t) { t.dur = pertExpected(taskById(t.id)); });
-    var res = computeScheduleOn(list), crit = list.filter(function (t) { return Math.abs(t.slack) < 1e-6 && !t.cycleError; });
+    var res = computeScheduleOn(list), crit = list.filter(function (t) { return Math.abs(t.slack) < 1e-6 && !t.cycleError && !t.inactive; });
     var variance = crit.reduce(function (s, t) { var sd = pertSd(taskById(t.id)); return s + sd * sd; }, 0), sd = Math.sqrt(variance), E = res.projectEnd, commit = commitDay();
     var P = sd > 0 ? normCdf((commit - E) / sd) : (E <= commit + 1e-9 ? 1 : 0);
     return { E: E, sd: sd, P: P, commit: commit, date: workdayISO(Math.max(0, Math.ceil(E - 1e-9) - 1)), critIds: crit.map(function (t) { return t.id; }) };
@@ -1720,7 +1806,7 @@
     });
   }
   function loadScenario(i) {
-    activeScenario = i; tasks = cloneTasks(scenarios[i].snap.tasksSnap); phases = clonePhases(scenarios[i].snap.phasesSnap); render();
+    pushHistory(); activeScenario = i; tasks = cloneTasks(scenarios[i].snap.tasksSnap); phases = clonePhases(scenarios[i].snap.phasesSnap); render();
   }
   function cycleRaci(taskId, pi) {
     ensureRaciPeople(); pushHistory();
@@ -1802,7 +1888,8 @@
       charter: clone(charter), comms: clone(comms), changeLog: clone(changeLog), decisionLog: clone(decisionLog), lessons: lessons,
       actualStart: actualStart, actualFinish: actualFinish, plannedFinishOverride: plannedFinishOverride,
       stakeholders: clone(stakeholders), teamCharter: clone(teamCharter), mgmtPlan: clone(mgmtPlan), changeRequest: clone(changeRequest),
-      issues: clone(issues), crList: clone(crList) };
+      issues: clone(issues), crList: clone(crList),
+      evmCuts: clone(evmCuts), timeLog: clone(timeLog), traceItems: clone(traceItems), traceLinks: clone(traceLinks), alertCfg: clone(alertCfg), eacMethod: eacMethod };
   }
   function storageKey(pid) { return "ptTI.v" + CONFIG.STORAGE_KEY_VERSION + "." + META.audience + "." + pid; }
   function downloadJson() {
@@ -1845,6 +1932,7 @@
       if (typeof t.name !== "string") return label + ": la tarea " + t.id + " no tiene nombre.";
       if (!isNum(t.dur) || t.dur < 0 || t.dur > 2000) return label + ": la duración de la tarea " + t.id + " no es válida.";
       if (!Array.isArray(t.preds) || t.preds.some(function (p) { return typeof p !== "string"; })) return label + ": las predecesoras de " + t.id + " no son válidas.";
+      if (t.inactive !== undefined && typeof t.inactive !== "boolean") return label + ": el estado activo de " + t.id + " no es válido.";
       if (!isNum(t.pct) || t.pct < 0 || t.pct > 100) return label + ": el porcentaje de la tarea " + t.id + " no es válido.";
       if (t.deps !== undefined && t.deps !== null) {
         if (typeof t.deps !== "object" || Array.isArray(t.deps)) return label + ": las dependencias de " + t.id + " no son válidas.";
@@ -1875,6 +1963,17 @@
     if (o.holidays !== undefined && (!Array.isArray(o.holidays) || o.holidays.some(function (h) { return !isISO(h); }))) return { error: "La lista de feriados del archivo tiene fechas inválidas." };
     return { ok: true, legacy: legacy };
   }
+  function sanitizeExtras(obj) {
+    var ids = {}; (obj.tasks || []).forEach(function (t) { ids[t.id] = 1; });
+    evmCuts = Array.isArray(obj.evmCuts) ? obj.evmCuts.slice(0, 200).filter(function (c) { return c && isISO(c.date) && isNum(c.PV) && isNum(c.EV) && isNum(c.AC); }).map(function (c) { return { date: c.date, PV: c.PV, EV: c.EV, AC: c.AC, CPI: isNum(c.CPI) ? c.CPI : null, SPI: isNum(c.SPI) ? c.SPI : null }; }) : [];
+    timeLog = Array.isArray(obj.timeLog) ? obj.timeLog.slice(0, 5000).filter(function (e) { return e && isISO(e.date) && typeof e.taskId === "string" && ids[e.taskId]; }).map(function (e, i) { return { id: str(e.id, 20) || ("T" + (i + 1)), date: e.date, taskId: e.taskId, days: isNum(e.days) && e.days >= 0 ? e.days : 0, cost: isNum(e.cost) && e.cost >= 0 ? e.cost : null, pct: isNum(e.pct) && e.pct >= 0 && e.pct <= 100 ? e.pct : null, note: str(e.note, 300) }; }) : [];
+    traceItems = Array.isArray(obj.traceItems) ? obj.traceItems.slice(0, 100).filter(function (x) { return x && typeof x.id === "string"; }).map(function (x) { return { id: str(x.id, 20), kind: x.kind === "Entregable" ? "Entregable" : "Objetivo", text: str(x.text, 400) }; }) : null;
+    traceLinks = {};
+    if (obj.traceLinks && typeof obj.traceLinks === "object" && !Array.isArray(obj.traceLinks)) Object.keys(obj.traceLinks).forEach(function (k) { if (ids[k] && Array.isArray(obj.traceLinks[k])) traceLinks[k] = obj.traceLinks[k].filter(function (v) { return typeof v === "string"; }).slice(0, 100); });
+    var a = obj.alertCfg && typeof obj.alertCfg === "object" ? obj.alertCfg : {}, d = defaultAlertCfg();
+    alertCfg = { lateCrit: isNum(a.lateCrit) && a.lateCrit >= 0 && a.lateCrit <= 100 ? a.lateCrit : d.lateCrit, cpiMin: isNum(a.cpiMin) && a.cpiMin > 0 && a.cpiMin <= 2 ? a.cpiMin : d.cpiMin, spiMin: isNum(a.spiMin) && a.spiMin > 0 && a.spiMin <= 2 ? a.spiMin : d.spiMin, contPct: isNum(a.contPct) && a.contPct >= 0 && a.contPct <= 100 ? a.contPct : d.contPct };
+    eacMethod = ["cpi", "plan", "cpispi"].indexOf(obj.eacMethod) >= 0 ? obj.eacMethod : "cpi";
+  }
   function sanitizeObj(o, fields) {
     var out = {};
     fields.forEach(function (f) { out[f.key] = str(o && typeof o === "object" ? o[f.key] : "", 4000); });
@@ -1884,14 +1983,14 @@
     if (!Array.isArray(arr)) return [];
     return arr.slice(0, 500).filter(function (x) { return x && typeof x === "object"; }).map(function (x) { var o = {}; keys.forEach(function (k) { o[k] = str(x[k], 1000); }); return o; });
   }
-  function applyImport(text, origen) {
+  function applyImport(text, origen, silent) {
     var obj;
-    try { obj = JSON.parse(text); } catch (e) { notify("No se pudo leer el archivo: no es un JSON válido. ¿Es un archivo exportado desde este planificador?"); return; }
+    try { obj = JSON.parse(text); } catch (e) { if (silent) return false; notify("No se pudo leer el archivo: no es un JSON válido. ¿Es un archivo exportado desde este planificador?"); return; }
     var v = validateState(obj);
-    if (v.error) { notify(v.error); return; }
+    if (v.error) { if (!silent) notify(v.error); return false; }
     var proj = CASOS[obj.projectId];
     currentProjectId = obj.projectId;
-    tasks = obj.tasks.map(function (t) { return Object.assign({}, t, { notes: str(t.notes), acTask: isNum(t.acTask) ? t.acTask : null, extraResources: Array.isArray(t.extraResources) ? t.extraResources.map(function (x) { return str(x, 100); }) : [], overlapDays: isNum(t.overlapDays) ? t.overlapDays : 0, levelDelay: isNum(t.levelDelay) ? t.levelDelay : 0, name: str(t.name, 300), resource: str(t.resource, 100), preds: t.preds.slice(), crashCostPerDay: isNum(t.crashCostPerDay) ? t.crashCostPerDay : null, deps: cleanDeps(t), opt: isNum(t.opt) ? t.opt : null, pess: isNum(t.pess) ? t.pess : null }); });
+    tasks = obj.tasks.map(function (t) { return Object.assign({}, t, { notes: str(t.notes), acTask: isNum(t.acTask) ? t.acTask : null, extraResources: Array.isArray(t.extraResources) ? t.extraResources.map(function (x) { return str(x, 100); }) : [], overlapDays: isNum(t.overlapDays) ? t.overlapDays : 0, levelDelay: isNum(t.levelDelay) ? t.levelDelay : 0, name: str(t.name, 300), resource: str(t.resource, 100), preds: t.preds.slice(), crashCostPerDay: isNum(t.crashCostPerDay) ? t.crashCostPerDay : null, deps: cleanDeps(t), opt: isNum(t.opt) ? t.opt : null, pess: isNum(t.pess) ? t.pess : null, inactive: t.inactive === true }); });
     phases = clonePhases(obj.phases);
     ORIGINAL_DURS = {}; proj.tasks.forEach(function (t) { ORIGINAL_DURS[t.id] = t.dur; });
     var tmp = cloneTasks(proj.tasks.map(function (t) { return Object.assign({}, clone(t), { overlapDays: 0, levelDelay: 0 }); }));
@@ -1912,6 +2011,7 @@
     issues.forEach(function (x) { if (x.type !== "Acción") x.type = "Problema"; if (ISSUE_STATUS.indexOf(x.status) < 0) x.status = "Abierto"; if (x.due && !isISO(x.due)) x.due = ""; });
     crList = sanitizeList(obj.crList, ["id", "title", "requester", "desc", "taskId", "impactDays", "impactCost", "impactScope", "status", "who", "date", "baselineName", "bacBefore", "bacAfter", "endBefore", "endAfter"]);
     crList.forEach(function (x) { if (["Pendiente", "Aprobada", "Rechazada", "Diferida"].indexOf(x.status) < 0) x.status = "Pendiente"; });
+    sanitizeExtras(obj);
     simResult = null;
     stakeholders = sanitizeList(obj.stakeholders, STK_KEYS);
     teamCharter = sanitizeObj(obj.teamCharter, TEAM_FIELDS);
@@ -1920,6 +2020,7 @@
     raciAssignments = obj.raciAssignments && typeof obj.raciAssignments === "object" ? obj.raciAssignments : {};
     raciPeople = Array.isArray(obj.raciPeople) ? obj.raciPeople.map(function (x) { return str(x, 100); }) : [];
     charter = {}; Object.keys(clone(proj.charter || {})).concat(["objective", "scopeOut", "contingency", "mgmtReserve"]).forEach(function (k) { charter[k] = str(obj.charter && obj.charter[k] !== undefined ? obj.charter[k] : (proj.charter || {})[k], 4000); });
+    if (!traceItems) { traceItems = []; traceSeed(); }
     comms = sanitizeList(obj.comms, ["id", "stakeholder", "info", "freq", "channel", "owner"]);
     changeLog = sanitizeList(obj.changeLog, ["id", "fecha", "desc", "impacto", "estado", "aprobadoPor"]);
     decisionLog = sanitizeList(obj.decisionLog, ["id", "fecha", "decision", "contexto", "responsable"]);
@@ -1931,8 +2032,479 @@
     actualStart = isISO(obj.actualStart) ? obj.actualStart : ""; actualFinish = isISO(obj.actualFinish) ? obj.actualFinish : ""; plannedFinishOverride = isISO(obj.plannedFinishOverride) ? obj.plannedFinishOverride : "";
     history = []; future = []; ftTaskId = "";
     $("projectSelect").value = currentProjectId; $("nearThreshold").value = nearThreshold;
-    lastSavedAt = ""; setDirty(origen === "archivo"); render();
+    lastSavedAt = ""; if (silent) { isDirty = false; return true; }
+    setDirty(origen === "archivo"); render();
     notify("Progreso cargado (" + origen + "): " + proj.title + (v.legacy ? ". Era un archivo de formato anterior; se convirtió al formato actual al guardarlo de nuevo." : "."));
+  }
+
+  /* ===================== inspector de fechas: ¿por qué esta fecha? ===================== */
+  // Recalcula, para una tarea, qué impone cada predecesora y cuál manda (la que fija el inicio más tardío). Es la misma fórmula del motor CPM.
+  function driversOf(t) {
+    var D = t.inactive ? 0 : t.dur, cands = [];
+    t.preds.forEach(function (p) {
+      var pt = taskById(p); if (!pt) return;
+      var d = depOf(t, p), v;
+      if (d.type === "SS") v = pt._es + d.lag;
+      else if (d.type === "FF") v = pt._ef + d.lag - D;
+      else if (d.type === "SF") v = pt._es + d.lag - D;
+      else v = pt._ef + d.lag - (t.overlapDays || 0);
+      cands.push({ p: pt, d: d, v: v });
+    });
+    var mx = cands.length ? Math.max.apply(null, cands.map(function (c) { return c.v; })) : 0, base = Math.max(0, mx);
+    return { cands: cands, base: base, drivers: cands.length && mx >= 0 ? cands.filter(function (c) { return c.v === base; }) : [] };
+  }
+  function depSentence(c, t) {
+    var d = c.d, p = c.p, lag = d.lag ? (d.lag > 0 ? " más " + d.lag + " día(s) de desfase" : " menos " + Math.abs(d.lag) + " día(s) de adelanto") : "";
+    var ov = d.type === "FS" && t.overlapDays > 0 ? " (con " + t.overlapDays + " día(s) de solape por seguimiento rápido)" : "";
+    var pn = p.id + " " + p.name;
+    if (d.type === "SS") return "Dependencia comienzo-comienzo con " + pn + ": no puede empezar antes de que empiece esa tarea (" + startISO(p) + ")" + lag + ".";
+    if (d.type === "FF") return "Dependencia fin-fin con " + pn + ": no puede terminar antes de que termine esa tarea (" + finishISO(p) + ")" + lag + ".";
+    if (d.type === "SF") return "Dependencia comienzo-fin con " + pn + ": su fin queda atado al inicio de esa tarea (" + startISO(p) + ")" + lag + ".";
+    return "Dependencia fin-comienzo con " + pn + ": no puede empezar hasta que esa tarea termine (" + finishISO(p) + ")" + lag + ov + ".";
+  }
+  function calendarNote(t) {
+    if (t.inactive || t.dur <= 0) return "";
+    var a = startISO(t), b = finishISO(t), cd = daysBetween(a, b) + 1, skip = cd - t.dur;
+    var hs = holidays.filter(function (h) { var w = isoToDate(h).getDay(); return h >= a && h <= b && w !== 0 && w !== 6; });
+    return "Del " + a + " al " + b + " hay " + cd + " días de calendario y " + t.dur + " hábiles" + (skip > 0 ? ": se saltan " + skip + " (fines de semana" + (hs.length ? " y feriados: " + hs.join(", ") : "") + ")" : "") + ".";
+  }
+  function explainData(t) {
+    computeSchedule(tasks);
+    var dv = driversOf(t), L = [];
+    if (t.inactive) L.push("La tarea está pausada: el escenario la trata como si no se hiciera (duración 0, fuera del costo y de la ruta crítica).");
+    if (!t.preds.length) L.push("No tiene predecesoras: arranca el día 1 del proyecto (" + workdayISO(0) + ")" + ((t.levelDelay || 0) > 0 ? ", pero tiene " + t.levelDelay + " día(s) de demora agregados a mano o por nivelación." : "."));
+    else {
+      if (dv.drivers.length) dv.drivers.forEach(function (c) { L.push("Manda: " + depSentence(c, t)); });
+      else L.push("Ninguna predecesora impone un inicio posterior al día 1 del proyecto.");
+      dv.cands.filter(function (c) { return dv.drivers.indexOf(c) < 0; }).forEach(function (c) {
+        L.push("No manda (holgura de " + (dv.base - c.v) + " día(s) respecto de la que manda): " + depSentence(c, t));
+      });
+      if ((t.levelDelay || 0) > 0) L.push("Además se suma una demora de " + t.levelDelay + " día(s): la pusiste vos al fijar una fecha de inicio o la agregó la nivelación de recursos.");
+    }
+    var cn = calendarNote(t); if (cn) L.push(cn);
+    var succ = tasks.filter(function (s) { return s.preds.indexOf(t.id) >= 0; }), drives = succ.filter(function (s) { return driversOf(s).drivers.some(function (c) { return c.p.id === t.id; }); });
+    var S = [];
+    if (t.inactive) S.push("Al reactivarla, vuelve a ocupar su duración original (" + t.dur + " día(s)).");
+    else if (t.critical) S.push("Es crítica (holgura 0): cada día que se atrase mueve el fin del proyecto.");
+    else S.push("Tiene " + t.slack + " día(s) de holgura total: puede demorarse hasta ese margen sin mover el fin del proyecto.");
+    if (drives.length) S.push("Marca la fecha de: " + drives.map(function (s) { return s.id + " " + s.name; }).join("; ") + ".");
+    else if (succ.length) S.push("Tiene sucesoras (" + succ.map(function (s) { return s.id; }).join(", ") + "), pero ninguna depende de ella para su fecha de inicio.");
+    else S.push("No tiene sucesoras: no condiciona la fecha de ninguna otra tarea.");
+    return { why: L, effect: S, start: startISO(t), finish: finishISO(t) };
+  }
+  function explainTask(id) {
+    var t = taskById(id); if (!t) return;
+    var e = explainData(t), box = document.createElement("div"); box.className = "dlgBox"; box.setAttribute("aria-labelledby", "dlgWhyT");
+    box.innerHTML = '<h2 id="dlgWhyT">¿Por qué esta fecha? ' + esc(t.id + " " + t.name) + '</h2><p class="note" style="margin-top:0">Empieza el ' + esc(e.start) + (t.dur > 0 && !t.inactive ? " y termina el " + esc(e.finish) : "") + '.</p><h3 style="font-size:13px;margin:10px 0 4px">Qué fija la fecha</h3><ul class="whyList">' +
+      e.why.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + '</ul><h3 style="font-size:13px;margin:10px 0 4px">Qué pasa si se mueve</h3><ul class="whyList">' + e.effect.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") +
+      '</ul><div class="dlgBtns"><button type="button" class="btn-primary dlgOk">Cerrar</button></div>';
+    var close = openModal(box); box.querySelector(".dlgOk").addEventListener("click", function () { close(null); }); box.querySelector(".dlgOk").focus();
+    track("inspector_fechas", { caso_id: currentProjectId });
+  }
+
+  /* ===================== escenarios: tareas pausadas y comparación ===================== */
+  function toggleInactive(id) {
+    var t = taskById(id); if (!t) return;
+    pushHistory(); t.inactive = !t.inactive; render();
+    notify(t.inactive ? "Tarea " + t.id + " pausada: el cronograma y el costo se calculan como si no se hiciera. Guardá el escenario para compararlo con el plan." : "Tarea " + t.id + " reactivada.");
+  }
+  function updateScenario(i) {
+    if (!scenarios[i]) return;
+    confirmBox('¿Reemplazar el contenido del escenario "' + scenarios[i].name + '" por el estado actual de las tareas?', "Reemplazar").then(function (ok) {
+      if (!ok) return; pushHistory(); scenarios[i].snap = { tasksSnap: cloneTasks(tasks), phasesSnap: clonePhases(phases) }; activeScenario = i; render();
+    });
+  }
+  function deleteScenario(i) {
+    if (scenarios.length < 2) { notify("Tiene que quedar al menos un escenario."); return; }
+    confirmBox('¿Eliminar el escenario "' + scenarios[i].name + '"?').then(function (ok) {
+      if (!ok) return; pushHistory(); scenarios.splice(i, 1); activeScenario = Math.min(activeScenario, scenarios.length - 1); render();
+    });
+  }
+  function scenarioStats(list, isLive) {
+    var l = cloneTasks(list), res = computeScheduleOn(l), cost = 0, crash = 0, inact = 0, crit = 0;
+    l.forEach(function (t) {
+      if (t.inactive) { inact++; return; }
+      cost += t.dur * getDailyCost(t); if (t.critical) crit++;
+      var orig = ORIGINAL_DURS[t.id]; if (orig !== undefined && t.crashCostPerDay && orig > t.dur) crash += (orig - t.dur) * t.crashCostPerDay;
+    });
+    return { end: res.projectEnd, endISO: workdayISO(Math.max(0, res.projectEnd - 1)), cost: cost + crash, crit: crit, inact: inact, live: !!isLive };
+  }
+  function renderScenarioPanel() {
+    var base = originalProjectEnd, baseCost = tasks.reduce(function (sum, t) { return sum + (ORIGINAL_DURS[t.id] !== undefined ? ORIGINAL_DURS[t.id] : t.dur) * getDailyCost(t); }, 0), rows = scenarios.map(function (sc, i) {
+      var live = i === activeScenario, st = scenarioStats(live ? tasks : sc.snap.tasksSnap, live), d = st.end - base;
+      return { sc: sc, i: i, st: st, d: d, live: live };
+    });
+    var h = '<p class="note" style="margin-top:0">Un escenario es una versión del cronograma para probar "qué pasa si". Con el botón <b>Pausa</b> de cada tarea la sacás del plan (no se hace): el cronograma, el costo y la ruta crítica se recalculan sin ella. Después guardás el escenario y lo comparás acá con el plan original. Las líneas base, en cambio, fijan el plan contra el que se mide el avance.</p>' +
+      '<div class="evmActions"><button type="button" data-action="saveScenario" data-fid="sc:save">Guardar el estado actual como escenario</button></div>' +
+      '<table class="simpletable"><caption class="sr-only">Comparación de escenarios</caption><thead><tr><th scope="col">Escenario</th><th scope="col">Fin del proyecto</th><th scope="col">Diferencia con el plan original</th><th scope="col">Costo total</th><th scope="col">Diferencia de costo con el plan original</th><th scope="col">Tareas críticas</th><th scope="col">Tareas pausadas</th><th scope="col"><span class="sr-only">Acciones</span></th></tr></thead><tbody>' +
+      rows.map(function (r) {
+        var dc = r.st.cost - baseCost;
+        return "<tr" + (r.live ? ' class="rowLive"' : "") + "><td>" + esc(r.sc.name) + (r.live ? " <small>(en pantalla, con tus cambios)</small>" : "") + "</td><td>" + esc(r.st.endISO) + "</td><td>" + (r.d === 0 ? "igual" : (r.d > 0 ? "+" : "") + r.d + " día(s)") + "</td><td>" + usd(r.st.cost) + "</td><td>" + (Math.abs(dc) < 1 ? "igual" : (dc > 0 ? "+" : "−") + usd(Math.abs(dc))) + "</td><td>" + r.st.crit + "</td><td>" + r.st.inact + '</td><td class="nowrap">' +
+          (r.live ? "" : '<button type="button" data-action="loadScenario" data-i="' + r.i + '" data-fid="scn:load:' + r.i + '">Cargar</button> ') +
+          '<button type="button" data-action="updateScenario" data-i="' + r.i + '" data-fid="scn:upd:' + r.i + '" aria-label="Reemplazar el escenario ' + esc(r.sc.name) + ' por el estado actual">Actualizar</button> <button type="button" class="delBtn" data-action="deleteScenario" data-i="' + r.i + '" data-fid="scn:del:' + r.i + '" aria-label="Eliminar el escenario ' + esc(r.sc.name) + '">✕</button></td></tr>';
+      }).join("") + "</tbody></table>" +
+      '<p class="note">El costo total suma la duración efectiva de cada tarea por su costo diario, más el costo de aceleración (crash) si lo hay. La diferencia de costo se mide contra el costo del plan original (duraciones originales por costo diario). La comparación respeta la fecha de inicio y los feriados vigentes.</p>';
+    $("scenBody").innerHTML = h;
+  }
+
+  /* ===================== EVM ampliado: curva S, tendencia, cortes ===================== */
+  function jsNum(n) { return isFinite(n) ? Math.round(n * 100) / 100 : 0; }
+  function lineChart(o) {
+    var W = 680, H = 260, L = 64, R = 16, T = 14, B = 36, iw = W - L - R, ih = H - T - B, yMin = o.yMin || 0, yMax = o.yMax > yMin ? o.yMax : yMin + 1;
+    var X = function (x) { return L + (o.xMax > 0 ? x / o.xMax : 0) * iw; }, Y = function (y) { return T + ih - (y - yMin) / (yMax - yMin) * ih; };
+    var s = '<svg class="chart" viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="' + esc(o.label) + '" focusable="false"><title>' + esc(o.label) + "</title>";
+    for (var i = 0; i <= 4; i++) {
+      var yv = yMin + (yMax - yMin) * i / 4;
+      s += '<line class="ch-grid" x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(yv) + '" y2="' + Y(yv) + '"/><text class="ch-tick" x="' + (L - 6) + '" y="' + (Y(yv) + 3) + '" text-anchor="end">' + esc(o.yFmt(yv)) + "</text>";
+    }
+    (o.xTicks || []).forEach(function (tk) { s += '<line class="ch-grid" x1="' + X(tk.x) + '" x2="' + X(tk.x) + '" y1="' + T + '" y2="' + (T + ih) + '"/><text class="ch-tick" x="' + X(tk.x) + '" y="' + (H - 18) + '" text-anchor="middle">' + esc(tk.label) + "</text>"; });
+    (o.hlines || []).forEach(function (hl) { if (hl.y < yMin || hl.y > yMax) return; s += '<line class="ch-line ' + hl.cls + '" x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(hl.y) + '" y2="' + Y(hl.y) + '"/><text class="ch-lab ' + hl.cls + '" x="' + (W - R - 2) + '" y="' + (Y(hl.y) - 4) + '" text-anchor="end">' + esc(hl.label) + "</text>"; });
+    (o.vlines || []).forEach(function (vl) { s += '<line class="ch-line ' + vl.cls + '" x1="' + X(vl.x) + '" x2="' + X(vl.x) + '" y1="' + T + '" y2="' + (T + ih) + '"/><text class="ch-lab ' + vl.cls + '" x="' + (X(vl.x) + 3) + '" y="' + (T + 10) + '">' + esc(vl.label) + "</text>"; });
+    o.series.forEach(function (se) {
+      if (!se.pts.length) return;
+      s += '<path class="ch-line ' + se.cls + '" fill="none" d="' + se.pts.map(function (p, k) { return (k ? "L" : "M") + jsNum(X(p[0])) + "," + jsNum(Y(Math.max(yMin, Math.min(yMax, p[1])))); }).join(" ") + '"/>';
+      if (se.dots) se.pts.forEach(function (p) { s += '<circle class="ch-dot ' + se.cls + '" cx="' + jsNum(X(p[0])) + '" cy="' + jsNum(Y(Math.max(yMin, Math.min(yMax, p[1])))) + '" r="3.2"/>'; });
+    });
+    return s + "</svg>";
+  }
+  function pvCurve(m) {
+    var end = Math.max(m.planned.projectEnd, 1), pts = [], sch = m.planned.schedule, step = end > 400 ? 5 : (end > 160 ? 2 : 1);
+    for (var d = 0; d <= end; d += step) {
+      var v = 0; m.perTask.forEach(function (p) { var pr = sch[p.t.id] || { es: p.t._es, dur: p.t.dur }; v += Math.max(0, Math.min(d - pr.es, pr.dur)) * p.dc; }); pts.push([d, v]);
+    }
+    if (pts[pts.length - 1][0] !== end) { var v2 = 0; m.perTask.forEach(function (p) { var pr = sch[p.t.id] || { es: p.t._es, dur: p.t.dur }; v2 += Math.max(0, Math.min(end - pr.es, pr.dur)) * p.dc; }); pts.push([end, v2]); }
+    return pts;
+  }
+  function cutRow(c) { return { date: c.date, day: dayOffsetFromDate(c.date), PV: c.PV, EV: c.EV, AC: c.AC, CPI: c.CPI, SPI: c.SPI }; }
+  function allCuts(m) {
+    var rows = evmCuts.map(cutRow);
+    if (!rows.some(function (r) { return r.date === m.cutISO; })) rows.push({ date: m.cutISO, day: m.cut, PV: m.PV, EV: m.EV, AC: m.AC, CPI: isFinite(m.CPI) ? m.CPI : null, SPI: isFinite(m.SPI) ? m.SPI : null, live: true });
+    return rows.sort(function (a, b) { return a.day - b.day; });
+  }
+  function sCurveHtml(m) {
+    var cuts = allCuts(m), pv = pvCurve(m), est = m.estDur ? Math.ceil(m.estDur) : 0, xMax = Math.max(pv[pv.length - 1][0], cuts.length ? cuts[cuts.length - 1].day : 0, est > 0 && est < pv[pv.length - 1][0] * 3 ? est : 0) * 1.0;
+    var yMax = Math.max(m.BAC, m.EAC, Math.max.apply(null, cuts.map(function (c) { return Math.max(c.EV, c.AC); }))) * 1.08, nTicks = 5, xt = [];
+    for (var i = 0; i <= nTicks; i++) { var x = Math.round(xMax * i / nTicks); xt.push({ x: x, label: workdayISO(x).slice(5) }); }
+    var svg = lineChart({ label: "Curva S: valor planificado, valor ganado y costo real acumulados contra el tiempo. Presupuesto al cierre " + usd(m.BAC) + ", estimación al cierre " + usd(m.EAC) + ".", xMax: xMax, yMax: yMax, xTicks: xt, yFmt: function (v) { return v >= 1000 ? Math.round(v / 1000) + " mil" : String(Math.round(v)); },
+      series: [{ cls: "ch-pv", pts: pv }, { cls: "ch-ev", pts: cuts.map(function (c) { return [c.day, c.EV]; }), dots: true }, { cls: "ch-ac", pts: cuts.map(function (c) { return [c.day, c.AC]; }), dots: true }],
+      hlines: [{ y: m.BAC, cls: "ch-bac", label: "BAC" }].concat(Math.abs(m.EAC - m.BAC) > 1 ? [{ y: m.EAC, cls: "ch-eac", label: "EAC" }] : []), vlines: [{ x: m.cut, cls: "ch-cut", label: "corte" }] });
+    var tbl = '<table class="simpletable"><caption class="sr-only">Valores de la curva S por corte</caption><thead><tr><th scope="col">Fecha</th><th scope="col">VP</th><th scope="col">VE</th><th scope="col">CA</th></tr></thead><tbody>' +
+      cuts.map(function (c) { return "<tr><td>" + esc(c.date) + (c.live ? " (corte vigente)" : "") + "</td><td>" + usd(c.PV) + "</td><td>" + usd(c.EV) + "</td><td>" + usd(c.AC) + "</td></tr>"; }).join("") + "</tbody></table>";
+    return '<h3 style="margin:16px 0 6px;font-size:13px">Curva S</h3><div class="chartBox">' + svg + '</div><p class="chartLegend"><span class="lg ch-pv">Valor planificado (VP)</span> <span class="lg ch-ev">Valor ganado (VE)</span> <span class="lg ch-ac">Costo real (CA)</span> <span class="lg ch-bac">BAC</span> <span class="lg ch-eac">EAC</span></p>' +
+      '<p class="note">La línea de VP es el plan acumulado contra ' + esc(m.planned.label) + ". VE y CA son puntos: uno por cada corte que registres más el corte vigente. Con un solo corte se ve un punto; registrá cortes periódicos (o generalos desde el registro de tiempo) para ver la curva.</p><details><summary>Ver los valores como tabla</summary>" + tbl + "</details>";
+  }
+  function trendHtml(m) {
+    var cuts = allCuts(m).filter(function (c) { return c.CPI !== null || c.SPI !== null; });
+    if (cuts.length < 2) return '<h3 style="margin:16px 0 6px;font-size:13px">Tendencia de CPI y SPI</h3><p class="note">La tendencia necesita al menos dos cortes. Registrá el corte actual con el botón "Registrar este corte", cambiá la fecha de corte y volvé a registrar, o generá los cortes semanales desde el registro de tiempo.</p>';
+    var cap = function (v) { return v === null ? null : Math.min(v, 2); }, xMax = cuts.length - 1, xt = cuts.map(function (c, i) { return { x: i, label: c.date.slice(5) }; });
+    if (xt.length > 8) xt = xt.filter(function (_, i) { return i % Math.ceil(xt.length / 8) === 0; });
+    var ser = function (key, cls) { var p = []; cuts.forEach(function (c, i) { var v = cap(c[key]); if (v !== null) p.push([i, v]); }); return { cls: cls, pts: p, dots: true }; };
+    var first = cuts[0], last = cuts[cuts.length - 1];
+    var arrow = function (a, b) { if (a === null || b === null) return "sin dato"; var d = b - a; return Math.abs(d) < 0.02 ? "estable" : (d > 0 ? "mejora" : "empeora"); };
+    var svg = lineChart({ label: "Tendencia de CPI y SPI en " + cuts.length + " cortes. CPI " + arrow(first.CPI, last.CPI) + ", SPI " + arrow(first.SPI, last.SPI) + ".", xMax: xMax || 1, yMin: 0, yMax: 2, xTicks: xt, yFmt: function (v) { return v.toFixed(1); }, series: [ser("CPI", "ch-cpi"), ser("SPI", "ch-spi")], hlines: [{ y: 1, cls: "ch-bac", label: "1,0" }] });
+    var tbl = '<table class="simpletable"><caption class="sr-only">CPI y SPI por corte</caption><thead><tr><th scope="col">Fecha</th><th scope="col">CPI</th><th scope="col">SPI</th></tr></thead><tbody>' + cuts.map(function (c) { return "<tr><td>" + esc(c.date) + "</td><td>" + (c.CPI === null ? "—" : c.CPI.toFixed(2)) + "</td><td>" + (c.SPI === null ? "—" : c.SPI.toFixed(2)) + "</td></tr>"; }).join("") + "</tbody></table>";
+    return '<h3 style="margin:16px 0 6px;font-size:13px">Tendencia de CPI y SPI</h3><div class="chartBox">' + svg + '</div><p class="chartLegend"><span class="lg ch-cpi">CPI</span> <span class="lg ch-spi">SPI</span> <span class="lg ch-bac">1,0 = según lo planificado</span></p><p class="note">Entre el primer y el último corte, el CPI ' + arrow(first.CPI, last.CPI) + " y el SPI " + arrow(first.SPI, last.SPI) + ". El gráfico corta los valores en 2,0.</p><details><summary>Ver los valores como tabla</summary>" + tbl + "</details>";
+  }
+  function recordCut() {
+    var m = computeEVM(); if (!(m.cut > 0)) { notify("El corte está en el inicio del proyecto: elegí una fecha posterior."); return; }
+    pushHistory();
+    var row = { date: m.cutISO, PV: m.PV, EV: m.EV, AC: m.AC, CPI: isFinite(m.CPI) ? m.CPI : null, SPI: isFinite(m.SPI) ? m.SPI : null };
+    evmCuts = evmCuts.filter(function (c) { return c.date !== row.date; }); evmCuts.push(row); evmCuts.sort(function (a, b) { return a.date < b.date ? -1 : 1; }); render();
+    notify("Corte del " + row.date + " registrado (" + evmCuts.length + " en total).");
+  }
+  function clearCuts() { if (!evmCuts.length) return; confirmBox("¿Borrar los " + evmCuts.length + " cortes registrados de la curva S y la tendencia?", "Borrar").then(function (ok) { if (ok) { pushHistory(); evmCuts = []; render(); } }); }
+  function syncPctFromLog() {
+    var best = {};
+    timeLog.forEach(function (e, i) { if (!isNum(e.pct)) return; var b = best[e.taskId]; if (!b || e.date > b.date || (e.date === b.date && i > b.i)) best[e.taskId] = { date: e.date, pct: e.pct, i: i }; });
+    tasks.forEach(function (t) { if (best[t.id]) t.pct = Math.round(best[t.id].pct); });
+  }
+  function generateWeeklyCuts() {
+    if (!timeLog.length) { notify("Todavía no hay entradas en el registro de tiempo."); return; }
+    var first = dayOffsetFromDate(timeLog.reduce(function (a, e) { return e.date < a ? e.date : a; }, timeLog[0].date)), last = Math.min(cutoffDay, getPlannedRef().projectEnd);
+    if (last <= first) { notify("El corte vigente tiene que ser posterior a la primera entrada del registro."); return; }
+    pushHistory();
+    var offs = []; for (var d = first + 4; d < last; d += 5) offs.push(d); offs.push(last);
+    var gen = offs.map(function (c) { var m = computeEVM({ cut: c, fromLog: true }); return { date: workdayISO(c), PV: m.PV, EV: m.EV, AC: m.AC, CPI: isFinite(m.CPI) ? m.CPI : null, SPI: isFinite(m.SPI) ? m.SPI : null }; });
+    var dates = {}; gen.forEach(function (g) { dates[g.date] = 1; });
+    evmCuts = evmCuts.filter(function (c) { return !dates[c.date]; }).concat(gen).sort(function (a, b) { return a.date < b.date ? -1 : 1; });
+    render(); notify("Se generaron " + gen.length + " cortes semanales con los datos del registro de tiempo.");
+  }
+
+  /* ===================== registro de tiempo y costo real ===================== */
+  function nextTimeId() { var n = 1; while (timeLog.some(function (e) { return e.id === "T" + n; })) n++; return "T" + n; }
+  function addTimeEntry() {
+    var cand = leafTasks().filter(function (t) { return !t.inactive && t.dur > 0; }), opts = cand.map(function (t) { return t.id + " " + t.name; });
+    if (!opts.length) { notify("No hay tareas activas para registrar tiempo."); return Promise.resolve(); }
+    return askForm("Registrar tiempo real", [
+      { key: "date", label: "Fecha del trabajo", type: "date", value: cutoffISO(), required: true },
+      { key: "task", label: "Tarea", type: "select", options: opts, value: opts[0] },
+      { key: "days", label: "Días trabajados (puede ser 0,5)", value: "1" },
+      { key: "cost", label: "Costo real en USD (opcional; si lo dejás vacío se calcula días × costo diario)", value: "" },
+      { key: "pct", label: "% de avance acumulado de la tarea (opcional)", value: "" },
+      { key: "note", label: "Nota (opcional)", value: "" }
+    ], "Registrar", function (r) {
+      if (!isISO(r.date)) return "La fecha no es válida.";
+      var d = r.days === "" ? 0 : num(r.days), c = r.cost === "" ? null : num(r.cost), p = r.pct === "" ? null : num(r.pct);
+      if (d === null || d < 0) return "Los días trabajados tienen que ser un número mayor o igual a 0.";
+      if (r.cost !== "" && (c === null || c < 0)) return "El costo tiene que ser un número mayor o igual a 0.";
+      if (r.pct !== "" && (p === null || p < 0 || p > 100)) return "El avance tiene que estar entre 0 y 100.";
+      if (d === 0 && c === null && p === null) return "Cargá días, costo o avance.";
+    }).then(function (r) {
+      if (!r) return; pushHistory();
+      timeLog.push({ id: nextTimeId(), date: r.date, taskId: r.task.split(" ")[0], days: r.days === "" ? 0 : num(r.days), cost: r.cost === "" ? null : num(r.cost), pct: r.pct === "" ? null : num(r.pct), note: String(r.note || "").slice(0, 300) });
+      syncPctFromLog(); render(); track("registro_tiempo", { caso_id: currentProjectId });
+    });
+  }
+  function timeRowsByTask() {
+    var by = {};
+    timeLog.forEach(function (e) { var b = by[e.taskId] = by[e.taskId] || { days: 0, cost: 0, n: 0 }; var tk = taskById(e.taskId); b.days += e.days || 0; b.cost += logCostOf(e, tk); b.n++; });
+    return by;
+  }
+  function renderTimePanel() {
+    var by = timeRowsByTask(), tot = Object.keys(by).reduce(function (s, k) { return s + by[k].cost; }, 0), totD = Object.keys(by).reduce(function (s, k) { return s + by[k].days; }, 0);
+    var m = computeEVM();
+    var h = '<p class="note" style="margin-top:0">Registrá el trabajo real: fecha, tarea, días y, si querés, el costo y el avance acumulado. Con esos datos la herramienta calcula sola el costo real (CA) y el avance (VE) a la fecha de corte, sin cargar nada a mano en el panel de valor ganado. Si cargaste un costo real manual por tarea, ese manda sobre el registro. Todo queda en tu navegador y en la copia de seguridad.</p>' +
+      '<div class="evmActions"><button type="button" class="primary" data-action="addTimeEntry" data-fid="tl:add">Registrar tiempo real</button><button type="button" data-action="genCuts" data-fid="tl:cuts">Generar cortes semanales para la curva S</button><button type="button" data-action="timeCsv" data-fid="tl:csv">Descargar el registro (CSV)</button></div>' +
+      '<p class="note">' + timeLog.length + " entrada(s), " + (Math.round(totD * 10) / 10) + " día(s) y " + usd(tot) + " en total. A la fecha de corte (" + esc(m.cutISO) + ") el costo real " + (m.acFromLog ? "sale del registro: " + usd(m.AC) + "." : "todavía no usa el registro (CA " + usd(m.AC) + (m.acEstimated ? ", estimado igual al VE" : "") + ").") + "</p>";
+    var list = timeLog.slice().sort(function (a, b) { return a.date < b.date ? 1 : (a.date > b.date ? -1 : 0); });
+    h += '<table class="simpletable"><caption class="sr-only">Registro de tiempo real</caption><thead><tr><th scope="col">Fecha</th><th scope="col">Tarea</th><th scope="col">Días</th><th scope="col">Costo</th><th scope="col">Avance</th><th scope="col">Nota</th><th scope="col"><span class="sr-only">Acciones</span></th></tr></thead><tbody>' +
+      (list.map(function (e) {
+        var tk = taskById(e.taskId);
+        return "<tr><td>" + esc(e.date) + "</td><td>" + esc(e.taskId + (tk ? " " + tk.name : "")) + "</td><td>" + (e.days || 0) + "</td><td>" + usd(logCostOf(e, tk)) + (isNum(e.cost) && e.cost > 0 ? "" : " <small>(días × costo diario)</small>") + "</td><td>" + (isNum(e.pct) ? e.pct + "%" : "—") + "</td><td>" + esc(e.note) + '</td><td><button type="button" class="delBtn" data-action="deleteTime" data-id="' + esc(e.id) + '" data-fid="tl:del:' + esc(e.id) + '" aria-label="Eliminar la entrada ' + esc(e.id) + '">✕</button></td></tr>';
+      }).join("") || '<tr><td colspan="7">Todavía no hay entradas.</td></tr>') + "</tbody></table>";
+    var ks = Object.keys(by);
+    if (ks.length) h += '<h3 style="margin:16px 0 8px;font-size:13px">Resumen por tarea</h3><table class="simpletable"><caption class="sr-only">Resumen del registro de tiempo por tarea</caption><thead><tr><th scope="col">Tarea</th><th scope="col">Entradas</th><th scope="col">Días</th><th scope="col">Costo real</th><th scope="col">Presupuesto</th></tr></thead><tbody>' +
+      ks.sort().map(function (k) { var tk = taskById(k), pt = m.perTask.filter(function (p) { return p.t.id === k; })[0]; return "<tr><td>" + esc(k + (tk ? " " + tk.name : "")) + "</td><td>" + by[k].n + "</td><td>" + (Math.round(by[k].days * 10) / 10) + "</td><td>" + usd(by[k].cost) + "</td><td>" + (pt ? usd(pt.budget) : "—") + "</td></tr>"; }).join("") + "</tbody></table>";
+    $("timeBody").innerHTML = h;
+  }
+  function timeCsv() {
+    var rows = [["Fecha", "Tarea", "Nombre", "Días", "Costo (USD)", "Avance acumulado (%)", "Nota"]];
+    timeLog.slice().sort(function (a, b) { return a.date < b.date ? -1 : 1; }).forEach(function (e) { var tk = taskById(e.taskId); rows.push([e.date, e.taskId, tk ? tk.name : "", e.days || 0, Math.round(logCostOf(e, tk)), isNum(e.pct) ? e.pct : "", e.note || ""]); });
+    dl("registro-tiempo-" + currentProjectId + ".csv", "text/csv;charset=utf-8", "﻿" + rows.map(function (r) { return r.map(csvSafe).join(","); }).join("\n"));
+  }
+
+  /* ===================== trazabilidad: objetivos del acta → entregables → tareas ===================== */
+  function traceSeed() {
+    var obj = String(charter.objective || "").trim(), del = String(charter.deliverable || "").trim();
+    if (obj) traceItems.push({ id: "O1", kind: "Objetivo", text: obj.slice(0, 400) });
+    if (del) traceItems.push({ id: "E1", kind: "Entregable", text: del.slice(0, 400) });
+  }
+  function nextTraceId(kind) { var p = kind === "Entregable" ? "E" : "O", n = 1; while (traceItems.some(function (x) { return x.id === p + n; })) n++; return p + n; }
+  function traceFromCharter() {
+    var added = 0;
+    [["Objetivo", String(charter.objective || "").trim()], ["Entregable", String(charter.deliverable || "").trim()]].forEach(function (k) {
+      if (!k[1] || traceItems.some(function (x) { return x.kind === k[0] && x.text === k[1].slice(0, 400); })) return;
+      if (!added) pushHistory();
+      traceItems.push({ id: nextTraceId(k[0]), kind: k[0], text: k[1].slice(0, 400) }); added++;
+    });
+    if (added) render(); else notify("El acta no tiene objetivo ni entregable nuevos para traer (o ya están en la lista).");
+  }
+  function traceAdd(kind) {
+    return askForm(kind === "Objetivo" ? "Agregar objetivo" : "Agregar entregable", [{ key: "text", label: kind === "Objetivo" ? "Objetivo (del acta de constitución)" : "Entregable", value: "", required: true }], "Agregar").then(function (r) {
+      if (!r) return; pushHistory(); traceItems.push({ id: nextTraceId(kind), kind: kind, text: r.text.trim().slice(0, 400) }); render();
+    });
+  }
+  function traceDel(id) {
+    confirmBox("¿Eliminar este elemento y sus vínculos con las tareas?").then(function (ok) {
+      if (!ok) return; pushHistory(); traceItems = traceItems.filter(function (x) { return x.id !== id; });
+      Object.keys(traceLinks).forEach(function (k) { traceLinks[k] = traceLinks[k].filter(function (v) { return v !== id; }); if (!traceLinks[k].length) delete traceLinks[k]; });
+      render();
+    });
+  }
+  function traceCoverage() {
+    var lt = leafTasks().filter(function (t) { return !t.inactive; }), ids = {}; traceItems.forEach(function (x) { ids[x.id] = 1; });
+    var linked = function (itemId) { return lt.filter(function (t) { return (traceLinks[t.id] || []).indexOf(itemId) >= 0; }); };
+    var objs = traceItems.filter(function (x) { return x.kind === "Objetivo"; }), dels = traceItems.filter(function (x) { return x.kind === "Entregable"; });
+    var unc = traceItems.filter(function (x) { return linked(x.id).length === 0; });
+    var orphans = lt.filter(function (t) { return !(traceLinks[t.id] || []).some(function (v) { return ids[v]; }); });
+    return { hasObj: objs.length > 0, hasItems: traceItems.length > 0, objs: objs, dels: dels, uncovered: unc, uncoveredObj: unc.filter(function (x) { return x.kind === "Objetivo"; }), orphans: orphans, nLeaf: lt.length };
+  }
+  function renderTracePanel() {
+    var tc = traceCoverage();
+    var h = '<p class="note" style="margin-top:0">La trazabilidad responde dos preguntas: ¿qué tarea del cronograma sirve a cada objetivo y a cada entregable del acta? y ¿hay tareas que no sirven a ninguno? Vinculá cada tarea (casilla) con el objetivo o el entregable al que contribuye. Las tareas de gestión del proyecto pueden quedar sin vínculo, o vincularse a un entregable de gestión que agregues.</p>' +
+      '<div class="evmActions"><button type="button" data-action="traceAdd" data-kind="Objetivo" data-fid="tr:addO">Agregar objetivo</button><button type="button" data-action="traceAdd" data-kind="Entregable" data-fid="tr:addE">Agregar entregable</button><button type="button" data-action="traceFromCharter" data-fid="tr:charter">Traer objetivo y entregable del acta</button></div>';
+    if (!tc.hasItems) { $("traceBody").innerHTML = h + '<p class="note">Todavía no hay objetivos ni entregables para trazar. Escribí el objetivo SMART en el acta y traelo con el botón, o agregalos a mano.</p>'; return; }
+    h += '<table class="simpletable"><caption class="sr-only">Objetivos y entregables a trazar</caption><thead><tr><th scope="col">ID</th><th scope="col">Tipo</th><th scope="col">Texto</th><th scope="col">Tareas vinculadas</th><th scope="col"><span class="sr-only">Acciones</span></th></tr></thead><tbody>' +
+      traceItems.map(function (x) {
+        var n = leafTasks().filter(function (t) { return !t.inactive && (traceLinks[t.id] || []).indexOf(x.id) >= 0; }).length, i = esc(x.id);
+        return "<tr" + (n ? "" : ' class="issueLate"') + "><td>" + i + '</td><td><select class="cell-input" data-change="traceItem" data-id="' + i + '" data-key="kind" data-fid="tr:k:' + i + '" aria-label="Tipo de ' + i + '"><option' + (x.kind === "Objetivo" ? " selected" : "") + ">Objetivo</option><option" + (x.kind === "Entregable" ? " selected" : "") + ">Entregable</option></select></td><td><input type=\"text\" class=\"cell-input\" style=\"width:100%;min-width:260px\" value=\"" + esc(x.text) + '" data-change="traceItem" data-id="' + i + '" data-key="text" data-fid="tr:t:' + i + '" aria-label="Texto de ' + i + '"></td><td>' + n + (n ? "" : ' <b class="issueTag">Sin tareas</b>') + '</td><td><button type="button" class="delBtn" data-action="traceDel" data-id="' + i + '" data-fid="tr:d:' + i + '" aria-label="Eliminar ' + i + '">✕</button></td></tr>';
+      }).join("") + "</tbody></table>";
+    h += '<h3 style="margin:16px 0 8px;font-size:13px">Matriz de trazabilidad</h3><div class="traceWrap"><table class="simpletable traceMx"><caption class="sr-only">Matriz que vincula cada tarea con objetivos y entregables</caption><thead><tr><th scope="col">Tarea</th>' +
+      traceItems.map(function (x) { return '<th scope="col" title="' + esc(x.kind + ": " + x.text) + '">' + esc(x.id) + "</th>"; }).join("") + '<th scope="col">Estado</th></tr></thead><tbody>' +
+      leafTasks().map(function (t) {
+        var lk = traceLinks[t.id] || [], orphan = !t.inactive && tc.orphans.indexOf(t) >= 0, id = esc(t.id);
+        return "<tr" + (t.inactive ? ' class="inactive-row"' : "") + '><th scope="row" class="taskname">' + id + " " + esc(t.name) + "</th>" + traceItems.map(function (x) {
+          return '<td class="tcell"><input type="checkbox" data-change="traceLink" data-id="' + id + '" data-item="' + esc(x.id) + '" data-fid="tr:c:' + id + ":" + esc(x.id) + '"' + (lk.indexOf(x.id) >= 0 ? " checked" : "") + ' aria-label="Tarea ' + id + " vinculada a " + esc(x.id) + '"></td>';
+        }).join("") + "<td>" + (t.inactive ? "pausada" : (orphan ? '<b class="issueTag">Sin vínculo</b>' : "ok")) + "</td></tr>";
+      }).join("") + "</tbody></table></div>";
+    h += '<p class="note">Cobertura: ' + (tc.objs.length - tc.uncoveredObj.length) + " de " + tc.objs.length + " objetivo(s) con al menos una tarea; " + (tc.dels.length - (tc.uncovered.length - tc.uncoveredObj.length)) + " de " + tc.dels.length + " entregable(s) con al menos una tarea; " + tc.orphans.length + " de " + tc.nLeaf + " tarea(s) sin vínculo. La herramienta cuenta vínculos; que sean los correctos lo juzgás vos (o quien corrige).</p>";
+    $("traceBody").innerHTML = h;
+  }
+
+  /* ===================== reglas de alerta y panel de control ===================== */
+  function overAllocated() {
+    var by = {}, out = [];
+    tasks.forEach(function (t) { if (t.inactive || t.dur <= 0) return; allResourcesOf(t).forEach(function (r) { (by[r] = by[r] || []).push(t); }); });
+    Object.keys(by).forEach(function (r) {
+      var l = by[r].slice().sort(function (a, b) { return a._es - b._es; }), mx = -1, ids = {};
+      l.forEach(function (t) { if (t._es < mx) { ids[t.id] = 1; } mx = Math.max(mx, t._ef); });
+      if (Object.keys(ids).length) out.push({ res: r, n: Object.keys(ids).length });
+    });
+    return out;
+  }
+  // Reglas "si pasa X, avisar": todos los umbrales son editables en el panel de control y viajan con la copia de seguridad.
+  function alertList() {
+    var out = [], m = computeEVM(), c = alertCfg, cut = cutoffDay;
+    leafTasks().forEach(function (t) {
+      if (t.inactive || !t.critical) return;
+      var pr = m.planned.schedule[t.id] || { es: t._es, dur: t.dur }, exp = pr.dur > 0 ? Math.max(0, Math.min(100, (cut - pr.es) / pr.dur * 100)) : (pr.es < cut ? 100 : 0), gap = Math.round(exp - t.pct);
+      if (gap >= c.lateCrit) out.push({ id: "crit:" + t.id, sev: gap >= c.lateCrit * 2 ? "rojo" : "ámbar", msg: "Tarea crítica " + t.id + " " + t.name + ": lleva " + t.pct + "% y a esta fecha debería llevar " + Math.round(exp) + "% (" + gap + " puntos de atraso; el umbral es " + c.lateCrit + ").", panel: "status" });
+    });
+    if (!m.acEstimated && m.CPI < c.cpiMin) out.push({ id: "cpi", sev: m.CPI < c.cpiMin - 0.1 ? "rojo" : "ámbar", msg: "CPI " + idx2(m.CPI) + ", por debajo del umbral " + c.cpiMin.toFixed(2) + ": se gasta más de lo que se gana.", panel: "evm" });
+    if (m.PV > 0 && m.SPI < c.spiMin) out.push({ id: "spi", sev: m.SPI < c.spiMin - 0.1 ? "rojo" : "ámbar", msg: "SPI " + idx2(m.SPI) + ", por debajo del umbral " + c.spiMin.toFixed(2) + ": el avance va por detrás del plan.", panel: "evm" });
+    if (!m.acEstimated && m.EAC > m.BAC * 1.0001) out.push({ id: "eac", sev: "ámbar", msg: "La estimación al cierre (" + usd(m.EAC) + ") supera el presupuesto (" + usd(m.BAC) + ") en " + usd(m.EAC - m.BAC) + ".", panel: "evm" });
+    var rd = reserveData();
+    if (rd.cont && rd.withData > 0) {
+      var rem = rd.cont - rd.consumed;
+      if (rem < rd.cont * c.contPct / 100) out.push({ id: "cont", sev: rem <= 0 ? "rojo" : "ámbar", msg: "Reserva de contingencia: quedan " + usd(Math.max(0, rem)) + " de " + usd(rd.cont) + " (" + Math.round(Math.max(0, rem) / rd.cont * 100) + "%); el umbral es " + c.contPct + "%.", panel: "risk" });
+    }
+    var today = cutoffISO(), od = issues.filter(function (x) { return x.status !== "Cerrado" && x.due && x.due < today; });
+    if (od.length) out.push({ id: "issues", sev: "ámbar", msg: od.length + " problema(s) o acción(es) vencidos a la fecha de corte: " + od.map(function (x) { return x.id; }).join(", ") + ".", panel: "issues" });
+    var pcr = crList.filter(function (x) { return x.status === "Pendiente"; });
+    if (pcr.length) out.push({ id: "cr", sev: "ámbar", msg: pcr.length + " solicitud(es) de cambio sin decidir: " + pcr.map(function (x) { return x.id; }).join(", ") + ".", panel: EGCI ? "changes" : "close" });
+    var oa = overAllocated();
+    if (oa.length) out.push({ id: "over", sev: "ámbar", msg: "Recursos sobreasignados: " + oa.map(function (o) { return o.res; }).join(", ") + ".", panel: "res" });
+    var ni = tasks.filter(function (t) { return t.inactive; }).length;
+    if (ni) out.push({ id: "inact", sev: "ámbar", msg: ni + " tarea(s) pausada(s): los números que ves corresponden a un escenario, no al plan completo.", panel: "scen" });
+    return out;
+  }
+  function worstLight(list) {
+    var l = list.filter(function (x) { return x !== "sin dato"; });
+    if (!l.length) return "sin dato";
+    return l.indexOf("rojo") >= 0 ? "rojo" : (l.indexOf("ámbar") >= 0 ? "ámbar" : "verde");
+  }
+  function caseMetrics() {
+    var res = computeSchedule(tasks), m = computeEVM(), d = statusData(), al = alertList(), ck = runChecks(), tc = traceCoverage(), rd = reserveData();
+    var cnt = { ok: 0, warn: 0, miss: 0 }; ck.forEach(function (c) { cnt[c.lvl]++; });
+    var tb = targetBudget(), nl = (lessons || "").split("\n").filter(function (s) { return s.trim(); }).length;
+    return { id: currentProjectId, label: CASOS[currentProjectId] ? CASOS[currentProjectId].label : currentProjectId, title: caseTitle(),
+      projectEnd: res.projectEnd, endISO: workdayISO(Math.max(0, res.projectEnd - 1)), planEnd: originalProjectEnd, delta: res.projectEnd - originalProjectEnd,
+      crit: tasks.filter(function (t) { return t.critical; }).length, nTasks: tasks.length, inactive: tasks.filter(function (t) { return t.inactive; }).length,
+      m: { BAC: m.BAC, PV: m.PV, EV: m.EV, AC: m.AC, CPI: m.CPI, SPI: m.SPI, EAC: m.EAC, ETC: m.ETC, TCPI: m.tcpiBac, acEstimated: m.acEstimated, acFromLog: m.acFromLog },
+      sched: d.sched, cost: d.cost, rk: d.rk, overall: worstLight([d.sched, d.cost, d.rk]),
+      bacTarget: tb, bacDiff: tb === null ? null : Math.round(m.BAC - tb), counts: cnt,
+      miss: ck.filter(function (c) { return c.lvl === "miss"; }).map(function (c) { return c.text; }), warn: ck.filter(function (c) { return c.lvl === "warn"; }).map(function (c) { return c.text; }),
+      alerts: al, trace: { has: tc.hasItems, uncovered: tc.uncovered.length, orphans: tc.orphans.length, nLeaf: tc.nLeaf },
+      reserve: { cont: rd.cont, consumed: rd.consumed, withData: rd.withData }, openIssues: d.openIssues.length, overdue: d.overdue.length, pendingCR: crList.filter(function (x) { return x.status === "Pendiente"; }).length,
+      lessonsN: nl, risksN: risks.length, timeN: timeLog.length, pctReal: m.BAC > 0 ? m.EV / m.BAC : 0, pctPlan: m.BAC > 0 ? m.PV / m.BAC : 0 };
+  }
+  function lightCard(label, light, detail) { return '<div class="stCard st-' + lightClass(light) + '"><div class="v">' + esc(light.toUpperCase()) + '</div><div class="l">' + esc(label) + '</div><div class="d">' + esc(detail) + "</div></div>"; }
+  var LINKS = [["status", "Informe de estado"], ["evm", "Valor ganado"], ["time", "Tiempo real"], ["risk", "Riesgos"], ["issues", "Problemas y acciones"], ["trace", "Trazabilidad"], ["scen", "Escenarios"], ["check", "Coherencia"]];
+  function renderDash() {
+    var cm = caseMetrics(), m = cm.m, idx = idx2;
+    var traceLight = !cm.trace.has ? "sin dato" : (cm.trace.uncovered ? "ámbar" : "verde");
+    var h = '<p class="note" style="margin-top:0">Resumen de ' + esc(cm.title) + " a la fecha de corte (" + esc(cutoffISO()) + "), medido contra " + esc(computeEVM().planned.label) + '. Cronograma y costo: verde desde 0,95, ámbar desde 0,85, rojo por debajo. Riesgos: según el puntaje más alto de las amenazas abiertas. El semáforo general toma el peor de los tres.</p>' +
+      '<div class="stGrid">' + lightCard("General", cm.overall, cm.alerts.length + " alerta(s) activa(s)") + lightCard("Cronograma", cm.sched, m.PV > 0 ? "SPI " + idx(m.SPI) : "sin valor planificado") +
+      lightCard("Costo", cm.cost, m.acEstimated ? "cargá el costo real" : "CPI " + idx(m.CPI)) + lightCard("Riesgos", cm.rk, risks.length ? risks.length + " en el registro" : "sin registro") +
+      lightCard("Trazabilidad", traceLight, cm.trace.has ? cm.trace.uncovered + " sin tareas; " + cm.trace.orphans + " tarea(s) sin vínculo" : "sin objetivos cargados") + "</div>" +
+      '<div class="evmGrid">' + [[usd(m.BAC), "BAC"], [pct(m.EV, m.BAC) + " / " + pct(m.PV, m.BAC), "Avance real / planificado"], [usd(m.AC), "Costo real" + (m.acEstimated ? " (estimado)" : (m.acFromLog ? " (registro)" : ""))], [usd(m.EAC), "EAC — estimación al cierre"], [usd(m.ETC), "ETC — por gastar"], [m.TCPI === null ? "—" : idx(m.TCPI), "TCPI — rendimiento necesario"], [cm.endISO, "Fin proyectado" + (cm.delta ? " (" + (cm.delta > 0 ? "+" : "") + cm.delta + " d vs plan)" : "")], [cm.crit + " tarea(s)", "Ruta crítica"]].map(function (k) { return '<div class="evmCard"><div class="v">' + esc(k[0]) + '</div><div class="l">' + esc(k[1]) + "</div></div>"; }).join("") + "</div>";
+    h += '<h3 style="margin:14px 0 6px;font-size:13px">Alertas</h3>' + (cm.alerts.length ? '<ul class="checkList">' + cm.alerts.map(function (a) { return '<li class="chk ' + (a.sev === "rojo" ? "miss" : "warn") + '"><span class="tag">' + (a.sev === "rojo" ? "Urgente" : "Atención") + "</span><span>" + esc(a.msg) + ' <button type="button" class="linkBtn" data-action="openPanel" data-key="' + a.panel + '" data-fid="al:' + esc(a.id) + '">Ver panel</button></span></li>'; }).join("") + "</ul>" : '<p class="note">Ninguna regla de alerta se disparó con los datos actuales.</p>');
+    h += '<h3 style="margin:14px 0 6px;font-size:13px">Reglas de alerta (editables)</h3><div class="alertCfg">' +
+      [["lateCrit", "Tarea crítica atrasada desde (puntos de avance)", 1, 100], ["cpiMin", "CPI mínimo aceptable", 0.1, 2, 0.01], ["spiMin", "SPI mínimo aceptable", 0.1, 2, 0.01], ["contPct", "Avisar si la reserva de contingencia baja de (% de lo aprobado)", 0, 100]].map(function (f) {
+        return '<label>' + esc(f[1]) + '<input type="number" class="cell-input" min="' + f[2] + '" max="' + f[3] + '" step="' + f[4] + '" value="' + alertCfg[f[0]] + '" data-change="alertCfg" data-key="' + f[0] + '" data-fid="ac:' + f[0] + '"></label>';
+      }).join("") + '</div><p class="note">Además se avisa cuando: la estimación al cierre supera al presupuesto, hay problemas o acciones vencidos, hay solicitudes de cambio sin decidir, hay recursos sobreasignados o hay tareas pausadas. Los avisos se recalculan solos con cada cambio.</p>';
+    h += '<h3 style="margin:14px 0 6px;font-size:13px">Coherencia de los documentos</h3><p class="note">' + cm.counts.ok + " cumplen, " + cm.counts.warn + " para revisar y " + cm.counts.miss + ' faltan.</p><div class="evmActions">' + LINKS.map(function (l) { return '<button type="button" data-action="openPanel" data-key="' + l[0] + '" data-fid="dl:' + l[0] + '">' + esc(l[1]) + "</button>"; }).join("") + "</div>";
+    $("dashBody").innerHTML = h;
+  }
+  function paintAlertBadge() {
+    var b = $("dashToggleBtn"); if (!b) return;
+    var n = 0; try { n = alertList().length; } catch (e) { n = 0; }
+    var base = (panelsOn.dash ? "Ocultar " : "Mostrar ") + PANELS.dash.label;
+    b.innerHTML = esc(base) + (n ? ' <span class="alertBadge" aria-label="' + n + ' alerta(s)">' + n + "</span>" : "");
+  }
+
+  /* ===================== portafolio de los cinco casos y modo docente ===================== */
+  var docEntries = [], portCache = null;
+  function docenteEnabled() { return EGCI && (store.get("ptTI.docente") === "1" || /(^|[#&])docente\b/.test(String(location.hash || ""))); }
+  function grabCtx() {
+    return { tasks: tasks, phases: phases, baselines: baselines, ORIGINAL_DURS: ORIGINAL_DURS, originalProjectEnd: originalProjectEnd, originalSchedule: originalSchedule, cutoffDay: cutoffDay, acActual: acActual, risks: risks, charter: charter,
+      issues: issues, crList: crList, comms: comms, changeLog: changeLog, decisionLog: decisionLog, lessons: lessons, stakeholders: stakeholders, teamCharter: teamCharter, mgmtPlan: mgmtPlan, changeRequest: changeRequest,
+      raciAssignments: raciAssignments, raciPeople: raciPeople, holidays: holidays, holidayCountry: holidayCountry, holidayYear: holidayYear, currentProjectId: currentProjectId, nearThreshold: nearThreshold,
+      evmCuts: evmCuts, timeLog: timeLog, traceItems: traceItems, traceLinks: traceLinks, alertCfg: alertCfg, eacMethod: eacMethod, simResult: simResult, actualStart: actualStart, actualFinish: actualFinish,
+      plannedFinishOverride: plannedFinishOverride, scenarios: scenarios, activeScenario: activeScenario, history: history, future: future, ftTaskId: ftTaskId, isDirty: isDirty, lastSavedAt: lastSavedAt, autosaveFailed: autosaveFailed,
+      startDate: $("startDate").value, projectSel: $("projectSelect").value, nearInput: $("nearThreshold").value };
+  }
+  function putCtx(c) {
+    tasks = c.tasks; phases = c.phases; baselines = c.baselines; ORIGINAL_DURS = c.ORIGINAL_DURS; originalProjectEnd = c.originalProjectEnd; originalSchedule = c.originalSchedule; cutoffDay = c.cutoffDay; acActual = c.acActual; risks = c.risks; charter = c.charter;
+    issues = c.issues; crList = c.crList; comms = c.comms; changeLog = c.changeLog; decisionLog = c.decisionLog; lessons = c.lessons; stakeholders = c.stakeholders; teamCharter = c.teamCharter; mgmtPlan = c.mgmtPlan; changeRequest = c.changeRequest;
+    raciAssignments = c.raciAssignments; raciPeople = c.raciPeople; holidays = c.holidays; holidayCountry = c.holidayCountry; holidayYear = c.holidayYear; currentProjectId = c.currentProjectId; nearThreshold = c.nearThreshold;
+    evmCuts = c.evmCuts; timeLog = c.timeLog; traceItems = c.traceItems; traceLinks = c.traceLinks; alertCfg = c.alertCfg; eacMethod = c.eacMethod; simResult = c.simResult; actualStart = c.actualStart; actualFinish = c.actualFinish;
+    plannedFinishOverride = c.plannedFinishOverride; scenarios = c.scenarios; activeScenario = c.activeScenario; history = c.history; future = c.future; ftTaskId = c.ftTaskId; isDirty = c.isDirty; lastSavedAt = c.lastSavedAt; autosaveFailed = c.autosaveFailed;
+    $("startDate").value = c.startDate; $("projectSelect").value = c.projectSel; $("nearThreshold").value = c.nearInput;
+    computeSchedule(tasks);
+    if (isDirty) scheduleAutosave();
+  }
+  // Calcula las métricas de otros casos (o de archivos de alumnos) cargándolos "en silencio" y devolviendo el estado de la pantalla tal cual estaba.
+  function buildPortfolio() {
+    var saved = grabCtx(), rows = [];
+    try {
+      caseIds().forEach(function (id) {
+        var raw = store.get(storageKey(id)), ok = raw ? applyImport(raw, "navegador", true) === true : false, src = ok ? "avance guardado" : "valores iniciales";
+        if (!ok) loadProject(id, true);
+        var cm = caseMetrics(); cm.source = src;
+        if (!ok) { cm.notStarted = true; cm.source = "sin avance guardado (datos de ejemplo)"; cm.sched = cm.cost = cm.rk = cm.overall = "sin dato"; cm.alerts = []; }
+        rows.push(cm);
+      });
+      docEntries.forEach(function (e) {
+        var ok = applyImport(e.text, "archivo", true) === true;
+        if (!ok) { rows.push({ error: true, source: "archivo: " + e.name, label: e.name, id: "" }); return; }
+        var cm = caseMetrics(); cm.source = "archivo: " + e.name; cm.doc = true; rows.push(cm);
+      });
+    } finally { putCtx(saved); }
+    return rows;
+  }
+  function refreshPortfolio() { portCache = buildPortfolio(); if (panelsOn.port) renderPortfolio(); }
+  function lightTag(l) { return '<span class="ltag lt-' + lightClass(l) + '">' + esc(l) + "</span>"; }
+  function portRowHtml(r, docente) {
+    if (r.error) return '<tr><td colspan="' + (docente ? 11 : 10) + '">' + esc(r.source) + ': el archivo no es un progreso válido del planificador.</td></tr>';
+    var m = r.m, bac = r.bacDiff === null ? "—" : (r.bacDiff === 0 ? "coincide" : (r.bacDiff > 0 ? "+" : "−") + fmtInt(Math.abs(r.bacDiff)));
+    var det = (docente && (r.miss.length || r.alerts.length)) ? '<details><summary>' + r.miss.length + " faltan" + (r.alerts.length ? ", " + r.alerts.length + " alerta(s)" : "") + "</summary><ul class=\"miniList\">" + r.miss.map(function (x) { return "<li>Falta: " + esc(x) + "</li>"; }).join("") + r.alerts.map(function (a) { return "<li>" + esc(a.msg) + "</li>"; }).join("") + "</ul></details>" : (docente ? "—" : "");
+    return "<tr" + (r.live ? ' class="rowLive"' : "") + "><th scope=\"row\">" + esc(r.label) + "<br><small>" + esc(r.source) + "</small></th><td>" + lightTag(r.overall) + "</td><td>" + lightTag(r.sched) + "</td><td>" + lightTag(r.cost) + "</td><td>" + lightTag(r.rk) + "</td><td>" + esc(r.endISO) + "<br><small>" + (r.delta ? (r.delta > 0 ? "+" : "") + r.delta + " d vs plan" : "según plan") + "</small></td><td>" + idx2(m.SPI) + " / " + (m.acEstimated ? "—" : idx2(m.CPI)) + "</td><td>" + pct(m.EV, m.BAC) + "</td><td>" + esc(bac) + "</td><td>" + r.counts.ok + " / " + r.counts.warn + " / " + r.counts.miss + (docente ? "</td><td>" + det : "") + "</td><td>" + r.alerts.length + "</td></tr>";
+  }
+  function renderPortfolio() {
+    if (!portCache) portCache = buildPortfolio();
+    var live = caseMetrics(); live.source = "en pantalla (sin guardar)"; live.live = true;
+    var rows = portCache.map(function (r) { return (!r.doc && r.id === currentProjectId) ? live : r; });
+    var doc = docenteEnabled();
+    var head = '<th scope="col">Caso</th><th scope="col">General</th><th scope="col">Cronograma</th><th scope="col">Costo</th><th scope="col">Riesgos</th><th scope="col">Fin proyectado</th><th scope="col">SPI / CPI</th><th scope="col">Avance</th><th scope="col">BAC vs acta</th><th scope="col">Coherencia (cumple / revisar / falta)</th>' + (doc ? '<th scope="col">Detalle</th>' : "") + '<th scope="col">Alertas</th>';
+    var h = '<p class="note" style="margin-top:0">Los cinco casos lado a lado, con el avance que guardaste en este navegador (o los valores iniciales si no empezaste ese caso). El caso abierto se muestra con lo que ves en pantalla. Cada fila usa las mismas reglas que el panel de control.</p><div class="evmActions"><button type="button" data-action="refreshPort" data-fid="pt:ref">Actualizar la vista</button>' + (doc ? '<button type="button" data-action="portCsv" data-fid="pt:csv">Descargar resumen (CSV)</button>' : "") + "</div>" +
+      '<div class="traceWrap"><table class="simpletable portMx"><caption class="sr-only">Comparación de los casos</caption><thead><tr>' + head + "</tr></thead><tbody>" + rows.map(function (r) { return portRowHtml(r, doc); }).join("") + "</tbody></table></div>";
+    if (EGCI) {
+      h += '<h3 style="margin:18px 0 8px;font-size:13px">Modo docente</h3>';
+      if (!doc) h += '<p class="note">El modo docente se activa abriendo esta página con <code>#docente</code> al final de la dirección. No es una protección: es solo para mostrar las herramientas de corrección a quien las necesita.</p>';
+      else h += '<p class="note">Cargá los archivos de copia de seguridad (.json) que entregaron los alumnos. Se leen en tu navegador: no se envían a ningún servidor ni se guardan. Cada archivo se evalúa con las mismas reglas de coherencia; el resumen ordena lo que falta, no califica: la corrección sigue siendo tuya.</p><div class="evmActions"><button type="button" class="primary" data-action="pickDocFiles" data-fid="pt:pick">Cargar archivos de alumnos</button><button type="button" data-action="clearDocFiles" data-fid="pt:clr">Quitar los archivos cargados (' + docEntries.length + ')</button><button type="button" data-action="docenteOff" data-fid="pt:off">Salir del modo docente</button></div>';
+    }
+    $("portBody").innerHTML = h;
+  }
+  function portCsv() {
+    if (!portCache) portCache = buildPortfolio();
+    var rows = [["Origen", "Caso", "General", "Cronograma", "Costo", "Riesgos", "Fin proyectado", "Desvío vs plan (días)", "SPI", "CPI", "Avance real (%)", "BAC", "Presupuesto del acta", "Diferencia BAC", "Cumple", "Revisar", "Faltan", "Faltantes", "Alertas", "Riesgos cargados", "Lecciones", "Registros de tiempo"]];
+    portCache.forEach(function (r) {
+      if (r.error) { rows.push([r.source, "archivo inválido"]); return; }
+      var m = r.m; rows.push([r.source, r.label, r.overall, r.sched, r.cost, r.rk, r.endISO, r.delta, isFinite(m.SPI) ? m.SPI.toFixed(2) : "", m.acEstimated || !isFinite(m.CPI) ? "" : m.CPI.toFixed(2), (r.pctReal * 100).toFixed(1), Math.round(m.BAC), r.bacTarget === null ? "" : r.bacTarget, r.bacDiff === null ? "" : r.bacDiff, r.counts.ok, r.counts.warn, r.counts.miss, r.miss.join(" | "), r.alerts.length, r.risksN, r.lessonsN, r.timeN]);
+    });
+    dl("resumen-casos-" + dateToISO(new Date()) + ".csv", "text/csv;charset=utf-8", "﻿" + rows.map(function (r) { return r.map(csvSafe).join(","); }).join("\n"));
+  }
+  function loadDocFiles(files) {
+    var list = Array.prototype.slice.call(files || [], 0, 80), pending = list.length;
+    if (!pending) return;
+    list.forEach(function (f) {
+      if (f.size > CONFIG.MAX_FILE_BYTES) { notify(f.name + ": pesa más de " + (CONFIG.MAX_FILE_BYTES / 1048576) + " MB, no parece un progreso del planificador."); if (!--pending) refreshPortfolio(); return; }
+      var rd = new FileReader();
+      rd.onload = function () { docEntries = docEntries.filter(function (e) { return e.name !== f.name; }); docEntries.push({ name: f.name.slice(0, 80), text: String(rd.result) }); if (!--pending) refreshPortfolio(); };
+      rd.onerror = function () { if (!--pending) refreshPortfolio(); };
+      rd.readAsText(f);
+    });
   }
 
   /* ===================== exportaciones ===================== */
@@ -2113,6 +2685,15 @@
     toggleBaseline: function (el) { pushHistory(); var b = baselines[+el.dataset.i]; b.visible = !b.visible; render(); },
     deleteBaseline: function (el) { var i = +el.dataset.i; confirmBox('¿Eliminar "' + baselines[i].name + '"?').then(function (ok) { if (ok) { pushHistory(); baselines.splice(i, 1); render(); } }); },
     loadScenario: function (el) { loadScenario(+el.dataset.i); },
+    explainTask: function (el) { explainTask(el.dataset.id); }, toggleInactive: function (el) { toggleInactive(el.dataset.id); },
+    updateScenario: function (el) { updateScenario(+el.dataset.i); }, deleteScenario: function (el) { deleteScenario(+el.dataset.i); },
+    openPanel: function (el) { var k = el.dataset.key; if (!PANELS[k]) return; if (panelsOn[k]) { PANELS[k].render(); var pe = $(PANELS[k].id); if (pe && pe.scrollIntoView) pe.scrollIntoView(); } else togglePanel(k); },
+    recordCut: recordCut, clearCuts: clearCuts, genCuts: generateWeeklyCuts, addTimeEntry: addTimeEntry, timeCsv: timeCsv,
+    deleteTime: function (el) { confirmBox("¿Eliminar esta entrada del registro de tiempo?").then(function (ok) { if (!ok) return; pushHistory(); timeLog = timeLog.filter(function (e) { return e.id !== el.dataset.id; }); syncPctFromLog(); render(); }); },
+    traceAdd: function (el) { traceAdd(el.dataset.kind); }, traceDel: function (el) { traceDel(el.dataset.id); }, traceFromCharter: traceFromCharter,
+    refreshPort: refreshPortfolio, portCsv: portCsv, pickDocFiles: function () { $("docFiles").click(); },
+    clearDocFiles: function () { docEntries = []; refreshPortfolio(); },
+    docenteOff: function () { store.set("ptTI.docente", "0"); if (/docente/.test(location.hash)) { try { window.history.replaceState(null, "", location.pathname + location.search); } catch (e) { location.hash = ""; } } renderPortfolio(); },
     deleteTask: function (el) { deleteTask(el.dataset.id); }, editNote: function (el) { editNote(el.dataset.id); }, extraRes: function (el) { editExtraResources(el.dataset.id); },
     cycleRaci: function (el) { cycleRaci(el.dataset.id, +el.dataset.pi); }, addRaciPerson: addRaciPerson, addRisk: addRisk,
     deleteRisk: function (el) { delFrom("¿Eliminar este riesgo?", function () { return risks; }, function (l) { risks = l; }, el.dataset.id); },
@@ -2237,6 +2818,23 @@
     },
     taskAc: function (el) { var t = taskById(el.dataset.id); pushHistory(); t.acTask = el.value === "" ? null : Math.max(0, parseFloat(el.value) || 0); queueRender(); },
     dailyCost: function (el) { var t = taskById(el.dataset.id); var v = parseFloat(el.value); pushHistory(); t.dailyCost = isNaN(v) || v < 0 ? null : v; queueRender(); },
+    eacMethod: function (el) { if (["cpi", "plan", "cpispi"].indexOf(el.value) < 0 || el.value === eacMethod) return; pushHistory(); eacMethod = el.value; queueRender(); },
+    alertCfg: function (el) {
+      var k = el.dataset.key, v = parseFloat(String(el.value).replace(",", ".")), lim = { lateCrit: [1, 100], cpiMin: [0.1, 2], spiMin: [0.1, 2], contPct: [0, 100] }[k]; if (!lim) return;
+      if (!isFinite(v)) v = defaultAlertCfg()[k]; v = Math.max(lim[0], Math.min(lim[1], v)); if (alertCfg[k] === v) return;
+      pushHistory(); alertCfg[k] = v; queueRender();
+    },
+    traceItem: function (el) {
+      var x = traceItems.filter(function (i) { return i.id === el.dataset.id; })[0]; if (!x) return;
+      var k = el.dataset.key, v = k === "kind" ? (el.value === "Entregable" ? "Entregable" : "Objetivo") : el.value.slice(0, 400);
+      if (x[k] === v) return; pushHistory(); x[k] = v; if (k === "kind") queueRender(); else paintAlertBadge();
+    },
+    traceLink: function (el) {
+      var id = el.dataset.id, it = el.dataset.item; if (!taskById(id)) return;
+      pushHistory(); var l = traceLinks[id] || [], i = l.indexOf(it);
+      if (el.checked && i < 0) l.push(it); else if (!el.checked && i >= 0) l.splice(i, 1);
+      if (l.length) traceLinks[id] = l; else delete traceLinks[id]; queueRender();
+    },
     ftSelect: function (el) { ftTaskId = el.value; queueRender(); },
     ftPct: function (el) { ftPct = Math.max(5, Math.min(75, parseInt(el.value, 10) || 25)); queueRender(); },
     riskTask: function (el) { var r = risks.filter(function (x) { return x.id === el.dataset.id; })[0]; if (r) { pushHistory(); r.taskId = el.value; queueRender(); } },
@@ -2328,6 +2926,7 @@
     populateProjectSelect(); bindGantt();
     $("importFile").addEventListener("change", function (e) { importFile(e.target.files[0]); e.target.value = ""; });
     $("lessonsInput").setAttribute("data-change", "lessons");
+    if ($("docFiles")) $("docFiles").addEventListener("change", function (e) { loadDocFiles(e.target.files); e.target.value = ""; });
     Array.prototype.forEach.call(document.querySelectorAll("[data-panel]"), function (b) { b.setAttribute("aria-expanded", "false"); });
     $("year").textContent = String(new Date().getFullYear());
     if (CONFIG.WHATSAPP_URL) { var w = $("waBtn"); w.href = CONFIG.WHATSAPP_URL; w.hidden = false; }
@@ -2338,7 +2937,8 @@
   }
   // utilidad de pruebas (no se usa en producción)
   window.__PTI_TEST__ = { computeScheduleOn: computeScheduleOn, validateState: validateState, getState: function () { return { tasks: tasks, holidays: holidays, risks: risks, issues: issues, crList: crList, baselines: baselines, changeLog: changeLog, charter: charter, comms: comms }; }, workdayISO: workdayISO, dayOffsetFromDate: dayOffsetFromDate, computeEVM: computeEVM,
-    parsePredSpec: parsePredSpec, predsText: predsText, buildIcs: buildIcs, statusData: statusData, buildStatusText: buildStatusText, statusRows: statusRows, reserveData: reserveData, pertAnalysis: pertAnalysis, runChecks: runChecks, serializeState: serializeState, applyImport: applyImport, applyChangeRequest: applyChangeRequest, crTaskCheck: crTaskCheck, loadProject: loadProject, buildInformeText: buildInformeText, tiDocs: tiDocs, icsFold: icsFold, getSim: function () { return simResult; }, setCutoff: function (d) { cutoffDay = d; } };
+    parsePredSpec: parsePredSpec, predsText: predsText, buildIcs: buildIcs, statusData: statusData, buildStatusText: buildStatusText, statusRows: statusRows, reserveData: reserveData, pertAnalysis: pertAnalysis, runChecks: runChecks, serializeState: serializeState, applyImport: applyImport, applyChangeRequest: applyChangeRequest, crTaskCheck: crTaskCheck, loadProject: loadProject, buildInformeText: buildInformeText, tiDocs: tiDocs, icsFold: icsFold, getSim: function () { return simResult; }, setCutoff: function (d) { cutoffDay = d; },
+    caseMetrics: caseMetrics, explainData: explainData, alertList: alertList, buildPortfolio: buildPortfolio, traceCoverage: traceCoverage, scenarioStats: scenarioStats, allCuts: allCuts, syncPctFromLog: syncPctFromLog, getExt: function () { return { evmCuts: evmCuts, timeLog: timeLog, traceItems: traceItems, traceLinks: traceLinks, alertCfg: alertCfg, eacMethod: eacMethod }; }, setExt: function (o) { if (o.timeLog) timeLog = o.timeLog; if (o.evmCuts) evmCuts = o.evmCuts; if (o.eacMethod) eacMethod = o.eacMethod; }, pvCurve: pvCurve, sCurveHtml: sCurveHtml, trendHtml: trendHtml, restoreFromStr: restoreFromStr, fullSnapshotStr: fullSnapshotStr, setDocEntries: function (l) { docEntries = l; portCache = null; } };
   window.__PTI_ACTIONS__ = { ACTIONS: ACTIONS, CHANGE: CHANGE };
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
 })();

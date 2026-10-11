@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="styles.css?v=20261010a">
+<link rel="stylesheet" href="styles.css?v=20261011a">
 
 <!-- GA4: solo eventos de uso sin datos personales ni contenido que escriba la persona. -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DK70Z7NVB9"></script>
@@ -105,6 +105,7 @@
     </details>
 
     <div id="ftBanner" class="banner" hidden role="status"></div>
+    <div id="inactBanner" class="banner" hidden role="status"></div>
     <div id="cycleBanner" class="banner error" hidden role="alert"></div>
     <div id="calBanner" class="banner" hidden role="status"></div>
     <div id="status" class="status" role="status" aria-live="polite"></div>
@@ -144,17 +145,25 @@
       <span><span class="sw" style="background:var(--gantt-normal-fill);border:1px solid var(--gantt-normal)"></span>Con holgura</span>
       <span><span class="sw" style="background:var(--gantt-summary)"></span>Fase</span>
       <span><span class="sw" style="background:var(--gantt-conflict)"></span>Recurso sobreasignado</span>
+      <span><span class="sw" style="background:var(--baseline-1)"></span>Línea base (franja bajo la barra; si se atrasó, "+Nd" a la izquierda)</span>
+      <span><span class="sw" style="background:transparent;border:1.5px dashed var(--color-muted)"></span>Tarea pausada (escenario)</span>
       <span>Trazo punteado: holgura. Línea punteada vertical: fecha de corte.</span>
     </div>
 
     <div id="leadCard" class="leadCard" hidden role="region" aria-label="Invitación a suscribirse"></div>
 
     <!-- Paneles de gestión, agrupados según las entregas del TI -->
+    <div class="toolbar" role="group" aria-label="Visión general">
+      <span class="grp-title">Visión general</span>
+      <button type="button" id="dashToggleBtn" data-panel="dash" aria-controls="dashpanel">Mostrar panel de control</button>
+      <button type="button" id="portToggleBtn" data-panel="port" aria-controls="portpanel">Mostrar vista de los cinco casos</button>
+    </div>
     <div class="toolbar" role="group" aria-label="Paneles: Inicio y planificación">
       <span class="grp-title">Inicio y planificación</span>
       <button type="button" id="charterToggleBtn" data-panel="charter" aria-controls="charterpanel">Mostrar acta de constitución</button>
       <button type="button" id="stkToggleBtn" data-panel="stk" aria-controls="stkpanel">Mostrar interesados y participación</button>
       <button type="button" id="planToggleBtn" data-panel="plan" aria-controls="planpanel">Mostrar plan de gestión</button>
+      <button type="button" id="traceToggleBtn" data-panel="trace" aria-controls="tracepanel">Mostrar trazabilidad de objetivos</button>
     </div>
     <div class="toolbar" role="group" aria-label="Paneles: Riesgos, comunicaciones y equipo">
       <span class="grp-title">Riesgos, comunicaciones y equipo</span>
@@ -166,6 +175,7 @@
     <div class="toolbar" role="group" aria-label="Paneles: Control y cierre">
       <span class="grp-title">Control y cierre</span>
       <button type="button" id="evmToggleBtn" data-panel="evm" aria-controls="evmpanel">Mostrar valor ganado (EVM)</button>
+      <button type="button" id="timeToggleBtn" data-panel="time" aria-controls="timepanel">Mostrar registro de tiempo real</button>
       <button type="button" id="statusToggleBtn" data-panel="status" aria-controls="statuspanel">Mostrar informe de estado semanal</button>
       <button type="button" id="issuesToggleBtn" data-panel="issues" aria-controls="issuespanel">Mostrar problemas y acciones</button>
       <button type="button" id="closeToggleBtn" data-panel="close" aria-controls="closepanel">Mostrar cierre del proyecto</button>
@@ -175,6 +185,7 @@
       <button type="button" id="holidayToggleBtn" data-panel="holidays" aria-controls="holidaypanel">Mostrar feriados y calendario</button>
       <button type="button" id="resToggleBtn" data-panel="res" aria-controls="respanel">Mostrar vista de recursos</button>
       <button type="button" id="kanbanToggleBtn" data-panel="kanban" aria-controls="kanbanpanel">Mostrar Kanban</button>
+      <button type="button" id="scenToggleBtn" data-panel="scen" aria-controls="scenpanel">Mostrar comparación de escenarios</button>
       <button type="button" id="threeToggleBtn" data-panel="three" aria-controls="threepanel">Mostrar estimación de tres puntos (PERT)</button>
       <button type="button" id="checkToggleBtn" data-panel="check" aria-controls="checkpanel">Mostrar control de coherencia</button>
     </div>
@@ -252,6 +263,27 @@
       <div class="phead"><h2 id="issuesH">Registro de problemas y acciones</h2></div>
       <div class="pbody" id="issuesBody"></div>
     </section>
+    <section id="dashpanel" class="panel" aria-labelledby="dashH">
+      <div class="phead"><h2 id="dashH">Panel de control</h2></div>
+      <div class="pbody" id="dashBody"></div>
+    </section>
+    <section id="portpanel" class="panel" aria-labelledby="portH">
+      <div class="phead"><h2 id="portH">Vista de los cinco casos</h2></div>
+      <div class="pbody" id="portBody"></div>
+      <input type="file" id="docFiles" accept=".json,application/json" multiple hidden aria-label="Cargar copias de seguridad de alumnos (archivos JSON)">
+    </section>
+    <section id="tracepanel" class="panel" aria-labelledby="traceH">
+      <div class="phead"><h2 id="traceH">Trazabilidad: objetivos y entregables del acta</h2></div>
+      <div class="pbody" id="traceBody"></div>
+    </section>
+    <section id="timepanel" class="panel" aria-labelledby="timeH">
+      <div class="phead"><h2 id="timeH">Registro de tiempo y costo real</h2></div>
+      <div class="pbody" id="timeBody"></div>
+    </section>
+    <section id="scenpanel" class="panel" aria-labelledby="scenH">
+      <div class="phead"><h2 id="scenH">Comparación de escenarios</h2></div>
+      <div class="pbody" id="scenBody"></div>
+    </section>
     <section id="threepanel" class="panel" aria-labelledby="threeH">
       <div class="phead"><h2 id="threeH">Estimación de tres puntos (PERT) y probabilidad de cumplir la fecha</h2></div>
       <div class="pbody" id="threeBody"></div>
@@ -304,8 +336,8 @@
   </span>
 </footer>
 
-<script src="data/feriados.js?v=20261010a"></script>
-<script src="data/casos-publicos.js?v=20261010a"></script>
-<script src="app.js?v=20261010a"></script>
+<script src="data/feriados.js?v=20261011a"></script>
+<script src="data/casos-publicos.js?v=20261011a"></script>
+<script src="app.js?v=20261011a"></script>
 </body>
 </html>

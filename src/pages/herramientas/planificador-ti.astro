@@ -114,6 +114,13 @@ const jsonLd = [
         un registro de problemas y acciones con fecha límite y un calendario (.ics) con las comunicaciones y los hitos
         del proyecto.
       </p>
+      <p>
+        Además calcula la estimación al cierre (EAC) con tres métodos, lo que falta gastar (ETC) y el índice de rendimiento
+        necesario (TCPI), y dibuja la curva S y la tendencia de CPI y SPI. Podés pausar una tarea para ver qué pasa si no se
+        hace y comparar escenarios, preguntarle a cada tarea por qué tiene esa fecha, vincular los objetivos del acta con
+        las tareas, registrar el tiempo y el costo real, y mirar todo junto en un panel de control con semáforo y alertas
+        que podés configurar. Todo funciona en tu navegador, sin servidor.
+      </p>
     </section>
 
     <section aria-labelledby="para-quien">
@@ -174,6 +181,14 @@ const jsonLd = [
         (O + 4M + P) / 6. Ejemplo ilustrativo: O = 4, M = 6 y P = 14 días dan una duración esperada de 7 días. La
         herramienta suma la red completa, calcula la probabilidad de cumplir la fecha comprometida y la contrasta con
         una simulación de 3.000 corridas.
+      </p>
+
+      <h3>EAC, ETC y TCPI</h3>
+      <p>
+        La estimación al cierre (EAC) proyecta cuánto va a costar el proyecto completo. Con el método más usado,
+        EAC = BAC / CPI. Ejemplo ilustrativo: BAC = 100.000, CPI = 0,80 da un EAC de 125.000; si ya se gastaron 50.000 (CA),
+        lo que falta gastar (ETC = EAC − CA) son 75.000. El TCPI dice qué CPI hay que sostener de ahora en más para cerrar
+        dentro del presupuesto: TCPI = (BAC − VE) / (BAC − CA). Si da bastante más que 1, cerrar en el BAC es poco realista.
       </p>
 
       <h3>Matriz RACI</h3>
