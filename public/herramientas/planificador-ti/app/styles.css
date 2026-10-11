@@ -477,3 +477,5 @@ text.ch-lab.ch-bac, text.ch-lab.ch-eac, text.ch-lab.ch-cut { stroke: none; } tex
 .tourT { font-weight: 700; font-size: 12px; color: var(--color-muted); }
 .tourTarget { outline: 3px solid var(--gantt-today) !important; outline-offset: 3px; }
 .alertPre { white-space: pre-wrap; font: inherit; font-size: 13px; line-height: 1.5; margin: 0 0 8px; }
+.helpBtn { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; min-width: 18px; min-height: 0; padding: 0; margin-left: 4px; border-radius: 50%; font-size: 11px; font-weight: 700; line-height: 1; vertical-align: middle; }
+@media (pointer: coarse), (max-width: 1024px) { .helpBtn { width: 28px; height: 28px; font-size: 13px; } }

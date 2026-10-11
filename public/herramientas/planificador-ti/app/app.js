@@ -492,6 +492,7 @@
     var ok = store.set(storageKey(currentProjectId), JSON.stringify(serializeState()));
     autosaveFailed = !ok;
     if (ok) {
+      if (!store.get(bakKey() + ".first")) store.set(bakKey() + ".first", new Date().toISOString());
       store.set(lastCaseKey(), currentProjectId);
       var d = new Date(); lastSavedAt = String(d.getHours()).padStart(2, "0") + ":" + String(d.getMinutes()).padStart(2, "0");
       isDirty = false;
@@ -827,7 +828,7 @@
 
     renderScenarioChips(); renderBaselineChips();
     Object.keys(PANELS).forEach(function (k) { if (panelsOn[k]) PANELS[k].render(); });
-    paintAlertBadge(); paintInactiveBanner();
+    paintAlertBadge(); paintInactiveBanner(); paintProjectButtons(); paintBackupBanner();
 
     if (fid) {
       var el = document.querySelector('[data-fid="' + fid.replace(/"/g, '\\"') + '"]');
@@ -927,6 +928,7 @@
     port: { id: "portpanel", btn: "portToggleBtn", label: "vista de los cinco casos", render: renderPortfolio },
     time: { id: "timepanel", btn: "timeToggleBtn", label: "registro de tiempo real", render: renderTimePanel },
     scen: { id: "scenpanel", btn: "scenToggleBtn", label: "comparación de escenarios", render: renderScenarioPanel },
+    proj: { id: "projpanel", btn: "projToggleBtn", label: "mis proyectos", render: renderProjectsPanel },
     trace: { id: "tracepanel", btn: "traceToggleBtn", label: "trazabilidad de objetivos", render: renderTracePanel }
   };
   function togglePanel(key) {
@@ -971,7 +973,7 @@
     var cd = $("cutoffDate"); if (document.activeElement !== cd) cd.value = workdayISO(cutoffDay);
     var ai = $("acInput"); if (document.activeElement !== ai) ai.value = acActual === null ? "" : Math.round(acActual);
     var idx = function (n) { return isFinite(n) ? n.toFixed(2) : "—"; };
-    var card = function (v, l, warn) { return '<div class="evmCard' + (warn ? " warn" : "") + '"><div class="v">' + v + '</div><div class="l">' + l + "</div></div>"; };
+    var card = function (v, l, warn) { return '<div class="evmCard' + (warn ? " warn" : "") + '"><div class="v">' + v + '</div><div class="l">' + l + helpFor(l) + "</div></div>"; };
     var bar = function (label, v, mx, color) {
       var pct = mx > 0 ? Math.min(100, v / mx * 100) : 0;
       return '<div class="evmbarrow"><span class="lbl2">' + label + '</span><div class="evmbartrack" role="img" aria-label="' + label + ": " + usd(v) + '"><div class="evmbarfill" style="width:' + pct + "%;background:" + color + '"></div></div><span class="val">' + usd(v) + "</span></div>";
@@ -1504,7 +1506,7 @@
   function renderThreePanel() {
     var lt = leafTasks().filter(function (t) { return t.dur > 0; }), any = lt.some(hasThree), pa = pertAnalysis(), plannedEnd = plannedFinishDate();
     var pc = function (p) { return (p * 100).toFixed(0) + " %"; };
-    var card = function (v, l, warn) { return '<div class="evmCard' + (warn ? " warn" : "") + '"><div class="v">' + v + '</div><div class="l">' + l + "</div></div>"; };
+    var card = function (v, l, warn) { return '<div class="evmCard' + (warn ? " warn" : "") + '"><div class="v">' + v + '</div><div class="l">' + l + helpFor(l) + "</div></div>"; };
     var h = '<p class="note" style="margin-top:0">Duración probable = la duración de la tabla de tareas. Cargá la optimista y la pesimista de las tareas que más incertidumbre tienen (las demás se toman como fijas). Duración esperada de cada tarea = (optimista + 4 × probable + pesimista) ÷ 6; desvío estándar = (pesimista − optimista) ÷ 6. La fecha comprometida es el fin planificado: <b>' + esc(plannedEnd) + "</b>.</p>";
     if (any) {
       h += '<div class="evmGrid">' + card(esc(pa.date), "Fin esperado (PERT)", pa.E - 1e-9 > pa.commit) + card(pa.E.toFixed(1) + " d", "Duración esperada del proyecto") + card(pa.sd.toFixed(1) + " d", "Desvío estándar (tareas críticas)") + card(pc(pa.P), "Probabilidad de cumplir la fecha (PERT, distribución normal)", pa.P < 0.5) + "</div>";
@@ -1543,7 +1545,7 @@
   }
   function renderReservesPanel() {
     var d = reserveData(), none = d.cont === null;
-    var card = function (v, l, warn) { return '<div class="evmCard' + (warn ? " warn" : "") + '"><div class="v">' + v + '</div><div class="l">' + l + "</div></div>"; };
+    var card = function (v, l, warn) { return '<div class="evmCard' + (warn ? " warn" : "") + '"><div class="v">' + v + '</div><div class="l">' + l + helpFor(l) + "</div></div>"; };
     var h = '<p class="note" style="margin-top:0">VME = probabilidad × impacto en USD de cada riesgo. La contingencia se compara con el VME de las <b>amenazas</b> (riesgos conocidos, dentro de la línea base); las oportunidades no la aumentan. La reserva de gestión es para riesgos desconocidos, queda fuera de la línea base y no se asigna a un riesgo puntual. Las dos son opcionales (PMBOK 8).</p>';
     h += '<p class="note">Monto de contingencia leído del acta: <b>' + (none ? "ninguno (el texto no tiene un monto)" : usd(d.cont)) + "</b>. Se toma el primer número del texto del campo; si no es el monto, escribilo primero, por ejemplo \"USD 90.000\". Reserva de gestión declarada: <b>" + (d.mg === null ? "ninguna con monto" : usd(d.mg)) + "</b> (fuera de la línea base).</p>";
     h += '<div class="evmGrid">' + card(usd(d.vmeAll), "VME de las amenazas (dimensionamiento)") + card(usd(d.vmeOpen), "VME de las amenazas todavía abiertas") + card(usd(d.consumed), "Consumo real (riesgos que ocurrieron)", !none && d.consumed > d.cont) + card(usd(d.vmeOpp), "VME de las oportunidades (informativo)") + (none ? "" : card(usd(d.cont - d.consumed), "Saldo de la contingencia", d.cont - d.consumed < 0)) + "</div>";
@@ -1890,13 +1892,14 @@
       stakeholders: clone(stakeholders), teamCharter: clone(teamCharter), mgmtPlan: clone(mgmtPlan), changeRequest: clone(changeRequest),
       issues: clone(issues), crList: clone(crList),
       evmCuts: clone(evmCuts), timeLog: clone(timeLog), traceItems: clone(traceItems), traceLinks: clone(traceLinks), alertCfg: clone(alertCfg), eacMethod: eacMethod,
-      customCase: currentProjectId === CUSTOM_ID ? customDefOf() : undefined };
+      customCase: isCustomCase() ? customDefOf() : undefined };
   }
   function storageKey(pid) { return "ptTI.v" + CONFIG.STORAGE_KEY_VERSION + "." + META.audience + "." + pid; }
   function downloadJson() {
     var blob = new Blob([JSON.stringify(serializeState(), null, 2)], { type: "application/json" });
     var url = URL.createObjectURL(blob), a = document.createElement("a");
     a.href = url; a.download = "progreso-" + currentProjectId + ".json"; document.body.appendChild(a); a.click(); a.remove(); setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+    store.set(bakKey(), new Date().toISOString()); paintBackupBanner();
     track("guardar_progreso", { metodo: "archivo", caso_id: currentProjectId }); maybeShowLead("guardar");
     notify("Copia de seguridad descargada. El progreso ya se guarda solo en este navegador; esta copia sirve para pasarlo a otra computadora o conservarlo.");
   }
@@ -1955,7 +1958,15 @@
     if (legacy && !(typeof o.projectId === "string" && Array.isArray(o.tasks) && Array.isArray(o.phases))) return { error: "Este archivo no corresponde al Planificador TI: faltan el caso, las tareas o las fases." };
     if (!legacy && !(Number.isInteger(o.schemaVersion) && o.schemaVersion >= 1)) return { error: "El archivo no indica la versión del formato." };
     if (!legacy && o.schemaVersion > CONFIG.SCHEMA_VERSION) return { error: "El archivo se creó con una versión más nueva del planificador (formato " + o.schemaVersion + "; esta herramienta entiende hasta el " + CONFIG.SCHEMA_VERSION + "). Recargá la página e intentá de nuevo." };
-    if (o.projectId === CUSTOM_ID && o.customCase) { var cerr = validateCustomDef(o.customCase); if (cerr) return { error: cerr }; registerCustom(o.customCase); }
+    if (isCustomId(o.projectId) && o.customCase) {
+      var cerr = validateCustomDef(o.customCase); if (cerr) return { error: cerr };
+      var sig = function (d) { return d.title + "|" + d.startDate + "|" + d.tasks.map(function (t) { return t.id + ":" + t.dur; }).join(","); }, ex = CASOS[o.projectId];
+      if (!(ex && ex.custom && sig(ex) === sig(o.customCase))) {
+        var nid = (ex && ex.custom) ? nextCustomIdName() : o.projectId;
+        if (!nid || (!(ex && ex.custom) && customIds().length >= MAX_CUSTOM) || customIds().length >= MAX_CUSTOM + 5) return { error: "Ya tenés el máximo de proyectos propios (" + MAX_CUSTOM + "). Eliminá alguno desde \"Mis proyectos\" y probá de nuevo." };
+        registerCustom(o.customCase, nid); o.projectId = nid;
+      }
+    }
     if (!CASOS[o.projectId]) return { error: 'El archivo es del caso "' + str(o.projectId, 60) + '", que no está disponible en esta versión de la herramienta (' + (META.audience === "alumnos-egci" ? "versión para alumnos" : "versión pública") + ")." };
     var e = validateTasks(o.tasks, "Tareas");
     if (e) return { error: e };
@@ -1992,7 +2003,7 @@
     if (v.error) { if (!silent) notify(v.error); return false; }
     var proj = CASOS[obj.projectId];
     currentProjectId = obj.projectId;
-    if (!silent && obj.projectId === CUSTOM_ID) { store.set(customKey(), JSON.stringify(customDefOf())); populateProjectSelect(); }
+    if (!silent && isCustomId(obj.projectId)) { persistCustoms(); populateProjectSelect(); }
     tasks = obj.tasks.map(function (t) { return Object.assign({}, t, { notes: str(t.notes), acTask: isNum(t.acTask) ? t.acTask : null, extraResources: Array.isArray(t.extraResources) ? t.extraResources.map(function (x) { return str(x, 100); }) : [], overlapDays: isNum(t.overlapDays) ? t.overlapDays : 0, levelDelay: isNum(t.levelDelay) ? t.levelDelay : 0, name: str(t.name, 300), resource: str(t.resource, 100), preds: t.preds.slice(), crashCostPerDay: isNum(t.crashCostPerDay) ? t.crashCostPerDay : null, deps: cleanDeps(t), opt: isNum(t.opt) ? t.opt : null, pess: isNum(t.pess) ? t.pess : null, inactive: t.inactive === true }); });
     phases = clonePhases(obj.phases);
     ORIGINAL_DURS = {}; proj.tasks.forEach(function (t) { ORIGINAL_DURS[t.id] = t.dur; });
@@ -2410,13 +2421,13 @@
       '<div class="stGrid">' + lightCard("General", cm.overall, cm.alerts.length + " alerta(s) activa(s)") + lightCard("Cronograma", cm.sched, m.PV > 0 ? "SPI " + idx(m.SPI) : "sin valor planificado") +
       lightCard("Costo", cm.cost, m.acEstimated ? "cargá el costo real" : "CPI " + idx(m.CPI)) + lightCard("Riesgos", cm.rk, risks.length ? risks.length + " en el registro" : "sin registro") +
       lightCard("Trazabilidad", traceLight, cm.trace.has ? cm.trace.uncovered + " sin tareas; " + cm.trace.orphans + " tarea(s) sin vínculo" : "sin objetivos cargados") + "</div>" +
-      '<div class="evmGrid">' + [[usd(m.BAC), "BAC"], [pct(m.EV, m.BAC) + " / " + pct(m.PV, m.BAC), "Avance real / planificado"], [usd(m.AC), "Costo real" + (m.acEstimated ? " (estimado)" : (m.acFromLog ? " (registro)" : ""))], [usd(m.EAC), "EAC — estimación al cierre"], [usd(m.ETC), "ETC — por gastar"], [m.TCPI === null ? "—" : idx(m.TCPI), "TCPI — rendimiento necesario"], [cm.endISO, "Fin proyectado" + (cm.delta ? " (" + (cm.delta > 0 ? "+" : "") + cm.delta + " d vs plan)" : "")], [cm.crit + " tarea(s)", "Ruta crítica"]].map(function (k) { return '<div class="evmCard"><div class="v">' + esc(k[0]) + '</div><div class="l">' + esc(k[1]) + "</div></div>"; }).join("") + "</div>";
+      '<div class="evmGrid">' + [[usd(m.BAC), "BAC"], [pct(m.EV, m.BAC) + " / " + pct(m.PV, m.BAC), "Avance real / planificado"], [usd(m.AC), "Costo real" + (m.acEstimated ? " (estimado)" : (m.acFromLog ? " (registro)" : ""))], [usd(m.EAC), "EAC — estimación al cierre"], [usd(m.ETC), "ETC — por gastar"], [m.TCPI === null ? "—" : idx(m.TCPI), "TCPI — rendimiento necesario"], [cm.endISO, "Fin proyectado" + (cm.delta ? " (" + (cm.delta > 0 ? "+" : "") + cm.delta + " d vs plan)" : "")], [cm.crit + " tarea(s)", "Ruta crítica"]].map(function (k) { return '<div class="evmCard"><div class="v">' + esc(k[0]) + '</div><div class="l">' + esc(k[1]) + helpFor(k[1]) + "</div></div>"; }).join("") + "</div>";
     h += '<h3 style="margin:14px 0 6px;font-size:13px">Alertas</h3>' + (cm.alerts.length ? '<ul class="checkList">' + cm.alerts.map(function (a) { return '<li class="chk ' + (a.sev === "rojo" ? "miss" : "warn") + '"><span class="tag">' + (a.sev === "rojo" ? "Urgente" : "Atención") + "</span><span>" + esc(a.msg) + ' <button type="button" class="linkBtn" data-action="openPanel" data-key="' + a.panel + '" data-fid="al:' + esc(a.id) + '">Ver panel</button></span></li>'; }).join("") + "</ul>" : '<p class="note">Ninguna regla de alerta se disparó con los datos actuales.</p>');
     h += '<h3 style="margin:14px 0 6px;font-size:13px">Reglas de alerta (editables)</h3><div class="alertCfg">' +
       [["lateCrit", "Tarea crítica atrasada desde (puntos de avance)", 1, 100], ["cpiMin", "CPI mínimo aceptable", 0.1, 2, 0.01], ["spiMin", "SPI mínimo aceptable", 0.1, 2, 0.01], ["contPct", "Avisar si la reserva de contingencia baja de (% de lo aprobado)", 0, 100]].map(function (f) {
         return '<label>' + esc(f[1]) + '<input type="number" class="cell-input" min="' + f[2] + '" max="' + f[3] + '" step="' + f[4] + '" value="' + alertCfg[f[0]] + '" data-change="alertCfg" data-key="' + f[0] + '" data-fid="ac:' + f[0] + '"></label>';
       }).join("") + '</div><p class="note">Además se avisa cuando: la estimación al cierre supera al presupuesto, hay problemas o acciones vencidos, hay solicitudes de cambio sin decidir, hay recursos sobreasignados o hay tareas pausadas. Los avisos se recalculan solos con cada cambio.</p>';
-    h += '<h3 style="margin:14px 0 6px;font-size:13px">Coherencia de los documentos</h3><p class="note">' + cm.counts.ok + " cumplen, " + cm.counts.warn + " para revisar y " + cm.counts.miss + ' faltan.</p><div class="evmActions">' + LINKS.map(function (l) { return '<button type="button" data-action="openPanel" data-key="' + l[0] + '" data-fid="dl:' + l[0] + '">' + esc(l[1]) + "</button>"; }).join("") + "</div>";
+    h += '<h3 style="margin:14px 0 6px;font-size:13px">Coherencia de los documentos</h3><div class="evmActions"><button type="button" data-action="exportDashPdf" data-fid="dash:pdf">Exportar el panel en PDF (una página)</button></div><p class="note">' + cm.counts.ok + " cumplen, " + cm.counts.warn + " para revisar y " + cm.counts.miss + ' faltan.</p><div class="evmActions">' + LINKS.map(function (l) { return '<button type="button" data-action="openPanel" data-key="' + l[0] + '" data-fid="dl:' + l[0] + '">' + esc(l[1]) + "</button>"; }).join("") + "</div>";
     $("dashBody").innerHTML = h;
   }
   function paintAlertBadge() {
@@ -2449,7 +2460,7 @@
   }
   // Calcula las métricas de otros casos (o de archivos de alumnos) cargándolos "en silencio" y devolviendo el estado de la pantalla tal cual estaba.
   function buildPortfolio() {
-    var saved = grabCtx(), rows = [], savedCustom = CASOS[CUSTOM_ID];
+    var saved = grabCtx(), rows = [], savedCustoms = {}; customIds().forEach(function (k) { savedCustoms[k] = CASOS[k]; });
     try {
       caseIds().forEach(function (id) {
         var raw = store.get(storageKey(id)), ok = raw ? applyImport(raw, "navegador", true) === true : false, src = ok ? "avance guardado" : "valores iniciales";
@@ -2463,7 +2474,7 @@
         if (!ok) { rows.push({ error: true, source: "archivo: " + e.name, label: e.name, id: "" }); return; }
         var cm = caseMetrics(); cm.source = "archivo: " + e.name; cm.doc = true; rows.push(cm);
       });
-    } finally { if (savedCustom) CASOS[CUSTOM_ID] = savedCustom; else delete CASOS[CUSTOM_ID]; putCtx(saved); }
+    } finally { customIds().forEach(function (k) { delete CASOS[k]; }); Object.keys(savedCustoms).forEach(function (k) { CASOS[k] = savedCustoms[k]; }); putCtx(saved); }
     return rows;
   }
   function refreshPortfolio() { portCache = buildPortfolio(); if (panelsOn.port) renderPortfolio(); }
@@ -2512,13 +2523,21 @@
 
 
   /* ===================== proyecto propio: en blanco o importado desde Excel / CSV ===================== */
-  var CUSTOM_ID = "propio";
+  var CUSTOM_ID = "propio", MAX_CUSTOM = 10;
+  var RISK_KEYS = ["id", "desc", "category", "prob", "impact", "response", "owner", "taskId", "type", "probPct", "impactUsd", "status", "actualCost"];
+  function isCustomId(id) { return /^propio(-\d{1,2})?$/.test(String(id)); }
   function isCustomCase() { return !!(CASOS[currentProjectId] && CASOS[currentProjectId].custom); }
+  function customIds() { return Object.keys(CASOS).filter(function (k) { return isCustomId(k) && CASOS[k].custom; }); }
   function customKey() { return "ptTI.custom." + META.audience; }
+  function customsKey() { return "ptTI.customs." + META.audience; }
+  function nextCustomIdName() { if (!CASOS[CUSTOM_ID]) return CUSTOM_ID; for (var n = 2; n <= 99; n++) if (!CASOS["propio-" + n]) return "propio-" + n; return ""; }
   function normCustomTask(t) {
-    var o = { id: str(t.id, 40), name: str(t.name, 300), dur: Math.round(t.dur), preds: t.preds.slice(0, 60).map(function (p) { return str(p, 40); }), pct: isNum(t.pct) ? Math.max(0, Math.min(100, Math.round(t.pct))) : 0, resource: str(t.resource || "PM", 100) || "PM", crashCostPerDay: null };
+    var o = { id: str(t.id, 40), name: str(t.name, 300), dur: Math.round(t.dur), preds: t.preds.slice(0, 60).map(function (p) { return str(p, 40); }), pct: isNum(t.pct) ? Math.max(0, Math.min(100, Math.round(t.pct))) : 0, resource: str(t.resource || "PM", 100) || "PM", crashCostPerDay: isNum(t.crashCostPerDay) && t.crashCostPerDay >= 0 ? t.crashCostPerDay : null };
     var d = cleanDeps(t); if (d) o.deps = d;
     if (isNum(t.dailyCost) && t.dailyCost >= 0) o.dailyCost = t.dailyCost;
+    if (isNum(t.opt) && isNum(t.pess)) { o.opt = t.opt; o.pess = t.pess; }
+    if (Array.isArray(t.extraResources)) o.extraResources = t.extraResources.slice(0, 20).map(function (x) { return str(x, 100); });
+    if (typeof t.notes === "string" && t.notes) o.notes = str(t.notes, 2000);
     return o;
   }
   function validateCustomDef(cc) {
@@ -2529,28 +2548,97 @@
     if (!Array.isArray(cc.phases) || cc.phases.some(function (p) { return !p || typeof p.id !== "string" || typeof p.name !== "string" || !Array.isArray(p.children) || p.children.some(function (c) { return !ids.has(c); }); })) return "Las fases del proyecto propio del archivo no son válidas.";
     return "";
   }
-  function registerCustom(def) {
-    var title = str(def.title, 120).trim() || "Mi proyecto";
-    CASOS[CUSTOM_ID] = { label: "Mi proyecto — " + title, title: title, startDate: def.startDate, startNote: "Proyecto propio. La fecha de inicio es editable.", custom: true,
+  function registerCustom(def, id) {
+    id = id || CUSTOM_ID;
+    var title = str(def.title, 120).trim() || "Mi proyecto", ch = {};
+    if (def.charter && typeof def.charter === "object" && !Array.isArray(def.charter)) Object.keys(def.charter).slice(0, 30).forEach(function (k) { ch[str(k, 40)] = str(def.charter[k], 4000); });
+    var rk = sanitizeList(def.risks, RISK_KEYS); rk.forEach(function (r) { if (r.type !== "Oportunidad") r.type = "Amenaza"; });
+    CASOS[id] = { label: "Mi proyecto — " + title, title: title, startDate: def.startDate, startNote: "Proyecto propio. La fecha de inicio es editable.", custom: true,
       phases: def.phases.map(function (p) { return { id: str(p.id, 40), name: str(p.name, 200), children: p.children.map(function (c) { return str(c, 40); }) }; }),
-      tasks: def.tasks.map(normCustomTask), risks: [], charter: {} };
+      tasks: def.tasks.map(normCustomTask), risks: rk, charter: ch };
   }
-  function customDefOf() { var c = CASOS[CUSTOM_ID]; return c ? { title: c.title, startDate: c.startDate, phases: clone(c.phases), tasks: clone(c.tasks) } : null; }
+  function customDefOf(id) {
+    var c = CASOS[id || currentProjectId]; if (!c || !c.custom) return null;
+    return { id: id || currentProjectId, title: c.title, startDate: c.startDate, phases: clone(c.phases), tasks: clone(c.tasks), risks: clone(c.risks || []), charter: clone(c.charter || {}) };
+  }
+  function persistCustoms() { store.set(customsKey(), JSON.stringify(customIds().map(function (k) { return customDefOf(k); }))); }
   function loadStoredCustom() {
-    var raw = store.get(customKey()); if (!raw) return;
-    try { var d = JSON.parse(raw); if (!validateCustomDef(d)) registerCustom(d); } catch (e) { /* definición dañada: se ignora */ }
+    var raw = store.get(customsKey()), old = store.get(customKey());
+    try {
+      if (raw) { JSON.parse(raw).slice(0, MAX_CUSTOM).forEach(function (d) { if (d && isCustomId(d.id) && !validateCustomDef(d)) registerCustom(d, d.id); }); }
+      else if (old) { var d0 = JSON.parse(old); if (!validateCustomDef(d0)) { registerCustom(d0, CUSTOM_ID); persistCustoms(); } }
+      if (old) { try { localStorage.removeItem(customKey()); } catch (e) { /* sin almacenamiento */ } }
+    } catch (e) { /* definición dañada: se ignora */ }
   }
   function startCustom(def, msg) {
+    var id = nextCustomIdName();
+    if (!id || customIds().length >= MAX_CUSTOM) { notify("Llegaste al máximo de " + MAX_CUSTOM + " proyectos propios. Eliminá alguno desde \"Mis proyectos\" para crear otro."); return; }
     autosaveNow();
-    var key = storageKey(CUSTOM_ID);
-    function go() {
-      try { localStorage.removeItem(key); } catch (e) { /* sin almacenamiento */ }
-      store.set(customKey(), JSON.stringify(def)); registerCustom(def); populateProjectSelect();
-      loadProject(CUSTOM_ID); store.set(lastCaseKey(), CUSTOM_ID); track("proyecto_propio", { origen: msg.origen, tareas: def.tasks.length });
-      notify(msg.text);
-    }
-    if (CASOS[CUSTOM_ID] && store.get(key)) confirmBox("Ya tenés un proyecto propio con avance guardado en este navegador. Si seguís, se reemplaza por el nuevo. Si querés conservarlo, cancelá y descargá antes la copia de seguridad.", "Reemplazar").then(function (ok) { if (ok) go(); });
-    else go();
+    try { localStorage.removeItem(storageKey(id)); } catch (e) { /* sin almacenamiento */ }
+    registerCustom(def, id); persistCustoms(); populateProjectSelect();
+    loadProject(id); store.set(lastCaseKey(), id); track("proyecto_propio", { origen: msg.origen, tareas: def.tasks.length });
+    notify(msg.text);
+  }
+  function renameProject(id) {
+    var c = CASOS[id]; if (!c || !c.custom) return Promise.resolve();
+    return askForm("Renombrar el proyecto", [{ key: "title", label: "Nombre del proyecto", value: c.title, required: true }], "Guardar").then(function (r) {
+      if (!r) return; var t = r.title.trim().slice(0, 120); if (!t) return;
+      c = CASOS[id]; if (!c) return;
+      c.title = t; c.label = "Mi proyecto — " + t; persistCustoms(); populateProjectSelect(); $("projectSelect").value = currentProjectId; render(); notify("Proyecto renombrado.");
+    });
+  }
+  function deleteProject(id) {
+    var c = CASOS[id]; if (!c || !c.custom) return Promise.resolve();
+    return confirmBox("¿Eliminar el proyecto \"" + c.title + "\"? Se borra de este navegador junto con su avance. Si querés conservarlo, cancelá y descargá antes la copia de seguridad.", "Eliminar").then(function (ok) {
+      if (!ok) return;
+      var wasCurrent = id === currentProjectId; clearTimeout(autosaveTimer); autosaveTimer = 0;
+      try { localStorage.removeItem(storageKey(id)); localStorage.removeItem(bakKey(id)); localStorage.removeItem(bakKey(id) + ".snooze"); localStorage.removeItem(bakKey(id) + ".first"); } catch (e) { /* sin almacenamiento */ }
+      delete CASOS[id]; persistCustoms(); populateProjectSelect();
+      if (wasCurrent) { var first = caseIds()[0]; isDirty = false; loadProject(first); store.set(lastCaseKey(), first); maybeRestore(first); } else render();
+      notify("Proyecto eliminado.");
+    });
+  }
+  function duplicateProject() {
+    return askForm("Duplicar este proyecto", [{ key: "title", label: "Nombre de la copia", value: ("Copia de " + caseTitle()).slice(0, 120), required: true }], "Duplicar").then(function (r) {
+      if (!r) return; computeSchedule(tasks);
+      startCustom({ title: r.title.trim(), startDate: startDateValue(), phases: clonePhases(phases), tasks: cloneTasks(tasks).map(function (t) { return { id: t.id, name: t.name, dur: t.dur, preds: t.preds, deps: t.deps, pct: t.pct, resource: t.resource, dailyCost: getDailyCost(t), crashCostPerDay: t.crashCostPerDay, opt: t.opt, pess: t.pess, extraResources: t.extraResources, notes: t.notes }; }), risks: clone(risks), charter: clone(charter) },
+        { origen: "copia", text: "Copia creada. Es un proyecto propio independiente: los cambios que hagas acá no afectan al original." });
+    });
+  }
+  function openProject(id) { if (id === currentProjectId || !CASOS[id]) return; CHANGE.project({ value: id }); }
+  function saveNow() {
+    isDirty = true; autosaveNow();
+    if (autosaveFailed) { notify("No se pudo guardar en este navegador (almacenamiento bloqueado o lleno). Descargá la copia de seguridad para no perder el trabajo."); return; }
+    notify("Guardado en este navegador a las " + lastSavedAt + ". Si querés tener una copia fuera del navegador, descargá la copia de seguridad.");
+  }
+  /* ---- aviso de copia de seguridad ---- */
+  function bakKey(id) { return "ptTI.bak." + META.audience + "." + (id || currentProjectId); }
+  var BAK_DAYS = 3;
+  function bakDue() {
+    if (!currentProjectId || !store.get(storageKey(currentProjectId))) return false;
+    var ref = 0, k = bakKey();
+    [store.get(k), store.get(k + ".snooze"), store.get(k + ".first")].forEach(function (v) { var t = v ? Date.parse(v) : NaN; if (isFinite(t) && t > ref) ref = t; });
+    return ref > 0 && Date.now() - ref >= BAK_DAYS * 86400000;
+  }
+  function paintBackupBanner() {
+    var b = $("bakBanner"); if (!b) return;
+    if (!bakDue()) { b.hidden = true; return; }
+    b.className = "banner info"; b.hidden = false;
+    b.innerHTML = 'Hace más de ' + BAK_DAYS + ' días que no descargás una copia de seguridad de este proyecto. El avance vive solo en este navegador: si se borran los datos del sitio, se pierde. <button type="button" class="linkBtn" data-action="bakNow" data-fid="bak:now">Descargar copia ahora</button> · <button type="button" class="linkBtn" data-action="bakSnooze" data-fid="bak:snz">Recordármelo en ' + BAK_DAYS + ' días</button>';
+  }
+  function renderProjectsPanel() {
+    var ids = customIds(), h = '<p class="note" style="margin-top:0">Tus proyectos propios (' + ids.length + " de " + MAX_CUSTOM + "), guardados en este navegador. Podés crear uno en blanco, importarlo desde una planilla, o duplicar el que tengas abierto (incluso un caso de ejemplo) para probar variantes sin tocar el original.</p>" +
+      '<div class="evmActions"><button type="button" class="primary" data-action="newBlank" data-fid="pj:new">Nuevo proyecto en blanco</button><button type="button" data-action="importPlan" data-fid="pj:imp">Importar planilla (Excel o CSV)</button><button type="button" data-action="planTemplate" data-fid="pj:tpl">Plantilla (CSV)</button><button type="button" data-action="duplicateProject" data-fid="pj:dup">Duplicar el proyecto abierto</button></div>';
+    h += '<table class="simpletable"><caption class="sr-only">Mis proyectos</caption><thead><tr><th scope="col">Proyecto</th><th scope="col">Inicio</th><th scope="col">Tareas</th><th scope="col">Avance guardado</th><th scope="col"><span class="sr-only">Acciones</span></th></tr></thead><tbody>' +
+      (ids.map(function (id) {
+        var c = CASOS[id], cur = id === currentProjectId, sv = !!store.get(storageKey(id)), i = esc(id);
+        return "<tr" + (cur ? ' class="rowLive"' : "") + "><th scope=\"row\">" + esc(c.title) + (cur ? " <small>(abierto)</small>" : "") + "</th><td>" + esc(c.startDate) + "</td><td>" + c.tasks.length + "</td><td>" + (sv ? "sí" : "no") + '</td><td class="nowrap">' +
+          (cur ? "" : '<button type="button" data-action="openProject" data-id="' + i + '" data-fid="pj:open:' + i + '">Abrir</button> ') + '<button type="button" data-action="renameProject" data-id="' + i + '" data-fid="pj:ren:' + i + '">Renombrar</button> <button type="button" class="delBtn" data-action="deleteProject" data-id="' + i + '" data-fid="pj:del:' + i + '" aria-label="Eliminar el proyecto ' + esc(c.title) + '">✕</button></td></tr>';
+      }).join("") || '<tr><td colspan="5">Todavía no creaste proyectos propios.</td></tr>') + "</tbody></table>";
+    $("projBody").innerHTML = h;
+  }
+  function paintProjectButtons() {
+    var c = isCustomCase(); ["renameBtn", "deleteProjBtn"].forEach(function (id) { var e = $(id); if (e) e.hidden = !c; });
   }
   function newBlankProject() {
     return askForm("Nuevo proyecto en blanco", [
@@ -2656,6 +2744,40 @@
       ["Inicio", "1.1.1", "Definir alcance y objetivos", 5, "", "PM", 300, 0], ["Inicio", "1.1.2", "Armar el plan del proyecto", 5, "1.1.1", "PM", 300, 0],
       ["Ejecución", "1.2.1", "Desarrollar el entregable", 20, "1.1.2", "Equipo", 800, 0], ["Ejecución", "1.2.2", "Pruebas", 8, "1.2.1", "Equipo", 600, 0], ["Cierre", "1.3.1", "Entrega y cierre", 0, "1.2.2", "PM", 0, 0]];
     dl("plantilla-planificador.csv", "text/csv;charset=utf-8", "\uFEFF" + rows.map(function (r) { return r.map(csvSafe).join(","); }).join("\n"));
+  }
+
+  /* ===================== ayuda en contexto: glosario de términos ===================== */
+  var GLOSS = {
+    "BAC": "Presupuesto al cierre (Budget at Completion): el costo total planificado de todo el proyecto. Ejemplo: si el plan completo cuesta USD 480.000, el BAC es 480.000.",
+    "VP": "Valor planificado: cuánto trabajo, medido en dinero del presupuesto, debería estar hecho a la fecha de corte según el plan. Ejemplo: si a esa fecha tendría que estar hecho el 40% de un BAC de 100.000, el VP es 40.000.",
+    "VE": "Valor ganado: el valor del trabajo realmente terminado, medido con el presupuesto. Ejemplo: si se completó el 30% de un BAC de 100.000, el VE es 30.000.",
+    "CA": "Costo real: lo que se gastó de verdad hasta la fecha de corte. Si no cargaste costo real, la herramienta lo estima igual al VE.",
+    "CPI": "Índice de rendimiento de costos = VE ÷ CA. Menor que 1 significa que gastás más de lo que ganás. Ejemplo: VE 80.000 y CA 100.000 dan CPI 0,80: por cada dólar gastado se obtienen 80 centavos de trabajo.",
+    "SPI": "Índice de rendimiento del cronograma = VE ÷ VP. Menor que 1 significa que vas atrasado. Ejemplo: VE 30.000 y VP 40.000 dan SPI 0,75.",
+    "CV": "Variación del costo = VE − CA. Negativa significa sobrecosto.",
+    "SV": "Variación del cronograma = VE − VP. Negativa significa atraso (medido en dinero, no en días).",
+    "EAC": "Estimación al cierre: cuánto va a costar el proyecto completo si el desempeño sigue como hasta ahora. Con el método por defecto, EAC = BAC ÷ CPI. Ejemplo: BAC 100.000 y CPI 0,80 dan un EAC de 125.000.",
+    "ETC": "Estimación hasta el cierre: lo que falta gastar. ETC = EAC − CA. Ejemplo: EAC 125.000 y CA 50.000 dan un ETC de 75.000.",
+    "VAC": "Variación al cierre = BAC − EAC. Negativa significa que se prevé terminar por encima del presupuesto.",
+    "TCPI": "Índice de rendimiento necesario: el CPI que tendrías que sostener de ahora en adelante para cerrar dentro del presupuesto. TCPI = (BAC − VE) ÷ (BAC − CA). Si da bastante más que 1, cerrar en el BAC es poco realista.",
+    "Duración estimada": "Aproximación simple de cuánto va a durar el proyecto = duración planificada ÷ SPI. No recalcula el cronograma: es solo una señal.",
+    "Ruta crítica": "Las tareas sin holgura: si una se demora, se mueve la fecha de fin del proyecto."
+  };
+  function glossKey(label) { return String(label).replace(/<[^>]*>/g, "").split(" — ")[0].replace(/\s*\(.*$/, "").trim(); }
+  function helpFor(label) { var k = glossKey(label); return GLOSS[k] ? ' <button type="button" class="helpBtn" data-action="helpTerm" data-term="' + esc(k) + '" aria-label="¿Qué es ' + esc(k) + '?" title="¿Qué es ' + esc(k) + '?">?</button>' : ""; }
+  function helpTerm(k) { if (GLOSS[k]) alertBox(k, GLOSS[k]); }
+  function exportDashPdf() {
+    var cm = caseMetrics(), m = cm.m, idx = idx2;
+    var rows = [["Fecha de corte", cutoffISO()], ["Estado general", cm.overall.toUpperCase()], ["Cronograma", cm.sched.toUpperCase() + (m.PV > 0 ? " · SPI " + idx(m.SPI) : "")], ["Costo", cm.cost.toUpperCase() + (m.acEstimated ? "" : " · CPI " + idx(m.CPI))], ["Riesgos", cm.rk.toUpperCase()],
+      ["BAC", usd(m.BAC)], ["Avance real / planificado", pct(m.EV, m.BAC) + " / " + pct(m.PV, m.BAC)], ["Costo real", usd(m.AC) + (m.acEstimated ? " (estimado)" : "")], ["EAC / ETC", usd(m.EAC) + " / " + usd(m.ETC)], ["TCPI", m.TCPI === null ? "—" : idx(m.TCPI)],
+      ["Fin proyectado", cm.endISO + (cm.delta ? " (" + (cm.delta > 0 ? "+" : "") + cm.delta + " días hábiles vs el plan)" : "")], ["Tareas críticas", String(cm.crit)],
+      ["Alertas (" + cm.alerts.length + ")", cm.alerts.length ? cm.alerts.map(function (a) { return (a.sev === "rojo" ? "Urgente: " : "Atención: ") + a.msg; }).join("\n") : "Ninguna"]];
+    $("printArea").innerHTML = '<div class="onepage"><h1>Panel de control — ' + esc(caseTitle()) + '</h1><div class="sub">Corte al ' + esc(cutoffISO()) + " · Generado " + esc(dateToISO(new Date())) + "</div>" + tblHtml(["Indicador", "Valor"], rows) + '<div class="attribPrint">' + esc(CONFIG.ATTRIBUTION) + "</div></div>";
+    var prev = document.title; document.title = "Panel_de_control_" + currentProjectId + "_" + cutoffISO();
+    window.addEventListener("afterprint", function () { document.title = prev; }, { once: true });
+    track("exportar_panel_control", { caso_id: currentProjectId });
+    notify("En el cuadro de impresión elegí \"Guardar como PDF\".");
+    setTimeout(function () { window.print(); }, 200);
   }
 
   /* ===================== visita guiada ===================== */
@@ -2869,6 +2991,9 @@
     loadScenario: function (el) { loadScenario(+el.dataset.i); },
     explainTask: function (el) { explainTask(el.dataset.id); }, toggleInactive: function (el) { toggleInactive(el.dataset.id); },
     updateScenario: function (el) { updateScenario(+el.dataset.i); }, deleteScenario: function (el) { deleteScenario(+el.dataset.i); },
+    duplicateProject: duplicateProject, renameProject: function (el) { renameProject(el.dataset.id || currentProjectId); }, deleteProject: function (el) { deleteProject(el.dataset.id || currentProjectId); },
+    openProject: function (el) { openProject(el.dataset.id); }, saveNow: saveNow, exportDashPdf: exportDashPdf, helpTerm: function (el) { helpTerm(el.dataset.term); },
+    bakNow: downloadJson, bakSnooze: function () { store.set(bakKey() + ".snooze", new Date().toISOString()); paintBackupBanner(); },
     newBlank: newBlankProject, importPlan: function () { $("planFile").click(); }, planTemplate: downloadPlanTemplate, startTour: startTour,
     tourNext: function () { showTourStep(tourStep + 1); }, tourPrev: function () { showTourStep(tourStep - 1); }, tourEnd: function () { endTour(true); },
     openPanel: function (el) { var k = el.dataset.key; if (!PANELS[k]) return; if (panelsOn[k]) { PANELS[k].render(); var pe = $(PANELS[k].id); if (pe && pe.scrollIntoView) pe.scrollIntoView(); } else togglePanel(k); },
@@ -3124,7 +3249,7 @@
   // utilidad de pruebas (no se usa en producción)
   window.__PTI_TEST__ = { computeScheduleOn: computeScheduleOn, validateState: validateState, getState: function () { return { tasks: tasks, holidays: holidays, risks: risks, issues: issues, crList: crList, baselines: baselines, changeLog: changeLog, charter: charter, comms: comms }; }, workdayISO: workdayISO, dayOffsetFromDate: dayOffsetFromDate, computeEVM: computeEVM,
     parsePredSpec: parsePredSpec, predsText: predsText, buildIcs: buildIcs, statusData: statusData, buildStatusText: buildStatusText, statusRows: statusRows, reserveData: reserveData, pertAnalysis: pertAnalysis, runChecks: runChecks, serializeState: serializeState, applyImport: applyImport, applyChangeRequest: applyChangeRequest, crTaskCheck: crTaskCheck, loadProject: loadProject, buildInformeText: buildInformeText, tiDocs: tiDocs, icsFold: icsFold, getSim: function () { return simResult; }, setCutoff: function (d) { cutoffDay = d; },
-    caseMetrics: caseMetrics, explainData: explainData, alertList: alertList, buildPortfolio: buildPortfolio, traceCoverage: traceCoverage, scenarioStats: scenarioStats, allCuts: allCuts, syncPctFromLog: syncPctFromLog, getExt: function () { return { evmCuts: evmCuts, timeLog: timeLog, traceItems: traceItems, traceLinks: traceLinks, alertCfg: alertCfg, eacMethod: eacMethod }; }, setExt: function (o) { if (o.timeLog) timeLog = o.timeLog; if (o.evmCuts) evmCuts = o.evmCuts; if (o.eacMethod) eacMethod = o.eacMethod; }, planRowsToDef: planRowsToDef, parseCsv: parseCsv, registerCustom: registerCustom, startCustom: startCustom, finishImport: finishImport, tourSteps: tourSteps, pvCurve: pvCurve, sCurveHtml: sCurveHtml, trendHtml: trendHtml, restoreFromStr: restoreFromStr, fullSnapshotStr: fullSnapshotStr, setDocEntries: function (l) { docEntries = l; portCache = null; } };
+    caseMetrics: caseMetrics, explainData: explainData, alertList: alertList, buildPortfolio: buildPortfolio, traceCoverage: traceCoverage, scenarioStats: scenarioStats, allCuts: allCuts, syncPctFromLog: syncPctFromLog, customIds: customIds, deleteProject: deleteProject, renameProject: renameProject, duplicateProject: duplicateProject, bakDue: bakDue, saveNow: saveNow, helpFor: helpFor, GLOSS: GLOSS, getExt: function () { return { evmCuts: evmCuts, timeLog: timeLog, traceItems: traceItems, traceLinks: traceLinks, alertCfg: alertCfg, eacMethod: eacMethod }; }, setExt: function (o) { if (o.timeLog) timeLog = o.timeLog; if (o.evmCuts) evmCuts = o.evmCuts; if (o.eacMethod) eacMethod = o.eacMethod; }, planRowsToDef: planRowsToDef, parseCsv: parseCsv, registerCustom: registerCustom, startCustom: startCustom, finishImport: finishImport, tourSteps: tourSteps, pvCurve: pvCurve, sCurveHtml: sCurveHtml, trendHtml: trendHtml, restoreFromStr: restoreFromStr, fullSnapshotStr: fullSnapshotStr, setDocEntries: function (l) { docEntries = l; portCache = null; } };
   window.__PTI_ACTIONS__ = { ACTIONS: ACTIONS, CHANGE: CHANGE };
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
 })();

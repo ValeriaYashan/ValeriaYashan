@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="styles.css?v=20261011c">
+<link rel="stylesheet" href="styles.css?v=20261011d">
 
 <!-- GA4: solo eventos de uso sin datos personales ni contenido que escriba la persona. -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DK70Z7NVB9"></script>
@@ -49,10 +49,14 @@
       <button type="button" data-action="downloadJson">Descargar copia de seguridad</button>
       <button type="button" data-action="importJson">Cargar copia de seguridad</button>
       <span class="sep" aria-hidden="true"></span>
+      <button type="button" data-action="saveNow">Guardar ahora</button>
       <button type="button" data-action="newBlank">Nuevo proyecto en blanco</button>
       <button type="button" data-action="importPlan">Importar planilla (Excel o CSV)</button>
       <button type="button" data-action="planTemplate">Plantilla (CSV)</button>
       <input type="file" id="planFile" accept=".csv,.xlsx,.xls,text/csv" hidden aria-label="Importar un proyecto desde una planilla Excel o CSV">
+      <button type="button" data-action="duplicateProject">Duplicar este proyecto</button>
+      <button type="button" id="renameBtn" data-action="renameProject" hidden>Renombrar</button>
+      <button type="button" id="deleteProjBtn" data-action="deleteProject" hidden>Eliminar este proyecto</button>
       <button type="button" data-action="startTour">Visita guiada</button>
       <input type="file" id="importFile" accept=".json,application/json" hidden aria-label="Cargar una copia de seguridad del planificador (archivo JSON)">
       <span class="sep" aria-hidden="true"></span>
@@ -112,6 +116,7 @@
 
     <div id="ftBanner" class="banner" hidden role="status"></div>
     <div id="inactBanner" class="banner" hidden role="status"></div>
+    <div id="bakBanner" class="banner info" hidden role="status"></div>
     <div id="cycleBanner" class="banner error" hidden role="alert"></div>
     <div id="calBanner" class="banner" hidden role="status"></div>
     <div id="status" class="status" role="status" aria-live="polite"></div>
@@ -163,6 +168,7 @@
       <span class="grp-title">Visión general</span>
       <button type="button" id="dashToggleBtn" data-panel="dash" aria-controls="dashpanel">Mostrar panel de control</button>
       <button type="button" id="portToggleBtn" data-panel="port" aria-controls="portpanel">Mostrar vista de los cinco casos</button>
+      <button type="button" id="projToggleBtn" data-panel="proj" aria-controls="projpanel">Mostrar mis proyectos</button>
     </div>
     <div class="toolbar" role="group" aria-label="Paneles: Inicio y planificación">
       <span class="grp-title">Inicio y planificación</span>
@@ -275,6 +281,10 @@
       <div class="phead"><h2 id="dashH">Panel de control</h2></div>
       <div class="pbody" id="dashBody"></div>
     </section>
+    <section id="projpanel" class="panel" aria-labelledby="projH">
+      <div class="phead"><h2 id="projH">Mis proyectos</h2></div>
+      <div class="pbody" id="projBody"></div>
+    </section>
     <section id="portpanel" class="panel" aria-labelledby="portH">
       <div class="phead"><h2 id="portH">Vista de los cinco casos</h2></div>
       <div class="pbody" id="portBody"></div>
@@ -352,8 +362,8 @@
   </span>
 </footer>
 
-<script src="data/feriados.js?v=20261011c"></script>
-<script src="data/casos-publicos.js?v=20261011c"></script>
-<script src="app.js?v=20261011c"></script>
+<script src="data/feriados.js?v=20261011d"></script>
+<script src="data/casos-publicos.js?v=20261011d"></script>
+<script src="app.js?v=20261011d"></script>
 </body>
 </html>
