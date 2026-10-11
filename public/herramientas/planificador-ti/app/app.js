@@ -1182,7 +1182,7 @@
       var noOwn = risks.filter(function (r) { return !String(r.owner || "").trim(); });
       if (noOwn.length) add(G2, "warn", "Riesgos sin responsable: " + noOwn.map(function (r) { return r.id; }).join(", ") + ".");
     }
-    if (EGCI && rc) {
+    if (rc) {
       var rd = reserveData();
       if (rd.cont !== null) {
         if (!rd.withData) add(G2, "warn", "Hay reserva de contingencia pero no cargaste probabilidad e impacto en USD de los riesgos: no se puede comparar con el VME.");
@@ -1638,7 +1638,7 @@
     var card = function (v, l) { return '<div class="evmCard"><div class="v">' + v + '</div><div class="l">' + l + "</div></div>"; };
     var h = '<p class="note" style="margin-top:0">Cada solicitud tiene su impacto en el cronograma y en el costo. Al aprobarla, la herramienta suma los días a la tarea que elegiste, recalcula el cronograma, ajusta el costo para que el BAC cambie en el monto indicado, <b>fija una nueva línea base</b> y asienta el cambio en el registro de cambios. Rechazar o diferir no toca el plan. Se puede deshacer con el botón Deshacer.</p>' +
       '<div class="evmGrid">' + card(usd(origBac), "BAC de la línea base original") + card(usd(m.BAC), "BAC de la línea base vigente (" + esc(m.planned.label) + ")") + card("día " + originalProjectEnd + " · " + esc(workdayISO(Math.max(0, originalProjectEnd - 1))), "Fin de la línea base original") + card("día " + endNow + " · " + esc(workdayISO(Math.max(0, endNow - 1))), "Fin de la línea base vigente") + "</div>" +
-      '<p class="note">Cambios aplicados: ' + applied.length + ", con un impacto total en el BAC de " + usd(approvedCostImpact()) + ". Si el BAC difiere del presupuesto del acta por estos cambios, actualizá el acta con la solicitud de cambio correspondiente (DOC-12).</p>" +
+      '<p class="note">Cambios aplicados: ' + applied.length + ", con un impacto total en el BAC de " + usd(approvedCostImpact()) + ". Si el BAC difiere del presupuesto del acta por estos cambios, actualizá el acta con la solicitud de cambio correspondiente.</p>" +
       '<div class="evmActions"><button type="button" data-action="addCr" data-fid="cr:add">Nueva solicitud de cambio</button></div>' +
       '<table class="simpletable"><caption class="sr-only">Solicitudes de cambio</caption><thead><tr><th scope="col">ID</th><th scope="col">Solicitud</th><th scope="col">Tarea</th><th scope="col">Impacto</th><th scope="col">Estado</th><th scope="col">Decisión</th><th scope="col">Resultado</th><th scope="col"><span class="sr-only">Acciones</span></th></tr></thead><tbody>' +
       (crList.map(function (c) {
@@ -2371,7 +2371,7 @@
     var today = cutoffISO(), od = issues.filter(function (x) { return x.status !== "Cerrado" && x.due && x.due < today; });
     if (od.length) out.push({ id: "issues", sev: "ámbar", msg: od.length + " problema(s) o acción(es) vencidos a la fecha de corte: " + od.map(function (x) { return x.id; }).join(", ") + ".", panel: "issues" });
     var pcr = crList.filter(function (x) { return x.status === "Pendiente"; });
-    if (pcr.length) out.push({ id: "cr", sev: "ámbar", msg: pcr.length + " solicitud(es) de cambio sin decidir: " + pcr.map(function (x) { return x.id; }).join(", ") + ".", panel: EGCI ? "changes" : "close" });
+    if (pcr.length) out.push({ id: "cr", sev: "ámbar", msg: pcr.length + " solicitud(es) de cambio sin decidir: " + pcr.map(function (x) { return x.id; }).join(", ") + ".", panel: "changes" });
     var oa = overAllocated();
     if (oa.length) out.push({ id: "over", sev: "ámbar", msg: "Recursos sobreasignados: " + oa.map(function (o) { return o.res; }).join(", ") + ".", panel: "res" });
     var ni = tasks.filter(function (t) { return t.inactive; }).length;
@@ -2425,7 +2425,7 @@
 
   /* ===================== portafolio de los cinco casos y modo docente ===================== */
   var docEntries = [], portCache = null;
-  function docenteEnabled() { return EGCI && (store.get("ptTI.docente") === "1" || /(^|[#&])docente\b/.test(String(location.hash || ""))); }
+  function docenteEnabled() { return (store.get("ptTI.docente") === "1" || /(^|[#&])docente\b/.test(String(location.hash || ""))); }
   function grabCtx() {
     return { tasks: tasks, phases: phases, baselines: baselines, ORIGINAL_DURS: ORIGINAL_DURS, originalProjectEnd: originalProjectEnd, originalSchedule: originalSchedule, cutoffDay: cutoffDay, acActual: acActual, risks: risks, charter: charter,
       issues: issues, crList: crList, comms: comms, changeLog: changeLog, decisionLog: decisionLog, lessons: lessons, stakeholders: stakeholders, teamCharter: teamCharter, mgmtPlan: mgmtPlan, changeRequest: changeRequest,
@@ -2479,7 +2479,7 @@
     var head = '<th scope="col">Caso</th><th scope="col">General</th><th scope="col">Cronograma</th><th scope="col">Costo</th><th scope="col">Riesgos</th><th scope="col">Fin proyectado</th><th scope="col">SPI / CPI</th><th scope="col">Avance</th><th scope="col">BAC vs acta</th><th scope="col">Coherencia (cumple / revisar / falta)</th>' + (doc ? '<th scope="col">Detalle</th>' : "") + '<th scope="col">Alertas</th>';
     var h = '<p class="note" style="margin-top:0">Los cinco casos lado a lado, con el avance que guardaste en este navegador (o los valores iniciales si no empezaste ese caso). El caso abierto se muestra con lo que ves en pantalla. Cada fila usa las mismas reglas que el panel de control.</p><div class="evmActions"><button type="button" data-action="refreshPort" data-fid="pt:ref">Actualizar la vista</button>' + (doc ? '<button type="button" data-action="portCsv" data-fid="pt:csv">Descargar resumen (CSV)</button>' : "") + "</div>" +
       '<div class="traceWrap"><table class="simpletable portMx"><caption class="sr-only">Comparación de los casos</caption><thead><tr>' + head + "</tr></thead><tbody>" + rows.map(function (r) { return portRowHtml(r, doc); }).join("") + "</tbody></table></div>";
-    if (EGCI) {
+    {
       h += '<h3 style="margin:18px 0 8px;font-size:13px">Modo docente</h3>';
       if (!doc) h += '<p class="note">El modo docente se activa abriendo esta página con <code>#docente</code> al final de la dirección. No es una protección: es solo para mostrar las herramientas de corrección a quien las necesita.</p>';
       else h += '<p class="note">Cargá los archivos de copia de seguridad (.json) que entregaron los alumnos. Se leen en tu navegador: no se envían a ningún servidor ni se guardan. Cada archivo se evalúa con las mismas reglas de coherencia; el resumen ordena lo que falta, no califica: la corrección sigue siendo tuya.</p><div class="evmActions"><button type="button" class="primary" data-action="pickDocFiles" data-fid="pt:pick">Cargar archivos de alumnos</button><button type="button" data-action="clearDocFiles" data-fid="pt:clr">Quitar los archivos cargados (' + docEntries.length + ')</button><button type="button" data-action="docenteOff" data-fid="pt:off">Salir del modo docente</button></div>';

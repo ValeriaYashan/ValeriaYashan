@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="styles.css?v=20261011a">
+<link rel="stylesheet" href="styles.css?v=20261011b">
 
 <!-- GA4: solo eventos de uso sin datos personales ni contenido que escriba la persona. -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DK70Z7NVB9"></script>
@@ -171,6 +171,7 @@
       <button type="button" id="commsToggleBtn" data-panel="comms" aria-controls="commspanel">Mostrar plan de comunicaciones</button>
       <button type="button" id="teamToggleBtn" data-panel="team" aria-controls="teampanel">Mostrar Team Charter</button>
       <button type="button" id="raciToggleBtn" data-panel="rac" aria-controls="racipanel">Mostrar matriz RACI</button>
+      <button type="button" id="reservesToggleBtn" data-panel="reserves" aria-controls="reservespanel">Mostrar análisis de reservas (VME)</button>
     </div>
     <div class="toolbar" role="group" aria-label="Paneles: Control y cierre">
       <span class="grp-title">Control y cierre</span>
@@ -178,6 +179,7 @@
       <button type="button" id="timeToggleBtn" data-panel="time" aria-controls="timepanel">Mostrar registro de tiempo real</button>
       <button type="button" id="statusToggleBtn" data-panel="status" aria-controls="statuspanel">Mostrar informe de estado semanal</button>
       <button type="button" id="issuesToggleBtn" data-panel="issues" aria-controls="issuespanel">Mostrar problemas y acciones</button>
+      <button type="button" id="changesToggleBtn" data-panel="changes" aria-controls="changespanel">Mostrar control de cambios</button>
       <button type="button" id="closeToggleBtn" data-panel="close" aria-controls="closepanel">Mostrar cierre del proyecto</button>
     </div>
     <div class="toolbar" role="group" aria-label="Paneles de apoyo">
@@ -284,6 +286,14 @@
       <div class="phead"><h2 id="scenH">Comparación de escenarios</h2></div>
       <div class="pbody" id="scenBody"></div>
     </section>
+    <section id="reservespanel" class="panel" aria-labelledby="reservesH">
+      <div class="phead"><h2 id="reservesH">Análisis de reservas con valor monetario esperado</h2></div>
+      <div class="pbody" id="reservesBody"></div>
+    </section>
+    <section id="changespanel" class="panel" aria-labelledby="changesH">
+      <div class="phead"><h2 id="changesH">Control de cambios: solicitudes, aprobación y nueva línea base</h2></div>
+      <div class="pbody" id="changesBody"></div>
+    </section>
     <section id="threepanel" class="panel" aria-labelledby="threeH">
       <div class="phead"><h2 id="threeH">Estimación de tres puntos (PERT) y probabilidad de cumplir la fecha</h2></div>
       <div class="pbody" id="threeBody"></div>
@@ -336,8 +346,8 @@
   </span>
 </footer>
 
-<script src="data/feriados.js?v=20261011a"></script>
-<script src="data/casos-publicos.js?v=20261011a"></script>
-<script src="app.js?v=20261011a"></script>
+<script src="data/feriados.js?v=20261011b"></script>
+<script src="data/casos-publicos.js?v=20261011b"></script>
+<script src="app.js?v=20261011b"></script>
 </body>
 </html>
