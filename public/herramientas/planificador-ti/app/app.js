@@ -862,7 +862,12 @@
     var on = panelsOn[key];
     $(p.id).className = "panel" + (on ? " show" : "");
     var b = $(p.btn); b.textContent = (on ? "Ocultar " : "Mostrar ") + p.label; b.setAttribute("aria-expanded", String(on));
-    if (on) p.render();
+    if (on) {
+      p.render();
+      // El panel se abre en su lugar fijo de la página, que puede quedar lejos de los botones: se lo lleva a la vista.
+      var el = $(p.id), reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (el && el.scrollIntoView) { try { el.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" }); } catch (e) { el.scrollIntoView(); } }
+    }
   }
 
   function renderResourceView() {
