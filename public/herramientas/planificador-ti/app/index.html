@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="styles.css?v=20261011b">
+<link rel="stylesheet" href="styles.css?v=20261011c">
 
 <!-- GA4: solo eventos de uso sin datos personales ni contenido que escriba la persona. -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DK70Z7NVB9"></script>
@@ -48,6 +48,12 @@
       <span class="grp-title">Proyecto</span>
       <button type="button" data-action="downloadJson">Descargar copia de seguridad</button>
       <button type="button" data-action="importJson">Cargar copia de seguridad</button>
+      <span class="sep" aria-hidden="true"></span>
+      <button type="button" data-action="newBlank">Nuevo proyecto en blanco</button>
+      <button type="button" data-action="importPlan">Importar planilla (Excel o CSV)</button>
+      <button type="button" data-action="planTemplate">Plantilla (CSV)</button>
+      <input type="file" id="planFile" accept=".csv,.xlsx,.xls,text/csv" hidden aria-label="Importar un proyecto desde una planilla Excel o CSV">
+      <button type="button" data-action="startTour">Visita guiada</button>
       <input type="file" id="importFile" accept=".json,application/json" hidden aria-label="Cargar una copia de seguridad del planificador (archivo JSON)">
       <span class="sep" aria-hidden="true"></span>
       <button type="button" class="primary" data-action="exportExcel">Exportar a Excel</button>
@@ -346,8 +352,8 @@
   </span>
 </footer>
 
-<script src="data/feriados.js?v=20261011b"></script>
-<script src="data/casos-publicos.js?v=20261011b"></script>
-<script src="app.js?v=20261011b"></script>
+<script src="data/feriados.js?v=20261011c"></script>
+<script src="data/casos-publicos.js?v=20261011c"></script>
+<script src="app.js?v=20261011c"></script>
 </body>
 </html>

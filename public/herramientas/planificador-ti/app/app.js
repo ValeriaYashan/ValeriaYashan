@@ -627,7 +627,7 @@
     evmCuts = []; timeLog = []; traceItems = []; traceLinks = {}; alertCfg = defaultAlertCfg(); eacMethod = "cpi";
     charter = clone(proj.charter || {});
     charter.contingency = charter.contingency || ""; charter.mgmtReserve = charter.mgmtReserve || "";
-    comms = (charter.stakeholders || "").split(",").slice(0, 2).map(function (s, i) {
+    comms = (charter.stakeholders || "").split(",").map(function (s) { return s.trim(); }).filter(Boolean).slice(0, 2).map(function (s, i) {
       return { id: "C" + (i + 1), stakeholder: s.trim(), info: i === 0 ? "Avance general del proyecto" : "Impacto en su área",
         freq: i === 0 ? "Semanal" : "Quincenal", channel: "Reunión / email", owner: "PM" };
     });
@@ -706,7 +706,7 @@
       var s = Math.min.apply(null, kids.map(function (k) { return k._es; })), e = Math.max.apply(null, kids.map(function (k) { return k._ef; }));
       rows += '<tr class="summary"><td class="wbs">' + esc(ph.id) + '</td><td class="name indent-1">' + esc(ph.name) + '</td><td class="res"></td><td class="dur">' + (e - s) + 'd</td><td class="dates">' + esc(workdayISO(s)) + '</td><td class="dates">' + esc(workdayISO(Math.max(0, e - 1))) + '</td><td class="pred"></td><td class="slack"></td><td class="pct"></td><td class="actcol"></td></tr>';
       kids.forEach(function (t) {
-        var locked = ORIGINAL_DURS[t.id] !== undefined && !t.crashCostPerDay;
+        var locked = ORIGINAL_DURS[t.id] !== undefined && !t.crashCostPerDay && !isCustomCase();
         var riskCount = risks.filter(function (rk) { return rk.taskId === t.id; }).length;
         var opts = resOptions.map(function (r) { return '<option value="' + esc(r) + '"' + (t.resource === r ? " selected" : "") + ">" + esc(r) + "</option>"; }).join("") + '<option value="__new__">+ Nuevo recurso…</option>';
         if (resOptions.indexOf(t.resource) < 0 && t.resource) opts = '<option value="' + esc(t.resource) + '" selected>' + esc(t.resource) + "</option>" + opts;
@@ -1889,7 +1889,8 @@
       actualStart: actualStart, actualFinish: actualFinish, plannedFinishOverride: plannedFinishOverride,
       stakeholders: clone(stakeholders), teamCharter: clone(teamCharter), mgmtPlan: clone(mgmtPlan), changeRequest: clone(changeRequest),
       issues: clone(issues), crList: clone(crList),
-      evmCuts: clone(evmCuts), timeLog: clone(timeLog), traceItems: clone(traceItems), traceLinks: clone(traceLinks), alertCfg: clone(alertCfg), eacMethod: eacMethod };
+      evmCuts: clone(evmCuts), timeLog: clone(timeLog), traceItems: clone(traceItems), traceLinks: clone(traceLinks), alertCfg: clone(alertCfg), eacMethod: eacMethod,
+      customCase: currentProjectId === CUSTOM_ID ? customDefOf() : undefined };
   }
   function storageKey(pid) { return "ptTI.v" + CONFIG.STORAGE_KEY_VERSION + "." + META.audience + "." + pid; }
   function downloadJson() {
@@ -1954,6 +1955,7 @@
     if (legacy && !(typeof o.projectId === "string" && Array.isArray(o.tasks) && Array.isArray(o.phases))) return { error: "Este archivo no corresponde al Planificador TI: faltan el caso, las tareas o las fases." };
     if (!legacy && !(Number.isInteger(o.schemaVersion) && o.schemaVersion >= 1)) return { error: "El archivo no indica la versión del formato." };
     if (!legacy && o.schemaVersion > CONFIG.SCHEMA_VERSION) return { error: "El archivo se creó con una versión más nueva del planificador (formato " + o.schemaVersion + "; esta herramienta entiende hasta el " + CONFIG.SCHEMA_VERSION + "). Recargá la página e intentá de nuevo." };
+    if (o.projectId === CUSTOM_ID && o.customCase) { var cerr = validateCustomDef(o.customCase); if (cerr) return { error: cerr }; registerCustom(o.customCase); }
     if (!CASOS[o.projectId]) return { error: 'El archivo es del caso "' + str(o.projectId, 60) + '", que no está disponible en esta versión de la herramienta (' + (META.audience === "alumnos-egci" ? "versión para alumnos" : "versión pública") + ")." };
     var e = validateTasks(o.tasks, "Tareas");
     if (e) return { error: e };
@@ -1990,6 +1992,7 @@
     if (v.error) { if (!silent) notify(v.error); return false; }
     var proj = CASOS[obj.projectId];
     currentProjectId = obj.projectId;
+    if (!silent && obj.projectId === CUSTOM_ID) { store.set(customKey(), JSON.stringify(customDefOf())); populateProjectSelect(); }
     tasks = obj.tasks.map(function (t) { return Object.assign({}, t, { notes: str(t.notes), acTask: isNum(t.acTask) ? t.acTask : null, extraResources: Array.isArray(t.extraResources) ? t.extraResources.map(function (x) { return str(x, 100); }) : [], overlapDays: isNum(t.overlapDays) ? t.overlapDays : 0, levelDelay: isNum(t.levelDelay) ? t.levelDelay : 0, name: str(t.name, 300), resource: str(t.resource, 100), preds: t.preds.slice(), crashCostPerDay: isNum(t.crashCostPerDay) ? t.crashCostPerDay : null, deps: cleanDeps(t), opt: isNum(t.opt) ? t.opt : null, pess: isNum(t.pess) ? t.pess : null, inactive: t.inactive === true }); });
     phases = clonePhases(obj.phases);
     ORIGINAL_DURS = {}; proj.tasks.forEach(function (t) { ORIGINAL_DURS[t.id] = t.dur; });
@@ -2446,7 +2449,7 @@
   }
   // Calcula las métricas de otros casos (o de archivos de alumnos) cargándolos "en silencio" y devolviendo el estado de la pantalla tal cual estaba.
   function buildPortfolio() {
-    var saved = grabCtx(), rows = [];
+    var saved = grabCtx(), rows = [], savedCustom = CASOS[CUSTOM_ID];
     try {
       caseIds().forEach(function (id) {
         var raw = store.get(storageKey(id)), ok = raw ? applyImport(raw, "navegador", true) === true : false, src = ok ? "avance guardado" : "valores iniciales";
@@ -2460,7 +2463,7 @@
         if (!ok) { rows.push({ error: true, source: "archivo: " + e.name, label: e.name, id: "" }); return; }
         var cm = caseMetrics(); cm.source = "archivo: " + e.name; cm.doc = true; rows.push(cm);
       });
-    } finally { putCtx(saved); }
+    } finally { if (savedCustom) CASOS[CUSTOM_ID] = savedCustom; else delete CASOS[CUSTOM_ID]; putCtx(saved); }
     return rows;
   }
   function refreshPortfolio() { portCache = buildPortfolio(); if (panelsOn.port) renderPortfolio(); }
@@ -2506,6 +2509,185 @@
       rd.readAsText(f);
     });
   }
+
+
+  /* ===================== proyecto propio: en blanco o importado desde Excel / CSV ===================== */
+  var CUSTOM_ID = "propio";
+  function isCustomCase() { return !!(CASOS[currentProjectId] && CASOS[currentProjectId].custom); }
+  function customKey() { return "ptTI.custom." + META.audience; }
+  function normCustomTask(t) {
+    var o = { id: str(t.id, 40), name: str(t.name, 300), dur: Math.round(t.dur), preds: t.preds.slice(0, 60).map(function (p) { return str(p, 40); }), pct: isNum(t.pct) ? Math.max(0, Math.min(100, Math.round(t.pct))) : 0, resource: str(t.resource || "PM", 100) || "PM", crashCostPerDay: null };
+    var d = cleanDeps(t); if (d) o.deps = d;
+    if (isNum(t.dailyCost) && t.dailyCost >= 0) o.dailyCost = t.dailyCost;
+    return o;
+  }
+  function validateCustomDef(cc) {
+    if (!cc || typeof cc !== "object" || Array.isArray(cc)) return "El proyecto propio del archivo no es válido.";
+    if (typeof cc.title !== "string" || !isISO(cc.startDate)) return "El proyecto propio del archivo no tiene nombre o fecha de inicio válidos.";
+    var e = validateTasks(cc.tasks, "Proyecto propio"); if (e) return e;
+    var ids = new Set(cc.tasks.map(function (t) { return t.id; }));
+    if (!Array.isArray(cc.phases) || cc.phases.some(function (p) { return !p || typeof p.id !== "string" || typeof p.name !== "string" || !Array.isArray(p.children) || p.children.some(function (c) { return !ids.has(c); }); })) return "Las fases del proyecto propio del archivo no son válidas.";
+    return "";
+  }
+  function registerCustom(def) {
+    var title = str(def.title, 120).trim() || "Mi proyecto";
+    CASOS[CUSTOM_ID] = { label: "Mi proyecto — " + title, title: title, startDate: def.startDate, startNote: "Proyecto propio. La fecha de inicio es editable.", custom: true,
+      phases: def.phases.map(function (p) { return { id: str(p.id, 40), name: str(p.name, 200), children: p.children.map(function (c) { return str(c, 40); }) }; }),
+      tasks: def.tasks.map(normCustomTask), risks: [], charter: {} };
+  }
+  function customDefOf() { var c = CASOS[CUSTOM_ID]; return c ? { title: c.title, startDate: c.startDate, phases: clone(c.phases), tasks: clone(c.tasks) } : null; }
+  function loadStoredCustom() {
+    var raw = store.get(customKey()); if (!raw) return;
+    try { var d = JSON.parse(raw); if (!validateCustomDef(d)) registerCustom(d); } catch (e) { /* definición dañada: se ignora */ }
+  }
+  function startCustom(def, msg) {
+    autosaveNow();
+    var key = storageKey(CUSTOM_ID);
+    function go() {
+      try { localStorage.removeItem(key); } catch (e) { /* sin almacenamiento */ }
+      store.set(customKey(), JSON.stringify(def)); registerCustom(def); populateProjectSelect();
+      loadProject(CUSTOM_ID); store.set(lastCaseKey(), CUSTOM_ID); track("proyecto_propio", { origen: msg.origen, tareas: def.tasks.length });
+      notify(msg.text);
+    }
+    if (CASOS[CUSTOM_ID] && store.get(key)) confirmBox("Ya tenés un proyecto propio con avance guardado en este navegador. Si seguís, se reemplaza por el nuevo. Si querés conservarlo, cancelá y descargá antes la copia de seguridad.", "Reemplazar").then(function (ok) { if (ok) go(); });
+    else go();
+  }
+  function newBlankProject() {
+    return askForm("Nuevo proyecto en blanco", [
+      { key: "title", label: "Nombre del proyecto", value: "", required: true },
+      { key: "startDate", label: "Fecha de inicio", type: "date", value: dateToISO(new Date()), required: true },
+      { key: "resource", label: "Recurso o responsable inicial", value: "PM" }
+    ], "Crear", function (r) { if (!isISO(r.startDate)) return "La fecha de inicio no es válida."; }).then(function (r) {
+      if (!r) return;
+      var res = (r.resource || "PM").trim() || "PM";
+      var T = function (id, name, dur, preds) { return { id: id, name: name, dur: dur, preds: preds, pct: 0, resource: res, crashCostPerDay: null }; };
+      startCustom({ title: r.title.trim(), startDate: r.startDate, phases: [{ id: "1.1", name: "Inicio y planificación", children: ["1.1.1", "1.1.2"] }, { id: "1.2", name: "Ejecución", children: ["1.2.1"] }],
+        tasks: [T("1.1.1", "Definir el alcance y los objetivos", 5, []), T("1.1.2", "Armar el plan del proyecto", 5, ["1.1.1"]), T("1.2.1", "Ejecutar el trabajo", 10, ["1.1.2"])] },
+        { origen: "blanco", text: "Proyecto creado con tres tareas de ejemplo: editalas, borralas o agregá las tuyas con \"Agregar tarea\"." });
+    });
+  }
+  /* ---- lectura de la planilla ---- */
+  function parseCsv(text) {
+    text = String(text || "").replace(/^\uFEFF/, "");
+    var first = text.split(/\r?\n/)[0] || "", sep = (first.split(";").length > first.split(",").length) ? ";" : ",", rows = [], row = [], cell = "", q = false;
+    for (var i = 0; i < text.length; i++) {
+      var c = text[i];
+      if (q) { if (c === '"') { if (text[i + 1] === '"') { cell += '"'; i++; } else q = false; } else cell += c; }
+      else if (c === '"') q = true;
+      else if (c === sep) { row.push(cell); cell = ""; }
+      else if (c === "\n" || c === "\r") { if (c === "\r" && text[i + 1] === "\n") i++; row.push(cell); rows.push(row); row = []; cell = ""; }
+      else cell += c;
+    }
+    if (cell !== "" || row.length) { row.push(cell); rows.push(row); }
+    return rows;
+  }
+  function normHead(h) { return String(h || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]/g, ""); }
+  var PLAN_COLS = { phase: ["fase", "etapa", "phase"], id: ["id", "edt", "wbs", "codigo"], name: ["tarea", "actividad", "nombre", "task", "name"], dur: ["duracion", "dias", "duration"], preds: ["predecesora", "dependencia", "predecessor"], res: ["recurso", "responsable", "resource"], cost: ["costo", "cost"], pct: ["avance", "completado", "porcentaje", "pct"] };
+  function planRowsToDef(rows) {
+    rows = rows.filter(function (r) { return r.some(function (c) { return String(c).trim() !== ""; }); });
+    if (rows.length < 2) return { error: "La planilla está vacía: tiene que tener una fila de títulos y al menos una tarea." };
+    var heads = rows[0].map(normHead), col = {};
+    Object.keys(PLAN_COLS).forEach(function (k) { for (var i = 0; i < heads.length; i++) { if (PLAN_COLS[k].some(function (a) { return heads[i] === a || heads[i].indexOf(a) === 0; }) && Object.keys(col).every(function (kk) { return col[kk] !== i; })) { col[k] = i; break; } } });
+    if (col.name === undefined || col.dur === undefined) return { error: "Faltan columnas obligatorias: \"Tarea\" y \"Duración\". Descargá la plantilla para ver los títulos esperados." };
+    var data = rows.slice(1), errs = [], tasksL = [], phases = [], phaseByName = {}, counters = {}, curPhase = "", seen = {};
+    if (data.length > CONFIG.MAX_TASKS) return { error: "La planilla tiene " + data.length + " tareas y el máximo es " + CONFIG.MAX_TASKS + "." };
+    var cell = function (r, k) { return col[k] === undefined ? "" : String(r[col[k]] === undefined ? "" : r[col[k]]).trim(); };
+    data.forEach(function (r, ri) {
+      var line = ri + 2, name = cell(r, "name"); if (!name) { errs.push("Fila " + line + ": falta el nombre de la tarea."); return; }
+      var ph = cell(r, "phase") || curPhase || "Tareas"; curPhase = ph;
+      if (!phaseByName[ph]) { var pid = "1." + (phases.length + 1); phaseByName[ph] = { id: pid, name: ph.slice(0, 200), children: [] }; phases.push(phaseByName[ph]); counters[pid] = 0; }
+      var P = phaseByName[ph], id = cell(r, "id");
+      if (!id) { do { counters[P.id]++; id = P.id + "." + counters[P.id]; } while (seen[id]); }
+      id = id.slice(0, 40);
+      if (seen[id]) { errs.push("Fila " + line + ": el ID " + id + " está repetido."); return; }
+      var dv = cell(r, "dur").replace(",", "."), dur = dv === "" ? NaN : Math.round(parseFloat(dv));
+      if (!isFinite(dur) || dur < 0 || dur > 2000) { errs.push("Fila " + line + ": la duración de " + id + " tiene que ser un número de días entre 0 y 2000."); return; }
+      var pv = cell(r, "pct").replace("%", "").replace(",", "."), pct = pv === "" ? 0 : parseFloat(pv);
+      if (!isFinite(pct) || pct < 0 || pct > 100) { errs.push("Fila " + line + ": el avance de " + id + " tiene que estar entre 0 y 100."); return; }
+      var cv = cell(r, "cost").replace(/[^\d.,]/g, "").replace(/\.(?=\d{3}(\D|$))/g, "").replace(",", "."), cost = cv === "" ? null : parseFloat(cv);
+      seen[id] = true; P.children.push(id);
+      var t = { id: id, name: name.slice(0, 300), dur: dur, preds: [], pct: Math.round(pct), resource: cell(r, "res").slice(0, 100) || "PM", crashCostPerDay: null, _spec: cell(r, "preds"), _line: line };
+      if (cost !== null && isFinite(cost) && cost >= 0) t.dailyCost = cost;
+      tasksL.push(t);
+    });
+    tasksL.forEach(function (t) {
+      if (!t._spec) return;
+      var ps = parsePredSpec(t._spec.replace(/;/g, ","), t.id, tasksL);
+      if (ps.error) { errs.push("Fila " + t._line + ": " + ps.error); return; }
+      t.preds = ps.preds; if (Object.keys(ps.deps).length) t.deps = ps.deps;
+    });
+    if (!errs.length && detectCycle(tasksL).length) errs.push("Las predecesoras forman un ciclo: " + detectCycle(tasksL).slice(0, 5).join(", ") + ".");
+    if (errs.length) return { error: errs.slice(0, 6).join("\n") + (errs.length > 6 ? "\n… y " + (errs.length - 6) + " problema(s) más." : "") };
+    tasksL.forEach(function (t) { delete t._spec; delete t._line; });
+    return { phases: phases, tasks: tasksL };
+  }
+  function importPlanFile(file) {
+    if (!file) return;
+    if (file.size > CONFIG.MAX_FILE_BYTES) { notify("El archivo pesa más de " + (CONFIG.MAX_FILE_BYTES / 1048576) + " MB."); return; }
+    var isX = /\.xlsx?$/i.test(file.name), rd = new FileReader();
+    rd.onerror = function () { notify("No se pudo leer el archivo."); };
+    rd.onload = function () {
+      if (!isX) { finishImport(parseCsv(String(rd.result)), file.name); return; }
+      loadXlsx().then(function () {
+        var wb = window.XLSX.read(rd.result, { type: "array" }), ws = wb.Sheets[wb.SheetNames[0]];
+        finishImport(window.XLSX.utils.sheet_to_json(ws, { header: 1, raw: false, defval: "" }), file.name);
+      }).catch(function () { notify("No se pudo leer el Excel (la librería no cargó o el archivo no es válido). Probá guardándolo como CSV."); });
+    };
+    if (isX) rd.readAsArrayBuffer(file); else rd.readAsText(file);
+  }
+  function finishImport(rows, fname) {
+    var def = planRowsToDef(rows);
+    if (def.error) { alertBox("No se pudo importar la planilla", def.error); return; }
+    askForm("Importar proyecto (" + def.tasks.length + " tareas en " + def.phases.length + " fase(s))", [
+      { key: "title", label: "Nombre del proyecto", value: fname.replace(/\.[^.]+$/, "").slice(0, 120), required: true },
+      { key: "startDate", label: "Fecha de inicio", type: "date", value: dateToISO(new Date()), required: true }
+    ], "Importar", function (r) { if (!isISO(r.startDate)) return "La fecha de inicio no es válida."; }).then(function (r) {
+      if (!r) return;
+      startCustom({ title: r.title.trim(), startDate: r.startDate, phases: def.phases, tasks: def.tasks }, { origen: "planilla", text: "Planilla importada: " + def.tasks.length + " tareas en " + def.phases.length + " fase(s). Revisá las fechas y las predecesoras." });
+    });
+  }
+  function alertBox(title, msg) {
+    var box = document.createElement("div"); box.className = "dlgBox"; box.setAttribute("aria-labelledby", "dlgAlT");
+    box.innerHTML = '<h2 id="dlgAlT">' + esc(title) + '</h2><pre class="alertPre">' + esc(msg) + '</pre><div class="dlgBtns"><button type="button" class="btn-primary dlgOk">Entendido</button></div>';
+    var close = openModal(box); box.querySelector(".dlgOk").addEventListener("click", function () { close(null); }); box.querySelector(".dlgOk").focus();
+  }
+  function downloadPlanTemplate() {
+    var rows = [["Fase", "ID", "Tarea", "Duración (días hábiles)", "Predecesoras", "Recurso", "Costo diario (USD)", "Avance (%)"],
+      ["Inicio", "1.1.1", "Definir alcance y objetivos", 5, "", "PM", 300, 0], ["Inicio", "1.1.2", "Armar el plan del proyecto", 5, "1.1.1", "PM", 300, 0],
+      ["Ejecución", "1.2.1", "Desarrollar el entregable", 20, "1.1.2", "Equipo", 800, 0], ["Ejecución", "1.2.2", "Pruebas", 8, "1.2.1", "Equipo", 600, 0], ["Cierre", "1.3.1", "Entrega y cierre", 0, "1.2.2", "PM", 0, 0]];
+    dl("plantilla-planificador.csv", "text/csv;charset=utf-8", "\uFEFF" + rows.map(function (r) { return r.map(csvSafe).join(","); }).join("\n"));
+  }
+
+  /* ===================== visita guiada ===================== */
+  var tourStep = -1;
+  var TOUR = [
+    { sel: "#projectSelect", t: "Elegí uno de los casos de ejemplo, o creá tu propio proyecto en blanco o importándolo desde una planilla (botones de la barra superior)." },
+    { sel: "#ganttBody", t: "Este es el diagrama de Gantt. Las barras rojas son la ruta crítica: si se demoran, se mueve el fin del proyecto. Arrastrá una barra para probar un cambio." },
+    { sel: '[data-action="explainTask"]', t: "En cada fila, el botón ? explica por qué la tarea tiene esa fecha, y Pausa simula qué pasa si esa tarea no se hace." },
+    { sel: "#dashToggleBtn", t: "El panel de control resume en una vista el semáforo de cronograma, costo y riesgos, y las alertas que se disparan." },
+    { sel: '[data-action="downloadJson"]', t: "Tu avance se guarda solo en este navegador. Descargá la copia de seguridad para llevarlo a otra computadora, o exportá a Excel." }
+  ];
+  function tourKey() { return "ptTI.tour." + META.audience; }
+  function tourSteps() { return TOUR.filter(function (s) { return document.querySelector(s.sel); }); }
+  function endTour(markSeen) {
+    var b = $("tourBox"); if (b) b.remove();
+    Array.prototype.forEach.call(document.querySelectorAll(".tourTarget"), function (e) { e.classList.remove("tourTarget"); });
+    document.removeEventListener("keydown", tourEsc, true); tourStep = -1;
+    if (markSeen) store.set(tourKey(), "1");
+  }
+  function tourEsc(e) { if (e.key === "Escape") { endTour(true); } }
+  function showTourStep(i) {
+    var steps = tourSteps(); if (!steps.length) { endTour(true); return; }
+    i = Math.max(0, Math.min(steps.length - 1, i)); tourStep = i;
+    Array.prototype.forEach.call(document.querySelectorAll(".tourTarget"), function (e) { e.classList.remove("tourTarget"); });
+    var el = document.querySelector(steps[i].sel);
+    if (el) { el.classList.add("tourTarget"); var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches; try { el.scrollIntoView({ block: "center", behavior: reduce ? "auto" : "smooth" }); } catch (e) { el.scrollIntoView(); } }
+    var b = $("tourBox"); if (!b) { b = document.createElement("div"); b.id = "tourBox"; b.className = "tourBox"; b.setAttribute("role", "dialog"); b.setAttribute("aria-labelledby", "tourT"); document.body.appendChild(b); }
+    var last = i === steps.length - 1;
+    b.innerHTML = '<div id="tourT" class="tourT">Visita guiada · paso ' + (i + 1) + " de " + steps.length + "</div><p>" + esc(steps[i].t) + '</p><div class="dlgBtns"><button type="button" class="tourSkip" data-action="tourEnd">Saltar</button>' + (i > 0 ? '<button type="button" data-action="tourPrev">Anterior</button>' : "") + '<button type="button" class="btn-primary" data-action="' + (last ? "tourEnd" : "tourNext") + '">' + (last ? "Terminar" : "Siguiente") + "</button></div>";
+    var nb = b.querySelector(".btn-primary"); if (nb) nb.focus({ preventScroll: true });
+  }
+  function startTour() { endTour(false); document.addEventListener("keydown", tourEsc, true); showTourStep(0); track("visita_guiada", { audiencia: META.audience }); }
 
   /* ===================== exportaciones ===================== */
   var xlsxPromise = null;
@@ -2687,6 +2869,8 @@
     loadScenario: function (el) { loadScenario(+el.dataset.i); },
     explainTask: function (el) { explainTask(el.dataset.id); }, toggleInactive: function (el) { toggleInactive(el.dataset.id); },
     updateScenario: function (el) { updateScenario(+el.dataset.i); }, deleteScenario: function (el) { deleteScenario(+el.dataset.i); },
+    newBlank: newBlankProject, importPlan: function () { $("planFile").click(); }, planTemplate: downloadPlanTemplate, startTour: startTour,
+    tourNext: function () { showTourStep(tourStep + 1); }, tourPrev: function () { showTourStep(tourStep - 1); }, tourEnd: function () { endTour(true); },
     openPanel: function (el) { var k = el.dataset.key; if (!PANELS[k]) return; if (panelsOn[k]) { PANELS[k].render(); var pe = $(PANELS[k].id); if (pe && pe.scrollIntoView) pe.scrollIntoView(); } else togglePanel(k); },
     recordCut: recordCut, clearCuts: clearCuts, genCuts: generateWeeklyCuts, addTimeEntry: addTimeEntry, timeCsv: timeCsv,
     deleteTime: function (el) { confirmBox("¿Eliminar esta entrada del registro de tiempo?").then(function (ok) { if (!ok) return; pushHistory(); timeLog = timeLog.filter(function (e) { return e.id !== el.dataset.id; }); syncPctFromLog(); render(); }); },
@@ -2747,7 +2931,7 @@
       var t = taskById(el.dataset.id), v = parseInt(el.value, 10);
       if (isNaN(v) || v < 0 || v > 2000) v = t.dur;
       var orig = ORIGINAL_DURS[t.id];
-      if (orig !== undefined && v < orig && !t.crashCostPerDay) { el.value = t.dur; notify("No se puede acelerar la tarea " + t.id + ": depende de un tercero."); return; }
+      if (orig !== undefined && v < orig && !t.crashCostPerDay && !isCustomCase()) { el.value = t.dur; notify("No se puede acelerar la tarea " + t.id + ": depende de un tercero."); return; }
       if (v === t.dur) return; pushHistory(); t.dur = v; queueRender();
     },
     preds: function (el) {
@@ -2777,7 +2961,7 @@
       var t = taskById(el.dataset.id); if (!el.value) { queueRender(); return; }
       computeSchedule(tasks);
       var newDur = (dayOffsetFromDate(el.value) + 1) - t._es, orig = ORIGINAL_DURS[t.id];
-      if (orig !== undefined && newDur < orig && !t.crashCostPerDay) { notify("No se puede acelerar esta tarea (depende de un tercero): el fin no puede ser anterior al que da su duración mínima."); queueRender(); return; }
+      if (orig !== undefined && newDur < orig && !t.crashCostPerDay && !isCustomCase()) { notify("No se puede acelerar esta tarea (depende de un tercero): el fin no puede ser anterior al que da su duración mínima."); queueRender(); return; }
       pushHistory(); t.dur = Math.max(0, newDur); queueRender();
     },
     threshold: function (el) { nearThreshold = Math.max(1, parseInt(el.value, 10) || 5); queueRender(); },
@@ -2923,7 +3107,8 @@
   /* ===================== inicio ===================== */
   function init() {
     if (!caseIds().length) { var b = $("cycleBanner"); b.textContent = "No se cargaron los casos de proyecto (falta data/casos-*.js)."; b.className = "banner error"; b.hidden = false; return; }
-    populateProjectSelect(); bindGantt();
+    loadStoredCustom(); populateProjectSelect(); bindGantt();
+    $("planFile").addEventListener("change", function (e) { importPlanFile(e.target.files[0]); e.target.value = ""; });
     $("importFile").addEventListener("change", function (e) { importFile(e.target.files[0]); e.target.value = ""; });
     $("lessonsInput").setAttribute("data-change", "lessons");
     if ($("docFiles")) $("docFiles").addEventListener("change", function (e) { loadDocFiles(e.target.files); e.target.value = ""; });
@@ -2934,11 +3119,12 @@
     loadProject(first); maybeRestore(first);
     if ($("exportTiBtn")) $("exportTiBtn").hidden = !EGCI;
     track("herramienta_abierta", { audiencia: META.audience });
+    if (store.get(tourKey()) !== "1") setTimeout(function () { if (!document.querySelector(".dlgOverlay") && store.get(tourKey()) !== "1" && tourStep < 0) startTour(); }, 900);
   }
   // utilidad de pruebas (no se usa en producción)
   window.__PTI_TEST__ = { computeScheduleOn: computeScheduleOn, validateState: validateState, getState: function () { return { tasks: tasks, holidays: holidays, risks: risks, issues: issues, crList: crList, baselines: baselines, changeLog: changeLog, charter: charter, comms: comms }; }, workdayISO: workdayISO, dayOffsetFromDate: dayOffsetFromDate, computeEVM: computeEVM,
     parsePredSpec: parsePredSpec, predsText: predsText, buildIcs: buildIcs, statusData: statusData, buildStatusText: buildStatusText, statusRows: statusRows, reserveData: reserveData, pertAnalysis: pertAnalysis, runChecks: runChecks, serializeState: serializeState, applyImport: applyImport, applyChangeRequest: applyChangeRequest, crTaskCheck: crTaskCheck, loadProject: loadProject, buildInformeText: buildInformeText, tiDocs: tiDocs, icsFold: icsFold, getSim: function () { return simResult; }, setCutoff: function (d) { cutoffDay = d; },
-    caseMetrics: caseMetrics, explainData: explainData, alertList: alertList, buildPortfolio: buildPortfolio, traceCoverage: traceCoverage, scenarioStats: scenarioStats, allCuts: allCuts, syncPctFromLog: syncPctFromLog, getExt: function () { return { evmCuts: evmCuts, timeLog: timeLog, traceItems: traceItems, traceLinks: traceLinks, alertCfg: alertCfg, eacMethod: eacMethod }; }, setExt: function (o) { if (o.timeLog) timeLog = o.timeLog; if (o.evmCuts) evmCuts = o.evmCuts; if (o.eacMethod) eacMethod = o.eacMethod; }, pvCurve: pvCurve, sCurveHtml: sCurveHtml, trendHtml: trendHtml, restoreFromStr: restoreFromStr, fullSnapshotStr: fullSnapshotStr, setDocEntries: function (l) { docEntries = l; portCache = null; } };
+    caseMetrics: caseMetrics, explainData: explainData, alertList: alertList, buildPortfolio: buildPortfolio, traceCoverage: traceCoverage, scenarioStats: scenarioStats, allCuts: allCuts, syncPctFromLog: syncPctFromLog, getExt: function () { return { evmCuts: evmCuts, timeLog: timeLog, traceItems: traceItems, traceLinks: traceLinks, alertCfg: alertCfg, eacMethod: eacMethod }; }, setExt: function (o) { if (o.timeLog) timeLog = o.timeLog; if (o.evmCuts) evmCuts = o.evmCuts; if (o.eacMethod) eacMethod = o.eacMethod; }, planRowsToDef: planRowsToDef, parseCsv: parseCsv, registerCustom: registerCustom, startCustom: startCustom, finishImport: finishImport, tourSteps: tourSteps, pvCurve: pvCurve, sCurveHtml: sCurveHtml, trendHtml: trendHtml, restoreFromStr: restoreFromStr, fullSnapshotStr: fullSnapshotStr, setDocEntries: function (l) { docEntries = l; portCache = null; } };
   window.__PTI_ACTIONS__ = { ACTIONS: ACTIONS, CHANGE: CHANGE };
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
 })();

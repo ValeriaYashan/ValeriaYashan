@@ -471,3 +471,9 @@ text.ch-lab.ch-bac, text.ch-lab.ch-eac, text.ch-lab.ch-cut { stroke: none; } tex
 .portMx td, .portMx th { vertical-align: top; }
 .miniList { margin: 4px 0 0; padding-left: 16px; font-size: 12px; }
 .inl { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; }
+
+.tourBox { position: fixed; left: 50%; bottom: 16px; transform: translateX(-50%); width: min(560px, calc(100vw - 32px)); background: var(--color-bg); border: 2px solid var(--color-text); border-radius: var(--radius); padding: 12px 14px; z-index: 60; box-shadow: 0 6px 24px rgba(0,0,0,.25); }
+.tourBox p { margin: 6px 0 10px; line-height: 1.5; font-size: 14px; }
+.tourT { font-weight: 700; font-size: 12px; color: var(--color-muted); }
+.tourTarget { outline: 3px solid var(--gantt-today) !important; outline-offset: 3px; }
+.alertPre { white-space: pre-wrap; font: inherit; font-size: 13px; line-height: 1.5; margin: 0 0 8px; }
