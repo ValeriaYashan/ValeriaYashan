@@ -108,6 +108,12 @@ const jsonLd = [
         decisiones, solicitud de cambio, informe final y un control de coherencia entre documentos. Tu avance se guarda
         solo en el navegador. Podés exportar a Excel, a CSV o imprimir, y descargar una copia de seguridad en JSON.
       </p>
+      <p>
+        También suma estimación de tres puntos (PERT) con la probabilidad de cumplir la fecha y una simulación de
+        3.000 corridas, dependencias de los cuatro tipos con desfase, un informe de estado semanal de una página,
+        un registro de problemas y acciones con fecha límite y un calendario (.ics) con las comunicaciones y los hitos
+        del proyecto.
+      </p>
     </section>
 
     <section aria-labelledby="para-quien">
@@ -128,6 +134,8 @@ const jsonLd = [
         <li><strong>Probá cambios.</strong> Arrastrá una barra, cambiá una duración o aplicá seguimiento rápido (fast-track) sobre la tarea que elijas.</li>
         <li><strong>Fijá una línea base</strong> antes de cambiar nada para comparar escenarios (las herramientas de escenarios, líneas base, seguimiento rápido y nivelación están en un panel plegado).</li>
         <li><strong>Controlá costos</strong> en el panel de valor ganado con una fecha de corte dentro del plazo del proyecto; la herramienta sugiere una y avisa si el BAC no coincide con el presupuesto del acta.</li>
+        <li><strong>Estimá con incertidumbre.</strong> Cargá duración optimista, probable y pesimista en las tareas y mirá la duración esperada PERT, la probabilidad de cumplir la fecha y el resultado de la simulación.</li>
+        <li><strong>Armá el informe de estado.</strong> El informe semanal sale como texto para mail o como PDF de una página, con semáforo por indicador; los problemas y acciones vencidos se marcan.</li>
         <li><strong>Seguí otro día y exportá.</strong> El progreso se guarda solo en este navegador. Descargá la copia de seguridad para llevarlo a otra computadora o exportá a Excel para compartir el cronograma.</li>
       </ol>
       <p>Atajos útiles: con el foco en una barra del Gantt, las flechas izquierda y derecha la mueven un día; Ctrl+Z y Ctrl+Y deshacen y rehacen.</p>
@@ -153,6 +161,21 @@ const jsonLd = [
         (cuesta más de lo previsto).
       </p>
 
+      <h3>Dependencias con desfase</h3>
+      <p>
+        Además de fin-a-inicio (FC), podés usar comienzo-a-comienzo (CC), fin-a-fin (FF) y comienzo-a-fin (CF), con
+        adelanto o retraso en días. Se escriben en la columna de predecesoras: <em>3CC+2</em> significa que la tarea
+        empieza dos días después de que empiece la tarea 3. La herramienta rechaza las dependencias que forman un ciclo.
+      </p>
+
+      <h3>Estimación de tres puntos (PERT)</h3>
+      <p>
+        Cada tarea puede tener una duración optimista (O), probable (M) y pesimista (P). La duración esperada es
+        (O + 4M + P) / 6. Ejemplo ilustrativo: O = 4, M = 6 y P = 14 días dan una duración esperada de 7 días. La
+        herramienta suma la red completa, calcula la probabilidad de cumplir la fecha comprometida y la contrasta con
+        una simulación de 3.000 corridas.
+      </p>
+
       <h3>Matriz RACI</h3>
       <p>
         Asigna a cada tarea quién ejecuta (R), quién es el responsable final (A, accountable), a quién se consulta (C) y a quién se informa (I).
@@ -176,7 +199,8 @@ const jsonLd = [
         <li>Los costos diarios de los casos son una distribución didáctica del presupuesto de cada acta de constitución (en proporción a la duración y al tipo de recurso), no una estimación ascendente.</li>
         <li>Los feriados precargados son los nacionales de Argentina 2026 y 2027 (los días no laborables con fines turísticos de 2027 todavía no están fijados); verificalos siempre con la fuente oficial.</li>
         <li>No hay cuenta ni servidor: tus datos se guardan en tu navegador o en el archivo que descargues. Si borrás los datos del navegador sin exportar, se pierden.</li>
-        <li>Calcula con días hábiles y dependencias fin-a-inicio, con solape opcional para el seguimiento rápido.</li>
+        <li>Calcula con días hábiles. Las dependencias son de los cuatro tipos (FC, CC, FF y CF) con desfase, y el seguimiento rápido admite solape opcional.</li>
+        <li>La simulación usa una distribución triangular con la duración probable como moda y una semilla fija: el resultado es reproducible, pero es un modelo didáctico, no una predicción.</li>
       </ul>
     </section>
 
