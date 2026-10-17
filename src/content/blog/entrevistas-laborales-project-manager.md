@@ -34,7 +34,7 @@ La mayoría de la gente dedica casi toda la respuesta a explicar el contexto y a
 
 Un ejemplo de cómo suena una buena respuesta a "contame de un cambio de alcance". En vez de decir "el cliente pidió más cosas y lo gestionamos con el equipo", sonaría más bien así: "El cliente pidió sumar un módulo de reportes a mitad de proyecto. Armé el análisis de impacto en una página, con dos escenarios: absorberlo y correr tres semanas la fecha, o dejarlo para una segunda fase. Se lo presenté al sponsor con el costo de cada opción, eligió la segunda fase, y entregamos el alcance original en fecha". Son cuatro oraciones, con una decisión tuya, un criterio y un resultado.
 
-<!-- VALERIA: acá va tu anécdota real (un caso de un proyecto tuyo o de una entrevista que viste desde ambos lados de la mesa). Escribila en dos o tres oraciones y borrá este comentario antes de publicar. -->
+Me pasó haciendo un simulacro de entrevista con un colega que había liderado un proyecto del sector de petróleo y gas. Su respuesta era prolija, pero decía "hicimos" todo el tiempo. Cuando se lo marqué y reformuló en primera persona, la misma historia pasó a mostrar a alguien que decidía.
 
 Y un detalle: cuando hables de un fracaso, no lo disfraces. Contá qué pasó, qué señal ignoraste y qué cambiaste después. Un proyecto fallido bien contado vale más que un éxito genérico.
 
