@@ -33,6 +33,7 @@ const cantidad = (slug: string) => clases.filter((c) => c.data.materia === slug)
           </a>
         ))}
       </div>
+      <p class="doc-aside">¿Sos de otra universidad o colegio? <a href="/contacto">Consultá mi disponibilidad para dictar materias de costos y administración estratégica.</a></p>
     </div>
   </section>
 </BaseLayout>
@@ -49,5 +50,6 @@ const cantidad = (slug: string) => clases.filter((c) => c.data.materia === slug)
   .doc-card-uni { font-size: 0.8rem; color: var(--color-muted); }
   .doc-card h2 { font-size: 1.35rem; }
   .doc-card p { color: var(--color-muted); font-size: 0.95rem; }
+  .doc-aside { margin-top: var(--space-lg); color: var(--color-muted); font-size: 0.95rem; }
   .doc-card-link { margin-top: auto; color: var(--color-accent); font-weight: 600; font-size: 0.95rem; }
 </style>
