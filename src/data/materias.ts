@@ -6,6 +6,17 @@ export const materias = [
     universidad: 'Universidad de San Isidro (USI)',
     descripcion:
       'Costos como herramienta de decisión: clasificación de costos, contribución marginal, punto de equilibrio, CVU, costeo ABC, presupuestos y Balanced Scorecard.',
+    docentes: {
+      intro:
+        'La materia se apoya en tres actividades formativas, no calificables, que recorren el ciclo completo de la decisión basada en costos: cuánto cuesta, qué conviene decidir, cómo planifico, cómo controlo y cómo aseguro la calidad. Están pensadas como una ruta: se practica una herramienta, se integra en un caso y se cierra con una autoevaluación.',
+      actividades: [
+        { nombre: 'Calculadora de punto de equilibrio', objetivo: 'Practicar la relación entre precio, costo variable, costos fijos y volumen, y ver cómo cada variable mueve el equilibrio.' },
+        { nombre: 'Del Norte S.A.: semana de decisiones', objetivo: 'Integrar las herramientas de las Unidades 1 y 2 en cinco decisiones de gestión, trabajando en equipo.' },
+        { nombre: 'Misión Mermeladas del Delta', objetivo: 'Autoevaluar las cinco unidades en un único caso, con retroalimentación inmediata y un plan de repaso que señala qué clase releer.' },
+      ],
+      uso:
+        'Se usan de forma autónoma, en celular o computadora, o en clase con un solo dispositivo y proyector, con equipos de 2 a 5 personas que se turnan. No requieren instalación ni cuenta, no envían datos de los estudiantes y el avance se guarda solo en el dispositivo.',
+    },
   },
   {
     slug: 'adm-estrategica',

@@ -4,12 +4,16 @@ description: "Actividad gamificada de cierre que integra las cinco unidades de l
 materia: costos
 tipo: herramienta
 orden: 3
+etapa: "Autoevaluarse"
+unidades: "Unidades 1 a 5"
+duracion: "30 min"
+modalidad: "Individual o en equipos"
 tags: ["repaso", "gamificación", "toma de decisiones"]
 ---
 
 Actividad gamificada de cierre de Costos para la Toma de Decisiones. Integra las cinco unidades del curso en un único caso: cada unidad responde una pregunta de gestión (¿cuánto cuesta?, ¿qué conviene decidir?, ¿cómo planifico?, ¿cómo controlo?, ¿cómo aseguro la calidad?) y las cinco forman el ciclo completo de la toma de decisiones basada en costos.
 
-Tiene carácter formativo: no afecta la calificación de la cursada. Es una autoevaluación de repaso, coherente con el TP integrador y con el Parcial 2. Dura unos 30 minutos, no pide cuenta ni instala nada, no envía tus datos y el avance se guarda solo en tu dispositivo.
+Tiene carácter formativo: no afecta la calificación de la cursada. Es una autoevaluación de repaso, coherente con el trabajo integrador y con la evaluación final. Dura unos 30 minutos, no pide cuenta ni instala nada, no envía tus datos y el avance se guarda solo en tu dispositivo.
 
 <iframe src="/herramientas-costos/mision-mermeladas-del-delta.html" title="Misión Mermeladas del Delta" loading="lazy" style="height: 85vh; min-height: 720px;"></iframe>
 

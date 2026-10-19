@@ -1,25 +1,25 @@
 <!doctype html><html lang="es" data-theme="light"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <meta name="claude:viewport-fit-sides" content="cover">
 <title>Calculadora de Punto de Equilibrio</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Mono:wght@400;500&family=Public+Sans:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;600&display=swap">
 <style>
 /* Layout: herramienta de dos zonas. A la izquierda los cuatro datos, a la derecha la respuesta en una frase, el gráfico de cruce entre ingresos y costos y tres escenarios. Misma familia visual que la landing de consultoría. */
 :root {
-  --bg: #F2F4F1;
-  --surface: #E7EBE6;
-  --fg: #101C1A;
-  --muted: #465652;
-  --line: #C7D0CA;
-  --accent: #1E6B57;
+  --bg: #FAFAF8;
+  --surface: #F2F1EE;
+  --fg: #1A1A1A;
+  --muted: #5C5C5C;
+  --line: #E0DFDB;
+  --accent: #2D6A4F;
   --on-accent: #FFFFFF;
   --mark: #F2C12E;
   --on-mark: #101C1A;
   --s1: #2F6FDB;
   --s2: #D2601F;
-  --good: #1E6B57;
+  --good: #2D6A4F;
   --bad: #B3361F;
-  --font-display: 'Bricolage Grotesque', 'Segoe UI', system-ui, sans-serif;
-  --font-body: 'Public Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Fraunces', Georgia, 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
 }
 @media (prefers-color-scheme: dark) {
@@ -460,6 +460,16 @@ function niceTicks(max, count) {
   window.addEventListener('load',send);
   window.addEventListener('resize',send);
   if(window.ResizeObserver) new ResizeObserver(send).observe(document.body);
+})();
+</script>
+<script>
+/* Marca la herramienta como usada en este dispositivo (sin enviar datos). */
+(function(){
+  var k='vy-prog:herramienta-punto-de-equilibrio', done=false;
+  ['price','vcost','fixed','qty'].forEach(function(id){
+    var e=document.getElementById(id);
+    if(e) e.addEventListener('input',function(){ if(done) return; done=true; try{ localStorage.setItem(k,JSON.stringify({d:Date.now(),n:'Usada'})); }catch(x){} });
+  });
 })();
 </script>
 </body></html>

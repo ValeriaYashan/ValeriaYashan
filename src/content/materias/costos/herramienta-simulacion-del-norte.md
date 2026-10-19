@@ -4,6 +4,10 @@ description: "Simulación en equipo para practicar las herramientas de las Unida
 materia: costos
 tipo: herramienta
 orden: 2
+etapa: "Integrar"
+unidades: "Unidades 1 y 2 · Clases 1 a 4"
+duracion: "30 a 40 min"
+modalidad: "En equipo"
 tags: ["simulación", "decisiones", "costos"]
 ---
 

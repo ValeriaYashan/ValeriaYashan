@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Del Norte S.A.: Semana de decisiones · Simulación USI</title>
+<title>Del Norte S.A.: Semana de decisiones · Simulación</title>
 <style>
   :root {
-    --verde: #548135;
-    --verde-oscuro: #2D4A1E;
-    --verde-claro: #EAF3DE;
+    --verde: #2D6A4F;
+    --verde-oscuro: #1B4332;
+    --verde-claro: #E6F0EA;
     --negro: #1A1A1A;
     --gris: #404040;
     --gris-claro: #F2F2F2;
@@ -23,7 +23,7 @@
   * { box-sizing: border-box; }
   body {
     font-family: Calibri, "Segoe UI", Arial, sans-serif;
-    background: #F7F8F6;
+    background: #FAFAF8;
     color: var(--negro);
     margin: 0;
     padding: 0;
@@ -149,7 +149,7 @@
   }
   @media print { button, .acciones { display: none; } }
 </style>
-</head>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=Inter:wght@400;500;600;700&display=swap"><style>html body{font-family:Inter,Calibri,"Segoe UI",Arial,sans-serif}html body h1,html body h2,html body h3{font-family:Fraunces,Georgia,serif}</style></head>
 <body>
 <div class="wrap">
 
@@ -157,11 +157,11 @@
     <div>
       <p class="eyebrow">Unidad 1 y 2 · Simulación de decisiones</p>
       <h1>Del Norte S.A.: Semana de decisiones</h1>
-      <p>Costos para la Toma de Decisiones · USI 2026 · Prof. Valeria Yashan</p>
+      <p>Costos para la Toma de Decisiones · Prof. Valeria Yashan</p>
     </div>
   </header>
 
-  <div class="aviso">Actividad de práctica y autoevaluación. Trabajá en equipo: cada escena representa un día de la semana laboral de Del Norte S.A. El resultado no se registra en el libro de calificaciones de Moodle.</div>
+  <div class="aviso">Actividad de práctica y autoevaluación. Trabajá en equipo: cada escena representa un día de la semana laboral de Del Norte S.A. El resultado no se registra ni afecta ninguna calificación.</div>
 
   <div class="progreso" id="barra-progreso"></div>
 
@@ -201,7 +201,7 @@
         <thead><tr><th>Día</th><th>Herramienta</th><th>Resultado</th></tr></thead>
         <tbody id="tabla-resumen-body"></tbody>
       </table>
-      <div class="narrativa" id="mensaje-final-narrativa"></div>
+      <div class="narrativa" id="mensaje-final-narrativa"></div><p><a href="/docencia/costos/#clases" target="_top">Ir a las clases de la materia →</a></p>
       <div class="acciones">
         <button class="secundario" onclick="reiniciar()">Volver a intentar la semana</button>
       </div>
@@ -210,7 +210,7 @@
   </div>
 
   <footer>
-    <span>Prof. Valeria Yashan · Costos para la Toma de Decisiones · USI 2026</span>
+    <span>Prof. Valeria Yashan · Costos para la Toma de Decisiones</span>
     <span>Simulación · Unidad 1-2 · Clases 1-4</span>
   </footer>
 
@@ -570,12 +570,13 @@ function mostrarFinal() {
   let nota = 'Insuficiente grave';
   let mensaje = 'La semana fue difícil. Antes de la próxima, conviene repasar las Clases 1 a 4 completas.';
   if (pct >= 90) { nota = 'Distinguido'; mensaje = 'Gestión impecable. El equipo tomó cada decisión con el respaldo técnico correcto — así se gerencia con información, no con intuición.'; }
-  else if (pct >= 75) { nota = 'Bueno'; mensaje = 'Muy buena semana de gestión, con algunos detalles para afinar. Repasá los días con más errores antes del Parcial 1.'; }
+  else if (pct >= 75) { nota = 'Bueno'; mensaje = 'Muy buena semana de gestión, con algunos detalles para afinar. Repasá los días con más errores antes de la evaluación de la unidad.'; }
   else if (pct >= 60) { nota = 'Aprobado'; mensaje = 'La empresa sobrevivió la semana, pero con decisiones que podrían haber sido mejores. Vale la pena repasar los fundamentos.'; }
   else if (pct >= 40) { nota = 'Insuficiente'; mensaje = 'Varias decisiones de la semana no tuvieron respaldo técnico correcto. Conviene repasar antes de seguir avanzando.'; }
 
   document.getElementById('puntaje-final-nota').textContent = nota;
   document.getElementById('mensaje-final-narrativa').textContent = mensaje;
+  try { localStorage.setItem('vy-prog:herramienta-simulacion-del-norte', JSON.stringify({ d: Date.now(), n: nota })); } catch (e) {}
 }
 
 function reiniciar() {

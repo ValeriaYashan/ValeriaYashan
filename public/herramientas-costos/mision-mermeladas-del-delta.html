@@ -1,38 +1,38 @@
 <!DOCTYPE html>
 <html lang="es"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Misión Mermeladas del Delta · Costos USI 2026</title>
+<title>Misión Mermeladas del Delta · Costos para la Toma de Decisiones</title>
 <style>
-:root{--ok:#2D6A2D;--bad:#A32D2D;--bg:#F1F5EC;--tx:#1F2A1A}
+:root{--ok:#2D6A4F;--bad:#A32D2D;--bg:#FAFAF8;--tx:#1F2A1A}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 body{margin:0;font-family:Calibri,Arial,sans-serif;background:var(--bg);color:var(--tx);line-height:1.45;font-size:17px}
-header{background:#fff;border-bottom:4px solid #548135;padding:8px 14px;display:flex;align-items:center;gap:12px}
-header img{height:38px}header h1{font-size:1.05rem;margin:0;color:#2D4A1E;line-height:1.2}header small{color:#555;font-size:.75rem}
-.hud{position:sticky;top:0;z-index:5;background:#2D4A1E;color:#fff;padding:6px 12px}
+header{background:#fff;border-bottom:4px solid #2D6A4F;padding:8px 14px;display:flex;align-items:center;gap:12px}
+header img{height:38px}header h1{font-size:1.05rem;margin:0;color:#1B4332;line-height:1.2}header small{color:#555;font-size:.75rem}
+.hud{position:sticky;top:0;z-index:5;background:#1B4332;color:#fff;padding:6px 12px}
 .hud .r{display:flex;gap:10px;align-items:center;justify-content:space-between;font-size:.9rem}.hud b{color:#FFE08A}
-.hud button{background:#548135;color:#fff;border:0;border-radius:8px;padding:6px 10px;font:inherit;font-size:.85rem;min-height:34px}
+.hud button{background:#2D6A4F;color:#fff;border:0;border-radius:8px;padding:6px 10px;font:inherit;font-size:.85rem;min-height:34px}
 .hl{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:5px}
 .hl div{font-size:.68rem;color:#D8E8CC}.bar{height:7px;background:#16300F;border-radius:4px;overflow:hidden;margin-top:2px}
 .bar i{display:block;height:100%;width:50%;transition:width .6s,background .6s;background:#E0A800}
 .board{margin-top:4px;font-size:.78rem;color:#D8E8CC}.board .on{color:#FFE08A;font-weight:bold}
 main{max-width:760px;margin:0 auto;padding:12px 12px 90px}
 .card{background:#fff;border:1px solid #d5dccf;border-radius:14px;padding:16px;margin:12px 0;box-shadow:0 1px 4px rgba(0,0,0,.06)}
-.hero{background:linear-gradient(160deg,#2D4A1E,#548135);color:#fff;border:0}.hero h2{color:#fff;font-size:1.5rem;margin:.1em 0}
+.hero{background:linear-gradient(160deg,#1B4332,#2D6A4F);color:#fff;border:0}.hero h2{color:#fff;font-size:1.5rem;margin:.1em 0}
 .hero p{margin:.4em 0}
-.notice{background:#EAF3E3;border-left:5px solid #548135;padding:9px 12px;border-radius:6px;margin:10px 0;font-size:.92rem}
+.notice{background:#EAF3E3;border-left:5px solid #2D6A4F;padding:9px 12px;border-radius:6px;margin:10px 0;font-size:.92rem}
 .map{display:flex;align-items:stretch;margin:6px 0}
 .tile{flex:1;border-radius:8px;color:#fff;padding:6px 4px;text-align:center;font-size:.62rem;opacity:.4;transition:.4s;line-height:1.15}
 .tile b{display:block;font-size:1rem}.tile.on{opacity:.9;outline:3px solid #FFE08A}.tile.done{opacity:1;box-shadow:0 0 12px rgba(255,224,138,.9)}
 .arw{width:12px;display:flex;align-items:center;justify-content:center;color:#bbb;font-size:1.1rem;font-weight:bold}.arw.lit{color:#E0A800}
 .conn{font-size:.85rem}.conn div{background:#FFF8DC;border-left:4px solid #E0A800;padding:5px 9px;margin:4px 0;border-radius:4px}
-h2{margin:.2em 0;color:#2D4A1E;font-size:1.25rem}
+h2{margin:.2em 0;color:#1B4332;font-size:1.25rem}
 .prog{font-size:.8rem;color:#666;margin:2px 0 4px}
-.pbar{height:6px;background:#dfe7d8;border-radius:3px;margin:6px 0 2px}.pbar i{display:block;height:100%;background:#548135;border-radius:3px;transition:width .4s}
+.pbar{height:6px;background:#dfe7d8;border-radius:3px;margin:6px 0 2px}.pbar i{display:block;height:100%;background:#2D6A4F;border-radius:3px;transition:width .4s}
 .q{font-weight:bold;margin:.5em 0 .3em}
 .opt{display:block;width:100%;text-align:left;border:1.5px solid #b9c4b0;background:#fff;border-radius:12px;padding:12px;margin:8px 0;font:inherit;cursor:pointer;min-height:48px}
 .opt:active:not([disabled]){background:#f0f6ea}.opt.right{background:#DDF0D8;border-color:var(--ok)}.opt.wrong{background:#F8DCDC;border-color:var(--bad)}.opt.gone{opacity:.25}
-.btn{display:inline-block;background:#2D4A1E;color:#fff;border:0;border-radius:12px;padding:12px 18px;font:inherit;font-weight:bold;cursor:pointer;margin:6px 6px 6px 0;min-height:46px}
-.btn.big{font-size:1.1rem;padding:14px 26px;background:#FFE08A;color:#2D4A1E}.btn.sec{background:#fff;color:#2D4A1E;border:1.5px solid #2D4A1E}.btn[disabled]{opacity:.4;cursor:default}
+.btn{display:inline-block;background:#1B4332;color:#fff;border:0;border-radius:12px;padding:12px 18px;font:inherit;font-weight:bold;cursor:pointer;margin:6px 6px 6px 0;min-height:46px}
+.btn.big{font-size:1.1rem;padding:14px 26px;background:#FFE08A;color:#1B4332}.btn.sec{background:#fff;color:#1B4332;border:1.5px solid #1B4332}.btn[disabled]{opacity:.4;cursor:default}
 .jk{background:#FFF3CC;color:#5A4300;border:1px solid #E0A800;border-radius:16px;padding:6px 12px;font:inherit;font-size:.85rem;cursor:pointer;margin:2px 6px 2px 0;min-height:34px}.jk[disabled]{opacity:.35}
 .fb{margin:8px 0 2px;padding:10px 12px;border-radius:10px;font-size:.95rem;background:#F1F1F1}.fb.ok{background:#E6F3E1}.fb.no{background:#FBEAEA}
 .rep{display:block;margin-top:6px;color:#1F4E79;font-size:.85rem}
@@ -47,11 +47,11 @@ table{border-collapse:collapse;width:100%;margin:8px 0;font-size:.9rem}td,th{bor
 .retry{background:#F7F2FF;border:1px dashed #7A5BB5;border-radius:12px;padding:10px;margin:10px 0}
 .event{background:#FFF3CC;border:2px solid #E0A800;border-radius:12px;padding:10px 12px;margin:8px 0}
 .badge{display:inline-block;padding:5px 11px;border-radius:14px;color:#fff;margin:3px;font-size:.85rem}
-.hidden{display:none!important}.big{font-size:2rem;font-weight:bold;color:#2D4A1E}
+.hidden{display:none!important}.big{font-size:2rem;font-weight:bold;color:#1B4332}
 .ord{list-style:none;margin:8px 0;padding:0}.ord li{display:flex;gap:8px;align-items:center;flex-wrap:wrap;border:1.5px solid #b9c4b0;border-radius:12px;padding:10px;margin:8px 0;background:#fff}
 .ord li.good{background:#DDF0D8;border-color:var(--ok)}.ord li.bad{background:#F8DCDC;border-color:var(--bad)}.ord li span{flex:1;min-width:150px}
-.ord button{border:1px solid #2D4A1E;background:#fff;border-radius:8px;padding:8px 14px;font:inherit;min-height:42px}
-details{margin:8px 0}summary{cursor:pointer;font-weight:bold;color:#2D4A1E;padding:6px 0}
+.ord button{border:1px solid #1B4332;background:#fff;border-radius:8px;padding:8px 14px;font:inherit;min-height:42px}
+details{margin:8px 0}summary{cursor:pointer;font-weight:bold;color:#1B4332;padding:6px 0}
 .hero summary{color:#FFE08A}.hero details label{display:block;margin:8px 0}
 #fab{position:fixed;right:12px;bottom:14px;z-index:9;background:#2E74B5;color:#fff;border:0;border-radius:28px;padding:12px 16px;opacity:.95;font:inherit;font-weight:bold;box-shadow:0 3px 8px rgba(0,0,0,.3)}
 #calc{position:fixed;right:10px;bottom:70px;z-index:9;background:#fff;border:2px solid #2E74B5;border-radius:14px;padding:10px;width:min(300px,calc(100vw - 20px));box-shadow:0 4px 14px rgba(0,0,0,.35)}
@@ -63,8 +63,8 @@ details{margin:8px 0}summary{cursor:pointer;font-weight:bold;color:#2D4A1E;paddi
 .gl{border-left:5px solid #888;padding:6px 10px;margin:8px 0;background:#FAFAFA}.gl.lock{opacity:.5}
 .plan .it{border-left:5px solid #888;background:#FAFAFA;padding:8px 10px;margin:8px 0;border-radius:4px;font-size:.93rem}
 @media print{.hud,.btn,.noprint,#fab,#calc{display:none!important}body{background:#fff}.card{box-shadow:none;break-inside:avoid}}
-</style></head><body>
-<header><div><h1>Misión Mermeladas del Delta</h1><small>Costos para la Toma de Decisiones · USI 2026 · Cierre del curso</small></div></header>
+</style><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=Inter:wght@400;500;600;700&display=swap"><style>html body{font-family:Inter,Calibri,"Segoe UI",Arial,sans-serif}html body h1,html body h2,html body h3{font-family:Fraunces,Georgia,serif}</style></head><body>
+<header><div><h1>Misión Mermeladas del Delta</h1><small>Costos para la Toma de Decisiones · Cierre del curso</small></div></header>
 <div class="hud"><div class="r"><span><b id="hRonda">Inicio</b></span><span>Puntaje <b id="hPts">0</b></span><span id="hTurn" class="hidden"><b id="hTeam"></b></span><span id="hTime" class="hidden">⏱ <b id="hT">4:00</b></span><span>Comodines <b id="hJk">3</b></span><button id="bGl">Glosario</button></div>
 <div class="hl"><div>Rentabilidad<div class="bar"><i id="hr"></i></div></div><div>Control<div class="bar"><i id="hc"></i></div></div><div>Calidad<div class="bar"><i id="hq"></i></div></div></div>
 <div class="board hidden" id="board"></div></div>
@@ -92,7 +92,7 @@ details{margin:8px 0}summary{cursor:pointer;font-weight:bold;color:#2D4A1E;paddi
 <div id="calc" class="hidden"><div class="disp" id="cd">0</div><div class="k" id="ck"></div><button class="btn sec" id="cuse" style="width:100%;margin-top:8px">Usar en la respuesta</button></div>
 <div id="glos" class="hidden"><div class="box"><h2>Glosario de bolsillo</h2><div id="glBody"></div><button class="btn" id="glX">Cerrar</button></div></div>
 <script>
-const U={U1:{n:"U1 ¿Cuánto cuesta?",c:"#2D4A1E"},U2:{n:"U2 ¿Qué conviene decidir?",c:"#2E74B5"},U3:{n:"U3 ¿Cómo planifico?",c:"#7B5800"},U4:{n:"U4 ¿Cómo controlo?",c:"#404040"},U5:{n:"U5 ¿Cómo aseguro la calidad?",c:"#548135"}};
+const U={U1:{n:"U1 ¿Cuánto cuesta?",c:"#1B4332"},U2:{n:"U2 ¿Qué conviene decidir?",c:"#2E74B5"},U3:{n:"U3 ¿Cómo planifico?",c:"#7B5800"},U4:{n:"U4 ¿Cómo controlo?",c:"#404040"},U5:{n:"U5 ¿Cómo aseguro la calidad?",c:"#2D6A4F"}};
 const KEYS=Object.keys(U);
 const TOOLS=[
 ["Costos indirectos de fabricación (CIF)","U1","Los CIF son un elemento del costo del producto; junto con MP y MOD responden cuánto cuesta producir."],
@@ -260,7 +260,7 @@ function award(sec,p,first,ctx){const pl=P();const mx=ctx.max||1;
  if(ctx.rescue){if(p>0){st.resolved[ctx.id]=1;health(ctx.id,1,true)}}
  else{pl.pts+=p;st.sec[sec].p+=p;health(ctx.id,p/mx,false);if(!first&&!st.err.includes(ctx.id))st.err.push(ctx.id)}hud()}
 function itemDone(){if(st.teams)st.turn=(st.turn+1)%st.teams.length;hud()}
-function repHtml(id){const r=REP[id];return r?`<span class="rep">Dónde repasarlo: ${r[0]} · ${r[1]}</span>`:""}
+function repHtml(id){const r=REP[id];return r?`<span class="rep">Dónde repasarlo: <a href="/docencia/costos/#clases" target="_top">${r[0]}</a> · ${r[1]}</span>`:""}
 /* mapa */
 function mapHtml(){let h="";KEYS.forEach((k,i)=>{const s=st.sec[k],d=s&&s.done;
  h+=`<div class="tile ${d?'done':''} ${st.cur===k?'on':''}" style="background:${U[k].c}"><b>${k}</b>${U[k].n.slice(3)}</div>`;
@@ -376,7 +376,7 @@ function crisis(){const c=el("div","card",`<h2>Crisis de gestión · ordene la s
   else{fb.className="fb no";fb.textContent=cor+" de 5 pasos están bien ubicados. Reordene y verifique de nuevo."}fb.classList.remove("hidden")});
  const nb=cont(c,"Continuar a la ronda de conexiones",()=>{st.sec.RC.done=true;next()},true);
  c.insertBefore(ul,btn);c.insertBefore(fb,btn);stage.appendChild(c)}
-function final(){const c=el("div","card","<h2>Ronda de conexiones del sistema</h2><p>Las cinco unidades no son compartimentos: cada una usa información de otra. Es lo que demuestra el TP integrador.</p>");
+function final(){const c=el("div","card","<h2>Ronda de conexiones del sistema</h2><p>Las cinco unidades no son compartimentos: cada una usa información de otra. Es lo que demuestra el trabajo integrador.</p>");
  const btn=cont(c,"Continuar",()=>next(),true);const holder=el("div");c.insertBefore(holder,btn);
  seq(holder,FINAL.map(f=>done=>mcBlock(f,{sec:"RF",id:f.id},done)),()=>{btn.disabled=false});stage.appendChild(c)}
 function rescue(){const list=st.err.filter(id=>VAR[id]&&!st.resolved[id]).slice(0,4);
@@ -386,11 +386,11 @@ function rescue(){const list=st.err.filter(id=>VAR[id]&&!st.resolved[id]).slice(
  const btn=cont(c,"Ver resultados",()=>next(),true);const holder=el("div");c.insertBefore(holder,btn);
  seq(holder,list.map(id=>done=>{const v=VAR[id],ctx={sec:"RS",id,rescue:true};let b;const w=el("div","",`<small><b>Expediente: ${UOF[id]||"Conexiones"}</b></small>`);
   if(id[0]==="t")b=toolBlock(v,ctx,done);else if(id[0]==="n")b=numBlock(v,ctx,done);else b=mcBlock(v,ctx,done);w.appendChild(b);return w}),()=>{btn.disabled=false});stage.appendChild(c)}
-function level(p){return p>=90?["Excelente","Domina el ciclo completo de la decisión. Está en condiciones de enfrentar el TP integrador con solvencia."]:p>=75?["Muy bien","Integra con solidez las herramientas del curso. Repase los puntos señalados para llegar al nivel máximo."]:p>=60?["Aprobado","Alcanza el nivel aprobatorio y cuenta con una base sobre la cual seguir creciendo. Revise las unidades con menor desempeño."]:p>=40?["Insuficiente","Todavía hay conceptos por consolidar. Vuelva a las clases señaladas en su plan de repaso: este es el momento ideal para hacerlo."]:["Insuficiente grave","Conviene retomar los conceptos base con calma y consultar a la profesora. Esta actividad no afecta su nota: es una oportunidad para ordenar el estudio."]}
-function planHtml(){const ids=st.err.filter(id=>REP[id]);if(!ids.length)return "<p>No quedaron pendientes: puede pasar directamente a trabajar en el TP integrador.</p>";
+function level(p){return p>=90?["Excelente","Domina el ciclo completo de la decisión. Está en condiciones de enfrentar el trabajo integrador con solvencia."]:p>=75?["Muy bien","Integra con solidez las herramientas del curso. Repase los puntos señalados para llegar al nivel máximo."]:p>=60?["Aprobado","Alcanza el nivel aprobatorio y cuenta con una base sobre la cual seguir creciendo. Revise las unidades con menor desempeño."]:p>=40?["Insuficiente","Todavía hay conceptos por consolidar. Vuelva a las clases señaladas en su plan de repaso: este es el momento ideal para hacerlo."]:["Insuficiente grave","Conviene retomar los conceptos base con calma y consultar a la profesora. Esta actividad no afecta su nota: es una oportunidad para ordenar el estudio."]}
+function planHtml(){const ids=st.err.filter(id=>REP[id]);if(!ids.length)return "<p>No quedaron pendientes: puede pasar directamente a trabajar en el trabajo integrador.</p>";
  const by={};ids.forEach(id=>{const u=UOF[id]||"U1";(by[u]=by[u]||[]).push(id)});const topics=new Set(ids.map(i=>REP[i][1]));
  const units=Object.keys(by).sort((a,b)=>by[b].length-by[a].length);
- return `<p>Ordenado por la unidad con más pendientes. Tiempo estimado: unos ${Math.max(10,Math.min(40,topics.size*4))} minutos.</p>`+units.map(u=>{const seen=new Set();return `<div class="it" style="border-color:${U[u].c}"><b>${U[u].n}</b>`+by[u].filter(i=>{const t=REP[i][1];if(seen.has(t))return false;seen.add(t);return true}).map(i=>`<br>${REP[i][0]} · ${REP[i][1]}`+(GL[u]&&REP[i]?"":"")).join("")+`<br><small><i>Fórmula clave: ${GL[u][1]}</i></small></div>`}).join("")}
+ return `<p>Ordenado por la unidad con más pendientes. Tiempo estimado: unos ${Math.max(10,Math.min(40,topics.size*4))} minutos.</p>`+units.map(u=>{const seen=new Set();return `<div class="it" style="border-color:${U[u].c}"><b>${U[u].n}</b>`+by[u].filter(i=>{const t=REP[i][1];if(seen.has(t))return false;seen.add(t);return true}).map(i=>`<br><a href="/docencia/costos/#clases" target="_top">${REP[i][0]}</a> · ${REP[i][1]}`+(GL[u]&&REP[i]?"":"")).join("")+`<br><small><i>Fórmula clave: ${GL[u][1]}</i></small></div>`}).join("")}
 function healthHtml(){const n={r:"Rentabilidad",c:"Control",q:"Calidad"};return `<div class="hl" style="margin:8px 0">`+["r","c","q"].map(m=>`<div style="color:#333">${n[m]}: ${Math.round(st.health[m])} / 100<div class="bar" style="background:#dfe7d8"><i style="width:${st.health[m]}%;background:${st.health[m]<35?"#D9534F":st.health[m]<60?"#E0A800":"#6CC04A"}"></i></div></div>`).join("")+"</div>"}
 function results(){stopTimer();clearSave();const tot=totalPts(),mx=st.total,pc=tot/mx*100,L=level(pc);
  const names={R1:"Ronda 1 · Clasificación",RC:"Crisis de gestión",RF:"Ronda de conexiones"};
@@ -403,15 +403,16 @@ function results(){stopTimer();clearSave();const tot=totalPts(),mx=st.total,pc=t
  const c=el("div","card",`<h2>Resultados de la misión</h2><div class="big">${fmt(tot)} / ${mx} · ${pc.toFixed(0)} %</div><h3>Nivel: ${L[0]}</h3><p>${L[1]}</p>${rank}<h3>Salud de la empresa</h3>${healthHtml()}<p><b>Insignias:</b> ${badges}</p><p><b>Expedientes recuperados en la revancha:</b> ${eligible} de ${pend}</p>
  <h3>Su plan de repaso</h3><div class="plan">${planHtml()}</div>
  <h3>Detalle por sección</h3><table><tr><th>Sección</th><th>Puntaje</th><th>%</th></tr>${rows}</table>
- <div class="notice"><b>Vínculo con el TP y el Parcial 2:</b> el caso de Pampa Sur exige combinar costos (U1), decisiones (U2), presupuesto y CAPEX (U3), BSC y riesgos (U4) y costos de calidad y ESG (U5). Esta actividad no afecta la calificación.</div>
+ <div class="notice"><b>Vínculo con el trabajo integrador y la evaluación final:</b> el caso de Pampa Sur exige combinar costos (U1), decisiones (U2), presupuesto y CAPEX (U3), BSC y riesgos (U4) y costos de calidad y ESG (U5). Esta actividad no afecta la calificación.</div>
  <div class="noprint"><input type="text" id="nm" placeholder="Su nombre (opcional) para la tarjeta" maxlength="30" style="font:inherit;font-size:16px;padding:10px;border:1.5px solid #b9c4b0;border-radius:10px;width:100%;margin-bottom:6px"><br>
  <button class="btn" id="bCard">Descargar tarjeta de resultados</button><button class="btn sec" id="bPrint">Imprimir o guardar en PDF</button><button class="btn sec" onclick="location.reload()">Jugar de nuevo</button></div>`);stage.appendChild(c);
+ try{localStorage.setItem("vy-prog:herramienta-mision-mermeladas-del-delta",JSON.stringify({d:Date.now(),n:L[0],p:pc}))}catch(e){}
  $("#bPrint").onclick=()=>window.print();$("#bCard").onclick=()=>card(tot,mx,pc,L[0],badges)}
 /* tarjeta compartible */
 async function card(tot,mx,pc,lev){const cv=document.createElement("canvas");cv.width=1080;cv.height=1350;const x=cv.getContext("2d");
- const g=x.createLinearGradient(0,0,0,1350);g.addColorStop(0,"#2D4A1E");g.addColorStop(1,"#548135");x.fillStyle=g;x.fillRect(0,0,1080,1350);
+ const g=x.createLinearGradient(0,0,0,1350);g.addColorStop(0,"#1B4332");g.addColorStop(1,"#2D6A4F");x.fillStyle=g;x.fillRect(0,0,1080,1350);
  x.fillStyle="#fff";x.beginPath();if(x.roundRect)x.roundRect(60,60,960,180,24);else x.rect(60,60,960,180);x.fill();
- x.fillStyle="#2D4A1E";x.font="bold 40px Calibri,Arial";x.fillText("Costos para la Toma",90,125);x.fillText("de Decisiones · USI 2026",90,180);
+ x.fillStyle="#1B4332";x.font="bold 40px Calibri,Arial";x.fillText("Costos para la Toma",90,125);x.fillText("de Decisiones",90,180);
  x.fillStyle="#fff";x.font="bold 64px Calibri,Arial";x.fillText("Misión Mermeladas del Delta",60,360);
  const nm=($("#nm").value||"").trim();if(nm){x.font="44px Calibri,Arial";x.fillStyle="#FFE08A";x.fillText(nm,60,430)}
  x.fillStyle="#fff";x.font="bold 200px Calibri,Arial";x.fillText(Math.round(pc)+" %",60,680);

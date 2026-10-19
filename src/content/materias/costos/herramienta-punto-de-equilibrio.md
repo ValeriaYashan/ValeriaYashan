@@ -4,6 +4,10 @@ description: "Cargá precio, costo variable y costos fijos y calculá cuántas u
 materia: costos
 tipo: herramienta
 orden: 1
+etapa: "Practicar"
+unidades: "Unidades 1 y 2"
+duracion: "10 a 15 min"
+modalidad: "Individual"
 tags: ["punto de equilibrio", "CVU", "contribución marginal"]
 ---
 
