@@ -24,7 +24,16 @@ export const materias = [
     corto: 'Adm. Estratégica',
     universidad: 'Universidad de San Isidro (USI)',
     descripcion:
-      'Análisis del entorno, formulación e implementación de estrategia, ventaja competitiva y control de gestión en organizaciones.',
+      'Administración estratégica como juego de decisiones: diagnóstico del entorno con las 5 Fuerzas de Porter, trabajo en equipo, evidencia del caso y síntesis estratégica.',
+    docentes: {
+      intro:
+        'La materia recorre el camino completo de la estrategia: diagnosticar el entorno y la empresa, formular opciones, decidir y poner el plan en marcha. La actividad publicada trabaja la primera herramienta del diagnóstico competitivo, las 5 Fuerzas de Porter, con una dinámica de equipo pensada para ser jugada y no solo completada.',
+      actividades: [
+        { nombre: 'Caso PedidosYa: el juego de las 5 Fuerzas de Porter', objetivo: 'Ubicar evidencia en la fuerza correcta, distinguir qué dato pertenece a Porter y cuál a otra herramienta, calificar la intensidad de cada fuerza y concluir sobre el atractivo del sector. Equipos de 3 a 5 personas, 60 minutos, mazo de 30 cartas (9 trampa). Entregan una tabla de síntesis, una hipótesis verificable, un trade-off explícito y la respuesta a una pregunta obligatoria sobre el grupo más afectado. Se autoevalúan con una rúbrica de 100 puntos incluida en el tablero.' },
+      ],
+      uso:
+        'Se usa en clase con proyector o de forma remota, en el navegador y sin instalar nada. Los participantes pueden sumarse desde el celular o la computadora, y el tablero admite votación, cronómetro y ruleta de roles.',
+    },
   },
 ] as const;
 
