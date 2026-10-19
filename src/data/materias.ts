@@ -35,6 +35,14 @@ export const materias = [
         'Se usa en clase con proyector o de forma remota, en el navegador y sin instalar nada. Los participantes pueden sumarse desde el celular o la computadora, y el tablero admite votación, cronómetro y ruleta de roles.',
     },
   },
+  {
+    slug: 'egci-pm',
+    nombre: 'EGCI Máster en Project Management',
+    corto: 'EGCI Máster PM',
+    universidad: 'EGCI Escuela de Gerencia',
+    descripcion:
+      'Máster en Project Management de EGCI Escuela de Gerencia: material de cátedra, clases y herramientas para la gestión profesional de proyectos con PMBOK® 8.',
+  },
 ] as const;
 
 export type MateriaSlug = (typeof materias)[number]['slug'];
