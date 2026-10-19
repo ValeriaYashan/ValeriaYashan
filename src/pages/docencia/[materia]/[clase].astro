@@ -34,6 +34,7 @@ const siguiente = idx < todas.length - 1 ? todas[idx + 1] : null;
   <article class="clase">
     <header class="clase-head">
       <div class="container">
+        <p class="clase-back"><a href={`/docencia/${m.slug}`}>&larr; Volver a {m.corto}</a></p>
         <p class="clase-crumb"><a href="/docencia">Materias</a> / <a href={`/docencia/${m.slug}`}>{m.corto}</a></p>
         <p class="clase-num">{esHerramienta ? 'Herramienta interactiva' : `Clase ${entry.data.clase}`}</p>
         <h1>{entry.data.title}</h1>
@@ -45,6 +46,7 @@ const siguiente = idx < todas.length - 1 ? todas[idx + 1] : null;
       <Content />
     </div>
 
+    <p class="container clase-back clase-back--foot"><a href={`/docencia/${m.slug}`}>&larr; Volver a {m.corto}</a></p>
     {!esHerramienta && <nav class="container clase-nav" aria-label="Navegación entre clases">
       {anterior ? <a href={`/docencia/${m.slug}/${slugDe(anterior)}`}>← {anterior.data.title}</a> : <span></span>}
       {siguiente ? <a href={`/docencia/${m.slug}/${slugDe(siguiente)}`}>{siguiente.data.title} →</a> : <span></span>}
@@ -78,5 +80,9 @@ const siguiente = idx < todas.length - 1 ? todas[idx + 1] : null;
   .clase-body :global(blockquote) { border-left: 3px solid var(--color-accent); padding-left: 1rem; color: var(--color-muted); margin: 1.25rem 0; }
   .clase-body :global(.katex-display) { overflow-x: auto; overflow-y: hidden; padding: 0.25rem 0; }
   .clase-body :global(iframe) { width: 100%; min-height: 700px; border: 1px solid var(--color-border); border-radius: 12px; background: #fff; }
+  .clase-back { margin-bottom: 0.9rem; font-size: 0.95rem; font-weight: 600; }
+  .clase-back a { text-decoration: none; }
+  .clase-back a:hover { text-decoration: underline; }
+  .clase-back--foot { margin-top: 0; padding-bottom: var(--space-md); }
   .clase-nav { display: flex; justify-content: space-between; gap: 1rem; padding-bottom: var(--space-xl); font-size: 0.95rem; }
 </style>
