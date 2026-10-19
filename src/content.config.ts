@@ -18,7 +18,7 @@ const materias = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
-    materia: z.enum(['costos', 'adm-estrategica', 'egci-pm']),
+    materia: z.enum(['costos', 'adm-estrategica', 'egci-pm', 'egci-liderazgo']),
     tipo: z.enum(['clase', 'herramienta', 'apunte']).default('clase'),
     clase: z.number().optional(),
     orden: z.number().optional(),

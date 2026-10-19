@@ -44,6 +44,15 @@ export const materias = [
     descripcion:
       'Máster en Project Management de EGCI Escuela de Gerencia: material de cátedra, clases y herramientas para la gestión profesional de proyectos con PMBOK® 8.',
   },
+  {
+    slug: 'egci-liderazgo',
+    sinClases: true,
+    nombre: 'Programa Avanzado Liderazgo y Competencias Esenciales',
+    corto: 'Liderazgo y Competencias',
+    universidad: 'EGCI Escuela de Gerencia',
+    descripcion:
+      'Programa Avanzado de EGCI Escuela de Gerencia: apuntes y herramientas para el desarrollo de liderazgo y competencias esenciales.',
+  },
 ] as const;
 
 export type MateriaSlug = (typeof materias)[number]['slug'];
