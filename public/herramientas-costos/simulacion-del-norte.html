@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Del Norte S.A.: Semana de decisiones · Simulación USI</title>
+<style>
+  :root {
+    --verde: #548135;
+    --verde-oscuro: #2D4A1E;
+    --verde-claro: #EAF3DE;
+    --negro: #1A1A1A;
+    --gris: #404040;
+    --gris-claro: #F2F2F2;
+    --gris-tabla: #D9D9D9;
+    --rojo: #A32D2D;
+    --rojo-bg: #FFF0F0;
+    --ambar: #7B5800;
+    --ambar-bg: #FFFBEA;
+    --azul: #2E74B5;
+    --azul-bg: #EAF1FB;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: Calibri, "Segoe UI", Arial, sans-serif;
+    background: #F7F8F6;
+    color: var(--negro);
+    margin: 0;
+    padding: 0;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 22px 70px; }
+  header {
+    background: #fff;
+    padding: 26px 0 16px;
+    border-bottom: 3px solid var(--verde);
+    margin-bottom: 26px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; flex-wrap: wrap;
+  }
+  header .eyebrow { color: var(--verde); font-weight: bold; font-size: 12px; text-transform: uppercase; letter-spacing: .5px; margin: 0 0 4px; }
+  header h1 { font-size: 23px; margin: 0 0 4px; }
+  header p { font-size: 13px; color: var(--gris); margin: 0; }
+  header img { height: 42px; }
+
+  .progreso { display: flex; gap: 6px; margin-bottom: 26px; }
+  .progreso .paso {
+    flex: 1; height: 8px; border-radius: 4px; background: var(--gris-tabla);
+    transition: background .3s;
+  }
+  .progreso .paso.hecho { background: var(--verde); }
+  .progreso .paso.actual { background: var(--azul); }
+
+  #app { }
+
+  .pantalla { display: none; }
+  .pantalla.activa { display: block; animation: fadein .3s; }
+  @keyframes fadein { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+  .portada { text-align: center; padding: 30px 10px; }
+  .portada .sello {
+    display: inline-block; background: var(--verde-oscuro); color: #fff;
+    font-size: 12px; font-weight: bold; padding: 5px 14px; border-radius: 20px;
+    margin-bottom: 16px; letter-spacing: .5px;
+  }
+  .portada h2 { font-size: 26px; margin: 0 0 10px; }
+  .portada p.sub { color: var(--gris); font-size: 14.5px; max-width: 560px; margin: 0 auto 24px; line-height: 1.5; }
+  .memo {
+    text-align: left; background: #FFFDF6; border: 1px solid #E8DFC2; border-radius: 6px;
+    padding: 20px 24px; margin: 0 auto 26px; max-width: 560px; font-size: 13.5px; line-height: 1.6;
+    color: var(--gris); box-shadow: 0 1px 3px rgba(0,0,0,.06);
+  }
+  .memo .firma { margin-top: 14px; font-style: italic; color: var(--gris); }
+
+  .escena-header { margin-bottom: 18px; }
+  .escena-header .tag {
+    display: inline-block; background: var(--verde); color: #fff; font-size: 11px; font-weight: bold;
+    padding: 3px 10px; border-radius: 3px; margin-bottom: 8px;
+  }
+  .escena-header h2 { font-size: 21px; margin: 0 0 6px; }
+  .escena-header .herramienta { color: var(--azul); font-weight: bold; font-size: 12.5px; }
+
+  .narrativa {
+    background: #FFFDF6; border-left: 4px solid var(--ambar); border-radius: 4px;
+    padding: 16px 18px; font-size: 13.5px; line-height: 1.6; color: var(--gris); margin-bottom: 24px;
+  }
+
+  .datos-box {
+    background: var(--gris-claro); border: 1px solid var(--gris-tabla); border-radius: 6px;
+    padding: 14px 18px; margin-bottom: 22px; font-size: 13px;
+  }
+  .datos-box strong { color: var(--negro); }
+  .datos-box table { width: 100%; border-collapse: collapse; margin-top: 6px; }
+  .datos-box td { padding: 4px 6px; font-size: 13px; color: var(--gris); }
+  .datos-box td:first-child { font-weight: bold; color: var(--negro); width: 60%; }
+
+  .pregunta { margin-bottom: 26px; }
+  .pregunta .p-title { font-weight: bold; font-size: 14px; margin-bottom: 10px; }
+  .opciones label {
+    display: block; background: #fff; border: 1px solid var(--gris-tabla); border-radius: 4px;
+    padding: 9px 12px; margin-bottom: 7px; font-size: 13.3px; cursor: pointer;
+  }
+  .opciones label:hover { border-color: var(--verde); }
+  .opciones input { margin-right: 8px; }
+  .opciones label.correcta { border-color: var(--verde); background: var(--verde-claro); }
+  .opciones label.incorrecta { border-color: var(--rojo); background: var(--rojo-bg); }
+
+  .feedback {
+    margin-top: 8px; font-size: 12.8px; padding: 9px 12px; border-radius: 4px; display: none;
+  }
+  .feedback.ok { background: var(--verde-claro); border-left: 4px solid var(--verde); color: var(--verde-oscuro); display: block; }
+  .feedback.bad { background: var(--rojo-bg); border-left: 4px solid var(--rojo); color: var(--rojo); display: block; }
+
+  button {
+    background: var(--verde); color: #fff; border: none; font-family: inherit; font-weight: bold;
+    font-size: 14px; padding: 11px 24px; border-radius: 4px; cursor: pointer;
+  }
+  button:hover { background: var(--verde-oscuro); }
+  button.secundario { background: #fff; color: var(--verde); border: 1.5px solid var(--verde); }
+  button.secundario:hover { background: var(--verde-claro); }
+  button:disabled { opacity: .5; cursor: not-allowed; }
+
+  .acciones { text-align: center; margin: 24px 0; }
+
+  .resumen-escena {
+    display: none; margin-top: 10px; padding: 12px 16px; border-radius: 5px;
+    background: var(--azul-bg); border-left: 4px solid var(--azul); font-size: 13.5px; color: var(--azul); font-weight: bold;
+  }
+
+  #pantalla-final .puntaje-total {
+    font-size: 40px; font-weight: bold; color: var(--verde); text-align: center; margin: 6px 0;
+  }
+  #pantalla-final .nota-final {
+    text-align: center; font-size: 17px; font-weight: bold; margin-bottom: 26px;
+  }
+  .tabla-resumen { width: 100%; border-collapse: collapse; margin-bottom: 24px; }
+  .tabla-resumen th {
+    background: var(--verde); color: #fff; font-size: 12.5px; padding: 8px 10px; text-align: left;
+  }
+  .tabla-resumen td { padding: 8px 10px; font-size: 13px; border-bottom: 1px solid var(--gris-tabla); }
+  .tabla-resumen tr:nth-child(even) td { background: var(--gris-claro); }
+
+  footer {
+    margin-top: 44px; padding-top: 14px; border-top: 2px solid var(--verde);
+    display: flex; justify-content: space-between; font-size: 11px; color: var(--gris); flex-wrap: wrap; gap: 6px;
+  }
+  .aviso {
+    font-size: 11.5px; color: var(--gris); background: var(--gris-claro); border: 1px solid var(--gris-tabla);
+    border-radius: 6px; padding: 9px 13px; margin-bottom: 24px;
+  }
+  @media print { button, .acciones { display: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div>
+      <p class="eyebrow">Unidad 1 y 2 · Simulación de decisiones</p>
+      <h1>Del Norte S.A.: Semana de decisiones</h1>
+      <p>Costos para la Toma de Decisiones · USI 2026 · Prof. Valeria Yashan</p>
+    </div>
+  </header>
+
+  <div class="aviso">Actividad de práctica y autoevaluación. Trabajá en equipo: cada escena representa un día de la semana laboral de Del Norte S.A. El resultado no se registra en el libro de calificaciones de Moodle.</div>
+
+  <div class="progreso" id="barra-progreso"></div>
+
+  <div id="app">
+
+    <!-- PORTADA -->
+    <section class="pantalla activa" id="pantalla-portada">
+      <div class="portada">
+        <span class="sello">Expediente confidencial</span>
+        <h2>Bienvenidos a la gerencia de Del Norte S.A.</h2>
+        <p class="sub">Fabricante de calzado de cuero. Esta semana, su equipo asume la gerencia general por cinco días. Cinco decisiones los esperan — cada una pone a prueba una herramienta distinta de las Unidades 1 y 2.</p>
+        <div class="memo">
+          <strong>De:</strong> Dirección General — Del Norte S.A.<br>
+          <strong>Para:</strong> Nuevo equipo de gerencia<br>
+          <strong>Asunto:</strong> Bienvenida y agenda de la semana<br><br>
+          Bienvenidos al equipo. Esta semana los vamos a poner a prueba con las decisiones reales que enfrentamos todos los meses en la planta: desde ordenar el caos contable hasta decidir precios con información que muchos gerentes ignoran. Confiamos en que apliquen lo aprendido en clase, no solo la intuición.
+          <div class="firma">— Dirección General</div>
+        </div>
+        <div class="acciones">
+          <button onclick="irEscena(0)">Comenzar la semana →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contenedor dinámico de escenas -->
+    <div id="contenedor-escenas"></div>
+
+    <!-- PANTALLA FINAL -->
+    <section class="pantalla" id="pantalla-final">
+      <div class="escena-header">
+        <span class="tag">CIERRE DE SEMANA</span>
+        <h2>Balance de gestión</h2>
+      </div>
+      <div class="puntaje-total" id="puntaje-final-num">0 / 0</div>
+      <div class="nota-final" id="puntaje-final-nota"></div>
+      <table class="tabla-resumen">
+        <thead><tr><th>Día</th><th>Herramienta</th><th>Resultado</th></tr></thead>
+        <tbody id="tabla-resumen-body"></tbody>
+      </table>
+      <div class="narrativa" id="mensaje-final-narrativa"></div>
+      <div class="acciones">
+        <button class="secundario" onclick="reiniciar()">Volver a intentar la semana</button>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    <span>Prof. Valeria Yashan · Costos para la Toma de Decisiones · USI 2026</span>
+    <span>Simulación · Unidad 1-2 · Clases 1-4</span>
+  </footer>
+
+</div>
+
+<script>
+const escenas = [
+  {
+    dia: "LUNES",
+    titulo: "Auditoría de costos",
+    herramienta: "Clasificación de costos · Clases 1-2",
+    narrativa: "8:00 AM. El contador dejó el estado de resultados del mes bloqueado hasta que el equipo clasifique correctamente las siguientes 8 partidas contables de la planta. Sin esta clasificación, no se puede saber qué es costo del producto y qué es gasto del período.",
+    tipo: "clasificacion",
+    categorias: ["Costo directo variable", "Costo indirecto fijo (CIF)", "Costo indirecto variable (CIF)", "Gasto de período fijo", "Gasto de período variable"],
+    items: [
+      { texto: "Cuero utilizado para fabricar las botas", correcta: 0, explicacion: "Es materia prima identificable directamente en cada par y varía con el volumen producido: costo directo variable." },
+      { texto: "Energía eléctrica de las máquinas de corte (se factura según kWh consumidos)", correcta: 2, explicacion: "No se identifica con una unidad de producto en particular (es indirecto), pero varía según el uso de las máquinas: CIF variable." },
+      { texto: "Sueldo del supervisor de planta (fijo mensual)", correcta: 1, explicacion: "No se identifica con un par en particular y no cambia con el volumen producido: CIF fijo." },
+      { texto: "Alquiler mensual del edificio de la planta industrial", correcta: 1, explicacion: "Es un costo de fábrica que no varía con la producción y no se identifica con una unidad: CIF fijo." },
+      { texto: "Comisiones de los vendedores (% sobre cada venta)", correcta: 4, explicacion: "No es un costo de producción, sino un gasto comercial, y varía con el volumen vendido: gasto de período variable." },
+      { texto: "Sueldo del gerente comercial (fijo mensual)", correcta: 3, explicacion: "Es un gasto de administración/comercialización que no varía con el nivel de actividad: gasto de período fijo." },
+      { texto: "Amortización de la maquinaria de corte", correcta: 1, explicacion: "Es un costo de fábrica indirecto (no se identifica con un par puntual) y no varía mes a mes: CIF fijo." },
+      { texto: "Sueldo del gerente general", correcta: 3, explicacion: "Es un gasto de administración, ajeno a la producción, y no varía con el volumen: gasto de período fijo." }
+    ]
+  },
+  {
+    dia: "MARTES",
+    titulo: "Alerta de Compras vs. Producción",
+    herramienta: "Costos estándar y variaciones · Clase 3",
+    narrativa: "10:30 AM. El jefe de Compras y el jefe de Producción están en tu oficina discutiendo. El mes cerró con un sobrecosto de materia prima y cada uno culpa al otro. Antes de tomar partido, hacé los números.",
+    tipo: "preguntas",
+    datos: [
+      ["Producción real del mes", "800 pares"],
+      ["MP estándar", "2,5 dm² de cuero por par ($600/dm²)"],
+      ["MP real utilizada", "2.200 dm² comprados a $570/dm²"]
+    ],
+    preguntas: [
+      {
+        prompt: "¿Cuál es la variación en precio de la MP?",
+        opciones: ["−$66.000 (Favorable)", "+$66.000 (Desfavorable)", "−$120.000 (Favorable)", "+$54.000 (Desfavorable)"],
+        correcta: 0,
+        explicacion: "(($570 − $600) × 2.200 dm²) = −$30 × 2.200 = −$66.000. Compras pagó menos que el estándar: variación favorable."
+      },
+      {
+        prompt: "¿Cuál es la variación en eficiencia de la MP?",
+        opciones: ["−$120.000 (Favorable)", "+$120.000 (Desfavorable)", "+$66.000 (Desfavorable)", "−$54.000 (Favorable)"],
+        correcta: 1,
+        explicacion: "Cantidad estándar permitida = 800 × 2,5 = 2.000 dm². (2.200 − 2.000) × $600 = +$120.000. Se usó más cuero del permitido: desfavorable."
+      },
+      {
+        prompt: "Con la variación neta en +$54.000 (Desfavorable), ¿a quién le pedís explicaciones formales?",
+        opciones: [
+          "A Compras, porque generó el sobrecosto",
+          "A Producción, porque el sobreconsumo de cuero (200 dm² de más) generó un desvío desfavorable que superó ampliamente el ahorro logrado por Compras",
+          "A ambos por igual, la responsabilidad es compartida en partes iguales",
+          "A ninguno, la variación neta desfavorable no tiene causa identificable"
+        ],
+        correcta: 1,
+        explicacion: "Compras ahorró $66.000 (favorable), pero Producción generó un desvío de $120.000 (desfavorable) por sobreconsumo físico. La causa principal del resultado neto desfavorable es la eficiencia de Producción, no el precio de Compras."
+      }
+    ]
+  },
+  {
+    dia: "MIÉRCOLES",
+    titulo: "Lanzamiento del nuevo modelo",
+    herramienta: "Target Costing · Clase 3",
+    narrativa: "2:00 PM. Marketing relevó el precio que el mercado está dispuesto a pagar por el nuevo modelo de bota. Ahora hay que decidir si el diseño actual es viable o si hay que rediseñarlo antes de lanzarlo.",
+    tipo: "preguntas",
+    datos: [
+      ["Precio de mercado relevado", "$15.000 por par"],
+      ["Margen de utilidad exigido", "20% sobre el precio de venta"],
+      ["Costo de producción actual estimado", "$13.500 por par"]
+    ],
+    preguntas: [
+      {
+        prompt: "¿Cuál es el Target Cost (costo objetivo)?",
+        opciones: ["$3.000", "$12.000", "$13.500", "$10.500"],
+        correcta: 1,
+        explicacion: "Target Cost = $15.000 × (1 − 0,20) = $12.000. Es el costo máximo admisible para lograr el margen exigido."
+      },
+      {
+        prompt: "¿Cuál es la brecha (gap) que hay que cerrar?",
+        opciones: ["$900", "$2.000", "$1.500", "$3.000"],
+        correcta: 2,
+        explicacion: "Brecha = Costo actual − Target Cost = $13.500 − $12.000 = $1.500 por par."
+      },
+      {
+        prompt: "¿Qué combinación de ingeniería de valor cierra exactamente la brecha, sin quedarte corto ni gastar de más?",
+        opciones: [
+          "Rediseñar la punta (−$600) + Eliminar empaque premium (−$400) = −$1.000",
+          "Rediseñar la punta (−$600) + Optimizar el compuesto de la suela (−$900) = −$1.500",
+          "Optimizar la suela (−$900) + Renegociar el cuero (−$700) = −$1.600",
+          "Eliminar empaque premium (−$400) + Renegociar el cuero (−$700) = −$1.100"
+        ],
+        correcta: 1,
+        explicacion: "Solo la combinación de rediseñar la punta (−$600) y optimizar la suela (−$900) suma exactamente −$1.500, cerrando la brecha con precisión y llevando el costo a los $12.000 objetivo."
+      }
+    ]
+  },
+  {
+    dia: "JUEVES",
+    titulo: "Guerra de precios",
+    herramienta: "Costeo ABC vs. tradicional · Clase 3",
+    narrativa: "4:30 PM. El gerente comercial quiere bajar precios para ganarle mercado a la competencia, pero no sabe en qué línea hay margen real para hacerlo sin perder rentabilidad. Te pide una recomendación basada en números, no en intuición.",
+    tipo: "preguntas",
+    datos: [
+      ["CIF totales mensuales", "$280.000"],
+      ["Línea Básico", "600 pares · 4 hs-MOD/par"],
+      ["Línea Sport", "200 pares · 4 hs-MOD/par"],
+      ["Costo tradicional (ambas líneas)", "$350,00 / par"],
+      ["Costo real ABC — Básico", "$303,33 / par"],
+      ["Costo real ABC — Sport", "$490,00 / par"]
+    ],
+    preguntas: [
+      {
+        prompt: "¿Qué línea tiene margen oculto para bajar el precio sin perder rentabilidad?",
+        opciones: [
+          "Básico, porque su costo real ABC ($303,33) es menor al costo tradicional que se le atribuía ($350,00)",
+          "Sport, porque su costo real ABC ($490,00) es menor al tradicional",
+          "Ninguna, ambas cuestan exactamente lo mismo en la realidad",
+          "Básico, simplemente porque produce más unidades"
+        ],
+        correcta: 0,
+        explicacion: "El costeo tradicional le atribuía $350,00 a Básico, pero su costo real (ABC) es $303,33: hay $46,67 de margen oculto por unidad para bajar el precio y ganar competitividad sin perder rentabilidad."
+      },
+      {
+        prompt: "¿Qué le recomendás al gerente sobre el precio de la línea Sport?",
+        opciones: [
+          "Bajarlo también, para ser consistentes con Básico",
+          "Subirlo o al menos mantenerlo: su costo real ($490,00) es mayor al que el costeo tradicional mostraba ($350,00); bajarlo generaría una pérdida oculta",
+          "Eliminar la línea Sport directamente",
+          "El precio de Sport no tiene relación con el costeo ABC"
+        ],
+        correcta: 1,
+        explicacion: "El método tradicional subvaluaba a Sport en $140,00 por par. Bajar su precio sin conocer este dato significaría vender a una pérdida oculta que el costeo tradicional no revela."
+      }
+    ]
+  },
+  {
+    dia: "VIERNES",
+    titulo: "Pedido especial y mezcla de producción",
+    herramienta: "Costos relevantes, contribución marginal y factores escasos · Clase 4",
+    narrativa: "9:00 AM. Un distribuidor mayorista ofrece comprar un lote grande de pares Básico aprovechando la capacidad ociosa de la planta, a un precio menor al de lista. Antes de responder, el jefe de Producción te avisa que la semana próxima solo van a contar con 3.200 horas de mano de obra directa (MOD) para repartir entre las líneas Básico y Sport. Cerrás la semana con dos decisiones que definen la rentabilidad del mes.",
+    tipo: "preguntas",
+    datos: [
+      ["Costo variable unitario — Básico", "$250 / par (MP + MOD + CIF variable)"],
+      ["Costo fijo unitario asignado — Básico", "$100 / par (no varía si se acepta o no el pedido)"],
+      ["Precio de lista — Básico", "$600 / par"],
+      ["Pedido especial ofrecido", "150 pares a $320 / par, sin afectar las ventas regulares"],
+      ["Contribución marginal unitaria — Básico", "$350 / par · 4 hs-MOD/par"],
+      ["Contribución marginal unitaria — Sport", "$520 / par · 8 hs-MOD/par"],
+      ["Horas MOD disponibles semana próxima", "3.200 horas"]
+    ],
+    preguntas: [
+      {
+        prompt: "El pedido especial ofrece $320 por par, muy por debajo del precio de lista ($600) y también por debajo del costo total unitario ($350 = $250 variable + $100 fijo asignado). ¿Qué deberías hacer?",
+        opciones: [
+          "Rechazarlo, porque $320 no cubre el costo total unitario de $350",
+          "Aceptarlo: el costo relevante es el variable ($250), y $320 lo supera en $70 por par, generando contribución marginal adicional sin afectar las ventas regulares",
+          "Aceptarlo solo si se cobra el precio de lista completo",
+          "Rechazarlo porque cualquier pedido por debajo del costo total genera pérdida"
+        ],
+        correcta: 1,
+        explicacion: "El costo fijo unitario asignado ($100) es irrelevante: no cambia se acepte o no el pedido. Comparando el precio ofrecido ($320) contra el costo variable relevante ($250), cada par del pedido especial aporta $70 de contribución marginal adicional, aprovechando capacidad ociosa que no compite con las ventas regulares."
+      },
+      {
+        prompt: "¿Cuál es la contribución marginal total que aporta el pedido especial de 150 pares?",
+        opciones: ["$10.500", "$48.000", "$52.500", "$37.500"],
+        correcta: 0,
+        explicacion: "CM unitaria del pedido = $320 − $250 = $70. CM total = $70 × 150 pares = $10.500."
+      },
+      {
+        prompt: "Con solo 3.200 horas MOD disponibles la semana próxima, ¿qué línea conviene priorizar para maximizar la rentabilidad?",
+        opciones: [
+          "Sport, porque tiene mayor contribución marginal unitaria ($520 > $350)",
+          "Básico, porque genera mayor contribución marginal por hora MOD ($87,50 vs. $65,00)",
+          "Repartir las horas en partes iguales entre ambas líneas, sin necesidad de calcular nada más",
+          "Es indistinto: ambas líneas rinden lo mismo por hora MOD"
+        ],
+        correcta: 1,
+        explicacion: "Con un recurso escaso, el criterio correcto es la contribución marginal por unidad del recurso limitante, no la CMu aislada. Básico: $350 ÷ 4 hs = $87,50/hora. Sport: $520 ÷ 8 hs = $65,00/hora. Aunque Sport tiene mayor CMu, Básico rinde más por cada hora MOD disponible — priorizar por CMu llevaría a una decisión subóptima."
+      }
+    ]
+  }
+];
+
+let escenaActual = -1; // -1 = portada
+const resultadosEscena = []; // {correctas, total}
+window.escenas = escenas;
+window.resultadosEscena = resultadosEscena;
+
+function totalPasos() { return escenas.length + 1; } // +1 = pantalla final
+
+function actualizarBarra() {
+  const barra = document.getElementById('barra-progreso');
+  barra.innerHTML = '';
+  for (let i = 0; i < totalPasos(); i++) {
+    const div = document.createElement('div');
+    div.className = 'paso';
+    if (i < escenaActual + 1) div.classList.add('hecho');
+    else if (i === escenaActual + 1) div.classList.add('actual');
+    barra.appendChild(div);
+  }
+}
+
+function ocultarTodo() {
+  document.querySelectorAll('.pantalla').forEach(p => p.classList.remove('activa'));
+}
+
+function renderEscena(idx) {
+  const esc = escenas[idx];
+  const cont = document.getElementById('contenedor-escenas');
+  const div = document.createElement('section');
+  div.className = 'pantalla';
+  div.id = 'escena-' + idx;
+
+  let datosHtml = '';
+  if (esc.datos) {
+    datosHtml = '<div class="datos-box"><strong>Datos de la situación:</strong><table>' +
+      esc.datos.map(d => `<tr><td>${d[0]}</td><td>${d[1]}</td></tr>`).join('') +
+      '</table></div>';
+  }
+
+  let cuerpoHtml = '';
+  if (esc.tipo === 'clasificacion') {
+    cuerpoHtml = esc.items.map((item, qi) => `
+      <div class="pregunta">
+        <div class="p-title">${qi + 1}. ${item.texto}</div>
+        <div class="opciones" id="opts-${idx}-${qi}">
+          ${esc.categorias.map((cat, oi) => `
+            <label id="opt-${idx}-${qi}-${oi}">
+              <input type="radio" name="q-${idx}-${qi}" value="${oi}"> ${cat}
+            </label>`).join('')}
+        </div>
+        <div class="feedback" id="fb-${idx}-${qi}"></div>
+      </div>
+    `).join('');
+  } else {
+    cuerpoHtml = esc.preguntas.map((p, qi) => `
+      <div class="pregunta">
+        <div class="p-title">${qi + 1}. ${p.prompt}</div>
+        <div class="opciones" id="opts-${idx}-${qi}">
+          ${p.opciones.map((op, oi) => `
+            <label id="opt-${idx}-${qi}-${oi}">
+              <input type="radio" name="q-${idx}-${qi}" value="${oi}"> ${op}
+            </label>`).join('')}
+        </div>
+        <div class="feedback" id="fb-${idx}-${qi}"></div>
+      </div>
+    `).join('');
+  }
+
+  div.innerHTML = `
+    <div class="escena-header">
+      <span class="tag">${esc.dia} · Día ${idx + 1} de ${escenas.length}</span>
+      <h2>${esc.titulo}</h2>
+      <div class="herramienta">${esc.herramienta}</div>
+    </div>
+    <div class="narrativa">${esc.narrativa}</div>
+    ${datosHtml}
+    ${cuerpoHtml}
+    <div class="acciones">
+      <button id="btn-verificar-${idx}" onclick="verificarEscena(${idx})">Verificar respuestas</button>
+    </div>
+    <div class="resumen-escena" id="resumen-${idx}"></div>
+    <div class="acciones" id="acciones-siguiente-${idx}" style="display:none;">
+      <button onclick="irEscena(${idx + 1})">${idx === escenas.length - 1 ? 'Ver balance de la semana →' : 'Siguiente día →'}</button>
+    </div>
+  `;
+  cont.appendChild(div);
+}
+
+function getItemsDeEscena(esc) {
+  return esc.tipo === 'clasificacion' ? esc.items : esc.preguntas;
+}
+
+function verificarEscena(idx) {
+  const esc = escenas[idx];
+  const items = getItemsDeEscena(esc);
+  let correctas = 0;
+
+  items.forEach((item, qi) => {
+    const seleccionado = document.querySelector(`input[name="q-${idx}-${qi}"]:checked`);
+    const fb = document.getElementById(`fb-${idx}-${qi}`);
+    const numOpciones = esc.tipo === 'clasificacion' ? esc.categorias.length : item.opciones.length;
+    for (let oi = 0; oi < numOpciones; oi++) {
+      const lab = document.getElementById(`opt-${idx}-${qi}-${oi}`);
+      if (lab) lab.classList.remove('correcta', 'incorrecta');
+    }
+    const correctaIdx = item.correcta;
+    if (!seleccionado) {
+      fb.className = 'feedback bad';
+      fb.textContent = 'No respondida. ' + item.explicacion;
+      document.getElementById(`opt-${idx}-${qi}-${correctaIdx}`).classList.add('correcta');
+      return;
+    }
+    const elegido = parseInt(seleccionado.value, 10);
+    if (elegido === correctaIdx) {
+      correctas++;
+      fb.className = 'feedback ok';
+      fb.textContent = 'Correcto. ' + item.explicacion;
+      document.getElementById(`opt-${idx}-${qi}-${elegido}`).classList.add('correcta');
+    } else {
+      fb.className = 'feedback bad';
+      fb.textContent = 'Incorrecto. ' + item.explicacion;
+      document.getElementById(`opt-${idx}-${qi}-${elegido}`).classList.add('incorrecta');
+      document.getElementById(`opt-${idx}-${qi}-${correctaIdx}`).classList.add('correcta');
+    }
+  });
+
+  resultadosEscena[idx] = { correctas, total: items.length };
+
+  const resumen = document.getElementById(`resumen-${idx}`);
+  resumen.style.display = 'block';
+  resumen.textContent = `Resultado del día: ${correctas} / ${items.length} correctas.`;
+
+  document.getElementById(`btn-verificar-${idx}`).disabled = true;
+  document.getElementById(`acciones-siguiente-${idx}`).style.display = 'block';
+}
+
+function irEscena(idx) {
+  ocultarTodo();
+  actualizarBarra();
+  if (idx >= escenas.length) {
+    mostrarFinal();
+    document.getElementById('pantalla-final').classList.add('activa');
+    escenaActual = escenas.length;
+    actualizarBarra();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    return;
+  }
+  escenaActual = idx;
+  if (!document.getElementById('escena-' + idx)) {
+    renderEscena(idx);
+  }
+  document.getElementById('escena-' + idx).classList.add('activa');
+  actualizarBarra();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function mostrarFinal() {
+  let totalCorrectas = 0, totalPreguntas = 0;
+  const tbody = document.getElementById('tabla-resumen-body');
+  tbody.innerHTML = '';
+  escenas.forEach((esc, idx) => {
+    const r = resultadosEscena[idx] || { correctas: 0, total: getItemsDeEscena(esc).length };
+    totalCorrectas += r.correctas;
+    totalPreguntas += r.total;
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${esc.dia}<br><span style="color:#666;font-weight:normal;">${esc.titulo}</span></td><td>${esc.herramienta}</td><td>${r.correctas} / ${r.total}</td>`;
+    tbody.appendChild(tr);
+  });
+
+  document.getElementById('puntaje-final-num').textContent = `${totalCorrectas} / ${totalPreguntas}`;
+
+  const pct = totalPreguntas ? (totalCorrectas / totalPreguntas) * 100 : 0;
+  let nota = 'Insuficiente grave';
+  let mensaje = 'La semana fue difícil. Antes de la próxima, conviene repasar las Clases 1 a 4 completas.';
+  if (pct >= 90) { nota = 'Distinguido'; mensaje = 'Gestión impecable. El equipo tomó cada decisión con el respaldo técnico correcto — así se gerencia con información, no con intuición.'; }
+  else if (pct >= 75) { nota = 'Bueno'; mensaje = 'Muy buena semana de gestión, con algunos detalles para afinar. Repasá los días con más errores antes del Parcial 1.'; }
+  else if (pct >= 60) { nota = 'Aprobado'; mensaje = 'La empresa sobrevivió la semana, pero con decisiones que podrían haber sido mejores. Vale la pena repasar los fundamentos.'; }
+  else if (pct >= 40) { nota = 'Insuficiente'; mensaje = 'Varias decisiones de la semana no tuvieron respaldo técnico correcto. Conviene repasar antes de seguir avanzando.'; }
+
+  document.getElementById('puntaje-final-nota').textContent = nota;
+  document.getElementById('mensaje-final-narrativa').textContent = mensaje;
+}
+
+function reiniciar() {
+  resultadosEscena.length = 0;
+  document.getElementById('contenedor-escenas').innerHTML = '';
+  escenaActual = -1;
+  ocultarTodo();
+  document.getElementById('pantalla-portada').classList.add('activa');
+  actualizarBarra();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+actualizarBarra();
+</script>
+
+<script>
+/* Embebida en valeriayashan.com.ar: avisa su alto a la página que la contiene. */
+(function(){
+  function send(){ try{ parent.postMessage({type:'calc-height',h:document.documentElement.scrollHeight},location.origin); }catch(e){} }
+  window.addEventListener('load',send);
+  window.addEventListener('resize',send);
+  if(window.ResizeObserver) new ResizeObserver(send).observe(document.body);
+})();
+</script>
+</body>
+</html>

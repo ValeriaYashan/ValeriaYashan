@@ -3,6 +3,7 @@ title: "Calculadora de punto de equilibrio"
 description: "Cargá precio, costo variable y costos fijos y calculá cuántas unidades necesitás vender para no perder plata, con gráfico y escenarios."
 materia: costos
 tipo: herramienta
+orden: 1
 tags: ["punto de equilibrio", "CVU", "contribución marginal"]
 ---
 

@@ -3,6 +3,7 @@ title: "Misión Mermeladas del Delta: juego de revisión"
 description: "Actividad gamificada de cierre que integra las cinco unidades de la materia en un único caso. Autoevaluación de repaso, de unos 30 minutos."
 materia: costos
 tipo: herramienta
+orden: 3
 tags: ["repaso", "gamificación", "toma de decisiones"]
 ---
 

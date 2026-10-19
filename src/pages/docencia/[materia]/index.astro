@@ -9,7 +9,9 @@ export function getStaticPaths() {
 const { m } = Astro.props;
 const entradas = (await getCollection('materias')).filter((c) => c.data.materia === m.slug && !c.data.draft);
 const clases = entradas.filter((c) => c.data.tipo === 'clase').sort((a, b) => (a.data.clase ?? 0) - (b.data.clase ?? 0));
-const herramientas = entradas.filter((c) => c.data.tipo === 'herramienta');
+const herramientas = entradas
+  .filter((c) => c.data.tipo === 'herramienta')
+  .sort((a, b) => (a.data.orden ?? 99) - (b.data.orden ?? 99));
 const slugDe = (c: (typeof entradas)[number]) => c.id.split('/').pop()?.replace(/\.mdx?$/, '');
 ---
 

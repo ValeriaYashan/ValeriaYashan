@@ -21,6 +21,7 @@ const materias = defineCollection({
     materia: z.enum(['costos', 'adm-estrategica']),
     tipo: z.enum(['clase', 'herramienta']).default('clase'),
     clase: z.number().optional(),
+    orden: z.number().optional(),
     fecha: z.coerce.date().optional(),
     tags: z.array(z.string()).default([]),
     draft: z.boolean().default(false),
