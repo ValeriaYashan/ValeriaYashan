@@ -12,6 +12,10 @@ const clases = entradas.filter((c) => c.data.tipo === 'clase').sort((a, b) => (a
 const herramientas = entradas
   .filter((c) => c.data.tipo === 'herramienta')
   .sort((a, b) => (a.data.orden ?? 99) - (b.data.orden ?? 99));
+const apuntes = entradas
+  .filter((c) => c.data.tipo === 'apunte')
+  .sort((a, b) => (a.data.orden ?? 99) - (b.data.orden ?? 99));
+const sinClases = (m as any).sinClases === true;
 const docentes = (m as any).docentes as undefined | { intro: string; actividades: { nombre: string; objetivo: string }[]; uso: string };
 const slugDe = (c: (typeof entradas)[number]) => c.id.split('/').pop()?.replace(/\.mdx?$/, '');
 ---
@@ -69,8 +73,23 @@ const slugDe = (c: (typeof entradas)[number]) => c.id.split('/').pop()?.replace(
           </ol>
         </div>
       )}
-      <h2 class="mat-h2" id="clases">Clases</h2>
-      {clases.length === 0 ? (
+      {apuntes.length > 0 && (
+        <div class="mat-tools">
+          <h2 class="mat-h2">Apuntes</h2>
+          <ol class="mat-list">
+            {apuntes.map((c) => (
+              <li>
+                <a href={`/docencia/${m.slug}/${slugDe(c)}`} class="mat-item">
+                  <span class="mat-title">{c.data.title}</span>
+                  <span class="mat-desc">{c.data.description}</span>
+                </a>
+              </li>
+            ))}
+          </ol>
+        </div>
+      )}
+      {!sinClases && <h2 class="mat-h2" id="clases">Clases</h2>}
+      {sinClases ? null : clases.length === 0 ? (
         <p class="mat-empty">Las clases se irán publicando a lo largo del cuatrimestre.</p>
       ) : (
         <ol class="mat-list">

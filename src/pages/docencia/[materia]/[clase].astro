@@ -22,6 +22,7 @@ const todas = (await getCollection('materias'))
   .filter((c) => c.data.materia === m.slug && !c.data.draft && c.data.tipo === 'clase')
   .sort((a, b) => (a.data.clase ?? 0) - (b.data.clase ?? 0));
 const esHerramienta = entry.data.tipo === 'herramienta';
+const esApunte = entry.data.tipo === 'apunte';
 const idx = todas.findIndex((c) => c.id === entry.id);
 const slugDe = (c: (typeof todas)[number]) => c.id.split('/').pop()!.replace(/\.mdx?$/, '');
 const anterior = idx > 0 ? todas[idx - 1] : null;
@@ -36,7 +37,7 @@ const siguiente = idx < todas.length - 1 ? todas[idx + 1] : null;
       <div class="container">
         <p class="clase-back"><a href={`/docencia/${m.slug}`}>&larr; Volver a {m.corto}</a></p>
         <p class="clase-crumb"><a href="/docencia">Materias</a> / <a href={`/docencia/${m.slug}`}>{m.corto}</a></p>
-        <p class="clase-num">{esHerramienta ? 'Herramienta interactiva' : `Clase ${entry.data.clase}`}</p>
+        <p class="clase-num">{esHerramienta ? 'Herramienta interactiva' : esApunte ? 'Apunte' : `Clase ${entry.data.clase}`}</p>
         <h1>{entry.data.title}</h1>
         <p class="clase-desc">{entry.data.description}</p>
       </div>
@@ -47,7 +48,7 @@ const siguiente = idx < todas.length - 1 ? todas[idx + 1] : null;
     </div>
 
     <p class="container clase-back clase-back--foot"><a href={`/docencia/${m.slug}`}>&larr; Volver a {m.corto}</a></p>
-    {!esHerramienta && <nav class="container clase-nav" aria-label="Navegación entre clases">
+    {!esHerramienta && !esApunte && <nav class="container clase-nav" aria-label="Navegación entre clases">
       {anterior ? <a href={`/docencia/${m.slug}/${slugDe(anterior)}`}>← {anterior.data.title}</a> : <span></span>}
       {siguiente ? <a href={`/docencia/${m.slug}/${slugDe(siguiente)}`}>{siguiente.data.title} →</a> : <span></span>}
     </nav>}

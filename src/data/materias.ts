@@ -37,6 +37,7 @@ export const materias = [
   },
   {
     slug: 'egci-pm',
+    sinClases: true,
     nombre: 'EGCI Máster en Project Management',
     corto: 'EGCI Máster PM',
     universidad: 'EGCI Escuela de Gerencia',
