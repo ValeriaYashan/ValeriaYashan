@@ -28,7 +28,7 @@ const anterior = idx > 0 ? todas[idx - 1] : null;
 const siguiente = idx < todas.length - 1 ? todas[idx + 1] : null;
 ---
 
-<BaseLayout title={`${entry.data.title} — ${m.corto}`} description={entry.data.description} noindex>
+<BaseLayout title={`${entry.data.title} — ${m.corto}`} description={entry.data.description} noindex={!esHerramienta}>
   <link slot="head" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/katex.min.css" />
 
   <article class="clase">

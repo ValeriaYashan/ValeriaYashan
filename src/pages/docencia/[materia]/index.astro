@@ -13,7 +13,7 @@ const herramientas = entradas.filter((c) => c.data.tipo === 'herramienta');
 const slugDe = (c: (typeof entradas)[number]) => c.id.split('/').pop()?.replace(/\.mdx?$/, '');
 ---
 
-<BaseLayout title={`${m.nombre} — Material de cátedra`} description={m.descripcion} noindex>
+<BaseLayout title={`${m.nombre} — Material de cátedra`} description={m.descripcion}>
   <section class="mat-hero">
     <div class="container">
       <p class="mat-crumb"><a href="/docencia">Materias universitarias</a> / {m.corto}</p>

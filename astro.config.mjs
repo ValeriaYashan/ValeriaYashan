@@ -7,9 +7,9 @@ export default defineConfig({
   site: 'https://valeriayashan.com.ar',
   integrations: [
     sitemap({
-      // El material de cátedra no compite con la marca en Google:
-      // solo el índice /docencia/ queda en el sitemap.
-      filter: (page) => !/\/docencia\/.+/.test(page),
+      // Quedan en el sitemap /docencia, las páginas de cada materia y las herramientas
+      // (muestra pública de la docencia). Los apuntes de cada clase quedan fuera.
+      filter: (page) => !/\/docencia\/[^/]+\/(?!herramienta-)[^/]+/.test(page),
     }),
   ],
   markdown: {
