@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+import { materias } from '../../../data/materias';
+
+export async function getStaticPaths() {
+  const clases = (await getCollection('materias')).filter((c) => !c.data.draft);
+  return clases.map((c) => ({
+    params: {
+      materia: c.data.materia,
+      clase: c.id.split('/').pop()!.replace(/\.mdx?$/, ''),
+    },
+    props: { entry: c },
+  }));
+}
+
+const { entry } = Astro.props;
+const m = materias.find((x) => x.slug === entry.data.materia)!;
+const { Content } = await render(entry);
+
+const todas = (await getCollection('materias'))
+  .filter((c) => c.data.materia === m.slug && !c.data.draft)
+  .sort((a, b) => a.data.clase - b.data.clase);
+const idx = todas.findIndex((c) => c.id === entry.id);
+const slugDe = (c: (typeof todas)[number]) => c.id.split('/').pop()!.replace(/\.mdx?$/, '');
+const anterior = idx > 0 ? todas[idx - 1] : null;
+const siguiente = idx < todas.length - 1 ? todas[idx + 1] : null;
+---
+
+<BaseLayout title={`${entry.data.title} — ${m.corto}`} description={entry.data.description} noindex>
+  <link slot="head" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/katex.min.css" />
+
+  <article class="clase">
+    <header class="clase-head">
+      <div class="container">
+        <p class="clase-crumb"><a href="/docencia">Materias</a> / <a href={`/docencia/${m.slug}`}>{m.corto}</a></p>
+        <p class="clase-num">Clase {entry.data.clase}</p>
+        <h1>{entry.data.title}</h1>
+        <p class="clase-desc">{entry.data.description}</p>
+      </div>
+    </header>
+
+    <div class="container clase-body">
+      <Content />
+    </div>
+
+    <nav class="container clase-nav" aria-label="Navegación entre clases">
+      {anterior ? <a href={`/docencia/${m.slug}/${slugDe(anterior)}`}>← {anterior.data.title}</a> : <span></span>}
+      {siguiente ? <a href={`/docencia/${m.slug}/${slugDe(siguiente)}`}>{siguiente.data.title} →</a> : <span></span>}
+    </nav>
+  </article>
+</BaseLayout>
+
+<style>
+  .clase-head { padding: var(--space-xl) 0 var(--space-lg); background: var(--color-surface); border-bottom: 1px solid var(--color-border); }
+  .clase-crumb { font-size: 0.85rem; color: var(--color-muted); margin-bottom: 0.75rem; }
+  .clase-num { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 0.4rem; }
+  .clase-head h1 { font-size: clamp(1.7rem, 4vw, 2.4rem); margin-bottom: 0.75rem; }
+  .clase-desc { color: var(--color-muted); max-width: 60ch; }
+  .clase-body { padding-top: var(--space-lg); padding-bottom: var(--space-lg); }
+  .clase-body :global(h2) { font-size: 1.5rem; margin: 2rem 0 0.75rem; }
+  .clase-body :global(h3) { font-size: 1.2rem; margin: 1.5rem 0 0.5rem; }
+  .clase-body :global(p), .clase-body :global(ul), .clase-body :global(ol) { margin-bottom: 1rem; }
+  .clase-body :global(ul), .clase-body :global(ol) { padding-left: 1.5rem; }
+  .clase-body :global(table) { width: 100%; border-collapse: collapse; margin: 1.25rem 0; font-size: 0.95rem; display: block; overflow-x: auto; }
+  .clase-body :global(th), .clase-body :global(td) { border: 1px solid var(--color-border); padding: 0.5rem 0.75rem; text-align: left; }
+  .clase-body :global(th) { background: var(--color-surface); }
+  .clase-body :global(blockquote) { border-left: 3px solid var(--color-accent); padding-left: 1rem; color: var(--color-muted); margin: 1.25rem 0; }
+  .clase-body :global(.katex-display) { overflow-x: auto; overflow-y: hidden; padding: 0.25rem 0; }
+  .clase-nav { display: flex; justify-content: space-between; gap: 1rem; padding-bottom: var(--space-xl); font-size: 0.95rem; }
+</style>

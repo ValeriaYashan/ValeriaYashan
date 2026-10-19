@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { materias } from '../../../data/materias';
+
+export function getStaticPaths() {
+  return materias.map((m) => ({ params: { materia: m.slug }, props: { m } }));
+}
+const { m } = Astro.props;
+const clases = (await getCollection('materias'))
+  .filter((c) => c.data.materia === m.slug && !c.data.draft)
+  .sort((a, b) => a.data.clase - b.data.clase);
+---
+
+<BaseLayout title={`${m.nombre} — Material de cátedra`} description={m.descripcion} noindex>
+  <section class="mat-hero">
+    <div class="container">
+      <p class="mat-crumb"><a href="/docencia">Materias universitarias</a> / {m.corto}</p>
+      <h1>{m.nombre}</h1>
+      <p class="mat-uni">{m.universidad}</p>
+      <p class="mat-lead">{m.descripcion}</p>
+    </div>
+  </section>
+
+  <section class="mat-list-section">
+    <div class="container">
+      {clases.length === 0 ? (
+        <p class="mat-empty">Las clases se irán publicando a lo largo del cuatrimestre.</p>
+      ) : (
+        <ol class="mat-list">
+          {clases.map((c) => (
+            <li>
+              <a href={`/docencia/${m.slug}/${c.id.split('/').pop()?.replace(/\.mdx?$/, '')}`} class="mat-item">
+                <span class="mat-num">Clase {c.data.clase}</span>
+                <span class="mat-title">{c.data.title}</span>
+                <span class="mat-desc">{c.data.description}</span>
+              </a>
+            </li>
+          ))}
+        </ol>
+      )}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .mat-hero { padding: var(--space-xl) 0 var(--space-lg); background: var(--color-surface); border-bottom: 1px solid var(--color-border); }
+  .mat-crumb { font-size: 0.85rem; color: var(--color-muted); margin-bottom: 0.75rem; }
+  .mat-hero h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 0.4rem; }
+  .mat-uni { color: var(--color-accent); font-weight: 600; font-size: 0.9rem; margin-bottom: 1rem; }
+  .mat-lead { color: var(--color-muted); max-width: 60ch; }
+  .mat-list-section { padding: var(--space-xl) 0; }
+  .mat-list { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+  .mat-item { display: grid; gap: 0.2rem; padding: 1rem 1.25rem; background: #fff; border: 1px solid var(--color-border); border-radius: 10px; text-decoration: none; color: var(--color-text); transition: border-color 0.2s; }
+  .mat-item:hover { border-color: var(--color-accent); opacity: 1; }
+  .mat-num { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-accent); }
+  .mat-title { font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; }
+  .mat-desc { color: var(--color-muted); font-size: 0.92rem; }
+  .mat-empty { color: var(--color-muted); }
+</style>

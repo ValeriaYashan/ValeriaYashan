@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { materias } from '../../data/materias';
+
+const clases = (await getCollection('materias')).filter((c) => !c.data.draft);
+const cantidad = (slug: string) => clases.filter((c) => c.data.materia === slug).length;
+---
+
+<BaseLayout
+  title="Materias universitarias — Valeria Yashan"
+  description="Material de cátedra de Costos para la Toma de Decisiones y Administración Estratégica: apuntes, ejercicios y guías por clase."
+>
+  <section class="doc-hero">
+    <div class="container">
+      <p class="doc-eyebrow">Docencia</p>
+      <h1>Materias universitarias</h1>
+      <p class="doc-lead">Apuntes, ejercicios resueltos y guías de estudio de las materias que dicto en la universidad. Material de consulta para mis alumnos.</p>
+    </div>
+  </section>
+
+  <section class="doc-grid-section">
+    <div class="container">
+      <div class="doc-grid">
+        {materias.map((m) => (
+          <a href={`/docencia/${m.slug}`} class="doc-card">
+            <p class="doc-card-uni">{m.universidad}</p>
+            <h2>{m.nombre}</h2>
+            <p>{m.descripcion}</p>
+            <span class="doc-card-link">
+              {cantidad(m.slug) > 0 ? `Ver ${cantidad(m.slug)} ${cantidad(m.slug) === 1 ? 'clase' : 'clases'} →` : 'Ver materia →'}
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .doc-hero { padding: var(--space-xl) 0 var(--space-lg); background: var(--color-surface); border-bottom: 1px solid var(--color-border); }
+  .doc-eyebrow { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 0.5rem; }
+  .doc-hero h1 { font-size: clamp(2rem, 4vw, 2.75rem); margin-bottom: 1rem; }
+  .doc-lead { color: var(--color-muted); font-size: 1.1rem; max-width: 60ch; }
+  .doc-grid-section { padding: var(--space-xl) 0; }
+  .doc-grid { display: grid; gap: var(--space-md); grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .doc-card { display: flex; flex-direction: column; gap: 0.6rem; padding: var(--space-md); background: #fff; border: 1px solid var(--color-border); border-radius: 12px; text-decoration: none; color: var(--color-text); transition: transform 0.2s, box-shadow 0.2s; }
+  .doc-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.08); opacity: 1; }
+  .doc-card-uni { font-size: 0.8rem; color: var(--color-muted); }
+  .doc-card h2 { font-size: 1.35rem; }
+  .doc-card p { color: var(--color-muted); font-size: 0.95rem; }
+  .doc-card-link { margin-top: auto; color: var(--color-accent); font-weight: 600; font-size: 0.95rem; }
+</style>

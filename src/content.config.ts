@@ -13,4 +13,17 @@ const blog = defineCollection({
   }),
 });
 
-export const collections = { blog };
+const materias = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/materias' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    materia: z.enum(['costos', 'adm-estrategica']),
+    clase: z.number(),
+    fecha: z.coerce.date().optional(),
+    tags: z.array(z.string()).default([]),
+    draft: z.boolean().default(false),
+  }),
+});
+
+export const collections = { blog, materias };
