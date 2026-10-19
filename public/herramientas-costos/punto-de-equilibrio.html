@@ -1,0 +1,474 @@
+<!doctype html><html lang="es" data-theme="light"><head><meta charset=utf8><meta name="robots" content="noindex, follow"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Calculadora de Punto de Equilibrio</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Mono:wght@400;500&family=Public+Sans:wght@400;600&display=swap">
+<style>
+/* Layout: herramienta de dos zonas. A la izquierda los cuatro datos, a la derecha la respuesta en una frase, el gráfico de cruce entre ingresos y costos y tres escenarios. Misma familia visual que la landing de consultoría. */
+:root {
+  --bg: #F2F4F1;
+  --surface: #E7EBE6;
+  --fg: #101C1A;
+  --muted: #465652;
+  --line: #C7D0CA;
+  --accent: #1E6B57;
+  --on-accent: #FFFFFF;
+  --mark: #F2C12E;
+  --on-mark: #101C1A;
+  --s1: #2F6FDB;
+  --s2: #D2601F;
+  --good: #1E6B57;
+  --bad: #B3361F;
+  --font-display: 'Bricolage Grotesque', 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'Public Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0D1513; --surface: #131E1B; --fg: #E6EDE9; --muted: #A3B3AD; --line: #2A3A35;
+    --accent: #5CC2A3; --on-accent: #0D1513; --mark: #E8BF45; --on-mark: #0D1513;
+    --s1: #4F8EE8; --s2: #D9744E; --good: #5CC2A3; --bad: #FF9C85;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0D1513; --surface: #131E1B; --fg: #E6EDE9; --muted: #A3B3AD; --line: #2A3A35;
+  --accent: #5CC2A3; --on-accent: #0D1513; --mark: #E8BF45; --on-mark: #0D1513;
+  --s1: #4F8EE8; --s2: #D9744E; --good: #5CC2A3; --bad: #FF9C85;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 1.0625rem; line-height: 1.6; }
+h1, h2, h3 { font-family: var(--font-display); margin: 0; text-wrap: balance; letter-spacing: -0.015em; }
+p { margin: 0; max-width: 65ch; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+.wrap { max-width: 72rem; margin-inline: auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.band { padding-block: clamp(2.5rem, 6vw, 4.5rem); }
+.stack { display: grid; gap: 1rem; min-width: 0; }
+.label { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.lead { color: var(--muted); font-size: 1.1875rem; }
+
+.top { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding-block: 1.25rem; flex-wrap: wrap; }
+.brand { font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500; }
+
+.intro { padding-block: clamp(1.5rem, 4vw, 3rem) clamp(1.5rem, 3vw, 2.5rem); }
+h1 { font-size: clamp(2rem, 4.8vw, 3.4rem); line-height: 1.06; font-weight: 700; letter-spacing: -0.025em; }
+
+.tool { display: grid; grid-template-columns: minmax(0, 1fr); gap: 2.5rem; align-items: start; }
+@media (min-width: 62rem) { .tool { grid-template-columns: minmax(0, 21rem) minmax(0, 1fr); gap: 3.5rem; } }
+
+/* Datos */
+.inputs { display: grid; gap: 1.25rem; border-top: 3px solid var(--fg); padding-top: 1.25rem; }
+.field { display: grid; gap: 0.35rem; }
+.field label { font-weight: 600; }
+.field small { color: var(--muted); font-size: 0.875rem; line-height: 1.4; }
+.inp { display: flex; align-items: stretch; border: 1px solid var(--line); border-radius: 0.375rem; background: var(--bg); }
+.inp:focus-within { border-color: var(--accent); outline: 3px solid var(--accent); outline-offset: 1px; }
+.inp span { display: flex; align-items: center; padding-inline: 0.85rem 0.25rem; color: var(--muted); font-family: var(--font-mono); }
+.inp input { flex: 1; min-width: 0; min-height: 48px; border: 0; background: transparent; color: var(--fg); font: inherit; font-size: 1.125rem; font-variant-numeric: tabular-nums; padding: 0.5rem 0.85rem 0.5rem 0.35rem; outline: none; }
+.note { font-size: 0.9rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: 1rem; }
+
+/* Resultados */
+.results { display: grid; gap: 2rem; min-width: 0; }
+.headline { font-size: clamp(1.6rem, 3.4vw, 2.4rem); line-height: 1.15; font-weight: 700; }
+.sub { color: var(--muted); font-size: 1.1875rem; margin-top: 0.5rem; }
+.metrics { margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 0 2.5rem; }
+.metrics div { display: grid; gap: 0.2rem; padding-block: 0.9rem; border-top: 1px solid var(--line); align-content: start; min-width: 0; }
+.metrics dt { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.metrics dd { margin: 0; font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.metrics dd small { display: block; font-family: var(--font-body); font-size: 0.875rem; font-weight: 400; color: var(--muted); line-height: 1.4; }
+.good { color: var(--good); }
+.bad { color: var(--bad); }
+.status { display: inline-flex; align-items: center; gap: 0.35rem; font-family: var(--font-body); font-size: 0.9rem; font-weight: 600; }
+
+.chart-block { display: grid; gap: 0.75rem; min-width: 0; }
+.legend { display: flex; flex-wrap: wrap; gap: 0.4rem 1.25rem; font-size: 0.9rem; }
+.legend span { display: inline-flex; align-items: center; gap: 0.5rem; }
+.sw { display: inline-block; width: 1.6rem; height: 0; border-top: 3px solid; }
+.sw.s1 { border-color: var(--s1); }
+.sw.s2 { border-color: var(--s2); }
+.sw.ref { border-top: 2px dashed var(--muted); }
+.dot { width: 0.8rem; height: 0.8rem; border-radius: 50%; background: var(--mark); border: 2px solid var(--fg); display: inline-block; }
+.chart { position: relative; min-width: 0; touch-action: pan-y; }
+.chart svg { display: block; max-width: 100%; overflow: visible; }
+.grid { stroke: var(--line); stroke-width: 1; }
+.axis { stroke: var(--muted); stroke-width: 1; }
+.tick { fill: var(--muted); font: 11px var(--font-mono); }
+.s1l { stroke: var(--s1); stroke-width: 2.5; fill: none; stroke-linecap: round; }
+.s2l { stroke: var(--s2); stroke-width: 2.5; fill: none; stroke-linecap: round; }
+.ref { stroke: var(--muted); stroke-width: 1.5; stroke-dasharray: 5 4; fill: none; }
+.lab { fill: var(--fg); font: 600 12px var(--font-body); paint-order: stroke; stroke: var(--bg); stroke-width: 4px; stroke-linejoin: round; }
+.axt { fill: var(--muted); font: 11px var(--font-mono); }
+.tip { position: absolute; top: 0; left: 0; pointer-events: none; background: var(--surface); border: 1px solid var(--line); border-radius: 0.375rem; padding: 0.5rem 0.7rem; font-size: 0.8125rem; line-height: 1.45; white-space: nowrap; font-variant-numeric: tabular-nums; z-index: 2; }
+.tip b { font-weight: 600; }
+
+details { border-top: 1px solid var(--line); padding-top: 0.75rem; }
+summary { cursor: pointer; font-weight: 600; min-height: 44px; display: flex; align-items: center; }
+.tablewrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 0.9rem; font-variant-numeric: tabular-nums; }
+th, td { text-align: right; padding: 0.45rem 0.75rem; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; }
+th { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+tr.be td { font-weight: 600; background: var(--surface); }
+
+.scen { list-style: none; margin: 0; padding: 0; }
+.scen li { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 0.25rem 1.25rem; padding-block: 0.8rem; border-top: 1px solid var(--line); align-items: baseline; }
+.scen li:last-child { border-bottom: 1px solid var(--line); }
+.scen .u { font-family: var(--font-display); font-weight: 700; font-size: 1.15rem; font-variant-numeric: tabular-nums; text-align: right; }
+.scen .d { font-variant-numeric: tabular-nums; color: var(--good); font-weight: 600; min-width: 5.5rem; text-align: right; }
+@media (max-width: 34rem) { .scen li { grid-template-columns: minmax(0, 1fr) auto; } .scen .d { grid-column: 2; } }
+.scen-note { color: var(--muted); font-size: 0.95rem; margin-top: 0.75rem; }
+.fine { font-size: 0.875rem; color: var(--muted); }
+.alert { border: 1px solid var(--bad); border-radius: 0.375rem; padding: 1rem 1.1rem; font-weight: 600; }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0.7rem 1.5rem; border-radius: 0.375rem; font-weight: 600; text-decoration: none; background: var(--mark); color: var(--on-mark); }
+.btn:hover { filter: brightness(1.05); }
+.cta { background: var(--fg); color: var(--bg); }
+.cta h2 { font-size: clamp(1.75rem, 4vw, 2.6rem); line-height: 1.12; font-weight: 700; }
+.cta p { color: var(--bg); opacity: 0.8; font-size: 1.1875rem; }
+.cta .label { color: var(--bg); opacity: 0.7; }
+.cta :focus-visible { outline-color: var(--mark); }
+footer { padding-block: 1.75rem; }
+footer .wrap { display: flex; justify-content: space-between; gap: 0.75rem 2rem; flex-wrap: wrap; font-family: var(--font-mono); font-size: 0.8125rem; color: var(--muted); }
+footer a { text-underline-offset: 3px; }
+</style>
+
+<header class="wrap top">
+  <span class="brand">Valeria Yashan · PM &amp; Strategy</span>
+  <span class="label">Herramienta de costos</span>
+</header>
+
+<main>
+  <section class="intro">
+    <div class="wrap stack">
+      <h1>Calculadora de punto de equilibrio</h1>
+      <p class="lead">Cargá tus números y mirá cuánto necesitás vender cada mes para no perder plata.</p>
+    </div>
+  </section>
+
+  <section class="band" style="padding-top: 0">
+    <div class="wrap tool">
+      <form class="inputs" id="form" onsubmit="return false" autocomplete="off">
+        <div class="field">
+          <label for="price">Precio de venta por unidad</label>
+          <div class="inp"><span aria-hidden="true">$</span><input id="price" inputmode="decimal" value="12.000"></div>
+          <small>Sin IVA.</small>
+        </div>
+        <div class="field">
+          <label for="vcost">Costo variable por unidad</label>
+          <div class="inp"><span aria-hidden="true">$</span><input id="vcost" inputmode="decimal" value="7.200"></div>
+          <small>Materiales, comisiones y todo lo que sube con cada venta.</small>
+        </div>
+        <div class="field">
+          <label for="fixed">Costos fijos por mes</label>
+          <div class="inp"><span aria-hidden="true">$</span><input id="fixed" inputmode="decimal" value="4.500.000"></div>
+          <small>Alquiler, sueldos fijos, sistemas: lo que pagás venda lo que venda.</small>
+        </div>
+        <div class="field">
+          <label for="qty">Unidades que vendés hoy por mes</label>
+          <div class="inp"><span aria-hidden="true">u.</span><input id="qty" inputmode="decimal" value="1.200"></div>
+          <small>Opcional. Sirve para calcular tu margen de seguridad y tu resultado.</small>
+        </div>
+        <p class="note">Los valores cargados son un ejemplo. Reemplazalos por los tuyos y el resultado se actualiza solo.</p>
+      </form>
+
+      <div class="results">
+        <p class="alert" id="invalid" hidden>Para calcular el equilibrio, el precio tiene que ser mayor al costo variable y los costos fijos tienen que ser mayores a cero.</p>
+
+        <div id="out" class="results">
+          <div>
+            <h2 class="headline" id="headline"></h2>
+            <p class="sub" id="sub"></p>
+          </div>
+
+          <dl class="metrics">
+            <div><dt>Contribución por unidad</dt><dd id="m-cm"></dd></div>
+            <div><dt>Margen de contribución</dt><dd id="m-pct"></dd></div>
+            <div><dt>Resultado mensual</dt><dd id="m-res"></dd></div>
+            <div><dt>Margen de seguridad</dt><dd id="m-mos"></dd></div>
+          </dl>
+
+          <div class="chart-block">
+            <span class="label">Ingresos y costos según lo que vendés</span>
+            <div class="legend" aria-hidden="true">
+              <span><i class="sw s1"></i>Ingresos</span>
+              <span><i class="sw s2"></i>Costos totales</span>
+              <span><i class="sw ref"></i>Costos fijos</span>
+              <span><i class="dot"></i>Punto de equilibrio</span>
+            </div>
+            <div class="chart" id="chart"></div>
+            <details>
+              <summary>Ver los datos del gráfico en tabla</summary>
+              <div class="tablewrap"><table id="tbl"></table></div>
+            </details>
+          </div>
+
+          <div>
+            <span class="label">Qué mueve más el equilibrio</span>
+            <ul class="scen" id="scen" style="margin-top: 0.75rem"></ul>
+            <p class="scen-note" id="scen-note"></p>
+          </div>
+
+          <p class="fine">El modelo supone precio y costo variable constantes y costos fijos que no cambian dentro del rango que se muestra. No incluye impuestos sobre ventas ni financiación.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band cta">
+    <div class="wrap stack" style="gap: 1.25rem">
+      <span class="label">Siguiente paso</span>
+      <h2>¿Lo calculamos con los números reales de tu empresa?</h2>
+      <p>Lo armamos por producto o por línea de servicio, con tus costos reales, y definimos qué cambiar primero.</p>
+      <div><a class="btn" href="https://valeriayashan.com.ar" target="_blank" rel="noopener">Escribime desde valeriayashan.com.ar</a></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Valeria Yashan · PM &amp; Strategy</span>
+    <a href="https://valeriayashan.com.ar" target="_blank" rel="noopener">valeriayashan.com.ar</a>
+  </div>
+</footer>
+
+<script>
+/*CALC-START*/
+function parseNum(s) {
+  if (s == null) return NaN;
+  s = String(s).replace(/[\s$]/g, '');
+  if (!s) return NaN;
+  if (s.indexOf('.') > -1 && s.indexOf(',') > -1) s = s.replace(/\./g, '').replace(',', '.');
+  else if (s.indexOf(',') > -1) s = s.replace(',', '.');
+  else if (/^\d{1,3}(\.\d{3})+$/.test(s)) s = s.replace(/\./g, '');
+  var n = Number(s);
+  return isFinite(n) ? n : NaN;
+}
+function calc(p, v, F, q) {
+  if (!(p > 0) || !(v >= 0) || !(F > 0) || !(p > v)) return null;
+  var cm = p - v, pe = F / cm;
+  var r = { p: p, v: v, F: F, cm: cm, cmPct: cm / p, pe: pe, peUnits: Math.ceil(pe), pePesos: pe * p };
+  if (q >= 0 && isFinite(q)) {
+    r.q = q;
+    r.result = cm * q - F;
+    r.mos = q > 0 ? (q - pe) / q : null;
+  }
+  return r;
+}
+function niceTicks(max, count) {
+  var raw = max / count;
+  var mag = Math.pow(10, Math.floor(Math.log10(raw)));
+  var norm = raw / mag;
+  var step = (norm <= 1 ? 1 : norm <= 2 ? 2 : norm <= 5 ? 5 : 10) * mag;
+  var top = Math.ceil(max / step - 1e-9) * step;
+  var t = [];
+  for (var x = 0; x <= top + step / 1e6; x += step) t.push(x);
+  return t;
+}
+/*CALC-END*/
+
+(function () {
+  var nf = new Intl.NumberFormat('es-AR', { maximumFractionDigits: 0 });
+  var nf1 = new Intl.NumberFormat('es-AR', { maximumFractionDigits: 1 });
+  var pf = new Intl.NumberFormat('es-AR', { style: 'percent', maximumFractionDigits: 1 });
+  function money(n) { return (n < 0 ? '−' : '') + '$ ' + nf.format(Math.abs(Math.round(n))); }
+  function compact(n) {
+    if (n >= 1e6) return nf1.format(n / 1e6) + ' M';
+    if (n >= 1e3) return nf.format(n / 1e3) + ' mil';
+    return nf.format(n);
+  }
+  var el = function (id) { return document.getElementById(id); };
+  var inputs = { price: el('price'), vcost: el('vcost'), fixed: el('fixed'), qty: el('qty') };
+  var chartEl = el('chart');
+  var current = null, geo = null;
+
+  function read() {
+    return {
+      p: parseNum(inputs.price.value),
+      v: parseNum(inputs.vcost.value),
+      F: parseNum(inputs.fixed.value),
+      q: inputs.qty.value.trim() === '' ? NaN : parseNum(inputs.qty.value)
+    };
+  }
+
+  function update() {
+    var d = read();
+    var r = calc(d.p, d.v, d.F, d.q);
+    current = r;
+    el('invalid').hidden = !!r;
+    el('out').hidden = !r;
+    if (!r) return;
+
+    el('headline').textContent = 'Necesitás vender ' + nf.format(r.peUnits) + ' unidades por mes para no perder plata.';
+    el('sub').textContent = 'Eso equivale a ' + money(r.pePesos) + ' de ventas mensuales.';
+    el('m-cm').textContent = money(r.cm);
+    el('m-pct').textContent = pf.format(r.cmPct);
+
+    var res = el('m-res'), mos = el('m-mos');
+    if (r.result === undefined) {
+      res.innerHTML = '—<small>Cargá tus ventas actuales para verlo.</small>';
+      mos.innerHTML = '—<small>Cargá tus ventas actuales para verlo.</small>';
+    } else {
+      var gain = r.result >= 0;
+      res.innerHTML = '<span class="' + (gain ? 'good' : 'bad') + '">' + money(r.result) + '</span>' +
+        '<small><span class="status ' + (gain ? 'good' : 'bad') + '">' + (gain ? '▲ Ganancia' : '▼ Pérdida') + '</span> con ' + nf.format(r.q) + ' unidades</small>';
+      if (r.q >= r.pe && r.mos !== null) {
+        mos.innerHTML = pf.format(r.mos) + '<small>Cuánto pueden caer tus ventas antes de perder plata.</small>';
+      } else {
+        mos.innerHTML = '<span class="bad">Negativo</span><small>Te faltan ' + nf.format(Math.ceil(r.pe - r.q)) + ' unidades para llegar al equilibrio.</small>';
+      }
+    }
+    scenarios(r);
+    table(r);
+    drawChart();
+  }
+
+  function scenarios(r) {
+    var list = [
+      { name: 'Subir el precio 5 %', r: calc(r.p * 1.05, r.v, r.F) },
+      { name: 'Bajar el costo variable 5 %', r: calc(r.p, r.v * 0.95, r.F) },
+      { name: 'Bajar los costos fijos 10 %', r: calc(r.p, r.v, r.F * 0.9) }
+    ];
+    var best = null, html = '';
+    list.forEach(function (s) {
+      var diff = s.r ? s.r.peUnits - r.peUnits : 0;
+      if (!best || diff < best.diff) best = { name: s.name, diff: diff };
+      html += '<li><span>' + s.name + '</span><span class="u">' + (s.r ? nf.format(s.r.peUnits) + ' u.' : '—') + '</span><span class="d">' +
+        (diff < 0 ? '−' + nf.format(Math.abs(diff)) + ' u.' : diff > 0 ? '+' + nf.format(diff) + ' u.' : 'sin cambio') + '</span></li>';
+    });
+    el('scen').innerHTML = html;
+    el('scen-note').textContent = best && best.diff < 0
+      ? 'Con tus números, el cambio que más acerca el equilibrio es: ' + best.name.charAt(0).toLowerCase() + best.name.slice(1) + '.'
+      : '';
+  }
+
+  function table(r) {
+    var xmax = geo ? geo.xmax : r.pe * 1.6;
+    var pts = [0, 1, 2, 3, 4, 5].map(function (i) { return Math.round(xmax * i / 5); });
+    pts.push(r.peUnits);
+    pts = pts.filter(function (v, i, a) { return a.indexOf(v) === i; }).sort(function (a, b) { return a - b; });
+    var h = '<thead><tr><th>Unidades</th><th>Ingresos</th><th>Costos totales</th><th>Resultado</th></tr></thead><tbody>';
+    pts.forEach(function (u) {
+      var inc = u * r.p, cost = r.F + u * r.v;
+      h += '<tr' + (u === r.peUnits ? ' class="be"' : '') + '><td>' + nf.format(u) + (u === r.peUnits ? ' (equilibrio)' : '') + '</td><td>' + money(inc) + '</td><td>' + money(cost) + '</td><td>' + money(inc - cost) + '</td></tr>';
+    });
+    el('tbl').innerHTML = h + '</tbody>';
+  }
+
+  function drawChart() {
+    var r = current;
+    var W = chartEl.clientWidth;
+    if (!r || !W) return;
+    var H = Math.max(270, Math.min(380, Math.round(W * 0.55)));
+    var m = { t: 26, r: 14, b: 42, l: 54 };
+    var pw = W - m.l - m.r, ph = H - m.t - m.b;
+    var xRaw = Math.max(r.pe * 1.6, r.q ? r.q * 1.15 : 0);
+    var xT = niceTicks(xRaw, 5), xmax = xT[xT.length - 1];
+    var yT = niceTicks(r.p * xmax, 4), ymax = yT[yT.length - 1];
+    var xs = function (x) { return m.l + x / xmax * pw; };
+    var ys = function (y) { return m.t + ph - y / ymax * ph; };
+    geo = { W: W, H: H, m: m, pw: pw, xmax: xmax, xs: xs, ys: ys };
+
+    var s = '<svg width="' + W + '" height="' + H + '" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Gráfico de ingresos y costos totales según las unidades vendidas. Se cruzan en ' + nf.format(r.peUnits) + ' unidades.">';
+    yT.forEach(function (t) {
+      s += '<line class="grid" x1="' + m.l + '" x2="' + (W - m.r) + '" y1="' + ys(t) + '" y2="' + ys(t) + '"/>';
+      s += '<text class="tick" x="' + (m.l - 8) + '" y="' + (ys(t) + 4) + '" text-anchor="end">' + compact(t) + '</text>';
+    });
+    xT.forEach(function (t, i) {
+      var anchor = i === xT.length - 1 ? 'end' : (i === 0 ? 'start' : 'middle');
+      s += '<text class="tick" x="' + xs(t) + '" y="' + (ys(0) + 18) + '" text-anchor="' + anchor + '">' + nf.format(t) + '</text>';
+    });
+    s += '<line class="axis" x1="' + m.l + '" x2="' + (W - m.r) + '" y1="' + ys(0) + '" y2="' + ys(0) + '"/>';
+    s += '<text class="axt" x="' + m.l + '" y="12">Pesos por mes</text>';
+    s += '<text class="axt" x="' + (W - m.r) + '" y="' + (H - 6) + '" text-anchor="end">Unidades vendidas por mes</text>';
+
+    if (r.q > 0 && r.q <= xmax) {
+      var qx = xs(r.q), right = qx > W * 0.7;
+      s += '<line class="ref" x1="' + qx + '" x2="' + qx + '" y1="' + m.t + '" y2="' + ys(0) + '"/>';
+      s += '<text class="lab" x="' + (qx + (right ? -6 : 6)) + '" y="' + (m.t + 14) + '" text-anchor="' + (right ? 'end' : 'start') + '">Hoy: ' + nf.format(r.q) + ' u.</text>';
+    }
+
+    var yInc = ys(r.p * xmax), yCost = ys(r.F + r.v * xmax), yFix = ys(r.F);
+    s += '<line class="ref" x1="' + xs(0) + '" x2="' + xs(xmax) + '" y1="' + yFix + '" y2="' + yFix + '"/>';
+    s += '<line class="s2l" x1="' + xs(0) + '" y1="' + yFix + '" x2="' + xs(xmax) + '" y2="' + yCost + '"/>';
+    s += '<line class="s1l" x1="' + xs(0) + '" y1="' + ys(0) + '" x2="' + xs(xmax) + '" y2="' + yInc + '"/>';
+
+    var lx = W - m.r - 4, costBelow = (yFix - yCost) >= 30;
+    s += '<text class="lab" x="' + lx + '" y="' + (yInc - 8) + '" text-anchor="end">Ingresos</text>';
+    s += '<text class="lab" x="' + lx + '" y="' + (costBelow ? yCost + 17 : yCost - 8) + '" text-anchor="end">Costos totales</text>';
+    s += '<text class="lab" x="' + lx + '" y="' + (yFix + 17) + '" text-anchor="end">Costos fijos</text>';
+
+    var bx = xs(r.pe), by = ys(r.pe * r.p);
+    s += '<circle cx="' + bx + '" cy="' + by + '" r="6.5" fill="var(--mark)" stroke="var(--bg)" stroke-width="2"/>';
+    var beText = 'Equilibrio: ' + nf.format(r.peUnits) + ' u.';
+    if (bx >= 150) s += '<text class="lab" x="' + (bx - 10) + '" y="' + (by - 12) + '" text-anchor="end">' + beText + '</text>';
+    else s += '<text class="lab" x="' + (bx + 10) + '" y="' + (by + 20) + '">' + beText + '</text>';
+
+    s += '<g id="hv" visibility="hidden"><line id="hvl" class="ref" y1="' + m.t + '" y2="' + ys(0) + '"/>' +
+      '<circle id="hv1" r="4.5" fill="var(--s1)" stroke="var(--bg)" stroke-width="2"/>' +
+      '<circle id="hv2" r="4.5" fill="var(--s2)" stroke="var(--bg)" stroke-width="2"/></g></svg>' +
+      '<div class="tip" id="tip" hidden></div>';
+    chartEl.innerHTML = s;
+  }
+
+  function hide() {
+    var hv = document.getElementById('hv'), tip = document.getElementById('tip');
+    if (hv) hv.setAttribute('visibility', 'hidden');
+    if (tip) tip.hidden = true;
+  }
+  function move(e) {
+    var r = current;
+    if (!r || !geo) return;
+    var svg = chartEl.querySelector('svg');
+    if (!svg) return;
+    var box = svg.getBoundingClientRect();
+    var px = e.clientX - box.left;
+    if (px < geo.m.l || px > geo.W - geo.m.r) { hide(); return; }
+    var x = (px - geo.m.l) / geo.pw * geo.xmax;
+    var inc = x * r.p, cost = r.F + x * r.v, res = inc - cost;
+    var hv = document.getElementById('hv'), tip = document.getElementById('tip');
+    hv.setAttribute('visibility', 'visible');
+    var line = document.getElementById('hvl');
+    line.setAttribute('x1', px); line.setAttribute('x2', px);
+    var c1 = document.getElementById('hv1'), c2 = document.getElementById('hv2');
+    c1.setAttribute('cx', px); c1.setAttribute('cy', geo.ys(inc));
+    c2.setAttribute('cx', px); c2.setAttribute('cy', geo.ys(cost));
+    tip.innerHTML = '<b>' + nf.format(Math.round(x)) + ' unidades</b><br>Ingresos: ' + money(inc) + '<br>Costos totales: ' + money(cost) +
+      '<br>' + (res >= 0 ? 'Ganancia: ' : 'Pérdida: ') + money(Math.abs(res));
+    tip.hidden = false;
+    var tw = tip.offsetWidth;
+    var left = px + 14;
+    if (left + tw > geo.W - 4) left = px - 14 - tw;
+    tip.style.left = Math.max(4, left) + 'px';
+    tip.style.top = (geo.m.t + 6) + 'px';
+  }
+  chartEl.addEventListener('pointermove', move);
+  chartEl.addEventListener('pointerdown', move);
+  chartEl.addEventListener('pointerleave', hide);
+
+  Object.keys(inputs).forEach(function (k) {
+    inputs[k].addEventListener('input', update);
+    inputs[k].addEventListener('blur', function () {
+      var n = parseNum(inputs[k].value);
+      if (!isNaN(n)) inputs[k].value = nf.format(n);
+    });
+  });
+  if (window.ResizeObserver) new ResizeObserver(function () { drawChart(); }).observe(chartEl);
+  else window.addEventListener('resize', drawChart);
+  update();
+})();
+</script>
+
+
+<script>
+/* Embebida en valeriayashan.com.ar: avisa su alto a la página que la contiene. */
+(function(){
+  function send(){ try{ parent.postMessage({type:'calc-height',h:document.documentElement.scrollHeight},location.origin); }catch(e){} }
+  window.addEventListener('load',send);
+  window.addEventListener('resize',send);
+  if(window.ResizeObserver) new ResizeObserver(send).observe(document.body);
+})();
+</script>
+</body></html>

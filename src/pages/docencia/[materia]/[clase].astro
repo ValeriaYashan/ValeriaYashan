@@ -19,8 +19,9 @@ const m = materias.find((x) => x.slug === entry.data.materia)!;
 const { Content } = await render(entry);
 
 const todas = (await getCollection('materias'))
-  .filter((c) => c.data.materia === m.slug && !c.data.draft)
-  .sort((a, b) => a.data.clase - b.data.clase);
+  .filter((c) => c.data.materia === m.slug && !c.data.draft && c.data.tipo === 'clase')
+  .sort((a, b) => (a.data.clase ?? 0) - (b.data.clase ?? 0));
+const esHerramienta = entry.data.tipo === 'herramienta';
 const idx = todas.findIndex((c) => c.id === entry.id);
 const slugDe = (c: (typeof todas)[number]) => c.id.split('/').pop()!.replace(/\.mdx?$/, '');
 const anterior = idx > 0 ? todas[idx - 1] : null;
@@ -34,7 +35,7 @@ const siguiente = idx < todas.length - 1 ? todas[idx + 1] : null;
     <header class="clase-head">
       <div class="container">
         <p class="clase-crumb"><a href="/docencia">Materias</a> / <a href={`/docencia/${m.slug}`}>{m.corto}</a></p>
-        <p class="clase-num">Clase {entry.data.clase}</p>
+        <p class="clase-num">{esHerramienta ? 'Herramienta interactiva' : `Clase ${entry.data.clase}`}</p>
         <h1>{entry.data.title}</h1>
         <p class="clase-desc">{entry.data.description}</p>
       </div>
@@ -44,12 +45,21 @@ const siguiente = idx < todas.length - 1 ? todas[idx + 1] : null;
       <Content />
     </div>
 
-    <nav class="container clase-nav" aria-label="Navegación entre clases">
+    {!esHerramienta && <nav class="container clase-nav" aria-label="Navegación entre clases">
       {anterior ? <a href={`/docencia/${m.slug}/${slugDe(anterior)}`}>← {anterior.data.title}</a> : <span></span>}
       {siguiente ? <a href={`/docencia/${m.slug}/${slugDe(siguiente)}`}>{siguiente.data.title} →</a> : <span></span>}
-    </nav>
+    </nav>}
   </article>
 </BaseLayout>
+
+<script is:inline>
+  // Ajusta el alto de las herramientas embebidas (iframes del mismo sitio).
+  window.addEventListener('message', function (e) {
+    if (e.origin !== location.origin || !e.data || e.data.type !== 'calc-height') return;
+    var f = document.querySelector('iframe[data-autoheight]');
+    if (f) f.style.height = e.data.h + 'px';
+  });
+</script>
 
 <style>
   .clase-head { padding: var(--space-xl) 0 var(--space-lg); background: var(--color-surface); border-bottom: 1px solid var(--color-border); }
@@ -67,5 +77,6 @@ const siguiente = idx < todas.length - 1 ? todas[idx + 1] : null;
   .clase-body :global(th) { background: var(--color-surface); }
   .clase-body :global(blockquote) { border-left: 3px solid var(--color-accent); padding-left: 1rem; color: var(--color-muted); margin: 1.25rem 0; }
   .clase-body :global(.katex-display) { overflow-x: auto; overflow-y: hidden; padding: 0.25rem 0; }
+  .clase-body :global(iframe) { width: 100%; min-height: 700px; border: 1px solid var(--color-border); border-radius: 12px; background: #fff; }
   .clase-nav { display: flex; justify-content: space-between; gap: 1rem; padding-bottom: var(--space-xl); font-size: 0.95rem; }
 </style>

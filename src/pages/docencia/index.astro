@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 import { materias } from '../../data/materias';
 
-const clases = (await getCollection('materias')).filter((c) => !c.data.draft);
+const clases = (await getCollection('materias')).filter((c) => !c.data.draft && c.data.tipo === 'clase');
 const cantidad = (slug: string) => clases.filter((c) => c.data.materia === slug).length;
 ---
 

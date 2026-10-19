@@ -7,9 +7,10 @@ export function getStaticPaths() {
   return materias.map((m) => ({ params: { materia: m.slug }, props: { m } }));
 }
 const { m } = Astro.props;
-const clases = (await getCollection('materias'))
-  .filter((c) => c.data.materia === m.slug && !c.data.draft)
-  .sort((a, b) => a.data.clase - b.data.clase);
+const entradas = (await getCollection('materias')).filter((c) => c.data.materia === m.slug && !c.data.draft);
+const clases = entradas.filter((c) => c.data.tipo === 'clase').sort((a, b) => (a.data.clase ?? 0) - (b.data.clase ?? 0));
+const herramientas = entradas.filter((c) => c.data.tipo === 'herramienta');
+const slugDe = (c: (typeof entradas)[number]) => c.id.split('/').pop()?.replace(/\.mdx?$/, '');
 ---
 
 <BaseLayout title={`${m.nombre} — Material de cátedra`} description={m.descripcion} noindex>
@@ -24,13 +25,30 @@ const clases = (await getCollection('materias'))
 
   <section class="mat-list-section">
     <div class="container">
+      {herramientas.length > 0 && (
+        <div class="mat-tools">
+          <h2 class="mat-h2">Herramientas</h2>
+          <ul class="mat-list">
+            {herramientas.map((c) => (
+              <li>
+                <a href={`/docencia/${m.slug}/${slugDe(c)}`} class="mat-item mat-item--tool">
+                  <span class="mat-num">Herramienta interactiva</span>
+                  <span class="mat-title">{c.data.title}</span>
+                  <span class="mat-desc">{c.data.description}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+      <h2 class="mat-h2">Clases</h2>
       {clases.length === 0 ? (
         <p class="mat-empty">Las clases se irán publicando a lo largo del cuatrimestre.</p>
       ) : (
         <ol class="mat-list">
           {clases.map((c) => (
             <li>
-              <a href={`/docencia/${m.slug}/${c.id.split('/').pop()?.replace(/\.mdx?$/, '')}`} class="mat-item">
+              <a href={`/docencia/${m.slug}/${slugDe(c)}`} class="mat-item">
                 <span class="mat-num">Clase {c.data.clase}</span>
                 <span class="mat-title">{c.data.title}</span>
                 <span class="mat-desc">{c.data.description}</span>
@@ -56,5 +74,8 @@ const clases = (await getCollection('materias'))
   .mat-num { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-accent); }
   .mat-title { font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; }
   .mat-desc { color: var(--color-muted); font-size: 0.92rem; }
+  .mat-h2 { font-size: 1.3rem; margin: 0 0 0.9rem; }
+  .mat-tools { margin-bottom: var(--space-lg); }
+  .mat-item--tool { border-left: 4px solid var(--color-accent); }
   .mat-empty { color: var(--color-muted); }
 </style>
