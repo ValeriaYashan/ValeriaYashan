@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Misión Mermeladas del Delta · Costos USI 2026</title>
+<style>
+:root{--ok:#2D6A2D;--bad:#A32D2D;--bg:#F1F5EC;--tx:#1F2A1A}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:Calibri,Arial,sans-serif;background:var(--bg);color:var(--tx);line-height:1.45;font-size:17px}
+header{background:#fff;border-bottom:4px solid #548135;padding:8px 14px;display:flex;align-items:center;gap:12px}
+header img{height:38px}header h1{font-size:1.05rem;margin:0;color:#2D4A1E;line-height:1.2}header small{color:#555;font-size:.75rem}
+.hud{position:sticky;top:0;z-index:5;background:#2D4A1E;color:#fff;padding:6px 12px}
+.hud .r{display:flex;gap:10px;align-items:center;justify-content:space-between;font-size:.9rem}.hud b{color:#FFE08A}
+.hud button{background:#548135;color:#fff;border:0;border-radius:8px;padding:6px 10px;font:inherit;font-size:.85rem;min-height:34px}
+.hl{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:5px}
+.hl div{font-size:.68rem;color:#D8E8CC}.bar{height:7px;background:#16300F;border-radius:4px;overflow:hidden;margin-top:2px}
+.bar i{display:block;height:100%;width:50%;transition:width .6s,background .6s;background:#E0A800}
+.board{margin-top:4px;font-size:.78rem;color:#D8E8CC}.board .on{color:#FFE08A;font-weight:bold}
+main{max-width:760px;margin:0 auto;padding:12px 12px 90px}
+.card{background:#fff;border:1px solid #d5dccf;border-radius:14px;padding:16px;margin:12px 0;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.hero{background:linear-gradient(160deg,#2D4A1E,#548135);color:#fff;border:0}.hero h2{color:#fff;font-size:1.5rem;margin:.1em 0}
+.hero p{margin:.4em 0}
+.notice{background:#EAF3E3;border-left:5px solid #548135;padding:9px 12px;border-radius:6px;margin:10px 0;font-size:.92rem}
+.map{display:flex;align-items:stretch;margin:6px 0}
+.tile{flex:1;border-radius:8px;color:#fff;padding:6px 4px;text-align:center;font-size:.62rem;opacity:.4;transition:.4s;line-height:1.15}
+.tile b{display:block;font-size:1rem}.tile.on{opacity:.9;outline:3px solid #FFE08A}.tile.done{opacity:1;box-shadow:0 0 12px rgba(255,224,138,.9)}
+.arw{width:12px;display:flex;align-items:center;justify-content:center;color:#bbb;font-size:1.1rem;font-weight:bold}.arw.lit{color:#E0A800}
+.conn{font-size:.85rem}.conn div{background:#FFF8DC;border-left:4px solid #E0A800;padding:5px 9px;margin:4px 0;border-radius:4px}
+h2{margin:.2em 0;color:#2D4A1E;font-size:1.25rem}
+.prog{font-size:.8rem;color:#666;margin:2px 0 4px}
+.pbar{height:6px;background:#dfe7d8;border-radius:3px;margin:6px 0 2px}.pbar i{display:block;height:100%;background:#548135;border-radius:3px;transition:width .4s}
+.q{font-weight:bold;margin:.5em 0 .3em}
+.opt{display:block;width:100%;text-align:left;border:1.5px solid #b9c4b0;background:#fff;border-radius:12px;padding:12px;margin:8px 0;font:inherit;cursor:pointer;min-height:48px}
+.opt:active:not([disabled]){background:#f0f6ea}.opt.right{background:#DDF0D8;border-color:var(--ok)}.opt.wrong{background:#F8DCDC;border-color:var(--bad)}.opt.gone{opacity:.25}
+.btn{display:inline-block;background:#2D4A1E;color:#fff;border:0;border-radius:12px;padding:12px 18px;font:inherit;font-weight:bold;cursor:pointer;margin:6px 6px 6px 0;min-height:46px}
+.btn.big{font-size:1.1rem;padding:14px 26px;background:#FFE08A;color:#2D4A1E}.btn.sec{background:#fff;color:#2D4A1E;border:1.5px solid #2D4A1E}.btn[disabled]{opacity:.4;cursor:default}
+.jk{background:#FFF3CC;color:#5A4300;border:1px solid #E0A800;border-radius:16px;padding:6px 12px;font:inherit;font-size:.85rem;cursor:pointer;margin:2px 6px 2px 0;min-height:34px}.jk[disabled]{opacity:.35}
+.fb{margin:8px 0 2px;padding:10px 12px;border-radius:10px;font-size:.95rem;background:#F1F1F1}.fb.ok{background:#E6F3E1}.fb.no{background:#FBEAEA}
+.rep{display:block;margin-top:6px;color:#1F4E79;font-size:.85rem}
+.tool{border:1px solid #d5dccf;border-radius:12px;padding:12px;margin:8px 0}.tool .nm{font-weight:bold;font-size:1.1rem;margin-bottom:6px}
+.ugrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ub{border-radius:10px;color:#fff;border:0;font:inherit;font-size:.88rem;padding:10px 8px;min-height:48px;cursor:pointer;text-align:left}
+.ub[disabled]{cursor:default}.ub.dim{opacity:.35}.ub.right{outline:4px solid #2D6A2D}.ub.wrong{outline:4px solid #A32D2D}
+.num{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0}.num input{font:inherit;font-size:16px;padding:12px;border:1.5px solid #b9c4b0;border-radius:10px;flex:1;min-width:140px}
+table{border-collapse:collapse;width:100%;margin:8px 0;font-size:.9rem}td,th{border:1px solid #cfd8c7;padding:6px 8px;text-align:left}th{background:#EAF3E3}
+.data{background:#FAFAF2;border:1px dashed #b7b08a;border-radius:10px;padding:10px 12px;margin:8px 0;font-size:.93rem}
+.sol{background:#F3F7FB;border-left:4px solid #2E74B5;padding:8px 12px;margin:8px 0;border-radius:6px;font-size:.93rem}
+.retry{background:#F7F2FF;border:1px dashed #7A5BB5;border-radius:12px;padding:10px;margin:10px 0}
+.event{background:#FFF3CC;border:2px solid #E0A800;border-radius:12px;padding:10px 12px;margin:8px 0}
+.badge{display:inline-block;padding:5px 11px;border-radius:14px;color:#fff;margin:3px;font-size:.85rem}
+.hidden{display:none!important}.big{font-size:2rem;font-weight:bold;color:#2D4A1E}
+.ord{list-style:none;margin:8px 0;padding:0}.ord li{display:flex;gap:8px;align-items:center;flex-wrap:wrap;border:1.5px solid #b9c4b0;border-radius:12px;padding:10px;margin:8px 0;background:#fff}
+.ord li.good{background:#DDF0D8;border-color:var(--ok)}.ord li.bad{background:#F8DCDC;border-color:var(--bad)}.ord li span{flex:1;min-width:150px}
+.ord button{border:1px solid #2D4A1E;background:#fff;border-radius:8px;padding:8px 14px;font:inherit;min-height:42px}
+details{margin:8px 0}summary{cursor:pointer;font-weight:bold;color:#2D4A1E;padding:6px 0}
+.hero summary{color:#FFE08A}.hero details label{display:block;margin:8px 0}
+#fab{position:fixed;right:12px;bottom:14px;z-index:9;background:#2E74B5;color:#fff;border:0;border-radius:28px;padding:12px 16px;opacity:.95;font:inherit;font-weight:bold;box-shadow:0 3px 8px rgba(0,0,0,.3)}
+#calc{position:fixed;right:10px;bottom:70px;z-index:9;background:#fff;border:2px solid #2E74B5;border-radius:14px;padding:10px;width:min(300px,calc(100vw - 20px));box-shadow:0 4px 14px rgba(0,0,0,.35)}
+#calc .disp{background:#F3F7FB;border-radius:8px;padding:8px;min-height:3rem;font-size:1.1rem;text-align:right;word-break:break-all}
+#calc .k{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:8px}.k button{font:inherit;font-size:1.1rem;padding:12px 0;border:1px solid #b9c4b0;border-radius:8px;background:#fff;min-height:46px}
+.k button.op{background:#EAF3E3}.k button.eq{background:#2E74B5;color:#fff}
+#glos{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:20;display:flex;align-items:center;justify-content:center;padding:14px}
+#glos .box{background:#fff;border-radius:12px;max-width:640px;width:100%;max-height:85vh;overflow:auto;padding:16px}
+.gl{border-left:5px solid #888;padding:6px 10px;margin:8px 0;background:#FAFAFA}.gl.lock{opacity:.5}
+.plan .it{border-left:5px solid #888;background:#FAFAFA;padding:8px 10px;margin:8px 0;border-radius:4px;font-size:.93rem}
+@media print{.hud,.btn,.noprint,#fab,#calc{display:none!important}body{background:#fff}.card{box-shadow:none;break-inside:avoid}}
+</style></head><body>
+<header><img alt="USI" src="data:image/png;base64,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"><div><h1>Misión Mermeladas del Delta</h1><small>Costos para la Toma de Decisiones · USI 2026 · Cierre del curso</small></div></header>
+<div class="hud"><div class="r"><span><b id="hRonda">Inicio</b></span><span>Puntaje <b id="hPts">0</b></span><span id="hTurn" class="hidden"><b id="hTeam"></b></span><span id="hTime" class="hidden">⏱ <b id="hT">4:00</b></span><span>Comodines <b id="hJk">3</b></span><button id="bGl">Glosario</button></div>
+<div class="hl"><div>Rentabilidad<div class="bar"><i id="hr"></i></div></div><div>Control<div class="bar"><i id="hc"></i></div></div><div>Calidad<div class="bar"><i id="hq"></i></div></div></div>
+<div class="board hidden" id="board"></div></div>
+<main>
+<div class="card hero" id="intro">
+<h2>Usted es el nuevo Controller</h2>
+<p>Mermeladas del Delta S.A. tiene problemas de rentabilidad, control y calidad. Con las herramientas de las cinco unidades del curso, usted debe sanearla en unos 30 minutos.</p>
+<p>Cada decisión correcta mejora la salud de la empresa (las tres barras de arriba); cada error se la baja. Al final recibe un plan de repaso con las clases a revisar.</p>
+<div class="map" id="map0"></div>
+<button class="btn big" id="start">Jugar</button> <button class="btn big hidden" id="resume" style="background:#fff"></button>
+<details><summary>Cómo se juega</summary>
+<p>Recorrido: clasificar herramientas, cinco estaciones (una por unidad), una crisis de gestión, una ronda de conexiones y, si queda algo pendiente, una ronda de rescate. Máximo 30 puntos.</p>
+<p>Cada acierto en el primer intento suma 1 punto. En los cálculos, el primer error recibe una pista según el error que cometió; el segundo intento suma 0,5. Después de un error puede practicar con otras cifras, sin puntos.</p>
+<p>Tiene tres comodines de un solo uso (50/50, Pista y Fórmula) y una calculadora integrada (botón azul «Calc»). Su avance se guarda al comenzar cada tramo en este dispositivo.</p></details>
+<details><summary>Opciones</summary>
+<label><input type="checkbox" id="optTimer"> Modo contrarreloj (4 minutos por estación, sin penalización).</label>
+<label><input type="checkbox" id="optTeams"> Modo equipos para clase (un dispositivo, los equipos se turnan): <select id="nTeams"><option>2</option><option>3</option><option>4</option><option>5</option></select></label>
+<div id="teamNames" class="hidden"></div></details>
+<div class="notice" style="color:#1F2A1A"><b>Esta actividad no afecta su calificación.</b> Es una autoevaluación de cierre.</div>
+</div>
+<div class="card hidden" id="mapCard"><div class="map" id="map"></div><div class="conn" id="conn"></div><div class="pbar"><i id="pb" style="width:0"></i></div></div>
+<div id="stage"></div>
+</main>
+<button id="fab">Calc</button>
+<div id="calc" class="hidden"><div class="disp" id="cd">0</div><div class="k" id="ck"></div><button class="btn sec" id="cuse" style="width:100%;margin-top:8px">Usar en la respuesta</button></div>
+<div id="glos" class="hidden"><div class="box"><h2>Glosario de bolsillo</h2><div id="glBody"></div><button class="btn" id="glX">Cerrar</button></div></div>
+<script>
+const U={U1:{n:"U1 ¿Cuánto cuesta?",c:"#2D4A1E"},U2:{n:"U2 ¿Qué conviene decidir?",c:"#2E74B5"},U3:{n:"U3 ¿Cómo planifico?",c:"#7B5800"},U4:{n:"U4 ¿Cómo controlo?",c:"#404040"},U5:{n:"U5 ¿Cómo aseguro la calidad?",c:"#548135"}};
+const KEYS=Object.keys(U);
+const TOOLS=[
+["Costos indirectos de fabricación (CIF)","U1","Los CIF son un elemento del costo del producto; junto con MP y MOD responden cuánto cuesta producir."],
+["Target Costing","U1","Parte del precio que tolera el mercado y de allí deduce el costo objetivo: es una herramienta de teoría de costos (U1)."],
+["Contribución marginal","U2","Precio menos costos variables: base de toda decisión de corto plazo (U2)."],
+["Punto de equilibrio (CVU)","U2","El análisis costo-volumen-utilidad indica qué volumen cubre los costos totales (U2)."],
+["Presupuesto flexible","U3","Reexpresa el presupuesto al volumen real para medir desvíos limpios: planificación y presupuestos (U3)."],
+["Presupuesto de capital: VAN, TIR y payback","U3","Evalúa inversiones; está en el bloque de planificación y presupuestos (U3)."],
+["Indicadores líderes y rezagados (leading/lagging)","U4","Forman parte del tablero y del Balanced Scorecard, herramientas de control (U4)."],
+["Auditoría operativa","U4","Revisa procesos para detectar ineficiencias y riesgos: control de gestión (U4)."],
+["Gestión de la calidad total (TQM)","U5","Filosofía de calidad que previene fallas: unidad de calidad y costos (U5)."],
+["ISO 14001 y métricas ESG","U5","Sistema de gestión ambiental y métricas de sostenibilidad: cierre de U5."]];
+const STATIONS=[
+{u:"U1",title:"Estación 1 · ¿Cuánto cuesta?",story:"La planta elabora frascos de mermelada de 450 g. Su primera tarea es clasificar y calcular correctamente el costo del producto.",
+mc:{id:"m1",q:"La amortización de la máquina envasadora, que sirve para fabricar los frascos, es:",o:[
+["CIF fijo, y por lo tanto costo del producto.",1,"Correcto. Si el bien se usa para producir, su amortización es un CIF fijo y forma parte del costo del producto."],
+["Gasto de comercialización, porque se usa al final del proceso.",0,"La envasadora forma parte de la fabricación; no se usa para vender ni para cobrar."],
+["Costo del período, porque no varía con la producción.",0,"Que sea fijo no la convierte en costo del período: es un CIF fijo, que en costeo por absorción integra el costo del producto."],
+["Pérdida, porque la máquina se desgasta.",0,"El desgaste de un bien productivo es un costo; la pérdida es un sacrificio sin contraprestación."]]},
+data:"Producción mensual: 30.000 frascos. Materia prima $40/u; mano de obra directa $22/u; CIF variable $8/u; CIF fijos $900.000 por mes.",
+nums:[{id:"n1",t:"Costo unitario de producción por absorción (en $ por frasco).",a:100,tol:0.01,hint:"Sume los tres elementos variables y agregue los CIF fijos divididos por las unidades producidas.",
+sol:["Fórmula: costo unitario = MP + MOD + CIF variable + CIF fijos / unidades.","Sustitución: 40 + 22 + 8 + 900.000 / 30.000.","Resultado: 70 + 30 = $100 por frasco.","Explicación: por absorción el costo del producto incorpora la porción de CIF fijos; por costeo variable sería $70."]}]},
+{u:"U2",title:"Estación 2 · ¿Qué conviene decidir?",story:"Con el costo claro, llegan decisiones de corto plazo: cuántos frascos hay que vender y si conviene aceptar un pedido especial.",
+mc:{id:"m2",q:"Existe capacidad ociosa y llega un pedido especial. Para decidir, el criterio relevante es:",o:[
+["Que el precio supere los costos diferenciales y aporte contribución.",1,"Correcto. Con capacidad ociosa, los costos fijos no cambian: solo importan los costos que varían por aceptar el pedido."],
+["Que el precio supere el costo unitario por absorción.",0,"El costo por absorción incluye CIF fijos que ya existen; no es relevante para esta decisión."],
+["Que el precio sea igual al precio de lista.",0,"El precio de lista no es el criterio: importa si el pedido aporta contribución incremental."],
+["Que el pedido tenga el mayor volumen posible.",0,"Más volumen no garantiza contribución positiva ni resuelve la decisión."]]},
+data:"Precio de venta $130; comisión de ventas $5/u; costo variable de producción $70/u; CIF fijos $900.000 y gastos fijos comerciales y administrativos $540.000 por mes. Capacidad 36.000 u; producción y ventas habituales 30.000 u. Pedido especial: 4.000 u a $90 sin comisión.",
+nums:[{id:"n2",t:"Punto de equilibrio en unidades por mes.",a:26182,tol:1,hint:"Primero calcule la contribución marginal unitaria con todos los costos variables, incluida la comisión; luego divida los costos fijos totales.",
+sol:["Fórmula: PE = costos fijos totales / contribución marginal unitaria.","Sustitución: CMu = 130 − (70 + 5) = 55; CF = 900.000 + 540.000 = 1.440.000; PE = 1.440.000 / 55.","Resultado: 26.182 frascos (26.181,8).","Explicación: por debajo de ese volumen hay pérdida; las ventas habituales (30.000 u) lo superan con un margen de seguridad de 12,7 %."]},
+{id:"n3",t:"Contribución incremental del pedido especial (en $).",a:80000,tol:1,hint:"El pedido no paga comisión y hay 6.000 u de capacidad ociosa, por lo que no desplaza ventas. Use el costo variable de producción.",
+sol:["Fórmula: contribución incremental = (precio − costo variable) × unidades.","Sustitución: (90 − 70) × 4.000.","Resultado: $80.000.","Explicación: cabe en la capacidad ociosa (6.000 u) y los fijos no cambian; conviene aceptarlo."]}]},
+{u:"U3",title:"Estación 3 · ¿Cómo planifico?",story:"Se cierra el mes y hay que evaluar la ejecución del presupuesto, además de decidir si se invierte en una nueva línea de envasado.",
+mc:{id:"m3",q:"La producción real fue mayor a la presupuestada. Para evaluar la eficiencia de los costos variables, se compara el costo real con:",o:[
+["El presupuesto flexible ajustado al volumen real.",1,"Correcto. Aísla el desvío de eficiencia o precio del efecto del volumen."],
+["El presupuesto estático original.",0,"Mezcla el efecto del mayor volumen con el de la eficiencia: el desvío resulta engañoso."],
+["El costo del mes anterior.",0,"No es un estándar de gestión; el contraste debe hacerse contra el presupuesto."],
+["El costo por absorción unitario.",0,"Es un dato de valuación, no el parámetro de control de la ejecución."]]},
+data:"Presupuesto: 30.000 u. Producción real: 32.000 u con costos variables de producción reales por $2.304.000 (el estándar es $70/u). Inversión nueva línea: $2.400.000; flujos de $800.000 anuales durante 4 años; tasa 10 %.",
+nums:[{id:"n4",t:"Desvío del presupuesto flexible de costos variables de producción (en $; indique el monto).",a:64000,tol:1,hint:"Calcule primero cuánto debieron costar 32.000 u al estándar.",
+sol:["Fórmula: desvío = costo real − presupuesto flexible.","Sustitución: 2.304.000 − (70 × 32.000) = 2.304.000 − 2.240.000.","Resultado: $64.000 desfavorable.","Explicación: se gastó más de lo que correspondía al volumen producido."]},
+{id:"n5",t:"VAN de la inversión (en $), con tasa del 10 %.",a:135892,tol:500,hint:"Los flujos iguales forman una anualidad: factor = suma de 1/(1,10)^t para t de 1 a 4, es decir 3,1699.",
+sol:["Fórmula: VAN = flujo × factor de anualidad − inversión.","Sustitución: 800.000 × 3,16987 − 2.400.000.","Resultado: +$135.892; el payback es 3 años (2.400.000 / 800.000).","Explicación: el VAN es positivo, por lo que el proyecto rinde más que el 10 % exigido."]}]},
+{u:"U4",title:"Estación 4 · ¿Cómo controlo?",story:"El directorio pide un tablero de comando para seguir la gestión. Hay que interpretar un indicador y su semáforo.",
+mc:{id:"m4",q:"Las horas de capacitación del personal de planta por trimestre, en un Balanced Scorecard, son un indicador:",o:[
+["Líder (leading) de la perspectiva Aprendizaje y crecimiento.",1,"Correcto. Anticipa mejoras futuras en procesos y resultados; no mide el resultado final."],
+["Rezagado (lagging) de la perspectiva Financiera.",0,"Un indicador financiero rezagado sería, por ejemplo, el margen o el ROI."],
+["Líder de la perspectiva Clientes.",0,"Mide un esfuerzo interno de formación, no la relación con clientes."],
+["Rezagado de la perspectiva Procesos internos.",0,"No mide el resultado de un proceso, sino un insumo que lo habilita."]]},
+data:"Indicador: costo por frasco (menor es mejor). Meta $100; real $108. Semáforo: verde si el cumplimiento es igual o mayor al 100 %, amarillo desde el 90 % de la meta, rojo el resto. Para indicadores de menor es mejor, cumplimiento = meta / real.",
+nums:[{id:"n6",t:"Cumplimiento del indicador (en %; con dos decimales). La resolución indica el color del semáforo.",a:92.59,tol:0.05,hint:"Al ser un indicador de menor es mejor, divida la meta por el valor real.",
+sol:["Fórmula: cumplimiento = meta / real.","Sustitución: 100 / 108.","Resultado: 92,59 %, que corresponde al semáforo amarillo (entre 90 % y 100 %).","Explicación: el desvío no es crítico pero exige un plan de acción; la auditoría operativa puede buscar la causa."]}]},
+{u:"U5",title:"Estación 5 · ¿Cómo aseguro la calidad?",story:"La causa del problema de costos parece estar en la calidad. Corresponde medir los costos de calidad y vincularlos con la gestión ambiental.",
+mc:{id:"m5",q:"La norma que certifica un sistema de gestión ambiental, y la dimensión ESG a la que se vincula, son:",o:[
+["ISO 14001 y la dimensión ambiental (E).",1,"Correcto. ISO 14001 ordena la gestión ambiental y alimenta las métricas de la dimensión E."],
+["ISO 9001 y la dimensión ambiental (E).",0,"ISO 9001 certifica sistemas de gestión de la calidad, no ambiental."],
+["ISO 14001 y la dimensión de gobernanza (G).",0,"La norma es la correcta, pero su foco es ambiental y no de gobernanza."],
+["ISO 9001 y la dimensión social (S).",0,"Se confunden la norma y la dimensión: ISO 9001 es calidad."]]},
+data:"Costos de calidad del período: prevención $120.000; evaluación $180.000; fallas internas $300.000; fallas externas $400.000.",
+nums:[{id:"n7",t:"Porcentaje de los costos de calidad que corresponde a costos de no calidad (fallas internas y externas).",a:70,tol:0.01,hint:"Los costos de no calidad son las fallas internas más las externas; el total incluye las cuatro categorías.",
+sol:["Fórmula: % no calidad = (fallas internas + externas) / costos de calidad totales.","Sustitución: (300.000 + 400.000) / 1.000.000.","Resultado: 70 %.","Explicación: se gasta mucho más en corregir que en prevenir; TQM propone invertir más en prevención para reducir fallas."]}]}];
+const FINAL=[
+{id:"f1",q:"Para calcular el punto de equilibrio (U2) hace falta haber hecho antes, en U1, la:",o:[["Clasificación de costos fijos y variables.",1,"Correcto. Sin esa clasificación por comportamiento no se pueden determinar costos fijos ni contribución marginal."],["Auditoría operativa.",0,"Es una herramienta de control (U4); no es insumo del PE."],["Certificación ISO 9001.",0,"No interviene en el cálculo del PE."],["Evaluación del VAN.",0,"El VAN pertenece a presupuesto de capital (U3)."]]},
+{id:"f2",q:"Un desvío desfavorable detectado en el presupuesto flexible (U3) se integra al control (U4) cuando:",o:[["Se incorpora a un tablero con indicador, meta y semáforo, y se investiga con auditoría operativa.",1,"Correcto. El desvío se transforma en indicador y dispara acciones de control."],["Se ignora hasta el cierre del ejercicio.",0,"El control requiere seguimiento oportuno."],["Se reemplaza por el presupuesto estático.",0,"Eso eliminaría la referencia de eficiencia."],["Se resuelve cambiando el precio de venta.",0,"El precio no corrige un desvío de eficiencia."]]},
+{id:"f3",q:"Los costos de no calidad elevados (U5) afectan los cálculos de U2 porque:",o:[["Reducen la contribución marginal y elevan el punto de equilibrio.",1,"Correcto. Las fallas aumentan el costo por unidad vendible y desplazan el PE hacia arriba."],["No tienen ningún efecto en el CVU.",0,"Sí lo tienen: modifican costos y márgenes."],["Disminuyen los costos fijos.",0,"Las fallas no reducen los costos fijos."],["Eliminan la necesidad de presupuestar.",0,"Hacen más necesario el presupuesto y el control."]]}];
+/* Crisis de gestión: orden correcto = orden del arreglo */
+const CR={story:"Alerta del directorio: el costo real por frasco es $108 contra una meta de $100, el tablero marca amarillo y los reclamos por frascos defectuosos aumentan. Ordene la secuencia de gestión, del primer al último paso.",
+steps:[
+["Calcular el desvío del presupuesto flexible de costos variables (U3).","Primero se mide cuánto y dónde se desvía el costo, aislando el efecto del volumen."],
+["Llevar el desvío al tablero como indicador con meta y semáforo (U4).","Lo medido se convierte en un indicador visible que permite seguimiento oportuno."],
+["Ordenar una auditoría operativa en el proceso de mayor desvío (U4).","El semáforo señala el problema; la auditoría busca la causa en el proceso."],
+["Medir los costos de calidad y de no calidad (U5).","El hallazgo apunta a fallas: corresponde cuantificar cuánto cuestan y cómo se distribuyen."],
+["Recalcular la contribución marginal y el punto de equilibrio con los costos corregidos (U2).","Con la causa identificada y medida, se decide con información actualizada; el ciclo vuelve a U1 y U2."]]};
+/* Variantes para la ronda de rescate (otras cifras o preguntas, mismo concepto) */
+const VAR={
+t1:["Mano de obra directa (MOD)","U1","La MOD es un elemento del costo de producción: responde cuánto cuesta producir (U1)."],
+t2:["Costos estándar","U1","Son costos predeterminados que se estudian en teoría de costos (U1)."],
+t3:["Decisión de hacer o comprar","U2","Es una decisión de corto plazo basada en costos relevantes (U2)."],
+t4:["Factor escaso","U2","Se prioriza por contribución marginal por unidad del recurso escaso: decisiones (U2)."],
+t5:["Presupuesto maestro","U3","Integra los presupuestos operativos y financieros: planificación (U3)."],
+t6:["Análisis de desvíos","U3","Compara real con presupuesto flexible: planificación y control presupuestario (U3)."],
+t7:["Las cuatro perspectivas del Balanced Scorecard","U4","Financiera, clientes, procesos internos y aprendizaje: control de gestión (U4)."],
+t8:["Análisis de riesgos","U4","Se aplica a procesos de auditoría y control: unidad de control de gestión (U4)."],
+t9:["Just in Time (JIT)","U5","Es parte de la filosofía de calidad y eliminación de desperdicios: calidad y costos (U5)."],
+t10:["Costos de prevención, evaluación y fallas","U5","Son las categorías de costos de calidad: U5."],
+m1:{q:"El alquiler del depósito donde se guardan los frascos ya terminados es:",o:[["Gasto de comercialización, costo del período.",1,"Correcto. Si el bien sirve para guardar o vender, no para producir, es costo del período."],["CIF fijo, costo del producto.",0,"El depósito de producto terminado no interviene en la fabricación."],["Materia prima.",0,"No se incorpora físicamente al producto."],["Mano de obra directa.",0,"No es una remuneración al personal que fabrica."]]},
+m2:{q:"Si la planta opera a plena capacidad y un pedido especial desplaza ventas regulares, la decisión debe incorporar:",o:[["El costo de oportunidad: la contribución de las ventas desplazadas.",1,"Correcto. Sin capacidad ociosa, aceptar el pedido implica renunciar a esa contribución."],["Solo los costos fijos de la planta.",0,"Los fijos no cambian y no son relevantes."],["El costo por absorción unitario.",0,"Incluye fijos no relevantes."],["Nada: el pedido siempre conviene si el precio es positivo.",0,"Debe aportar más contribución que lo que se resigna."]]},
+m3:{q:"El presupuesto maestro integra:",o:[["Los presupuestos operativos y financieros en un plan único y articulado.",1,"Correcto. Reúne ventas, producción, compras, costos, caja y estados proyectados."],["Únicamente el presupuesto de ventas.",0,"Es solo uno de sus componentes."],["Los costos reales del período anterior.",0,"Es una proyección, no un registro histórico."],["Solo la evaluación de inversiones.",0,"Eso corresponde al presupuesto de capital."]]},
+m4:{q:"La satisfacción de clientes medida por una encuesta trimestral es, en un BSC, un indicador:",o:[["Rezagado (lagging) de la perspectiva Clientes.",1,"Correcto. Mide un resultado ya producido en la relación con los clientes."],["Líder de la perspectiva Financiera.",0,"La perspectiva no corresponde."],["Líder de la perspectiva Aprendizaje y crecimiento.",0,"Mide un resultado, no una capacidad interna."],["Rezagado de la perspectiva Procesos internos.",0,"Refleja la percepción del cliente, no la eficiencia de un proceso."]]},
+m5:{q:"La inspección de la materia prima recibida, antes de producir, es un costo de:",o:[["Evaluación.",1,"Correcto. Verifica la conformidad antes de que el producto avance."],["Prevención.",0,"La prevención evita que aparezca el defecto (diseño, capacitación)."],["Fallas internas.",0,"Las fallas internas se detectan antes de la entrega pero implican defectos ya producidos."],["Fallas externas.",0,"Ocurren cuando el producto ya llegó al cliente."]]},
+n1:{data:"Producción mensual: 40.000 unidades. MP $55/u; MOD $30/u; CIF variable $15/u; CIF fijos $1.200.000 por mes.",t:"Costo unitario de producción por absorción (en $ por unidad).",a:130,tol:0.01,hint:"Sume los tres elementos variables y agregue los CIF fijos divididos por las unidades producidas.",sol:["Fórmula: costo unitario = MP + MOD + CIF variable + CIF fijos / unidades.","Sustitución: 55 + 30 + 15 + 1.200.000 / 40.000.","Resultado: 100 + 30 = $130 por unidad.","Explicación: por absorción se incorpora la porción de CIF fijos."]},
+n2:{data:"Precio $200; costo variable de producción $110/u; comisión $10/u; CIF fijos $1.000.000 y gastos fijos comerciales y administrativos $760.000 por mes.",t:"Punto de equilibrio en unidades por mes.",a:22000,tol:1,hint:"Calcule la contribución marginal unitaria con la comisión incluida y divida los costos fijos totales.",sol:["Fórmula: PE = costos fijos totales / contribución marginal unitaria.","Sustitución: CMu = 200 − (110 + 10) = 80; CF = 1.760.000; PE = 1.760.000 / 80.","Resultado: 22.000 unidades.","Explicación: por debajo de ese volumen hay pérdida."]},
+n3:{data:"Precio del pedido especial $140 sin comisión; costo variable de producción $110/u; hay capacidad ociosa suficiente. Pedido: 3.000 unidades.",t:"Contribución incremental del pedido especial (en $).",a:90000,tol:1,hint:"Con capacidad ociosa, solo importa el costo variable de producción.",sol:["Fórmula: (precio − costo variable) × unidades.","Sustitución: (140 − 110) × 3.000.","Resultado: $90.000.","Explicación: los fijos no cambian; conviene aceptarlo."]},
+n4:{data:"Costo variable estándar $110/u. Producción real: 41.000 unidades con costos variables reales de $4.633.000.",t:"Desvío del presupuesto flexible de costos variables (en $; indique el monto).",a:123000,tol:1,hint:"Calcule primero cuánto debieron costar 41.000 unidades al estándar.",sol:["Fórmula: desvío = costo real − presupuesto flexible.","Sustitución: 4.633.000 − (110 × 41.000) = 4.633.000 − 4.510.000.","Resultado: $123.000 desfavorable.","Explicación: se gastó más de lo que correspondía al volumen real."]},
+n5:{data:"Inversión $3.000.000; flujos de $1.000.000 anuales durante 4 años; tasa 12 %. Factor de anualidad (12 %, 4 años) = 3,0373.",t:"VAN de la inversión (en $).",a:37349,tol:500,hint:"Multiplique el flujo anual por el factor de anualidad y reste la inversión.",sol:["Fórmula: VAN = flujo × factor de anualidad − inversión.","Sustitución: 1.000.000 × 3,0373 − 3.000.000.","Resultado: +$37.349 (con el factor exacto); payback de 3 años.","Explicación: VAN positivo: rinde más que el 12 % exigido."]},
+n6:{data:"Indicador: tiempo de ciclo de un pedido (menor es mejor). Meta 100 horas; real 125 horas. Semáforo: verde 100 % o más, amarillo desde 90 %, rojo el resto.",t:"Cumplimiento del indicador (en %; con dos decimales).",a:80,tol:0.05,hint:"Es de menor es mejor: divida la meta por el valor real.",sol:["Fórmula: cumplimiento = meta / real.","Sustitución: 100 / 125.","Resultado: 80,00 %: semáforo rojo (menos del 90 %).","Explicación: requiere acción correctiva inmediata."]},
+n7:{data:"Costos de calidad: prevención $90.000; evaluación $210.000; fallas internas $260.000; fallas externas $340.000.",t:"Porcentaje de costos de no calidad sobre el total de costos de calidad (con dos decimales).",a:66.67,tol:0.01,hint:"No calidad = fallas internas más fallas externas; el total suma las cuatro categorías.",sol:["Fórmula: % no calidad = (fallas internas + externas) / total.","Sustitución: (260.000 + 340.000) / 900.000.","Resultado: 66,67 %.","Explicación: dos tercios del gasto en calidad se destinan a corregir."]},
+f1:{q:"El costo estándar (U1) se utiliza en U3 principalmente para:",o:[["Construir el presupuesto flexible y calcular desvíos.",1,"Correcto. Es el parámetro contra el que se compara lo real."],["Fijar el precio de venta al cliente.",0,"El precio considera el mercado y la estrategia."],["Certificar una norma ISO.",0,"No guarda relación directa."],["Eliminar el punto de equilibrio.",0,"El PE sigue siendo necesario."]]},
+f2:{q:"Un VAN positivo (U3) se vincula con el control (U4) cuando:",o:[["Se da seguimiento al proyecto con indicadores del tablero y se audita su ejecución.",1,"Correcto. Lo planificado debe controlarse en su ejecución."],["Se archiva el estudio una vez aprobado.",0,"Sin seguimiento no hay control."],["Se reemplaza por la TIR de otra empresa.",0,"No tiene sentido comparativo."],["Se lo exime de riesgos.",0,"Todo proyecto debe analizarse en sus riesgos."]]},
+f3:{q:"Al evaluar la eliminación de una línea (U2), de los costos de U1 interesan:",o:[["Los costos evitables, que desaparecerían con la línea.",1,"Correcto. Los no evitables permanecen y no son relevantes."],["Todos los costos por absorción.",0,"Incluyen costos que persisten."],["Solo los costos históricos.",0,"Lo relevante es lo que cambia."],["Solo los gastos financieros.",0,"No son el criterio de la decisión."]]}};
+const LBL={t:"Clasificación",m1:"U1",m2:"U2",m3:"U3",m4:"U4",m5:"U5",n1:"U1",n2:"U2",n3:"U2",n4:"U3",n5:"U3",n6:"U4",n7:"U5",f:"Conexiones"};
+const GL={U1:["Costo unitario por absorción","(MP + MOD + CIF variable) + CIF fijos / unidades. Por costeo variable no se incluyen los CIF fijos."],
+U2:["Punto de equilibrio y contribución","CMu = precio − costo variable unitario; PE = costos fijos / CMu. Con capacidad ociosa, un pedido conviene si su precio supera el costo diferencial."],
+U3:["Desvío flexible y VAN","Desvío = real − presupuesto flexible (al volumen real). VAN = flujo × factor de anualidad − inversión; payback = inversión / flujo anual."],
+U4:["Cumplimiento y semáforo","Mayor es mejor: real / meta. Menor es mejor: meta / real. Verde desde 100 %, amarillo desde 90 %, rojo menor."],
+U5:["Costos de no calidad","% no calidad = (fallas internas + externas) / costos de calidad totales. Prevención y evaluación son costos de conformidad."]};
+const CONN={"U1-U2":"La clasificación en fijos y variables (U1) permite calcular la contribución marginal y el punto de equilibrio (U2).","U2-U3":"La contribución y el punto de equilibrio (U2) alimentan el presupuesto maestro y el análisis de inversiones (U3).","U3-U4":"Los desvíos del presupuesto flexible (U3) se transforman en indicadores del tablero (U4).","U4-U5":"El tablero y la auditoría (U4) detectan problemas que los costos de calidad (U5) cuantifican.","U5-U1":"Los costos de no calidad (U5) vuelven a elevar el costo (U1) y desplazan el punto de equilibrio (U2): el ciclo se cierra."};
+
+/* ===== v3: dónde repasar, diagnóstico de errores, eventos ===== */
+const REP={t1:["Clase 2","elementos del costo: MP, MOD y CIF"],t2:["Clase 3","Target Costing e introducción al ABC"],t3:["Clase 4","contribución marginal"],t4:["Clase 5","punto de equilibrio y CVU"],t5:["Clases 7 y 8","presupuesto flexible"],t6:["Clase 9","presupuesto de capital: VAN, TIR y payback"],t7:["Clases 9 y 10","tablero e indicadores líderes y rezagados"],t8:["Clase 10","auditoría operativa"],t9:["Clase 11","TQM y JIT"],t10:["Clase 11","costos de calidad e ISO 14001 / ESG"],
+m1:["Clases 1 y 2","costo del producto frente a costo del período; CIF fijos"],n1:["Clase 2","costeo por absorción frente a costeo variable"],
+m2:["Clases 4 y 6","costos relevantes y pedido especial"],n2:["Clase 5","punto de equilibrio y CVU"],n3:["Clases 4 y 6","contribución marginal y pedido especial"],
+m3:["Clases 7 y 8","presupuesto flexible"],n4:["Clases 7 y 8","presupuesto flexible y desvíos"],n5:["Clase 9","presupuesto de capital: VAN y payback"],
+m4:["Clase 10","Balanced Scorecard"],n6:["Clases 9 y 10","tablero de comando e indicadores"],
+m5:["Clase 11","ISO 14001 y métricas ESG"],n7:["Clase 11","costos de calidad y de no calidad"],
+f1:["Clases 2 y 5","clasificación de costos y punto de equilibrio"],f2:["Clases 8 y 10","desvíos, tablero y auditoría operativa"],f3:["Clases 5 y 11","costos de no calidad y punto de equilibrio"],
+c1:["Clases 8, 10 y 11","secuencia desvío, tablero, auditoría y calidad"]};
+const UOF={m1:"U1",m2:"U2",m3:"U3",m4:"U4",m5:"U5",n1:"U1",n2:"U2",n3:"U2",n4:"U3",n5:"U3",n6:"U4",n7:"U5",f1:"U2",f2:"U4",f3:"U5",c1:"U4"};
+TOOLS.forEach((t,i)=>UOF["t"+(i+1)]=t[1]);
+/* variantes de herramientas: mismo ítem, se asocia por id */
+const DIAG={
+n1:[[70,"Obtuvo $70: es el costo variable. Por absorción falta sumar los CIF fijos por unidad ($900.000 / 30.000)."],[78,"Omitió la mano de obra directa ($22) en la suma."],[30,"$30 es solo la porción de CIF fijos; falta sumar los $70 variables."]],
+n2:[[24000,"Olvidó la comisión: la contribución marginal unitaria es 130 − 75 = 55, no 60."],[16364,"Dejó afuera los gastos fijos comerciales y administrativos ($540.000): los costos fijos totales son $1.440.000."],[11077,"Dividió por el precio de venta; corresponde dividir por la contribución marginal unitaria."],[19200,"Usó el costo variable (75) como divisor; corresponde la contribución marginal unitaria (130 − 75 = 55)."]],
+n3:[[60000,"Descontó la comisión, pero este pedido especial no la paga: la contribución unitaria es 90 − 70 = 20."],[-40000,"Comparó contra el costo por absorción ($100). Con capacidad ociosa, los fijos no cambian y no son relevantes."],[360000,"$360.000 es el ingreso del pedido; falta restar los costos variables."]],
+n4:[[204000,"Comparó contra el presupuesto estático (30.000 u): mezcla el efecto del volumen con el de la eficiencia."],[72,"$72 es el costo unitario real; falta compararlo con el estándar ($70) y multiplicar por las 32.000 unidades."]],
+n5:[[800000,"Sumó los flujos sin descontarlos. Hay que llevarlos a valor actual con el factor de anualidad (3,1699)."],[2535892,"Ese es el valor actual de los flujos; falta restar la inversión de $2.400.000."],[3,"3 es el payback en años, no el VAN."]],
+n6:[[108,"Dividió real / meta. En un indicador de menor es mejor se divide meta / real."],[8,"8 % es el desvío frente a la meta, no el cumplimiento."]],
+n7:[[30,"30 % corresponde a prevención más evaluación (o solo a fallas internas). La no calidad suma fallas internas y externas."],[40,"40 % son solo las fallas externas; falta sumar las internas."]]};
+const DIAGV={
+n1:[[100,"Obtuvo 100: es el costo variable. Falta sumar los CIF fijos por unidad (1.200.000 / 40.000 = 30)."],[30,"30 es solo la porción de CIF fijos."]],
+n2:[[19556,"Olvidó la comisión: la contribución marginal unitaria es 200 − 120 = 80, no 90."],[12500,"Dejó afuera los gastos fijos comerciales y administrativos."]],
+n3:[[60000,"Descontó una comisión que este pedido no paga: (140 − 110) × 3.000."]],
+n4:[[113,"$113 es el costo unitario real; el desvío es (113 − 110) × 41.000."]],
+n5:[[1000000,"Sumó los flujos sin descontarlos al 12 %."],[3037349,"Es el valor actual de los flujos; falta restar la inversión."]],
+n6:[[125,"Dividió real / meta; en un indicador de menor es mejor se divide meta / real."],[25,"25 % es el desvío, no el cumplimiento."]],
+n7:[[33.33,"33,33 % es prevención más evaluación; la no calidad suma fallas internas y externas."],[28.89,"Solo consideró las fallas internas."]]};
+STATIONS.forEach(S=>S.nums.forEach(n=>{n.diag=DIAG[n.id]}));
+Object.keys(DIAGV).forEach(k=>{VAR[k].diag=DIAGV[k]});
+STATIONS[3].nums[0].abs=false;STATIONS[2].nums[0].abs=true;VAR.n4.abs=true;
+const EVENTS=[
+{t:"Pedido grande confirmado",d:"Un cliente mayorista confirma un pedido grande. Recibe un comodín 50/50 adicional.",fx:s=>{P().jk.m++}},
+{t:"Capacitación del personal",d:"La capacitación mejora los procesos: Control y Calidad suben 10 puntos.",fx:s=>{bump("c",10);bump("q",10)}},
+{t:"Reclamo de un cliente",d:"Un lote con defectos llega a un cliente. La Calidad baja 8 puntos. Todavía puede recuperarla con buenas decisiones.",fx:s=>{bump("q",-8)}}];
+const STEPNAME=["Ronda 1","Estación 1","Estación 2","Estación 3","Estación 4","Estación 5","Crisis de gestión","Ronda de conexiones","Ronda de rescate"];
+
+const SKEY="usi_costos_cierre_v3";
+const st={sec:{},total:0,step:-1,teams:null,turn:0,p:{pts:0,jk:{m:1,h:1,f:1}},err:[],resolved:{},gl:{},health:{r:50,c:50,q:50},timer:false,deadline:0,tick:null,ev:[]};
+const $=s=>document.querySelector(s);const stage=$("#stage");
+const P=()=>st.teams?st.teams[st.turn]:st.p;
+const fmt=x=>String(Math.round(x*100)/100).replace(".",",");
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){let j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a}
+function el(t,c,h){const e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e}
+function totalPts(){return Object.values(st.sec).reduce((a,s)=>a+s.p,0)}
+/* salud de la empresa */
+const MET=id=>{const u=UOF[id];return id==="c1"?["r","c","q"]:u==="U1"||u==="U2"?["r"]:u==="U3"||u==="U4"?["c"]:["q"]};
+function bump(m,d){st.health[m]=Math.max(0,Math.min(100,st.health[m]+d));hud()}
+function health(id,ratio,rescue){const d=rescue?(ratio>0?2:0):(ratio>=1?4:ratio>0?1:-3);MET(id).forEach(m=>{st.health[m]=Math.max(0,Math.min(100,st.health[m]+d))})}
+function hud(r){if(r)$("#hRonda").textContent=r;const p=P();$("#hPts").textContent=fmt(p.pts);$("#hJk").textContent=p.jk.m+p.jk.h+p.jk.f;
+ ["r","c","q"].forEach(m=>{const b=$("#h"+m),v=st.health[m];b.style.width=v+"%";b.style.background=v<35?"#D9534F":v<60?"#E0A800":"#6CC04A"});
+ if(st.teams){$("#hTurn").classList.remove("hidden");$("#hTeam").textContent=p.name;$("#board").classList.remove("hidden");
+  $("#board").innerHTML=st.teams.map((t,i)=>`<span class="${i===st.turn?'on':''}">${t.name}: ${fmt(t.pts)}</span>`).join(" · ")}}
+function maxOf(sec,m){st.sec[sec]=st.sec[sec]||{p:0,m:0};st.sec[sec].m+=m;st.total+=m}
+function award(sec,p,first,ctx){const pl=P();const mx=ctx.max||1;
+ if(ctx.rescue){if(p>0){st.resolved[ctx.id]=1;health(ctx.id,1,true)}}
+ else{pl.pts+=p;st.sec[sec].p+=p;health(ctx.id,p/mx,false);if(!first&&!st.err.includes(ctx.id))st.err.push(ctx.id)}hud()}
+function itemDone(){if(st.teams)st.turn=(st.turn+1)%st.teams.length;hud()}
+function repHtml(id){const r=REP[id];return r?`<span class="rep">Dónde repasarlo: ${r[0]} · ${r[1]}</span>`:""}
+/* mapa */
+function mapHtml(){let h="";KEYS.forEach((k,i)=>{const s=st.sec[k],d=s&&s.done;
+ h+=`<div class="tile ${d?'done':''} ${st.cur===k?'on':''}" style="background:${U[k].c}"><b>${k}</b>${U[k].n.slice(3)}</div>`;
+ if(i<4){const n=KEYS[i+1];h+=`<div class="arw ${d&&st.sec[n]&&st.sec[n].done?'lit':''}">›</div>`}});return h}
+function map(){$("#map0").innerHTML=mapHtml();$("#map").innerHTML=mapHtml();
+ const un=[];["U1-U2","U2-U3","U3-U4","U4-U5"].forEach(p=>{const[a,b]=p.split("-");if(st.sec[a]&&st.sec[a].done&&st.sec[b]&&st.sec[b].done)un.push(CONN[p])});
+ if(KEYS.every(k=>st.sec[k]&&st.sec[k].done))un.push(CONN["U5-U1"]);
+ $("#conn").innerHTML=un.length?"<b>Conexiones desbloqueadas</b>"+un.map(x=>`<div>${x}</div>`).join(""):"";
+ $("#pb").style.width=Math.max(0,st.step)/9*100+"%"}
+/* glosario */
+function glos(){$("#glBody").innerHTML=KEYS.map(k=>st.gl[k]?`<div class="gl" style="border-color:${U[k].c}"><b>${k} · ${GL[k][0]}</b><br>${GL[k][1]}</div>`:`<div class="gl lock"><b>${k}</b> · se desbloquea al terminar la estación</div>`).join("");$("#glos").classList.remove("hidden")}
+$("#bGl").onclick=glos;$("#glX").onclick=()=>$("#glos").classList.add("hidden");
+/* calculadora */
+let lastInp=null,expr="";document.addEventListener("focusin",e=>{if(e.target.matches(".num input"))lastInp=e.target});
+const KEYSC=["7","8","9","÷","4","5","6","×","1","2","3","−","0",",","⌫","+","(",")","C","="];
+KEYSC.forEach(k=>{const b=el("button",["÷","×","−","+","⌫","C"].includes(k)?"op":k==="="?"eq":"",k);b.onclick=()=>kp(k);$("#ck").appendChild(b)});
+function calcEval(){try{let s=expr.replace(/×/g,"*").replace(/÷/g,"/").replace(/−/g,"-").replace(/,/g,".");if(!/^[0-9+\-*/().\s]+$/.test(s))return null;const v=Function('"use strict";return ('+s+')')();return isFinite(v)?v:null}catch(e){return null}}
+function kp(k){if(k==="C")expr="";else if(k==="⌫")expr=expr.slice(0,-1);else if(k==="="){const v=calcEval();if(v!==null)expr=String(Math.round(v*10000)/10000).replace(".",",")}else expr+=k;$("#cd").textContent=expr||"0"}
+$("#fab").onclick=()=>$("#calc").classList.toggle("hidden");
+$("#cuse").onclick=()=>{const v=calcEval();const t=v!==null?String(Math.round(v*10000)/10000).replace(".",","):expr;const i=lastInp&&document.body.contains(lastInp)&&!lastInp.disabled?lastInp:document.querySelector("#stage .num input:not([disabled])");if(i){i.value=t;i.focus()}}
+/* temporizador */
+function startTimer(){stopTimer();if(!st.timer)return;st.deadline=Date.now()+240000;$("#hTime").classList.remove("hidden");
+ const t=()=>{const r=Math.max(0,Math.round((st.deadline-Date.now())/1000));$("#hT").textContent=Math.floor(r/60)+":"+String(r%60).padStart(2,"0")};t();st.tick=setInterval(t,500)}
+function stopTimer(){if(st.tick){clearInterval(st.tick);st.tick=null}$("#hTime").classList.add("hidden")}
+/* guardado */
+function save(){if(st.teams)return;try{localStorage.setItem(SKEY,JSON.stringify({step:st.step,sec:st.sec,total:st.total,p:st.p,err:st.err,resolved:st.resolved,gl:st.gl,health:st.health}))}catch(e){}}
+function load(){try{const s=JSON.parse(localStorage.getItem(SKEY)||"null");return s&&s.step>=1&&s.step<9?s:null}catch(e){return null}}
+function clearSave(){try{localStorage.removeItem(SKEY)}catch(e){}}
+/* flujo */
+function next(){st.step++;render()}
+function render(){stage.innerHTML="";const n=st.step;map();if(n>=0&&n<9)save();
+ if(n===0){st.cur=null;hud("Ronda 1");roundTools()}
+ else if(n>=1&&n<=5){const S=STATIONS[n-1];st.cur=S.u;map();hud("Estación "+n);station(S,n)}
+ else if(n===6){st.cur=null;map();hud("Crisis de gestión");crisis()}
+ else if(n===7){hud("Ronda de conexiones");final()}
+ else if(n===8){hud("Ronda de rescate");rescue()}
+ else{hud("Resultados");results()}
+ window.scrollTo({top:0,behavior:"smooth"})}
+function cont(c,label,cb,dis){const b=el("button","btn",label);b.disabled=!!dis;b.onclick=cb;c.appendChild(b);return b}
+/* secuenciador: un ítem por vez */
+function seq(c,builders,done){const holder=el("div");c.appendChild(holder);let i=0;
+ const show=()=>{holder.innerHTML="";holder.appendChild(el("div","prog","Ítem "+(i+1)+" de "+builders.length));
+  const blk=builders[i](()=>{if(i===builders.length-1)done();else{const nb=el("button","btn","Siguiente ›");nb.onclick=()=>{i++;show()};holder.appendChild(nb)}});holder.appendChild(blk)};show()}
+/* revancha inmediata */
+function offerRetry(d,ctx){if(ctx.rescue||!VAR[ctx.id]||!st.err.includes(ctx.id)||st.resolved[ctx.id])return;
+ const w=el("div","retry","<b>Revancha:</b> practique el mismo concepto con otras cifras. No suma puntos, pero recupera salud de la empresa.<br>");
+ const b=el("button","btn sec","Probar con otras cifras");w.appendChild(b);d.appendChild(w);
+ b.onclick=()=>{b.disabled=true;const v=VAR[ctx.id],c2={sec:"RS",id:ctx.id,rescue:true};let blk;
+  if(ctx.id[0]==="t")blk=toolBlock(v,c2,()=>{});else if(ctx.id[0]==="n")blk=numBlock(v,c2,()=>{});else blk=mcBlock(v,c2,()=>{});w.appendChild(blk)}}
+/* bloques */
+function toolBlock(t,ctx,onDone){const d=el("div","tool",`<div class="nm">${t[0]}</div>`);if(!ctx.rescue)maxOf(ctx.sec,1);
+ const fb=el("div","fb hidden");const g=el("div","ugrid");
+ KEYS.forEach(k=>{const b=el("button","ub",U[k].n);b.style.background=U[k].c;b.dataset.k=k;
+  b.onclick=()=>{const ok=k===t[1];g.querySelectorAll(".ub").forEach(x=>{x.disabled=true;if(x.dataset.k===t[1])x.classList.add("right");else if(x!==b)x.classList.add("dim")});
+   if(!ok)b.classList.add("wrong");award(ctx.sec,ok?1:0,ok,ctx);fb.className="fb "+(ok?"ok":"no");fb.innerHTML=(ok?"Correcto. ":"Corresponde a "+U[t[1]].n+". ")+t[2]+(ok?"":repHtml(ctx.id));itemDone();offerRetry(d,ctx);onDone()};
+  g.appendChild(b)});d.append(g,fb);return d}
+function useJk(type){const p=P();if(!p.jk[type])return false;p.jk[type]--;hud();return true}
+function mcBlock(it,ctx,onDone){const d=el("div","",`<div class="q">${it.q}</div>`);if(!ctx.rescue)maxOf(ctx.sec,1);
+ const fb=el("div","fb hidden");const jr=el("div");
+ if(!ctx.rescue){const j=el("button","jk","Comodín 50/50");j.onclick=()=>{if(!useJk("m"))return;j.disabled=true;
+   shuffle([...d.querySelectorAll(".opt")].filter(x=>x.dataset.ok==="0")).slice(0,2).forEach(x=>{x.disabled=true;x.classList.add("gone")})};jr.appendChild(j)}
+ d.appendChild(jr);
+ shuffle(it.o).forEach(o=>{const b=el("button","opt");b.textContent=o[0];b.dataset.ok=o[1];
+  b.onclick=()=>{d.querySelectorAll(".opt").forEach(x=>{x.disabled=true;x.classList.remove("gone")});jr.querySelectorAll("button").forEach(x=>x.disabled=true);
+   b.classList.add(o[1]?"right":"wrong");if(!o[1])d.querySelectorAll(".opt").forEach(x=>{if(x.dataset.ok==="1")x.classList.add("right")});
+   award(ctx.sec,o[1]?1:0,!!o[1],ctx);fb.className="fb "+(o[1]?"ok":"no");fb.innerHTML=o[2]+(o[1]?"":repHtml(ctx.id));itemDone();offerRetry(d,ctx);onDone()};d.appendChild(b)});
+ d.appendChild(fb);return d}
+function numParse(s){s=s.trim().replace(/[$%\s]/g,"");if(/,\d{1,2}$/.test(s))s=s.replace(/\./g,"").replace(",",".");else s=s.replace(/[.,](?=\d{3}(\D|$))/g,"");return parseFloat(s)}
+function stepSol(wrap,lines,auto){wrap.innerHTML="";const box=el("div","sol","<b>Resolución paso a paso</b>");wrap.appendChild(box);let k=0;
+ const btn=el("button","btn sec","Ver el primer paso");const add=()=>{box.appendChild(el("div","",lines[k]));k++;if(k>=lines.length)btn.remove();else btn.textContent="Ver el siguiente paso"};
+ btn.onclick=add;wrap.appendChild(btn);if(auto)while(k<lines.length)add()}
+function numBlock(it,ctx,onDone){const d=el("div","",(it.data?`<div class="data"><b>Datos:</b> ${it.data}</div>`:"")+`<div class="q">${it.t}</div>`);if(!ctx.rescue)maxOf(ctx.sec,1);
+ const fb=el("div","fb hidden");let tries=0;const jr=el("div");const solw=el("div");
+ const row=el("div","num",`<input type="text" inputmode="decimal" placeholder="Su respuesta" aria-label="respuesta"><button class="btn">Verificar</button>`);
+ const inp=row.querySelector("input"),bt=row.querySelector("button");
+ if(!ctx.rescue){const jh=el("button","jk","Comodín Pista"),jf=el("button","jk","Comodín Fórmula");
+  jh.onclick=()=>{if(!useJk("h"))return;jh.disabled=true;fb.className="fb";fb.textContent="Pista: "+it.hint};
+  jf.onclick=()=>{if(!useJk("f"))return;jf.disabled=true;fb.className="fb";fb.textContent=it.sol[0]};jr.append(jh,jf)}
+ const diagMsg=v=>{const x=(it.diag||[]).find(z=>Math.abs(v-z[0])<=Math.max(1,Math.abs(z[0])*.005));return x?x[1]:null};
+ const fin=()=>{inp.disabled=true;bt.disabled=true;jr.querySelectorAll("button").forEach(x=>x.disabled=true);itemDone();offerRetry(d,ctx);onDone()};
+ bt.onclick=()=>{const v=numParse(inp.value);if(isNaN(v)){fb.className="fb no";fb.textContent="Ingrese un número.";return}
+  tries++;const vv=it.abs?Math.abs(v):v;const ok=Math.abs(vv-it.a)<=it.tol;
+  if(ok){award(ctx.sec,tries===1?1:.5,tries===1,ctx);fb.className="fb ok";fb.textContent="Correcto."+(ctx.rescue?"":(tries===1?" Primer intento.":" Segundo intento: 0,5 puntos."));
+   const sb=el("button","btn sec","Ver la resolución");sb.onclick=()=>{sb.remove();stepSol(solw,it.sol,true)};solw.appendChild(sb);fin()}
+  else{const dm=diagMsg(v);
+   if(tries===1){fb.className="fb no";fb.innerHTML=(dm?dm+" ":"")+"<b>Pista:</b> "+it.hint;if(!ctx.rescue&&!st.err.includes(ctx.id))st.err.push(ctx.id)}
+   else{award(ctx.sec,0,false,ctx);fb.className="fb no";fb.innerHTML=(dm?dm+" ":"")+"No coincide. Revise la resolución paso a paso."+(ctx.rescue?"":repHtml(ctx.id));stepSol(solw,it.sol,false);fin()}}};
+ inp.addEventListener("keydown",e=>{if(e.key==="Enter")bt.click()});
+ d.append(jr,row,fb,solw);return d}
+/* secciones */
+function roundTools(){const c=el("div","card","<h2>Ronda 1 · ¿A qué pregunta de gestión responde cada herramienta?</h2><p>Una tarjeta por herramienta. Asígnela a la unidad que corresponde: solo cuenta el primer intento.</p>");
+ const btn=cont(c,"Continuar a la Estación 1",()=>{st.sec.R1.done=true;next()},true);
+ const holder=el("div");c.insertBefore(holder,btn);
+ seq(holder,TOOLS.map((t,i)=>done=>toolBlock(t,{sec:"R1",id:"t"+(i+1)},done)),()=>{btn.disabled=false});stage.appendChild(c)}
+function station(S,n){const c=el("div","card",`<h2>${S.title}</h2><p>${S.story}</p>`);c.style.borderTop="6px solid "+U[S.u].c;
+ if(n===3||n===5){const used=st.ev.slice();const pool=EVENTS.filter((e,i)=>!used.includes(i));const ix=EVENTS.indexOf(pool[Math.random()*pool.length|0]);st.ev.push(ix);const e=EVENTS[ix];e.fx();c.appendChild(el("div","event",`<b>Evento: ${e.t}</b><br>${e.d}`))}
+ c.appendChild(el("div","data","<b>Datos:</b> "+S.data));
+ const sec=S.u;const btn=cont(c,n<5?"Continuar":"Ir a la crisis de gestión",()=>{stopTimer();st.sec[sec].done=true;st.gl[sec]=true;next()},true);
+ const holder=el("div");c.insertBefore(holder,btn);
+ const bl=[done=>mcBlock(S.mc,{sec,id:S.mc.id},done),...S.nums.map(it=>done=>numBlock(it,{sec,id:it.id},done))];
+ seq(holder,bl,()=>{btn.disabled=false});stage.appendChild(c);startTimer()}
+function crisis(){const c=el("div","card",`<h2>Crisis de gestión · ordene la secuencia</h2><p>${CR.story}</p><p><i>Cada paso bien ubicado suma 1 punto. Tiene dos verificaciones: la segunda suma 0,5 por paso.</i></p>`);
+ maxOf("RC",5);let order=shuffle(CR.steps.map((x,i)=>i));let tries=0,over=false;const ul=el("ol","ord");const fb=el("div","fb hidden");
+ const draw=()=>{ul.innerHTML="";order.forEach((ix,pos)=>{const li=el("li","",`<b>${pos+1}.</b><span>${CR.steps[ix][0]}</span>`);
+  if(!over){const up=el("button","","↑"),dw=el("button","","↓");up.setAttribute("aria-label","Subir");dw.setAttribute("aria-label","Bajar");
+   up.onclick=()=>{if(pos>0){[order[pos-1],order[pos]]=[order[pos],order[pos-1]];draw()}};dw.onclick=()=>{if(pos<4){[order[pos+1],order[pos]]=[order[pos],order[pos+1]];draw()}};li.append(up,dw)}
+  else{li.classList.add(ix===pos?"good":"bad");li.appendChild(el("small","",CR.steps[pos][1]))}ul.appendChild(li)})};
+ draw();const btn=cont(c,"Verificar orden",()=>{tries++;const cor=order.filter((x,i)=>x===i).length;
+  if(cor===5||tries===2){over=true;btn.disabled=true;const sc=cor*(tries===1?1:.5);award("RC",sc,cor===5&&tries===1,{id:"c1",max:5});
+   if(sc<5&&!st.err.includes("c1"))st.err.push("c1");
+   fb.className="fb "+(cor===5?"ok":"no");fb.innerHTML=(cor===5?"Orden correcto. ":cor+" paso(s) bien ubicado(s). ")+"Puntaje: "+fmt(sc)+". A continuación, el orden correcto y su fundamento."+(sc<5?repHtml("c1"):"");
+   order=CR.steps.map((x,i)=>i);draw();itemDone();nb.disabled=false}
+  else{fb.className="fb no";fb.textContent=cor+" de 5 pasos están bien ubicados. Reordene y verifique de nuevo."}fb.classList.remove("hidden")});
+ const nb=cont(c,"Continuar a la ronda de conexiones",()=>{st.sec.RC.done=true;next()},true);
+ c.insertBefore(ul,btn);c.insertBefore(fb,btn);stage.appendChild(c)}
+function final(){const c=el("div","card","<h2>Ronda de conexiones del sistema</h2><p>Las cinco unidades no son compartimentos: cada una usa información de otra. Es lo que demuestra el TP integrador.</p>");
+ const btn=cont(c,"Continuar",()=>next(),true);const holder=el("div");c.insertBefore(holder,btn);
+ seq(holder,FINAL.map(f=>done=>mcBlock(f,{sec:"RF",id:f.id},done)),()=>{btn.disabled=false});stage.appendChild(c)}
+function rescue(){const list=st.err.filter(id=>VAR[id]&&!st.resolved[id]).slice(0,4);
+ const c=el("div","card","<h2>Ronda de rescate · expedientes pendientes</h2>");
+ if(!list.length){c.innerHTML+="<p>No quedan expedientes pendientes. Pase a los resultados.</p>";cont(c,"Ver resultados",()=>next());stage.appendChild(c);return}
+ c.innerHTML+="<p>Estos ítems siguen pendientes. Resuelva su variante (otras cifras u otra pregunta, el mismo concepto). Recupera salud de la empresa pero no modifica su puntaje.</p>";
+ const btn=cont(c,"Ver resultados",()=>next(),true);const holder=el("div");c.insertBefore(holder,btn);
+ seq(holder,list.map(id=>done=>{const v=VAR[id],ctx={sec:"RS",id,rescue:true};let b;const w=el("div","",`<small><b>Expediente: ${UOF[id]||"Conexiones"}</b></small>`);
+  if(id[0]==="t")b=toolBlock(v,ctx,done);else if(id[0]==="n")b=numBlock(v,ctx,done);else b=mcBlock(v,ctx,done);w.appendChild(b);return w}),()=>{btn.disabled=false});stage.appendChild(c)}
+function level(p){return p>=90?["Excelente","Domina el ciclo completo de la decisión. Está en condiciones de enfrentar el TP integrador con solvencia."]:p>=75?["Muy bien","Integra con solidez las herramientas del curso. Repase los puntos señalados para llegar al nivel máximo."]:p>=60?["Aprobado","Alcanza el nivel aprobatorio y cuenta con una base sobre la cual seguir creciendo. Revise las unidades con menor desempeño."]:p>=40?["Insuficiente","Todavía hay conceptos por consolidar. Vuelva a las clases señaladas en su plan de repaso: este es el momento ideal para hacerlo."]:["Insuficiente grave","Conviene retomar los conceptos base con calma y consultar a la profesora. Esta actividad no afecta su nota: es una oportunidad para ordenar el estudio."]}
+function planHtml(){const ids=st.err.filter(id=>REP[id]);if(!ids.length)return "<p>No quedaron pendientes: puede pasar directamente a trabajar en el TP integrador.</p>";
+ const by={};ids.forEach(id=>{const u=UOF[id]||"U1";(by[u]=by[u]||[]).push(id)});const topics=new Set(ids.map(i=>REP[i][1]));
+ const units=Object.keys(by).sort((a,b)=>by[b].length-by[a].length);
+ return `<p>Ordenado por la unidad con más pendientes. Tiempo estimado: unos ${Math.max(10,Math.min(40,topics.size*4))} minutos.</p>`+units.map(u=>{const seen=new Set();return `<div class="it" style="border-color:${U[u].c}"><b>${U[u].n}</b>`+by[u].filter(i=>{const t=REP[i][1];if(seen.has(t))return false;seen.add(t);return true}).map(i=>`<br>${REP[i][0]} · ${REP[i][1]}`+(GL[u]&&REP[i]?"":"")).join("")+`<br><small><i>Fórmula clave: ${GL[u][1]}</i></small></div>`}).join("")}
+function healthHtml(){const n={r:"Rentabilidad",c:"Control",q:"Calidad"};return `<div class="hl" style="margin:8px 0">`+["r","c","q"].map(m=>`<div style="color:#333">${n[m]}: ${Math.round(st.health[m])} / 100<div class="bar" style="background:#dfe7d8"><i style="width:${st.health[m]}%;background:${st.health[m]<35?"#D9534F":st.health[m]<60?"#E0A800":"#6CC04A"}"></i></div></div>`).join("")+"</div>"}
+function results(){stopTimer();clearSave();const tot=totalPts(),mx=st.total,pc=tot/mx*100,L=level(pc);
+ const names={R1:"Ronda 1 · Clasificación",RC:"Crisis de gestión",RF:"Ronda de conexiones"};
+ const rows=[["R1",names.R1],...KEYS.map(k=>[k,U[k].n]),["RC",names.RC],["RF",names.RF]].map(([k,nm])=>{const s=st.sec[k],q=s.p/s.m*100;return `<tr><td>${nm}</td><td>${fmt(s.p)} / ${s.m}</td><td>${q.toFixed(0)} %</td></tr>`}).join("");
+ const eligible=Object.keys(st.resolved).length,pend=st.err.filter(id=>VAR[id]).length;
+ let badges=KEYS.filter(k=>st.sec[k].p/st.sec[k].m>=.6).map(k=>`<span class="badge" style="background:${U[k].c}">★ ${k}</span>`).join("");
+ if(pend>0&&eligible>=pend)badges+=`<span class="badge" style="background:#B8860B">Rescatista</span>`;if(pend===0)badges+=`<span class="badge" style="background:#B8860B">Sin expedientes</span>`;
+ badges=badges||"<i>Todavía ninguna: se obtienen con 60 % o más en cada estación.</i>";
+ let rank="";if(st.teams){const t=st.teams.slice().sort((a,b)=>b.pts-a.pts);rank=`<h3>Posiciones por equipo</h3><table><tr><th>#</th><th>Equipo</th><th>Puntos</th></tr>${t.map((x,i)=>`<tr><td>${i+1}</td><td>${x.name}</td><td>${fmt(x.pts)}</td></tr>`).join("")}</table>`}
+ const c=el("div","card",`<h2>Resultados de la misión</h2><div class="big">${fmt(tot)} / ${mx} · ${pc.toFixed(0)} %</div><h3>Nivel: ${L[0]}</h3><p>${L[1]}</p>${rank}<h3>Salud de la empresa</h3>${healthHtml()}<p><b>Insignias:</b> ${badges}</p><p><b>Expedientes recuperados en la revancha:</b> ${eligible} de ${pend}</p>
+ <h3>Su plan de repaso</h3><div class="plan">${planHtml()}</div>
+ <h3>Detalle por sección</h3><table><tr><th>Sección</th><th>Puntaje</th><th>%</th></tr>${rows}</table>
+ <div class="notice"><b>Vínculo con el TP y el Parcial 2:</b> el caso de Pampa Sur exige combinar costos (U1), decisiones (U2), presupuesto y CAPEX (U3), BSC y riesgos (U4) y costos de calidad y ESG (U5). Esta actividad no afecta la calificación.</div>
+ <div class="noprint"><input type="text" id="nm" placeholder="Su nombre (opcional) para la tarjeta" maxlength="30" style="font:inherit;font-size:16px;padding:10px;border:1.5px solid #b9c4b0;border-radius:10px;width:100%;margin-bottom:6px"><br>
+ <button class="btn" id="bCard">Descargar tarjeta de resultados</button><button class="btn sec" id="bPrint">Imprimir o guardar en PDF</button><button class="btn sec" onclick="location.reload()">Jugar de nuevo</button></div>`);stage.appendChild(c);
+ $("#bPrint").onclick=()=>window.print();$("#bCard").onclick=()=>card(tot,mx,pc,L[0],badges)}
+/* tarjeta compartible */
+async function card(tot,mx,pc,lev){const cv=document.createElement("canvas");cv.width=1080;cv.height=1350;const x=cv.getContext("2d");
+ const g=x.createLinearGradient(0,0,0,1350);g.addColorStop(0,"#2D4A1E");g.addColorStop(1,"#548135");x.fillStyle=g;x.fillRect(0,0,1080,1350);
+ x.fillStyle="#fff";x.beginPath();if(x.roundRect)x.roundRect(60,60,960,180,24);else x.rect(60,60,960,180);x.fill();
+ try{const im=new Image();im.src=document.querySelector("header img").src;await im.decode();const w=300,h=im.height/im.width*w;x.drawImage(im,90,150-h/2,w,h)}catch(e){}
+ x.fillStyle="#2D4A1E";x.font="bold 40px Calibri,Arial";x.fillText("Costos para la Toma",440,125);x.fillText("de Decisiones · USI 2026",440,180);
+ x.fillStyle="#fff";x.font="bold 64px Calibri,Arial";x.fillText("Misión Mermeladas del Delta",60,360);
+ const nm=($("#nm").value||"").trim();if(nm){x.font="44px Calibri,Arial";x.fillStyle="#FFE08A";x.fillText(nm,60,430)}
+ x.fillStyle="#fff";x.font="bold 200px Calibri,Arial";x.fillText(Math.round(pc)+" %",60,680);
+ x.font="48px Calibri,Arial";x.fillText(fmt(tot)+" de "+mx+" puntos",60,750);
+ x.fillStyle="#FFE08A";x.font="bold 70px Calibri,Arial";x.fillText("Nivel: "+lev,60,850);
+ const n={r:"Rentabilidad",c:"Control",q:"Calidad"};let y=960;x.font="36px Calibri,Arial";
+ ["r","c","q"].forEach(m=>{x.fillStyle="#fff";x.fillText(n[m]+": "+Math.round(st.health[m]),60,y);x.fillStyle="#16300F";x.fillRect(480,y-30,540,28);x.fillStyle=st.health[m]<35?"#D9534F":st.health[m]<60?"#E0A800":"#6CC04A";x.fillRect(480,y-30,540*st.health[m]/100,28);y+=80});
+ x.fillStyle="#D8E8CC";x.font="32px Calibri,Arial";const bs=KEYS.filter(k=>st.sec[k].p/st.sec[k].m>=.6).map(k=>"★ "+k).join("   ");x.fillText(bs||"Seguimos practicando",60,1250);
+ x.font="26px Calibri,Arial";x.fillText("Autoevaluación de cierre · no afecta la calificación",60,1305);
+ cv.toBlob(async b=>{const f=new File([b],"tarjeta_mision_mermeladas.png",{type:"image/png"});
+  if(navigator.canShare&&navigator.canShare({files:[f]})){try{await navigator.share({files:[f],title:"Misión Mermeladas del Delta"});return}catch(e){}}
+  const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=f.name;a.click()})}
+/* inicio */
+$("#optTeams").onchange=$("#nTeams").onchange=()=>{const on=$("#optTeams").checked,n=+$("#nTeams").value,d=$("#teamNames");d.classList.toggle("hidden",!on);
+ if(on)d.innerHTML="Nombres: "+Array.from({length:n},(_,i)=>`<input type="text" value="Equipo ${i+1}" maxlength="18" aria-label="equipo ${i+1}" style="font:inherit;padding:5px;margin:2px;width:130px">`).join("")};
+function begin(){$("#intro").classList.add("hidden");$("#mapCard").classList.remove("hidden")}
+$("#start").onclick=()=>{clearSave();st.timer=$("#optTimer").checked;
+ if($("#optTeams").checked)st.teams=[...document.querySelectorAll("#teamNames input")].map((i,x)=>({name:i.value.trim()||"Equipo "+(x+1),pts:0,jk:{m:1,h:1,f:1}}));
+ begin();st.step=-1;next()};
+const sv=load();if(sv){const r=$("#resume");r.textContent="Continuar: "+STEPNAME[sv.step];r.classList.remove("hidden");
+ r.onclick=()=>{Object.assign(st,{sec:sv.sec,total:sv.total,p:sv.p,err:sv.err,resolved:sv.resolved,gl:sv.gl,health:sv.health});st.timer=$("#optTimer").checked;begin();st.step=sv.step;render()}}
+map();hud();
+</script></body></html>
