@@ -14,7 +14,9 @@ El Planificador TI reúne en un solo lugar el cronograma, los costos y el contro
 
 No pide cuenta ni instalación y no envía tus datos: el trabajo se guarda solo en tu navegador. Para no perderlo, descargá de vez en cuando la copia de seguridad desde la propia herramienta.
 
-<iframe src="/herramientas/planificador-ti/alumnos-d0f4dda780e1/" title="Planificador TI" loading="lazy" style="height: 90vh; min-height: 760px;"></iframe>
+<p><strong><a href="/herramientas/planificador-ti/alumnos-d0f4dda780e1/" target="_blank" rel="noopener">Abrir el Planificador TI en pantalla completa</a></strong> (recomendado en el celular y para usar todas las funciones con comodidad)</p>
+
+<iframe src="/herramientas/planificador-ti/alumnos-d0f4dda780e1/" title="Planificador TI" loading="lazy" style="height: 95vh; min-height: 900px;"></iframe>
 
 <p><a href="/herramientas/planificador-ti/alumnos-d0f4dda780e1/" target="_blank" rel="noopener">Abrir el Planificador TI en pantalla completa</a> (recomendado en el celular)</p>
 
