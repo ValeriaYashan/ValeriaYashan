@@ -1,0 +1,53 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex, follow"><title>Clasificador GTD y Eisenhower</title><link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet"><style>
+:root{--g:#2D6A4F;--bg:#FAFAF8;--sf:#F2F1EE;--tx:#1A1A1A;--mu:#6B6B6B;--bd:#E0DFDB;--r:#B3261E;--a:#B26A00}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.55 Inter,system-ui,sans-serif;padding:16px}
+h1,h2{font-family:Fraunces,Georgia,serif;font-weight:600;margin:0 0 8px}h1{font-size:24px}h2{font-size:19px}
+p{margin:0 0 10px}.mu{color:var(--mu);font-size:13px}.card{background:#fff;border:1px solid var(--bd);border-radius:10px;padding:12px}
+.btn{background:var(--g);color:#fff;border:0;border-radius:8px;padding:9px 14px;font:600 14px Inter,sans-serif;cursor:pointer}.btn.s{background:var(--sf);color:var(--tx);border:1px solid var(--bd)}
+.tag{display:inline-block;font-size:11px;font-weight:600;padding:2px 8px;border-radius:4px;margin-bottom:6px}
+.c1{background:#FBE3E1;color:var(--r)}.c2{background:#FFF0D6;color:var(--a)}.c3{background:#E3EEF9;color:#1F5C99}.c4{background:#EAEAE6;color:#555}
+input,textarea,select{font:inherit;border:1px solid var(--bd);border-radius:8px;padding:8px;background:#fff;width:100%}
+#vy-volver{display:none;margin:-16px -16px 14px;padding:10px 16px;background:var(--sf);border-bottom:1px solid var(--bd)}#vy-volver a{color:var(--g);font-weight:600;text-decoration:none}
+.cols{display:flex;gap:10px;overflow-x:auto;padding-bottom:6px}.col{min-width:170px;flex:1}.col h3{font-size:13px;margin:0 0 2px}.col .mu{margin-bottom:8px}
+.it{background:#fff;border:1px solid var(--bd);border-radius:8px;padding:9px;margin-bottom:8px;font-size:13px}
+.ok{color:var(--g);font-weight:600}
+</style></head><body><div id="vy-volver"><a href="/docencia/egci-liderazgo/">&larr; Volver a Liderazgo y Competencias</a></div><h1>Clasificador de pendientes</h1>
+<p class="mu">Escribí un pendiente por vez, respondé dos preguntas y el sistema lo manda a la lista GTD que corresponde. Los datos quedan solo en tu dispositivo.</p>
+<div class="card"><input id="t" placeholder="Ej.: Preparar conversación difícil con mi equipo">
+<p style="margin:10px 0 4px">¿Requiere una acción tuya?</p>
+<select id="q0"><option value="s">Sí</option><option value="n">No, es información o una idea</option></select>
+<p style="margin:10px 0 4px">¿Es importante para tus objetivos?</p><select id="q1"><option value="s">Sí</option><option value="n">No</option></select>
+<p style="margin:10px 0 4px">¿Tiene fecha límite cercana?</p><select id="q2"><option value="s">Sí</option><option value="n">No</option></select>
+<p style="margin:10px 0 4px">¿Depende de otra persona?</p><select id="q3"><option value="n">No</option><option value="s">Sí</option></select>
+<p style="margin:10px 0 4px">¿Se hace en menos de dos minutos?</p><select id="q4"><option value="n">No</option><option value="s">Sí</option></select>
+<p style="margin-top:12px"><button class="btn" id="add">Clasificar</button> <button class="btn s" id="clr">Vaciar todo</button></p><p id="adv" class="mu"></p></div>
+<div class="cols" id="cols" style="margin-top:14px"></div>
+<div class="card" style="margin-top:12px"><h2>Tu revisión semanal</h2><p class="mu">Marcá cada paso al completarlo.</p><div id="rev"></div><p id="msg" class="ok"></p></div><script>
+var KEY='vy-clasificador-gtd',S=[];try{S=JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){}
+var LS=[['Inbox','Por procesar'],['Próxima acción','Listas para hacer'],['En espera','Esperando a otros'],['Algún día','Sin compromiso'],['Hacer ya','Menos de 2 min'],['Eliminar / delegar','No es para vos']];
+function cls(a){if(a.q0==='n')return a.q1==='s'?[3,'']:[5,'c4'];
+if(a.q4==='s')return [4,a.q1==='s'?(a.q2==='s'?'c1':'c2'):'c3'];
+if(a.q3==='s')return [2,''];
+var q=a.q1==='s'?(a.q2==='s'?'c1':'c2'):(a.q2==='s'?'c3':'c4');return q==='c4'?[5,'c4']:[1,q]}
+var N={c1:'C-I',c2:'C-II',c3:'C-III',c4:'C-IV'},ADV={c1:'C-I: hacelo hoy y protegé tiempo.',c2:'C-II: agendá un bloque. Es lo que más se posterga y lo que más rinde.',c3:'C-III: delegalo o acotalo.',c4:'C-IV: eliminalo sin culpa.'};
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function draw(){var c=document.getElementById('cols');c.innerHTML='';LS.forEach(function(l,i){var h='<div class="col"><h3>'+l[0]+'</h3><div class="mu">'+l[1]+'</div>';
+S.forEach(function(s,k){if(s.l===i)h+='<div class="it">'+(s.c?'<span class="tag '+s.c+'">'+N[s.c]+'</span><br>':'')+s.t.replace(/</g,'&lt;')+' <a href="#" data-k="'+k+'" style="color:#6B6B6B">&times;</a></div>'});
+c.insertAdjacentHTML('beforeend',h+'</div>')});
+c.querySelectorAll('a[data-k]').forEach(function(a){a.onclick=function(e){e.preventDefault();S.splice(+a.dataset.k,1);save();draw()}})}
+document.getElementById('add').onclick=function(){var t=document.getElementById('t').value.trim();if(!t)return;
+var a={};['q0','q1','q2','q3','q4'].forEach(function(q){a[q]=document.getElementById(q).value});var r=cls(a);S.push({t:t,l:r[0],c:r[1]});save();draw();
+document.getElementById('adv').textContent=(r[1]?ADV[r[1]]+' ':'')+'Va a: '+LS[r[0]][0]+'.';document.getElementById('t').value='';vyDone()};
+document.getElementById('clr').onclick=function(){S=[];save();draw()};
+var R=['Vaciar el Inbox','Revisar cada proyecto activo y definir su próxima acción','Revisar En espera y reclamar lo vencido','Mirar Algún día y descartar lo que ya no va','Agendar bloques para tus tareas C-II'],rv=document.getElementById('rev');
+R.forEach(function(r,i){var l=document.createElement('label');l.style.cssText='display:block;margin:6px 0';l.innerHTML='<input type="checkbox" style="width:auto"> '+r;rv.appendChild(l);
+l.firstChild.onchange=function(){var all=[].every.call(rv.querySelectorAll('input'),function(x){return x.checked});document.getElementById('msg').textContent=all?'Revisión completa.':''}});
+draw();
+</script><p class="mu" style="margin-top:16px"><a href="/docencia/egci-liderazgo/#clases" target="_top" style="color:#2D6A4F">Ir a las clases</a></p>
+<script>
+(function(){if(window.self===window.top)document.getElementById('vy-volver').style.display='block';
+var K='vy-prog:herramienta-clasificador-gtd';window.vyDone=function(){try{localStorage.setItem(K,'1')}catch(e){}};
+function h(){try{parent.postMessage({type:'calc-height',height:document.documentElement.scrollHeight},'*')}catch(e){}}
+window.addEventListener('load',h);window.addEventListener('resize',h);new MutationObserver(h).observe(document.body,{subtree:true,childList:true,attributes:true});})();
+
+</script></body></html>

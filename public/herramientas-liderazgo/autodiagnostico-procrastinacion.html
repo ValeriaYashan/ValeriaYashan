@@ -1,0 +1,32 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex, follow"><title>Autodiagnóstico de procrastinación</title><link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet"><style>
+:root{--g:#2D6A4F;--bg:#FAFAF8;--sf:#F2F1EE;--tx:#1A1A1A;--mu:#6B6B6B;--bd:#E0DFDB;--r:#B3261E;--a:#B26A00}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.55 Inter,system-ui,sans-serif;padding:16px}
+h1,h2{font-family:Fraunces,Georgia,serif;font-weight:600;margin:0 0 8px}h1{font-size:24px}h2{font-size:19px}
+p{margin:0 0 10px}.mu{color:var(--mu);font-size:13px}.card{background:#fff;border:1px solid var(--bd);border-radius:10px;padding:12px}
+.btn{background:var(--g);color:#fff;border:0;border-radius:8px;padding:9px 14px;font:600 14px Inter,sans-serif;cursor:pointer}.btn.s{background:var(--sf);color:var(--tx);border:1px solid var(--bd)}
+.tag{display:inline-block;font-size:11px;font-weight:600;padding:2px 8px;border-radius:4px;margin-bottom:6px}
+.c1{background:#FBE3E1;color:var(--r)}.c2{background:#FFF0D6;color:var(--a)}.c3{background:#E3EEF9;color:#1F5C99}.c4{background:#EAEAE6;color:#555}
+input,textarea,select{font:inherit;border:1px solid var(--bd);border-radius:8px;padding:8px;background:#fff;width:100%}
+#vy-volver{display:none;margin:-16px -16px 14px;padding:10px 16px;background:var(--sf);border-bottom:1px solid var(--bd)}#vy-volver a{color:var(--g);font-weight:600;text-decoration:none}
+.cols{display:flex;gap:10px;overflow-x:auto;padding-bottom:6px}.col{min-width:170px;flex:1}.col h3{font-size:13px;margin:0 0 2px}.col .mu{margin-bottom:8px}
+.it{background:#fff;border:1px solid var(--bd);border-radius:8px;padding:9px;margin-bottom:8px;font-size:13px}
+.ok{color:var(--g);font-weight:600}
+</style></head><body><div id="vy-volver"><a href="/docencia/egci-liderazgo/">&larr; Volver a Liderazgo y Competencias</a></div><h1>Autodiagnóstico: ¿cuánto posterga tu sistema?</h1><p class="mu">Respondé con sinceridad: 0 es nunca, 3 es casi siempre. Las respuestas no se envían a ningún servidor.</p><div id="qs"></div><p><button class="btn" id="go">Ver mi resultado</button></p><div class="card" id="res" style="display:none"></div><script>
+var Q=["Dejo para último momento las tareas que no tienen una fecha firme.", "Empiezo muchas cosas y termino pocas.", "Reviso el correo o el celular cuando tengo que concentrarme en algo difícil.", "Espero sentirme motivado/a para arrancar una tarea importante.", "Postergo conversaciones incómodas con mi equipo.", "Mis pendientes viven en mi cabeza, no en un sistema.", "Cuando algo me desborda, lo evito en vez de dividirlo en pasos.", "Reacciono a lo urgente y me falta tiempo para lo importante."],qs=document.getElementById('qs');
+Q.forEach(function(q,i){var d=document.createElement('div');d.className='card';d.style.marginBottom='8px';
+d.innerHTML='<p>'+(i+1)+'. '+q+'</p>'+[0,1,2,3].map(function(v){return '<label style="margin-right:14px"><input type="radio" name="q'+i+'" value="'+v+'" style="width:auto"> '+v+'</label>'}).join('');qs.appendChild(d)});
+document.getElementById('go').onclick=function(){var t=0,n=0;Q.forEach(function(q,i){var r=document.querySelector('input[name=q'+i+']:checked');if(r){t+=+r.value;n++}});
+var r=document.getElementById('res');r.style.display='block';
+if(n<Q.length){r.innerHTML='<p>Faltan respuestas: respondiste '+n+' de '+Q.length+'.</p>';return}
+var h,a;if(t<=8){h='Proactivo/a con margen de mejora';a='Tu hábito es sólido. Sumá la revisión semanal para sostenerlo y protegé un bloque para tus tareas C-II.'}
+else if(t<=16){h='Postergación situacional';a='Postergás cuando la tarea es difusa o incómoda. Elegí la tarea que más evitás, escribila como una próxima acción de 25 minutos y hacela hoy.'}
+else{h='Sistema desbordado';a='El problema no es la voluntad: es que no hay un sistema que sostenga. Empezá por vaciar tu cabeza en un Inbox y usá el clasificador GTD con tus 10 pendientes más pesados.'}
+r.innerHTML='<h2>'+h+' ('+t+' de 24)</h2><p>'+a+'</p>';vyDone()};
+</script><p class="mu" style="margin-top:16px"><a href="/docencia/egci-liderazgo/#clases" target="_top" style="color:#2D6A4F">Ir a las clases</a></p>
+<script>
+(function(){if(window.self===window.top)document.getElementById('vy-volver').style.display='block';
+var K='vy-prog:herramienta-autodiagnostico-procrastinacion';window.vyDone=function(){try{localStorage.setItem(K,'1')}catch(e){}};
+function h(){try{parent.postMessage({type:'calc-height',height:document.documentElement.scrollHeight},'*')}catch(e){}}
+window.addEventListener('load',h);window.addEventListener('resize',h);new MutationObserver(h).observe(document.body,{subtree:true,childList:true,attributes:true});})();
+
+</script></body></html>

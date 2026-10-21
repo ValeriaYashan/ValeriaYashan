@@ -1,0 +1,40 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex, follow"><title>Tablero GTD en Trello</title><link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet"><style>
+:root{--g:#2D6A4F;--bg:#FAFAF8;--sf:#F2F1EE;--tx:#1A1A1A;--mu:#6B6B6B;--bd:#E0DFDB;--r:#B3261E;--a:#B26A00}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.55 Inter,system-ui,sans-serif;padding:16px}
+h1,h2{font-family:Fraunces,Georgia,serif;font-weight:600;margin:0 0 8px}h1{font-size:24px}h2{font-size:19px}
+p{margin:0 0 10px}.mu{color:var(--mu);font-size:13px}.card{background:#fff;border:1px solid var(--bd);border-radius:10px;padding:12px}
+.btn{background:var(--g);color:#fff;border:0;border-radius:8px;padding:9px 14px;font:600 14px Inter,sans-serif;cursor:pointer}.btn.s{background:var(--sf);color:var(--tx);border:1px solid var(--bd)}
+.tag{display:inline-block;font-size:11px;font-weight:600;padding:2px 8px;border-radius:4px;margin-bottom:6px}
+.c1{background:#FBE3E1;color:var(--r)}.c2{background:#FFF0D6;color:var(--a)}.c3{background:#E3EEF9;color:#1F5C99}.c4{background:#EAEAE6;color:#555}
+input,textarea,select{font:inherit;border:1px solid var(--bd);border-radius:8px;padding:8px;background:#fff;width:100%}
+#vy-volver{display:none;margin:-16px -16px 14px;padding:10px 16px;background:var(--sf);border-bottom:1px solid var(--bd)}#vy-volver a{color:var(--g);font-weight:600;text-decoration:none}
+.cols{display:flex;gap:10px;overflow-x:auto;padding-bottom:6px}.col{min-width:170px;flex:1}.col h3{font-size:13px;margin:0 0 2px}.col .mu{margin-bottom:8px}
+.it{background:#fff;border:1px solid var(--bd);border-radius:8px;padding:9px;margin-bottom:8px;font-size:13px}
+.ok{color:var(--g);font-weight:600}
+</style></head><body><div id="vy-volver"><a href="/docencia/egci-liderazgo/">&larr; Volver a Liderazgo y Competencias</a></div><h1>Armá tu sistema GTD en Trello</h1>
+<p class="mu">Un tablero, cinco listas y una regla para cada una. Tocá una lista para ver qué entra y cómo se decide el pasaje.</p>
+<div class="cols" id="cols"></div>
+<div class="card" id="det" style="margin-top:12px"><p class="mu">Elegí una lista para ver su criterio.</p></div>
+<div class="card" style="margin-top:12px"><h2>Cómo escribir una próxima acción</h2>
+<p>Empieza con un verbo concreto, se hace en una sola sesión y no depende de nadie más. Mal: "Propuesta cliente". Bien: "Redactar el alcance de la propuesta y enviarlo a Laura".</p>
+<p class="mu">Etiquetas del tablero: C-I (importante y urgente), C-II (importante, no urgente: tu zona de crecimiento), C-III (urgente, no importante: delegá o acotá), C-IV (ni una ni otra: eliminá).</p></div>
+<div style="margin-top:12px"><button class="btn" id="fin">Ya armé mi tablero</button> <span id="msg" class="ok"></span></div><script>
+var L=[
+['Inbox','Todo lo que llega sin procesar: ideas, pedidos, notas.','Una sola puerta de entrada. Se vacía al menos una vez por día. Para cada tarjeta preguntate: ¿requiere acción? Si no, va a Algún día o a la papelera. Si sí y toma menos de dos minutos, hacela ahora.',['Pedido de informe de RR.HH.','Nota de la reunión del lunes'],''],
+['Próxima acción','Acciones concretas, listas para ejecutar.','Entra lo que tiene verbo, responsable (vos) y no está bloqueado. Cada tarjeta lleva etiqueta de cuadrante. Máximo 5 tarjetas C-I y C-II a la vez, si no, no es una lista de prioridades.',['Cerrar propuesta al cliente|c1|C-I','Preparar conversación difícil|c2|C-II'],''],
+['En espera','Depende de otra persona.','Cada tarjeta anota a quién esperás y desde cuándo. Se revisa en la revisión semanal: si pasó el plazo, volvé a escribirle.',['Aprobación de presupuesto||Esperando a: Finanzas'],''],
+['Algún día','Ideas sin compromiso.','Nada de culpa: es tu banco de ideas. Se revisa una vez por mes; lo que ya no te entusiasma, se borra.',['Rediseñar el onboarding del equipo'],''],
+['Hecho','Lo completado.','Archivalo cada viernes. Mirar esta lista alimenta la motivación y es evidencia para tu revisión semanal.',['Enviar agenda de la reunión'],'']];
+var c=document.getElementById('cols'),d=document.getElementById('det');
+L.forEach(function(l,i){var e=document.createElement('div');e.className='col';var h='<h3>'+l[0]+'</h3><div class="mu">'+l[1]+'</div>';
+l[3].forEach(function(t){var p=t.split('|');h+='<div class="it">'+(p[1]?'<span class="tag '+p[1]+'">'+p[2]+'</span><br>':'')+p[0]+(p[1]===''&&p[2]?'<div class="mu">'+p[2]+'</div>':'')+'</div>'});
+e.innerHTML=h;e.style.cursor='pointer';e.onclick=function(){d.innerHTML='<h2>'+l[0]+'</h2><p>'+l[2]+'</p>'};c.appendChild(e)});
+document.getElementById('fin').onclick=function(){vyDone();document.getElementById('msg').textContent='Registrado en este dispositivo.'};
+</script><p class="mu" style="margin-top:16px"><a href="/docencia/egci-liderazgo/#clases" target="_top" style="color:#2D6A4F">Ir a las clases</a></p>
+<script>
+(function(){if(window.self===window.top)document.getElementById('vy-volver').style.display='block';
+var K='vy-prog:herramienta-gtd-trello';window.vyDone=function(){try{localStorage.setItem(K,'1')}catch(e){}};
+function h(){try{parent.postMessage({type:'calc-height',height:document.documentElement.scrollHeight},'*')}catch(e){}}
+window.addEventListener('load',h);window.addEventListener('resize',h);new MutationObserver(h).observe(document.body,{subtree:true,childList:true,attributes:true});})();
+
+</script></body></html>
