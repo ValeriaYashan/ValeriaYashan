@@ -29,7 +29,7 @@ Los datos del Planificador se pueden llevar a Power BI con el botón «Exportar 
 - Cronograma: las tareas con fechas, desvío, holgura y estado de ruta crítica, filtrables por fase.
 - Riesgos y control: el registro de riesgos con probabilidad, impacto, puntaje y responsable, y la matriz de probabilidad por impacto.
 
-Para que las curvas muestren evolución, registrá un corte en el Planificador antes de cada exportación.
+Es una captura fija al 25/10/2026 del proyecto de ejemplo «vacaenergia»: no se actualiza sola ni refleja tus datos. Para que las curvas muestren evolución en tu propio informe, registrá un corte en el Planificador antes de cada exportación.
 
 <p><strong><a href="/herramientas/planificador-ti/alumnos-d0f4dda780e1/informe-ejemplo-power-bi.pdf" target="_blank" rel="noopener">Abrir el informe de ejemplo en pantalla completa</a></strong> (PDF)</p>
 
