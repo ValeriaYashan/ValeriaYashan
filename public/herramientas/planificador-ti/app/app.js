@@ -2866,6 +2866,87 @@
     X.writeFile(wb, "cronograma-" + currentProjectId + ".xlsx");
     track("exportar_excel", { caso_id: currentProjectId }); maybeShowLead("excel");
   }
+  /* ===================== exportar para Power BI (tablas planas con claves, listas para relacionar) ===================== */
+  function exportPowerBI(btn) {
+    var label = btn ? btn.textContent : ""; if (btn) { btn.textContent = "Preparando archivo…"; btn.disabled = true; }
+    loadXlsx().then(function () { if (btn) { btn.textContent = label; btn.disabled = false; } runExportPowerBI(); }).catch(function () {
+      if (btn) { btn.textContent = label; btn.disabled = false; }
+      notify("No se pudo cargar la librería de Excel (sin conexión o bloqueada). Probá con otra conexión o desactivá el bloqueador de contenido.");
+    });
+  }
+  function xlDate(iso) { // fecha como número de serie de Excel con formato de fecha: Power BI la reconoce como fecha sin importar la zona horaria
+    if (!iso || !/^\d{4}-\d{2}-\d{2}$/.test(iso)) return "";
+    var p = iso.split("-"); return { t: "n", v: Math.round((Date.UTC(+p[0], +p[1] - 1, +p[2]) - Date.UTC(1899, 11, 30)) / 86400000), z: "yyyy-mm-dd" };
+  }
+  function pbiSheet(X, cols, rows) { // cols: [{k, dt?}] ; rows: objetos
+    var aoa = [cols.map(function (c) { return c.k; })];
+    rows.forEach(function (r) { aoa.push(cols.map(function (c) { var v = r[c.k]; if (c.dt) return xlDate(v); return v === undefined || v === null ? "" : v; })); });
+    var ws = X.utils.aoa_to_sheet(aoa);
+    ws["!cols"] = cols.map(function (c) { return { wch: Math.max(10, Math.min(40, c.k.length + 4)) }; });
+    return ws;
+  }
+  function runExportPowerBI() {
+    var m = computeEVM(), res = computeSchedule(tasks), X = window.XLSX, pid = currentProjectId, title = CASOS[pid] ? CASOS[pid].title : pid, exported = dateToISO(new Date());
+    var key = function (id) { return pid + "|" + id; };
+    var phaseOf = {}; phases.forEach(function (ph) { ph.children.forEach(function (c) { phaseOf[c] = ph; }); });
+    var cutISO = m.cutISO, logByTask = {};
+    timeLog.forEach(function (e) { if (e.date && e.date <= cutISO) { var tk = taskById(e.taskId); logByTask[e.taskId] = (logByTask[e.taskId] || 0) + logCostOf(e, tk); } });
+    var perId = {}; m.perTask.forEach(function (p) { perId[p.t.id] = p; });
+    var endISO = workdayISO(Math.max(0, res.projectEnd - 1)), baseEndISO = workdayISO(Math.max(0, m.planned.projectEnd - 1));
+    var bs = parseBudget(charter.budget);
+    var proyecto = [{ "ProyectoID": pid, "Proyecto": title, "Audiencia": META.audience, "Inicio": startDateValue(), "FinPlanificado": baseEndISO, "FinPronosticado": endISO,
+      "DuracionPlanificadaDias": m.planned.projectEnd, "DuracionPronosticadaDias": res.projectEnd, "LineaBase": m.planned.label, "Patrocinador": charter.sponsor || "", "PresupuestoActa": bs === null ? "" : bs,
+      "FechaCorte": cutISO, "BAC": Math.round(m.BAC), "PV": Math.round(m.PV), "EV": Math.round(m.EV), "AC": Math.round(m.AC), "CPI": isFinite(m.CPI) ? Math.round(m.CPI * 1000) / 1000 : "", "SPI": isFinite(m.SPI) ? Math.round(m.SPI * 1000) / 1000 : "",
+      "EAC": Math.round(m.EAC), "ETC": Math.round(m.ETC), "VAC": Math.round(m.VAC), "CV": Math.round(m.CV), "SV": Math.round(m.SV), "TCPI": m.tcpiBac === null ? "" : Math.round(m.tcpiBac * 1000) / 1000,
+      "MetodoEAC": m.method, "CostoRealEstimado": m.acEstimated ? 1 : 0, "FechaExportacion": exported }];
+    var tareas = [], deps = [], recursos = [];
+    tasks.forEach(function (t) {
+      var ph = phaseOf[t.id], p = perId[t.id], pr = m.planned.schedule[t.id] || { es: t._es, ef: t._ef, dur: t.dur }, dc = getDailyCost(t);
+      var acT = (t.acTask !== null && t.acTask !== undefined) ? t.acTask : (logByTask[t.id] !== undefined ? logByTask[t.id] : "");
+      tareas.push({ "TareaKey": key(t.id), "ProyectoID": pid, "EDT": t.id, "FaseEDT": ph ? ph.id : "", "Fase": ph ? ph.name : "", "Tarea": t.name, "Tipo": t.dur === 0 ? "Hito" : "Tarea", "Recurso": t.resource || "",
+        "DuracionDias": t.dur, "Inicio": startISO(t), "Fin": finishISO(t), "InicioLineaBase": workdayISO(pr.es), "FinLineaBase": pr.dur === 0 ? workdayISO(pr.es) : workdayISO(Math.max(0, pr.ef - 1)),
+        "DesvioFinDias": t.inactive ? 0 : t._ef - pr.ef, "HolguraDias": t.slack, "EsCritica": t.critical ? 1 : 0, "EstadoRuta": t.critical ? "Crítica" : (t.near ? "Casi crítica" : "Con holgura"),
+        "AvancePct": t.pct, "CostoDiario": Math.round(dc * 100) / 100, "Presupuesto": p ? Math.round(p.budget) : 0, "VE": p ? Math.round(p.ev) : 0,
+        "VPAlCorte": t.inactive ? 0 : Math.round(Math.max(0, Math.min(m.cut - pr.es, pr.dur)) * dc), "CostoReal": acT === "" ? "" : Math.round(acT), "Inactiva": t.inactive ? 1 : 0, "Predecesoras": predsText(t), "Notas": t.notes || "" });
+      t.preds.forEach(function (pp) { var d = depOf(t, pp); deps.push({ "TareaKey": key(t.id), "PredecesoraKey": key(pp), "ProyectoID": pid, "Tipo": DEP_ES[d.type], "DesfaseDias": d.lag }); });
+      allResourcesOf(t).forEach(function (r) { recursos.push({ "ProyectoID": pid, "TareaKey": key(t.id), "Recurso": r, "Inicio": startISO(t), "Fin": finishISO(t), "DuracionDias": t.dur }); });
+    });
+    var curva = [], hasta = Math.max(m.planned.projectEnd, res.projectEnd);
+    for (var d = 0; d <= hasta; d++) {
+      var vp = 0; m.perTask.forEach(function (p) { var pr = m.planned.schedule[p.t.id] || { es: p.t._es, dur: p.t.dur }; vp += Math.max(0, Math.min(d - pr.es, pr.dur)) * p.dc; });
+      curva.push({ "ProyectoID": pid, "Fecha": workdayISO(d), "DiaHabil": d, "VPAcumulado": Math.round(vp), "BAC": Math.round(m.BAC) });
+    }
+    var cortes = allCuts(m).map(function (c) { return { "ProyectoID": pid, "Fecha": c.date, "DiaHabil": c.day, "PV": Math.round(c.PV), "EV": Math.round(c.EV), "AC": Math.round(c.AC), "CPI": c.CPI === null ? "" : Math.round(c.CPI * 1000) / 1000, "SPI": c.SPI === null ? "" : Math.round(c.SPI * 1000) / 1000, "EsCorteVigente": c.live ? 1 : 0 }; });
+    var tiempos = timeLog.map(function (e) { var tk = taskById(e.taskId); return { "ProyectoID": pid, "Fecha": e.date, "TareaKey": key(e.taskId), "DiasTrabajados": e.days === null || e.days === undefined ? "" : e.days, "Costo": Math.round(logCostOf(e, tk)), "AvancePct": e.pct === null || e.pct === undefined ? "" : e.pct, "Nota": e.note || "" }; });
+    var riesgos = risks.map(function (r) { var mv = riskMoney(r); return { "ProyectoID": pid, "RiesgoKey": pid + "|" + r.id, "ID": r.id, "Riesgo": r.desc, "Tipo": r.type || "Amenaza", "Categoria": r.category || "", "Probabilidad": r.prob, "Impacto": r.impact, "Puntaje": riskScore(r.prob, r.impact),
+      "Respuesta": r.response || "", "Responsable": r.owner || "", "TareaKey": r.taskId ? key(r.taskId) : "", "ProbabilidadPct": r.probPct === undefined || r.probPct === null ? "" : r.probPct, "ImpactoUSD": r.impactUsd === undefined || r.impactUsd === null ? "" : r.impactUsd, "VME": mv === null ? "" : mv, "Estado": r.status || "", "CostoRealUSD": r.actualCost || "" }; });
+    var problemas = issues.map(function (x) { return { "ProyectoID": pid, "ID": x.id, "Tipo": x.type || "", "Descripcion": x.desc || "", "Responsable": x.owner || "", "FechaLimite": x.due || "", "Estado": x.status || "", "TareaKey": x.taskId ? key(x.taskId) : "" }; });
+    var cambios = crList.map(function (c) { return { "ProyectoID": pid, "ID": c.id, "Solicitud": c.title || "", "Solicitante": c.requester || "", "TareaKey": c.taskId ? key(c.taskId) : "", "ImpactoDias": num(c.impactDays) || 0, "ImpactoUSD": num(c.impactCost) || 0, "Estado": c.status || "", "Decide": c.who || "", "Fecha": c.date || "", "BACAntes": c.bacBefore === "" ? "" : c.bacBefore, "BACDespues": c.bacAfter === "" ? "" : c.bacAfter }; });
+    var interesados = stakeholders.map(function (s) { return { "ProyectoID": pid, "Interesado": s.name || "", "Rol": s.role || "", "Poder": s.power || "", "Interes": s.interest || "", "ParticipacionActual": s.engNow || "", "ParticipacionDeseada": s.engDesired || "", "Estrategia": s.strategy || "" }; });
+    var C = function (names, dts) { return names.map(function (k) { return { k: k, dt: !!(dts && dts.indexOf(k) >= 0) }; }); };
+    var spec = [
+      ["Proyecto", proyecto, ["ProyectoID", "Proyecto", "Audiencia", "Inicio", "FinPlanificado", "FinPronosticado", "DuracionPlanificadaDias", "DuracionPronosticadaDias", "LineaBase", "Patrocinador", "PresupuestoActa", "FechaCorte", "BAC", "PV", "EV", "AC", "CPI", "SPI", "EAC", "ETC", "VAC", "CV", "SV", "TCPI", "MetodoEAC", "CostoRealEstimado", "FechaExportacion"], ["Inicio", "FinPlanificado", "FinPronosticado", "FechaCorte", "FechaExportacion"]],
+      ["Tareas", tareas, ["TareaKey", "ProyectoID", "EDT", "FaseEDT", "Fase", "Tarea", "Tipo", "Recurso", "DuracionDias", "Inicio", "Fin", "InicioLineaBase", "FinLineaBase", "DesvioFinDias", "HolguraDias", "EsCritica", "EstadoRuta", "AvancePct", "CostoDiario", "Presupuesto", "VE", "VPAlCorte", "CostoReal", "Inactiva", "Predecesoras", "Notas"], ["Inicio", "Fin", "InicioLineaBase", "FinLineaBase"]],
+      ["Dependencias", deps, ["TareaKey", "PredecesoraKey", "ProyectoID", "Tipo", "DesfaseDias"], []],
+      ["Recursos", recursos, ["ProyectoID", "TareaKey", "Recurso", "Inicio", "Fin", "DuracionDias"], ["Inicio", "Fin"]],
+      ["CurvaS", curva, ["ProyectoID", "Fecha", "DiaHabil", "VPAcumulado", "BAC"], ["Fecha"]],
+      ["CortesEVM", cortes, ["ProyectoID", "Fecha", "DiaHabil", "PV", "EV", "AC", "CPI", "SPI", "EsCorteVigente"], ["Fecha"]],
+      ["RegistroTiempo", tiempos, ["ProyectoID", "Fecha", "TareaKey", "DiasTrabajados", "Costo", "AvancePct", "Nota"], ["Fecha"]],
+      ["Riesgos", riesgos, ["ProyectoID", "RiesgoKey", "ID", "Riesgo", "Tipo", "Categoria", "Probabilidad", "Impacto", "Puntaje", "Respuesta", "Responsable", "TareaKey", "ProbabilidadPct", "ImpactoUSD", "VME", "Estado", "CostoRealUSD"], []],
+      ["ProblemasAcciones", problemas, ["ProyectoID", "ID", "Tipo", "Descripcion", "Responsable", "FechaLimite", "Estado", "TareaKey"], ["FechaLimite"]],
+      ["Cambios", cambios, ["ProyectoID", "ID", "Solicitud", "Solicitante", "TareaKey", "ImpactoDias", "ImpactoUSD", "Estado", "Decide", "Fecha", "BACAntes", "BACDespues"], ["Fecha"]],
+      ["Interesados", interesados, ["ProyectoID", "Interesado", "Rol", "Poder", "Interes", "ParticipacionActual", "ParticipacionDeseada", "Estrategia"], []]
+    ];
+    var wb = X.utils.book_new();
+    spec.forEach(function (s) { X.utils.book_append_sheet(wb, pbiSheet(X, C(s[2], s[3]), s[1]), s[0]); });
+    X.utils.book_append_sheet(wb, X.utils.aoa_to_sheet([["Archivo para Power BI generado por el Planificador TI · " + CONFIG.SITE_URL], ["Proyecto: " + title + " (ProyectoID = " + pid + ")"], ["Exportado el " + exported + ". Fecha de corte del EVM: " + cutISO + ". Línea base: " + m.planned.label + "."],
+      ["Cada hoja es una tabla plana. Claves: ProyectoID (proyecto) y TareaKey (= ProyectoID|EDT). Las fechas son fechas reales; los importes están en USD."], ["Para reportar varios proyectos: guardá un archivo por proyecto en una misma carpeta y conectá Power BI a la carpeta (Obtener datos → Carpeta)."]]), "LEEME");
+    wb.Props = { Title: "Power BI — " + title, Author: "Valeria Yashan", Company: "valeriayashan.com.ar" };
+    X.writeFile(wb, "PowerBI-" + pid + ".xlsx");
+    track("exportar_powerbi", { caso_id: pid });
+    notify("Archivo para Power BI descargado (PowerBI-" + pid + ".xlsx). Guardalo en una carpeta y conectá Power BI a esa carpeta para sumar varios proyectos.");
+  }
+
   function csvSafe(v) { var s = String(v == null ? "" : v).replace(/\n/g, " "); if (/^[=+\-@\t\r]/.test(s)) s = "'" + s; return '"' + s.replace(/"/g, '""') + '"'; }
   function exportCsv() {
     computeSchedule(tasks);
@@ -2983,6 +3064,7 @@
     deleteStakeholder: function (el) { delFrom("¿Eliminar a este interesado del registro?", function () { return stakeholders; }, function (l) { stakeholders = l; }, el.dataset.id); },
     importJson: function () { $("importFile").click(); },
     exportExcel: function (el) { exportExcel(el); },
+    exportPowerBI: function (el) { exportPowerBI(el); },
     saveScenario: saveScenario, setBaseline: setBaseline, addTask: addTask, level: levelResources, undoLevel: undoLeveling, undo: undo, redo: redo,
     ftToggle: toggleFastTrack,
     clearBaselines: function () { if (!baselines.length) return; confirmBox("¿Quitar todas las líneas base?", "Quitar").then(function (ok) { if (ok) { pushHistory(); baselines = []; render(); } }); },
