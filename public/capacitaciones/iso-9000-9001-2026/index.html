@@ -325,8 +325,10 @@ footer a{color:#dbe5f3}
 
 <script>
 (function(){
-  // Configuración: pegar acá la URL que recibe el formulario (Formspree, Supabase Edge Function, webhook, etc.).
-  var FORM_ENDPOINT = "";
+  // Destino del formulario: tabla public.leads_web en Supabase (solo permite insertar; la clave publicable es pública por diseño).
+  var SUPABASE_URL = "https://rfuzdwvmuvdikqqwnfet.supabase.co";
+  var SUPABASE_KEY = "sb_publishable_H2-F_7-lWdQXhhg5n7EoBA_8Euk2erG";
+  var FORM_ENDPOINT = SUPABASE_URL + "/rest/v1/leads_web";
 
   var KEYS = ["utm_source","utm_medium","utm_campaign","utm_content"];
   var form = document.getElementById("waitlist");
@@ -363,9 +365,10 @@ footer a{color:#dbe5f3}
     if (!FORM_ENDPOINT) { say("Formulario sin conectar: falta configurar FORM_ENDPOINT en el script de esta página.", "err"); return; }
 
     var data = {};
-    ["nombre","email","perfil","empresa","pagina"].concat(KEYS).forEach(function(k){ data[k] = f[k].value.trim(); });
+    ["nombre","email","perfil","empresa","pagina"].concat(KEYS).forEach(function(k){ var v = f[k].value.trim(); data[k] = v === "" ? null : v; });
+    data.consent = true;
     btn.disabled = true; say("Enviando...");
-    fetch(FORM_ENDPOINT, {method:"POST", headers:{"Content-Type":"application/json","Accept":"application/json"}, body: JSON.stringify(data)})
+    fetch(FORM_ENDPOINT, {method:"POST", headers:{"Content-Type":"application/json","apikey":SUPABASE_KEY,"Authorization":"Bearer "+SUPABASE_KEY,"Prefer":"return=minimal"}, body: JSON.stringify(data)})
       .then(function(r){ if (!r.ok) throw new Error(r.status); form.reset(); KEYS.forEach(function(k){ f[k].value = saved[k] || ""; });
         say("Listo, quedaste anotado/a. Se te avisa apenas se abra la inscripción.", "ok");
         track("generate_lead", {form: "lista-espera-iso", campaign: "iso-2026"}); })
