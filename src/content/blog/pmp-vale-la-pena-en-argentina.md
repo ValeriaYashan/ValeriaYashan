@@ -87,7 +87,7 @@ Ahora, que valga la pena no significa que te vuelva mejor project manager de un 
 
 ---
 
-¿Estás evaluando si hacer el PMP? Escribime a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar) y te ayudo a evaluar tu situación específica.
+¿Estás evaluando si hacer el PMP? Escribí a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar) y se evalúa tu situación específica.
 
 ---
 

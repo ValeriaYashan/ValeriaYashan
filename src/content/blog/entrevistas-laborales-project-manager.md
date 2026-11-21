@@ -68,7 +68,7 @@ Elegí cinco proyectos de tu trayectoria y escribí cada uno en formato STAR, co
 
 Prepararte mejor es la mitad. La otra mitad es tener entrevistas a las que ir. Armé una [bolsa de trabajo de gestión de proyectos](https://vy-pm-jobs-hub.lovable.app) donde reviso y publico avisos del rubro, para que no tengas que buscar entre cientos de resultados que no tienen nada que ver con tu perfil. Pasate y guardala entre tus favoritos.
 
-Y si estás por entrar a un proceso importante y querés practicar con alguien que te haga las preguntas incómodas, escribime desde [contacto](/contacto) o mirá cómo trabajo en [servicios](/servicios).
+Y si estás por entrar a un proceso importante y querés practicar con alguien que te haga las preguntas incómodas, escribí desde [contacto](/contacto) o mirá cómo se trabaja en [servicios](/servicios).
 
 ## Fuentes consultadas
 

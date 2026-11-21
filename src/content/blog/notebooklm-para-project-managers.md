@@ -94,7 +94,7 @@ Es gratuito, no requiere configuración técnica y se puede empezar a usar en me
 
 ---
 
-¿Querés incorporar IA en la gestión de tus proyectos? Escribime a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar) o por [WhatsApp](https://wa.me/5491140791007).
+¿Querés incorporar IA en la gestión de tus proyectos? Escribí a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar) o por [WhatsApp](https://wa.me/5491140791007).
 
 ---
 

@@ -69,7 +69,7 @@ Cuando el proyecto necesita una decisión que cruza áreas — cambiar una fecha
 
 ---
 
-¿Tu empresa está por arrancar un proyecto de tecnología y querés evitar estos errores desde el inicio? Escribime a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar) o agendá una llamada en [Calendly](https://calendly.com/valeriayashan/30min).
+¿Tu empresa está por arrancar un proyecto de tecnología y querés evitar estos errores desde el inicio? Escribí a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar) o agendá una llamada en [Calendly](https://calendly.com/valeriayashan/30min).
 
 ---
 

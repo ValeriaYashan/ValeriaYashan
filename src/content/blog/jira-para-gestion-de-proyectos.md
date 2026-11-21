@@ -102,7 +102,7 @@ Cómo se hace esa adopción para que no se caiga a las tres semanas lo desarroll
 
 ---
 
-¿Estás evaluando qué herramienta implementar en tu equipo? Escribime a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar) o por [WhatsApp](https://wa.me/5491140791007) y lo vemos juntos.
+¿Estás evaluando qué herramienta implementar en tu equipo? Escribí a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar) o por [WhatsApp](https://wa.me/5491140791007) y lo vemos juntos.
 
 ---
 

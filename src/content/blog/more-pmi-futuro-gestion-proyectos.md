@@ -158,7 +158,7 @@ Eso es M.O.R.E. Y es exactamente lo que la profesión necesita hoy.
 
 ---
 
-*¿Querés profundizar en cómo aplicar estos principios en tu equipo o prepararte para el PMP® 2026? [Escribime](/contacto) y coordinamos.*
+*¿Querés profundizar en cómo aplicar estos principios en tu equipo o prepararte para el PMP® 2026? [Escribí](/contacto) y se coordina.*
 
 ---
 

@@ -126,4 +126,4 @@ Las tres herramientas tienen guías prácticas completas en este sitio, con ejem
 
 ---
 
-Si estás evaluando herramientas para tu equipo y querés una recomendación personalizada según el tipo de proyecto y la cultura de tu organización, [escribime →](/contacto). Es una de las consultas más frecuentes que recibo y en general se resuelve en una conversación de 30 minutos.
+Si estás evaluando herramientas para tu equipo y querés una recomendación personalizada según el tipo de proyecto y la cultura de tu organización, [escribí →](/contacto). Es una de las consultas más frecuentes y en general se resuelve en una conversación de 30 minutos.

@@ -96,7 +96,7 @@ Lo que sí importa: los proyectos no pueden superponerse en el tiempo. Si lidera
 
 ---
 
-¿Tenés dudas sobre si tu experiencia califica para el PMP? Escribime a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar) y te ayudo a evaluarlo.
+¿Tenés dudas sobre si tu experiencia califica para el PMP? Escribí a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar) y se evalúa tu caso.
 
 ---
 

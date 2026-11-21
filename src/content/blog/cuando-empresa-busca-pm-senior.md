@@ -100,7 +100,7 @@ Si la respuesta es vaga ("queremos que los proyectos vayan mejor"), el problema 
 
 ---
 
-*¿Estás evaluando cómo mejorar la gestión de proyectos en tu organización? Puedo ayudarte a diagnosticar qué necesitás antes de decidir. [Escribime →](/contacto)*
+*¿Estás evaluando cómo mejorar la gestión de proyectos en tu organización? Se puede diagnosticar qué necesitás antes de decidir. [Escribí →](/contacto)*
 
 ---
 

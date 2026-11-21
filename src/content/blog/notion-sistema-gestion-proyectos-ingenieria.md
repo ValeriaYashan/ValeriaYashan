@@ -84,7 +84,7 @@ Si lo usás, me interesa saber qué modificaste y por qué. Cada equipo tiene su
 
 ---
 
-¿Usás Notion para gestionar proyectos? ¿Qué tenés armado? Escribime a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar) o dejame un mensaje por [WhatsApp](https://wa.me/5491140791007).
+¿Usás Notion para gestionar proyectos? ¿Qué tenés armado? Escribí a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar) o dejá un mensaje por [WhatsApp](https://wa.me/5491140791007).
 
 ---
 

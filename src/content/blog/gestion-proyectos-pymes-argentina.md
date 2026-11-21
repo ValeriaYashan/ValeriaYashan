@@ -61,7 +61,7 @@ Con un proyecto bien gestionado, el equipo aprende qué funciona para su context
 
 ---
 
-¿Querés implementar gestión de proyectos en tu empresa? Escribime a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar) o agendá una llamada en [Calendly](https://calendly.com/valeriayashan/30min).
+¿Querés implementar gestión de proyectos en tu empresa? Escribí a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar) o agendá una llamada en [Calendly](https://calendly.com/valeriayashan/30min).
 
 ---
 

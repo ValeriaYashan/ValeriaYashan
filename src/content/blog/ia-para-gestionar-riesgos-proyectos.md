@@ -161,7 +161,7 @@ Eso no es automatizar la gestión de riesgos. Es usar mejor el tiempo disponible
 
 ---
 
-¿Querés implementar un proceso de gestión de riesgos con IA en tu organización? Escribime a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar) o por [WhatsApp](https://wa.me/5491140791007).
+¿Querés implementar un proceso de gestión de riesgos con IA en tu organización? Escribí a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar) o por [WhatsApp](https://wa.me/5491140791007).
 
 ---
 

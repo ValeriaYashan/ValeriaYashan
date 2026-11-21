@@ -90,7 +90,7 @@ Si tenés que elegir una sola para empezar y ya tenés experiencia en PM: PMP. S
 
 ---
 
-¿Tenés dudas sobre cuál certificación hacer según tu perfil? Escribime a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar) y lo vemos juntos.
+¿Tenés dudas sobre cuál certificación hacer según tu perfil? Escribí a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar) y lo vemos juntos.
 
 ---
 
