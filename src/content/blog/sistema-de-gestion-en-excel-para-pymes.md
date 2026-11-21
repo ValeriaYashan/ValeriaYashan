@@ -1,6 +1,6 @@
 ---
 title: "Un sistema de gestión en Excel que no se rompe al mes"
-description: "Cómo se diseña un sistema de gestión en Excel para una PyME: la cadena insumo-receta-costo-precio-stock, la merma y las dos preguntas previas."
+description: "Cómo se diseña un sistema de gestión en Excel para una PyME: la cadena insumo-receta-costo-precio-stock, la merma y las dos preguntas previas al diseño."
 pubDate: "2026-07-29"
 category: "Herramientas"
 tags: ["Excel", "Costos", "PyMEs", "Procesos"]

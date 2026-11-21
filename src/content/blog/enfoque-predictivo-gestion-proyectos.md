@@ -1,6 +1,6 @@
 ---
 title: "Enfoque predictivo: qué es, cuándo usarlo y cuándo no"
-description: "Qué es el enfoque predictivo (cascada), cómo funciona, en qué se diferencia del ágil, cuándo conviene usarlo y cuándo no."
+description: "Qué es el enfoque predictivo (cascada), cómo funciona, en qué se diferencia del ágil, cuándo conviene usarlo, cuándo no y qué le exige al project manager."
 pubDate: "2026-07-04"
 category: "Project Management"
 tags: ["Project Management", "Certificación PMP", "PMBOK", "Metodologías"]

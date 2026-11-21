@@ -1,6 +1,6 @@
 ---
 title: "Power Skills: la habilidad que define a un buen PM"
-description: "El Talent Triangle de PMI divide la competencia de un PM en tres pilares iguales. Power Skills es el más difícil de certificar y el más decisivo hoy."
+description: "El Talent Triangle de PMI divide la competencia de un PM en tres pilares iguales. Power Skills es el pilar más difícil de certificar y el más decisivo hoy."
 pubDate: "2026-09-22"
 category: "Project Management"
 tags: ["Project Management", "Liderazgo", "Carrera"]

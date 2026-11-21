@@ -1,6 +1,6 @@
 ---
 title: "Reserva de contingencia vs. de gestión: ejemplo PMBOK® 8"
-description: "Diferencia entre reserva de contingencia y de gestión en PMBOK® 8: qué cubre cada una, si van dentro del presupuesto y un ejemplo con números."
+description: "Diferencia entre reserva de contingencia y de gestión en PMBOK® 8: qué cubre cada una, si van dentro del presupuesto, un ejemplo con números y el Acta."
 pubDate: "2026-10-04"
 category: "Project Management"
 tags: ["PMBOK", "Reservas", "Presupuesto", "Project Charter", "Costos"]
