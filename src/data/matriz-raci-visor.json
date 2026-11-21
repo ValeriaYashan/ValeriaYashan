@@ -1,0 +1,380 @@
+{
+ "guia": [
+  {
+   "titulo": "Para qué sirve",
+   "filas": [
+    [
+     "Objetivo",
+     "Dejar escrito quién hace, quién responde y a quién se consulta en cada actividad, y detectar a tiempo los vacíos y las duplicaciones de responsabilidad."
+    ],
+    [
+     "Regla central",
+     "Cada actividad tiene una sola persona con la letra A (quien responde por el resultado). Si hay cero o dos, la fila se marca sola."
+    ]
+   ]
+  },
+  {
+   "titulo": "Qué significa cada letra",
+   "filas": [
+    [
+     "R · Responsable (Responsible)",
+     "Hace el trabajo. Puede haber varias personas con R."
+    ],
+    [
+     "A · Aprobador o dueño del resultado (Accountable)",
+     "Responde por el resultado y da la aprobación final. Una sola por actividad."
+    ],
+    [
+     "AR · A y R a la vez",
+     "Una misma persona hace y responde. Es válido cuando el rol es chico; la plantilla lo cuenta como A y como R."
+    ],
+    [
+     "C · Consultado (Consulted)",
+     "Aporta información o criterio antes de decidir. Comunicación en dos sentidos."
+    ],
+    [
+     "I · Informado (Informed)",
+     "Recibe el resultado. Comunicación en un sentido."
+    ]
+   ]
+  },
+  {
+   "titulo": "Cómo se completa",
+   "filas": [
+    [
+     "Paso 1",
+     "En la hoja Plantilla, escribí en las filas de la columna A las actividades o entregables (idealmente los paquetes de trabajo de la EDT)."
+    ],
+    [
+     "Paso 2",
+     "Cambiá los nombres de los roles en la fila de encabezado por los de tu proyecto. Hay 8 columnas."
+    ],
+    [
+     "Paso 3",
+     "Elegí R, A, AR, C o I en cada celda con la lista desplegable. Dejá en blanco los roles que no participan."
+    ],
+    [
+     "Paso 4",
+     "Mirá la columna Estado: debe decir OK en todas las filas. Falta A, Más de un A y Falta R se corrigen antes de compartir la matriz."
+    ]
+   ]
+  },
+  {
+   "titulo": "Cómo se lee el Estado",
+   "filas": [
+    [
+     "OK",
+     "Una sola A y al menos una R."
+    ],
+    [
+     "Falta A",
+     "Nadie responde por el resultado. Es el vacío más común."
+    ],
+    [
+     "Más de un A",
+     "Dos personas creen decidir. Es el origen de las demoras en las aprobaciones."
+    ],
+    [
+     "Falta R",
+     "Alguien responde, pero nadie ejecuta."
+    ]
+   ]
+  }
+ ],
+ "encabezados": [
+  "N.º",
+  "Actividad o entregable",
+  "Patrocinador",
+  "Gerente de proyecto",
+  "Líder técnico",
+  "Analista funcional",
+  "Equipo de desarrollo",
+  "QA",
+  "Usuario clave",
+  "Proveedor externo",
+  "Estado"
+ ],
+ "plantilla": [
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0
+ ],
+ "ejemplo": [
+  [
+   1,
+   "Aprobar el acta de constitución",
+   "A",
+   "R",
+   "C",
+   "",
+   "",
+   "",
+   "I",
+   "",
+   "OK"
+  ],
+  [
+   2,
+   "Relevar requisitos",
+   "I",
+   "A",
+   "C",
+   "R",
+   "",
+   "",
+   "C",
+   "",
+   "OK"
+  ],
+  [
+   3,
+   "Diseñar la arquitectura",
+   "",
+   "I",
+   "AR",
+   "",
+   "C",
+   "",
+   "",
+   "C",
+   "OK"
+  ],
+  [
+   4,
+   "Desarrollar la integración",
+   "",
+   "",
+   "A",
+   "",
+   "R",
+   "C",
+   "",
+   "R",
+   "OK"
+  ],
+  [
+   5,
+   "Configurar el ambiente de pruebas",
+   "",
+   "",
+   "A",
+   "",
+   "",
+   "R",
+   "",
+   "C",
+   "OK"
+  ],
+  [
+   6,
+   "Ejecutar las pruebas de aceptación",
+   "",
+   "I",
+   "",
+   "",
+   "",
+   "R",
+   "R",
+   "",
+   "Falta A"
+  ],
+  [
+   7,
+   "Aprobar el pasaje a producción",
+   "A",
+   "A",
+   "R",
+   "",
+   "",
+   "C",
+   "",
+   "",
+   "Más de un A"
+  ],
+  [
+   8,
+   "Capacitar a los usuarios",
+   "",
+   "A",
+   "",
+   "R",
+   "",
+   "",
+   "C",
+   "",
+   "OK"
+  ],
+  [
+   9,
+   "Informe de estado semanal",
+   "I",
+   "AR",
+   "C",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "OK"
+  ],
+  [
+   10,
+   "Gestionar los cambios",
+   "C",
+   "A",
+   "C",
+   "R",
+   "",
+   "",
+   "",
+   "I",
+   "OK"
+  ],
+  [
+   11,
+   "Gestionar el contrato del proveedor",
+   "A",
+   "R",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "C",
+   "OK"
+  ],
+  [
+   12,
+   "Cierre y lecciones aprendidas",
+   "I",
+   "A",
+   "C",
+   "R",
+   "C",
+   "C",
+   "C",
+   "",
+   "OK"
+  ]
+ ],
+ "acuerdos": [
+  [
+   "Objetivo común",
+   "¿Qué resultado nos importa lograr juntos, más allá de cada tarea?",
+   "Entregar la migración sin cortar la facturación de ningún cliente."
+  ],
+  [
+   "Disponibilidad",
+   "¿En qué horarios y días se puede contar con cada persona?",
+   "Núcleo horario de 10 a 16 h; ausencias avisadas con 48 h."
+  ],
+  [
+   "Canales de comunicación",
+   "¿Qué se habla por chat, por correo y en reunión?",
+   "Chat para dudas del día; correo para decisiones; reunión para desacuerdos."
+  ],
+  [
+   "Tiempos de respuesta",
+   "¿En cuánto tiempo se responde cada tipo de mensaje?",
+   "Consultas en 24 h hábiles; urgencias por llamada."
+  ],
+  [
+   "Reuniones",
+   "¿Cuáles hay, cuánto duran y qué se espera de cada una?",
+   "Seguimiento semanal de 30 minutos, con agenda enviada el día anterior."
+  ],
+  [
+   "Toma de decisiones",
+   "¿Quién decide qué, y qué se decide en conjunto?",
+   "Técnicas: líder técnico. Alcance y plazos: gerente de proyecto con el patrocinador."
+  ],
+  [
+   "Desacuerdos",
+   "¿Cómo se resuelve un conflicto antes de escalarlo?",
+   "Primero entre las partes; si no hay acuerdo en 48 h, al gerente de proyecto."
+  ],
+  [
+   "Criterio de terminado",
+   "¿Cuándo se considera cerrada una tarea?",
+   "Revisada por otra persona y probada en el ambiente de pruebas."
+  ],
+  [
+   "Cambios y escalamiento",
+   "¿Cómo se pide un cambio y cuándo se avisa al patrocinador?",
+   "Todo cambio de alcance se registra; desvíos de más de una semana se escalan."
+  ],
+  [
+   "Revisión de los acuerdos",
+   "¿Cuándo y cómo se revisan estos acuerdos?",
+   "En cada cierre de fase y cuando entre o salga alguien del equipo."
+  ]
+ ],
+ "resumen": {
+  "estados": [
+   [
+    "OK",
+    10
+   ],
+   [
+    "Falta A",
+    1
+   ],
+   [
+    "Más de un A",
+    1
+   ],
+   [
+    "Falta R",
+    0
+   ]
+  ],
+  "carga": [
+   [
+    "Patrocinador",
+    0,
+    3
+   ],
+   [
+    "Gerente de proyecto",
+    3,
+    6
+   ],
+   [
+    "Líder técnico",
+    2,
+    3
+   ],
+   [
+    "Analista funcional",
+    4,
+    0
+   ],
+   [
+    "Equipo de desarrollo",
+    1,
+    0
+   ],
+   [
+    "QA",
+    2,
+    0
+   ],
+   [
+    "Usuario clave",
+    1,
+    0
+   ],
+   [
+    "Proveedor externo",
+    1,
+    0
+   ]
+  ],
+  "total": 12
+ }
+}
