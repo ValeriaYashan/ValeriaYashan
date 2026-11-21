@@ -4,6 +4,7 @@ description: "Qué es la ISO 21500, cómo se estructura, en qué se diferencia d
 pubDate: "2026-07-15"
 category: "Project Management"
 tags: ["ISO 21500", "gestión de proyectos", "estándares", "PMBOK", "Project Management"]
+cta: "servicio-consultoria-pm"
 image: "/images/blog/iso-21500-gestion-de-proyectos.jpg"
 ---
 

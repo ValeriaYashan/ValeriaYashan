@@ -1,0 +1,90 @@
+---
+/* CTA medible de artículo.
+   Convención fija de UTM: utm_source=sitio | utm_medium=cta-articulo | utm_campaign=<destino> | utm_content=<slug>
+   Los UTM se agregan solo a destinos externos (Substack). En enlaces internos no se agregan porque
+   pisarían la fuente original de la sesión en GA4; se mide con el evento cta_click (mismos cuatro valores). */
+interface Props {
+  slug: string;
+  destino: 'servicio-consultoria-pm' | 'servicio-power-bi' | 'newsletter';
+}
+const { slug, destino } = Astro.props;
+
+const destinos = {
+  'servicio-consultoria-pm': {
+    titulo: '¿Necesitás ordenar la gestión de tus proyectos?',
+    texto: 'PM & Strategy acompaña a equipos y organizaciones con diagnóstico, diseño de procesos y seguimiento, adaptados a su contexto.',
+    boton: 'Ver el servicio de consultoría',
+    url: '/servicios/consultoria-pm/',
+  },
+  'servicio-power-bi': {
+    titulo: '¿Querés un tablero de control de proyectos que se actualice solo?',
+    texto: 'El servicio de control de proyectos con Power BI parte de las decisiones que necesitás tomar y arma el tablero a partir de ellas.',
+    boton: 'Ver el servicio de Power BI',
+    url: '/servicios/control-de-proyectos-power-bi/',
+  },
+  newsletter: {
+    titulo: 'Recibí más análisis de PM e IA aplicada',
+    texto: 'La newsletter reúne artículos y recursos sobre gestión de proyectos e inteligencia artificial. Sin spam.',
+    boton: 'Suscribirme en Substack',
+    url: 'https://valeriayashanpm.substack.com/',
+  },
+} as const;
+
+const d = destinos[destino];
+const externo = d.url.startsWith('http');
+const href = externo
+  ? `${d.url}?utm_source=sitio&utm_medium=cta-articulo&utm_campaign=${destino}&utm_content=${slug}`
+  : d.url;
+---
+
+<aside class="cta-articulo" data-slug={slug} data-destino={destino}>
+  <h2>{d.titulo}</h2>
+  <p>{d.texto}</p>
+  <a
+    class="cta-articulo__btn"
+    href={href}
+    {...(externo ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+    data-cta-link
+  >{d.boton}</a>
+</aside>
+
+<style>
+  .cta-articulo {
+    margin: var(--space-xl, 2.5rem) 0;
+    padding: 1.5rem 1.6rem;
+    border: 1px solid var(--color-border);
+    border-left: 5px solid var(--color-accent);
+    border-radius: 10px;
+    background: var(--color-surface);
+  }
+  .cta-articulo h2 { margin: 0 0 0.5rem; font-size: 1.35rem; }
+  .cta-articulo p { margin: 0 0 1rem; color: var(--color-muted); }
+  .cta-articulo__btn {
+    display: inline-block;
+    padding: 0.75rem 1.25rem;
+    border-radius: 8px;
+    background: var(--color-text);
+    color: #fff;
+    font-weight: 700;
+    text-decoration: none;
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.cta-articulo').forEach((box) => {
+    const a = box.querySelector<HTMLAnchorElement>('[data-cta-link]');
+    if (!a) return;
+    a.addEventListener('click', () => {
+      const d = {
+        utm_source: 'sitio',
+        utm_medium: 'cta-articulo',
+        utm_campaign: box.dataset.destino,
+        utm_content: box.dataset.slug,
+        link_url: a.href,
+      };
+      const w = window as any;
+      try { if (w.gtag) w.gtag('event', 'cta_click', d); } catch (e) {}
+      try { (w.dataLayer = w.dataLayer || []).push({ event: 'cta_click', ...d }); } catch (e) {}
+    });
+  });
+</script>

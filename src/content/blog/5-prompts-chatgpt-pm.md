@@ -4,6 +4,7 @@ description: "Los mejores prompts para project managers no son genéricos: son e
 pubDate: "2026-06-14"
 category: "IA"
 tags: ["IA", "Project Management", "Productividad", "ChatGPT", "Prompts"]
+cta: "newsletter"
 image: "/images/blog/5-prompts-chatgpt-pm.jpg"
 ---
 

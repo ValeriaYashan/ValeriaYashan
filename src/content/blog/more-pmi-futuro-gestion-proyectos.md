@@ -4,6 +4,7 @@ description: "M.O.R.E. es el marco con el que el PMI redefine el éxito en proye
 pubDate: "2026-07-19"
 category: "Project Management"
 tags: ["PMI", "M.O.R.E.", "gestión de proyectos", "PMP", "liderazgo", "valor"]
+cta: "newsletter"
 image: "/images/blog/more-pmi-futuro-gestion-proyectos.jpg"
 ---
 

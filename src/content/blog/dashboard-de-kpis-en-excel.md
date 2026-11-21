@@ -4,6 +4,7 @@ description: "Qué separa un dashboard de KPIs en Excel de un reporte con colore
 pubDate: "2026-07-29"
 category: "Herramientas"
 tags: ["Excel", "Indicadores", "Dashboards", "Procesos"]
+cta: "servicio-power-bi"
 ---
 
 Un pedido que veo repetido con la misma redacción: "necesito un dashboard de KPIs en Excel, dinámico y visualmente atractivo". El adjetivo del final es el que hunde la mitad de los tableros que se construyen.

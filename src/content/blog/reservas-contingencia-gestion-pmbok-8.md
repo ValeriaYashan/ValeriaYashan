@@ -4,6 +4,7 @@ description: "Diferencia entre reserva de contingencia y de gestión en PMBOK® 
 pubDate: "2026-10-04"
 category: "Project Management"
 tags: ["PMBOK", "Reservas", "Presupuesto", "Project Charter", "Costos"]
+cta: "servicio-consultoria-pm"
 ---
 
 <style>
