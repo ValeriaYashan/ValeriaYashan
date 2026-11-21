@@ -252,7 +252,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <div class="cta-inner">
         <h2>¿Necesitás un dashboard de proyectos para tu organización?</h2>
         <p>Puedo ayudarte a definir los KPIs, estructurar los datos y construir el dashboard en Power BI adaptado a tu portfolio de proyectos real.</p>
-        <a href="/servicios/control-de-proyectos-power-bi/" class="btn-cta-guia">Ver el servicio de control de proyectos con Power BI →</a>
+        <a href="/servicios/control-de-proyectos-power-bi/" class="btn-cta-guia" data-cta-link data-slug="herramientas-power-bi" data-destino="servicio-power-bi">Ver el servicio de control de proyectos con Power BI →</a>
       </div>
     </section>
 
@@ -266,6 +266,23 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
   </div>
 
+<script>
+  // Evento cta_click con la convención fija de UTM (enlace interno: sin UTM en la URL, para no pisar la fuente de la sesión en GA4).
+  document.querySelectorAll<HTMLAnchorElement>('[data-cta-link][data-slug]').forEach((a) => {
+    a.addEventListener('click', () => {
+      const d = {
+        utm_source: 'sitio',
+        utm_medium: 'cta-articulo',
+        utm_campaign: a.dataset.destino,
+        utm_content: a.dataset.slug,
+        link_url: a.href,
+      };
+      const w = window as any;
+      try { if (w.gtag) w.gtag('event', 'cta_click', d); } catch (e) {}
+      try { (w.dataLayer = w.dataLayer || []).push({ event: 'cta_click', ...d }); } catch (e) {}
+    });
+  });
+</script>
 </BaseLayout>
 
 <style>

@@ -4,6 +4,7 @@ description: "Qué es el enfoque predictivo (cascada), cómo funciona, en qué s
 pubDate: "2026-07-04"
 category: "Project Management"
 tags: ["Project Management", "Certificación PMP", "PMBOK", "Metodologías"]
+cta: "servicio-consultoria-pm"
 image: "/images/blog/enfoque-predictivo-gestion-proyectos.jpg"
 ---
 

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import AutorBio from '../components/AutorBio.astro';
+import CtaArticulo from '../components/CtaArticulo.astro';
 import { getCollection } from 'astro:content';
 
 interface Props {
@@ -10,9 +11,11 @@ interface Props {
   category: string;
   tags: string[];
   image?: string;
+  cta?: 'servicio-consultoria-pm' | 'servicio-power-bi' | 'newsletter';
+  slug?: string;
 }
 
-const { title, description, pubDate, category, tags, image } = Astro.props;
+const { title, description, pubDate, category, tags, image, cta, slug } = Astro.props;
 
 const todosLosArticulos = await getCollection('blog');
 const relacionados = todosLosArticulos
@@ -84,6 +87,8 @@ const articleSchema = {
     <div class="post-body">
       <slot />
     </div>
+
+    {cta && slug && <CtaArticulo slug={slug} destino={cta} />}
 
     <AutorBio />
 

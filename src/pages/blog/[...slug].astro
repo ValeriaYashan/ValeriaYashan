@@ -19,6 +19,8 @@ const img = post.data.image ?? '';
   category={post.data.category}
   tags={post.data.tags}
   image={img}
+  cta={post.data.cta}
+  slug={post.id.replace(/\.md$/, '')}
 >
   <Content />
 </BlogPostLayout>
