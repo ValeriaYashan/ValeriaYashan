@@ -90,6 +90,8 @@ Los datos son ficticios. La estructura es la real: cuatro hojas (Dashboard, Dato
 
 **¿Necesitás un tablero de indicadores para tu equipo o tu negocio?**
 
+Si Excel ya se te quedó corto (varias fuentes de datos, varios proyectos o mucha gente consultando el tablero), mirá el servicio de [control de proyectos con Power BI](/servicios/control-de-proyectos-power-bi/).
+
 Escribime a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar) o por [WhatsApp](https://wa.me/5491140791007). En una llamada de 15 minutos definimos qué decisiones tiene que habilitar el panel — que es la parte que después no se puede corregir con diseño.
 
 ---
