@@ -88,7 +88,7 @@ Durante ese período, lo que define el éxito no es la configuración de la herr
 
 Si el líder del equipo sigue preguntando por WhatsApp en lugar de revisar el tablero, el tablero muere. Es así de simple.
 
-La implementación de herramientas de gestión es, en el fondo, un proyecto de gestión del cambio. Si estás evaluando hacer esto en tu organización y querés hacerlo bien desde el inicio, podés [contactarme](/contacto) para trabajarlo juntos.
+La implementación de herramientas de gestión es, en el fondo, un proyecto de gestión del cambio. Si estás evaluando hacer esto en tu organización y querés hacerlo bien desde el inicio, podés [contactarme](/contacto) para trabajarlo juntos. El detalle de cómo es ese acompañamiento, de punta a punta, está en el [servicio de implementación de monday.com](/servicios/implementacion-monday-com/).
 
 ---
 
