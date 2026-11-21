@@ -1,0 +1,190 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import RaciVisor from '../../components/RaciVisor.astro';
+
+const title = "Plantilla de matriz RACI y acuerdos de equipo";
+const description = "Descargá gratis una plantilla en Excel de matriz RACI que avisa cuando una actividad no tiene A o tiene dos, con ejemplo completo y acuerdos de equipo.";
+const ogImage = "https://valeriayashan.com.ar/images/og-default.jpg";
+const archivo = "/recursos/matriz-raci-acuerdos-equipo.xlsx";
+---
+
+<BaseLayout title={title} description={description} ogImage={ogImage}>
+
+  <section class="pl-hero">
+    <div class="pl-hero-inner">
+      <div class="pl-badge">Recurso gratuito</div>
+      <h1>Plantilla de matriz RACI y acuerdos de equipo</h1>
+      <p class="pl-subtitle">
+        Una plantilla en Excel para definir quién ejecuta y quién responde en cada actividad del proyecto,
+        con una verificación automática de que cada actividad tenga una sola persona con la A.
+      </p>
+      <a href={archivo} download="matriz-raci-acuerdos-equipo.xlsx" class="btn-download" data-descarga="hero">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Descargar plantilla en Excel
+      </a>
+      <p class="pl-meta">Excel (.xlsx) · Descarga directa · Sin registro · <a href="#vista-previa" class="pl-link">Ver vista previa</a></p>
+    </div>
+  </section>
+
+  <section class="pl-content">
+    <div class="pl-content-inner">
+
+      <div class="pl-block">
+        <h2>Qué resuelve</h2>
+        <p>
+          Cuando una actividad no tiene quien responda por el resultado, nadie la cierra. Cuando tiene dos, nadie se anima a aprobarla.
+          La plantilla marca sola las filas con cero o con más de una A, y muestra qué roles concentran la carga para repartirla antes de que se convierta en demora.
+        </p>
+      </div>
+
+      <div class="pl-block">
+        <h2>Qué incluye</h2>
+        <ul class="pl-list">
+          <li>
+            <strong>Guía de uso</strong>
+            <span>El significado de R, A, C e I, la variante AR y cómo leer cada estado de la matriz.</span>
+          </li>
+          <li>
+            <strong>Plantilla para 25 actividades y 8 roles</strong>
+            <span>Con lista desplegable en cada celda y una columna Estado que dice OK, Falta A, Más de un A o Falta R.</span>
+          </li>
+          <li>
+            <strong>Ejemplo completo con errores a propósito</strong>
+            <span>Un proyecto ficticio de 12 actividades donde dos filas fallan, para ver cómo se detectan.</span>
+          </li>
+          <li>
+            <strong>Acuerdos de equipo</strong>
+            <span>Diez preguntas guía con ejemplos para dejar por escrito cómo trabaja el equipo: canales, reuniones, decisiones y desacuerdos.</span>
+          </li>
+          <li>
+            <strong>Resumen con gráficos</strong>
+            <span>Cantidad de actividades como R y como A por rol, para detectar sobrecarga.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="pl-block">
+        <h2>Cómo se usa</h2>
+        <ol class="pl-steps">
+          <li>Listar las actividades o los paquetes de trabajo de la EDT en la primera columna.</li>
+          <li>Reemplazar los nombres de los roles por los del proyecto.</li>
+          <li>Elegir R, A, AR, C o I en cada celda.</li>
+          <li>Corregir cada fila hasta que la columna Estado diga OK, y completar los acuerdos de equipo en una reunión.</li>
+        </ol>
+        <p class="pl-nota">
+          Base conceptual: PMBOK Guide 8.ª edición (PMI, 2025). La regla de una sola A por actividad es un criterio de PM &amp; Strategy, de uso extendido en la práctica, no un requisito literal del PMBOK.
+        </p>
+      </div>
+
+      <div class="pl-block" id="vista-previa">
+        <h2>Vista previa de la planilla</h2>
+        <p>
+          Recorré las cinco hojas del Excel: Guía, Plantilla en blanco, Ejemplo completo, Acuerdos de equipo y Resumen.
+          Usá el botón de pantalla completa para verla en grande. La columna Estado se calcula sola en el Excel.
+        </p>
+        <RaciVisor />
+      </div>
+
+      <div class="pl-cta">
+        <a href={archivo} download="matriz-raci-acuerdos-equipo.xlsx" class="btn-download" data-descarga="final">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Descargar plantilla en Excel
+        </a>
+        <p class="pl-meta">Gratuita · Sin registro · Uso libre</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="pl-next">
+    <div class="pl-next-inner">
+      <h2>Para ir más lejos</h2>
+      <div class="pl-next-cards">
+        <div class="pl-next-card">
+          <h3>Más recursos gratuitos</h3>
+          <p>Plantillas, checklists y guías sobre gestión de proyectos e IA.</p>
+          <a href="/recursos" class="btn-outline" data-cta="recursos">Ver todos los recursos</a>
+        </div>
+        <div class="pl-next-card">
+          <h3>Consultoría en gestión de proyectos</h3>
+          <p>Matrices de responsabilidades y acuerdos de equipo aplicados a un proyecto real.</p>
+          <a href="/servicios/consultoria-pm" class="btn-outline" data-cta="consultoria-pm">Ver el servicio</a>
+        </div>
+        <div class="pl-next-card">
+          <h3>Recibir los próximos recursos</h3>
+          <p>Nuevos recursos y artículos sobre PM e IA, sin tener que volver a buscarlos.</p>
+          <a href="/recursos#newsletter" class="btn-outline" data-cta="newsletter">Suscribirme</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .pl-hero { background: var(--color-surface); border-bottom: 1px solid var(--color-border); padding: 5rem 1.5rem 4rem; text-align: center; }
+  .pl-hero-inner { max-width: 720px; margin: 0 auto; }
+  .pl-badge { display: inline-block; background: #e8f5e9; color: var(--color-accent); font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; padding: 0.35rem 0.9rem; border-radius: 20px; margin-bottom: 1.25rem; }
+  .pl-hero h1 { font-family: 'Fraunces', serif; font-size: clamp(1.9rem, 4.5vw, 2.7rem); font-weight: 900; color: var(--color-text); margin: 0 0 1.25rem; line-height: 1.15; }
+  .pl-subtitle { font-size: 1.1rem; color: var(--color-muted); line-height: 1.65; margin: 0 0 2rem; }
+  .pl-meta { font-size: 0.82rem; color: var(--color-muted); margin-top: 0.75rem; }
+  .btn-download { display: inline-flex; align-items: center; gap: 0.6rem; background: var(--color-accent); color: #fff; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 1rem; padding: 0.85rem 1.75rem; border-radius: 6px; text-decoration: none; transition: background 0.2s; }
+  .btn-download:hover { background: #1B4332; }
+  .pl-content { padding: 4rem 1.5rem; }
+  .pl-content-inner { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 3rem; }
+  .pl-block h2 { font-family: 'Fraunces', serif; font-size: 1.6rem; font-weight: 700; color: var(--color-text); margin: 0 0 0.75rem; }
+  .pl-block p { color: var(--color-muted); line-height: 1.65; margin: 0; }
+  .pl-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 1rem; }
+  .pl-list li { display: flex; flex-direction: column; gap: 0.25rem; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px; padding: 1rem 1.25rem; }
+  .pl-list li strong { font-family: 'Inter', sans-serif; font-weight: 600; color: var(--color-text); font-size: 0.95rem; }
+  .pl-list li span { font-size: 0.88rem; color: var(--color-muted); line-height: 1.5; }
+  .pl-steps { margin: 0 0 1.25rem; padding-left: 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; color: var(--color-text); line-height: 1.55; }
+  .pl-nota { font-size: 0.82rem; }
+  .pl-link { color: var(--color-accent); font-weight: 600; }
+  .pl-cta { text-align: center; padding: 2rem; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px; }
+  .pl-next { background: var(--color-surface); border-top: 1px solid var(--color-border); padding: 4rem 1.5rem 5rem; }
+  .pl-next-inner { max-width: 900px; margin: 0 auto; }
+  .pl-next h2 { font-family: 'Fraunces', serif; font-size: 1.75rem; font-weight: 700; color: var(--color-text); margin: 0 0 2rem; }
+  .pl-next-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+  .pl-next-card { background: var(--color-bg, #fff); border: 1px solid var(--color-border); border-radius: 8px; padding: 1.5rem; display: flex; flex-direction: column; gap: 0.6rem; }
+  .pl-next-card h3 { font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 600; color: var(--color-text); margin: 0; }
+  .pl-next-card p { font-size: 0.88rem; color: var(--color-muted); line-height: 1.55; margin: 0; flex: 1; }
+  .btn-outline { display: inline-block; font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 600; color: var(--color-accent); text-decoration: none; margin-top: 0.5rem; }
+  .btn-outline:hover { text-decoration: underline; }
+  @media (max-width: 700px) {
+    .pl-hero { padding: 3.5rem 1.25rem 3rem; }
+    .pl-content { padding: 3rem 1.25rem; }
+    .pl-next { padding: 3rem 1.25rem 4rem; }
+    .pl-next-cards { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script>
+  // Medición según la convención del sitio: sin UTM en enlaces internos; eventos file_download y cta_click.
+  const w = window as any;
+  const enviar = (nombre: string, datos: Record<string, string>) => {
+    try { if (w.gtag) w.gtag('event', nombre, datos); } catch (e) {}
+    try { (w.dataLayer = w.dataLayer || []).push({ event: nombre, ...datos }); } catch (e) {}
+  };
+  document.querySelectorAll<HTMLAnchorElement>('[data-descarga]').forEach((a) => {
+    a.addEventListener('click', () => {
+      enviar('file_download', {
+        file_name: 'matriz-raci-acuerdos-equipo.xlsx',
+        link_url: a.href,
+        campaign: 'plantilla-raci',
+        content: a.dataset.descarga || '',
+      });
+    });
+  });
+  document.querySelectorAll<HTMLAnchorElement>('[data-cta]').forEach((a) => {
+    a.addEventListener('click', () => {
+      enviar('cta_click', {
+        utm_source: 'sitio',
+        utm_medium: 'landing',
+        utm_campaign: a.dataset.cta || '',
+        utm_content: 'plantilla-raci',
+        link_url: a.href,
+      });
+    });
+  });
+</script>

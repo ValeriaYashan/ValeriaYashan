@@ -1,0 +1,129 @@
+---
+import '../styles/visor.css';
+import datos from '../data/matriz-raci-visor.json';
+
+const { guia, encabezados, plantilla, ejemplo, acuerdos, resumen } = datos;
+const tabs = [
+  { id: 'guia', nombre: 'Guía' },
+  { id: 'plantilla', nombre: 'Plantilla' },
+  { id: 'ejemplo', nombre: 'Ejemplo' },
+  { id: 'acuerdos', nombre: 'Acuerdos de equipo' },
+  { id: 'resumen', nombre: 'Resumen' },
+];
+const claseEstado = (v: string) => (v === 'OK' ? 'nula' : v === 'Más de un A' ? 'media' : 'alta');
+const maxCarga = Math.max(1, ...resumen.carga.map((c) => Math.max(Number(c[1]), Number(c[2]))));
+const maxEstado = Math.max(1, ...resumen.estados.map((c) => Number(c[1])));
+---
+
+<div class="pv pv-raci" data-visor>
+  <div class="pv-barra">
+    <div class="pv-tabs" role="tablist" aria-label="Hojas de la plantilla">
+      {tabs.map((t, i) => (
+        <button type="button" role="tab" id={`pv-tab-${t.id}`} class="pv-tab" aria-controls={`pv-panel-${t.id}`} aria-selected={i === 2 ? 'true' : 'false'} tabindex={i === 2 ? 0 : -1} data-tab={t.id}>{t.nombre}</button>
+      ))}
+    </div>
+    <button type="button" class="pv-fs" data-fs aria-pressed="false">
+      <span data-fs-texto>Pantalla completa</span>
+    </button>
+  </div>
+
+  <div class="pv-cuerpo">
+    <div role="tabpanel" id="pv-panel-guia" aria-labelledby="pv-tab-guia" class="pv-panel" hidden tabindex="0">
+      <div class="pv-guia">
+        {guia.map((s) => (
+          <section class="pv-sec">
+            <h3>{s.titulo}</h3>
+            <dl>
+              {s.filas.map((f) => (<><dt>{f[0]}</dt><dd>{f[1]}</dd></>))}
+            </dl>
+          </section>
+        ))}
+      </div>
+    </div>
+
+    <div role="tabpanel" id="pv-panel-plantilla" aria-labelledby="pv-tab-plantilla" class="pv-panel" hidden tabindex="0">
+      <div class="pv-scroll">
+        <table class="pv-tabla">
+          <thead><tr>{encabezados.map((h) => <th scope="col">{h}</th>)}</tr></thead>
+          <tbody>
+            {plantilla.map((_, n) => (
+              <tr>{encabezados.map((__, i) => <td class={i === 1 ? '' : 'pv-c'}>{i === 0 ? n + 1 : ''}</td>)}</tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="pv-pie">Estructura en blanco: en el Excel tenés 25 filas listas para completar, con lista desplegable (R, A, AR, C, I) y la columna Estado calculada sola.</p>
+    </div>
+
+    <div role="tabpanel" id="pv-panel-ejemplo" aria-labelledby="pv-tab-ejemplo" class="pv-panel" tabindex="0">
+      <div class="pv-scroll">
+        <table class="pv-tabla">
+          <thead><tr>{encabezados.map((h) => <th scope="col">{h}</th>)}</tr></thead>
+          <tbody>
+            {ejemplo.map((fila) => (
+              <tr>
+                {fila.map((v, i) => (
+                  i === fila.length - 1
+                    ? <td class={`pv-c pv-brecha ${claseEstado(String(v))}`}>{v}</td>
+                    : <td class={i === 1 ? '' : `pv-c${i > 1 && String(v).includes('A') ? ' pv-a' : ''}`}>{v}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="pv-pie">Proyecto ficticio de migración de un sistema de facturación. Dos filas tienen errores a propósito: "Ejecutar las pruebas de aceptación" no tiene A y "Aprobar el pasaje a producción" tiene dos.</p>
+    </div>
+
+    <div role="tabpanel" id="pv-panel-acuerdos" aria-labelledby="pv-tab-acuerdos" class="pv-panel" hidden tabindex="0">
+      <div class="pv-scroll">
+        <table class="pv-tabla pv-tabla-ac">
+          <thead><tr><th scope="col">Tema</th><th scope="col">Pregunta guía</th><th scope="col">Ejemplo de acuerdo</th></tr></thead>
+          <tbody>
+            {acuerdos.map((f) => (<tr><td><b>{f[0]}</b></td><td>{f[1]}</td><td>{f[2]}</td></tr>))}
+          </tbody>
+        </table>
+      </div>
+      <p class="pv-pie">En el Excel hay una cuarta columna en blanco, "Acuerdo del equipo", para completar en una reunión de 45 minutos.</p>
+    </div>
+
+    <div role="tabpanel" id="pv-panel-resumen" aria-labelledby="pv-tab-resumen" class="pv-panel" hidden tabindex="0">
+      <div class="pv-res">
+        <section class="pv-sec">
+          <h3>Estado de las filas</h3>
+          {resumen.estados.map((c) => (
+            <div class="pv-fila"><span class="pv-et">{c[0]}</span><span class="pv-bar"><span class={claseEstado(String(c[0]))} style={`width:${(Number(c[1]) / maxEstado) * 100}%`}></span></span><b>{c[1]}</b></div>
+          ))}
+        </section>
+        <section class="pv-sec">
+          <h3>Actividades en las que es Responsable (R)</h3>
+          {resumen.carga.map((c) => (
+            <div class="pv-fila"><span class="pv-et">{c[0]}</span><span class="pv-bar"><span style={`width:${(Number(c[1]) / maxCarga) * 100}%`}></span></span><b>{c[1]}</b></div>
+          ))}
+        </section>
+        <section class="pv-sec">
+          <h3>Actividades en las que es Aprobador (A)</h3>
+          {resumen.carga.map((c) => (
+            <div class="pv-fila"><span class="pv-et">{c[0]}</span><span class="pv-bar"><span class="pv-naranja" style={`width:${(Number(c[2]) / maxCarga) * 100}%`}></span></span><b>{c[2]}</b></div>
+          ))}
+        </section>
+      </div>
+      <p class="pv-pie">Esta hoja se calcula sola a partir de lo que completes en Plantilla. Acá se muestra con los datos del Ejemplo: el gerente de proyecto concentra 6 aprobaciones.</p>
+    </div>
+  </div>
+</div>
+
+<style is:global>
+  .pv-raci .pv-tabla { min-width: 1100px; }
+  .pv-raci .pv-tabla td:nth-child(n+13) { min-width: 90px; }
+  .pv-raci .pv-tabla th:nth-child(2), .pv-raci .pv-tabla td:nth-child(2) { min-width: 240px; }
+  .pv-raci .pv-tabla td.pv-a { font-weight: 700; color: #003087; background: #e6f6fd; }
+  .pv-raci .pv-tabla-ac { min-width: 760px; }
+  .pv-raci .pv-tabla-ac td:nth-child(1) { min-width: 170px; }
+  .pv-raci .pv-tabla-ac td { vertical-align: top; }
+  .pv-bar .pv-naranja { background: #f7941d; }
+</style>
+
+<script>
+  import '../scripts/visor.ts';
+</script>

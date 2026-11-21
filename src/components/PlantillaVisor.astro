@@ -1,4 +1,5 @@
 ---
+import '../styles/visor.css';
 import datos from '../data/plantilla-interesados-visor.json';
 
 const { guia, encabezados, plantilla, ejemplo, resumen } = datos;
@@ -94,92 +95,8 @@ const maxBrecha = Math.max(1, ...resumen.brecha.map((c) => Number(c[1])));
   </div>
 </div>
 
-<style is:global>
-  .pv { background: #fff; border: 1px solid #b8c4d6; border-radius: 10px; margin: 1.25rem 0 0.75rem; display: flex; flex-direction: column; overflow: hidden; font-family: 'Inter', sans-serif; color: #1a2b4a; }
-  .pv-barra { display: flex; align-items: flex-end; justify-content: space-between; gap: 0.75rem; background: #f0f4f8; border-bottom: 1px solid #b8c4d6; padding: 0.5rem 0.75rem 0; flex-wrap: wrap; }
-  .pv-tabs { display: flex; gap: 0.25rem; overflow-x: auto; }
-  .pv-tab { font: inherit; font-size: 0.85rem; font-weight: 600; color: #4a6080; background: transparent; border: 1px solid transparent; border-bottom: none; border-radius: 8px 8px 0 0; padding: 0.55rem 1.1rem; cursor: pointer; white-space: nowrap; }
-  .pv-tab:hover { color: #003087; }
-  .pv-tab[aria-selected="true"] { background: #fff; color: #003087; border-color: #b8c4d6; position: relative; top: 1px; box-shadow: inset 0 3px 0 #f7941d; }
-  .pv-tab:focus-visible, .pv-fs:focus-visible, .pv-panel:focus-visible { outline: 2px solid #00aeef; outline-offset: 2px; }
-  .pv-fs { font: inherit; font-size: 0.8rem; font-weight: 600; color: #003087; background: #fff; border: 1px solid #003087; border-radius: 6px; padding: 0.4rem 0.8rem; margin-bottom: 0.4rem; cursor: pointer; }
-  .pv-fs:hover { background: #003087; color: #fff; }
-  .pv-cuerpo { flex: 1; min-height: 0; overflow: auto; max-height: 560px; }
-  .pv.pv-full .pv-cuerpo, .pv:fullscreen .pv-cuerpo { max-height: none; }
-  .pv-panel[hidden] { display: none; }
-  .pv-scroll { overflow: auto; max-height: 460px; }
-  .pv-tabla { border-collapse: separate; border-spacing: 0; width: 100%; min-width: 1700px; font-size: 0.82rem; }
-  .pv-tabla th { position: sticky; top: 0; z-index: 2; background: #003087; color: #fff; font-weight: 600; padding: 0.6rem 0.65rem; border-right: 1px solid #28489a; border-bottom: 1px solid #b8c4d6; vertical-align: middle; }
-  .pv-tabla td { padding: 0.6rem 0.65rem; border-right: 1px solid #d5deea; border-bottom: 1px solid #d5deea; vertical-align: middle; line-height: 1.45; background: #fff; min-width: 90px; }
-  .pv-tabla td.pv-c { text-align: center; }
-  .pv-tabla th:nth-child(1), .pv-tabla td:nth-child(1) { position: sticky; left: 0; min-width: 44px; z-index: 1; }
-  .pv-tabla th:nth-child(1) { z-index: 3; }
-  .pv-tabla th:nth-child(2), .pv-tabla td:nth-child(2) { position: sticky; left: 44px; min-width: 170px; z-index: 1; box-shadow: 2px 0 0 #b8c4d6; }
-  .pv-tabla th:nth-child(2) { z-index: 3; }
-  .pv-tabla td:nth-child(n+13) { min-width: 200px; }
-  .pv-brecha { font-weight: 700; }
-  .pv-brecha.alta, .pv-bar .alta { background: #f4b6b6; color: #8b0000; }
-  .pv-brecha.media, .pv-bar .media { background: #ffe8a3; color: #7a5200; }
-  .pv-brecha.nula, .pv-bar .nula { background: #bfe5c0; color: #1b5e20; }
-  .pv-pie { font-size: 0.78rem; color: #4a6080; padding: 0.6rem 0.9rem; margin: 0; border-top: 1px solid #d5deea; }
-  .pv-guia, .pv-res { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; padding: 1rem; }
-  .pv-sec { border: 1px solid #d5deea; border-radius: 8px; padding: 0.9rem 1rem; background: #fff; }
-  .pv-sec h3 { font-family: 'Fraunces', serif; font-size: 1rem; font-weight: 700; color: #003087; margin: 0 0 0.6rem; padding-bottom: 0.4rem; border-bottom: 2px solid #f7941d; }
-  .pv-sec dl { margin: 0; display: grid; gap: 0.5rem; font-size: 0.82rem; line-height: 1.45; }
-  .pv-sec dt { font-weight: 700; color: #1a2b4a; }
-  .pv-sec dd { margin: 0 0 0.35rem; color: #4a6080; }
-  .pv-fila { display: grid; grid-template-columns: minmax(120px, 190px) 1fr 2rem; gap: 0.6rem; align-items: center; margin-bottom: 0.6rem; font-size: 0.82rem; }
-  .pv-fila b { text-align: right; color: #003087; }
-  .pv-bar { background: #eef2f7; border-radius: 4px; height: 1.1rem; display: block; overflow: hidden; }
-  .pv-bar span { display: block; height: 100%; background: #00aeef; border-radius: 4px; min-width: 0; }
-  .pv-prom { font-size: 0.85rem; margin: 0.8rem 0 0; color: #1a2b4a; }
 
-  /* Pantalla completa (API nativa o respaldo CSS) */
-  .pv.pv-full { position: fixed; inset: 0; z-index: 9999; border-radius: 0; border: none; margin: 0; width: 100vw; height: 100dvh; }
-  .pv:fullscreen { width: 100vw; height: 100vh; border-radius: 0; border: none; margin: 0; }
-  .pv.pv-full .pv-scroll, .pv:fullscreen .pv-scroll { max-height: none; height: calc(100dvh - 7.5rem); }
-  .pv.pv-full .pv-tabla, .pv:fullscreen .pv-tabla { font-size: 0.9rem; }
-  body.pv-bloqueado { overflow: hidden; }
-  @media (max-width: 600px) { .pv-fs { width: 100%; margin-bottom: 0.5rem; } .pv-fila { grid-template-columns: 1fr 2rem; } .pv-fila .pv-bar { grid-column: 1 / -1; order: 3; } .pv-fila b { order: 2; } }
-</style>
 
 <script>
-  document.querySelectorAll<HTMLElement>('[data-visor]').forEach((visor) => {
-    const tabs = Array.from(visor.querySelectorAll<HTMLButtonElement>('[role="tab"]'));
-    const paneles = Array.from(visor.querySelectorAll<HTMLElement>('[role="tabpanel"]'));
-    const activar = (tab: HTMLButtonElement, foco = false) => {
-      tabs.forEach((t) => { const on = t === tab; t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1; });
-      paneles.forEach((p) => { p.hidden = p.id !== tab.getAttribute('aria-controls'); });
-      if (foco) tab.focus();
-    };
-    tabs.forEach((t, i) => {
-      t.addEventListener('click', () => activar(t));
-      t.addEventListener('keydown', (e) => {
-        let j = -1;
-        if (e.key === 'ArrowRight') j = (i + 1) % tabs.length;
-        else if (e.key === 'ArrowLeft') j = (i - 1 + tabs.length) % tabs.length;
-        else if (e.key === 'Home') j = 0;
-        else if (e.key === 'End') j = tabs.length - 1;
-        if (j >= 0) { e.preventDefault(); activar(tabs[j], true); }
-      });
-    });
-
-    const btn = visor.querySelector<HTMLButtonElement>('[data-fs]')!;
-    const texto = visor.querySelector<HTMLElement>('[data-fs-texto]')!;
-    const estado = (on: boolean) => {
-      visor.classList.toggle('pv-full', on && !document.fullscreenElement);
-      document.body.classList.toggle('pv-bloqueado', on);
-      btn.setAttribute('aria-pressed', String(on));
-      texto.textContent = on ? 'Salir de pantalla completa' : 'Pantalla completa';
-    };
-    let activo = false;
-    const entrar = async () => {
-      activo = true; estado(true);
-      if (visor.requestFullscreen) { try { await visor.requestFullscreen(); visor.classList.remove('pv-full'); } catch { visor.classList.add('pv-full'); } }
-    };
-    const salir = () => { activo = false; if (document.fullscreenElement) document.exitFullscreen(); estado(false); };
-    btn.addEventListener('click', () => (activo ? salir() : entrar()));
-    document.addEventListener('fullscreenchange', () => { if (!document.fullscreenElement && activo) { activo = false; estado(false); } });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && activo) salir(); });
-  });
+  import '../scripts/visor.ts';
 </script>
