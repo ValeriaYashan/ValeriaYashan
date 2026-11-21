@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Implementación de monday.com para equipos y empresas</title>
+<meta name="description" content="Servicio de implementación de monday.com: diagnóstico de procesos, tableros, automatizaciones, capacitación y dashboards. Consultoría PMP®.">
+<link rel="canonical" href="https://valeriayashan.com.ar/servicios/implementacion-monday-com/">
+<meta property="og:type" content="website"><meta property="og:locale" content="es_AR">
+<meta property="og:title" content="Implementación de monday.com para equipos y empresas"><meta property="og:description" content="Servicio de implementación de monday.com: diagnóstico de procesos, tableros, automatizaciones, capacitación y dashboards. Consultoría PMP®.">
+<meta property="og:url" content="https://valeriayashan.com.ar/servicios/implementacion-monday-com/">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Service", "name": "Implementación de monday.com para tu equipo", "description": "Servicio de implementación de monday.com: diagnóstico de procesos, tableros, automatizaciones, capacitación y dashboards. Consultoría PMP®.", "provider": {"@type": "Organization", "name": "PM & Strategy", "url": "https://valeriayashan.com.ar/"}, "url": "https://valeriayashan.com.ar/servicios/implementacion-monday-com/"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "¿Es lo mismo implementar monday.com que configurarlo?", "acceptedAnswer": {"@type": "Answer", "text": "No. Configurar es crear tableros. Implementar es lograr que el equipo trabaje con ellos: definir el proceso, configurar, probar con un piloto, capacitar y medir el uso."}}, {"@type": "Question", "name": "¿Necesito tener monday.com contratado antes?", "acceptedAnswer": {"@type": "Answer", "text": "No hace falta. Si todavía no lo elegiste, primero revisamos si es la herramienta adecuada para tu equipo y qué plan conviene según el uso."}}, {"@type": "Question", "name": "¿Y si todavía no sé qué herramienta usar?", "acceptedAnswer": {"@type": "Answer", "text": "Podemos comparar opciones antes de decidir. Hay una comparativa de ClickUp, Trello y monday.com que sirve de punto de partida."}}, {"@type": "Question", "name": "¿Cuánto cuesta la implementación?", "acceptedAnswer": {"@type": "Answer", "text": "Depende del alcance, la cantidad de equipos y las integraciones. Después de una consulta inicial de 15 minutos se envía una propuesta con alcance claro."}}]}</script>
+<style>
+:root{
+  --navy:#0b2545; --navy-2:#13315c; --ink:#1b2430; --muted:#5a6675;
+  --line:#e3e8ef; --bg:#f6f8fb; --white:#fff; --accent:#e8a317; --accent-d:#b87d05; --ok:#1d7a4d; --err:#b3261e;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--white);line-height:1.6;font-size:17px}
+img,svg{max-width:100%}
+a{color:var(--navy-2)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+.skip{position:absolute;left:-999px}
+.skip:focus{left:12px;top:12px;background:#fff;padding:8px 12px;z-index:10}
+
+header.top{background:var(--white);border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;padding-top:14px;padding-bottom:14px;gap:12px;flex-wrap:wrap}
+.brand{font-weight:700;color:var(--navy);text-decoration:none;letter-spacing:.2px}
+.brand span{color:var(--muted);font-weight:500}
+header.top a.back{font-size:15px;color:var(--muted);text-decoration:none}
+header.top a.back:hover{text-decoration:underline}
+
+.hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-2) 100%);color:#fff;padding:64px 0 56px}
+.eyebrow{display:inline-block;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:#ffd98a;font-weight:600;margin-bottom:14px}
+.hero h1{font-size:clamp(28px,5vw,44px);line-height:1.15;margin:0 0 14px;font-weight:800}
+.hero p.lead{font-size:clamp(17px,2.2vw,21px);max-width:680px;margin:0 0 26px;color:#dbe5f3}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;padding:14px 22px;border-radius:8px;font-weight:700;text-decoration:none;font-size:16px;border:2px solid transparent;cursor:pointer;font-family:inherit}
+.btn-primary{background:var(--accent);color:#1a1200}
+.btn-primary:hover{background:#f2b52e}
+.btn-ghost{border-color:#fff;color:#fff;background:transparent}
+.btn-ghost:hover{background:rgba(255,255,255,.12)}
+.btn:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #8ab4ff;outline-offset:2px}
+.note-small{font-size:14px;color:#c4d3e8;margin-top:14px}
+
+.facts{background:var(--bg);border-bottom:1px solid var(--line)}
+.facts .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0}
+.fact{padding:22px 18px;border-right:1px solid var(--line)}
+.fact:last-child{border-right:0}
+.fact b{display:block;font-size:26px;color:var(--navy);line-height:1.2}
+.fact span{color:var(--muted);font-size:15px}
+
+section{padding:56px 0}
+section.alt{background:var(--bg)}
+h2{font-size:clamp(24px,3.4vw,32px);line-height:1.2;color:var(--navy);margin:0 0 12px}
+h3{font-size:19px;margin:0 0 6px;color:var(--navy)}
+.sub{color:var(--muted);max-width:720px;margin:0 0 28px}
+
+.classes{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:22px}
+.card .n{display:inline-flex;width:34px;height:34px;border-radius:50%;background:var(--navy);color:#fff;font-weight:700;align-items:center;justify-content:center;margin-bottom:10px}
+.card p{margin:0;color:#364152;font-size:16px}
+
+.two{display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:start}
+@media(max-width:800px){.two{grid-template-columns:1fr}.fact{border-right:0;border-bottom:1px solid var(--line)}}
+ul.ticks{list-style:none;padding:0;margin:0}
+ul.ticks li{padding:8px 0 8px 30px;position:relative;border-bottom:1px solid var(--line)}
+ul.ticks li:last-child{border-bottom:0}
+ul.ticks li::before{content:"✓";position:absolute;left:0;color:var(--ok);font-weight:800}
+
+.case{background:#fff;border-left:5px solid var(--accent);padding:18px 22px;border-radius:0 10px 10px 0;border:1px solid var(--line);border-left-width:5px;border-left-color:var(--accent)}
+
+.download{background:var(--navy);color:#fff;border-radius:14px;padding:30px;display:flex;gap:20px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.download h2{color:#fff;margin:0 0 6px;font-size:24px}
+.download p{margin:0;color:#c9d6ea;max-width:560px;font-size:16px}
+
+form{background:#fff;border:1px solid var(--line);border-radius:14px;padding:26px;box-shadow:0 6px 24px rgba(11,37,69,.06)}
+label{display:block;font-weight:600;margin:14px 0 6px;font-size:15px}
+label small{font-weight:400;color:var(--muted)}
+input[type=text],input[type=email],select{width:100%;padding:12px 14px;border:1px solid #c7d0dc;border-radius:8px;font-size:16px;font-family:inherit;background:#fff}
+.check{display:flex;gap:10px;align-items:flex-start;margin-top:16px;font-size:14.5px;color:#364152}
+.check input{margin-top:4px}
+.hp{position:absolute;left:-9999px;height:0;overflow:hidden}
+form .btn{width:100%;margin-top:18px;text-align:center}
+.status{margin-top:14px;font-size:15px;min-height:22px}
+.status.ok{color:var(--ok)}
+.status.err{color:var(--err)}
+
+details{border-bottom:1px solid var(--line);padding:14px 0}
+summary{cursor:pointer;font-weight:600;color:var(--navy)}
+details p{margin:10px 0 0;color:#364152}
+
+footer{background:#0a1d36;color:#aebdd3;padding:32px 0;font-size:14.5px}
+footer a{color:#dbe5f3}
+.who{display:flex;gap:18px;align-items:flex-start}
+.avatar{flex:0 0 56px;height:56px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:20px}
+
+.steps{counter-reset:s;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.steps .card{counter-increment:s}
+.steps .card::before{content:counter(s);display:inline-flex;width:34px;height:34px;border-radius:50%;background:var(--navy);color:#fff;font-weight:700;align-items:center;justify-content:center;margin-bottom:10px}
+.links{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px}
+</style>
+</head>
+<body>
+<a class="skip" href="#contenido">Ir al contenido</a>
+<header class="top"><div class="wrap">
+<a class="brand" href="https://valeriayashan.com.ar/">PM &amp; Strategy</a>
+<a class="back" href="https://valeriayashan.com.ar/servicios/">← Todos los servicios</a>
+</div></header>
+<main id="contenido">
+<section class="hero"><div class="wrap">
+<span class="eyebrow">Servicio · Consultoría en gestión de proyectos</span>
+<h1>Implementación de monday.com para tu equipo</h1>
+<p class="lead">Diseño y puesta en marcha de monday.com a partir de cómo trabaja tu equipo: procesos claros, tableros útiles, automatizaciones y adopción real.</p>
+<div class="cta">
+<a class="btn btn-primary" data-cta="hero" href="https://valeriayashan.com.ar/contacto/?utm_source=sitio&utm_medium=servicio&utm_campaign=implementacion-monday&utm_content=hero">Consultar por el servicio (15 minutos)</a>
+<a class="btn btn-ghost" href="#como-trabajo">Cómo es el trabajo</a>
+</div>
+<p class="note-small">Primero hay una consulta de 15 minutos para definir qué necesitás. Después se envía una propuesta con alcance claro.</p>
+</div></section>
+
+<section><div class="wrap">
+<h2>Para quién es este servicio</h2>
+<p class="sub">Para empresas y equipos que quieren implementar monday.com y que se use de verdad, no que quede como un tablero más que nadie actualiza.</p>
+<div class="classes">
+<article class="card"><h3>Equipos con trabajo en planillas y mails</h3><p>Proyectos, tareas y pedidos repartidos entre Excel, correos y chats, sin una vista única del estado real.</p></article>
+<article class="card"><h3>Empresas que ya compraron monday.com</h3><p>La herramienta está, pero cada persona la usa distinto y los tableros no reflejan cómo trabaja el equipo.</p></article>
+<article class="card"><h3>Áreas que necesitan visibilidad</h3><p>Líderes que quieren saber qué está en curso, qué se atrasa y quién tiene qué, sin pedir reportes manuales.</p></article>
+</div></div></section>
+
+<section class="alt" id="como-trabajo"><div class="wrap">
+<h2>Cómo es la implementación de monday.com</h2>
+<p class="sub">La herramienta se configura al final. Primero se define cómo trabaja el equipo, porque automatizar un proceso confuso solo lo hace más confuso.</p>
+<div class="steps">
+<article class="card"><h3>Diagnóstico y mapeo de procesos</h3><p>Se releva cómo fluye hoy el trabajo, dónde se traba y qué información necesita cada rol.</p></article>
+<article class="card"><h3>Diseño de tableros y flujos</h3><p>Se definen estructura, estados, responsables, campos y vistas para que reflejen el proceso real.</p></article>
+<article class="card"><h3>Configuración y automatizaciones</h3><p>Se arman los tableros, las automatizaciones y las integraciones que el equipo necesita desde el día uno.</p></article>
+<article class="card"><h3>Piloto con un equipo</h3><p>Probamos con un grupo chico, ajustamos con uso real y recién después extendemos al resto.</p></article>
+<article class="card"><h3>Capacitación y adopción</h3><p>El equipo aprende a usarlo con sus propios casos, con reglas claras de uso y mantenimiento.</p></article>
+<article class="card"><h3>Medición y mejora</h3><p>Dashboards con los indicadores acordados y revisión de qué ajustar después de las primeras semanas.</p></article>
+</div></div></section>
+
+<section><div class="wrap">
+<h2>Qué te llevás</h2>
+<div class="two"><ul class="ticks">
+<li>Un espacio de trabajo en monday.com configurado para tu proceso, con roles y permisos definidos.</li>
+<li>Automatizaciones que eliminan tareas repetitivas de seguimiento.</li>
+<li>Dashboards de estado, plazos y carga de trabajo.</li>
+<li>Reglas de uso simples que el equipo puede sostener solo.</li>
+</ul>
+<div class="case"><h3>Un enfoque de gestión de proyectos</h3>
+<p style="margin:0;color:#364152">El servicio está a cargo de una consultora PMP® en gestión de proyectos. La herramienta se implementa desde el método de trabajo, no al revés.</p></div></div>
+</div></section>
+
+<section class="alt" id="preguntas"><div class="wrap" style="max-width:780px">
+<h2>Preguntas frecuentes</h2>
+<details><summary>¿Es lo mismo implementar monday.com que configurarlo?</summary><p>No. Configurar es crear tableros. Implementar es lograr que el equipo trabaje con ellos: definir el proceso, configurar, probar con un piloto, capacitar y medir el uso.</p></details>
+<details><summary>¿Necesito tener monday.com contratado antes?</summary><p>No hace falta. Si todavía no lo elegiste, primero revisamos si es la herramienta adecuada para tu equipo y qué plan conviene según el uso.</p></details>
+<details><summary>¿Y si todavía no sé qué herramienta usar?</summary><p>Podemos comparar opciones antes de decidir. Hay una comparativa de ClickUp, Trello y monday.com que sirve de punto de partida.</p></details>
+<details><summary>¿Cuánto cuesta la implementación?</summary><p>Depende del alcance, la cantidad de equipos y las integraciones. Después de una consulta inicial de 15 minutos se envía una propuesta con alcance claro.</p></details>
+</div></section>
+<section><div class="wrap">
+<div class="download"><div><h2>Hablemos de tu proyecto</h2>
+<p>Contá cómo trabajan hoy y qué decisión querés poder tomar mejor. La respuesta llega con los próximos pasos.</p></div>
+<a class="btn btn-primary" data-cta="cierre" href="https://valeriayashan.com.ar/contacto/?utm_source=sitio&utm_medium=servicio&utm_campaign=implementacion-monday&utm_content=cierre">Escribir ahora</a></div>
+<h3 style="margin-top:28px">Para seguir leyendo</h3>
+<div class="links"><a href="https://valeriayashan.com.ar/blog/implementar-monday-com-argentina/">Implementar monday.com en Argentina</a>
+<a href="https://valeriayashan.com.ar/blog/clickup-trello-monday-comparativa/">Comparativa ClickUp, Trello y monday.com</a>
+<a href="https://valeriayashan.com.ar/herramientas/monday/">Guía de monday.com</a></div>
+</div></section>
+</main>
+<footer><div class="wrap">
+<p style="margin:0 0 6px">© PM &amp; Strategy · <a href="https://valeriayashan.com.ar/">valeriayashan.com.ar</a></p>
+</div></footer>
+<script>
+document.querySelectorAll("[data-cta]").forEach(function(a){
+  a.addEventListener("click",function(){
+    var d={page:"implementacion-monday-com",position:a.getAttribute("data-cta"),campaign:"implementacion-monday"};
+    try{if(window.gtag)window.gtag("event","cta_click",d);}catch(e){}
+    try{(window.dataLayer=window.dataLayer||[]).push(Object.assign({event:"cta_click"},d));}catch(e){}
+  });
+});
+</script>
+</body></html>
