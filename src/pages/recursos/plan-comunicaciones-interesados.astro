@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import ejemplo from '../../data/plantilla-interesados-ejemplo.json';
+import PlantillaVisor from '../../components/PlantillaVisor.astro';
 
 const title = "Plantilla de plan de comunicaciones con interesados";
 const description = "Descargá gratis una plantilla en Excel para planificar la comunicación con interesados: matriz poder-interés, brecha de participación y métodos de comunicación.";
@@ -75,34 +75,12 @@ const archivo = "/recursos/plan-comunicaciones-interesados.xlsx";
       </div>
 
       <div class="pl-block" id="vista-previa">
-        <h2>Vista previa: la hoja Ejemplo</h2>
+        <h2>Vista previa de la planilla</h2>
         <p>
-          Así se ve la plantilla completa con un caso real de uso: la obra de un parque lineal junto a una comunidad local.
-          Las columnas Estrategia, Brecha e Intensidad sugerida se calculan solas en el Excel.
+          Recorré las cuatro hojas del Excel: Guía, Plantilla en blanco, Ejemplo completo y Resumen.
+          Usá el botón de pantalla completa para verla en grande. Las columnas Estrategia, Brecha e Intensidad sugerida se calculan solas en el Excel.
         </p>
-        <div class="pl-tabla-wrap" role="region" aria-label="Vista previa de la hoja Ejemplo de la plantilla" tabindex="0">
-          <table class="pl-tabla">
-            <caption class="pl-caption">Hoja Ejemplo de la plantilla (los datos son ilustrativos)</caption>
-            <thead>
-              <tr>{ejemplo.encabezados.map((h) => <th scope="col">{h}</th>)}</tr>
-            </thead>
-            <tbody>
-              {ejemplo.filas.map((fila) => (
-                <tr>
-                  {fila.map((v, i) => (
-                    i === 7
-                      ? <td class={`pl-brecha ${Number(v) >= 2 ? 'alta' : Number(v) === 1 ? 'media' : 'nula'}`}>{v}</td>
-                      : <td class={i === 0 || (i >= 2 && i <= 6) ? 'pl-centro' : ''}>{v}</td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <p class="pl-nota">
-          Brecha: diferencia de niveles entre la participación deseada y la actual. Verde: 0 o menos. Amarillo: 1. Rojo: 2 o más.
-          Deslizá la tabla hacia los costados para ver todas las columnas.
-        </p>
+        <PlantillaVisor />
       </div>
 
       <div class="pl-cta">
@@ -161,17 +139,6 @@ const archivo = "/recursos/plan-comunicaciones-interesados.xlsx";
   .pl-steps { margin: 0 0 1.25rem; padding-left: 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; color: var(--color-text); line-height: 1.55; }
   .pl-nota { font-size: 0.82rem; }
   .pl-link { color: var(--color-accent); font-weight: 600; }
-  .pl-tabla-wrap { overflow-x: auto; border: 1px solid var(--color-border); border-radius: 8px; margin: 1.25rem 0 0.75rem; background: #fff; }
-  .pl-tabla-wrap:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
-  .pl-tabla { border-collapse: collapse; width: 100%; min-width: 1700px; font-family: 'Inter', sans-serif; font-size: 0.82rem; }
-  .pl-caption { text-align: left; padding: 0.6rem 0.85rem; font-size: 0.78rem; color: var(--color-muted); caption-side: bottom; }
-  .pl-tabla th { background: #003087; color: #fff; font-weight: 600; text-align: center; padding: 0.6rem 0.65rem; border: 1px solid #b8c4d6; vertical-align: middle; }
-  .pl-tabla td { padding: 0.6rem 0.65rem; border: 1px solid #b8c4d6; color: #1a2b4a; vertical-align: middle; line-height: 1.45; }
-  .pl-tabla td.pl-centro { text-align: center; }
-  .pl-tabla td.pl-brecha { text-align: center; font-weight: 700; }
-  .pl-brecha.alta { background: #f4b6b6; color: #8b0000; }
-  .pl-brecha.media { background: #ffe8a3; color: #7a5200; }
-  .pl-brecha.nula { background: #bfe5c0; color: #1b5e20; }
   .pl-cta { text-align: center; padding: 2rem; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px; }
   .pl-next { background: var(--color-surface); border-top: 1px solid var(--color-border); padding: 4rem 1.5rem 5rem; }
   .pl-next-inner { max-width: 900px; margin: 0 auto; }
