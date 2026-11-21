@@ -1,0 +1,361 @@
+{
+ "guia": [
+  {
+   "titulo": "Cómo usarla",
+   "filas": [
+    [
+     "Paso 1",
+     "Cargá un interesado por fila en la hoja Plantilla. Hay lugar para 25."
+    ],
+    [
+     "Paso 2",
+     "Elegí poder e interés (Alto o Bajo). La estrategia de la matriz aparece sola."
+    ],
+    [
+     "Paso 3",
+     "Elegí la participación actual (C) y la deseada (D). La brecha y la intensidad sugerida se calculan solas."
+    ],
+    [
+     "Paso 4",
+     "Definí método, canal, frecuencia, responsable, mensaje clave y cómo vas a verificar que llegó."
+    ],
+    [
+     "Paso 5",
+     "Mirá la hoja Resumen para ver dónde está concentrado el esfuerzo."
+    ]
+   ]
+  },
+  {
+   "titulo": "Qué significa cada celda",
+   "filas": [
+    [
+     "Celda amarilla claro",
+     "Se completa a mano."
+    ],
+    [
+     "Celda gris",
+     "Se calcula sola; no la modifiques."
+    ]
+   ]
+  },
+  {
+   "titulo": "Cuadrantes de la matriz poder-interés (Mendelow, 1991)",
+   "filas": [
+    [
+     "Gestionar de cerca",
+     "Poder alto e interés alto. Involucrarlos de forma activa y frecuente."
+    ],
+    [
+     "Mantener satisfecho",
+     "Poder alto e interés bajo. Informarlos lo necesario sin saturarlos."
+    ],
+    [
+     "Mantener informado",
+     "Poder bajo e interés alto. Comunicar avances e impactos y escuchar su opinión."
+    ],
+    [
+     "Monitorear",
+     "Poder bajo e interés bajo. Seguimiento con el mínimo esfuerzo."
+    ]
+   ]
+  },
+  {
+   "titulo": "Niveles de participación (PMBOK 8, págs. 200-201)",
+   "filas": [
+    [
+     "Desconocedor",
+     "No conoce el proyecto ni sus impactos."
+    ],
+    [
+     "Resistivo",
+     "Conoce el proyecto y se resiste a los cambios que trae."
+    ],
+    [
+     "Neutral",
+     "Conoce el proyecto, pero no lo apoya ni se resiste."
+    ],
+    [
+     "Apoyo",
+     "Conoce el proyecto y apoya los cambios."
+    ],
+    [
+     "Liderazgo",
+     "Conoce el proyecto y participa activamente para que tenga éxito."
+    ]
+   ]
+  },
+  {
+   "titulo": "Métodos de comunicación (PMBOK 8, pág. 152)",
+   "filas": [
+    [
+     "Push",
+     "Se envía a destinatarios específicos. Garantiza la distribución, no la comprensión."
+    ],
+    [
+     "Pull",
+     "Para grandes audiencias o mucha información. El receptor accede cuando quiere."
+    ],
+    [
+     "Interactiva",
+     "Intercambio multidireccional en tiempo real. Favorece la colaboración y el entendimiento."
+    ]
+   ]
+  }
+ ],
+ "encabezados": [
+  "N.º",
+  "Interesado",
+  "Poder",
+  "Interés",
+  "Estrategia (matriz poder-interés)",
+  "Participación actual (C)",
+  "Participación deseada (D)",
+  "Brecha (niveles)",
+  "Intensidad sugerida (criterio orientativo)",
+  "Método de comunicación",
+  "Canal",
+  "Frecuencia",
+  "Responsable",
+  "Mensaje clave",
+  "Cómo se verifica que llegó",
+  "Observaciones"
+ ],
+ "plantilla": [
+  [
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   ""
+  ],
+  [
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   ""
+  ],
+  [
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   ""
+  ],
+  [
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   ""
+  ],
+  [
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   ""
+  ],
+  [
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   ""
+  ],
+  [
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   ""
+  ],
+  [
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   ""
+  ]
+ ],
+ "ejemplo": [
+  [
+   1,
+   "Vecino de la comunidad local",
+   "Bajo",
+   "Alto",
+   "Mantener informado",
+   "Neutral",
+   "Apoyo",
+   1,
+   "Brecha media: reforzar push periódico y pull",
+   "Push periódico, pull e interactiva",
+   "Boletín, portal o tablón, reunión comunitaria",
+   "Mensual",
+   "Gerente del proyecto",
+   "Qué se construye, cuándo y cómo afecta la vida diaria del barrio",
+   "Asistencia a la reunión comunitaria y preguntas recibidas",
+   "Si hay resistencia o la comunidad se organiza, subir la intensidad hacia lo interactivo."
+  ],
+  [
+   2,
+   "Autoridad municipal",
+   "Alto",
+   "Alto",
+   "Gestionar de cerca",
+   "Neutral",
+   "Apoyo",
+   1,
+   "Brecha media: reforzar push periódico y pull",
+   "Interactiva y push",
+   "Reunión de seguimiento, informe de avance",
+   "Quincenal",
+   "Patrocinador del proyecto",
+   "Avance contra el cronograma y decisiones que necesita",
+   "Decisiones tomadas en cada reunión",
+   ""
+  ],
+  [
+   3,
+   "Comercios de la zona",
+   "Bajo",
+   "Bajo",
+   "Monitorear",
+   "Neutral",
+   "Neutral",
+   0,
+   "Sin brecha: mantener lo actual (push o pull)",
+   "Pull",
+   "Tablón y portal del proyecto",
+   "Cuando hay cortes o desvíos",
+   "Coordinador de comunicaciones",
+   "Fechas de cortes de calle y desvíos",
+   "Consultas recibidas por canal",
+   ""
+  ]
+ ],
+ "resumen": {
+  "cuadrantes": [
+   [
+    "Gestionar de cerca",
+    1
+   ],
+   [
+    "Mantener satisfecho",
+    0
+   ],
+   [
+    "Mantener informado",
+    1
+   ],
+   [
+    "Monitorear",
+    1
+   ]
+  ],
+  "total": 3,
+  "brecha": [
+   [
+    "Brecha alta (2 niveles o más)",
+    0
+   ],
+   [
+    "Brecha media (1 nivel)",
+    2
+   ],
+   [
+    "Sin brecha (0 o menos)",
+    1
+   ]
+  ],
+  "promedio": 0.7
+ }
+}
