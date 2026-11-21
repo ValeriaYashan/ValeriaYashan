@@ -52,7 +52,7 @@ Un dato que conecta todo esto: los proyectos con una PMO bien establecida usan e
 
 ---
 
-**¿Tu organización está viendo esta misma tensión entre la velocidad de cambio y la capacidad de tus equipos para sostener el rumbo?** Conversemos: escribime a hola@valeriayashan.com.ar o por WhatsApp al [+54 9 11 4079-1007](https://wa.me/5491140791007).
+**¿Tu organización está viendo esta misma tensión entre la velocidad de cambio y la capacidad de tus equipos para sostener el rumbo?** Conversemos: escribí a hola@valeriayashan.com.ar o por WhatsApp al [+54 9 11 4079-1007](https://wa.me/5491140791007).
 
 ---
 

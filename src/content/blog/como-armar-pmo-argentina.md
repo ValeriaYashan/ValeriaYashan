@@ -112,7 +112,7 @@ En esos casos, un consultor externo puede diseñar la estructura, acompañar los
 
 ---
 
-¿Estás evaluando implementar una PMO en tu empresa? Agendá una llamada en [Calendly](https://calendly.com/valeriayashan/30min) o escribime a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar).
+¿Estás evaluando implementar una PMO en tu empresa? Agendá una llamada en [Calendly](https://calendly.com/valeriayashan/30min) o escribí a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar).
 
 ---
 

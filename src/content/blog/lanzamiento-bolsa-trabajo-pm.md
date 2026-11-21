@@ -24,4 +24,4 @@ Y si trabajás en una empresa que está buscando sumar a alguien de Project Mana
 
 ## Quiero mantenerme al tanto
 
-Si te interesa el tema de Project Management más allá de esto, en [mis servicios de consultoría y capacitación](/servicios) trabajo justo con equipos que necesitan estructurar mejor sus proyectos, y en el [blog](/blog) vas a encontrar más contenido sobre PM aplicado. Cualquier consulta, [escribime](/contacto).
+Si te interesa el tema de Project Management más allá de esto, en los [servicios de consultoría y capacitación](/servicios) se trabaja justo con equipos que necesitan estructurar mejor sus proyectos, y en el [blog](/blog) vas a encontrar más contenido sobre PM aplicado. Cualquier consulta, [escribí](/contacto).

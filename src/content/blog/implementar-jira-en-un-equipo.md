@@ -97,7 +97,7 @@ Si estás por implementar una herramienta o ya tenés una que el equipo dejó de
 
 ---
 
-¿Estás implementando una herramienta de gestión o tenés una que el equipo dejó de usar? Escribime a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar) o por [WhatsApp](https://wa.me/5491140791007) y lo vemos juntos.
+¿Estás implementando una herramienta de gestión o tenés una que el equipo dejó de usar? Escribí a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar) o por [WhatsApp](https://wa.me/5491140791007) y lo vemos juntos.
 
 ---
 

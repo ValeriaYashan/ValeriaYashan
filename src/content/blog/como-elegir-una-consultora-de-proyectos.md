@@ -77,7 +77,7 @@ Eso no se certifica. Pero se evalúa.
 
 ---
 
-Si estás evaluando incorporar gestión de proyectos a tu organización, puedo ayudarte a definir qué necesitás antes de buscar a quién contratarlo. Escribime a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar) o agendá una llamada en [Calendly](https://calendly.com/valeriayashan/30min).
+Si estás evaluando incorporar gestión de proyectos a tu organización, conviene definir qué necesitás antes de buscar a quién contratar. Escribí a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar) o agendá una llamada en [Calendly](https://calendly.com/valeriayashan/30min).
 
 ---
 

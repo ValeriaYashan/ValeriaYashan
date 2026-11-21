@@ -70,7 +70,7 @@ Ese es exactamente el trabajo del archivo. No producir reportes: producir el nú
 
 **¿Necesitás un sistema de gestión así para tu negocio o tu equipo?**
 
-Escribime a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar) o por [WhatsApp](https://wa.me/5491140791007). En una llamada de 15 minutos vemos si Excel alcanza para tu caso o si te conviene otra herramienta — a veces la respuesta honesta es la segunda, y sobre eso escribí en [Notion con IA para gestionar proyectos](/blog/notion-ia-para-gestionar-proyectos).
+Escribí a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar) o por [WhatsApp](https://wa.me/5491140791007). En una llamada de 15 minutos vemos si Excel alcanza para tu caso o si te conviene otra herramienta — a veces la respuesta honesta es la segunda, y sobre eso escribí en [Notion con IA para gestionar proyectos](/blog/notion-ia-para-gestionar-proyectos).
 
 ---
 

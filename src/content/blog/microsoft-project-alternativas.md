@@ -98,7 +98,7 @@ La herramienta que el equipo realmente usa siempre supera a la herramienta técn
 
 ---
 
-¿Estás evaluando qué herramienta implementar? Escribime a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar) o por [WhatsApp](https://wa.me/5491140791007).
+¿Estás evaluando qué herramienta implementar? Escribí a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar) o por [WhatsApp](https://wa.me/5491140791007).
 
 ---
 

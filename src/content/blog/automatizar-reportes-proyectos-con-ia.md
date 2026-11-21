@@ -115,7 +115,7 @@ Para reportes recurrentes, vale la pena crear un proyecto o hilo dedicado en la 
 
 ---
 
-¿Querés implementar esto con tu equipo? Escribime a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar) o por [WhatsApp](https://wa.me/5491140791007).
+¿Querés implementar esto con tu equipo? Escribí a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar) o por [WhatsApp](https://wa.me/5491140791007).
 
 ---
 

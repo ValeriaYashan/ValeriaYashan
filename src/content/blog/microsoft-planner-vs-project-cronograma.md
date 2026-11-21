@@ -48,7 +48,7 @@ Si el proyecto tiene entregables interdependientes, necesita ruta crítica, o va
 
 ---
 
-¿Necesitás ayuda para elegir la herramienta correcta para tu próximo cronograma? [Escribime](mailto:hola@valeriayashan.com.ar).
+¿Necesitás ayuda para elegir la herramienta correcta para tu próximo cronograma? [Escribí](mailto:hola@valeriayashan.com.ar).
 
 ---
 

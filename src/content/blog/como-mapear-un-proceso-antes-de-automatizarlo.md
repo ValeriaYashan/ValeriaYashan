@@ -105,7 +105,7 @@ Si alguna de esas condiciones no se cumple, la automatización va a heredar el p
 
 El mapeo de procesos no es burocracia. Es la diferencia entre implementar una solución y resolver un problema. Antes de preguntarte "¿con qué herramienta automatizo esto?", preguntate "¿entiendo exactamente qué estoy automatizando?".
 
-Si trabajás con equipos que necesitan ordenar sus procesos antes de dar el salto a la automatización, [escribime](/contacto) y lo analizamos juntos.
+Si trabajás con equipos que necesitan ordenar sus procesos antes de dar el salto a la automatización, [escribí](/contacto) y lo analizamos juntos.
 
 ---
 

@@ -75,7 +75,7 @@ Notion, por su flexibilidad, también puede volverse un caos si no tiene estruct
 
 ---
 
-¿Estás evaluando implementar alguna de estas herramientas en tu equipo? Escribime a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar) o por [WhatsApp](https://wa.me/5491140791007).
+¿Estás evaluando implementar alguna de estas herramientas en tu equipo? Escribí a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar) o por [WhatsApp](https://wa.me/5491140791007).
 
 ---
 

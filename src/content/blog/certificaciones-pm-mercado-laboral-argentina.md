@@ -84,7 +84,7 @@ Desde 2020, muchos PMs argentinos trabajan para empresas del exterior. En esos c
 
 ---
 
-¿Tenés dudas sobre qué certificación conviene para tu perfil? Escribime a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar) y lo evaluamos juntos.
+¿Tenés dudas sobre qué certificación conviene para tu perfil? Escribí a [hola@valeriayashan.com.ar](mailto:hola@valeriayashan.com.ar) y lo evaluamos juntos.
 
 ---
 
