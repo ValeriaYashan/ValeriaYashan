@@ -1,6 +1,6 @@
 ---
 title: "Por qué 1 de cada 3 proyectos complejos fracasa"
-description: "El Pulse of the Profession 2026 del PMI explica por qué la complejidad hunde proyectos y qué separa a los equipos que la navegan bien."
+description: "El Pulse of the Profession 2026 del PMI explica por qué la complejidad hunde proyectos, qué separa a los equipos que la navegan bien y qué prácticas ayudan."
 pubDate: "2026-08-06"
 category: "Project Management"
 tags: ["Complejidad", "PMI", "Frameworks", "Liderazgo de Proyectos"]

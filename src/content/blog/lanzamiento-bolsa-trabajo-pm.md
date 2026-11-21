@@ -1,6 +1,6 @@
 ---
 title: "Lancé una bolsa de trabajo para Project Managers"
-description: "Avisos de PM curados a mano, sin ruido ni contenido genérico. Así funciona la nueva bolsa de trabajo de VY PM & Strategy."
+description: "Avisos de PM curados a mano, sin ruido ni contenido genérico. Así funciona la nueva bolsa de trabajo de VY PM & Strategy, por qué se armó así y cómo seguirla."
 pubDate: "2026-09-25"
 category: "Project Management"
 tags: ["Project Management", "Búsqueda laboral", "Recursos"]

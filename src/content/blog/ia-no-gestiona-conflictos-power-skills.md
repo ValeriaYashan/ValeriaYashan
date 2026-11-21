@@ -1,6 +1,6 @@
 ---
 title: "Por qué la IA no gestiona conflictos en un equipo"
-description: "Un experimento del IIL con 21 estudiantes de MBA midió, tarea por tarea, dónde rinde la IA en un proyecto y dónde sigue siendo trabajo humano."
+description: "Un experimento del IIL con 21 estudiantes de MBA midió, tarea por tarea, dónde rinde la IA en un proyecto y qué sigue siendo humano, como los conflictos."
 pubDate: "2026-09-22"
 category: "IA"
 tags: ["Project Management", "IA aplicada", "Liderazgo"]
